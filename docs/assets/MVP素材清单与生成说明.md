@@ -36,9 +36,11 @@
 - `salad_bowl.png`：沙拉碗，低负担但昂贵。
 - `sandwich.png`：三明治，中等价格、较均衡。
 
-### 行动卡牌 8 张
+### 行动相关图片 8 张
 
 目录：`life-strategy/assets/generated/actions/`
+
+当前餐后行动卡为 7 张；`sleep_early.png` 作为睡眠阶段选项使用，不进入早餐后、午餐后或晚餐后行动列表。行动与睡眠数据已迁移到 `life-strategy/data/cards/actions.xml` 与 `life-strategy/data/cards/sleep_options.xml`，并在 XML 中标注可出现场景。
 
 - `study.png`：复习，推进目标但提高压力。
 - `nap.png`：小睡，恢复精力。
@@ -46,7 +48,7 @@
 - `drink_water.png`：喝水，免费维护，每天限次。
 - `go_cafeteria.png`：去食堂，影响明日均衡抽牌倾向。
 - `convenience_store.png`：便利店，影响明日快乐速食抽牌倾向。
-- `sleep_early.png`：早睡，恢复型行动/睡眠主题图。
+- `sleep_early.png`：早睡，睡眠阶段恢复选项。
 - `allow_imperfection.png`：允许不完美，心理维护行动。
 
 ### 结局图 3 张

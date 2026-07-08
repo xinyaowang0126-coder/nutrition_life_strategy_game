@@ -7,6 +7,25 @@ const PORTRAIT_PATH := "res://assets/generated/characters/student_portrait.png"
 const METRICS_GUIDE_PATH := "res://assets/generated/ui/metrics_guide.png"
 const FONT_PATH := "res://assets/fonts/NotoSansSC-VF.ttf"
 
+const FONT_DEFAULT := 19
+const FONT_HEADER := 36
+const FONT_PHASE := 24
+const FONT_PANEL_TITLE := 27
+const FONT_SECTION_TITLE := 23
+const FONT_BODY := 18
+const FONT_SMALL := 17
+const FONT_CARD_TITLE := 22
+const FONT_BUTTON := 19
+
+const COLOR_TEXT := Color(0.20, 0.17, 0.13)
+const COLOR_TEXT_SOFT := Color(0.30, 0.25, 0.19)
+const COLOR_TEXT_MUTED := Color(0.39, 0.33, 0.25)
+const COLOR_HEADING := Color(0.14, 0.18, 0.13)
+const COLOR_HEADER_TEXT := Color(1.0, 0.94, 0.76)
+const COLOR_BUTTON_TEXT := Color(1.0, 0.97, 0.88)
+const COLOR_TEXT_OUTLINE := Color(1.0, 0.94, 0.82, 0.55)
+const COLOR_HEADER_OUTLINE := Color(0.06, 0.08, 0.06, 0.55)
+
 const MAX_FOODS_PER_MEAL := 3
 const MAX_DAILY_ACTIONS := 3
 const PHASE_ORDER := ["breakfast", "breakfast_action", "lunch", "lunch_action", "dinner", "dinner_action", "sleep"]
@@ -71,6 +90,7 @@ func _apply_font() -> void:
 	if font:
 		var ui_theme := Theme.new()
 		ui_theme.default_font = font
+		ui_theme.default_font_size = FONT_DEFAULT
 		theme = ui_theme
 		add_theme_font_override("font", font)
 
@@ -89,12 +109,17 @@ func _setup_scene_shell() -> void:
 	var menu_button: Button = $RootMargin/RootBox/HeaderPanel/HeaderRow/MenuButton
 	restart_button.pressed.connect(start_new_run)
 	menu_button.pressed.connect(func(): get_tree().change_scene_to_file(MAIN_MENU))
+	_style_label(header_label, FONT_HEADER, COLOR_HEADER_TEXT, true)
+	_style_label(phase_label, FONT_PHASE, COLOR_HEADER_TEXT, true)
 	_style_existing_button(restart_button, Color(0.36, 0.42, 0.34))
 	_style_existing_button(menu_button, Color(0.28, 0.35, 0.32))
 
 
 func _style_existing_button(button: Button, color: Color) -> void:
-	button.add_theme_color_override("font_color", Color(1.0, 0.96, 0.88))
+	button.add_theme_font_size_override("font_size", FONT_BUTTON)
+	button.add_theme_color_override("font_color", COLOR_BUTTON_TEXT)
+	button.add_theme_constant_override("outline_size", 1)
+	button.add_theme_color_override("font_outline_color", COLOR_HEADER_OUTLINE)
 	button.add_theme_stylebox_override("normal", _button_style(color))
 	button.add_theme_stylebox_override("hover", _button_style(color.lightened(0.07)))
 	button.add_theme_stylebox_override("pressed", _button_style(color.darkened(0.10)))
@@ -149,7 +174,7 @@ func _start_day() -> void:
 
 func _build_draw_pile() -> void:
 	draw_pile.clear()
-	for id in GameDataScript.FOOD_IDS:
+	for id in GameDataScript.get_food_ids_for_scene("meal"):
 		var food := GameDataScript.get_food(id)
 		var copies := 2
 		var cost := int(food["cost"])
@@ -189,7 +214,7 @@ func _ensure_affordable_food() -> void:
 	for id in hand:
 		if int(GameDataScript.get_food(id)["cost"]) <= int(state["balance"]):
 			return
-	if int(state["balance"]) >= GameDataScript.cheapest_food_cost():
+	if int(state["balance"]) >= GameDataScript.cheapest_food_cost("meal"):
 		hand.append("rice_plain")
 
 
@@ -214,7 +239,7 @@ func _refresh_header() -> void:
 
 func _rebuild_left() -> void:
 	_clear_children(left_content)
-	_add_heading(left_content, "角色状态", 24)
+	_add_heading(left_content, "角色状态", FONT_PANEL_TITLE)
 
 	var portrait := TextureRect.new()
 	portrait.texture = load(PORTRAIT_PATH)
@@ -235,20 +260,20 @@ func _rebuild_left() -> void:
 		MAX_DAILY_ACTIONS,
 		_bias_name(tomorrow_bias),
 	]
-	detail.add_theme_font_size_override("font_size", 14)
-	detail.add_theme_color_override("font_color", Color(0.23, 0.26, 0.22))
+	detail.add_theme_font_size_override("font_size", FONT_SMALL)
+	detail.add_theme_color_override("font_color", COLOR_TEXT_SOFT)
 	detail.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	left_content.add_child(detail)
 
 	var hint := Label.new()
 	hint.text = _left_hint()
-	hint.add_theme_font_size_override("font_size", 14)
-	hint.add_theme_color_override("font_color", Color(0.41, 0.33, 0.23))
+	hint.add_theme_font_size_override("font_size", FONT_SMALL)
+	hint.add_theme_color_override("font_color", COLOR_TEXT_MUTED)
 	hint.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	left_content.add_child(hint)
 
 	var guide_button := _make_button("指标说明", Color(0.43, 0.49, 0.38))
-	guide_button.custom_minimum_size = Vector2(0, 42)
+	guide_button.custom_minimum_size = Vector2(0, 46)
 	guide_button.pressed.connect(_open_metrics_guide)
 	left_content.add_child(guide_button)
 
@@ -260,7 +285,7 @@ func _add_stat_bar(key: String) -> void:
 
 	var label := Label.new()
 	label.text = "%s  %d" % [GameDataScript.STAT_LABELS[key], int(state[key])]
-	label.add_theme_font_size_override("font_size", 14)
+	label.add_theme_font_size_override("font_size", FONT_SMALL)
 	label.add_theme_color_override("font_color", _stat_color(key, int(state[key])))
 	row.add_child(label)
 
@@ -283,11 +308,11 @@ func _rebuild_center() -> void:
 		_build_ending_center()
 		return
 
-	_add_heading(center_content, _center_title(), 26)
+	_add_heading(center_content, _center_title(), FONT_PANEL_TITLE)
 	var prompt := Label.new()
 	prompt.text = _phase_prompt()
-	prompt.add_theme_font_size_override("font_size", 17)
-	prompt.add_theme_color_override("font_color", Color(0.24, 0.27, 0.23))
+	prompt.add_theme_font_size_override("font_size", FONT_BODY)
+	prompt.add_theme_color_override("font_color", COLOR_TEXT)
 	prompt.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	center_content.add_child(prompt)
 
@@ -308,8 +333,8 @@ func _build_food_choices() -> void:
 		selected_food_indices.size(),
 		_selected_food_cost(),
 	]
-	selection_status.add_theme_font_size_override("font_size", 16)
-	selection_status.add_theme_color_override("font_color", Color(0.33, 0.30, 0.24))
+	selection_status.add_theme_font_size_override("font_size", FONT_BODY)
+	selection_status.add_theme_color_override("font_color", COLOR_TEXT_SOFT)
 	selection_status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	center_content.add_child(selection_status)
 
@@ -349,7 +374,7 @@ func _make_food_card(id: String, hand_index: int = -1) -> PanelContainer:
 	var selected := selected_food_indices.has(hand_index)
 	var can_toggle := selected or _can_add_food(hand_index)
 	var panel := PanelContainer.new()
-	panel.custom_minimum_size = Vector2(300, 390)
+	panel.custom_minimum_size = Vector2(300, 410)
 	panel.add_theme_stylebox_override("panel", _card_style(selected, can_toggle))
 
 	var box := VBoxContainer.new()
@@ -365,8 +390,8 @@ func _make_food_card(id: String, hand_index: int = -1) -> PanelContainer:
 
 	var title := Label.new()
 	title.text = "%s  ¥%d" % [String(food["name"]), int(food["cost"])]
-	title.add_theme_font_size_override("font_size", 18)
-	title.add_theme_color_override("font_color", Color(0.16, 0.19, 0.16))
+	title.add_theme_font_size_override("font_size", FONT_CARD_TITLE)
+	title.add_theme_color_override("font_color", COLOR_HEADING)
 	title.clip_text = true
 	box.add_child(title)
 
@@ -377,16 +402,16 @@ func _make_food_card(id: String, hand_index: int = -1) -> PanelContainer:
 		_delta_text(int(food["mood"])),
 		_delta_text(int(food["burden"])),
 	]
-	stats.add_theme_font_size_override("font_size", 14)
-	stats.add_theme_color_override("font_color", Color(0.38, 0.31, 0.23))
+	stats.add_theme_font_size_override("font_size", FONT_SMALL)
+	stats.add_theme_color_override("font_color", COLOR_TEXT_SOFT)
 	stats.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	box.add_child(stats)
 
 	var desc := Label.new()
 	desc.text = String(food["desc"])
-	desc.custom_minimum_size = Vector2(0, 64)
-	desc.add_theme_font_size_override("font_size", 14)
-	desc.add_theme_color_override("font_color", Color(0.31, 0.32, 0.27))
+	desc.custom_minimum_size = Vector2(0, 72)
+	desc.add_theme_font_size_override("font_size", FONT_SMALL)
+	desc.add_theme_color_override("font_color", COLOR_TEXT_MUTED)
 	desc.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	box.add_child(desc)
 
@@ -406,8 +431,8 @@ func _build_action_choices() -> void:
 		actions_used_today,
 		MAX_DAILY_ACTIONS,
 	]
-	status.add_theme_font_size_override("font_size", 17)
-	status.add_theme_color_override("font_color", Color(0.25, 0.29, 0.24))
+	status.add_theme_font_size_override("font_size", FONT_BODY)
+	status.add_theme_color_override("font_color", COLOR_TEXT)
 	status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	center_content.add_child(status)
 
@@ -422,7 +447,7 @@ func _build_action_choices() -> void:
 	grid.add_theme_constant_override("v_separation", 18)
 	scroll.add_child(grid)
 
-	for id in GameDataScript.ACTION_IDS:
+	for id in GameDataScript.get_action_ids_for_scene(phase):
 		grid.add_child(_make_action_card(id))
 
 	var row := HBoxContainer.new()
@@ -437,7 +462,7 @@ func _make_action_card(id: String) -> PanelContainer:
 	var action := GameDataScript.get_action(id)
 	var can_use := _can_use_action(action)
 	var panel := PanelContainer.new()
-	panel.custom_minimum_size = Vector2(300, 330)
+	panel.custom_minimum_size = Vector2(300, 350)
 	panel.add_theme_stylebox_override("panel", _card_style(false, can_use))
 
 	var box := VBoxContainer.new()
@@ -453,8 +478,8 @@ func _make_action_card(id: String) -> PanelContainer:
 
 	var title := Label.new()
 	title.text = "%s  行动 1" % String(action["name"])
-	title.add_theme_font_size_override("font_size", 16)
-	title.add_theme_color_override("font_color", Color(0.16, 0.19, 0.16))
+	title.add_theme_font_size_override("font_size", FONT_CARD_TITLE)
+	title.add_theme_color_override("font_color", COLOR_HEADING)
 	title.clip_text = true
 	box.add_child(title)
 
@@ -465,21 +490,21 @@ func _make_action_card(id: String) -> PanelContainer:
 		_delta_text(int(action["stress"])),
 		_delta_text(int(action["study"])),
 	]
-	stats.add_theme_font_size_override("font_size", 13)
-	stats.add_theme_color_override("font_color", Color(0.38, 0.31, 0.23))
+	stats.add_theme_font_size_override("font_size", FONT_SMALL)
+	stats.add_theme_color_override("font_color", COLOR_TEXT_SOFT)
 	stats.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	box.add_child(stats)
 
 	var desc := Label.new()
 	desc.text = String(action["desc"])
-	desc.custom_minimum_size = Vector2(0, 54)
-	desc.add_theme_font_size_override("font_size", 13)
-	desc.add_theme_color_override("font_color", Color(0.31, 0.32, 0.27))
+	desc.custom_minimum_size = Vector2(0, 64)
+	desc.add_theme_font_size_override("font_size", FONT_SMALL)
+	desc.add_theme_color_override("font_color", COLOR_TEXT_MUTED)
 	desc.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	box.add_child(desc)
 
 	var button := _make_button(_action_button_text(action, can_use), Color(0.56, 0.42, 0.22))
-	button.custom_minimum_size = Vector2(0, 38)
+	button.custom_minimum_size = Vector2(0, 44)
 	button.disabled = not can_use
 	button.pressed.connect(func(): _apply_action(id))
 	box.add_child(button)
@@ -493,7 +518,7 @@ func _build_sleep_choices() -> void:
 	row.add_theme_constant_override("separation", 22)
 	center_content.add_child(row)
 
-	for id in GameDataScript.SLEEP_OPTIONS.keys():
+	for id in GameDataScript.get_sleep_option_ids_for_scene("sleep"):
 		row.add_child(_make_sleep_card(id))
 
 
@@ -508,8 +533,8 @@ func _make_sleep_card(id: String) -> PanelContainer:
 
 	var title := Label.new()
 	title.text = String(option["name"])
-	title.add_theme_font_size_override("font_size", 23)
-	title.add_theme_color_override("font_color", Color(0.18, 0.21, 0.17))
+	title.add_theme_font_size_override("font_size", FONT_PANEL_TITLE)
+	title.add_theme_color_override("font_color", COLOR_HEADING)
 	box.add_child(title)
 
 	var stats := Label.new()
@@ -520,15 +545,15 @@ func _make_sleep_card(id: String) -> PanelContainer:
 		_delta_text(int(option["study"])),
 		_delta_text(int(option["satiety"])),
 	]
-	stats.add_theme_font_size_override("font_size", 16)
-	stats.add_theme_color_override("font_color", Color(0.35, 0.29, 0.22))
+	stats.add_theme_font_size_override("font_size", FONT_BODY)
+	stats.add_theme_color_override("font_color", COLOR_TEXT_SOFT)
 	box.add_child(stats)
 
 	var desc := Label.new()
 	desc.text = String(option["desc"])
 	desc.custom_minimum_size = Vector2(0, 100)
-	desc.add_theme_font_size_override("font_size", 15)
-	desc.add_theme_color_override("font_color", Color(0.29, 0.31, 0.26))
+	desc.add_theme_font_size_override("font_size", FONT_BODY)
+	desc.add_theme_color_override("font_color", COLOR_TEXT_MUTED)
 	desc.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	box.add_child(desc)
 
@@ -542,8 +567,8 @@ func _build_summary_center() -> void:
 	var label := Label.new()
 	label.text = daily_summary
 	label.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	label.add_theme_font_size_override("font_size", 22)
-	label.add_theme_color_override("font_color", Color(0.20, 0.23, 0.20))
+	label.add_theme_font_size_override("font_size", FONT_PHASE)
+	label.add_theme_color_override("font_color", COLOR_TEXT)
 	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	center_content.add_child(label)
 
@@ -557,7 +582,7 @@ func _build_summary_center() -> void:
 
 func _build_ending_center() -> void:
 	var ending := GameDataScript.get_ending(ending_id)
-	_add_heading(center_content, String(ending["title"]), 34)
+	_add_heading(center_content, String(ending["title"]), FONT_HEADER)
 
 	var image := TextureRect.new()
 	image.texture = load(String(ending["image"]))
@@ -574,8 +599,8 @@ func _build_ending_center() -> void:
 		int(state["balance"]),
 		daily_summary,
 	]
-	text.add_theme_font_size_override("font_size", 21)
-	text.add_theme_color_override("font_color", Color(0.20, 0.23, 0.20))
+	text.add_theme_font_size_override("font_size", FONT_PHASE)
+	text.add_theme_color_override("font_color", COLOR_TEXT)
 	text.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	center_content.add_child(text)
 
@@ -604,7 +629,7 @@ func _close_metrics_guide() -> void:
 
 
 func _build_metrics_guide_center() -> void:
-	_add_heading(center_content, "指标说明", 30)
+	_add_heading(center_content, "指标说明", FONT_HEADER)
 
 	var image := TextureRect.new()
 	image.texture = load(METRICS_GUIDE_PATH)
@@ -627,8 +652,8 @@ func _build_metrics_guide_center() -> void:
 		MAX_FOODS_PER_MEAL,
 		MAX_DAILY_ACTIONS,
 	]
-	guide.add_theme_font_size_override("font_size", 18)
-	guide.add_theme_color_override("font_color", Color(0.20, 0.23, 0.20))
+	guide.add_theme_font_size_override("font_size", FONT_BODY)
+	guide.add_theme_color_override("font_color", COLOR_TEXT)
 	guide.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	box.add_child(guide)
 
@@ -642,27 +667,27 @@ func _build_metrics_guide_center() -> void:
 
 func _rebuild_right() -> void:
 	_clear_children(right_content)
-	_add_heading(right_content, "今日记录", 22)
+	_add_heading(right_content, "今日记录", FONT_PANEL_TITLE)
 
 	var meals := Label.new()
 	if today_meals.is_empty():
 		meals.text = "还没吃东西。"
 	else:
 		meals.text = "\n".join(today_meals)
-	meals.add_theme_font_size_override("font_size", 16)
-	meals.add_theme_color_override("font_color", Color(0.24, 0.27, 0.23))
+	meals.add_theme_font_size_override("font_size", FONT_BODY)
+	meals.add_theme_color_override("font_color", COLOR_TEXT)
 	meals.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	right_content.add_child(meals)
 
-	_add_heading(right_content, "状态提示", 20)
+	_add_heading(right_content, "状态提示", FONT_SECTION_TITLE)
 	var signals := Label.new()
 	signals.text = _signals_text()
-	signals.add_theme_font_size_override("font_size", 15)
-	signals.add_theme_color_override("font_color", Color(0.34, 0.30, 0.24))
+	signals.add_theme_font_size_override("font_size", FONT_SMALL)
+	signals.add_theme_color_override("font_color", COLOR_TEXT_SOFT)
 	signals.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	right_content.add_child(signals)
 
-	_add_heading(right_content, "日志", 20)
+	_add_heading(right_content, "日志", FONT_SECTION_TITLE)
 	var log_scroll := ScrollContainer.new()
 	log_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	right_content.add_child(log_scroll)
@@ -673,8 +698,8 @@ func _rebuild_right() -> void:
 	for entry in log_entries:
 		var label := Label.new()
 		label.text = entry
-		label.add_theme_font_size_override("font_size", 14)
-		label.add_theme_color_override("font_color", Color(0.25, 0.28, 0.24))
+		label.add_theme_font_size_override("font_size", FONT_SMALL)
+		label.add_theme_color_override("font_color", COLOR_TEXT_SOFT)
 		label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		log_box.add_child(label)
 
@@ -1070,6 +1095,8 @@ func _clamp_stats() -> void:
 func _can_use_action(action: Dictionary) -> bool:
 	if not _is_action_phase():
 		return false
+	if not GameDataScript.is_action_available(String(action["id"]), phase):
+		return false
 	if int(action["cost"]) > int(state["balance"]):
 		return false
 	if actions_used_today >= MAX_DAILY_ACTIONS:
@@ -1197,6 +1224,14 @@ func _delta_text(value: int) -> String:
 	return "%d" % value
 
 
+func _style_label(label: Label, font_size: int, color: Color, outline := false) -> void:
+	label.add_theme_font_size_override("font_size", font_size)
+	label.add_theme_color_override("font_color", color)
+	if outline:
+		label.add_theme_constant_override("outline_size", 1)
+		label.add_theme_color_override("font_outline_color", COLOR_HEADER_OUTLINE)
+
+
 func _stat_color(key: String, value: int) -> Color:
 	if key == "stress" or key == "diet_burden":
 		if value >= 75:
@@ -1220,8 +1255,7 @@ func _stat_color(key: String, value: int) -> Color:
 func _add_heading(parent: Control, text: String, font_size: int) -> void:
 	var label := Label.new()
 	label.text = text
-	label.add_theme_font_size_override("font_size", font_size)
-	label.add_theme_color_override("font_color", Color(0.16, 0.20, 0.17))
+	_style_label(label, font_size, COLOR_HEADING)
 	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	parent.add_child(label)
 
@@ -1234,9 +1268,11 @@ func _clear_children(node: Node) -> void:
 func _make_button(text: String, color: Color) -> Button:
 	var button := Button.new()
 	button.text = text
-	button.custom_minimum_size = Vector2(146, 44)
-	button.add_theme_font_size_override("font_size", 16)
-	button.add_theme_color_override("font_color", Color(1.0, 0.96, 0.88))
+	button.custom_minimum_size = Vector2(154, 48)
+	button.add_theme_font_size_override("font_size", FONT_BUTTON)
+	button.add_theme_color_override("font_color", COLOR_BUTTON_TEXT)
+	button.add_theme_constant_override("outline_size", 1)
+	button.add_theme_color_override("font_outline_color", COLOR_HEADER_OUTLINE)
 	button.add_theme_stylebox_override("normal", _button_style(color))
 	button.add_theme_stylebox_override("hover", _button_style(color.lightened(0.07)))
 	button.add_theme_stylebox_override("pressed", _button_style(color.darkened(0.10)))
@@ -1248,13 +1284,13 @@ func _make_button(text: String, color: Color) -> Button:
 func _button_style(color: Color) -> StyleBoxFlat:
 	var style := StyleBoxFlat.new()
 	style.bg_color = color
-	style.border_color = Color(0.98, 0.86, 0.62, 0.55)
+	style.border_color = Color(0.98, 0.86, 0.62, 0.70)
 	style.set_border_width_all(1)
 	style.set_corner_radius_all(7)
-	style.content_margin_left = 10
-	style.content_margin_right = 10
-	style.content_margin_top = 8
-	style.content_margin_bottom = 8
+	style.content_margin_left = 12
+	style.content_margin_right = 12
+	style.content_margin_top = 10
+	style.content_margin_bottom = 10
 	return style
 
 
@@ -1273,7 +1309,7 @@ func _panel_style(color: Color, border: Color) -> StyleBoxFlat:
 
 func _card_style(selected: bool, enabled: bool) -> StyleBoxFlat:
 	var style := StyleBoxFlat.new()
-	style.bg_color = Color(1.0, 0.96, 0.87, 0.98) if enabled else Color(0.80, 0.78, 0.70, 0.85)
+	style.bg_color = Color(1.0, 0.97, 0.89, 1.0) if enabled else Color(0.80, 0.78, 0.70, 0.90)
 	style.border_color = Color(0.86, 0.32, 0.19, 0.90) if selected else Color(0.72, 0.52, 0.29, 0.58)
 	style.set_border_width_all(3 if selected else 1)
 	style.set_corner_radius_all(8)
@@ -1286,7 +1322,7 @@ func _card_style(selected: bool, enabled: bool) -> StyleBoxFlat:
 
 func _bar_bg_style() -> StyleBoxFlat:
 	var style := StyleBoxFlat.new()
-	style.bg_color = Color(0.78, 0.72, 0.62, 0.72)
+	style.bg_color = Color(0.73, 0.66, 0.54, 0.82)
 	style.set_corner_radius_all(5)
 	return style
 

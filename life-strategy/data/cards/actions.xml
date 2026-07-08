@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+  <action id="study" name="复习" cost="0" slots="1" energy="-8" mood="-2" stress="3" study="10" satiety="-4" burden="0" image="res://assets/generated/actions/study.png" scenes="breakfast_action,lunch_action,dinner_action">
+    <desc>推进考试目标，但会消耗状态。</desc>
+  </action>
+  <action id="nap" name="小睡" cost="0" slots="1" energy="14" mood="2" stress="-4" study="0" satiety="-2" burden="0" image="res://assets/generated/actions/nap.png" scenes="breakfast_action,lunch_action,dinner_action">
+    <desc>短休恢复精力，牺牲一个行动。</desc>
+  </action>
+  <action id="walk" name="散步" cost="0" slots="1" energy="-3" mood="3" stress="-6" study="0" satiety="-3" burden="-2" image="res://assets/generated/actions/walk.png" scenes="breakfast_action,lunch_action,dinner_action">
+    <desc>让脑子透气，降低压力和负担。</desc>
+  </action>
+  <action id="drink_water" name="喝水" cost="0" slots="1" energy="1" mood="0" stress="-1" study="0" satiety="3" burden="-3" image="res://assets/generated/actions/drink_water.png" scenes="breakfast_action,lunch_action,dinner_action">
+    <desc>免费小维护，占一次餐后行动，每天最多两次。</desc>
+  </action>
+  <action id="go_cafeteria" name="去食堂" cost="0" slots="1" energy="-2" mood="1" stress="-2" study="0" satiety="0" burden="-1" image="res://assets/generated/actions/go_cafeteria.png" scenes="breakfast_action,lunch_action,dinner_action">
+    <desc>把明天的抽牌偏向便宜均衡食物。</desc>
+  </action>
+  <action id="convenience_store" name="便利店" cost="0" slots="1" energy="-2" mood="3" stress="0" study="0" satiety="0" burden="2" image="res://assets/generated/actions/convenience_store.png" scenes="breakfast_action,lunch_action,dinner_action">
+    <desc>把明天的抽牌偏向快乐速食。</desc>
+  </action>
+  <action id="allow_imperfection" name="允许不完美" cost="0" slots="1" energy="4" mood="7" stress="-8" study="-2" satiety="0" burden="-1" image="res://assets/generated/actions/allow_imperfection.png" scenes="breakfast_action,lunch_action,dinner_action">
+    <desc>少一点自责，今天也算走过来了。</desc>
+  </action>
+</actions>

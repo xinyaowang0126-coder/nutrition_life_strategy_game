@@ -2,6 +2,10 @@ extends Control
 
 const GAME_SCENE := "res://scenes/game/GameRoot.tscn"
 const FONT_PATH := "res://assets/fonts/NotoSansSC-VF.ttf"
+const FONT_DEFAULT := 18
+const FONT_BUTTON := 22
+const COLOR_BUTTON_TEXT := Color(1.0, 0.97, 0.88)
+const COLOR_BUTTON_OUTLINE := Color(0.06, 0.08, 0.06, 0.55)
 
 @onready var start_button: Button = $MenuMargin/Layout/ButtonRow/StartButton
 @onready var quit_button: Button = $MenuMargin/Layout/ButtonRow/QuitButton
@@ -19,6 +23,7 @@ func _apply_font() -> void:
 	if font:
 		var ui_theme := Theme.new()
 		ui_theme.default_font = font
+		ui_theme.default_font_size = FONT_DEFAULT
 		theme = ui_theme
 		add_theme_font_override("font", font)
 
@@ -29,7 +34,10 @@ func _style_buttons() -> void:
 
 
 func _apply_button_style(button: Button, color: Color) -> void:
-	button.add_theme_color_override("font_color", Color(1, 0.96, 0.88))
+	button.add_theme_font_size_override("font_size", FONT_BUTTON)
+	button.add_theme_color_override("font_color", COLOR_BUTTON_TEXT)
+	button.add_theme_constant_override("outline_size", 1)
+	button.add_theme_color_override("font_outline_color", COLOR_BUTTON_OUTLINE)
 	button.add_theme_stylebox_override("normal", _button_style(color))
 	button.add_theme_stylebox_override("hover", _button_style(color.lightened(0.08)))
 	button.add_theme_stylebox_override("pressed", _button_style(color.darkened(0.10)))
@@ -39,7 +47,7 @@ func _apply_button_style(button: Button, color: Color) -> void:
 func _button_style(color: Color) -> StyleBoxFlat:
 	var style := StyleBoxFlat.new()
 	style.bg_color = color
-	style.border_color = Color(0.98, 0.86, 0.62, 0.65)
+	style.border_color = Color(0.98, 0.86, 0.62, 0.75)
 	style.set_border_width_all(2)
 	style.set_corner_radius_all(8)
 	style.content_margin_left = 18

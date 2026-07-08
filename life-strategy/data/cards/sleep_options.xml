@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sleep_options>
+  <sleep_option id="sleep_early" name="早睡恢复" energy="26" mood="3" stress="-9" study="0" satiety="-12" burden="-4" image="res://assets/generated/actions/sleep_early.png" scenes="sleep">
+    <desc>明天的底盘更稳。</desc>
+  </sleep_option>
+  <sleep_option id="night_study" name="熬夜复习" energy="-22" mood="-5" stress="12" study="16" satiety="-11" burden="2" scenes="sleep">
+    <desc>进度会上去，代价也会显形。</desc>
+  </sleep_option>
+  <sleep_option id="scroll_phone" name="刷手机放空" energy="-10" mood="8" stress="-2" study="0" satiety="-8" burden="1" scenes="sleep">
+    <desc>心情松一点，睡眠浅一点。</desc>
+  </sleep_option>
+</sleep_options>

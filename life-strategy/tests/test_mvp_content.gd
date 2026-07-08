@@ -9,23 +9,45 @@ func suite_name() -> String:
 	return "mvp_content"
 
 
+func suite_setup(_ctx: Dictionary) -> void:
+	GameDataScript.ensure_loaded()
+
+
+func test_xml_card_data_exists() -> void:
+	assert_true(FileAccess.file_exists("res://data/cards/foods.xml"), "foods.xml missing")
+	assert_true(FileAccess.file_exists("res://data/cards/actions.xml"), "actions.xml missing")
+	assert_true(FileAccess.file_exists("res://data/cards/sleep_options.xml"), "sleep_options.xml missing")
+
+
 func test_food_assets_and_costs() -> void:
-	assert_eq(GameDataScript.FOOD_IDS.size(), 15)
-	for id in GameDataScript.FOOD_IDS:
+	var food_ids := GameDataScript.get_food_ids_for_scene("meal")
+	assert_eq(food_ids.size(), 15)
+	for id in food_ids:
 		var food := GameDataScript.get_food(id)
 		assert_true(food.has("name"), "%s missing name" % id)
 		assert_true(int(food["cost"]) >= 0, "%s cost is negative" % id)
+		assert_true(food.has("scenes"), "%s missing scenes" % id)
+		assert_true(GameDataScript.is_food_available(id, "meal"), "%s should be available in meal scene" % id)
 		assert_true(ResourceLoader.exists(String(food["image"])), "%s image missing: %s" % [id, String(food["image"])])
 
 
 func test_action_assets_and_rules() -> void:
-	assert_eq(GameDataScript.ACTION_IDS.size(), 6)
-	for id in GameDataScript.ACTION_IDS:
+	var action_ids := GameDataScript.get_action_ids_for_scene("breakfast_action")
+	assert_eq(action_ids.size(), 7)
+	for id in action_ids:
 		var action := GameDataScript.get_action(id)
 		assert_true(action.has("slots"), "%s missing slots" % id)
 		assert_true(int(action["slots"]) >= 1, "%s should consume one meal-after action" % id)
+		assert_true(action.has("scenes"), "%s missing scenes" % id)
 		assert_true(ResourceLoader.exists(String(action["image"])), "%s image missing: %s" % [id, String(action["image"])])
 	assert_eq(int(GameDataScript.get_action("drink_water")["slots"]), 1)
+
+
+func test_sleep_early_is_sleep_only() -> void:
+	assert_false(GameDataScript.get_action_ids_for_scene("breakfast_action").has("sleep_early"), "sleep_early should not be a breakfast-after action")
+	assert_false(GameDataScript.get_action_ids_for_scene("lunch_action").has("sleep_early"), "sleep_early should not be a lunch-after action")
+	assert_false(GameDataScript.get_action_ids_for_scene("dinner_action").has("sleep_early"), "sleep_early should not be a dinner-after action")
+	assert_true(GameDataScript.get_sleep_option_ids_for_scene("sleep").has("sleep_early"), "sleep_early should be available in sleep phase")
 
 
 func test_metrics_guide_asset_exists() -> void:

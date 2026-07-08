@@ -1,6 +1,7 @@
 class_name GameData
 extends RefCounted
 
+const CardDataStoreScript := preload("res://scripts/CardDataStore.gd")
 const TOTAL_DAYS := 7
 
 const STAT_LABELS := {
@@ -249,6 +250,7 @@ const ACTION_IDS := [
 	"drink_water",
 	"go_cafeteria",
 	"convenience_store",
+	"allow_imperfection",
 ]
 
 const ACTIONS := {
@@ -423,29 +425,25 @@ const ENDINGS := {
 	},
 }
 
+static func ensure_loaded() -> void:
+	CardDataStoreScript.ensure_loaded()
+
+
 static func get_starting_stats() -> Dictionary:
+	ensure_loaded()
 	return STARTING_STATS.duplicate(true)
 
 
 static func get_food(id: String) -> Dictionary:
-	if not FOODS.has(id):
-		push_error("Unknown food id: %s" % id)
-		return {}
-	return FOODS[id].duplicate(true)
+	return CardDataStoreScript.get_food(id)
 
 
 static func get_action(id: String) -> Dictionary:
-	if not ACTIONS.has(id):
-		push_error("Unknown action id: %s" % id)
-		return {}
-	return ACTIONS[id].duplicate(true)
+	return CardDataStoreScript.get_action(id)
 
 
 static func get_sleep_option(id: String) -> Dictionary:
-	if not SLEEP_OPTIONS.has(id):
-		push_error("Unknown sleep id: %s" % id)
-		return {}
-	return SLEEP_OPTIONS[id].duplicate(true)
+	return CardDataStoreScript.get_sleep_option(id)
 
 
 static func get_ending(id: String) -> Dictionary:
@@ -455,12 +453,33 @@ static func get_ending(id: String) -> Dictionary:
 	return ENDINGS[id].duplicate(true)
 
 
+static func get_food_ids_for_scene(scene: String) -> Array[String]:
+	return CardDataStoreScript.get_food_ids_for_scene(scene)
+
+
+static func get_action_ids_for_scene(scene: String) -> Array[String]:
+	return CardDataStoreScript.get_action_ids_for_scene(scene)
+
+
+static func get_sleep_option_ids_for_scene(scene: String = "sleep") -> Array[String]:
+	return CardDataStoreScript.get_sleep_option_ids_for_scene(scene)
+
+
+static func is_food_available(id: String, scene: String) -> bool:
+	return CardDataStoreScript.is_food_available(id, scene)
+
+
+static func is_action_available(id: String, scene: String) -> bool:
+	return CardDataStoreScript.is_action_available(id, scene)
+
+
+static func is_sleep_option_available(id: String, scene: String) -> bool:
+	return CardDataStoreScript.is_sleep_option_available(id, scene)
+
+
 static func has_tag(item: Dictionary, tag: String) -> bool:
 	return item.has("tags") and item["tags"].has(tag)
 
 
-static func cheapest_food_cost() -> int:
-	var cheapest := 999
-	for id in FOOD_IDS:
-		cheapest = min(cheapest, int(FOODS[id]["cost"]))
-	return cheapest
+static func cheapest_food_cost(scene: String = "") -> int:
+	return CardDataStoreScript.cheapest_food_cost(scene)

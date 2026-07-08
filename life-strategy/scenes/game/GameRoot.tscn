@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" path="res://assets/generated/backgrounds/dorm_background.png" id="2_bg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_header"]
-bg_color = Color(0.12, 0.18, 0.15, 0.9)
+bg_color = Color(0.09, 0.15, 0.12, 0.94)
 border_color = Color(0.82, 0.68, 0.42, 0.55)
 border_width_left = 2
 border_width_top = 2
@@ -20,7 +20,7 @@ content_margin_right = 18.0
 content_margin_bottom = 14.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
-bg_color = Color(0.98, 0.93, 0.84, 0.96)
+bg_color = Color(1, 0.95, 0.86, 0.99)
 border_color = Color(0.7, 0.48, 0.24, 0.56)
 border_width_left = 2
 border_width_top = 2
@@ -62,7 +62,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.07, 0.08, 0.07, 0.42)
+color = Color(0.06, 0.07, 0.06, 0.54)
 
 [node name="RootMargin" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -93,14 +93,14 @@ theme_override_constants/separation = 18
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(1, 0.92, 0.76, 1)
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 36
 text = "撑过这一周  第 1/7 天"
 
 [node name="PhaseLabel" type="Label" parent="RootMargin/RootBox/HeaderPanel/HeaderRow"]
 custom_minimum_size = Vector2(420, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.94, 0.89, 0.78, 1)
-theme_override_font_sizes/font_size = 22
+theme_override_font_sizes/font_size = 24
 text = "早餐  |  余额 ¥120  |  手牌 6"
 horizontal_alignment = 2
 
