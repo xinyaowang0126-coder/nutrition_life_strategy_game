@@ -13,7 +13,7 @@ docs/.tmp_render/
 docs/render_tmp_workaround/
 docs/tmp_render_plain/
 docs/rendered_project_overview/
-docs/play/*.tmp
+Play/*.tmp
 
 # Godot local caches
 life-strategy/.godot/

@@ -6,11 +6,11 @@
 
 GitHub Pages 发布后，可通过以下链接测试 HTML 版本：
 
-https://xinyaowang0126-coder.github.io/nutrition_life_strategy_game/play/
+https://xinyaowang0126-coder.github.io/nutrition_life_strategy_game/Play/
 
 ## 项目结构
 
 - `life-strategy/`：Godot 4.7 游戏项目
-- `docs/`：项目文档、系统预览和 Web 发布目录
+- `docs/`：项目文档和系统预览
+- `Play/`：GitHub Pages HTML 测试版
 - `tools/`：文档与素材辅助脚本
-
