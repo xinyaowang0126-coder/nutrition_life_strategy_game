@@ -1,0 +1,22 @@
+# OS/editor noise
+.DS_Store
+Thumbs.db
+
+# Local Codex/agent scratch
+.agents/
+.codex/
+.cache/
+downloads/
+
+# Temporary document rendering output
+docs/.tmp_render/
+docs/render_tmp_workaround/
+docs/tmp_render_plain/
+docs/rendered_project_overview/
+docs/play/*.tmp
+
+# Godot local caches
+life-strategy/.godot/
+life-strategy/.import/
+life-strategy/android/
+life-strategy/exports/

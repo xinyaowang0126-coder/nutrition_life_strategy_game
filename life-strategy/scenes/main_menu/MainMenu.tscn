@@ -1,0 +1,111 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/MainMenu.gd" id="1_menu"]
+[ext_resource type="Texture2D" path="res://assets/generated/backgrounds/dorm_background.png" id="2_bg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(0.12, 0.16, 0.13, 0.72)
+border_color = Color(0.95, 0.78, 0.45, 0.55)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+content_margin_left = 32.0
+content_margin_top = 28.0
+content_margin_right = 32.0
+content_margin_bottom = 28.0
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_menu")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_bg")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Shade" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.06, 0.08, 0.07, 0.45)
+
+[node name="MenuMargin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 120
+theme_override_constants/margin_top = 96
+theme_override_constants/margin_right = 120
+theme_override_constants/margin_bottom = 96
+
+[node name="Layout" type="VBoxContainer" parent="MenuMargin"]
+layout_mode = 2
+alignment = 1
+theme_override_constants/separation = 26
+
+[node name="Title" type="Label" parent="MenuMargin/Layout"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.92, 0.76, 1)
+theme_override_font_sizes/font_size = 88
+text = "撑过这一周"
+horizontal_alignment = 1
+
+[node name="Subtitle" type="Label" parent="MenuMargin/Layout"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.96, 0.89, 0.76, 1)
+theme_override_font_sizes/font_size = 34
+text = "7 天营养生活策略 MVP"
+horizontal_alignment = 1
+
+[node name="IntroPanel" type="PanelContainer" parent="MenuMargin/Layout"]
+custom_minimum_size = Vector2(880, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="IntroText" type="Label" parent="MenuMargin/Layout/IntroPanel"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.96, 0.86, 1)
+theme_override_font_sizes/font_size = 24
+text = "用有限预算安排三餐、行动与睡眠，让身体、心情和复习进度一起撑到周末。"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="ButtonRow" type="HBoxContainer" parent="MenuMargin/Layout"]
+layout_mode = 2
+alignment = 1
+theme_override_constants/separation = 18
+
+[node name="StartButton" type="Button" parent="MenuMargin/Layout/ButtonRow"]
+custom_minimum_size = Vector2(260, 68)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "开始 7 天原型"
+
+[node name="QuitButton" type="Button" parent="MenuMargin/Layout/ButtonRow"]
+custom_minimum_size = Vector2(180, 68)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "退出"

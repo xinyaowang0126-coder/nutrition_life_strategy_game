@@ -1,0 +1,167 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/GameRoot.gd" id="1_game"]
+[ext_resource type="Texture2D" path="res://assets/generated/backgrounds/dorm_background.png" id="2_bg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_header"]
+bg_color = Color(0.12, 0.18, 0.15, 0.9)
+border_color = Color(0.82, 0.68, 0.42, 0.55)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+content_margin_left = 18.0
+content_margin_top = 14.0
+content_margin_right = 18.0
+content_margin_bottom = 14.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(0.98, 0.93, 0.84, 0.96)
+border_color = Color(0.7, 0.48, 0.24, 0.56)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+content_margin_left = 16.0
+content_margin_top = 14.0
+content_margin_right = 16.0
+content_margin_bottom = 14.0
+
+[node name="GameRoot" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_game")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_bg")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Shade" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.07, 0.08, 0.07, 0.42)
+
+[node name="RootMargin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 28
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 28
+theme_override_constants/margin_bottom = 24
+
+[node name="RootBox" type="VBoxContainer" parent="RootMargin"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="HeaderPanel" type="PanelContainer" parent="RootMargin/RootBox"]
+custom_minimum_size = Vector2(0, 78)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_header")
+
+[node name="HeaderRow" type="HBoxContainer" parent="RootMargin/RootBox/HeaderPanel"]
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="HeaderLabel" type="Label" parent="RootMargin/RootBox/HeaderPanel/HeaderRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 0.92, 0.76, 1)
+theme_override_font_sizes/font_size = 32
+text = "撑过这一周  第 1/7 天"
+
+[node name="PhaseLabel" type="Label" parent="RootMargin/RootBox/HeaderPanel/HeaderRow"]
+custom_minimum_size = Vector2(420, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.94, 0.89, 0.78, 1)
+theme_override_font_sizes/font_size = 22
+text = "早餐  |  余额 ¥120  |  手牌 6"
+horizontal_alignment = 2
+
+[node name="RestartButton" type="Button" parent="RootMargin/RootBox/HeaderPanel/HeaderRow"]
+custom_minimum_size = Vector2(140, 48)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "重新开始"
+
+[node name="MenuButton" type="Button" parent="RootMargin/RootBox/HeaderPanel/HeaderRow"]
+custom_minimum_size = Vector2(116, 48)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "主菜单"
+
+[node name="Body" type="HBoxContainer" parent="RootMargin/RootBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 16
+
+[node name="LeftPanel" type="PanelContainer" parent="RootMargin/RootBox/Body"]
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="LeftContent" type="VBoxContainer" parent="RootMargin/RootBox/Body/LeftPanel"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="EditorPreview" type="Label" parent="RootMargin/RootBox/Body/LeftPanel/LeftContent"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "角色状态区\n运行时显示头像、稳定度、精力、心情、饱腹、压力、饮食负担、复习进度。"
+autowrap_mode = 3
+
+[node name="CenterPanel" type="PanelContainer" parent="RootMargin/RootBox/Body"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="CenterContent" type="VBoxContainer" parent="RootMargin/RootBox/Body/CenterPanel"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="EditorPreview" type="Label" parent="RootMargin/RootBox/Body/CenterPanel/CenterContent"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "核心选择区\n运行时显示三餐卡牌、行动卡、睡眠选择、日结和结局。"
+autowrap_mode = 3
+
+[node name="RightPanel" type="PanelContainer" parent="RootMargin/RootBox/Body"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="RightContent" type="VBoxContainer" parent="RootMargin/RootBox/Body/RightPanel"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="EditorPreview" type="Label" parent="RootMargin/RootBox/Body/RightPanel/RightContent"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "今日记录区\n运行时显示三餐记录、组合提示和日志。"
+autowrap_mode = 3
