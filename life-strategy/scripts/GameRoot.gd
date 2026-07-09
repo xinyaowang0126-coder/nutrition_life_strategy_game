@@ -7,15 +7,17 @@ const PORTRAIT_PATH := "res://assets/generated/characters/student_portrait.png"
 const METRICS_GUIDE_PATH := "res://assets/generated/ui/metrics_guide.png"
 const FONT_PATH := "res://assets/fonts/NotoSansSC-VF.ttf"
 
-const FONT_DEFAULT := 19
-const FONT_HEADER := 36
-const FONT_PHASE := 24
-const FONT_PANEL_TITLE := 27
-const FONT_SECTION_TITLE := 23
-const FONT_BODY := 18
-const FONT_SMALL := 17
-const FONT_CARD_TITLE := 22
-const FONT_BUTTON := 19
+const FONT_DEFAULT := 22
+const FONT_HEADER := 42
+const FONT_PHASE := 29
+const FONT_PANEL_TITLE := 32
+const FONT_SECTION_TITLE := 28
+const FONT_BODY := 22
+const FONT_SMALL := 20
+const FONT_CARD_TITLE := 26
+const FONT_BUTTON := 23
+const FONT_EMBOLDEN := 0.95
+const FONT_WEIGHT := 760.0
 
 const COLOR_TEXT := Color(0.20, 0.17, 0.13)
 const COLOR_TEXT_SOFT := Color(0.30, 0.25, 0.19)
@@ -88,11 +90,15 @@ func _ready() -> void:
 func _apply_font() -> void:
 	var font := load(FONT_PATH)
 	if font:
+		var bold_font := FontVariation.new()
+		bold_font.base_font = font
+		bold_font.variation_embolden = FONT_EMBOLDEN
+		bold_font.variation_opentype = {"wght": FONT_WEIGHT}
 		var ui_theme := Theme.new()
-		ui_theme.default_font = font
+		ui_theme.default_font = bold_font
 		ui_theme.default_font_size = FONT_DEFAULT
 		theme = ui_theme
-		add_theme_font_override("font", font)
+		add_theme_font_override("font", bold_font)
 
 
 func _wire_scene_nodes() -> void:
@@ -107,6 +113,8 @@ func _wire_scene_nodes() -> void:
 func _setup_scene_shell() -> void:
 	var restart_button: Button = $RootMargin/RootBox/HeaderPanel/HeaderRow/RestartButton
 	var menu_button: Button = $RootMargin/RootBox/HeaderPanel/HeaderRow/MenuButton
+	restart_button.custom_minimum_size = Vector2(168, 58)
+	menu_button.custom_minimum_size = Vector2(138, 58)
 	restart_button.pressed.connect(start_new_run)
 	menu_button.pressed.connect(func(): get_tree().change_scene_to_file(MAIN_MENU))
 	_style_label(header_label, FONT_HEADER, COLOR_HEADER_TEXT, true)
@@ -374,7 +382,7 @@ func _make_food_card(id: String, hand_index: int = -1) -> PanelContainer:
 	var selected := selected_food_indices.has(hand_index)
 	var can_toggle := selected or _can_add_food(hand_index)
 	var panel := PanelContainer.new()
-	panel.custom_minimum_size = Vector2(300, 410)
+	panel.custom_minimum_size = Vector2(330, 466)
 	panel.add_theme_stylebox_override("panel", _card_style(selected, can_toggle))
 
 	var box := VBoxContainer.new()
@@ -409,7 +417,7 @@ func _make_food_card(id: String, hand_index: int = -1) -> PanelContainer:
 
 	var desc := Label.new()
 	desc.text = String(food["desc"])
-	desc.custom_minimum_size = Vector2(0, 72)
+	desc.custom_minimum_size = Vector2(0, 92)
 	desc.add_theme_font_size_override("font_size", FONT_SMALL)
 	desc.add_theme_color_override("font_color", COLOR_TEXT_MUTED)
 	desc.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -417,7 +425,7 @@ func _make_food_card(id: String, hand_index: int = -1) -> PanelContainer:
 
 	var button := _make_button(_food_button_text(hand_index), Color(0.66, 0.38, 0.18))
 	button.disabled = not can_toggle
-	button.custom_minimum_size = Vector2(0, 44)
+	button.custom_minimum_size = Vector2(0, 56)
 	button.pressed.connect(func(): _toggle_food_selection(hand_index))
 	box.add_child(button)
 
@@ -462,7 +470,7 @@ func _make_action_card(id: String) -> PanelContainer:
 	var action := GameDataScript.get_action(id)
 	var can_use := _can_use_action(action)
 	var panel := PanelContainer.new()
-	panel.custom_minimum_size = Vector2(300, 350)
+	panel.custom_minimum_size = Vector2(330, 410)
 	panel.add_theme_stylebox_override("panel", _card_style(false, can_use))
 
 	var box := VBoxContainer.new()
@@ -497,14 +505,14 @@ func _make_action_card(id: String) -> PanelContainer:
 
 	var desc := Label.new()
 	desc.text = String(action["desc"])
-	desc.custom_minimum_size = Vector2(0, 64)
+	desc.custom_minimum_size = Vector2(0, 86)
 	desc.add_theme_font_size_override("font_size", FONT_SMALL)
 	desc.add_theme_color_override("font_color", COLOR_TEXT_MUTED)
 	desc.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	box.add_child(desc)
 
 	var button := _make_button(_action_button_text(action, can_use), Color(0.56, 0.42, 0.22))
-	button.custom_minimum_size = Vector2(0, 44)
+	button.custom_minimum_size = Vector2(0, 56)
 	button.disabled = not can_use
 	button.pressed.connect(func(): _apply_action(id))
 	box.add_child(button)
@@ -525,7 +533,7 @@ func _build_sleep_choices() -> void:
 func _make_sleep_card(id: String) -> PanelContainer:
 	var option := GameDataScript.get_sleep_option(id)
 	var panel := PanelContainer.new()
-	panel.custom_minimum_size = Vector2(300, 360)
+	panel.custom_minimum_size = Vector2(330, 410)
 	panel.add_theme_stylebox_override("panel", _card_style(false, true))
 	var box := VBoxContainer.new()
 	box.add_theme_constant_override("separation", 8)
@@ -551,7 +559,7 @@ func _make_sleep_card(id: String) -> PanelContainer:
 
 	var desc := Label.new()
 	desc.text = String(option["desc"])
-	desc.custom_minimum_size = Vector2(0, 100)
+	desc.custom_minimum_size = Vector2(0, 124)
 	desc.add_theme_font_size_override("font_size", FONT_BODY)
 	desc.add_theme_color_override("font_color", COLOR_TEXT_MUTED)
 	desc.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -1268,7 +1276,7 @@ func _clear_children(node: Node) -> void:
 func _make_button(text: String, color: Color) -> Button:
 	var button := Button.new()
 	button.text = text
-	button.custom_minimum_size = Vector2(154, 48)
+	button.custom_minimum_size = Vector2(176, 58)
 	button.add_theme_font_size_override("font_size", FONT_BUTTON)
 	button.add_theme_color_override("font_color", COLOR_BUTTON_TEXT)
 	button.add_theme_constant_override("outline_size", 1)

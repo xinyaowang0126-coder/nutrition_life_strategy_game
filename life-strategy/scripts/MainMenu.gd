@@ -2,8 +2,10 @@ extends Control
 
 const GAME_SCENE := "res://scenes/game/GameRoot.tscn"
 const FONT_PATH := "res://assets/fonts/NotoSansSC-VF.ttf"
-const FONT_DEFAULT := 18
-const FONT_BUTTON := 22
+const FONT_DEFAULT := 22
+const FONT_BUTTON := 27
+const FONT_EMBOLDEN := 0.95
+const FONT_WEIGHT := 760.0
 const COLOR_BUTTON_TEXT := Color(1.0, 0.97, 0.88)
 const COLOR_BUTTON_OUTLINE := Color(0.06, 0.08, 0.06, 0.55)
 
@@ -21,11 +23,15 @@ func _ready() -> void:
 func _apply_font() -> void:
 	var font := load(FONT_PATH)
 	if font:
+		var bold_font := FontVariation.new()
+		bold_font.base_font = font
+		bold_font.variation_embolden = FONT_EMBOLDEN
+		bold_font.variation_opentype = {"wght": FONT_WEIGHT}
 		var ui_theme := Theme.new()
-		ui_theme.default_font = font
+		ui_theme.default_font = bold_font
 		ui_theme.default_font_size = FONT_DEFAULT
 		theme = ui_theme
-		add_theme_font_override("font", font)
+		add_theme_font_override("font", bold_font)
 
 
 func _style_buttons() -> void:
@@ -34,6 +40,7 @@ func _style_buttons() -> void:
 
 
 func _apply_button_style(button: Button, color: Color) -> void:
+	button.custom_minimum_size = Vector2(178, 62)
 	button.add_theme_font_size_override("font_size", FONT_BUTTON)
 	button.add_theme_color_override("font_color", COLOR_BUTTON_TEXT)
 	button.add_theme_constant_override("outline_size", 1)
