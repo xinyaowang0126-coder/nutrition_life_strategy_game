@@ -76,7 +76,7 @@ horizontal_alignment = 1
 layout_mode = 2
 theme_override_colors/font_color = Color(0.96, 0.89, 0.76, 1)
 theme_override_font_sizes/font_size = 34
-text = "7 天营养生活策略 MVP"
+text = "离考试还有七天"
 horizontal_alignment = 1
 
 [node name="IntroPanel" type="PanelContainer" parent="MenuMargin/Layout"]
@@ -89,7 +89,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.96, 0.86, 1)
 theme_override_font_sizes/font_size = 24
-text = "用有限预算安排三餐、行动与睡眠，让身体、心情和复习进度一起撑到周末。"
+text = "吃饭、复习、睡觉。钱和精力，都得算着用。"
 horizontal_alignment = 1
 autowrap_mode = 3
 
@@ -102,7 +102,7 @@ theme_override_constants/separation = 18
 custom_minimum_size = Vector2(260, 68)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "开始 7 天原型"
+text = "开始这一周"
 
 [node name="QuitButton" type="Button" parent="MenuMargin/Layout/ButtonRow"]
 custom_minimum_size = Vector2(180, 68)

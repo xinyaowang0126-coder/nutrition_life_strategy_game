@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://ddw0oqhh5qu0d"]
+
+[ext_resource type="Script" uid="uid://dxtngvxqp6kj1" path="res://scripts/ui/ToastFeed.gd" id="1_sr1b5"]
+
+[node name="ToastFeed" type="VBoxContainer" unique_id=98915518]
+custom_minimum_size = Vector2(320, 0)
+mouse_filter = 2
+theme_override_constants/separation = 8
+script = ExtResource("1_sr1b5")

@@ -4,6 +4,7 @@ extends RefCounted
 const FOODS_XML := "res://data/cards/foods.xml"
 const ACTIONS_XML := "res://data/cards/actions.xml"
 const SLEEP_OPTIONS_XML := "res://data/cards/sleep_options.xml"
+const MEAL_SOURCES_XML := "res://data/cards/meal_sources.xml"
 
 const INT_FIELDS := [
 	"cost",
@@ -14,9 +15,12 @@ const INT_FIELDS := [
 	"burden",
 	"stress",
 	"study",
+	"fee",
+	"hand_size",
+	"dorm_stock",
 ]
 
-const CSV_FIELDS := ["tags", "scenes"]
+const CSV_FIELDS := ["tags", "scenes", "sources"]
 
 static var food_ids: Array[String] = []
 static var foods: Dictionary = {}
@@ -24,6 +28,8 @@ static var action_ids: Array[String] = []
 static var actions: Dictionary = {}
 static var sleep_option_ids: Array[String] = []
 static var sleep_options: Dictionary = {}
+static var meal_source_ids: Array[String] = []
+static var meal_sources: Dictionary = {}
 static var _loaded := false
 
 
@@ -37,10 +43,13 @@ static func ensure_loaded() -> void:
 	actions.clear()
 	sleep_option_ids.clear()
 	sleep_options.clear()
+	meal_source_ids.clear()
+	meal_sources.clear()
 
 	_load_xml_cards(FOODS_XML, "food", food_ids, foods)
 	_load_xml_cards(ACTIONS_XML, "action", action_ids, actions)
 	_load_xml_cards(SLEEP_OPTIONS_XML, "sleep_option", sleep_option_ids, sleep_options)
+	_load_xml_cards(MEAL_SOURCES_XML, "meal_source", meal_source_ids, meal_sources)
 	_loaded = true
 
 
@@ -66,6 +75,56 @@ static func get_sleep_option(id: String) -> Dictionary:
 		push_error("Unknown sleep id: %s" % id)
 		return {}
 	return sleep_options[id].duplicate(true)
+
+
+static func get_meal_source(id: String) -> Dictionary:
+	ensure_loaded()
+	if not meal_sources.has(id):
+		push_error("Unknown meal source id: %s" % id)
+		return {}
+	return meal_sources[id].duplicate(true)
+
+
+static func get_meal_source_ids() -> Array[String]:
+	ensure_loaded()
+	return meal_source_ids.duplicate()
+
+
+static func get_meal_source_ids_for_scene(scene: String) -> Array[String]:
+	ensure_loaded()
+	var ids: Array[String] = []
+	for id in meal_source_ids:
+		if is_meal_source_available(id, scene):
+			ids.append(id)
+	return ids
+
+
+static func is_meal_source_available(id: String, scene: String) -> bool:
+	ensure_loaded()
+	return meal_sources.has(id) and _has_scene(meal_sources[id], scene)
+
+
+static func get_food_ids_for_context(source_id: String, meal_phase: String) -> Array[String]:
+	ensure_loaded()
+	var ids: Array[String] = []
+	for id in food_ids:
+		var food: Dictionary = foods[id]
+		if not _has_scene(food, meal_phase):
+			continue
+		var sources: Array = food.get("sources", [])
+		if sources.has(source_id):
+			ids.append(id)
+	return ids
+
+
+static func get_initial_dorm_inventory() -> Dictionary:
+	ensure_loaded()
+	var inventory := {}
+	for id in food_ids:
+		var stock := int(foods[id].get("dorm_stock", 0))
+		if stock > 0:
+			inventory[id] = stock
+	return inventory
 
 
 static func get_food_ids_for_scene(scene: String) -> Array[String]:

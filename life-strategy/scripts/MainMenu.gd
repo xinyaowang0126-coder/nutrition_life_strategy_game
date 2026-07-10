@@ -17,7 +17,10 @@ func _ready() -> void:
 	_apply_font()
 	_style_buttons()
 	start_button.pressed.connect(func(): get_tree().change_scene_to_file(GAME_SCENE))
-	quit_button.pressed.connect(func(): get_tree().quit())
+	if OS.has_feature("web"):
+		quit_button.hide()
+	else:
+		quit_button.pressed.connect(func(): get_tree().quit())
 
 
 func _apply_font() -> void:

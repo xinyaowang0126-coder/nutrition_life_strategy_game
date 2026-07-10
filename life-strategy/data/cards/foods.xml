@@ -1,48 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <foods>
-  <food id="rice_plain" name="白米饭" kind="主食" cost="2" satiety="25" energy="4" mood="0" burden="0" image="res://assets/generated/cards/rice_plain.png" scenes="meal,breakfast,lunch,dinner,cafeteria" tags="staple,cheap,plain">
-    <desc>便宜顶饱，缺点是有点单调。</desc>
+  <food id="rice_plain" name="白米饭" kind="主食" cost="2" satiety="25" energy="4" mood="0" burden="0" image="res://assets/generated/cards/rice_plain.png" scenes="meal,breakfast,lunch,dinner" sources="cafeteria" tags="staple,cheap,plain">
+    <desc>热乎的一碗，简单也踏实。</desc>
   </food>
-  <food id="oatmeal" name="燕麦" kind="主食" cost="3" satiety="32" energy="7" mood="0" burden="0" image="res://assets/generated/cards/oatmeal.png" scenes="meal,breakfast,lunch,dinner,dorm_storage" tags="staple,whole_grain,fiber,cheap">
-    <desc>慢释放的能量，适合撑过上午。</desc>
+  <food id="oatmeal" name="燕麦" kind="主食" cost="3" satiety="32" energy="7" mood="0" burden="0" dorm_stock="2" image="res://assets/generated/cards/oatmeal.png" scenes="meal,breakfast,lunch,dinner" sources="cafeteria,dorm_storage" tags="staple,whole_grain,fiber,cheap">
+    <desc>慢慢吃完，胃里暖起来。</desc>
   </food>
-  <food id="egg" name="鸡蛋" kind="蛋白" cost="2" satiety="18" energy="5" mood="0" burden="0" image="res://assets/generated/cards/egg.png" scenes="meal,breakfast,lunch,dinner,cafeteria" tags="protein,cheap">
-    <desc>便宜蛋白质，组合餐的好拼图。</desc>
+  <food id="egg" name="鸡蛋" kind="蛋白" cost="2" satiety="18" energy="5" mood="0" burden="0" image="res://assets/generated/cards/egg.png" scenes="meal,breakfast,lunch,dinner" sources="cafeteria" tags="protein,cheap">
+    <desc>随手添一个，怎么配都合适。</desc>
   </food>
-  <food id="tofu" name="豆腐" kind="蛋白" cost="3" satiety="20" energy="4" mood="0" burden="0" image="res://assets/generated/cards/tofu.png" scenes="meal,lunch,dinner,cafeteria" tags="protein,cheap,vegetable">
-    <desc>清淡、便宜，也能补一点蛋白。</desc>
+  <food id="tofu" name="豆腐" kind="蛋白" cost="3" satiety="20" energy="4" mood="0" burden="0" image="res://assets/generated/cards/tofu.png" scenes="meal,lunch,dinner" sources="cafeteria" tags="protein,cheap,vegetable">
+    <desc>软软的一块，带着一点豆香。</desc>
   </food>
-  <food id="greens" name="青菜" kind="蔬菜" cost="3" satiety="10" energy="2" mood="-2" burden="-2" image="res://assets/generated/cards/greens.png" scenes="meal,lunch,dinner,cafeteria" tags="vegetable,fiber,plain">
-    <desc>不太快乐，但会让身体轻一点。</desc>
+  <food id="greens" name="青菜" kind="蔬菜" cost="3" satiety="10" energy="2" mood="-2" burden="-2" image="res://assets/generated/cards/greens.png" scenes="meal,lunch,dinner" sources="cafeteria" tags="vegetable,fiber,plain">
+    <desc>刚出锅，还带着锅气。</desc>
   </food>
-  <food id="tomato" name="番茄" kind="蔬果" cost="3" satiety="8" energy="2" mood="3" burden="-1" image="res://assets/generated/cards/tomato.png" scenes="meal,breakfast,lunch,dinner,cafeteria" tags="vegetable,fruit_like,fiber">
-    <desc>清爽的小补充，稳定情绪。</desc>
+  <food id="tomato" name="番茄" kind="蔬果" cost="3" satiety="8" energy="2" mood="3" burden="-1" image="res://assets/generated/cards/tomato.png" scenes="meal,breakfast,lunch,dinner" sources="cafeteria" tags="vegetable,fruit_like,fiber">
+    <desc>酸酸甜甜，给盘子添点颜色。</desc>
   </food>
-  <food id="apple" name="苹果" kind="水果" cost="3" satiety="14" energy="3" mood="5" burden="-1" image="res://assets/generated/cards/apple.png" scenes="meal,breakfast,lunch,dinner,convenience_store" tags="fruit,fiber,mood">
-    <desc>清脆的安全感。</desc>
+  <food id="apple" name="苹果" kind="水果" cost="3" satiety="14" energy="3" mood="5" burden="-1" dorm_stock="1" image="res://assets/generated/cards/apple.png" scenes="meal,breakfast,lunch,dinner" sources="convenience_store,dorm_storage" tags="fruit,fiber,mood">
+    <desc>咔嚓一口，清脆得很。</desc>
   </food>
-  <food id="banana" name="香蕉" kind="水果" cost="3" satiety="18" energy="6" mood="5" burden="0" image="res://assets/generated/cards/banana.png" scenes="meal,breakfast,lunch,dinner,convenience_store" tags="fruit,energy,mood">
-    <desc>便宜、快速、适合低电量。</desc>
+  <food id="banana" name="香蕉" kind="水果" cost="3" satiety="18" energy="6" mood="5" burden="0" image="res://assets/generated/cards/banana.png" scenes="meal,breakfast,lunch,dinner" sources="convenience_store" tags="fruit,energy,mood">
+    <desc>剥开就吃，赶时间正好。</desc>
   </food>
-  <food id="milk" name="牛奶" kind="饮品" cost="4" satiety="15" energy="5" mood="3" burden="1" image="res://assets/generated/cards/milk.png" scenes="meal,breakfast,lunch,dinner,convenience_store" tags="protein,drink">
-    <desc>温和补能，轻微增加负担。</desc>
+  <food id="milk" name="牛奶" kind="饮品" cost="4" satiety="15" energy="5" mood="3" burden="1" dorm_stock="1" image="res://assets/generated/cards/milk.png" scenes="meal,breakfast,lunch,dinner" sources="convenience_store,dorm_storage" tags="protein,drink">
+    <desc>顺手带一盒，垫垫肚子。</desc>
   </food>
-  <food id="coffee" name="咖啡" kind="饮品" cost="8" satiety="2" energy="14" mood="5" burden="1" stress="3" image="res://assets/generated/cards/coffee.png" scenes="meal,breakfast,lunch,dinner,convenience_store" tags="drink,energy">
-    <desc>短期提神，也会推高一点紧绷感。</desc>
+  <food id="coffee" name="咖啡" kind="饮品" cost="8" satiety="2" energy="14" mood="5" burden="1" stress="3" image="res://assets/generated/cards/coffee.png" scenes="meal,breakfast,lunch,dinner" sources="convenience_store" tags="drink,energy">
+    <desc>先借一会儿清醒。</desc>
   </food>
-  <food id="bubble_tea" name="奶茶" kind="快乐" cost="15" satiety="8" energy="4" mood="18" burden="8" image="res://assets/generated/cards/bubble_tea.png" scenes="meal,lunch,dinner,convenience_store,comfort_event" tags="drink,snack,high_sugar,mood,favorite">
-    <desc>今天先活下来。明天再说。</desc>
+  <food id="bubble_tea" name="奶茶" kind="饮品" cost="15" satiety="8" energy="4" mood="18" burden="8" image="res://assets/generated/cards/bubble_tea.png" scenes="meal,lunch,dinner" sources="takeout,convenience_store" tags="drink,snack,high_sugar,mood,favorite">
+    <desc>甜的，冰的，今天很想喝。</desc>
   </food>
-  <food id="instant_noodles" name="方便面" kind="速食" cost="4" satiety="24" energy="5" mood="8" burden="9" image="res://assets/generated/cards/instant_noodles.png" scenes="meal,breakfast,lunch,dinner,convenience_store,dorm_storage" tags="instant,cheap,high_sodium,high_fat,favorite">
-    <desc>低价救场，但会留下负担。</desc>
+  <food id="instant_noodles" name="方便面" kind="速食" cost="4" satiety="32" energy="5" mood="8" burden="11" dorm_stock="2" image="res://assets/generated/cards/instant_noodles.png" scenes="meal,breakfast,lunch,dinner" sources="convenience_store,dorm_storage" tags="instant,cheap,high_sodium,high_fat,favorite">
+    <desc>热水一泡，很快就有东西吃。</desc>
   </food>
-  <food id="fried_chicken" name="炸鸡" kind="奖励" cost="25" satiety="32" energy="5" mood="20" burden="12" image="res://assets/generated/cards/fried_chicken.png" scenes="meal,lunch,dinner,comfort_event" tags="fastfood,high_fat,high_sodium,tasty,favorite">
-    <desc>快乐很高，预算和身体会记账。</desc>
+  <food id="fried_chicken" name="炸鸡" kind="炸物" cost="25" satiety="32" energy="5" mood="20" burden="12" image="res://assets/generated/cards/fried_chicken.png" scenes="meal,lunch,dinner" sources="takeout" tags="fastfood,high_fat,high_sodium,tasty,favorite">
+    <desc>纸袋还是热的，香味先跑了出来。</desc>
   </food>
-  <food id="salad_bowl" name="沙拉碗" kind="轻食" cost="28" satiety="20" energy="5" mood="-3" burden="-4" image="res://assets/generated/cards/salad_bowl.png" scenes="meal,lunch,dinner,cafeteria" tags="vegetable,fruit,light_meal,expensive">
-    <desc>清爽但贵，预算紧张时很奢侈。</desc>
+  <food id="salad_bowl" name="沙拉碗" kind="轻食" cost="28" satiety="20" energy="5" mood="-3" burden="-4" image="res://assets/generated/cards/salad_bowl.png" scenes="meal,lunch,dinner" sources="takeout" tags="vegetable,fruit,light_meal,expensive">
+    <desc>清清爽爽，结账时会犹豫一下。</desc>
   </food>
-  <food id="sandwich" name="三明治" kind="便利" cost="15" satiety="25" energy="6" mood="3" burden="2" image="res://assets/generated/cards/sandwich.png" scenes="meal,breakfast,lunch,dinner,convenience_store" tags="fastfood,convenient,moderate,staple,protein">
-    <desc>均衡一点，也贵一点。</desc>
+  <food id="sandwich" name="三明治" kind="便利" cost="15" satiety="25" energy="6" mood="3" burden="2" image="res://assets/generated/cards/sandwich.png" scenes="meal,breakfast,lunch,dinner" sources="takeout,convenience_store" tags="fastfood,convenient,moderate,staple,protein">
+    <desc>不用等，拿上就能走。</desc>
   </food>
 </foods>

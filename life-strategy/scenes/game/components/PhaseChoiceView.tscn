@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://c45poqgaee7ji"]
+
+[ext_resource type="Script" uid="uid://b2holptqlb4ka" path="res://scripts/ui/PhaseChoiceView.gd" id="1_7un4k"]
+
+[node name="PhaseChoiceView" type="VBoxContainer" unique_id=178642058]
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+script = ExtResource("1_7un4k")
+
+[node name="Title" type="Label" parent="." unique_id=367231437]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "阶段标题"
+
+[node name="Prompt" type="Label" parent="." unique_id=267351989]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "一句提示"
+autowrap_mode = 3
+
+[node name="Status" type="Label" parent="." unique_id=1746071625]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "状态"
+autowrap_mode = 3
+
+[node name="Scroll" type="ScrollContainer" parent="." unique_id=2116638449]
+layout_mode = 2
+size_flags_vertical = 3
+follow_focus = true
+
+[node name="Grid" type="GridContainer" parent="Scroll" unique_id=547661734]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 16
+columns = 3
+
+[node name="Footer" type="HBoxContainer" parent="." unique_id=1756074349]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Back" type="Button" parent="Footer" unique_id=1018386481]
+custom_minimum_size = Vector2(150, 54)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "返回"
+
+[node name="Spacer" type="Control" parent="Footer" unique_id=760048584]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Secondary" type="Button" parent="Footer" unique_id=1317089731]
+custom_minimum_size = Vector2(170, 54)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "次要"
+
+[node name="Primary" type="Button" parent="Footer" unique_id=40861869]
+custom_minimum_size = Vector2(190, 54)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "确认"

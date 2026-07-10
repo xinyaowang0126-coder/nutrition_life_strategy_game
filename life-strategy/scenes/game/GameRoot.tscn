@@ -1,50 +1,53 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene format=3 uid="uid://belpmtfceom2a"]
 
-[ext_resource type="Script" path="res://scripts/GameRoot.gd" id="1_game"]
-[ext_resource type="Texture2D" path="res://assets/generated/backgrounds/dorm_background.png" id="2_bg"]
+[ext_resource type="Script" uid="uid://c7y4ew3jxo4gu" path="res://scripts/GameRoot.gd" id="1_game"]
+[ext_resource type="Theme" uid="uid://mqx5wclucmow" path="res://scenes/game/components/GameTheme.tres" id="1_ohvdy"]
+[ext_resource type="Texture2D" uid="uid://dbshyue1ehyvx" path="res://assets/generated/backgrounds/dorm_background.png" id="2_bg"]
+[ext_resource type="PackedScene" uid="uid://ddw0oqhh5qu0d" path="res://scenes/game/components/ToastFeed.tscn" id="4_wufqc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_header"]
-bg_color = Color(0.09, 0.15, 0.12, 0.94)
-border_color = Color(0.82, 0.68, 0.42, 0.55)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
 content_margin_left = 18.0
 content_margin_top = 14.0
 content_margin_right = 18.0
 content_margin_bottom = 14.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
-bg_color = Color(1, 0.95, 0.86, 0.99)
-border_color = Color(0.7, 0.48, 0.24, 0.56)
+bg_color = Color(0.09, 0.15, 0.12, 0.94)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
+border_color = Color(0.82, 0.68, 0.42, 0.55)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
 content_margin_left = 16.0
 content_margin_top = 14.0
 content_margin_right = 16.0
 content_margin_bottom = 14.0
+bg_color = Color(1, 0.95, 0.86, 0.99)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.7, 0.48, 0.24, 0.56)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
-[node name="GameRoot" type="Control"]
+[node name="GameRoot" type="Control" unique_id=536082132]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_ohvdy")
 script = ExtResource("1_game")
 
-[node name="Background" type="TextureRect" parent="."]
+[node name="Background" type="TextureRect" parent="." unique_id=1383241107]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -55,7 +58,7 @@ texture = ExtResource("2_bg")
 expand_mode = 1
 stretch_mode = 6
 
-[node name="Shade" type="ColorRect" parent="."]
+[node name="Shade" type="ColorRect" parent="." unique_id=1127120226]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -64,7 +67,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.06, 0.07, 0.06, 0.54)
 
-[node name="RootMargin" type="MarginContainer" parent="."]
+[node name="RootMargin" type="MarginContainer" parent="." unique_id=791183842]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -76,92 +79,105 @@ theme_override_constants/margin_top = 24
 theme_override_constants/margin_right = 28
 theme_override_constants/margin_bottom = 24
 
-[node name="RootBox" type="VBoxContainer" parent="RootMargin"]
+[node name="RootBox" type="VBoxContainer" parent="RootMargin" unique_id=215110605]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="HeaderPanel" type="PanelContainer" parent="RootMargin/RootBox"]
+[node name="HeaderPanel" type="PanelContainer" parent="RootMargin/RootBox" unique_id=33388646]
 custom_minimum_size = Vector2(0, 78)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_header")
 
-[node name="HeaderRow" type="HBoxContainer" parent="RootMargin/RootBox/HeaderPanel"]
+[node name="HeaderRow" type="HBoxContainer" parent="RootMargin/RootBox/HeaderPanel" unique_id=791761173]
 layout_mode = 2
 theme_override_constants/separation = 18
 
-[node name="HeaderLabel" type="Label" parent="RootMargin/RootBox/HeaderPanel/HeaderRow"]
+[node name="HeaderLabel" type="Label" parent="RootMargin/RootBox/HeaderPanel/HeaderRow" unique_id=953751224]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(1, 0.92, 0.76, 1)
 theme_override_font_sizes/font_size = 36
-text = "撑过这一周  第 1/7 天"
+text = "第 1 天 / 7"
 
-[node name="PhaseLabel" type="Label" parent="RootMargin/RootBox/HeaderPanel/HeaderRow"]
+[node name="PhaseLabel" type="Label" parent="RootMargin/RootBox/HeaderPanel/HeaderRow" unique_id=1733881919]
 custom_minimum_size = Vector2(420, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.94, 0.89, 0.78, 1)
 theme_override_font_sizes/font_size = 24
-text = "早餐  |  余额 ¥120  |  手牌 6"
+text = "早餐 · 余 ¥120 · 今日安排 0/3"
 horizontal_alignment = 2
 
-[node name="RestartButton" type="Button" parent="RootMargin/RootBox/HeaderPanel/HeaderRow"]
+[node name="RestartButton" type="Button" parent="RootMargin/RootBox/HeaderPanel/HeaderRow" unique_id=1030954525]
 custom_minimum_size = Vector2(140, 48)
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "重新开始"
 
-[node name="MenuButton" type="Button" parent="RootMargin/RootBox/HeaderPanel/HeaderRow"]
+[node name="MenuButton" type="Button" parent="RootMargin/RootBox/HeaderPanel/HeaderRow" unique_id=516199325]
 custom_minimum_size = Vector2(116, 48)
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "主菜单"
 
-[node name="Body" type="HBoxContainer" parent="RootMargin/RootBox"]
+[node name="Body" type="HBoxContainer" parent="RootMargin/RootBox" unique_id=568052303]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 16
 
-[node name="LeftPanel" type="PanelContainer" parent="RootMargin/RootBox/Body"]
-custom_minimum_size = Vector2(320, 0)
+[node name="LeftPanel" type="PanelContainer" parent="RootMargin/RootBox/Body" unique_id=1658684062]
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
 
-[node name="LeftContent" type="VBoxContainer" parent="RootMargin/RootBox/Body/LeftPanel"]
+[node name="LeftContent" type="VBoxContainer" parent="RootMargin/RootBox/Body/LeftPanel" unique_id=1617674568]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="EditorPreview" type="Label" parent="RootMargin/RootBox/Body/LeftPanel/LeftContent"]
+[node name="EditorPreview" type="Label" parent="RootMargin/RootBox/Body/LeftPanel/LeftContent" unique_id=1248369046]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
-text = "角色状态区\n运行时显示头像、稳定度、精力、心情、饱腹、压力、饮食负担、复习进度。"
+text = "此刻
+头像、余力、精力、心情、饱腹、压力、身体负担与复习。"
 autowrap_mode = 3
 
-[node name="CenterPanel" type="PanelContainer" parent="RootMargin/RootBox/Body"]
+[node name="CenterPanel" type="PanelContainer" parent="RootMargin/RootBox/Body" unique_id=1139893539]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
 
-[node name="CenterContent" type="VBoxContainer" parent="RootMargin/RootBox/Body/CenterPanel"]
+[node name="CenterContent" type="VBoxContainer" parent="RootMargin/RootBox/Body/CenterPanel" unique_id=1750695519]
 layout_mode = 2
 theme_override_constants/separation = 14
 
-[node name="EditorPreview" type="Label" parent="RootMargin/RootBox/Body/CenterPanel/CenterContent"]
+[node name="EditorPreview" type="Label" parent="RootMargin/RootBox/Body/CenterPanel/CenterContent" unique_id=351195493]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "核心选择区\n运行时显示三餐卡牌、行动卡、睡眠选择、日结和结局。"
+text = "当前阶段
+地点、餐食、行动、睡眠、日结或结局视图。"
 autowrap_mode = 3
 
-[node name="RightPanel" type="PanelContainer" parent="RootMargin/RootBox/Body"]
-custom_minimum_size = Vector2(400, 0)
+[node name="RightPanel" type="PanelContainer" parent="RootMargin/RootBox/Body" unique_id=2086537081]
+custom_minimum_size = Vector2(330, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
 
-[node name="RightContent" type="VBoxContainer" parent="RootMargin/RootBox/Body/RightPanel"]
+[node name="RightContent" type="VBoxContainer" parent="RootMargin/RootBox/Body/RightPanel" unique_id=981438988]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="EditorPreview" type="Label" parent="RootMargin/RootBox/Body/RightPanel/RightContent"]
+[node name="EditorPreview" type="Label" parent="RootMargin/RootBox/Body/RightPanel/RightContent" unique_id=1752167502]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
-text = "今日记录区\n运行时显示三餐记录、组合提示和日志。"
+text = "今天
+三餐记录与当前提示；短消息由 ToastFeed 渐隐显示。"
 autowrap_mode = 3
+
+[node name="ToastFeed" parent="." unique_id=98915518 instance=ExtResource("4_wufqc")]
+z_index = 20
+layout_mode = 0
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -344.0
+offset_top = 112.0
+offset_right = -24.0
+offset_bottom = 112.0

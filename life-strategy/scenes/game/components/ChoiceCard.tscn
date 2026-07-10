@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://dgrwg4kqs3pke"]
+
+[ext_resource type="Script" uid="uid://n1tpfabb0kfh" path="res://scripts/ui/ChoiceCard.gd" id="1_6akii"]
+
+[node name="ChoiceCard" type="PanelContainer" unique_id=563862958]
+custom_minimum_size = Vector2(280, 350)
+size_flags_horizontal = 3
+script = ExtResource("1_6akii")
+
+[node name="Margin" type="MarginContainer" parent="." unique_id=405295544]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Content" type="VBoxContainer" parent="Margin" unique_id=1526583610]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="TopRow" type="HBoxContainer" parent="Margin/Content" unique_id=1181758343]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Badge" type="Label" parent="Margin/Content/TopRow" unique_id=1360599309]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "食物"
+
+[node name="Spacer" type="Control" parent="Margin/Content/TopRow" unique_id=2016505305]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Cost" type="Label" parent="Margin/Content/TopRow" unique_id=848679677]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "¥0"
+
+[node name="Image" type="TextureRect" parent="Margin/Content" unique_id=240475627]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Title" type="Label" parent="Margin/Content" unique_id=1332409441]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "卡牌名称"
+clip_text = true
+
+[node name="Summary" type="Label" parent="Margin/Content" unique_id=1530321437]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "简要效果"
+autowrap_mode = 3
+
+[node name="Action" type="Button" parent="Margin/Content" unique_id=306200138]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "选这个"

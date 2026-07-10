@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Life strategy"
+config/name="撑过这一周"
 run/main_scene="res://scenes/boot/Boot.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"

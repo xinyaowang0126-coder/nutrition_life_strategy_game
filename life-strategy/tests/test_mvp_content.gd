@@ -17,6 +17,7 @@ func test_xml_card_data_exists() -> void:
 	assert_true(FileAccess.file_exists("res://data/cards/foods.xml"), "foods.xml missing")
 	assert_true(FileAccess.file_exists("res://data/cards/actions.xml"), "actions.xml missing")
 	assert_true(FileAccess.file_exists("res://data/cards/sleep_options.xml"), "sleep_options.xml missing")
+	assert_true(FileAccess.file_exists("res://data/cards/meal_sources.xml"), "meal_sources.xml missing")
 
 
 func test_food_assets_and_costs() -> void:
@@ -33,7 +34,7 @@ func test_food_assets_and_costs() -> void:
 
 func test_action_assets_and_rules() -> void:
 	var action_ids := GameDataScript.get_action_ids_for_scene("breakfast_action")
-	assert_eq(action_ids.size(), 7)
+	assert_eq(action_ids.size(), 5)
 	for id in action_ids:
 		var action := GameDataScript.get_action(id)
 		assert_true(action.has("slots"), "%s missing slots" % id)
@@ -52,6 +53,23 @@ func test_sleep_early_is_sleep_only() -> void:
 
 func test_metrics_guide_asset_exists() -> void:
 	assert_true(ResourceLoader.exists("res://assets/generated/ui/metrics_guide.png"), "metrics guide image missing")
+
+
+func test_meal_sources_and_pools() -> void:
+	var source_ids := GameDataScript.get_meal_source_ids()
+	assert_eq(source_ids.size(), 4)
+	assert_false(GameDataScript.is_meal_source_available("takeout", "breakfast"))
+	assert_true(GameDataScript.is_meal_source_available("takeout", "lunch"))
+	for id in source_ids:
+		var source := GameDataScript.get_meal_source(id)
+		assert_true(ResourceLoader.exists(String(source["image"])), "%s image missing" % id)
+		assert_true(ResourceLoader.exists(String(source["background"])), "%s background missing" % id)
+		for meal in ["breakfast", "lunch", "dinner"]:
+			if GameDataScript.is_meal_source_available(id, meal):
+				assert_gt(GameDataScript.get_food_ids_for_context(id, meal).size(), 0, "%s has no %s food" % [id, meal])
+	var inventory := GameDataScript.get_initial_dorm_inventory()
+	assert_eq(int(inventory.get("oatmeal", 0)), 2)
+	assert_eq(int(inventory.get("instant_noodles", 0)), 2)
 
 
 func test_endings_have_images() -> void:
