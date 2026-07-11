@@ -17,8 +17,13 @@ const DESKTOP_DETAILS_LEFT := 720.0
 const DESKTOP_DETAILS_RIGHT := 770.0
 const MOBILE_DETAILS_LEFT := 646.0
 const MOBILE_DETAILS_RIGHT := 696.0
+const DESKTOP_PORTRAIT_RECT := Rect2(0.0, -630.0, 430.0, 650.0)
+const MOBILE_PORTRAIT_RECT := Rect2(-92.0, -630.0, 430.0, 650.0)
+const DESKTOP_SHADOW_RECT := Rect2(12.0, -620.0, 430.0, 650.0)
+const MOBILE_SHADOW_RECT := Rect2(-80.0, -620.0, 430.0, 650.0)
 
 @onready var portrait: TextureRect = $Portrait
+@onready var portrait_shadow: TextureRect = $PortraitShadow
 @onready var status_board: PanelContainer = $StatusBoard
 @onready var stability_icon: Label = $StatusBoard/Margin/VBox/StabilityRow/StabilityIcon
 @onready var stability_label: Label = $StatusBoard/Margin/VBox/StabilityRow/StabilityLabel
@@ -57,6 +62,8 @@ func _ready() -> void:
 
 
 func apply_responsive_profile(mobile: bool) -> void:
+	_apply_control_rect(portrait, MOBILE_PORTRAIT_RECT if mobile else DESKTOP_PORTRAIT_RECT)
+	_apply_control_rect(portrait_shadow, MOBILE_SHADOW_RECT if mobile else DESKTOP_SHADOW_RECT)
 	status_board.offset_left = MOBILE_STATUS_LEFT if mobile else DESKTOP_STATUS_LEFT
 	status_board.offset_right = MOBILE_STATUS_RIGHT if mobile else DESKTOP_STATUS_RIGHT
 	status_board.offset_top = MOBILE_STATUS_TOP if mobile else DESKTOP_STATUS_TOP
@@ -68,6 +75,13 @@ func apply_responsive_profile(mobile: bool) -> void:
 		if is_instance_valid(_hover_tween):
 			_hover_tween.kill()
 		status_board.scale = Vector2.ONE
+
+
+func _apply_control_rect(control: Control, rect: Rect2) -> void:
+	control.offset_left = rect.position.x
+	control.offset_top = rect.position.y
+	control.offset_right = rect.end.x
+	control.offset_bottom = rect.end.y
 
 
 func configure(stats: Dictionary, animate: bool = false) -> void:

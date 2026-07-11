@@ -89,3 +89,7 @@ visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "选择"
+
+[node name="LongPressTimer" type="Timer" parent="." unique_id=1437478592]
+wait_time = 0.48
+one_shot = true

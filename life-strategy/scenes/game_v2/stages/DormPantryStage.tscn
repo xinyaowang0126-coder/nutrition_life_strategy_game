@@ -155,6 +155,13 @@ text = "+"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Preview" type="TextureRect" parent="Layout/BowlPanel/BowlMargin/Bowl/SelectedSlots/Slot1" unique_id=827840455]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
 [node name="Slot2" type="PanelContainer" parent="Layout/BowlPanel/BowlMargin/Bowl/SelectedSlots" unique_id=1381427755]
 custom_minimum_size = Vector2(145, 145)
 layout_mode = 2
@@ -167,6 +174,13 @@ text = "+"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Preview" type="TextureRect" parent="Layout/BowlPanel/BowlMargin/Bowl/SelectedSlots/Slot2" unique_id=2063531299]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
 [node name="Slot3" type="PanelContainer" parent="Layout/BowlPanel/BowlMargin/Bowl/SelectedSlots" unique_id=83921231]
 custom_minimum_size = Vector2(145, 145)
 layout_mode = 2
@@ -178,6 +192,13 @@ theme_override_font_sizes/font_size = 38
 text = "+"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Preview" type="TextureRect" parent="Layout/BowlPanel/BowlMargin/Bowl/SelectedSlots/Slot3" unique_id=1625174901]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
 
 [node name="BowlReceipt" type="HBoxContainer" parent="Layout/BowlPanel/BowlMargin/Bowl" unique_id=1478317284]
 layout_mode = 2

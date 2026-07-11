@@ -23,7 +23,6 @@ var _options: Dictionary = {}
 var _ready_finished := false
 var _has_setup := false
 var _scrolling := false
-var _last_scroll_motion_msec := -1000
 
 
 func setup(items: Array, options: Dictionary = {}) -> void:
@@ -86,12 +85,52 @@ func _update_header() -> void:
 	slots_label.text = "安排 %d/%d" % [used, maximum]
 	water_count_label.text = "水杯 %d/%d" % [int(_options.get("water_count", 0)), int(_options.get("water_max", 2))]
 	var names: Array = _options.get("used_action_names", []) as Array
+	var ids: Array = _options.get("used_action_ids", []) as Array
 	var slot_nodes := used_slots.get_children()
 	for index in range(slot_nodes.size()):
-		var label := (slot_nodes[index] as Node).get_node_or_null("Text") as Label
-		if label != null:
-			label.text = String(names[index]) if index < names.size() else "空位"
-			label.modulate = Color.WHITE if index < names.size() else Color(1.0, 1.0, 1.0, 0.62)
+		var slot := slot_nodes[index] as PanelContainer
+		var label := slot.get_node_or_null("Text") as Label
+		var preview := slot.get_node_or_null("Preview") as TextureRect
+		if index < ids.size():
+			var action := _action_payload(String(ids[index]))
+			var texture := _action_preview_texture(action)
+			if preview != null:
+				preview.texture = texture
+				preview.visible = texture != null
+			if label != null:
+				label.visible = texture == null
+				label.text = String(names[index]) if index < names.size() else "?"
+		else:
+			if preview != null:
+				preview.texture = null
+				preview.visible = false
+			if label != null:
+				label.visible = true
+				label.text = "+"
+				label.modulate = Color(1.0, 1.0, 1.0, 0.62)
+
+
+func _action_payload(action_id: String) -> Dictionary:
+	for payload in _items:
+		if String(payload.get("id", "")) == action_id:
+			return payload
+	return {}
+
+
+func _action_preview_texture(action: Dictionary) -> Texture2D:
+	var image_path := String(action.get("image", ""))
+	if image_path.is_empty() or not ResourceLoader.exists(image_path):
+		return null
+	var source := load(image_path) as Texture2D
+	if source == null or image_path.contains("/ui_v2/card_art/"):
+		return source
+	if not image_path.contains("/generated/actions/"):
+		return source
+	var atlas := AtlasTexture.new()
+	atlas.atlas = source
+	atlas.region = Rect2(98, 103, 316, 294)
+	atlas.filter_clip = true
+	return atlas
 
 
 func _on_action_pressed(action_id: String) -> void:
@@ -108,20 +147,15 @@ func _bind_scroll_guard() -> void:
 	if action_scroll.has_signal("scroll_started"):
 		action_scroll.connect("scroll_started", func() -> void:
 			_scrolling = true
-			_last_scroll_motion_msec = Time.get_ticks_msec()
 		)
 	if action_scroll.has_signal("scroll_ended"):
 		action_scroll.connect("scroll_ended", func() -> void:
 			_scrolling = false
-			_last_scroll_motion_msec = Time.get_ticks_msec()
 		)
-	action_scroll.get_h_scroll_bar().value_changed.connect(func(_value: float) -> void:
-		_last_scroll_motion_msec = Time.get_ticks_msec()
-	)
 
 
 func _is_scroll_gesture() -> bool:
-	return _scrolling or Time.get_ticks_msec() - _last_scroll_motion_msec < 140
+	return _scrolling
 
 
 func _forward_detail(payload: Dictionary, anchor_rect: Rect2, pinned: bool) -> void:

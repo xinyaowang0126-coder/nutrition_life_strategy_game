@@ -1,5 +1,7 @@
 [gd_resource type="Theme" format=3 uid="uid://dthxodrk6slpq"]
 
+[ext_resource type="FontFile" uid="uid://bwr015fuhqxje" path="res://assets/fonts/NotoSansCJKsc-Bold.otf" id="1_font"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dkeno"]
 content_margin_left = 16.0
 content_margin_top = 10.0
@@ -106,10 +108,12 @@ shadow_size = 8
 shadow_offset = Vector2(0, 4)
 
 [resource]
+default_font = ExtResource("1_font")
 Button/colors/font_color = Color(1, 0.9490196, 0.8392157, 1)
 Button/colors/font_disabled_color = Color(0.84705883, 0.8117647, 0.7254902, 0.6666667)
 Button/colors/font_focus_color = Color(1, 0.9529412, 0.8392157, 1)
 Button/font_sizes/font_size = 20
+Button/fonts/font = ExtResource("1_font")
 Button/styles/disabled = SubResource("StyleBoxFlat_dkeno")
 Button/styles/focus = SubResource("StyleBoxFlat_ev5gx")
 Button/styles/hover = SubResource("StyleBoxFlat_gt4yl")
@@ -117,4 +121,5 @@ Button/styles/normal = SubResource("StyleBoxFlat_2cxs5")
 Button/styles/pressed = SubResource("StyleBoxFlat_l8t6h")
 Label/colors/font_color = Color(0.20392157, 0.15686275, 0.12156863, 1)
 Label/font_sizes/font_size = 20
+Label/fonts/font = ExtResource("1_font")
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_ffkwc")

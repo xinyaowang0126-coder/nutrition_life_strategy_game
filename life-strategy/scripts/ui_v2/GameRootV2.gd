@@ -86,6 +86,7 @@ var today_meal_records: Array[Dictionary] = []
 var actions_used_today := 0
 var drink_water_used := 0
 var used_action_names: Array[String] = []
+var used_action_ids: Array[String] = []
 var combos_today: Array[String] = []
 var summary_payload: Dictionary = {}
 var ending_id := ""
@@ -136,6 +137,7 @@ func _start_day() -> void:
 	actions_used_today = 0
 	drink_water_used = 0
 	used_action_names.clear()
+	used_action_ids.clear()
 	combos_today.clear()
 	summary_payload.clear()
 
@@ -245,6 +247,7 @@ func _show_action_stage() -> void:
 		"water_count": drink_water_used,
 		"water_max": 2,
 		"used_action_names": used_action_names,
+		"used_action_ids": used_action_ids,
 	})
 
 
@@ -521,6 +524,7 @@ func _apply_action(action_id: String) -> void:
 	if action_id == "drink_water":
 		drink_water_used += 1
 	used_action_names.append(display_name)
+	used_action_ids.append(action_id)
 	state["balance"] = int(state["balance"]) - int(action.get("cost", 0))
 	_apply_stat_delta({
 		"energy": int(action.get("energy", 0)),
@@ -962,33 +966,69 @@ func _mobile_source_layout(stage: Control) -> void:
 func _mobile_cafeteria_layout(stage: Control) -> void:
 	_set_rect(stage.get_node("Header") as Control, 0.5, 0, 0.5, 0, -286, 8, 286, 72)
 	_set_rect(stage.get_node("FoodRail") as Control, 0.02, 0.10, 0.98, 0.54, 0, 0, 0, 0)
-	_set_rect(stage.get_node("TrayDropZone") as Control, 0.02, 0.57, 0.98, 0.88, 0, 0, 0, 0)
+	_set_rect(stage.get_node("TrayDropZone") as Control, 0.29, 0.55, 0.98, 0.80, 0, 0, 0, 0)
+	stage.get_node("TrayDropZone/TrayMargin/VBox/TrayHeader/TrayHint").visible = false
+	var tray_margin := stage.get_node("TrayDropZone/TrayMargin") as MarginContainer
+	tray_margin.add_theme_constant_override("margin_left", 20)
+	tray_margin.add_theme_constant_override("margin_right", 20)
+	tray_margin.add_theme_constant_override("margin_top", 14)
+	tray_margin.add_theme_constant_override("margin_bottom", 14)
+	var selected_slots := stage.get_node("TrayDropZone/TrayMargin/VBox/SelectedSlots") as HBoxContainer
+	selected_slots.add_theme_constant_override("separation", 12)
 	for slot in stage.get_node("TrayDropZone/TrayMargin/VBox/SelectedSlots").get_children():
-		(slot as Control).custom_minimum_size = Vector2(150, 112)
-	_set_rect(stage.get_node("Footer") as Control, 1, 1, 1, 1, -510, -88, -8, -28)
+		(slot as Control).custom_minimum_size = Vector2(108, 140)
+	var footer := stage.get_node("Footer") as HBoxContainer
+	footer.add_theme_constant_override("separation", 10)
+	(footer.get_node("BackButton") as Button).custom_minimum_size = Vector2(120, 60)
+	(footer.get_node("SkipButton") as Button).custom_minimum_size = Vector2(110, 60)
+	(footer.get_node("ConfirmButton") as Button).custom_minimum_size = Vector2(170, 60)
+	_set_rect(footer, 1, 1, 1, 1, -420, -130, -8, -70)
 
 
 func _mobile_takeout_layout(stage: Control) -> void:
 	_set_rect(stage.get_node("Layout/Header") as Control, 0.5, 0, 0.5, 0, -294, 6, 294, 70)
-	_set_rect(stage.get_node("Layout/PhoneShell") as Control, 0.5, 0.49, 0.5, 0.49, -270, -405, 270, 365)
+	_set_rect(stage.get_node("Layout/PhoneShell") as Control, 0.65, 0.49, 0.65, 0.49, -240, -405, 240, 300)
 	stage.get_node("Layout/SwipeHint").visible = false
-	_set_rect(stage.get_node("Layout/Footer") as Control, 1, 1, 1, 1, -314, -88, -8, -28)
+	var footer := stage.get_node("Layout/Footer") as HBoxContainer
+	(footer.get_node("BackButton") as Button).custom_minimum_size = Vector2(120, 60)
+	(footer.get_node("SkipButton") as Button).custom_minimum_size = Vector2(110, 60)
+	_set_rect(footer, 1, 1, 1, 1, -250, -130, -8, -70)
 
 
 func _mobile_convenience_layout(stage: Control) -> void:
 	_set_rect(stage.get_node("Layout/Header") as Control, 0.5, 0, 0.5, 0, -294, 6, 294, 70)
 	_set_rect(stage.get_node("Layout/ShelfPanel") as Control, 0.02, 0.11, 0.98, 0.54, 0, 0, 0, 0)
-	_set_rect(stage.get_node("Layout/BasketPanel") as Control, 0.02, 0.57, 0.98, 0.84, 0, 0, 0, 0)
+	_set_rect(stage.get_node("Layout/BasketPanel") as Control, 0.25, 0.59, 0.98, 0.81, 0, 0, 0, 0)
+	stage.get_node("Layout/BasketPanel/BasketMargin/Basket/BasketHeader/BasketHint").visible = false
+	var selected_slots := stage.get_node("Layout/BasketPanel/BasketMargin/Basket/SelectedSlots") as HBoxContainer
+	selected_slots.add_theme_constant_override("separation", 8)
 	for slot in stage.get_node("Layout/BasketPanel/BasketMargin/Basket/SelectedSlots").get_children():
-		(slot as Control).custom_minimum_size = Vector2(102, 74)
-	_set_rect(stage.get_node("Layout/Footer") as Control, 1, 1, 1, 1, -502, -88, -8, -28)
+		(slot as Control).custom_minimum_size = Vector2(76, 76)
+	var footer := stage.get_node("Layout/Footer") as HBoxContainer
+	(footer.get_node("BackButton") as Button).custom_minimum_size = Vector2(120, 60)
+	(footer.get_node("SkipButton") as Button).custom_minimum_size = Vector2(110, 60)
+	(footer.get_node("ConfirmButton") as Button).custom_minimum_size = Vector2(170, 60)
+	_set_rect(footer, 1, 1, 1, 1, -420, -130, -8, -70)
 
 
 func _mobile_dorm_layout(stage: Control) -> void:
 	_set_rect(stage.get_node("Layout/Header") as Control, 0.5, 0, 0.5, 0, -294, 6, 294, 70)
 	_set_rect(stage.get_node("Layout/PantryPanel") as Control, 0.02, 0.10, 0.98, 0.48, 0, 0, 0, 0)
-	_set_rect(stage.get_node("Layout/BowlPanel") as Control, 0.02, 0.51, 0.98, 0.82, 0, 0, 0, 0)
-	_set_rect(stage.get_node("Layout/Footer") as Control, 1, 1, 1, 1, -502, -88, -8, -28)
+	_set_rect(stage.get_node("Layout/BowlPanel") as Control, 0.25, 0.52, 0.98, 0.78, 0, 0, 0, 0)
+	stage.get_node("Layout/BowlPanel/BowlMargin/Bowl/BowlHint").visible = false
+	stage.get_node("Layout/BowlPanel/BowlMargin/Bowl/BowlReceipt/FreeTag").visible = false
+	var bowl_margin := stage.get_node("Layout/BowlPanel/BowlMargin") as MarginContainer
+	bowl_margin.add_theme_constant_override("margin_left", 16)
+	bowl_margin.add_theme_constant_override("margin_right", 16)
+	bowl_margin.add_theme_constant_override("margin_top", 12)
+	bowl_margin.add_theme_constant_override("margin_bottom", 12)
+	for slot in stage.get_node("Layout/BowlPanel/BowlMargin/Bowl/SelectedSlots").get_children():
+		(slot as Control).custom_minimum_size = Vector2(100, 100)
+	var footer := stage.get_node("Layout/Footer") as HBoxContainer
+	(footer.get_node("BackButton") as Button).custom_minimum_size = Vector2(120, 60)
+	(footer.get_node("SkipButton") as Button).custom_minimum_size = Vector2(110, 60)
+	(footer.get_node("ConfirmButton") as Button).custom_minimum_size = Vector2(150, 60)
+	_set_rect(footer, 1, 1, 1, 1, -400, -130, -8, -70)
 
 
 func _mobile_action_layout(stage: Control) -> void:
@@ -997,14 +1037,17 @@ func _mobile_action_layout(stage: Control) -> void:
 	stage.get_node("Layout/Header/PromptTag").custom_minimum_size = Vector2(300, 64)
 	stage.get_node("Layout/Header/SlotsTag").custom_minimum_size = Vector2(120, 64)
 	_set_rect(stage.get_node("Layout/ActionRail") as Control, 0.02, 0.13, 0.98, 0.68, 0, 0, 0, 0)
-	_set_rect(stage.get_node("Layout/PlannerNote") as Control, 0.03, 0.72, 0.97, 0.89, 0, 0, 0, 0)
-	_set_rect(stage.get_node("Layout/SkipButton") as Control, 1, 1, 1, 1, -178, -88, -8, -28)
+	_set_rect(stage.get_node("Layout/PlannerNote") as Control, 0.43, 0.70, 0.98, 0.86, 0, 0, 0, 0)
+	for slot in stage.get_node("Layout/PlannerNote/PlannerMargin/Planner/UsedSlots").get_children():
+		(slot as Control).custom_minimum_size = Vector2(90, 90)
+	_set_rect(stage.get_node("Layout/SkipButton") as Control, 1, 1, 1, 1, -178, -130, -8, -70)
 
 
 func _mobile_sleep_layout(stage: Control) -> void:
 	_set_rect(stage.get_node("Layout/PromptTag") as Control, 0.5, 0, 0.5, 0, -320, 8, 320, 90)
 	_set_rect(stage.get_node("Layout/SleepRail") as Control, 0.02, 0.15, 0.98, 0.66, 0, 0, 0, 0)
-	_set_rect(stage.get_node("Layout/AlarmNote") as Control, 0.04, 0.71, 0.96, 0.88, 0, 0, 0, 0)
+	_set_rect(stage.get_node("Layout/AlarmNote") as Control, 0.43, 0.72, 0.98, 0.86, 0, 0, 0, 0)
+	(stage.get_node("Layout/AlarmNote/AlarmMargin/Alarm/Clock") as Label).add_theme_font_size_override("font_size", 34)
 
 
 func _set_rect(

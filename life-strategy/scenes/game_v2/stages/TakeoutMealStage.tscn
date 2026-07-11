@@ -59,9 +59,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -290.0
+offset_left = -240.0
 offset_top = -330.0
-offset_right = 290.0
+offset_right = 240.0
 offset_bottom = 350.0
 
 [node name="PhoneMargin" type="MarginContainer" parent="Layout/PhoneShell" unique_id=1992772540]

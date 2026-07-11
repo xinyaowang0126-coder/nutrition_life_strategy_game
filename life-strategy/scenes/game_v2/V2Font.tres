@@ -1,0 +1,10 @@
+[gd_resource type="FontVariation" format=3 uid="uid://dxrv4itob3lps"]
+
+[ext_resource type="FontFile" uid="uid://dpt0yo4edclc7" path="res://assets/fonts/NotoSansSC-VF.ttf" id="1_c32qv"]
+
+[resource]
+base_font = ExtResource("1_c32qv")
+variation_opentype = {
+"wght": 760.0
+}
+variation_embolden = 0.9

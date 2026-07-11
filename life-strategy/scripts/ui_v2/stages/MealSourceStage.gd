@@ -26,6 +26,7 @@ var _meal_label := "这一顿"
 var _ready_finished := false
 var _has_setup := false
 var _prop_tweens: Dictionary = {}
+var _prop_base_positions: Dictionary = {}
 
 
 func setup(sources: Array, meal_label: String = "这一顿", disabled_reasons: Dictionary = {}) -> void:
@@ -82,6 +83,7 @@ func _bind_prop(source_id: String) -> void:
 		button.mouse_exited.connect(_dismiss_source_detail.bind(source_id))
 		button.mouse_entered.connect(_animate_prop.bind(source_id, true))
 		button.mouse_exited.connect(_animate_prop.bind(source_id, false))
+		button.button_down.connect(_press_prop.bind(source_id))
 		button.focus_entered.connect(_show_source_detail.bind(source_id, false))
 		button.focus_exited.connect(_dismiss_source_detail.bind(source_id))
 	if info != null:
@@ -126,9 +128,6 @@ func _apply_source(source_id: String) -> void:
 					shadow.texture = texture
 					var idle_alpha := 0.24 if shadow_name == "ShadowSoft" else 0.36
 					shadow.modulate.a = idle_alpha if enabled else 0.08
-	var idle_plate := prop.get_node_or_null("IdlePlate") as PanelContainer
-	if idle_plate != null:
-		idle_plate.self_modulate.a = 0.82 if enabled else 0.34
 	if name_label != null:
 		name_label.text = String(source.get("name", source_id))
 		name_label.modulate = Color.WHITE if enabled else Color(0.60, 0.57, 0.51, 1.0)
@@ -164,6 +163,9 @@ func _animate_prop(source_id: String, hovered: bool) -> void:
 	var prop := _prop_for(source_id)
 	if prop == null:
 		return
+	if hovered and not _prop_base_positions.has(source_id):
+		_prop_base_positions[source_id] = prop.position
+	var base_position: Vector2 = _prop_base_positions.get(source_id, prop.position)
 	var previous := _prop_tweens.get(source_id) as Tween
 	if is_instance_valid(previous):
 		previous.kill()
@@ -172,7 +174,29 @@ func _animate_prop(source_id: String, hovered: bool) -> void:
 	prop.z_index = 20 if hovered else 10
 	var tween := prop.create_tween()
 	tween.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	tween.set_parallel(true)
 	tween.tween_property(prop, "scale", Vector2(1.055, 1.055) if hovered else Vector2.ONE, 0.14)
+	tween.tween_property(prop, "position", base_position + (Vector2.UP * 7.0 if hovered else Vector2.ZERO), 0.14)
+	_prop_tweens[source_id] = tween
+	if not hovered:
+		_prop_base_positions.erase(source_id)
+
+
+func _press_prop(source_id: String) -> void:
+	var prop := _prop_for(source_id)
+	if prop == null:
+		return
+	if not _prop_base_positions.has(source_id):
+		_prop_base_positions[source_id] = prop.position
+	var base_position: Vector2 = _prop_base_positions[source_id]
+	var previous := _prop_tweens.get(source_id) as Tween
+	if is_instance_valid(previous):
+		previous.kill()
+	prop.z_index = 25
+	var tween := prop.create_tween()
+	tween.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT).set_parallel(true)
+	tween.tween_property(prop, "scale", Vector2(1.025, 1.025), 0.07)
+	tween.tween_property(prop, "position", base_position + Vector2(0.0, -2.0), 0.07)
 	_prop_tweens[source_id] = tween
 
 

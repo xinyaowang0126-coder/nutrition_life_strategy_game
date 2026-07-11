@@ -163,6 +163,13 @@ text = "+"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Preview" type="TextureRect" parent="Layout/BasketPanel/BasketMargin/Basket/SelectedSlots/Slot1" unique_id=1743837802]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
 [node name="Slot2" type="PanelContainer" parent="Layout/BasketPanel/BasketMargin/Basket/SelectedSlots" unique_id=1078712782]
 custom_minimum_size = Vector2(130, 76)
 layout_mode = 2
@@ -174,6 +181,13 @@ theme_override_font_sizes/font_size = 30
 text = "+"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Preview" type="TextureRect" parent="Layout/BasketPanel/BasketMargin/Basket/SelectedSlots/Slot2" unique_id=1874421387]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
 
 [node name="Slot3" type="PanelContainer" parent="Layout/BasketPanel/BasketMargin/Basket/SelectedSlots" unique_id=1873908972]
 custom_minimum_size = Vector2(130, 76)
@@ -187,6 +201,13 @@ text = "+"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Preview" type="TextureRect" parent="Layout/BasketPanel/BasketMargin/Basket/SelectedSlots/Slot3" unique_id=1024520211]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
 [node name="Slot4" type="PanelContainer" parent="Layout/BasketPanel/BasketMargin/Basket/SelectedSlots" unique_id=1063574958]
 custom_minimum_size = Vector2(130, 76)
 layout_mode = 2
@@ -199,6 +220,13 @@ text = "+"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Preview" type="TextureRect" parent="Layout/BasketPanel/BasketMargin/Basket/SelectedSlots/Slot4" unique_id=1348150836]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
 [node name="Slot5" type="PanelContainer" parent="Layout/BasketPanel/BasketMargin/Basket/SelectedSlots" unique_id=1294745697]
 custom_minimum_size = Vector2(130, 76)
 layout_mode = 2
@@ -210,6 +238,13 @@ theme_override_font_sizes/font_size = 30
 text = "+"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Preview" type="TextureRect" parent="Layout/BasketPanel/BasketMargin/Basket/SelectedSlots/Slot5" unique_id=1824414074]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
 
 [node name="Footer" type="HBoxContainer" parent="Layout" unique_id=697236496]
 layout_mode = 0

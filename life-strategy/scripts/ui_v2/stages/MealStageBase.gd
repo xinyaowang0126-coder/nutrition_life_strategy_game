@@ -24,7 +24,6 @@ var _meal_label := "这一顿"
 var _ready_finished := false
 var _has_setup := false
 var _scrolling := false
-var _last_scroll_motion_msec := -1000
 
 
 func setup(foods: Array, selected_ids: Array = [], options: Dictionary = {}) -> void:
@@ -167,22 +166,50 @@ func _update_slot_labels(animate: bool) -> void:
 		if slot == null:
 			continue
 		var label := slot.get_node_or_null("Empty") as Label
-		if label == null:
-			continue
+		var preview := slot.get_node_or_null("Preview") as TextureRect
 		if index < _selected_ids.size():
 			var food_id := _selected_ids[index]
 			var food: Dictionary = _foods_by_id.get(food_id, {})
-			label.text = _slot_text(food)
-			label.add_theme_font_size_override("font_size", 18)
-			label.add_theme_color_override("font_color", Color(0.24, 0.20, 0.15, 1.0))
+			var texture := _food_preview_texture(food)
+			if preview != null:
+				preview.texture = texture
+				preview.visible = texture != null
+			if label != null:
+				label.visible = texture == null
+				label.text = "?"
+				label.add_theme_font_size_override("font_size", 28)
+				label.add_theme_color_override("font_color", Color(0.55, 0.48, 0.40, 0.55))
 			slot.self_modulate = Color(1.0, 0.91, 0.73, 1.0)
 			if animate:
 				_pulse_slot(slot)
 		else:
-			label.text = "+"
-			label.add_theme_font_size_override("font_size", 36)
-			label.add_theme_color_override("font_color", Color(0.55, 0.48, 0.40, 0.42))
+			if preview != null:
+				preview.texture = null
+				preview.visible = false
+			if label != null:
+				label.visible = true
+				label.text = "+"
+				label.add_theme_font_size_override("font_size", 36)
+				label.add_theme_color_override("font_color", Color(0.55, 0.48, 0.40, 0.42))
 			slot.self_modulate = Color.WHITE
+
+
+func _food_preview_texture(food: Dictionary) -> Texture2D:
+	var image_path := String(food.get("image", ""))
+	if image_path.is_empty() or not ResourceLoader.exists(image_path):
+		return null
+	var source := load(image_path) as Texture2D
+	if source == null or image_path.contains("/ui_v2/card_art/"):
+		return source
+	if not image_path.contains("/generated/cards/"):
+		return source
+	# Legacy food assets include a baked card frame.  Reuse only their painted
+	# center in the scene-authored tray/basket/bowl TextureRect.
+	var atlas := AtlasTexture.new()
+	atlas.atlas = source
+	atlas.region = Rect2(130, 112, 252, 288)
+	atlas.filter_clip = true
+	return atlas
 
 
 func _on_card_selected(food_id: String) -> void:
@@ -265,30 +292,19 @@ func _bind_scroll_guard(scroll: ScrollContainer) -> void:
 		scroll.connect("scroll_started", Callable(self, "_on_scroll_started"))
 	if scroll.has_signal("scroll_ended"):
 		scroll.connect("scroll_ended", Callable(self, "_on_scroll_ended"))
-	var horizontal_bar := scroll.get_h_scroll_bar()
-	var vertical_bar := scroll.get_v_scroll_bar()
-	if horizontal_bar != null:
-		horizontal_bar.value_changed.connect(_on_scroll_value_changed)
-	if vertical_bar != null:
-		vertical_bar.value_changed.connect(_on_scroll_value_changed)
-
-
 func _on_scroll_started() -> void:
 	_scrolling = true
-	_last_scroll_motion_msec = Time.get_ticks_msec()
 
 
 func _on_scroll_ended() -> void:
 	_scrolling = false
-	_last_scroll_motion_msec = Time.get_ticks_msec()
-
-
-func _on_scroll_value_changed(_value: float) -> void:
-	_last_scroll_motion_msec = Time.get_ticks_msec()
 
 
 func _is_scroll_gesture() -> bool:
-	return _scrolling or Time.get_ticks_msec() - _last_scroll_motion_msec < 140
+	# Each card already cancels a tap after an 18 px drag.  Scroll-bar value
+	# changes can also be caused by hover scaling/layout, so using a time window
+	# here made the first ordinary click get ignored on desktop and Web.
+	return _scrolling
 
 
 func _emit_back() -> void:

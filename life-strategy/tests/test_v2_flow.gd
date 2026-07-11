@@ -148,18 +148,39 @@ func test_every_v2_stage_reaches_ready_with_real_data() -> void:
 	_add_to_test_tree(cafeteria)
 	assert_true(cafeteria.is_node_ready())
 	assert_eq(cafeteria._cards_by_id.size(), 3)
+	for card in cafeteria._cards_by_id.values():
+		assert_true(card is CompactChoiceCardV2)
+	cafeteria._on_card_selected("rice_plain")
+	var cafeteria_preview := cafeteria.get_node(
+		"TrayDropZone/TrayMargin/VBox/SelectedSlots/Slot1/Preview"
+	) as TextureRect
+	assert_true(cafeteria_preview.visible)
+	assert_true(cafeteria_preview.texture != null)
+	assert_false((cafeteria_preview.get_parent().get_node("Empty") as Label).visible)
+	assert_false(cafeteria._is_scroll_gesture())
+	cafeteria._scrolling = true
+	assert_true(cafeteria._is_scroll_gesture(), "an active drag must suppress card selection")
+	cafeteria._scrolling = false
 
 	var takeout := TakeoutStageScene.instantiate() as TakeoutMealStageV2
 	takeout.setup(_foods(["sandwich", "bubble_tea"]), [], _cash_options("午餐", 3))
 	_add_to_test_tree(takeout)
 	assert_true(takeout.is_node_ready())
 	assert_eq(takeout._cards_by_id.size(), 2)
+	for card in takeout._cards_by_id.values():
+		assert_true(card is TakeoutFoodRowCardV2, "takeout must use its horizontal phone row card")
+	takeout._on_card_selected("sandwich")
+	assert_eq(takeout.bag_label.text, "购物袋 1/3")
 
 	var convenience := ConvenienceStageScene.instantiate() as ConvenienceMealStageV2
 	convenience.setup(_foods(["apple", "banana", "milk"]), [], _cash_options("午餐"))
 	_add_to_test_tree(convenience)
 	assert_true(convenience.is_node_ready())
 	assert_eq(convenience._cards_by_id.size(), 3)
+	convenience._on_card_selected("apple")
+	assert_true((convenience.get_node(
+		"Layout/BasketPanel/BasketMargin/Basket/SelectedSlots/Slot1/Preview"
+	) as TextureRect).visible)
 
 	var dorm := DormStageScene.instantiate() as DormPantryStageV2
 	dorm.setup(_foods(["oatmeal", "instant_noodles"]), [], {
@@ -171,15 +192,27 @@ func test_every_v2_stage_reaches_ready_with_real_data() -> void:
 	_add_to_test_tree(dorm)
 	assert_true(dorm.is_node_ready())
 	assert_eq(dorm._cards_by_id.size(), 2)
+	dorm._on_card_selected("oatmeal")
+	assert_true((dorm.get_node(
+		"Layout/BowlPanel/BowlMargin/Bowl/SelectedSlots/Slot1/Preview"
+	) as TextureRect).visible)
 
 	var action_stage := ActionStageScene.instantiate() as ActionStageV2
 	var actions: Array[Dictionary] = []
 	for action_id in GameDataScript.get_action_ids_for_scene("breakfast_action"):
 		actions.append(GameDataScript.get_action(action_id))
-	action_stage.setup(actions, {"slots_used": 0, "max_slots": 3})
+	action_stage.setup(actions, {
+		"slots_used": 1,
+		"max_slots": 3,
+		"used_action_ids": ["study"],
+		"used_action_names": ["晨读"],
+	})
 	_add_to_test_tree(action_stage)
 	assert_true(action_stage.is_node_ready())
 	assert_eq(action_stage._cards_by_id.size(), actions.size())
+	assert_true((action_stage.get_node(
+		"Layout/PlannerNote/PlannerMargin/Planner/UsedSlots/Slot1/Preview"
+	) as TextureRect).visible)
 
 	var sleep_stage := SleepStageScene.instantiate() as SleepStageV2
 	var sleep_options: Array[Dictionary] = []
@@ -201,16 +234,16 @@ func test_v2_root_scene_starts_at_breakfast_source() -> void:
 	assert_true(game._active_stage is MealSourceStageV2)
 
 
-func test_mobile_baseline_is_720_by_1280() -> void:
+func test_mobile_baseline_is_720_by_1280_without_forcing_desktop_window() -> void:
 	assert_eq(
 		int(ProjectSettings.get_setting("display/window/size/window_width_override", 0)),
-		720,
-		"mobile QA window width must stay at 720"
+		0,
+		"the checked-in project must not force the desktop window to mobile width"
 	)
 	assert_eq(
 		int(ProjectSettings.get_setting("display/window/size/window_height_override", 0)),
-		1280,
-		"mobile QA window height must stay at 1280 (9:16)"
+		0,
+		"the checked-in project must not force the desktop window to mobile height"
 	)
 	var controller_source := FileAccess.get_file_as_string("res://scripts/ui_v2/GameRootV2.gd")
 	assert_contains(
@@ -220,6 +253,20 @@ func test_mobile_baseline_is_720_by_1280() -> void:
 	)
 
 
+func test_v2_theme_bundles_chinese_font_for_web() -> void:
+	var ui_theme := load("res://scenes/game_v2/V2Theme.tres") as Theme
+	assert_true(ui_theme != null)
+	assert_true(ui_theme.default_font != null, "V2 theme must not depend on an OS fallback font")
+	assert_eq(
+		ui_theme.default_font.resource_path,
+		"res://assets/fonts/NotoSansCJKsc-Bold.otf",
+		"the bundled static bold Chinese font must be used by desktop and Web exports"
+	)
+	assert_true(ui_theme.default_font is FontFile)
+	assert_eq(ui_theme.get_font("font", "Label"), ui_theme.default_font)
+	assert_eq(ui_theme.get_font("font", "Button"), ui_theme.default_font)
+
+
 func test_character_hud_mobile_profile_keeps_footer_clear_and_clickable() -> void:
 	var game := GameRootV2Scene.instantiate() as GameRootV2
 	_add_to_test_tree(game)
@@ -227,6 +274,14 @@ func test_character_hud_mobile_profile_keeps_footer_clear_and_clickable() -> voi
 	game._apply_shell_profile()
 
 	var status_board := game.character_hud.status_board
+	assert_eq(game.character_hud.portrait.offset_left, -92.0)
+	assert_eq(game.character_hud.portrait.offset_right, 338.0)
+	assert_eq(game.character_hud.portrait_shadow.offset_left, -80.0)
+	assert_eq(
+		game.character_hud.portrait.texture.resource_path,
+		"res://assets/generated/ui_v2/characters/student_bust.png",
+		"mobile layout must move the original texture node instead of cropping the image"
+	)
 	assert_eq(status_board.offset_top, -250.0)
 	assert_eq(status_board.offset_bottom, -20.0)
 	assert_eq(game.character_hud.pivot_offset.y, game.character_anchor.size.y)
@@ -255,6 +310,8 @@ func test_character_hud_mobile_profile_keeps_footer_clear_and_clickable() -> voi
 
 	game._mobile_mode = false
 	game._apply_shell_profile()
+	assert_eq(game.character_hud.portrait.offset_left, 0.0)
+	assert_eq(game.character_hud.portrait_shadow.offset_left, 12.0)
 	assert_eq(status_board.offset_top, -310.0)
 	assert_eq(status_board.offset_bottom, -90.0)
 	assert_eq(game.character_hud.pivot_offset, Vector2.ZERO)

@@ -123,6 +123,13 @@ text = "+"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Preview" type="TextureRect" parent="TrayDropZone/TrayMargin/VBox/SelectedSlots/Slot1" unique_id=106507167]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
 [node name="Slot2" type="PanelContainer" parent="TrayDropZone/TrayMargin/VBox/SelectedSlots" unique_id=627692483]
 custom_minimum_size = Vector2(210, 135)
 layout_mode = 2
@@ -135,6 +142,13 @@ text = "+"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Preview" type="TextureRect" parent="TrayDropZone/TrayMargin/VBox/SelectedSlots/Slot2" unique_id=627879509]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
 [node name="Slot3" type="PanelContainer" parent="TrayDropZone/TrayMargin/VBox/SelectedSlots" unique_id=1908776836]
 custom_minimum_size = Vector2(210, 135)
 layout_mode = 2
@@ -146,6 +160,13 @@ theme_override_font_sizes/font_size = 42
 text = "+"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Preview" type="TextureRect" parent="TrayDropZone/TrayMargin/VBox/SelectedSlots/Slot3" unique_id=1506030234]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
 
 [node name="Footer" type="HBoxContainer" parent="." unique_id=430922049]
 layout_mode = 0

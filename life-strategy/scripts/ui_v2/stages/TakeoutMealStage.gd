@@ -44,7 +44,7 @@ func _update_scene_summary() -> void:
 	title_label.text = "%s · 外卖 App" % _meal_label
 	status_label.text = "购物袋 %d/%d" % [_selected_ids.size(), _max_selected]
 	fee_label.text = "配送 ¥%d" % _source_fee
-	bag_label.text = "还没选餐" if _selected_ids.is_empty() else "已选 %d 样" % _selected_ids.size()
+	bag_label.text = "购物袋 %d/%d" % [_selected_ids.size(), _max_selected]
 	total_label.text = "合计 ¥%d" % _selection_total()
 
 

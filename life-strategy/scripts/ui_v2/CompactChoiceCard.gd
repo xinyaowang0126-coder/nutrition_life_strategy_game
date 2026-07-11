@@ -16,6 +16,7 @@ signal detail_dismissed(item_id: String)
 @onready var secondary_stat: Label = $Margin/VBox/QuickStats/Secondary
 @onready var tertiary_stat: Label = $Margin/VBox/QuickStats/Tertiary
 @onready var select_button: Button = $Margin/VBox/SelectButton
+@onready var long_press_timer: Timer = $LongPressTimer
 
 var item_id := ""
 var _payload: Dictionary = {}
@@ -30,6 +31,7 @@ var _hovered := false
 var _last_touch_msec := -1000
 var _touch_active := false
 var _touch_cancelled := false
+var _long_press_triggered := false
 var _touch_start_position := Vector2.ZERO
 var _motion_tween: Tween
 
@@ -44,6 +46,7 @@ func _ready() -> void:
 	info_button.focus_exited.connect(_dismiss_detail)
 	select_button.focus_entered.connect(_request_preview_detail)
 	select_button.focus_exited.connect(_dismiss_detail)
+	long_press_timer.timeout.connect(_on_long_press_timeout)
 	mouse_entered.connect(_on_hover_started)
 	mouse_exited.connect(_on_hover_ended)
 	focus_entered.connect(_on_focus_entered)
@@ -312,6 +315,8 @@ func _dismiss_detail() -> void:
 
 
 func _on_hover_started() -> void:
+	if _touch_active or Time.get_ticks_msec() - _last_touch_msec <= 300:
+		return
 	_hovered = true
 	z_index = 4
 	request_detail(false)
@@ -341,22 +346,37 @@ func _on_gui_input(event: InputEvent) -> void:
 		if touch.pressed:
 			_touch_active = true
 			_touch_cancelled = false
+			_long_press_triggered = false
 			_touch_start_position = touch.position
+			long_press_timer.start()
 		else:
 			var is_tap := (
 				_touch_active
 				and not _touch_cancelled
+				and not _long_press_triggered
 				and touch.position.distance_to(_touch_start_position) <= TOUCH_TAP_SLOP
 			)
+			var was_long_press := _long_press_triggered
+			long_press_timer.stop()
 			_touch_active = false
 			_last_touch_msec = Time.get_ticks_msec()
-			if is_tap:
+			if was_long_press:
+				accept_event()
+				detail_dismissed.emit(item_id)
+				z_index = 0
+				_animate_scale(_target_scale())
+			elif is_tap:
 				accept_event()
 				_emit_selected()
+			_long_press_triggered = false
 	elif event is InputEventScreenDrag:
 		var drag := event as InputEventScreenDrag
 		if _touch_active and drag.position.distance_to(_touch_start_position) > TOUCH_TAP_SLOP:
 			_touch_cancelled = true
+			long_press_timer.stop()
+			if _long_press_triggered:
+				_long_press_triggered = false
+				detail_dismissed.emit(item_id)
 	elif event is InputEventMouseButton:
 		var mouse := event as InputEventMouseButton
 		if mouse.button_index == MOUSE_BUTTON_LEFT and not mouse.pressed:
@@ -368,6 +388,15 @@ func _on_gui_input(event: InputEvent) -> void:
 		if key.pressed and not key.echo and key.is_action_pressed("ui_accept"):
 			accept_event()
 			_emit_selected()
+
+
+func _on_long_press_timeout() -> void:
+	if not _touch_active or _touch_cancelled or _payload.is_empty():
+		return
+	_long_press_triggered = true
+	z_index = 5
+	request_detail(false)
+	_animate_scale(Vector2(1.045, 1.045), 0.12)
 
 
 func _update_pivot() -> void:

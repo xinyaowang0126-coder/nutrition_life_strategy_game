@@ -182,17 +182,6 @@ offset_bottom = 54.0
 theme_override_font_sizes/font_size = 22
 text = "?"
 
-[node name="IdlePlate" type="PanelContainer" parent="PropLayer/CafeteriaProp" unique_id=1632745485]
-self_modulate = Color(1, 0.94, 0.82, 0.54)
-z_index = -3
-layout_mode = 0
-offset_left = 12.0
-offset_top = 8.0
-offset_right = 268.0
-offset_bottom = 236.0
-pivot_offset = Vector2(128, 114)
-mouse_filter = 2
-
 [node name="TakeoutProp" type="Control" parent="PropLayer" unique_id=1802239815]
 z_index = 10
 anchors_preset = 0
@@ -285,17 +274,6 @@ offset_bottom = 54.0
 theme_override_font_sizes/font_size = 22
 text = "?"
 
-[node name="IdlePlate" type="PanelContainer" parent="PropLayer/TakeoutProp" unique_id=1835592257]
-self_modulate = Color(1, 0.94, 0.82, 0.54)
-z_index = -3
-layout_mode = 0
-offset_left = 12.0
-offset_top = 8.0
-offset_right = 268.0
-offset_bottom = 236.0
-pivot_offset = Vector2(128, 114)
-mouse_filter = 2
-
 [node name="ConvenienceProp" type="Control" parent="PropLayer" unique_id=1810540262]
 z_index = 10
 anchors_preset = 0
@@ -373,17 +351,6 @@ offset_bottom = 54.0
 theme_override_font_sizes/font_size = 22
 text = "?"
 
-[node name="IdlePlate" type="PanelContainer" parent="PropLayer/ConvenienceProp" unique_id=1437606086]
-self_modulate = Color(1, 0.94, 0.82, 0.54)
-z_index = -3
-layout_mode = 0
-offset_left = 12.0
-offset_top = 8.0
-offset_right = 268.0
-offset_bottom = 236.0
-pivot_offset = Vector2(128, 114)
-mouse_filter = 2
-
 [node name="DormProp" type="Control" parent="PropLayer" unique_id=1767964600]
 z_index = 10
 anchors_preset = 0
@@ -460,17 +427,6 @@ offset_right = -4.0
 offset_bottom = 54.0
 theme_override_font_sizes/font_size = 22
 text = "?"
-
-[node name="IdlePlate" type="PanelContainer" parent="PropLayer/DormProp" unique_id=1858350495]
-self_modulate = Color(1, 0.94, 0.82, 0.54)
-z_index = -3
-layout_mode = 0
-offset_left = 12.0
-offset_top = 8.0
-offset_right = 268.0
-offset_bottom = 236.0
-pivot_offset = Vector2(128, 114)
-mouse_filter = 2
 
 [node name="Footer" type="HBoxContainer" parent="." unique_id=1706125336]
 layout_mode = 0

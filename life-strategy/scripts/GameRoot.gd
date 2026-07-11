@@ -8,7 +8,7 @@ const PHASE_VIEW_SCENE := preload("res://scenes/game/components/PhaseChoiceView.
 const MAIN_MENU := "res://scenes/main_menu/MainMenu.tscn"
 const DEFAULT_BACKGROUND := "res://assets/generated/backgrounds/dorm_background.png"
 const PORTRAIT_PATH := "res://assets/generated/characters/student_portrait.png"
-const FONT_PATH := "res://assets/fonts/NotoSansSC-VF.ttf"
+const FONT_PATH := "res://assets/fonts/NotoSansCJKsc-Bold.otf"
 const GAME_THEME_PATH := "res://scenes/game/components/GameTheme.tres"
 
 const MAX_FOODS_PER_MEAL := 3
@@ -90,8 +90,8 @@ func _apply_theme() -> void:
 	if font_resource != null:
 		var font_variation := FontVariation.new()
 		font_variation.base_font = font_resource
-		font_variation.variation_embolden = 0.72
-		font_variation.variation_opentype = {"wght": 690.0}
+		font_variation.variation_embolden = 0.16
+		font_variation.variation_opentype = {"wght": 700.0}
 		game_theme.default_font = font_variation
 	game_theme.default_font_size = 18
 	theme = game_theme

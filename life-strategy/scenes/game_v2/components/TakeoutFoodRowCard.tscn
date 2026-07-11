@@ -82,3 +82,7 @@ custom_minimum_size = Vector2(76, 50)
 layout_mode = 2
 theme_override_font_sizes/font_size = 17
 text = "加购"
+
+[node name="LongPressTimer" type="Timer" parent="." unique_id=1087079509]
+wait_time = 0.48
+one_shot = true
