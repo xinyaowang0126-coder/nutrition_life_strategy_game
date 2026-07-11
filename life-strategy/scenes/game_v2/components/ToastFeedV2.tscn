@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://blrnkwlhh2ct2"]
+
+[ext_resource type="Theme" uid="uid://dthxodrk6slpq" path="res://scenes/game_v2/V2Theme.tres" id="1_8yk42"]
+[ext_resource type="Script" uid="uid://dpj1tgx8oobia" path="res://scripts/ui_v2/ToastFeedV2.gd" id="2_7sd4n"]
+
+[node name="ToastFeedV2" type="VBoxContainer" unique_id=679252961]
+mouse_filter = 2
+theme = ExtResource("1_8yk42")
+script = ExtResource("2_7sd4n")

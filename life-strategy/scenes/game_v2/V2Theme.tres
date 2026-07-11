@@ -1,0 +1,120 @@
+[gd_resource type="Theme" format=3 uid="uid://dthxodrk6slpq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dkeno"]
+content_margin_left = 16.0
+content_margin_top = 10.0
+content_margin_right = 16.0
+content_margin_bottom = 10.0
+bg_color = Color(0.31764707, 0.29803923, 0.2627451, 0.8)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.5058824, 0.47058824, 0.41568628, 0.6666667)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ev5gx"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.9411765, 0.7882353, 0.42745098, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gt4yl"]
+content_margin_left = 16.0
+content_margin_top = 10.0
+content_margin_right = 16.0
+content_margin_bottom = 10.0
+bg_color = Color(0.5176471, 0.40784314, 0.25882354, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.9411765, 0.8117647, 0.5137255, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+shadow_color = Color(0.11372549, 0.08627451, 0.05882353, 0.33333334)
+shadow_size = 9
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2cxs5"]
+content_margin_left = 16.0
+content_margin_top = 10.0
+content_margin_right = 16.0
+content_margin_bottom = 10.0
+bg_color = Color(0.42745098, 0.3254902, 0.2, 0.9411765)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.8509804, 0.7137255, 0.43529412, 0.8784314)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+shadow_color = Color(0.11372549, 0.08627451, 0.05882353, 0.2509804)
+shadow_size = 6
+shadow_offset = Vector2(0, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l8t6h"]
+content_margin_left = 16.0
+content_margin_top = 11.0
+content_margin_right = 16.0
+content_margin_bottom = 9.0
+bg_color = Color(0.34901962, 0.25490198, 0.14901961, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.9137255, 0.78039217, 0.4627451, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ffkwc"]
+content_margin_left = 14.0
+content_margin_top = 10.0
+content_margin_right = 14.0
+content_margin_bottom = 10.0
+bg_color = Color(1, 0.9529412, 0.85882354, 0.9098039)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.6156863, 0.4627451, 0.2627451, 0.8784314)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_color = Color(0.11372549, 0.08627451, 0.05882353, 0.27058825)
+shadow_size = 8
+shadow_offset = Vector2(0, 4)
+
+[resource]
+Button/colors/font_color = Color(1, 0.9490196, 0.8392157, 1)
+Button/colors/font_disabled_color = Color(0.84705883, 0.8117647, 0.7254902, 0.6666667)
+Button/colors/font_focus_color = Color(1, 0.9529412, 0.8392157, 1)
+Button/font_sizes/font_size = 20
+Button/styles/disabled = SubResource("StyleBoxFlat_dkeno")
+Button/styles/focus = SubResource("StyleBoxFlat_ev5gx")
+Button/styles/hover = SubResource("StyleBoxFlat_gt4yl")
+Button/styles/normal = SubResource("StyleBoxFlat_2cxs5")
+Button/styles/pressed = SubResource("StyleBoxFlat_l8t6h")
+Label/colors/font_color = Color(0.20392157, 0.15686275, 0.12156863, 1)
+Label/font_sizes/font_size = 20
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_ffkwc")

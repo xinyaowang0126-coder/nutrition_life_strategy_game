@@ -1,0 +1,101 @@
+[gd_scene format=3 uid="uid://dtnnsldie4eh4"]
+
+[ext_resource type="Theme" uid="uid://dthxodrk6slpq" path="res://scenes/game_v2/V2Theme.tres" id="1_0qsmx"]
+[ext_resource type="Script" uid="uid://bvjlt2ifh837e" path="res://scripts/ui_v2/stages/SleepStage.gd" id="2_doaol"]
+
+[node name="SleepStage" type="Control" unique_id=798688386]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_0qsmx")
+script = ExtResource("2_doaol")
+
+[node name="Layout" type="Control" parent="." unique_id=1984720739]
+anchors_preset = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="PromptTag" type="PanelContainer" parent="Layout" unique_id=1060716225]
+layout_mode = 0
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -300.0
+offset_top = 26.0
+offset_right = 300.0
+offset_bottom = 96.0
+mouse_filter = 2
+
+[node name="PromptBox" type="VBoxContainer" parent="Layout/PromptTag" unique_id=1562737202]
+layout_mode = 2
+
+[node name="Prompt" type="Label" parent="Layout/PromptTag/PromptBox" unique_id=2072720628]
+layout_mode = 2
+theme_override_font_sizes/font_size = 31
+text = "夜深了，几点睡？"
+horizontal_alignment = 1
+
+[node name="SubPrompt" type="Label" parent="Layout/PromptTag/PromptBox" unique_id=2058953316]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.42745098, 0.38431373, 0.32941177, 1)
+theme_override_font_sizes/font_size = 16
+text = "明天的状态，从今晚开始。"
+horizontal_alignment = 1
+
+[node name="SleepRail" type="ScrollContainer" parent="Layout" unique_id=1999133163]
+layout_mode = 0
+anchor_left = 0.24
+anchor_top = 0.25
+anchor_right = 0.92
+anchor_bottom = 0.72
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 0
+scroll_deadzone = 24
+
+[node name="Choices" type="HBoxContainer" parent="Layout/SleepRail" unique_id=1642248479]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 26
+alignment = 1
+
+[node name="AlarmNote" type="PanelContainer" parent="Layout" unique_id=2042389004]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.76
+anchor_right = 0.78
+anchor_bottom = 0.91
+mouse_filter = 2
+
+[node name="AlarmMargin" type="MarginContainer" parent="Layout/AlarmNote" unique_id=1806127453]
+layout_mode = 2
+theme_override_constants/margin_left = 22
+theme_override_constants/margin_top = 14
+theme_override_constants/margin_right = 22
+theme_override_constants/margin_bottom = 14
+
+[node name="Alarm" type="HBoxContainer" parent="Layout/AlarmNote/AlarmMargin" unique_id=1457986208]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="Clock" type="Label" parent="Layout/AlarmNote/AlarmMargin/Alarm" unique_id=1615058640]
+layout_mode = 2
+theme_override_font_sizes/font_size = 42
+text = "◷"
+
+[node name="AlarmText" type="VBoxContainer" parent="Layout/AlarmNote/AlarmMargin/Alarm" unique_id=235206361]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Tomorrow" type="Label" parent="Layout/AlarmNote/AlarmMargin/Alarm/AlarmText" unique_id=1122701622]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "明早还有安排"
+
+[node name="Hint" type="Label" parent="Layout/AlarmNote/AlarmMargin/Alarm/AlarmText" unique_id=2054214896]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.42745098, 0.38431373, 0.32941177, 1)
+theme_override_font_sizes/font_size = 16
+text = "悬停或点开便利贴，看清代价再选。"

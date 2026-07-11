@@ -1,0 +1,113 @@
+[gd_scene format=3 uid="uid://cobi5u3x8l5q1"]
+
+[ext_resource type="Theme" uid="uid://dthxodrk6slpq" path="res://scenes/game_v2/V2Theme.tres" id="1_gjp4g"]
+[ext_resource type="Script" uid="uid://ixsqwols87w0" path="res://scripts/ui_v2/DailySummaryPopup.gd" id="2_r7g2v"]
+
+[node name="DailySummaryPopup" type="Control" unique_id=194952615]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+theme = ExtResource("1_gjp4g")
+script = ExtResource("2_r7g2v")
+
+[node name="Dim" type="ColorRect" parent="." unique_id=1559519247]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.02, 0.03, 0.03, 0.22)
+
+[node name="PaperHost" type="Control" parent="." unique_id=573785221]
+clip_contents = true
+anchors_preset = 0
+mouse_filter = 1
+
+[node name="Paper" type="PanelContainer" parent="PaperHost" unique_id=496505920]
+layout_mode = 0
+offset_right = 672.0
+offset_bottom = 480.0
+
+[node name="Margin" type="MarginContainer" parent="PaperHost/Paper" unique_id=1966218851]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/margin_left = 34
+theme_override_constants/margin_top = 28
+theme_override_constants/margin_right = 34
+theme_override_constants/margin_bottom = 28
+
+[node name="VBox" type="VBoxContainer" parent="PaperHost/Paper/Margin" unique_id=750870335]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 16
+
+[node name="DayTitle" type="Label" parent="PaperHost/Paper/Margin/VBox" unique_id=786323648]
+layout_mode = 2
+theme_override_font_sizes/font_size = 34
+text = "第 1 天，过去了"
+horizontal_alignment = 1
+
+[node name="CoreStats" type="HBoxContainer" parent="PaperHost/Paper/Margin/VBox" unique_id=327794215]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="StabilityChip" type="PanelContainer" parent="PaperHost/Paper/Margin/VBox/CoreStats" unique_id=846955481]
+custom_minimum_size = Vector2(150, 66)
+layout_mode = 2
+
+[node name="Value" type="Label" parent="PaperHost/Paper/Margin/VBox/CoreStats/StabilityChip" unique_id=151363321]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "余力 65"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StudyChip" type="PanelContainer" parent="PaperHost/Paper/Margin/VBox/CoreStats" unique_id=2137177798]
+custom_minimum_size = Vector2(150, 66)
+layout_mode = 2
+
+[node name="Value" type="Label" parent="PaperHost/Paper/Margin/VBox/CoreStats/StudyChip" unique_id=1831431981]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "复习 10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BalanceChip" type="PanelContainer" parent="PaperHost/Paper/Margin/VBox/CoreStats" unique_id=1018884862]
+custom_minimum_size = Vector2(150, 66)
+layout_mode = 2
+
+[node name="Value" type="Label" parent="PaperHost/Paper/Margin/VBox/CoreStats/BalanceChip" unique_id=1793512627]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "余额 ¥100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Divider" type="HSeparator" parent="PaperHost/Paper/Margin/VBox" unique_id=650808295]
+layout_mode = 2
+
+[node name="Quality" type="Label" parent="PaperHost/Paper/Margin/VBox" unique_id=102056602]
+layout_mode = 2
+theme_override_font_sizes/font_size = 23
+text = "三顿吃得还算齐全。"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Advice" type="Label" parent="PaperHost/Paper/Margin/VBox" unique_id=465984789]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.37, 0.31, 0.24, 1)
+theme_override_font_sizes/font_size = 20
+text = "今天还算顺。照这个节奏，慢慢来。"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Spacer" type="Control" parent="PaperHost/Paper/Margin/VBox" unique_id=1017574170]
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="NextButton" type="Button" parent="PaperHost/Paper/Margin/VBox" unique_id=1872035228]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_font_sizes/font_size = 23
+text = "睡到明天"

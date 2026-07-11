@@ -3,10 +3,10 @@
   <sleep_option id="sleep_early" name="早点睡" energy="26" mood="3" stress="-9" study="0" satiety="-12" burden="-4" image="res://assets/generated/actions/sleep_early.png" scenes="sleep">
     <desc>把灯关了，剩下的明天再说。</desc>
   </sleep_option>
-  <sleep_option id="night_study" name="再看一会儿" energy="-22" mood="-5" stress="12" study="16" satiety="-11" burden="2" image="res://assets/generated/actions/study.png" scenes="sleep">
+  <sleep_option id="night_study" name="再看一会儿" energy="-22" mood="-5" stress="12" study="16" satiety="-11" burden="2" image="res://assets/generated/ui_v2/card_art/sleep/night_study_art.png" scenes="sleep">
     <desc>台灯再亮一阵。</desc>
   </sleep_option>
-  <sleep_option id="scroll_phone" name="刷会儿手机" energy="-10" mood="8" stress="-2" study="0" satiety="-8" burden="1" image="res://assets/generated/actions/allow_imperfection.png" scenes="sleep">
+  <sleep_option id="scroll_phone" name="刷会儿手机" energy="-10" mood="8" stress="-2" study="0" satiety="-8" burden="1" image="res://assets/generated/ui_v2/card_art/sleep/scroll_phone_art.png" scenes="sleep">
     <desc>本来只想看十分钟。</desc>
   </sleep_option>
 </sleep_options>

@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://cblk01fdi5mfg"]
+
+[ext_resource type="Theme" uid="uid://dthxodrk6slpq" path="res://scenes/game_v2/V2Theme.tres" id="1_vd1b5"]
+
+[node name="ToastItem" type="PanelContainer" unique_id=1339848470]
+theme = ExtResource("1_vd1b5")
+
+[node name="Margin" type="MarginContainer" parent="." unique_id=1721445566]
+layout_mode = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 12
+
+[node name="Row" type="HBoxContainer" parent="Margin" unique_id=652852857]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Icon" type="Label" parent="Margin/Row" unique_id=1430883559]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "•"
+
+[node name="Message" type="Label" parent="Margin/Row" unique_id=1969686902]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 18
+text = "今天的记录"
+autowrap_mode = 2

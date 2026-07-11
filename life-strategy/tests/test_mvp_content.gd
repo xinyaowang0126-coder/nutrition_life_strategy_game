@@ -32,6 +32,35 @@ func test_food_assets_and_costs() -> void:
 		assert_true(ResourceLoader.exists(String(food["image"])), "%s image missing: %s" % [id, String(food["image"])])
 
 
+func test_food_satiety_is_rebalanced() -> void:
+	var expected := {
+		"rice_plain": 16,
+		"oatmeal": 18,
+		"egg": 10,
+		"tofu": 11,
+		"greens": 5,
+		"tomato": 4,
+		"apple": 6,
+		"banana": 8,
+		"milk": 6,
+		"coffee": 1,
+		"bubble_tea": 4,
+		"instant_noodles": 20,
+		"fried_chicken": 22,
+		"salad_bowl": 14,
+		"sandwich": 18,
+	}
+	for id in expected:
+		var satiety := int(GameDataScript.get_food(id).get("satiety", -1))
+		assert_eq(satiety, int(expected[id]), "%s satiety drifted" % id)
+		assert_true(satiety <= 22, "%s is too filling as one item" % id)
+	for id in ["milk", "coffee", "bubble_tea"]:
+		assert_true(int(GameDataScript.get_food(id)["satiety"]) <= 6, "%s drink should stay light" % id)
+	assert_eq(int(GameDataScript.get_food("rice_plain")["satiety"]) + int(GameDataScript.get_food("egg")["satiety"]), 26)
+	assert_eq(int(GameDataScript.get_food("rice_plain")["satiety"]) + int(GameDataScript.get_food("tofu")["satiety"]), 27)
+	assert_eq(int(GameDataScript.get_food("salad_bowl")["satiety"]) + int(GameDataScript.get_food("sandwich")["satiety"]), 32)
+
+
 func test_action_assets_and_rules() -> void:
 	var action_ids := GameDataScript.get_action_ids_for_scene("breakfast_action")
 	assert_eq(action_ids.size(), 5)

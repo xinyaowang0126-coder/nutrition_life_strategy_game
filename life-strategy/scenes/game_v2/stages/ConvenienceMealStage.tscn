@@ -1,0 +1,240 @@
+[gd_scene format=3 uid="uid://dqc5vvfkdq5hu"]
+
+[ext_resource type="Theme" uid="uid://dthxodrk6slpq" path="res://scenes/game_v2/V2Theme.tres" id="1_qljx2"]
+[ext_resource type="Script" uid="uid://b2r60gkj1vwkn" path="res://scripts/ui_v2/stages/ConvenienceMealStage.gd" id="2_6mo6p"]
+
+[node name="ConvenienceMealStage" type="Control" unique_id=1329763672]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_qljx2")
+script = ExtResource("2_6mo6p")
+
+[node name="Layout" type="Control" parent="." unique_id=425487626]
+anchors_preset = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Header" type="HBoxContainer" parent="Layout" unique_id=668617541]
+layout_mode = 0
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -310.0
+offset_top = 20.0
+offset_right = 310.0
+offset_bottom = 82.0
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="TitleTag" type="PanelContainer" parent="Layout/Header" unique_id=165586021]
+custom_minimum_size = Vector2(390, 62)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Title" type="Label" parent="Layout/Header/TitleTag" unique_id=1148042697]
+layout_mode = 2
+theme_override_font_sizes/font_size = 29
+text = "早餐 · 便利店货架"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SelectionTag" type="PanelContainer" parent="Layout/Header" unique_id=967746051]
+custom_minimum_size = Vector2(200, 62)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Status" type="Label" parent="Layout/Header/SelectionTag" unique_id=694540047]
+layout_mode = 2
+theme_override_font_sizes/font_size = 21
+text = "篮子 0/5"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ShelfPanel" type="PanelContainer" parent="Layout" unique_id=744270624]
+layout_mode = 0
+anchor_left = 0.12
+anchor_top = 0.15
+anchor_right = 0.88
+anchor_bottom = 0.67
+
+[node name="ShelfMargin" type="MarginContainer" parent="Layout/ShelfPanel" unique_id=1193075844]
+layout_mode = 2
+theme_override_constants/margin_left = 26
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 26
+theme_override_constants/margin_bottom = 20
+
+[node name="Shelf" type="VBoxContainer" parent="Layout/ShelfPanel/ShelfMargin" unique_id=853784134]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="ShelfSign" type="HBoxContainer" parent="Layout/ShelfPanel/ShelfMargin/Shelf" unique_id=2002033628]
+layout_mode = 2
+
+[node name="Aisle" type="Label" parent="Layout/ShelfPanel/ShelfMargin/Shelf/ShelfSign" unique_id=400611705]
+layout_mode = 2
+theme_override_font_sizes/font_size = 27
+text = "即食区"
+
+[node name="Spacer" type="Control" parent="Layout/ShelfPanel/ShelfMargin/Shelf/ShelfSign" unique_id=1753532521]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Hint" type="Label" parent="Layout/ShelfPanel/ShelfMargin/Shelf/ShelfSign" unique_id=675063697]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.42745098, 0.38431373, 0.32941177, 1)
+theme_override_font_sizes/font_size = 17
+text = "左右滑货架 · 点一下放进篮子"
+
+[node name="ShelfEdge" type="HSeparator" parent="Layout/ShelfPanel/ShelfMargin/Shelf" unique_id=472794388]
+layout_mode = 2
+
+[node name="ShelfScroll" type="ScrollContainer" parent="Layout/ShelfPanel/ShelfMargin/Shelf" unique_id=1013120375]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 0
+scroll_deadzone = 24
+
+[node name="Products" type="HBoxContainer" parent="Layout/ShelfPanel/ShelfMargin/Shelf/ShelfScroll" unique_id=1840016006]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 18
+
+[node name="BasketPanel" type="PanelContainer" parent="Layout" unique_id=673132258]
+layout_mode = 0
+anchor_left = 0.24
+anchor_top = 0.7
+anchor_right = 0.76
+anchor_bottom = 0.93
+
+[node name="BasketMargin" type="MarginContainer" parent="Layout/BasketPanel" unique_id=105124089]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 16
+
+[node name="Basket" type="VBoxContainer" parent="Layout/BasketPanel/BasketMargin" unique_id=2137178033]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="BasketHeader" type="HBoxContainer" parent="Layout/BasketPanel/BasketMargin/Basket" unique_id=1913363660]
+layout_mode = 2
+
+[node name="BasketTitle" type="Label" parent="Layout/BasketPanel/BasketMargin/Basket/BasketHeader" unique_id=1267839857]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "帆布购物篮"
+
+[node name="BasketHint" type="Label" parent="Layout/BasketPanel/BasketMargin/Basket/BasketHeader" unique_id=2132757610]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.42745098, 0.38431373, 0.32941177, 1)
+theme_override_font_sizes/font_size = 16
+text = "  选中的东西会落进来"
+
+[node name="Spacer" type="Control" parent="Layout/BasketPanel/BasketMargin/Basket/BasketHeader" unique_id=532116307]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Total" type="Label" parent="Layout/BasketPanel/BasketMargin/Basket/BasketHeader" unique_id=620012060]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7882353, 0.4, 0.15294118, 1)
+theme_override_font_sizes/font_size = 24
+text = "合计 ¥0"
+
+[node name="SelectedSlots" type="HBoxContainer" parent="Layout/BasketPanel/BasketMargin/Basket" unique_id=1331963704]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="Slot1" type="PanelContainer" parent="Layout/BasketPanel/BasketMargin/Basket/SelectedSlots" unique_id=366300031]
+custom_minimum_size = Vector2(130, 76)
+layout_mode = 2
+
+[node name="Empty" type="Label" parent="Layout/BasketPanel/BasketMargin/Basket/SelectedSlots/Slot1" unique_id=1277292786]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.54901963, 0.4745098, 0.4, 0.33333334)
+theme_override_font_sizes/font_size = 30
+text = "+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Slot2" type="PanelContainer" parent="Layout/BasketPanel/BasketMargin/Basket/SelectedSlots" unique_id=1078712782]
+custom_minimum_size = Vector2(130, 76)
+layout_mode = 2
+
+[node name="Empty" type="Label" parent="Layout/BasketPanel/BasketMargin/Basket/SelectedSlots/Slot2" unique_id=123409933]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.54901963, 0.4745098, 0.4, 0.33333334)
+theme_override_font_sizes/font_size = 30
+text = "+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Slot3" type="PanelContainer" parent="Layout/BasketPanel/BasketMargin/Basket/SelectedSlots" unique_id=1873908972]
+custom_minimum_size = Vector2(130, 76)
+layout_mode = 2
+
+[node name="Empty" type="Label" parent="Layout/BasketPanel/BasketMargin/Basket/SelectedSlots/Slot3" unique_id=806139777]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.54901963, 0.4745098, 0.4, 0.33333334)
+theme_override_font_sizes/font_size = 30
+text = "+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Slot4" type="PanelContainer" parent="Layout/BasketPanel/BasketMargin/Basket/SelectedSlots" unique_id=1063574958]
+custom_minimum_size = Vector2(130, 76)
+layout_mode = 2
+
+[node name="Empty" type="Label" parent="Layout/BasketPanel/BasketMargin/Basket/SelectedSlots/Slot4" unique_id=690552431]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.54901963, 0.4745098, 0.4, 0.33333334)
+theme_override_font_sizes/font_size = 30
+text = "+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Slot5" type="PanelContainer" parent="Layout/BasketPanel/BasketMargin/Basket/SelectedSlots" unique_id=1294745697]
+custom_minimum_size = Vector2(130, 76)
+layout_mode = 2
+
+[node name="Empty" type="Label" parent="Layout/BasketPanel/BasketMargin/Basket/SelectedSlots/Slot5" unique_id=1320840588]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.54901963, 0.4745098, 0.4, 0.33333334)
+theme_override_font_sizes/font_size = 30
+text = "+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Footer" type="HBoxContainer" parent="Layout" unique_id=697236496]
+layout_mode = 0
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -520.0
+offset_top = -72.0
+offset_right = -18.0
+offset_bottom = -12.0
+theme_override_constants/separation = 10
+
+[node name="BackButton" type="Button" parent="Layout/Footer" unique_id=1420936125]
+custom_minimum_size = Vector2(160, 60)
+layout_mode = 2
+text = "换个地方"
+
+[node name="SkipButton" type="Button" parent="Layout/Footer" unique_id=1567265422]
+custom_minimum_size = Vector2(140, 60)
+layout_mode = 2
+text = "先不吃"
+
+[node name="ConfirmButton" type="Button" parent="Layout/Footer" unique_id=205183832]
+custom_minimum_size = Vector2(190, 60)
+layout_mode = 2
+disabled = true
+text = "去结账"
