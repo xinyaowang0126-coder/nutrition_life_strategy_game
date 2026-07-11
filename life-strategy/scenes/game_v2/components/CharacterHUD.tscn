@@ -1,0 +1,210 @@
+[gd_scene format=3 uid="uid://dvqv5q3midb81"]
+
+[ext_resource type="Theme" uid="uid://dthxodrk6slpq" path="res://scenes/game_v2/V2Theme.tres" id="1_chnl8"]
+[ext_resource type="Script" uid="uid://dyrivohky7fqj" path="res://scripts/ui_v2/CharacterHUD.gd" id="2_xagrg"]
+[ext_resource type="Texture2D" uid="uid://dndhghoal2pvt" path="res://assets/generated/ui_v2/characters/student_bust.png" id="3_xagrg"]
+
+[sub_resource type="Animation" id="Animation_xagrg"]
+length = 3.6
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Portrait:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.008, 1.012)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PortraitShadow:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.018, 1.012)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6edpy"]
+_data = {
+&"breathe": SubResource("Animation_xagrg")
+}
+
+[node name="CharacterHUD" type="Control" unique_id=1909520872]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("1_chnl8")
+script = ExtResource("2_xagrg")
+
+[node name="Portrait" type="TextureRect" parent="." unique_id=844652523]
+layout_mode = 0
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -630.0
+offset_right = 430.0
+offset_bottom = 20.0
+pivot_offset = Vector2(215, 650)
+mouse_filter = 2
+texture = ExtResource("3_xagrg")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="StatusBoard" type="PanelContainer" parent="." unique_id=308908101]
+layout_mode = 0
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 300.0
+offset_top = -310.0
+offset_right = 780.0
+offset_bottom = -90.0
+
+[node name="Margin" type="MarginContainer" parent="StatusBoard" unique_id=876156865]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 12
+
+[node name="VBox" type="VBoxContainer" parent="StatusBoard/Margin" unique_id=907121185]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="StabilityRow" type="HBoxContainer" parent="StatusBoard/Margin/VBox" unique_id=272839824]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="StabilityIcon" type="Label" parent="StatusBoard/Margin/VBox/StabilityRow" unique_id=331516957]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "◈"
+
+[node name="StabilityLabel" type="Label" parent="StatusBoard/Margin/VBox/StabilityRow" unique_id=1846728774]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "余力"
+
+[node name="Spacer" type="Control" parent="StatusBoard/Margin/VBox/StabilityRow" unique_id=829313834]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="StabilityValue" type="Label" parent="StatusBoard/Margin/VBox/StabilityRow" unique_id=80251167]
+layout_mode = 2
+theme_override_font_sizes/font_size = 38
+text = "65"
+
+[node name="StatGrid" type="GridContainer" parent="StatusBoard/Margin/VBox" unique_id=500009878]
+layout_mode = 2
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
+columns = 3
+
+[node name="EnergyChip" type="PanelContainer" parent="StatusBoard/Margin/VBox/StatGrid" unique_id=1929253765]
+custom_minimum_size = Vector2(135, 54)
+layout_mode = 2
+
+[node name="Value" type="Label" parent="StatusBoard/Margin/VBox/StatGrid/EnergyChip" unique_id=1481239642]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "⚡ 52"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MoodChip" type="PanelContainer" parent="StatusBoard/Margin/VBox/StatGrid" unique_id=2076009226]
+custom_minimum_size = Vector2(135, 54)
+layout_mode = 2
+
+[node name="Value" type="Label" parent="StatusBoard/Margin/VBox/StatGrid/MoodChip" unique_id=1998757399]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "♥ 55"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SatietyChip" type="PanelContainer" parent="StatusBoard/Margin/VBox/StatGrid" unique_id=486934674]
+custom_minimum_size = Vector2(135, 54)
+layout_mode = 2
+
+[node name="Value" type="Label" parent="StatusBoard/Margin/VBox/StatGrid/SatietyChip" unique_id=265415250]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "● 58"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StressChip" type="PanelContainer" parent="StatusBoard/Margin/VBox/StatGrid" unique_id=1792947719]
+custom_minimum_size = Vector2(135, 54)
+layout_mode = 2
+
+[node name="Value" type="Label" parent="StatusBoard/Margin/VBox/StatGrid/StressChip" unique_id=931143315]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "▲ 48"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BurdenChip" type="PanelContainer" parent="StatusBoard/Margin/VBox/StatGrid" unique_id=2703781]
+custom_minimum_size = Vector2(135, 54)
+layout_mode = 2
+
+[node name="Value" type="Label" parent="StatusBoard/Margin/VBox/StatGrid/BurdenChip" unique_id=323946094]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "◆ 24"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StudyChip" type="PanelContainer" parent="StatusBoard/Margin/VBox/StatGrid" unique_id=171221196]
+custom_minimum_size = Vector2(135, 54)
+layout_mode = 2
+
+[node name="Value" type="Label" parent="StatusBoard/Margin/VBox/StatGrid/StudyChip" unique_id=302654922]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "✎ 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DetailsButton" type="Button" parent="." unique_id=152763218]
+layout_mode = 0
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 720.0
+offset_top = -147.0
+offset_right = 770.0
+offset_bottom = -99.0
+tooltip_text = "查看完整状态"
+theme_override_font_sizes/font_size = 22
+text = "…"
+
+[node name="PortraitShadow" type="TextureRect" parent="." unique_id=409103913]
+modulate = Color(1, 1, 1, 0.3)
+self_modulate = Color(0.04, 0.03, 0.025, 1)
+z_index = -2
+layout_mode = 0
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = -620.0
+offset_right = 442.0
+offset_bottom = 30.0
+pivot_offset = Vector2(215, 650)
+mouse_filter = 2
+texture = ExtResource("3_xagrg")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="IdleAnimation" type="AnimationPlayer" parent="." unique_id=145544782]
+libraries/ = SubResource("AnimationLibrary_6edpy")
+autoplay = &"breathe"

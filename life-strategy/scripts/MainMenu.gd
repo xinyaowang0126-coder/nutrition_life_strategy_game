@@ -1,6 +1,6 @@
 extends Control
 
-const GAME_SCENE := "res://scenes/game/GameRoot.tscn"
+const GAME_SCENE := "res://scenes/game_v2/GameRootV2.tscn"
 const FONT_PATH := "res://assets/fonts/NotoSansSC-VF.ttf"
 const FONT_DEFAULT := 22
 const FONT_BUTTON := 27

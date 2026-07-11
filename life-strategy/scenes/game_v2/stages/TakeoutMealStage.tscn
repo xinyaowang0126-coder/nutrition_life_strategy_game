@@ -1,0 +1,216 @@
+[gd_scene format=3 uid="uid://c25gxkafki7ep"]
+
+[ext_resource type="Theme" uid="uid://dthxodrk6slpq" path="res://scenes/game_v2/V2Theme.tres" id="1_2wbfj"]
+[ext_resource type="Script" uid="uid://ief7mksjhs0i" path="res://scripts/ui_v2/stages/TakeoutMealStage.gd" id="2_6xdlj"]
+
+[node name="TakeoutMealStage" type="Control" unique_id=539177375]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_2wbfj")
+script = ExtResource("2_6xdlj")
+
+[node name="Layout" type="Control" parent="." unique_id=928609035]
+anchors_preset = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Header" type="HBoxContainer" parent="Layout" unique_id=1305845518]
+layout_mode = 0
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -315.0
+offset_top = 20.0
+offset_right = 315.0
+offset_bottom = 82.0
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="TitleTag" type="PanelContainer" parent="Layout/Header" unique_id=216855344]
+custom_minimum_size = Vector2(380, 62)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Title" type="Label" parent="Layout/Header/TitleTag" unique_id=880143816]
+layout_mode = 2
+theme_override_font_sizes/font_size = 29
+text = "早餐 · 外卖 App"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SelectionTag" type="PanelContainer" parent="Layout/Header" unique_id=729320745]
+custom_minimum_size = Vector2(210, 62)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Status" type="Label" parent="Layout/Header/SelectionTag" unique_id=1405211159]
+layout_mode = 2
+theme_override_font_sizes/font_size = 21
+text = "购物袋 0/4"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PhoneShell" type="PanelContainer" parent="Layout" unique_id=1706817611]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -290.0
+offset_top = -330.0
+offset_right = 290.0
+offset_bottom = 350.0
+
+[node name="PhoneMargin" type="MarginContainer" parent="Layout/PhoneShell" unique_id=1992772540]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 22
+
+[node name="Phone" type="VBoxContainer" parent="Layout/PhoneShell/PhoneMargin" unique_id=633363060]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Speaker" type="Label" parent="Layout/PhoneShell/PhoneMargin/Phone" unique_id=2025700254]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "━"
+horizontal_alignment = 1
+
+[node name="AppHeader" type="HBoxContainer" parent="Layout/PhoneShell/PhoneMargin/Phone" unique_id=1923976892]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="StoreText" type="VBoxContainer" parent="Layout/PhoneShell/PhoneMargin/Phone/AppHeader" unique_id=1754910017]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="StoreName" type="Label" parent="Layout/PhoneShell/PhoneMargin/Phone/AppHeader/StoreText" unique_id=1265719937]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "附近好吃的"
+
+[node name="StoreMeta" type="Label" parent="Layout/PhoneShell/PhoneMargin/Phone/AppHeader/StoreText" unique_id=475729307]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.42745098, 0.38431373, 0.32941177, 1)
+theme_override_font_sizes/font_size = 16
+text = "预计 28 分钟送达"
+
+[node name="FeeChip" type="PanelContainer" parent="Layout/PhoneShell/PhoneMargin/Phone/AppHeader" unique_id=1536591904]
+layout_mode = 2
+
+[node name="Fee" type="Label" parent="Layout/PhoneShell/PhoneMargin/Phone/AppHeader/FeeChip" unique_id=1080654441]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "配送 ¥3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MenuScroll" type="ScrollContainer" parent="Layout/PhoneShell/PhoneMargin/Phone" unique_id=1974978219]
+custom_minimum_size = Vector2(0, 390)
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+scroll_deadzone = 24
+
+[node name="FoodList" type="VBoxContainer" parent="Layout/PhoneShell/PhoneMargin/Phone/MenuScroll" unique_id=453062056]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+
+[node name="CheckoutBar" type="PanelContainer" parent="Layout/PhoneShell/PhoneMargin/Phone" unique_id=1494083392]
+layout_mode = 2
+
+[node name="CheckoutMargin" type="MarginContainer" parent="Layout/PhoneShell/PhoneMargin/Phone/CheckoutBar" unique_id=848872229]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 10
+
+[node name="Checkout" type="HBoxContainer" parent="Layout/PhoneShell/PhoneMargin/Phone/CheckoutBar/CheckoutMargin" unique_id=199140859]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="OrderText" type="VBoxContainer" parent="Layout/PhoneShell/PhoneMargin/Phone/CheckoutBar/CheckoutMargin/Checkout" unique_id=1854822024]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Bag" type="Label" parent="Layout/PhoneShell/PhoneMargin/Phone/CheckoutBar/CheckoutMargin/Checkout/OrderText" unique_id=1227201429]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "还没选餐"
+
+[node name="Total" type="Label" parent="Layout/PhoneShell/PhoneMargin/Phone/CheckoutBar/CheckoutMargin/Checkout/OrderText" unique_id=90981967]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7882353, 0.4, 0.15294118, 1)
+theme_override_font_sizes/font_size = 25
+text = "合计 ¥3"
+
+[node name="ConfirmButton" type="Button" parent="Layout/PhoneShell/PhoneMargin/Phone/CheckoutBar/CheckoutMargin/Checkout" unique_id=1735945010]
+custom_minimum_size = Vector2(150, 64)
+layout_mode = 2
+disabled = true
+text = "下单"
+
+[node name="SwipeHint" type="PanelContainer" parent="Layout" unique_id=2091070464]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 320.0
+offset_top = -80.0
+offset_right = 560.0
+offset_bottom = 100.0
+mouse_filter = 2
+
+[node name="HintMargin" type="MarginContainer" parent="Layout/SwipeHint" unique_id=569804278]
+layout_mode = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 14
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 14
+
+[node name="HintText" type="VBoxContainer" parent="Layout/SwipeHint/HintMargin" unique_id=290685211]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Gesture" type="Label" parent="Layout/SwipeHint/HintMargin/HintText" unique_id=101652510]
+layout_mode = 2
+theme_override_font_sizes/font_size = 38
+text = "↕"
+horizontal_alignment = 1
+
+[node name="Copy" type="Label" parent="Layout/SwipeHint/HintMargin/HintText" unique_id=823869126]
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+text = "在手机里滑动挑选\\n点菜名可看小票详情"
+horizontal_alignment = 1
+
+[node name="Footer" type="HBoxContainer" parent="Layout" unique_id=1080276363]
+layout_mode = 0
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -330.0
+offset_top = -72.0
+offset_right = -18.0
+offset_bottom = -12.0
+theme_override_constants/separation = 10
+
+[node name="BackButton" type="Button" parent="Layout/Footer" unique_id=327007747]
+custom_minimum_size = Vector2(160, 60)
+layout_mode = 2
+text = "换个地方"
+
+[node name="SkipButton" type="Button" parent="Layout/Footer" unique_id=162163940]
+custom_minimum_size = Vector2(140, 60)
+layout_mode = 2
+text = "先不吃"

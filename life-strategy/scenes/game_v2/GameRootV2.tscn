@@ -1,0 +1,204 @@
+[gd_scene format=3 uid="uid://bq7d41g0mn03c"]
+
+[ext_resource type="Theme" uid="uid://dthxodrk6slpq" path="res://scenes/game_v2/V2Theme.tres" id="1_h6bss"]
+[ext_resource type="Texture2D" uid="uid://dbshyue1ehyvx" path="res://assets/generated/backgrounds/dorm_background.png" id="2_qokeg"]
+[ext_resource type="Script" uid="uid://dhmfwqcpyw68a" path="res://scripts/ui_v2/GameRootV2.gd" id="2_vkrue"]
+[ext_resource type="PackedScene" uid="uid://dvqv5q3midb81" path="res://scenes/game_v2/components/CharacterHUD.tscn" id="3_vkrue"]
+[ext_resource type="PackedScene" uid="uid://blrnkwlhh2ct2" path="res://scenes/game_v2/components/ToastFeedV2.tscn" id="4_4rjd0"]
+[ext_resource type="PackedScene" uid="uid://bi8i7mbk8bsla" path="res://scenes/game_v2/components/StickyNotePopup.tscn" id="5_s3rtf"]
+[ext_resource type="PackedScene" uid="uid://cobi5u3x8l5q1" path="res://scenes/game_v2/components/DailySummaryPopup.tscn" id="6_1k0vw"]
+
+[node name="GameRootV2" type="Control" unique_id=940067868]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_h6bss")
+script = ExtResource("2_vkrue")
+
+[node name="BackgroundStack" type="Control" parent="." unique_id=138022282]
+anchors_preset = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="BackgroundA" type="TextureRect" parent="BackgroundStack" unique_id=914433975]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+texture = ExtResource("2_qokeg")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="BackgroundB" type="TextureRect" parent="BackgroundStack" unique_id=2120483674]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 6
+
+[node name="TimeGrade" type="ColorRect" parent="BackgroundStack" unique_id=90216905]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color(0.08, 0.1, 0.16, 0.1)
+
+[node name="SoftShade" type="ColorRect" parent="BackgroundStack" unique_id=268555837]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color(0.02, 0.03, 0.03, 0.08)
+
+[node name="WorldStage" type="Control" parent="." unique_id=1109997190]
+anchors_preset = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="StageSafeArea" type="MarginContainer" parent="WorldStage" unique_id=1450862295]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_constants/margin_left = 28
+theme_override_constants/margin_top = 90
+theme_override_constants/margin_right = 28
+theme_override_constants/margin_bottom = 24
+
+[node name="StageHost" type="Control" parent="WorldStage/StageSafeArea" unique_id=1835497954]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=4321493]
+
+[node name="HUDRoot" type="Control" parent="HUD" unique_id=981326613]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TopSafeArea" type="MarginContainer" parent="HUD/HUDRoot" unique_id=1431668978]
+layout_mode = 0
+anchor_right = 1.0
+mouse_filter = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 0
+
+[node name="TopHUD" type="HBoxContainer" parent="HUD/HUDRoot/TopSafeArea" unique_id=904621238]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 12
+
+[node name="DayTag" type="PanelContainer" parent="HUD/HUDRoot/TopSafeArea/TopHUD" unique_id=1200246010]
+custom_minimum_size = Vector2(250, 54)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="DayLabel" type="Label" parent="HUD/HUDRoot/TopSafeArea/TopHUD/DayTag" unique_id=1816485670]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "第 1 天 / 第 7 天"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TopSpacer" type="Control" parent="HUD/HUDRoot/TopSafeArea/TopHUD" unique_id=221649562]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="PhaseTag" type="PanelContainer" parent="HUD/HUDRoot/TopSafeArea/TopHUD" unique_id=1852102882]
+custom_minimum_size = Vector2(190, 54)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="PhaseLabel" type="Label" parent="HUD/HUDRoot/TopSafeArea/TopHUD/PhaseTag" unique_id=326532671]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "早餐"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BalanceChip" type="PanelContainer" parent="HUD/HUDRoot/TopSafeArea/TopHUD" unique_id=1392006817]
+custom_minimum_size = Vector2(150, 54)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="BalanceLabel" type="Label" parent="HUD/HUDRoot/TopSafeArea/TopHUD/BalanceChip" unique_id=832591117]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "¥120"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MenuButton" type="Button" parent="HUD/HUDRoot/TopSafeArea/TopHUD" unique_id=2008087635]
+custom_minimum_size = Vector2(106, 54)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "菜单"
+
+[node name="CharacterAnchor" type="Control" parent="HUD/HUDRoot" unique_id=466851890]
+anchors_preset = 0
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = -690.0
+offset_right = 780.0
+mouse_filter = 2
+
+[node name="CharacterSlot" type="MarginContainer" parent="HUD/HUDRoot/CharacterAnchor" unique_id=410479570]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="CharacterHUD" parent="HUD/HUDRoot/CharacterAnchor/CharacterSlot" unique_id=1909520872 instance=ExtResource("3_vkrue")]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ToastAnchor" type="Control" parent="HUD/HUDRoot" unique_id=280536838]
+anchors_preset = 0
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -470.0
+offset_top = 88.0
+offset_right = -20.0
+offset_bottom = 430.0
+mouse_filter = 2
+
+[node name="ToastFeed" parent="HUD/HUDRoot/ToastAnchor" unique_id=679252961 instance=ExtResource("4_4rjd0")]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="DetailLayer" type="Control" parent="HUD/HUDRoot" unique_id=535183461]
+anchors_preset = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="StickyNote" parent="HUD/HUDRoot/DetailLayer" unique_id=441605454 instance=ExtResource("5_s3rtf")]
+layout_mode = 0
+offset_right = 430.0
+
+[node name="ModalLayer" type="Control" parent="HUD/HUDRoot" unique_id=2122984974]
+anchors_preset = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="DailySummary" parent="HUD/HUDRoot/ModalLayer" unique_id=194952615 instance=ExtResource("6_1k0vw")]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0

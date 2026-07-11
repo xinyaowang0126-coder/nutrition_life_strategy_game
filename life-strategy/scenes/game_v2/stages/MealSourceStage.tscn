@@ -1,0 +1,499 @@
+[gd_scene format=3 uid="uid://8opkh1l4mfo5"]
+
+[ext_resource type="Theme" uid="uid://dthxodrk6slpq" path="res://scenes/game_v2/V2Theme.tres" id="1_mol5y"]
+[ext_resource type="Script" uid="uid://cltwv45hpj2lv" path="res://scripts/ui_v2/stages/MealSourceStage.gd" id="2_xn4im"]
+[ext_resource type="Texture2D" uid="uid://ca0ehjxyymklg" path="res://assets/generated/ui_v2/props/cafeteria_window_alpha.png" id="3_xn4im"]
+[ext_resource type="Texture2D" uid="uid://c7ok2rq404585" path="res://assets/generated/ui_v2/props/takeout_phone_alpha.png" id="4_w7stn"]
+[ext_resource type="Texture2D" uid="uid://cm5deawtdrsir" path="res://assets/generated/ui_v2/props/convenience_shelf_alpha.png" id="5_ftemt"]
+[ext_resource type="Texture2D" uid="uid://bmburgrrpync6" path="res://assets/generated/ui_v2/props/dorm_pantry_alpha.png" id="6_gtk66"]
+
+[sub_resource type="Animation" id="Animation_xn4im"]
+length = 4.8
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PropLayer/CafeteriaProp:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.012, 0.012]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PropLayer/TakeoutProp:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.35, 2.45),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.014, -0.01]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PropLayer/ConvenienceProp:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.7, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.01, 0.013]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PropLayer/DormProp:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.15, 2.65),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.009, -0.012]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w7stn"]
+_data = {
+&"idle": SubResource("Animation_xn4im")
+}
+
+[node name="MealSourceStage" type="Control" unique_id=1995578541]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_mol5y")
+script = ExtResource("2_xn4im")
+
+[node name="PromptTag" type="PanelContainer" parent="." unique_id=1327148335]
+layout_mode = 0
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -300.0
+offset_top = 18.0
+offset_right = 300.0
+offset_bottom = 98.0
+mouse_filter = 2
+
+[node name="VBox" type="VBoxContainer" parent="PromptTag" unique_id=168010449]
+layout_mode = 2
+alignment = 1
+
+[node name="Title" type="Label" parent="PromptTag/VBox" unique_id=268034118]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "早餐怎么解决？"
+horizontal_alignment = 1
+
+[node name="Subtitle" type="Label" parent="PromptTag/VBox" unique_id=1112971198]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "挑个去处。"
+horizontal_alignment = 1
+
+[node name="PropLayer" type="Control" parent="." unique_id=840968730]
+anchors_preset = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="CafeteriaProp" type="Control" parent="PropLayer" unique_id=351882381]
+z_index = 10
+anchors_preset = 0
+anchor_left = 0.38
+anchor_top = 0.28
+anchor_right = 0.38
+anchor_bottom = 0.28
+offset_left = -140.0
+offset_top = -125.0
+offset_right = 140.0
+offset_bottom = 175.0
+pivot_offset = Vector2(140, 150)
+
+[node name="ShadowSoft" type="TextureRect" parent="PropLayer/CafeteriaProp" unique_id=665860864]
+modulate = Color(1, 1, 1, 0.25)
+self_modulate = Color(0.07058824, 0.047058824, 0.03137255, 1)
+z_index = -2
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 0.82
+offset_left = 18.0
+offset_top = 20.0
+offset_right = 18.0
+offset_bottom = 20.0
+scale = Vector2(1.04, 1.04)
+mouse_filter = 2
+texture = ExtResource("3_xn4im")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Shadow" type="TextureRect" parent="PropLayer/CafeteriaProp" unique_id=2063672105]
+modulate = Color(1, 1, 1, 0.34)
+self_modulate = Color(0.07058824, 0.047058824, 0.03137255, 1)
+z_index = -1
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 0.82
+offset_left = 10.0
+offset_top = 12.0
+offset_right = 10.0
+offset_bottom = 12.0
+mouse_filter = 2
+texture = ExtResource("3_xn4im")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Button" type="TextureButton" parent="PropLayer/CafeteriaProp" unique_id=412878517]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 0.82
+tooltip_text = "去食堂"
+texture_normal = ExtResource("3_xn4im")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Name" type="Label" parent="PropLayer/CafeteriaProp" unique_id=1309070938]
+layout_mode = 0
+anchor_top = 0.82
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_font_sizes/font_size = 34
+text = "食堂"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Info" type="Button" parent="PropLayer/CafeteriaProp" unique_id=1674951617]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 0
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -54.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = 54.0
+theme_override_font_sizes/font_size = 22
+text = "?"
+
+[node name="IdlePlate" type="PanelContainer" parent="PropLayer/CafeteriaProp" unique_id=1632745485]
+self_modulate = Color(1, 0.94, 0.82, 0.54)
+z_index = -3
+layout_mode = 0
+offset_left = 12.0
+offset_top = 8.0
+offset_right = 268.0
+offset_bottom = 236.0
+pivot_offset = Vector2(128, 114)
+mouse_filter = 2
+
+[node name="TakeoutProp" type="Control" parent="PropLayer" unique_id=1802239815]
+z_index = 10
+anchors_preset = 0
+anchor_left = 0.64
+anchor_top = 0.3
+anchor_right = 0.64
+anchor_bottom = 0.3
+offset_left = -140.0
+offset_top = -125.0
+offset_right = 140.0
+offset_bottom = 175.0
+pivot_offset = Vector2(140, 150)
+
+[node name="ShadowSoft" type="TextureRect" parent="PropLayer/TakeoutProp" unique_id=1074442848]
+modulate = Color(1, 1, 1, 0.25)
+self_modulate = Color(0.07058824, 0.047058824, 0.03137255, 1)
+z_index = -2
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 0.82
+offset_left = 18.0
+offset_top = 20.0
+offset_right = 18.0
+offset_bottom = 20.0
+scale = Vector2(1.04, 1.04)
+mouse_filter = 2
+texture = ExtResource("4_w7stn")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Shadow" type="TextureRect" parent="PropLayer/TakeoutProp" unique_id=655600348]
+modulate = Color(1, 1, 1, 0.34)
+self_modulate = Color(0.07058824, 0.047058824, 0.03137255, 1)
+z_index = -1
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 0.82
+offset_left = 10.0
+offset_top = 12.0
+offset_right = 10.0
+offset_bottom = 12.0
+mouse_filter = 2
+texture = ExtResource("4_w7stn")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Button" type="TextureButton" parent="PropLayer/TakeoutProp" unique_id=1207024663]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 0.82
+tooltip_text = "点外卖"
+texture_normal = ExtResource("4_w7stn")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Name" type="Label" parent="PropLayer/TakeoutProp" unique_id=690880905]
+layout_mode = 0
+anchor_top = 0.82
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_font_sizes/font_size = 34
+text = "外卖"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ClosedSticker" type="Label" parent="PropLayer/TakeoutProp" unique_id=1816149514]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -11.5
+offset_right = 40.0
+offset_bottom = 11.5
+theme_override_font_sizes/font_size = 18
+text = "午餐开放"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Info" type="Button" parent="PropLayer/TakeoutProp" unique_id=2078999538]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 0
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -54.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = 54.0
+theme_override_font_sizes/font_size = 22
+text = "?"
+
+[node name="IdlePlate" type="PanelContainer" parent="PropLayer/TakeoutProp" unique_id=1835592257]
+self_modulate = Color(1, 0.94, 0.82, 0.54)
+z_index = -3
+layout_mode = 0
+offset_left = 12.0
+offset_top = 8.0
+offset_right = 268.0
+offset_bottom = 236.0
+pivot_offset = Vector2(128, 114)
+mouse_filter = 2
+
+[node name="ConvenienceProp" type="Control" parent="PropLayer" unique_id=1810540262]
+z_index = 10
+anchors_preset = 0
+anchor_left = 0.46
+anchor_top = 0.61
+anchor_right = 0.46
+anchor_bottom = 0.61
+offset_left = -140.0
+offset_top = -125.0
+offset_right = 140.0
+offset_bottom = 175.0
+pivot_offset = Vector2(140, 150)
+
+[node name="ShadowSoft" type="TextureRect" parent="PropLayer/ConvenienceProp" unique_id=1698900535]
+modulate = Color(1, 1, 1, 0.25)
+self_modulate = Color(0.07058824, 0.047058824, 0.03137255, 1)
+z_index = -2
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 0.82
+offset_left = 18.0
+offset_top = 20.0
+offset_right = 18.0
+offset_bottom = 20.0
+scale = Vector2(1.04, 1.04)
+mouse_filter = 2
+texture = ExtResource("5_ftemt")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Shadow" type="TextureRect" parent="PropLayer/ConvenienceProp" unique_id=2121091607]
+modulate = Color(1, 1, 1, 0.34)
+self_modulate = Color(0.07058824, 0.047058824, 0.03137255, 1)
+z_index = -1
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 0.82
+offset_left = 10.0
+offset_top = 12.0
+offset_right = 10.0
+offset_bottom = 12.0
+mouse_filter = 2
+texture = ExtResource("5_ftemt")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Button" type="TextureButton" parent="PropLayer/ConvenienceProp" unique_id=1885599105]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 0.82
+tooltip_text = "便利店"
+texture_normal = ExtResource("5_ftemt")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Name" type="Label" parent="PropLayer/ConvenienceProp" unique_id=2051200400]
+layout_mode = 0
+anchor_top = 0.82
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_font_sizes/font_size = 34
+text = "便利店"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Info" type="Button" parent="PropLayer/ConvenienceProp" unique_id=1069849430]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 0
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -54.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = 54.0
+theme_override_font_sizes/font_size = 22
+text = "?"
+
+[node name="IdlePlate" type="PanelContainer" parent="PropLayer/ConvenienceProp" unique_id=1437606086]
+self_modulate = Color(1, 0.94, 0.82, 0.54)
+z_index = -3
+layout_mode = 0
+offset_left = 12.0
+offset_top = 8.0
+offset_right = 268.0
+offset_bottom = 236.0
+pivot_offset = Vector2(128, 114)
+mouse_filter = 2
+
+[node name="DormProp" type="Control" parent="PropLayer" unique_id=1767964600]
+z_index = 10
+anchors_preset = 0
+anchor_left = 0.74
+anchor_top = 0.61
+anchor_right = 0.74
+anchor_bottom = 0.61
+offset_left = -140.0
+offset_top = -125.0
+offset_right = 140.0
+offset_bottom = 175.0
+pivot_offset = Vector2(140, 150)
+
+[node name="ShadowSoft" type="TextureRect" parent="PropLayer/DormProp" unique_id=1250186697]
+modulate = Color(1, 1, 1, 0.25)
+self_modulate = Color(0.07058824, 0.047058824, 0.03137255, 1)
+z_index = -2
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 0.82
+offset_left = 18.0
+offset_top = 20.0
+offset_right = 18.0
+offset_bottom = 20.0
+scale = Vector2(1.04, 1.04)
+mouse_filter = 2
+texture = ExtResource("6_gtk66")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Shadow" type="TextureRect" parent="PropLayer/DormProp" unique_id=12994067]
+modulate = Color(1, 1, 1, 0.34)
+self_modulate = Color(0.07058824, 0.047058824, 0.03137255, 1)
+z_index = -1
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 0.82
+offset_left = 10.0
+offset_top = 12.0
+offset_right = 10.0
+offset_bottom = 12.0
+mouse_filter = 2
+texture = ExtResource("6_gtk66")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Button" type="TextureButton" parent="PropLayer/DormProp" unique_id=1584886502]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 0.82
+tooltip_text = "翻翻存粮"
+texture_normal = ExtResource("6_gtk66")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Name" type="Label" parent="PropLayer/DormProp" unique_id=705490220]
+layout_mode = 0
+anchor_top = 0.82
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_font_sizes/font_size = 34
+text = "宿舍存粮"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Info" type="Button" parent="PropLayer/DormProp" unique_id=1708531018]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 0
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -54.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = 54.0
+theme_override_font_sizes/font_size = 22
+text = "?"
+
+[node name="IdlePlate" type="PanelContainer" parent="PropLayer/DormProp" unique_id=1858350495]
+self_modulate = Color(1, 0.94, 0.82, 0.54)
+z_index = -3
+layout_mode = 0
+offset_left = 12.0
+offset_top = 8.0
+offset_right = 268.0
+offset_bottom = 236.0
+pivot_offset = Vector2(128, 114)
+mouse_filter = 2
+
+[node name="Footer" type="HBoxContainer" parent="." unique_id=1706125336]
+layout_mode = 0
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -350.0
+offset_top = -78.0
+offset_right = -18.0
+offset_bottom = -16.0
+theme_override_constants/separation = 10
+
+[node name="SkipButton" type="Button" parent="Footer" unique_id=456528675]
+custom_minimum_size = Vector2(150, 62)
+layout_mode = 2
+text = "这顿先算了"
+
+[node name="MenuHintButton" type="Button" parent="Footer" unique_id=14396171]
+custom_minimum_size = Vector2(170, 62)
+layout_mode = 2
+text = "玩法说明"
+
+[node name="IdleAnimation" type="AnimationPlayer" parent="." unique_id=1953240274]
+libraries/ = SubResource("AnimationLibrary_w7stn")
+autoplay = &"idle"

@@ -1,0 +1,173 @@
+[gd_scene format=3 uid="uid://to0sir0d8w6k"]
+
+[ext_resource type="Theme" uid="uid://dthxodrk6slpq" path="res://scenes/game_v2/V2Theme.tres" id="1_woggp"]
+[ext_resource type="Script" uid="uid://b3gq4k0qsm1sx" path="res://scripts/ui_v2/stages/ActionStage.gd" id="2_4r40m"]
+
+[node name="ActionStage" type="Control" unique_id=1459143544]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_woggp")
+script = ExtResource("2_4r40m")
+
+[node name="Layout" type="Control" parent="." unique_id=919488373]
+anchors_preset = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Header" type="HBoxContainer" parent="Layout" unique_id=627131131]
+layout_mode = 0
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -410.0
+offset_top = 22.0
+offset_right = 410.0
+offset_bottom = 88.0
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="TimeTag" type="PanelContainer" parent="Layout/Header" unique_id=786509681]
+custom_minimum_size = Vector2(180, 64)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="TimeLabel" type="Label" parent="Layout/Header/TimeTag" unique_id=2106723357]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "早餐后"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PromptTag" type="PanelContainer" parent="Layout/Header" unique_id=1187911268]
+custom_minimum_size = Vector2(430, 64)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Prompt" type="Label" parent="Layout/Header/PromptTag" unique_id=622238868]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "接下来做点什么？"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SlotsTag" type="PanelContainer" parent="Layout/Header" unique_id=690883091]
+custom_minimum_size = Vector2(180, 64)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Slots" type="Label" parent="Layout/Header/SlotsTag" unique_id=196559027]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "安排 0/3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ActionRail" type="ScrollContainer" parent="Layout" unique_id=2077422747]
+layout_mode = 0
+anchor_left = 0.15
+anchor_top = 0.22
+anchor_right = 0.95
+anchor_bottom = 0.72
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 0
+scroll_deadzone = 24
+
+[node name="Actions" type="HBoxContainer" parent="Layout/ActionRail" unique_id=1475912098]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 22
+alignment = 1
+
+[node name="PlannerNote" type="PanelContainer" parent="Layout" unique_id=1698720234]
+layout_mode = 0
+anchor_left = 0.48
+anchor_top = 0.76
+anchor_right = 0.84
+anchor_bottom = 0.92
+mouse_filter = 2
+
+[node name="PlannerMargin" type="MarginContainer" parent="Layout/PlannerNote" unique_id=26740461]
+layout_mode = 2
+theme_override_constants/margin_left = 22
+theme_override_constants/margin_top = 14
+theme_override_constants/margin_right = 22
+theme_override_constants/margin_bottom = 14
+
+[node name="Planner" type="VBoxContainer" parent="Layout/PlannerNote/PlannerMargin" unique_id=868111810]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="PlannerHeader" type="HBoxContainer" parent="Layout/PlannerNote/PlannerMargin/Planner" unique_id=394680316]
+layout_mode = 2
+
+[node name="PlannerTitle" type="Label" parent="Layout/PlannerNote/PlannerMargin/Planner/PlannerHeader" unique_id=667473067]
+layout_mode = 2
+theme_override_font_sizes/font_size = 23
+text = "今日安排"
+
+[node name="Spacer" type="Control" parent="Layout/PlannerNote/PlannerMargin/Planner/PlannerHeader" unique_id=423607691]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="WaterCount" type="Label" parent="Layout/PlannerNote/PlannerMargin/Planner/PlannerHeader" unique_id=21253777]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.3019608, 0.46666667, 0.57254905, 1)
+theme_override_font_sizes/font_size = 17
+text = "水杯 0/2"
+
+[node name="UsedSlots" type="HBoxContainer" parent="Layout/PlannerNote/PlannerMargin/Planner" unique_id=714991803]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Slot1" type="PanelContainer" parent="Layout/PlannerNote/PlannerMargin/Planner/UsedSlots" unique_id=1052246815]
+custom_minimum_size = Vector2(150, 56)
+layout_mode = 2
+
+[node name="Text" type="Label" parent="Layout/PlannerNote/PlannerMargin/Planner/UsedSlots/Slot1" unique_id=1347475585]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.54901963, 0.4745098, 0.4, 0.53333336)
+theme_override_font_sizes/font_size = 17
+text = "空位"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Slot2" type="PanelContainer" parent="Layout/PlannerNote/PlannerMargin/Planner/UsedSlots" unique_id=1304733921]
+custom_minimum_size = Vector2(150, 56)
+layout_mode = 2
+
+[node name="Text" type="Label" parent="Layout/PlannerNote/PlannerMargin/Planner/UsedSlots/Slot2" unique_id=341579059]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.54901963, 0.4745098, 0.4, 0.53333336)
+theme_override_font_sizes/font_size = 17
+text = "空位"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Slot3" type="PanelContainer" parent="Layout/PlannerNote/PlannerMargin/Planner/UsedSlots" unique_id=1760075772]
+custom_minimum_size = Vector2(150, 56)
+layout_mode = 2
+
+[node name="Text" type="Label" parent="Layout/PlannerNote/PlannerMargin/Planner/UsedSlots/Slot3" unique_id=153336923]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.54901963, 0.4745098, 0.4, 0.53333336)
+theme_override_font_sizes/font_size = 17
+text = "空位"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SkipButton" type="Button" parent="Layout" unique_id=930993632]
+custom_minimum_size = Vector2(170, 60)
+layout_mode = 0
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -188.0
+offset_top = -72.0
+offset_right = -18.0
+offset_bottom = -12.0
+text = "先缓一缓"

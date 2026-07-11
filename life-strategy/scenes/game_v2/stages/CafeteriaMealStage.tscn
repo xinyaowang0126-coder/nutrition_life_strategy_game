@@ -1,0 +1,176 @@
+[gd_scene format=3 uid="uid://d17qimp4osg1n"]
+
+[ext_resource type="Theme" uid="uid://dthxodrk6slpq" path="res://scenes/game_v2/V2Theme.tres" id="1_6eslo"]
+[ext_resource type="Script" uid="uid://d1k7dfd3xmhl8" path="res://scripts/ui_v2/stages/CafeteriaMealStage.gd" id="2_jmvog"]
+
+[node name="CafeteriaMealStage" type="Control" unique_id=1637405280]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_6eslo")
+script = ExtResource("2_jmvog")
+
+[node name="Header" type="HBoxContainer" parent="." unique_id=1323536747]
+layout_mode = 0
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -300.0
+offset_top = 18.0
+offset_right = 300.0
+offset_bottom = 82.0
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="TitleTag" type="PanelContainer" parent="Header" unique_id=1137726148]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Title" type="Label" parent="Header/TitleTag" unique_id=1774913044]
+layout_mode = 2
+theme_override_font_sizes/font_size = 29
+text = "早餐 · 食堂窗口"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SelectionTag" type="PanelContainer" parent="Header" unique_id=591040439]
+custom_minimum_size = Vector2(230, 60)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Status" type="Label" parent="Header/SelectionTag" unique_id=2086543871]
+layout_mode = 2
+theme_override_font_sizes/font_size = 21
+text = "已选 0/3 · ¥0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FoodRail" type="ScrollContainer" parent="." unique_id=1270422693]
+layout_mode = 0
+anchor_left = 0.16
+anchor_top = 0.13
+anchor_right = 0.96
+anchor_bottom = 0.52
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 0
+scroll_deadzone = 24
+
+[node name="Cards" type="HBoxContainer" parent="FoodRail" unique_id=95648327]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 18
+
+[node name="TrayDropZone" type="PanelContainer" parent="." unique_id=931576263]
+layout_mode = 0
+anchor_left = 0.35
+anchor_top = 0.57
+anchor_right = 0.86
+anchor_bottom = 0.91
+
+[node name="TrayMargin" type="MarginContainer" parent="TrayDropZone" unique_id=1981040807]
+layout_mode = 2
+theme_override_constants/margin_left = 28
+theme_override_constants/margin_top = 22
+theme_override_constants/margin_right = 28
+theme_override_constants/margin_bottom = 22
+
+[node name="VBox" type="VBoxContainer" parent="TrayDropZone/TrayMargin" unique_id=901141706]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="TrayHeader" type="HBoxContainer" parent="TrayDropZone/TrayMargin/VBox" unique_id=2021651630]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="TrayTitle" type="Label" parent="TrayDropZone/TrayMargin/VBox/TrayHeader" unique_id=2116356268]
+layout_mode = 2
+theme_override_font_sizes/font_size = 27
+text = "我的餐盘"
+
+[node name="TrayHint" type="Label" parent="TrayDropZone/TrayMargin/VBox/TrayHeader" unique_id=196321712]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.39, 0.33, 0.25, 1)
+theme_override_font_sizes/font_size = 17
+text = "点击卡牌，食物会放到这里"
+
+[node name="Spacer" type="Control" parent="TrayDropZone/TrayMargin/VBox/TrayHeader" unique_id=1536911855]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Receipt" type="Label" parent="TrayDropZone/TrayMargin/VBox/TrayHeader" unique_id=366209576]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.82, 0.42, 0.15, 1)
+theme_override_font_sizes/font_size = 24
+text = "合计 ¥0"
+
+[node name="SelectedSlots" type="HBoxContainer" parent="TrayDropZone/TrayMargin/VBox" unique_id=1432423888]
+layout_mode = 2
+theme_override_constants/separation = 18
+alignment = 1
+
+[node name="Slot1" type="PanelContainer" parent="TrayDropZone/TrayMargin/VBox/SelectedSlots" unique_id=1275618526]
+custom_minimum_size = Vector2(210, 135)
+layout_mode = 2
+
+[node name="Empty" type="Label" parent="TrayDropZone/TrayMargin/VBox/SelectedSlots/Slot1" unique_id=1756255144]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.55, 0.48, 0.38, 0.55)
+theme_override_font_sizes/font_size = 42
+text = "+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Slot2" type="PanelContainer" parent="TrayDropZone/TrayMargin/VBox/SelectedSlots" unique_id=627692483]
+custom_minimum_size = Vector2(210, 135)
+layout_mode = 2
+
+[node name="Empty" type="Label" parent="TrayDropZone/TrayMargin/VBox/SelectedSlots/Slot2" unique_id=214794772]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.55, 0.48, 0.38, 0.55)
+theme_override_font_sizes/font_size = 42
+text = "+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Slot3" type="PanelContainer" parent="TrayDropZone/TrayMargin/VBox/SelectedSlots" unique_id=1908776836]
+custom_minimum_size = Vector2(210, 135)
+layout_mode = 2
+
+[node name="Empty" type="Label" parent="TrayDropZone/TrayMargin/VBox/SelectedSlots/Slot3" unique_id=67452695]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.55, 0.48, 0.38, 0.55)
+theme_override_font_sizes/font_size = 42
+text = "+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Footer" type="HBoxContainer" parent="." unique_id=430922049]
+layout_mode = 0
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -520.0
+offset_top = -72.0
+offset_right = -18.0
+offset_bottom = -12.0
+theme_override_constants/separation = 10
+
+[node name="BackButton" type="Button" parent="Footer" unique_id=1689100026]
+custom_minimum_size = Vector2(160, 60)
+layout_mode = 2
+text = "换个地方"
+
+[node name="SkipButton" type="Button" parent="Footer" unique_id=799333538]
+custom_minimum_size = Vector2(140, 60)
+layout_mode = 2
+text = "先不吃"
+
+[node name="ConfirmButton" type="Button" parent="Footer" unique_id=1332230962]
+custom_minimum_size = Vector2(210, 60)
+layout_mode = 2
+disabled = true
+text = "端走餐盘"

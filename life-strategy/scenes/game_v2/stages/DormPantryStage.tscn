@@ -1,0 +1,226 @@
+[gd_scene format=3 uid="uid://35j3jjhsnqsb"]
+
+[ext_resource type="Theme" uid="uid://dthxodrk6slpq" path="res://scenes/game_v2/V2Theme.tres" id="1_wm2xb"]
+[ext_resource type="Script" uid="uid://gpg46mrf5xoa" path="res://scripts/ui_v2/stages/DormPantryStage.gd" id="2_vhsom"]
+
+[node name="DormPantryStage" type="Control" unique_id=1951703082]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_wm2xb")
+script = ExtResource("2_vhsom")
+
+[node name="Layout" type="Control" parent="." unique_id=1577963821]
+anchors_preset = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Header" type="HBoxContainer" parent="Layout" unique_id=219051192]
+layout_mode = 0
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -320.0
+offset_top = 20.0
+offset_right = 320.0
+offset_bottom = 82.0
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="TitleTag" type="PanelContainer" parent="Layout/Header" unique_id=1324753518]
+custom_minimum_size = Vector2(400, 62)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Title" type="Label" parent="Layout/Header/TitleTag" unique_id=1717570417]
+layout_mode = 2
+theme_override_font_sizes/font_size = 29
+text = "早餐 · 宿舍存粮"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StockTag" type="PanelContainer" parent="Layout/Header" unique_id=757171362]
+custom_minimum_size = Vector2(210, 62)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Stock" type="Label" parent="Layout/Header/StockTag" unique_id=1800880242]
+layout_mode = 2
+theme_override_font_sizes/font_size = 21
+text = "存货 0 件"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PantryPanel" type="PanelContainer" parent="Layout" unique_id=591252920]
+layout_mode = 0
+anchor_left = 0.12
+anchor_top = 0.17
+anchor_right = 0.52
+anchor_bottom = 0.84
+
+[node name="PantryMargin" type="MarginContainer" parent="Layout/PantryPanel" unique_id=1590115351]
+layout_mode = 2
+theme_override_constants/margin_left = 26
+theme_override_constants/margin_top = 22
+theme_override_constants/margin_right = 26
+theme_override_constants/margin_bottom = 22
+
+[node name="Pantry" type="VBoxContainer" parent="Layout/PantryPanel/PantryMargin" unique_id=654989290]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="CabinetHeader" type="HBoxContainer" parent="Layout/PantryPanel/PantryMargin/Pantry" unique_id=483013074]
+layout_mode = 2
+
+[node name="CabinetTitle" type="Label" parent="Layout/PantryPanel/PantryMargin/Pantry/CabinetHeader" unique_id=1322082755]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "床边小柜"
+
+[node name="Spacer" type="Control" parent="Layout/PantryPanel/PantryMargin/Pantry/CabinetHeader" unique_id=412637179]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Hint" type="Label" parent="Layout/PantryPanel/PantryMargin/Pantry/CabinetHeader" unique_id=1188825970]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.42745098, 0.38431373, 0.32941177, 1)
+theme_override_font_sizes/font_size = 16
+text = "库存吃完就没有了"
+
+[node name="ShelfLine" type="HSeparator" parent="Layout/PantryPanel/PantryMargin/Pantry" unique_id=484048225]
+layout_mode = 2
+
+[node name="PantryScroll" type="ScrollContainer" parent="Layout/PantryPanel/PantryMargin/Pantry" unique_id=288402376]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+scroll_deadzone = 24
+
+[node name="StockGrid" type="GridContainer" parent="Layout/PantryPanel/PantryMargin/Pantry/PantryScroll" unique_id=951026272]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 16
+columns = 2
+
+[node name="BowlPanel" type="PanelContainer" parent="Layout" unique_id=1222789545]
+layout_mode = 0
+anchor_left = 0.56
+anchor_top = 0.34
+anchor_right = 0.88
+anchor_bottom = 0.78
+
+[node name="BowlMargin" type="MarginContainer" parent="Layout/BowlPanel" unique_id=968088406]
+layout_mode = 2
+theme_override_constants/margin_left = 26
+theme_override_constants/margin_top = 22
+theme_override_constants/margin_right = 26
+theme_override_constants/margin_bottom = 22
+
+[node name="Bowl" type="VBoxContainer" parent="Layout/BowlPanel/BowlMargin" unique_id=106492272]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="BowlTitle" type="Label" parent="Layout/BowlPanel/BowlMargin/Bowl" unique_id=1911424870]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "凑一顿"
+horizontal_alignment = 1
+
+[node name="BowlHint" type="Label" parent="Layout/BowlPanel/BowlMargin/Bowl" unique_id=895931999]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.42745098, 0.38431373, 0.32941177, 1)
+theme_override_font_sizes/font_size = 17
+text = "点一下存粮，放进碗里"
+horizontal_alignment = 1
+
+[node name="SelectedSlots" type="HBoxContainer" parent="Layout/BowlPanel/BowlMargin/Bowl" unique_id=539865170]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="Slot1" type="PanelContainer" parent="Layout/BowlPanel/BowlMargin/Bowl/SelectedSlots" unique_id=92068496]
+custom_minimum_size = Vector2(145, 145)
+layout_mode = 2
+
+[node name="Empty" type="Label" parent="Layout/BowlPanel/BowlMargin/Bowl/SelectedSlots/Slot1" unique_id=1664427204]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.54901963, 0.4745098, 0.4, 0.33333334)
+theme_override_font_sizes/font_size = 38
+text = "+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Slot2" type="PanelContainer" parent="Layout/BowlPanel/BowlMargin/Bowl/SelectedSlots" unique_id=1381427755]
+custom_minimum_size = Vector2(145, 145)
+layout_mode = 2
+
+[node name="Empty" type="Label" parent="Layout/BowlPanel/BowlMargin/Bowl/SelectedSlots/Slot2" unique_id=942745083]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.54901963, 0.4745098, 0.4, 0.33333334)
+theme_override_font_sizes/font_size = 38
+text = "+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Slot3" type="PanelContainer" parent="Layout/BowlPanel/BowlMargin/Bowl/SelectedSlots" unique_id=83921231]
+custom_minimum_size = Vector2(145, 145)
+layout_mode = 2
+
+[node name="Empty" type="Label" parent="Layout/BowlPanel/BowlMargin/Bowl/SelectedSlots/Slot3" unique_id=318320133]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.54901963, 0.4745098, 0.4, 0.33333334)
+theme_override_font_sizes/font_size = 38
+text = "+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BowlReceipt" type="HBoxContainer" parent="Layout/BowlPanel/BowlMargin/Bowl" unique_id=1478317284]
+layout_mode = 2
+
+[node name="FreeTag" type="Label" parent="Layout/BowlPanel/BowlMargin/Bowl/BowlReceipt" unique_id=94105593]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "不花现金 · 消耗库存"
+
+[node name="Spacer" type="Control" parent="Layout/BowlPanel/BowlMargin/Bowl/BowlReceipt" unique_id=867959006]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Status" type="Label" parent="Layout/BowlPanel/BowlMargin/Bowl/BowlReceipt" unique_id=805087843]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7882353, 0.4, 0.15294118, 1)
+theme_override_font_sizes/font_size = 23
+text = "已选 0/3"
+
+[node name="Footer" type="HBoxContainer" parent="Layout" unique_id=860695879]
+layout_mode = 0
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -520.0
+offset_top = -72.0
+offset_right = -18.0
+offset_bottom = -12.0
+theme_override_constants/separation = 10
+
+[node name="BackButton" type="Button" parent="Layout/Footer" unique_id=1106342522]
+custom_minimum_size = Vector2(160, 60)
+layout_mode = 2
+text = "换个地方"
+
+[node name="SkipButton" type="Button" parent="Layout/Footer" unique_id=1141475971]
+custom_minimum_size = Vector2(140, 60)
+layout_mode = 2
+text = "先不吃"
+
+[node name="ConfirmButton" type="Button" parent="Layout/Footer" unique_id=551359232]
+custom_minimum_size = Vector2(190, 60)
+layout_mode = 2
+disabled = true
+text = "开吃"

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <meal_sources>
-  <meal_source id="cafeteria" name="去食堂" fee="0" hand_size="6" payment_mode="cash" scenes="breakfast,lunch,dinner" image="res://assets/generated/actions/go_cafeteria.png" background="res://assets/generated/backgrounds/cafeteria_background.png" tone="steady">
-    <desc>走到食堂，看看今天开了哪些窗口。</desc>
+  <meal_source id="cafeteria" name="食堂" fee="0" hand_size="6" payment_mode="cash" scenes="breakfast,lunch,dinner" image="res://assets/generated/ui_v2/props/cafeteria_window_alpha.png" background="res://assets/generated/backgrounds/cafeteria_background.png" tone="steady">
+    <desc>窗口多，价格也稳。</desc>
   </meal_source>
-  <meal_source id="takeout" name="点外卖" fee="3" hand_size="4" payment_mode="cash" scenes="lunch,dinner" image="res://assets/generated/cards/fried_chicken.png" background="res://assets/generated/backgrounds/takeout_background.png" tone="comfort">
-    <desc>不想出门，手机上挑一家。</desc>
+  <meal_source id="takeout" name="外卖" fee="3" hand_size="4" payment_mode="cash" scenes="lunch,dinner" image="res://assets/generated/ui_v2/props/takeout_phone_alpha.png" background="res://assets/generated/backgrounds/takeout_background.png" tone="comfort">
+    <desc>不用出门，要多付配送费。</desc>
   </meal_source>
-  <meal_source id="convenience_store" name="便利店" fee="0" hand_size="5" payment_mode="cash" scenes="breakfast,lunch,dinner" image="res://assets/generated/actions/convenience_store.png" background="res://assets/generated/backgrounds/convenience_background.png" tone="quick">
-    <desc>下楼转一圈，很快回来。</desc>
+  <meal_source id="convenience_store" name="便利店" fee="0" hand_size="5" payment_mode="cash" scenes="breakfast,lunch,dinner" image="res://assets/generated/ui_v2/props/convenience_shelf_alpha.png" background="res://assets/generated/backgrounds/convenience_background.png" tone="quick">
+    <desc>下楼就到，能选的不多。</desc>
   </meal_source>
-  <meal_source id="dorm_storage" name="翻翻存粮" fee="0" hand_size="4" payment_mode="stock" scenes="breakfast,lunch,dinner" image="res://assets/generated/actions/drink_water.png" background="res://assets/generated/backgrounds/dorm_background.png" tone="quiet">
-    <desc>看看桌边和柜子里还剩什么。</desc>
+  <meal_source id="dorm_storage" name="宿舍存粮" fee="0" hand_size="4" payment_mode="stock" scenes="breakfast,lunch,dinner" image="res://assets/generated/ui_v2/props/dorm_pantry_alpha.png" background="res://assets/generated/backgrounds/dorm_background.png" tone="quiet">
+    <desc>不花现金，吃的是现有存货。</desc>
   </meal_source>
 </meal_sources>

@@ -1,0 +1,117 @@
+[gd_scene format=3 uid="uid://bi8i7mbk8bsla"]
+
+[ext_resource type="Theme" uid="uid://dthxodrk6slpq" path="res://scenes/game_v2/V2Theme.tres" id="1_8gb35"]
+[ext_resource type="Script" uid="uid://76qeupm8rhut" path="res://scripts/ui_v2/StickyNotePopup.gd" id="2_w62bp"]
+
+[node name="StickyNotePopup" type="PanelContainer" unique_id=441605454]
+visible = false
+custom_minimum_size = Vector2(430, 0)
+theme = ExtResource("1_8gb35")
+script = ExtResource("2_w62bp")
+
+[node name="Margin" type="MarginContainer" parent="." unique_id=1716782177]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 22
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 20
+
+[node name="VBox" type="VBoxContainer" parent="Margin" unique_id=285515303]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="TitleRow" type="HBoxContainer" parent="Margin/VBox" unique_id=2052200794]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Title" type="Label" parent="Margin/VBox/TitleRow" unique_id=782459728]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "白米饭"
+
+[node name="Spacer" type="Control" parent="Margin/VBox/TitleRow" unique_id=62746848]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Cost" type="Label" parent="Margin/VBox/TitleRow" unique_id=662402653]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.39, 0.17, 1)
+theme_override_font_sizes/font_size = 25
+text = "¥2"
+
+[node name="CloseButton" type="Button" parent="Margin/VBox/TitleRow" unique_id=903224903]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "×"
+
+[node name="Divider" type="HSeparator" parent="Margin/VBox" unique_id=1928558992]
+layout_mode = 2
+
+[node name="KindTag" type="Label" parent="Margin/VBox" unique_id=1332262101]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.43, 0.32, 0.2, 1)
+theme_override_font_sizes/font_size = 18
+text = "主食"
+
+[node name="RuleHint" type="Label" parent="Margin/VBox" unique_id=1414986438]
+layout_mode = 2
+theme_override_font_sizes/font_size = 19
+text = "一碗热饭，适合和蛋白质、蔬菜一起搭配。"
+autowrap_mode = 3
+
+[node name="MetricGrid" type="GridContainer" parent="Margin/VBox" unique_id=1030568575]
+layout_mode = 2
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
+columns = 3
+
+[node name="Satiety" type="Label" parent="Margin/VBox/MetricGrid" unique_id=96244297]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.22, 0.48, 0.28, 1)
+text = "饱腹 +16"
+
+[node name="Energy" type="Label" parent="Margin/VBox/MetricGrid" unique_id=1185174549]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.23, 0.45, 0.67, 1)
+text = "精力 +4"
+
+[node name="Mood" type="Label" parent="Margin/VBox/MetricGrid" unique_id=273381622]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.75, 0.4, 0.44, 1)
+text = "心情 0"
+
+[node name="Stress" type="Label" parent="Margin/VBox/MetricGrid" unique_id=2103996736]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.64, 0.34, 0.26, 1)
+text = "压力 0"
+
+[node name="Burden" type="Label" parent="Margin/VBox/MetricGrid" unique_id=891301016]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.45, 0.4, 0.55, 1)
+text = "负担 0"
+
+[node name="Study" type="Label" parent="Margin/VBox/MetricGrid" unique_id=2094906508]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.52, 0.38, 0.16, 1)
+text = "复习 0"
+
+[node name="Description" type="Label" parent="Margin/VBox" unique_id=90922428]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.34, 0.29, 0.22, 1)
+theme_override_font_sizes/font_size = 17
+text = "热乎的一碗，简单也踏实。"
+autowrap_mode = 3
+
+[node name="DisabledReason" type="Label" parent="Margin/VBox" unique_id=1763858348]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0.76, 0.2, 0.18, 1)
+theme_override_font_sizes/font_size = 17
+autowrap_mode = 3
+
+[node name="ActionButton" type="Button" parent="Margin/VBox" unique_id=2017099025]
+visible = false
+custom_minimum_size = Vector2(0, 54)
+layout_mode = 2
+text = "放进餐盘"
