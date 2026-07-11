@@ -331,6 +331,8 @@ func _on_hover_ended() -> void:
 
 
 func _on_focus_entered() -> void:
+	if _touch_active or Time.get_ticks_msec() - _last_touch_msec <= 300:
+		return
 	request_detail(false)
 	_animate_scale(Vector2(1.035, 1.035))
 
@@ -377,6 +379,8 @@ func _on_gui_input(event: InputEvent) -> void:
 			if _long_press_triggered:
 				_long_press_triggered = false
 				detail_dismissed.emit(item_id)
+				z_index = 0
+				_animate_scale(_target_scale())
 	elif event is InputEventMouseButton:
 		var mouse := event as InputEventMouseButton
 		if mouse.button_index == MOUSE_BUTTON_LEFT and not mouse.pressed:

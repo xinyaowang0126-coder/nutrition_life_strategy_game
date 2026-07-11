@@ -12,6 +12,8 @@ const ConvenienceStageScene := preload("res://scenes/game_v2/stages/ConvenienceM
 const DormStageScene := preload("res://scenes/game_v2/stages/DormPantryStage.tscn")
 const ActionStageScene := preload("res://scenes/game_v2/stages/ActionStage.tscn")
 const SleepStageScene := preload("res://scenes/game_v2/stages/SleepStage.tscn")
+const CompactCardScene := preload("res://scenes/game_v2/components/CompactChoiceCard.tscn")
+const TakeoutRowScene := preload("res://scenes/game_v2/components/TakeoutFoodRowCard.tscn")
 
 
 func suite_name() -> String:
@@ -140,23 +142,24 @@ func test_every_v2_stage_reaches_ready_with_real_data() -> void:
 		sources.append(GameDataScript.get_meal_source(source_id))
 	source_stage.setup(sources, "早餐", {"takeout": "这个时段还没营业。"})
 	_add_to_test_tree(source_stage)
-	assert_true(source_stage.is_node_ready())
+	assert_true(source_stage.is_node_ready(), "source stage must enter the tree ready")
 	assert_eq(source_stage._sources_by_id.size(), 4)
 
 	var cafeteria := CafeteriaStageScene.instantiate() as CafeteriaMealStageV2
 	cafeteria.setup(_foods(["rice_plain", "egg", "tomato"]), [], _cash_options("早餐"))
 	_add_to_test_tree(cafeteria)
-	assert_true(cafeteria.is_node_ready())
+	assert_true(cafeteria.is_node_ready(), "cafeteria stage must enter the tree ready")
 	assert_eq(cafeteria._cards_by_id.size(), 3)
 	for card in cafeteria._cards_by_id.values():
-		assert_true(card is CompactChoiceCardV2)
+		assert_true(card is CompactChoiceCardV2, "cafeteria must use compact choice cards")
 	cafeteria._on_card_selected("rice_plain")
 	var cafeteria_preview := cafeteria.get_node(
 		"TrayDropZone/TrayMargin/VBox/SelectedSlots/Slot1/Preview"
 	) as TextureRect
-	assert_true(cafeteria_preview.visible)
-	assert_true(cafeteria_preview.texture != null)
+	assert_true(cafeteria_preview.visible, "cafeteria tray must reveal the selected food image")
+	assert_true(cafeteria_preview.texture != null, "cafeteria tray preview must have a texture")
 	assert_false((cafeteria_preview.get_parent().get_node("Empty") as Label).visible)
+	_assert_scroll_contract(cafeteria.get_node("FoodRail") as ScrollContainer, true)
 	assert_false(cafeteria._is_scroll_gesture())
 	cafeteria._scrolling = true
 	assert_true(cafeteria._is_scroll_gesture(), "an active drag must suppress card selection")
@@ -165,22 +168,26 @@ func test_every_v2_stage_reaches_ready_with_real_data() -> void:
 	var takeout := TakeoutStageScene.instantiate() as TakeoutMealStageV2
 	takeout.setup(_foods(["sandwich", "bubble_tea"]), [], _cash_options("午餐", 3))
 	_add_to_test_tree(takeout)
-	assert_true(takeout.is_node_ready())
+	assert_true(takeout.is_node_ready(), "takeout stage must enter the tree ready")
 	assert_eq(takeout._cards_by_id.size(), 2)
 	for card in takeout._cards_by_id.values():
 		assert_true(card is TakeoutFoodRowCardV2, "takeout must use its horizontal phone row card")
 	takeout._on_card_selected("sandwich")
 	assert_eq(takeout.bag_label.text, "购物袋 1/3")
+	_assert_scroll_contract(takeout.menu_scroll, false)
 
 	var convenience := ConvenienceStageScene.instantiate() as ConvenienceMealStageV2
 	convenience.setup(_foods(["apple", "banana", "milk"]), [], _cash_options("午餐"))
 	_add_to_test_tree(convenience)
-	assert_true(convenience.is_node_ready())
+	assert_true(convenience.is_node_ready(), "convenience stage must enter the tree ready")
 	assert_eq(convenience._cards_by_id.size(), 3)
 	convenience._on_card_selected("apple")
 	assert_true((convenience.get_node(
 		"Layout/BasketPanel/BasketMargin/Basket/SelectedSlots/Slot1/Preview"
-	) as TextureRect).visible)
+	) as TextureRect).visible, "convenience basket must reveal the selected food image")
+	_assert_scroll_contract(convenience.get_node(
+		"Layout/ShelfPanel/ShelfMargin/Shelf/ShelfScroll"
+	) as ScrollContainer, true)
 
 	var dorm := DormStageScene.instantiate() as DormPantryStageV2
 	dorm.setup(_foods(["oatmeal", "instant_noodles"]), [], {
@@ -190,12 +197,18 @@ func test_every_v2_stage_reaches_ready_with_real_data() -> void:
 		"stock_by_id": {"oatmeal": 1, "instant_noodles": 2},
 	})
 	_add_to_test_tree(dorm)
-	assert_true(dorm.is_node_ready())
+	assert_true(dorm.is_node_ready(), "dorm stage must enter the tree ready")
 	assert_eq(dorm._cards_by_id.size(), 2)
+	assert_false(dorm._is_scroll_gesture(), "dorm stage must not start in a scrolling state")
+	assert_eq(dorm._disabled_reason("oatmeal"), "", "available dorm stock must be selectable")
 	dorm._on_card_selected("oatmeal")
+	assert_eq(dorm._selected_ids, ["oatmeal"], "dorm tap must add available stock to the bowl")
 	assert_true((dorm.get_node(
 		"Layout/BowlPanel/BowlMargin/Bowl/SelectedSlots/Slot1/Preview"
-	) as TextureRect).visible)
+	) as TextureRect).visible, "dorm bowl must reveal the selected food image")
+	_assert_scroll_contract(dorm.get_node(
+		"Layout/PantryPanel/PantryMargin/Pantry/PantryScroll"
+	) as ScrollContainer, false)
 
 	var action_stage := ActionStageScene.instantiate() as ActionStageV2
 	var actions: Array[Dictionary] = []
@@ -208,11 +221,12 @@ func test_every_v2_stage_reaches_ready_with_real_data() -> void:
 		"used_action_names": ["晨读"],
 	})
 	_add_to_test_tree(action_stage)
-	assert_true(action_stage.is_node_ready())
+	assert_true(action_stage.is_node_ready(), "action stage must enter the tree ready")
 	assert_eq(action_stage._cards_by_id.size(), actions.size())
 	assert_true((action_stage.get_node(
 		"Layout/PlannerNote/PlannerMargin/Planner/UsedSlots/Slot1/Preview"
-	) as TextureRect).visible)
+	) as TextureRect).visible, "action planner must reveal the arranged action image")
+	_assert_scroll_contract(action_stage.action_scroll, true)
 
 	var sleep_stage := SleepStageScene.instantiate() as SleepStageV2
 	var sleep_options: Array[Dictionary] = []
@@ -220,8 +234,45 @@ func test_every_v2_stage_reaches_ready_with_real_data() -> void:
 		sleep_options.append(GameDataScript.get_sleep_option(option_id))
 	sleep_stage.setup(sleep_options)
 	_add_to_test_tree(sleep_stage)
-	assert_true(sleep_stage.is_node_ready())
+	assert_true(sleep_stage.is_node_ready(), "sleep stage must enter the tree ready")
 	assert_eq(sleep_stage._cards_by_id.size(), sleep_options.size())
+	_assert_scroll_contract(sleep_stage.sleep_scroll, true)
+
+
+func test_touch_contract_tap_swipe_and_long_press() -> void:
+	var card := CompactCardScene.instantiate() as CompactChoiceCardV2
+	card.configure(GameDataScript.get_food("apple"), "food")
+	_add_to_test_tree(card)
+	var selections: Array[String] = []
+	var details: Array[String] = []
+	var dismissals: Array[String] = []
+	card.selected.connect(func(item_id: String) -> void: selections.append(item_id))
+	card.detail_requested.connect(func(payload: Dictionary, _rect: Rect2, pinned: bool) -> void:
+		details.append("%s:%s" % [String(payload.get("id", "")), str(pinned)])
+	)
+	card.detail_dismissed.connect(func(item_id: String) -> void: dismissals.append(item_id))
+	assert_eq(card.long_press_timer.wait_time, 0.48)
+
+	card._on_gui_input(_touch_event(true, Vector2(20, 20)))
+	card._on_gui_input(_touch_event(false, Vector2(24, 22)))
+	assert_eq(selections, ["apple"], "a short tap should select exactly once")
+
+	card._on_gui_input(_touch_event(true, Vector2(20, 20)))
+	card._on_gui_input(_drag_event(Vector2(72, 20)))
+	card._on_gui_input(_touch_event(false, Vector2(72, 20)))
+	assert_eq(selections, ["apple"], "a swipe must scroll without selecting")
+
+	card._on_gui_input(_touch_event(true, Vector2(20, 20)))
+	card._on_long_press_timeout()
+	assert_eq(details, ["apple:false"], "long press should mirror an unpinned desktop hover")
+	card._on_gui_input(_touch_event(false, Vector2(20, 20)))
+	assert_eq(selections, ["apple"], "long press must not also select")
+	assert_eq(dismissals, ["apple"], "releasing a long press should dismiss its preview")
+
+	var row := TakeoutRowScene.instantiate() as TakeoutFoodRowCardV2
+	row.configure(GameDataScript.get_food("sandwich"), "food")
+	_add_to_test_tree(row)
+	assert_eq(row.long_press_timer.wait_time, 0.48)
 
 
 func test_v2_root_scene_starts_at_breakfast_source() -> void:
@@ -431,6 +482,25 @@ func _cash_options(meal_label: String, fee: int = 0) -> Dictionary:
 		"payment_mode": "cash",
 		"meal_label": meal_label,
 	}
+
+
+func _assert_scroll_contract(scroll: ScrollContainer, horizontal: bool) -> void:
+	assert_eq(scroll.scroll_deadzone, 24)
+	assert_eq(scroll.horizontal_scroll_mode, 3 if horizontal else 0)
+	assert_eq(scroll.vertical_scroll_mode, 0 if horizontal else 3)
+
+
+func _touch_event(pressed: bool, position: Vector2) -> InputEventScreenTouch:
+	var event := InputEventScreenTouch.new()
+	event.pressed = pressed
+	event.position = position
+	return event
+
+
+func _drag_event(position: Vector2) -> InputEventScreenDrag:
+	var event := InputEventScreenDrag.new()
+	event.position = position
+	return event
 
 
 func _add_to_test_tree(node: Node) -> void:

@@ -244,7 +244,11 @@ func _disabled_reason(food_id: String) -> String:
 		return "已经放满了，先移出一样。"
 	if _payment_mode == "stock" and _card_stock(food_id) <= 0:
 		return "柜子里已经没有了。"
-	if _balance >= 0 and _selection_total() + int(food.get("cost", 0)) > _balance:
+	if (
+		_payment_mode != "stock"
+		and _balance >= 0
+		and _selection_total() + int(food.get("cost", 0)) > _balance
+	):
 		return "余额不够，再换一样吧。"
 	return base_reason
 
