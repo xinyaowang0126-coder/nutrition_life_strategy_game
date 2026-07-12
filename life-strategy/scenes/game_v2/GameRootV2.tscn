@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://dhmfwqcpyw68a" path="res://scripts/ui_v2/GameRootV2.gd" id="2_vkrue"]
 [ext_resource type="PackedScene" uid="uid://dvqv5q3midb81" path="res://scenes/game_v2/components/CharacterHUD.tscn" id="3_vkrue"]
 [ext_resource type="PackedScene" uid="uid://blrnkwlhh2ct2" path="res://scenes/game_v2/components/ToastFeedV2.tscn" id="4_4rjd0"]
+[ext_resource type="FontFile" uid="uid://bwr015fuhqxje" path="res://assets/fonts/NotoSansCJKsc-Bold.otf" id="4_vkrue"]
 [ext_resource type="PackedScene" uid="uid://bi8i7mbk8bsla" path="res://scenes/game_v2/components/StickyNotePopup.tscn" id="5_s3rtf"]
 [ext_resource type="PackedScene" uid="uid://cobi5u3x8l5q1" path="res://scenes/game_v2/components/DailySummaryPopup.tscn" id="6_1k0vw"]
 
@@ -107,6 +108,7 @@ mouse_filter = 2
 
 [node name="DayLabel" type="Label" parent="HUD/HUDRoot/TopSafeArea/TopHUD/DayTag" unique_id=1816485670]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("4_vkrue")
 theme_override_font_sizes/font_size = 28
 text = "第 1 天 / 第 7 天"
 horizontal_alignment = 1
@@ -124,6 +126,7 @@ mouse_filter = 2
 
 [node name="PhaseLabel" type="Label" parent="HUD/HUDRoot/TopSafeArea/TopHUD/PhaseTag" unique_id=326532671]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("4_vkrue")
 theme_override_font_sizes/font_size = 22
 text = "早餐"
 horizontal_alignment = 1
@@ -136,6 +139,7 @@ mouse_filter = 2
 
 [node name="BalanceLabel" type="Label" parent="HUD/HUDRoot/TopSafeArea/TopHUD/BalanceChip" unique_id=832591117]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("4_vkrue")
 theme_override_font_sizes/font_size = 24
 text = "¥120"
 horizontal_alignment = 1
@@ -144,6 +148,7 @@ vertical_alignment = 1
 [node name="MenuButton" type="Button" parent="HUD/HUDRoot/TopSafeArea/TopHUD" unique_id=2008087635]
 custom_minimum_size = Vector2(106, 54)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("4_vkrue")
 theme_override_font_sizes/font_size = 20
 text = "菜单"
 
@@ -164,7 +169,6 @@ mouse_filter = 2
 
 [node name="CharacterHUD" parent="HUD/HUDRoot/CharacterAnchor/CharacterSlot" unique_id=1909520872 instance=ExtResource("3_vkrue")]
 layout_mode = 2
-mouse_filter = 2
 
 [node name="ToastAnchor" type="Control" parent="HUD/HUDRoot" unique_id=280536838]
 anchors_preset = 0
@@ -180,7 +184,6 @@ mouse_filter = 2
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-mouse_filter = 2
 
 [node name="DetailLayer" type="Control" parent="HUD/HUDRoot" unique_id=535183461]
 anchors_preset = 0

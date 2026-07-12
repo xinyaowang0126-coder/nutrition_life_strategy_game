@@ -129,12 +129,12 @@ func _apply_stats(animate: bool, previous: Dictionary = {}) -> void:
 	}
 	var prefixes := {
 		"stability": "",
-		"energy": "⚡ 精力 ",
-		"mood": "♥ 心情 ",
-		"satiety": "◉ 饱腹 ",
-		"stress": "‼ 压力 ",
-		"diet_burden": "◆ 负担 ",
-		"study_progress": "✎ 复习 ",
+		"energy": "精力 ",
+		"mood": "心情 ",
+		"satiety": "饱腹 ",
+		"stress": "压力 ",
+		"diet_burden": "负担 ",
+		"study_progress": "复习 ",
 	}
 	var changed_labels: Array[Label] = []
 	for key: String in labels:

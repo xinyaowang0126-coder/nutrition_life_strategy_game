@@ -29,9 +29,11 @@ var _button_text := ""
 var _ready_finished := false
 var _hovered := false
 var _last_touch_msec := -1000
+var _emulated_pointer_until_msec := -1000
 var _touch_active := false
 var _touch_cancelled := false
 var _long_press_triggered := false
+var _touch_index := -1
 var _touch_start_position := Vector2.ZERO
 var _motion_tween: Tween
 
@@ -315,7 +317,7 @@ func _dismiss_detail() -> void:
 
 
 func _on_hover_started() -> void:
-	if _touch_active or Time.get_ticks_msec() - _last_touch_msec <= 300:
+	if _should_ignore_pointer_preview():
 		return
 	_hovered = true
 	z_index = 4
@@ -331,7 +333,7 @@ func _on_hover_ended() -> void:
 
 
 func _on_focus_entered() -> void:
-	if _touch_active or Time.get_ticks_msec() - _last_touch_msec <= 300:
+	if _should_ignore_pointer_preview():
 		return
 	request_detail(false)
 	_animate_scale(Vector2(1.035, 1.035))
@@ -346,21 +348,28 @@ func _on_gui_input(event: InputEvent) -> void:
 	if event is InputEventScreenTouch:
 		var touch := event as InputEventScreenTouch
 		if touch.pressed:
+			if _touch_active and touch.index != _touch_index:
+				return
 			_touch_active = true
 			_touch_cancelled = false
 			_long_press_triggered = false
+			_touch_index = touch.index
 			_touch_start_position = touch.position
 			long_press_timer.start()
 		else:
+			if not _touch_active or touch.index != _touch_index:
+				return
 			var is_tap := (
 				_touch_active
 				and not _touch_cancelled
 				and not _long_press_triggered
+				and not touch.canceled
 				and touch.position.distance_to(_touch_start_position) <= TOUCH_TAP_SLOP
 			)
 			var was_long_press := _long_press_triggered
 			long_press_timer.stop()
 			_touch_active = false
+			_touch_index = -1
 			_last_touch_msec = Time.get_ticks_msec()
 			if was_long_press:
 				accept_event()
@@ -373,7 +382,11 @@ func _on_gui_input(event: InputEvent) -> void:
 			_long_press_triggered = false
 	elif event is InputEventScreenDrag:
 		var drag := event as InputEventScreenDrag
-		if _touch_active and drag.position.distance_to(_touch_start_position) > TOUCH_TAP_SLOP:
+		if (
+			_touch_active
+			and drag.index == _touch_index
+			and drag.position.distance_to(_touch_start_position) > TOUCH_TAP_SLOP
+		):
 			_touch_cancelled = true
 			long_press_timer.stop()
 			if _long_press_triggered:
@@ -383,10 +396,11 @@ func _on_gui_input(event: InputEvent) -> void:
 				_animate_scale(_target_scale())
 	elif event is InputEventMouseButton:
 		var mouse := event as InputEventMouseButton
+		if mouse.device == InputEvent.DEVICE_ID_EMULATION:
+			return
 		if mouse.button_index == MOUSE_BUTTON_LEFT and not mouse.pressed:
-			if Time.get_ticks_msec() - _last_touch_msec > 250:
-				accept_event()
-				_emit_selected()
+			accept_event()
+			_emit_selected()
 	elif event is InputEventKey:
 		var key := event as InputEventKey
 		if key.pressed and not key.echo and key.is_action_pressed("ui_accept"):
@@ -401,6 +415,23 @@ func _on_long_press_timeout() -> void:
 	z_index = 5
 	request_detail(false)
 	_animate_scale(Vector2(1.045, 1.045), 0.12)
+
+
+func _input(event: InputEvent) -> void:
+	# Web touch generates an emulated mouse stream before the raw touch stream.
+	# Remember that source before GUI hover/focus callbacks run so a finger-down
+	# cannot masquerade as desktop hover.
+	if event.device == InputEvent.DEVICE_ID_EMULATION:
+		_emulated_pointer_until_msec = Time.get_ticks_msec() + 500
+
+
+func _should_ignore_pointer_preview() -> bool:
+	var now := Time.get_ticks_msec()
+	return (
+		_touch_active
+		or now <= _emulated_pointer_until_msec
+		or now - _last_touch_msec <= 300
+	)
 
 
 func _update_pivot() -> void:

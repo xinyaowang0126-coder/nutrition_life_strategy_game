@@ -55,9 +55,9 @@ vertical_alignment = 1
 
 [node name="PhoneShell" type="PanelContainer" parent="Layout" unique_id=1706817611]
 layout_mode = 0
-anchor_left = 0.5
+anchor_left = 0.58
 anchor_top = 0.5
-anchor_right = 0.5
+anchor_right = 0.58
 anchor_bottom = 0.5
 offset_left = -240.0
 offset_top = -330.0
@@ -116,7 +116,7 @@ layout_mode = 2
 size_flags_vertical = 3
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 3
-scroll_deadzone = 24
+scroll_deadzone = 18
 
 [node name="FoodList" type="VBoxContainer" parent="Layout/PhoneShell/PhoneMargin/Phone/MenuScroll" unique_id=453062056]
 layout_mode = 2
@@ -164,9 +164,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 320.0
+offset_left = 430.0
 offset_top = -80.0
-offset_right = 560.0
+offset_right = 690.0
 offset_bottom = 100.0
 mouse_filter = 2
 

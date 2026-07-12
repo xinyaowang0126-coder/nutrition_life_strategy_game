@@ -52,7 +52,7 @@ anchor_right = 0.92
 anchor_bottom = 0.72
 horizontal_scroll_mode = 3
 vertical_scroll_mode = 0
-scroll_deadzone = 24
+scroll_deadzone = 18
 
 [node name="Choices" type="HBoxContainer" parent="Layout/SleepRail" unique_id=1642248479]
 layout_mode = 2

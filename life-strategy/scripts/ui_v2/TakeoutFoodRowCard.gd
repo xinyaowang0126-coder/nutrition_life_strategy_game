@@ -24,9 +24,11 @@ var _disabled_reason := ""
 var _button_text := "加购"
 var _ready_finished := false
 var _last_touch_msec := -1000
+var _emulated_pointer_until_msec := -1000
 var _touch_active := false
 var _touch_cancelled := false
 var _long_press_triggered := false
+var _touch_index := -1
 var _touch_start_position := Vector2.ZERO
 var _motion_tween: Tween
 
@@ -38,7 +40,7 @@ func _ready() -> void:
 	_make_surface_clickable()
 	select_button.pressed.connect(_emit_selected)
 	info_button.pressed.connect(func() -> void: request_detail(true))
-	info_button.focus_entered.connect(func() -> void: request_detail(false))
+	info_button.focus_entered.connect(_request_preview_detail)
 	info_button.focus_exited.connect(func() -> void: detail_dismissed.emit(item_id))
 	long_press_timer.timeout.connect(_on_long_press_timeout)
 	mouse_entered.connect(_on_hover_started)
@@ -163,7 +165,7 @@ func _emit_selected() -> void:
 
 
 func _on_hover_started() -> void:
-	if _touch_active or Time.get_ticks_msec() - _last_touch_msec <= 300:
+	if _should_ignore_pointer_preview():
 		return
 	z_index = 4
 	request_detail(false)
@@ -180,21 +182,28 @@ func _on_gui_input(event: InputEvent) -> void:
 	if event is InputEventScreenTouch:
 		var touch := event as InputEventScreenTouch
 		if touch.pressed:
+			if _touch_active and touch.index != _touch_index:
+				return
 			_touch_active = true
 			_touch_cancelled = false
 			_long_press_triggered = false
+			_touch_index = touch.index
 			_touch_start_position = touch.position
 			long_press_timer.start()
 		else:
+			if not _touch_active or touch.index != _touch_index:
+				return
 			var is_tap := (
 				_touch_active
 				and not _touch_cancelled
 				and not _long_press_triggered
+				and not touch.canceled
 				and touch.position.distance_to(_touch_start_position) <= TOUCH_TAP_SLOP
 			)
 			var was_long_press := _long_press_triggered
 			long_press_timer.stop()
 			_touch_active = false
+			_touch_index = -1
 			_last_touch_msec = Time.get_ticks_msec()
 			if was_long_press:
 				accept_event()
@@ -207,7 +216,11 @@ func _on_gui_input(event: InputEvent) -> void:
 			_long_press_triggered = false
 	elif event is InputEventScreenDrag:
 		var drag := event as InputEventScreenDrag
-		if _touch_active and drag.position.distance_to(_touch_start_position) > TOUCH_TAP_SLOP:
+		if (
+			_touch_active
+			and drag.index == _touch_index
+			and drag.position.distance_to(_touch_start_position) > TOUCH_TAP_SLOP
+		):
 			_touch_cancelled = true
 			long_press_timer.stop()
 			if _long_press_triggered:
@@ -217,7 +230,9 @@ func _on_gui_input(event: InputEvent) -> void:
 				_animate_scale(Vector2(1.018, 1.018) if _selected else Vector2.ONE, 0.12)
 	elif event is InputEventMouseButton:
 		var mouse := event as InputEventMouseButton
-		if mouse.button_index == MOUSE_BUTTON_LEFT and not mouse.pressed and Time.get_ticks_msec() - _last_touch_msec > 250:
+		if mouse.device == InputEvent.DEVICE_ID_EMULATION:
+			return
+		if mouse.button_index == MOUSE_BUTTON_LEFT and not mouse.pressed:
 			accept_event()
 			_emit_selected()
 
@@ -229,6 +244,25 @@ func _on_long_press_timeout() -> void:
 	z_index = 5
 	request_detail(false)
 	_animate_scale(Vector2(1.028, 1.028), 0.12)
+
+
+func _input(event: InputEvent) -> void:
+	if event.device == InputEvent.DEVICE_ID_EMULATION:
+		_emulated_pointer_until_msec = Time.get_ticks_msec() + 500
+
+
+func _should_ignore_pointer_preview() -> bool:
+	var now := Time.get_ticks_msec()
+	return (
+		_touch_active
+		or now <= _emulated_pointer_until_msec
+		or now - _last_touch_msec <= 300
+	)
+
+
+func _request_preview_detail() -> void:
+	if not _should_ignore_pointer_preview():
+		request_detail(false)
 
 
 func _animate_scale(target: Vector2, duration: float) -> void:

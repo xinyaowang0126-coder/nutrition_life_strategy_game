@@ -5,6 +5,7 @@
 
 [node name="TakeoutFoodRowCard" type="PanelContainer" unique_id=443654306]
 custom_minimum_size = Vector2(520, 146)
+mouse_filter = 1
 theme = ExtResource("1_5j6qh")
 script = ExtResource("2_m88vl")
 

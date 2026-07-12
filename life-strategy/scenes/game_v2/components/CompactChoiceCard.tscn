@@ -6,6 +6,7 @@
 [node name="CompactChoiceCard" type="PanelContainer" unique_id=396501926]
 custom_minimum_size = Vector2(210, 270)
 size_flags_vertical = 4
+mouse_filter = 1
 theme = ExtResource("1_1mput")
 script = ExtResource("2_v17uy")
 

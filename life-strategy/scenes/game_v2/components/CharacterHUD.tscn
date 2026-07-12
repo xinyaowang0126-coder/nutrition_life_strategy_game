@@ -88,7 +88,7 @@ theme_override_constants/separation = 8
 [node name="StabilityIcon" type="Label" parent="StatusBoard/Margin/VBox/StabilityRow" unique_id=331516957]
 layout_mode = 2
 theme_override_font_sizes/font_size = 26
-text = "◈"
+text = "◆"
 
 [node name="StabilityLabel" type="Label" parent="StatusBoard/Margin/VBox/StabilityRow" unique_id=1846728774]
 layout_mode = 2
@@ -117,7 +117,7 @@ layout_mode = 2
 [node name="Value" type="Label" parent="StatusBoard/Margin/VBox/StatGrid/EnergyChip" unique_id=1481239642]
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
-text = "⚡ 52"
+text = "精力 52"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -128,7 +128,7 @@ layout_mode = 2
 [node name="Value" type="Label" parent="StatusBoard/Margin/VBox/StatGrid/MoodChip" unique_id=1998757399]
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
-text = "♥ 55"
+text = "心情 55"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -139,7 +139,7 @@ layout_mode = 2
 [node name="Value" type="Label" parent="StatusBoard/Margin/VBox/StatGrid/SatietyChip" unique_id=265415250]
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
-text = "● 58"
+text = "饱腹 58"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -150,7 +150,7 @@ layout_mode = 2
 [node name="Value" type="Label" parent="StatusBoard/Margin/VBox/StatGrid/StressChip" unique_id=931143315]
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
-text = "▲ 48"
+text = "压力 48"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -161,7 +161,7 @@ layout_mode = 2
 [node name="Value" type="Label" parent="StatusBoard/Margin/VBox/StatGrid/BurdenChip" unique_id=323946094]
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
-text = "◆ 24"
+text = "负担 24"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -172,7 +172,7 @@ layout_mode = 2
 [node name="Value" type="Label" parent="StatusBoard/Margin/VBox/StatGrid/StudyChip" unique_id=302654922]
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
-text = "✎ 0"
+text = "复习 0"
 horizontal_alignment = 1
 vertical_alignment = 1
 

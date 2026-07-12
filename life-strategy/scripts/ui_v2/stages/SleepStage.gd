@@ -19,7 +19,6 @@ var _options: Dictionary = {}
 var _cards_by_id: Dictionary = {}
 var _ready_finished := false
 var _has_setup := false
-var _scrolling := false
 
 
 func setup(items: Array, options: Dictionary = {}) -> void:
@@ -36,7 +35,6 @@ func setup(items: Array, options: Dictionary = {}) -> void:
 
 
 func _ready() -> void:
-	_bind_scroll_guard()
 	_ready_finished = true
 	if _has_setup:
 		_apply_setup()
@@ -67,30 +65,13 @@ func _apply_setup() -> void:
 
 
 func _on_sleep_pressed(sleep_id: String) -> void:
-	if _is_scroll_gesture() or not _cards_by_id.has(sleep_id):
+	if not _cards_by_id.has(sleep_id):
 		return
 	var card := _cards_by_id[sleep_id] as CompactChoiceCardV2
 	if not is_instance_valid(card):
 		return
 	card.set_selected(true, true)
 	sleep_selected.emit(sleep_id)
-
-
-func _bind_scroll_guard() -> void:
-	if sleep_scroll.has_signal("scroll_started"):
-		sleep_scroll.connect("scroll_started", func() -> void:
-			_scrolling = true
-		)
-	if sleep_scroll.has_signal("scroll_ended"):
-		sleep_scroll.connect("scroll_ended", func() -> void:
-			_scrolling = false
-		)
-
-
-func _is_scroll_gesture() -> bool:
-	# CompactChoiceCard performs its own touch-slop check.  A recent scrollbar
-	# value change is not proof of a drag (hover scaling can cause one).
-	return _scrolling
 
 
 func _forward_detail(payload: Dictionary, anchor_rect: Rect2, pinned: bool) -> void:

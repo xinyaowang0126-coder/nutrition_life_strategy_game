@@ -55,10 +55,10 @@ vertical_alignment = 1
 
 [node name="ShelfPanel" type="PanelContainer" parent="Layout" unique_id=744270624]
 layout_mode = 0
-anchor_left = 0.12
+anchor_left = 0.2
 anchor_top = 0.15
-anchor_right = 0.88
-anchor_bottom = 0.67
+anchor_right = 0.91
+anchor_bottom = 0.63
 
 [node name="ShelfMargin" type="MarginContainer" parent="Layout/ShelfPanel" unique_id=1193075844]
 layout_mode = 2
@@ -97,7 +97,7 @@ layout_mode = 2
 size_flags_vertical = 3
 horizontal_scroll_mode = 3
 vertical_scroll_mode = 0
-scroll_deadzone = 24
+scroll_deadzone = 18
 
 [node name="Products" type="HBoxContainer" parent="Layout/ShelfPanel/ShelfMargin/Shelf/ShelfScroll" unique_id=1840016006]
 layout_mode = 2
@@ -106,17 +106,17 @@ theme_override_constants/separation = 18
 
 [node name="BasketPanel" type="PanelContainer" parent="Layout" unique_id=673132258]
 layout_mode = 0
-anchor_left = 0.24
-anchor_top = 0.7
-anchor_right = 0.76
-anchor_bottom = 0.93
+anchor_left = 0.43
+anchor_top = 0.67
+anchor_right = 0.8
+anchor_bottom = 0.91
 
 [node name="BasketMargin" type="MarginContainer" parent="Layout/BasketPanel" unique_id=105124089]
 layout_mode = 2
-theme_override_constants/margin_left = 24
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 24
-theme_override_constants/margin_bottom = 16
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 14
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 14
 
 [node name="Basket" type="VBoxContainer" parent="Layout/BasketPanel/BasketMargin" unique_id=2137178033]
 layout_mode = 2
@@ -148,11 +148,11 @@ text = "合计 ¥0"
 
 [node name="SelectedSlots" type="HBoxContainer" parent="Layout/BasketPanel/BasketMargin/Basket" unique_id=1331963704]
 layout_mode = 2
-theme_override_constants/separation = 12
+theme_override_constants/separation = 10
 alignment = 1
 
 [node name="Slot1" type="PanelContainer" parent="Layout/BasketPanel/BasketMargin/Basket/SelectedSlots" unique_id=366300031]
-custom_minimum_size = Vector2(130, 76)
+custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
 
 [node name="Empty" type="Label" parent="Layout/BasketPanel/BasketMargin/Basket/SelectedSlots/Slot1" unique_id=1277292786]
@@ -171,7 +171,7 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="Slot2" type="PanelContainer" parent="Layout/BasketPanel/BasketMargin/Basket/SelectedSlots" unique_id=1078712782]
-custom_minimum_size = Vector2(130, 76)
+custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
 
 [node name="Empty" type="Label" parent="Layout/BasketPanel/BasketMargin/Basket/SelectedSlots/Slot2" unique_id=123409933]
@@ -190,7 +190,7 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="Slot3" type="PanelContainer" parent="Layout/BasketPanel/BasketMargin/Basket/SelectedSlots" unique_id=1873908972]
-custom_minimum_size = Vector2(130, 76)
+custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
 
 [node name="Empty" type="Label" parent="Layout/BasketPanel/BasketMargin/Basket/SelectedSlots/Slot3" unique_id=806139777]
@@ -209,7 +209,7 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="Slot4" type="PanelContainer" parent="Layout/BasketPanel/BasketMargin/Basket/SelectedSlots" unique_id=1063574958]
-custom_minimum_size = Vector2(130, 76)
+custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
 
 [node name="Empty" type="Label" parent="Layout/BasketPanel/BasketMargin/Basket/SelectedSlots/Slot4" unique_id=690552431]
@@ -228,7 +228,7 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="Slot5" type="PanelContainer" parent="Layout/BasketPanel/BasketMargin/Basket/SelectedSlots" unique_id=1294745697]
-custom_minimum_size = Vector2(130, 76)
+custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
 
 [node name="Empty" type="Label" parent="Layout/BasketPanel/BasketMargin/Basket/SelectedSlots/Slot5" unique_id=1320840588]

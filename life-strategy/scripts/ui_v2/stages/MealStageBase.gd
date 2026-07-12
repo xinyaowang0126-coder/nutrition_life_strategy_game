@@ -23,7 +23,6 @@ var _payment_mode := "cash"
 var _meal_label := "这一顿"
 var _ready_finished := false
 var _has_setup := false
-var _scrolling := false
 
 
 func setup(foods: Array, selected_ids: Array = [], options: Dictionary = {}) -> void:
@@ -85,12 +84,11 @@ func _bind_meal_controls(
 	back_button: Button,
 	skip_button: Button,
 	confirm_button: Button,
-	scroll: ScrollContainer
+	_scroll: ScrollContainer
 ) -> void:
 	back_button.pressed.connect(_emit_back)
 	skip_button.pressed.connect(_emit_skip)
 	confirm_button.pressed.connect(_emit_confirm)
-	_bind_scroll_guard(scroll)
 
 
 func _finish_ready() -> void:
@@ -213,7 +211,7 @@ func _food_preview_texture(food: Dictionary) -> Texture2D:
 
 
 func _on_card_selected(food_id: String) -> void:
-	if _is_scroll_gesture() or not _foods_by_id.has(food_id):
+	if not _foods_by_id.has(food_id):
 		return
 	var was_selected := _selected_ids.has(food_id)
 	if was_selected:
@@ -287,28 +285,6 @@ func _selected_names() -> Array[String]:
 		var food: Dictionary = _foods_by_id.get(food_id, {})
 		result.append(String(food.get("name", food_id)))
 	return result
-
-
-func _bind_scroll_guard(scroll: ScrollContainer) -> void:
-	if scroll == null:
-		return
-	if scroll.has_signal("scroll_started"):
-		scroll.connect("scroll_started", Callable(self, "_on_scroll_started"))
-	if scroll.has_signal("scroll_ended"):
-		scroll.connect("scroll_ended", Callable(self, "_on_scroll_ended"))
-func _on_scroll_started() -> void:
-	_scrolling = true
-
-
-func _on_scroll_ended() -> void:
-	_scrolling = false
-
-
-func _is_scroll_gesture() -> bool:
-	# Each card already cancels a tap after an 18 px drag.  Scroll-bar value
-	# changes can also be caused by hover scaling/layout, so using a time window
-	# here made the first ordinary click get ignored on desktop and Web.
-	return _scrolling
 
 
 func _emit_back() -> void:

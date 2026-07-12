@@ -22,7 +22,6 @@ var _cards_by_id: Dictionary = {}
 var _options: Dictionary = {}
 var _ready_finished := false
 var _has_setup := false
-var _scrolling := false
 
 
 func setup(items: Array, options: Dictionary = {}) -> void:
@@ -50,7 +49,6 @@ func set_usage(used: int, maximum: int, used_names: Array = [], water_count: int
 
 func _ready() -> void:
 	skip_button.pressed.connect(func() -> void: skip_requested.emit())
-	_bind_scroll_guard()
 	_ready_finished = true
 	if _has_setup:
 		_apply_setup()
@@ -134,28 +132,13 @@ func _action_preview_texture(action: Dictionary) -> Texture2D:
 
 
 func _on_action_pressed(action_id: String) -> void:
-	if _is_scroll_gesture() or not _cards_by_id.has(action_id):
+	if not _cards_by_id.has(action_id):
 		return
 	var card := _cards_by_id[action_id] as CompactChoiceCardV2
 	if not is_instance_valid(card):
 		return
 	card.set_selected(true, true)
 	action_selected.emit(action_id)
-
-
-func _bind_scroll_guard() -> void:
-	if action_scroll.has_signal("scroll_started"):
-		action_scroll.connect("scroll_started", func() -> void:
-			_scrolling = true
-		)
-	if action_scroll.has_signal("scroll_ended"):
-		action_scroll.connect("scroll_ended", func() -> void:
-			_scrolling = false
-		)
-
-
-func _is_scroll_gesture() -> bool:
-	return _scrolling
 
 
 func _forward_detail(payload: Dictionary, anchor_rect: Rect2, pinned: bool) -> void:

@@ -914,9 +914,9 @@ func _apply_shell_profile() -> void:
 		toast_anchor.offset_right = -18.0
 		toast_anchor.offset_bottom = 360.0
 	else:
-		character_anchor.offset_left = 12.0
+		character_anchor.offset_left = -32.0
 		character_anchor.offset_top = -690.0
-		character_anchor.offset_right = 780.0
+		character_anchor.offset_right = 736.0
 		character_anchor.offset_bottom = 0.0
 		character_hud.pivot_offset = Vector2.ZERO
 		character_hud.scale = Vector2.ONE

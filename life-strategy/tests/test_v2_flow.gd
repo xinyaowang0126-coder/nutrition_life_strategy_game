@@ -160,10 +160,6 @@ func test_every_v2_stage_reaches_ready_with_real_data() -> void:
 	assert_true(cafeteria_preview.texture != null, "cafeteria tray preview must have a texture")
 	assert_false((cafeteria_preview.get_parent().get_node("Empty") as Label).visible)
 	_assert_scroll_contract(cafeteria.get_node("FoodRail") as ScrollContainer, true)
-	assert_false(cafeteria._is_scroll_gesture())
-	cafeteria._scrolling = true
-	assert_true(cafeteria._is_scroll_gesture(), "an active drag must suppress card selection")
-	cafeteria._scrolling = false
 
 	var takeout := TakeoutStageScene.instantiate() as TakeoutMealStageV2
 	takeout.setup(_foods(["sandwich", "bubble_tea"]), [], _cash_options("午餐", 3))
@@ -199,7 +195,6 @@ func test_every_v2_stage_reaches_ready_with_real_data() -> void:
 	_add_to_test_tree(dorm)
 	assert_true(dorm.is_node_ready(), "dorm stage must enter the tree ready")
 	assert_eq(dorm._cards_by_id.size(), 2)
-	assert_false(dorm._is_scroll_gesture(), "dorm stage must not start in a scrolling state")
 	assert_eq(dorm._disabled_reason("oatmeal"), "", "available dorm stock must be selectable")
 	dorm._on_card_selected("oatmeal")
 	assert_eq(dorm._selected_ids, ["oatmeal"], "dorm tap must add available stock to the bowl")
@@ -252,13 +247,16 @@ func test_touch_contract_tap_swipe_and_long_press() -> void:
 	)
 	card.detail_dismissed.connect(func(item_id: String) -> void: dismissals.append(item_id))
 	assert_eq(card.long_press_timer.wait_time, 0.48)
+	assert_eq(card.mouse_filter, Control.MOUSE_FILTER_PASS)
 
 	card._on_gui_input(_touch_event(true, Vector2(20, 20)))
+	card._on_gui_input(_mouse_event(false, Vector2(24, 22), InputEvent.DEVICE_ID_EMULATION))
 	card._on_gui_input(_touch_event(false, Vector2(24, 22)))
-	assert_eq(selections, ["apple"], "a short tap should select exactly once")
+	assert_eq(selections, ["apple"], "emulated mouse plus touch must select exactly once")
 
 	card._on_gui_input(_touch_event(true, Vector2(20, 20)))
 	card._on_gui_input(_drag_event(Vector2(72, 20)))
+	card._on_gui_input(_mouse_event(false, Vector2(72, 20), InputEvent.DEVICE_ID_EMULATION))
 	card._on_gui_input(_touch_event(false, Vector2(72, 20)))
 	assert_eq(selections, ["apple"], "a swipe must scroll without selecting")
 
@@ -268,11 +266,20 @@ func test_touch_contract_tap_swipe_and_long_press() -> void:
 	card._on_gui_input(_touch_event(false, Vector2(20, 20)))
 	assert_eq(selections, ["apple"], "long press must not also select")
 	assert_eq(dismissals, ["apple"], "releasing a long press should dismiss its preview")
+	card._on_gui_input(_mouse_event(false, Vector2(20, 20), 0))
+	assert_eq(selections, ["apple", "apple"], "a physical mouse release must still select")
 
 	var row := TakeoutRowScene.instantiate() as TakeoutFoodRowCardV2
 	row.configure(GameDataScript.get_food("sandwich"), "food")
 	_add_to_test_tree(row)
 	assert_eq(row.long_press_timer.wait_time, 0.48)
+	assert_eq(row.mouse_filter, Control.MOUSE_FILTER_PASS)
+	var row_selections: Array[String] = []
+	row.selected.connect(func(item_id: String) -> void: row_selections.append(item_id))
+	row._on_gui_input(_touch_event(true, Vector2(30, 30)))
+	row._on_gui_input(_mouse_event(false, Vector2(30, 30), InputEvent.DEVICE_ID_EMULATION))
+	row._on_gui_input(_touch_event(false, Vector2(30, 30)))
+	assert_eq(row_selections, ["sandwich"], "takeout rows must also ignore emulated mouse selection")
 
 
 func test_v2_root_scene_starts_at_breakfast_source() -> void:
@@ -283,6 +290,43 @@ func test_v2_root_scene_starts_at_breakfast_source() -> void:
 	assert_eq(game.phase, "breakfast_source")
 	assert_eq(game.day_label.text, "第 1 天 / 第 7 天")
 	assert_true(game._active_stage is MealSourceStageV2)
+	var hud_font_path := "res://assets/fonts/NotoSansCJKsc-Bold.otf"
+	for node_path in [
+		"HUD/HUDRoot/TopSafeArea/TopHUD/DayTag/DayLabel",
+		"HUD/HUDRoot/TopSafeArea/TopHUD/PhaseTag/PhaseLabel",
+		"HUD/HUDRoot/TopSafeArea/TopHUD/BalanceChip/BalanceLabel",
+		"HUD/HUDRoot/TopSafeArea/TopHUD/MenuButton",
+	]:
+		var top_control := game.get_node(node_path) as Control
+		assert_eq(
+			top_control.get_theme_font("font").resource_path,
+			hud_font_path,
+			"top HUD fonts must be explicit because CanvasLayer breaks theme inheritance"
+		)
+
+
+func test_desktop_stage_panels_leave_character_safe_zone() -> void:
+	var cafeteria := CafeteriaStageScene.instantiate() as CafeteriaMealStageV2
+	assert_true(is_equal_approx((cafeteria.get_node("TrayDropZone") as Control).anchor_left, 0.44))
+	assert_eq(
+		(cafeteria.get_node("TrayDropZone/TrayMargin/VBox/SelectedSlots/Slot1") as Control).custom_minimum_size,
+		Vector2(132, 170)
+	)
+	var takeout := TakeoutStageScene.instantiate() as TakeoutMealStageV2
+	assert_true(is_equal_approx((takeout.get_node("Layout/PhoneShell") as Control).anchor_left, 0.58))
+	var convenience := ConvenienceStageScene.instantiate() as ConvenienceMealStageV2
+	assert_true(is_equal_approx((convenience.get_node("Layout/BasketPanel") as Control).anchor_left, 0.43))
+	var dorm := DormStageScene.instantiate() as DormPantryStageV2
+	assert_true(is_equal_approx((dorm.get_node("Layout/PantryPanel") as Control).anchor_bottom, 0.70))
+	var action := ActionStageScene.instantiate() as ActionStageV2
+	assert_true(is_equal_approx((action.get_node("Layout/PlannerNote") as Control).anchor_top, 0.68))
+	assert_eq(
+		(action.get_node("Layout/PlannerNote/PlannerMargin/Planner/UsedSlots/Slot1") as Control).custom_minimum_size,
+		Vector2(150, 120),
+		"desktop action previews must remain legible"
+	)
+	for node in [cafeteria, takeout, convenience, dorm, action]:
+		node.free()
 
 
 func test_mobile_baseline_is_720_by_1280_without_forcing_desktop_window() -> void:
@@ -485,21 +529,38 @@ func _cash_options(meal_label: String, fee: int = 0) -> Dictionary:
 
 
 func _assert_scroll_contract(scroll: ScrollContainer, horizontal: bool) -> void:
-	assert_eq(scroll.scroll_deadzone, 24)
+	assert_eq(scroll.scroll_deadzone, 18)
 	assert_eq(scroll.horizontal_scroll_mode, 3 if horizontal else 0)
 	assert_eq(scroll.vertical_scroll_mode, 0 if horizontal else 3)
 
 
-func _touch_event(pressed: bool, position: Vector2) -> InputEventScreenTouch:
+func _touch_event(
+	pressed: bool,
+	position: Vector2,
+	index: int = 0,
+	canceled: bool = false
+) -> InputEventScreenTouch:
 	var event := InputEventScreenTouch.new()
 	event.pressed = pressed
 	event.position = position
+	event.index = index
+	event.canceled = canceled
 	return event
 
 
-func _drag_event(position: Vector2) -> InputEventScreenDrag:
+func _drag_event(position: Vector2, index: int = 0) -> InputEventScreenDrag:
 	var event := InputEventScreenDrag.new()
 	event.position = position
+	event.index = index
+	return event
+
+
+func _mouse_event(pressed: bool, position: Vector2, device: int) -> InputEventMouseButton:
+	var event := InputEventMouseButton.new()
+	event.button_index = MOUSE_BUTTON_LEFT
+	event.pressed = pressed
+	event.position = position
+	event.device = device
 	return event
 
 
