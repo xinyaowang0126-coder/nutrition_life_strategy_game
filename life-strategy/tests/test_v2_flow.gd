@@ -368,6 +368,51 @@ func test_v2_root_scene_starts_at_breakfast_source() -> void:
 		)
 
 
+func test_new_day_popup_uses_live_state_event_rules_and_art() -> void:
+	var game := GameRootV2Scene.instantiate() as GameRootV2
+	_add_to_test_tree(game)
+	assert_true(game.new_day_popup.visible)
+	assert_eq(game.new_day_popup.day_title.text, "第 1 天开始")
+	assert_true(game.new_day_popup.status_image.visible)
+	assert_true(game.new_day_popup.event_image.visible)
+
+	game.day = 5
+	game.current_learning_state = {
+		"id": "clear_focus",
+		"title": "脑子很清醒",
+		"summary": "三餐接住了，昨晚也睡得早。",
+		"study_modifier": 3,
+	}
+	game.current_event = {
+		"id": "mock_exam_notice",
+		"title": "小测提醒",
+		"summary": "群里发来了小测范围。",
+	}
+	game._show_new_day_popup()
+	game.new_day_popup._finish_show()
+	assert_eq(game.new_day_popup.status_title.text, "脑子很清醒")
+	assert_eq(game.new_day_popup.status_effect.text, "每次学习效果 +3")
+	assert_eq(game.new_day_popup.event_title.text, "小测提醒")
+	assert_contains(game.new_day_popup.event_effect.text, "复习收益 +3")
+	assert_eq(
+		game.new_day_popup.status_image.texture.resource_path,
+		"res://assets/generated/ui_v2/day_popup/states/clear_focus.png"
+	)
+	assert_eq(
+		game.new_day_popup.event_image.texture.resource_path,
+		"res://assets/generated/ui_v2/day_popup/events/mock_exam_notice.png"
+	)
+	assert_eq(game.new_day_popup.cards_grid.columns, 2)
+	game.new_day_popup.set_mobile_mode(true)
+	assert_eq(game.new_day_popup.cards_grid.columns, 1)
+	assert_true(
+		game.new_day_popup.paper_host.get_global_rect().encloses(
+			game.new_day_popup.continue_button.get_global_rect()
+		),
+		"new-day continue button must remain inside the modal on mobile"
+	)
+
+
 func test_desktop_stage_panels_leave_character_safe_zone() -> void:
 	var cafeteria := CafeteriaStageScene.instantiate() as CafeteriaMealStageV2
 	assert_true(is_equal_approx((cafeteria.get_node("TrayDropZone") as Control).anchor_left, 0.44))

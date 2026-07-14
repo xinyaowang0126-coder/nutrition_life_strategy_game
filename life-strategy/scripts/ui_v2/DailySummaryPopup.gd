@@ -164,7 +164,10 @@ func _target_popup_size(viewport_size: Vector2) -> Vector2:
 	var desired_width := 672.0 if _mobile_mode else 780.0
 	var desired_height := 0.0
 	if detail_panel.visible:
-		desired_height = 900.0 if ending_layout else 820.0
+		if _mobile_mode:
+			desired_height = 1060.0 if ending_layout else 960.0
+		else:
+			desired_height = 980.0 if ending_layout else 900.0
 	elif ending_layout:
 		desired_height = 700.0 if _mobile_mode else 650.0
 	elif detail_button.visible:

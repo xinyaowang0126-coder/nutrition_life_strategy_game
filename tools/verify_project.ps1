@@ -133,6 +133,8 @@ function Assert-ReleaseConfiguration {
         'res://scenes/game_v2/GameRootV2.tscn',
         'scenes/game_v2/components/*.tscn',
         'scenes/game_v2/stages/*.tscn',
+        'assets/generated/ui_v2/day_popup/states/*.png',
+        'assets/generated/ui_v2/day_popup/events/*.png',
         'scripts/CardDataStore.gd',
         'scripts/GameData.gd',
         'scripts/systems/*.gd',
@@ -195,15 +197,20 @@ function Assert-CleanWebPack {
         "scenes/main_menu/MainMenu",
         "scenes/game_v2/GameRootV2",
         "scenes/game_v2/components/CompactChoiceCard",
+        "scenes/game_v2/components/NewDayPopup",
         "scenes/game_v2/stages/MealSourceStage",
         "scripts/GameData.gd",
         "scripts/systems/MealResolver",
         "scripts/systems/NutritionLedger",
         "scripts/systems/WeeklyEventService",
         "scripts/systems/DayCarryoverService",
+        "scripts/ui_v2/NewDayPopup",
         "scripts/ui_v2/stages/MealStageBase",
         "data/cards/foods.xml",
-        "assets/generated/cards/"
+        "assets/generated/cards/",
+        "assets/generated/ui_v2/day_popup/states/clear_focus",
+        "assets/generated/ui_v2/day_popup/events/mock_exam_notice",
+        "assets/generated/ui_v2/day_popup/events/rainy_day"
     )) {
         if ($packText.IndexOf($requiredPath, [StringComparison]::OrdinalIgnoreCase) -lt 0) {
             throw "Web PCK is missing required production content: $requiredPath"
