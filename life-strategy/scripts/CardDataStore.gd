@@ -18,9 +18,19 @@ const INT_FIELDS := [
 	"fee",
 	"hand_size",
 	"dorm_stock",
+	"min_energy",
+	"selection_limit",
 ]
 
-const CSV_FIELDS := ["tags", "scenes", "sources"]
+const CSV_FIELDS := [
+	"tags",
+	"scenes",
+	"sources",
+	"food_groups",
+	"nutrient_tags",
+	"limit_tags",
+	"stock_items",
+]
 
 static var food_ids: Array[String] = []
 static var foods: Dictionary = {}
@@ -233,6 +243,9 @@ static func _append_card(card: Dictionary, ids: Array[String], target: Dictionar
 
 	var id := String(card["id"])
 	card["id"] = id
+	if target.has(id):
+		push_error("Duplicate card id '%s' in %s" % [id, source_path])
+		return
 	if not card.has("tags"):
 		card["tags"] = []
 	if not card.has("scenes"):

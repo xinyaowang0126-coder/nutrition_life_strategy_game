@@ -169,7 +169,18 @@ func _apply_quick_stats() -> void:
 	match _mode:
 		"source":
 			_set_quick_stat(primary_stat, "可看 ", int(_payload.get("hand_size", 0)), false)
-		"action", "sleep":
+		"action":
+			if String(_payload.get("id", "")) == "study":
+				primary_stat.add_theme_color_override("font_color", Color("#4d739f"))
+				_set_quick_stat(primary_stat, "复习 ", int(_payload.get("study", 0)))
+			else:
+				_apply_strongest_stat([
+					["精力 ", int(_payload.get("energy", 0)), Color("#387f4a")],
+					["压力 ", int(_payload.get("stress", 0)), Color("#b45c64")],
+					["复习 ", int(_payload.get("study", 0)), Color("#4d739f")],
+					["心情 ", int(_payload.get("mood", 0)), Color("#b06f32")],
+				])
+		"sleep":
 			_apply_strongest_stat([
 				["精力 ", int(_payload.get("energy", 0)), Color("#387f4a")],
 				["压力 ", int(_payload.get("stress", 0)), Color("#b45c64")],

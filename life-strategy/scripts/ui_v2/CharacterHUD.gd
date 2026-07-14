@@ -140,7 +140,14 @@ func _apply_stats(animate: bool, previous: Dictionary = {}) -> void:
 	for key: String in labels:
 		var label := labels[key] as Label
 		var value := _stat_value(key)
-		label.text = "%s%d" % [String(prefixes[key]), value]
+		if key == "study_progress":
+			label.text = "%s%d/%d" % [
+				String(prefixes[key]),
+				value,
+				int(_stats.get("study_target", 70)),
+			]
+		else:
+			label.text = "%s%d" % [String(prefixes[key]), value]
 		if animate and int(previous.get(key, _alias_value(previous, key))) != value:
 			changed_labels.append(label)
 	_apply_status_colors(labels)

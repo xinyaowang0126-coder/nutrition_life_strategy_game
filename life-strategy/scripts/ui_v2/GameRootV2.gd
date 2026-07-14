@@ -4,6 +4,9 @@ extends Control
 const GameDataScript := preload("res://scripts/GameData.gd")
 const MealDeckServiceScript := preload("res://scripts/systems/MealDeckService.gd")
 const MealResolverScript := preload("res://scripts/systems/MealResolver.gd")
+const NutritionLedgerScript := preload("res://scripts/systems/NutritionLedger.gd")
+const WeeklyEventServiceScript := preload("res://scripts/systems/WeeklyEventService.gd")
+const DayCarryoverServiceScript := preload("res://scripts/systems/DayCarryoverService.gd")
 
 const SOURCE_STAGE_SCENE := preload("res://scenes/game_v2/stages/MealSourceStage.tscn")
 const CAFETERIA_STAGE_SCENE := preload("res://scenes/game_v2/stages/CafeteriaMealStage.tscn")
@@ -34,6 +37,28 @@ const ACTION_BACKGROUNDS_MOBILE := {
 	"dinner_action": "res://assets/generated/ui_v2/backgrounds/action_evening_9x16.png",
 	"sleep": "res://assets/generated/ui_v2/backgrounds/action_evening_9x16.png",
 	"summary": "res://assets/generated/ui_v2/backgrounds/action_evening_9x16.png",
+}
+const LEARNING_STATE_IMAGES := {
+	"clear_focus": "res://assets/generated/ui_v2/day_popup/states/clear_focus.png",
+	"steady": "res://assets/generated/endings/stable_endurance.png",
+	"fatigued": "res://assets/generated/endings/barely_survived.png",
+	"brain_fog": "res://assets/generated/ui_v2/card_art/sleep/night_study_art.png",
+}
+const EVENT_IMAGES := {
+	"quiet_day": "res://assets/generated/ui_v2/backgrounds/action_morning_16x9.png",
+	"clear_skies": "res://assets/generated/actions/walk.png",
+	"cafeteria_rotation": "res://assets/generated/backgrounds/cafeteria_background.png",
+	"delivery_coupon": "res://assets/generated/backgrounds/takeout_background.png",
+	"mock_exam_notice": "res://assets/generated/ui_v2/day_popup/events/mock_exam_notice.png",
+	"rainy_day": "res://assets/generated/ui_v2/day_popup/events/rainy_day.png",
+}
+const EVENT_EFFECT_TEXT := {
+	"clear_skies": "心情 +3｜压力 -2｜散步恢复增强",
+	"cafeteria_rotation": "食堂候选菜品 +2",
+	"delivery_coupon": "外卖配送费 -2｜候选餐品 +1",
+	"mock_exam_notice": "复习收益 +3｜额外精力 -2、压力 +1",
+	"rainy_day": "心情 -2｜压力 +2｜外卖费 +2，散步恢复减弱",
+	"quiet_day": "没有额外规则变化",
 }
 
 const MAX_FOODS_PER_MEAL := 3
@@ -73,6 +98,7 @@ const PHASE_NAMES := {
 @onready var toast_feed: ToastFeedV2 = $HUD/HUDRoot/ToastAnchor/ToastFeed
 @onready var sticky_note: StickyNotePopupV2 = $HUD/HUDRoot/DetailLayer/StickyNote
 @onready var daily_summary: DailySummaryPopupV2 = $HUD/HUDRoot/ModalLayer/DailySummary
+@onready var new_day_popup: NewDayPopupV2 = $HUD/HUDRoot/ModalLayer/NewDayPopup
 
 var state: Dictionary = {}
 var day := 1
@@ -87,10 +113,18 @@ var actions_used_today := 0
 var drink_water_used := 0
 var used_action_names: Array[String] = []
 var used_action_ids: Array[String] = []
+var today_action_records: Array[Dictionary] = []
 var combos_today: Array[String] = []
 var summary_payload: Dictionary = {}
 var ending_id := ""
 var low_stability_days := 0
+var run_history: Array[Dictionary] = []
+var current_event: Dictionary = {}
+var current_learning_state: Dictionary = {}
+var pending_learning_state: Dictionary = {}
+var _day_start_state: Dictionary = {}
+var chosen_sleep_id := ""
+var chosen_sleep_name := ""
 
 var _deck_service: RefCounted
 var _active_stage: Control
@@ -109,6 +143,7 @@ func _ready() -> void:
 	character_hud.detail_dismissed.connect(_dismiss_detail)
 	sticky_note.closed.connect(func() -> void: pass)
 	daily_summary.next_day_requested.connect(_on_summary_advanced)
+	new_day_popup.continue_requested.connect(_on_new_day_continue)
 	get_viewport().size_changed.connect(_apply_responsive_profile)
 	_apply_responsive_profile()
 	start_new_run()
@@ -120,14 +155,25 @@ func start_new_run() -> void:
 	low_stability_days = 0
 	dorm_inventory = GameDataScript.get_initial_dorm_inventory()
 	ending_id = ""
+	run_history.clear()
+	current_event.clear()
+	current_learning_state = DayCarryoverServiceScript.STEADY.duplicate(true)
+	pending_learning_state = current_learning_state.duplicate(true)
 	daily_summary.hide_summary(false)
+	new_day_popup.hide_popup(false)
 	sticky_note.hide_note(false)
 	_start_day()
-	_post("第一天，先把早饭接上。", "info")
 	_render_phase()
+	_show_new_day_popup()
 
 
 func _start_day() -> void:
+	_day_start_state = state.duplicate(true)
+	current_learning_state = pending_learning_state.duplicate(true)
+	_apply_stat_delta(current_learning_state.get("opening_delta", {}))
+	current_event = WeeklyEventServiceScript.event_for_day(day)
+	state = WeeklyEventServiceScript.apply_opening_state(day, state)
+	_clamp_stats()
 	phase = "breakfast_source"
 	hand.clear()
 	selected_food_ids.clear()
@@ -138,8 +184,11 @@ func _start_day() -> void:
 	drink_water_used = 0
 	used_action_names.clear()
 	used_action_ids.clear()
+	today_action_records.clear()
 	combos_today.clear()
 	summary_payload.clear()
+	chosen_sleep_id = ""
+	chosen_sleep_name = ""
 
 
 func _render_phase() -> void:
@@ -175,7 +224,7 @@ func _show_source_stage() -> void:
 	var disabled_reasons := {}
 	var meal := _current_meal_phase()
 	for source_id in GameDataScript.get_meal_source_ids():
-		var source := GameDataScript.get_meal_source(source_id)
+		var source := _effective_meal_source(source_id)
 		var reason := _source_disabled_reason(source_id, meal)
 		source["enabled"] = reason.is_empty()
 		source["disabled_reason"] = reason
@@ -204,7 +253,7 @@ func _show_meal_stage() -> void:
 	var foods: Array[Dictionary] = []
 	for food_id in hand:
 		foods.append(GameDataScript.get_food(food_id))
-	var source := GameDataScript.get_meal_source(current_source_id)
+	var source := _effective_meal_source(current_source_id)
 	var options := {
 		"max_selected": _source_selection_limit(current_source_id),
 		"source_fee": int(source.get("fee", 0)),
@@ -227,7 +276,7 @@ func _show_action_stage() -> void:
 	_install_stage(stage)
 	var actions: Array[Dictionary] = []
 	for action_id in GameDataScript.get_action_ids_for_scene(phase):
-		var action := GameDataScript.get_action(action_id)
+		var action := _effective_action(action_id)
 		var display_key := "name_%s" % phase
 		if action.has(display_key):
 			action["name"] = String(action[display_key])
@@ -257,13 +306,20 @@ func _show_sleep_stage() -> void:
 	var options_list: Array[Dictionary] = []
 	for option_id in GameDataScript.get_sleep_option_ids_for_scene("sleep"):
 		options_list.append(GameDataScript.get_sleep_option(option_id))
+	var tomorrow_preview := WeeklyEventServiceScript.next_day_preview(day, GameDataScript.TOTAL_DAYS)
+	var tomorrow_text := "周末就要到了"
+	if not tomorrow_preview.is_empty():
+		tomorrow_text = "%s · %s" % [
+			String(tomorrow_preview.get("title", "明日安排")),
+			String(tomorrow_preview.get("summary", "")),
+		]
 	stage.sleep_selected.connect(_choose_sleep)
 	stage.detail_requested.connect(_show_detail.bind("sleep"))
 	stage.detail_dismissed.connect(_dismiss_detail)
 	stage.setup(options_list, {
 		"prompt": "夜深了，几点睡？",
 		"sub_prompt": "闹钟还没响，先把今晚定下来。",
-		"tomorrow_text": "明早还有安排",
+		"tomorrow_text": tomorrow_text,
 		"hint": "点小圆标看清代价，再决定。",
 	})
 
@@ -325,7 +381,7 @@ func _hand_for_source(source_id: String, meal: String) -> Array[String]:
 			if source_id != "dorm_storage" or int(dorm_inventory.get(food_id, 0)) > 0:
 				valid_cached.append(food_id)
 		return valid_cached
-	var source := GameDataScript.get_meal_source(source_id)
+	var source := _effective_meal_source(source_id)
 	var candidates := GameDataScript.get_food_ids_for_context(source_id, meal)
 	var uses_stock := String(source.get("payment_mode", "cash")) == "stock"
 	var built: Array[String] = _deck_service.build_hand(
@@ -361,7 +417,7 @@ func _ensure_affordable_in_source_hand(built: Array[String], candidates: Array[S
 func _source_disabled_reason(source_id: String, meal: String) -> String:
 	if not GameDataScript.is_meal_source_available(source_id, meal):
 		return "这个时段还没营业。"
-	var source := GameDataScript.get_meal_source(source_id)
+	var source := _effective_meal_source(source_id)
 	var candidates := GameDataScript.get_food_ids_for_context(source_id, meal)
 	if String(source.get("payment_mode", "cash")) == "stock":
 		for food_id in candidates:
@@ -404,7 +460,7 @@ func _selected_meal_total(extra_food_id: String = "") -> int:
 		ids.append(extra_food_id)
 	if ids.is_empty():
 		return 0
-	var source := GameDataScript.get_meal_source(current_source_id)
+	var source := _effective_meal_source(current_source_id)
 	var total := int(source.get("fee", 0))
 	for food_id in ids:
 		total += int(GameDataScript.get_food(food_id).get("cost", 0))
@@ -427,7 +483,7 @@ func _confirm_food(food_ids: Array) -> void:
 	var foods: Array[Dictionary] = []
 	for food_id in safe_ids:
 		foods.append(GameDataScript.get_food(food_id))
-	var source := GameDataScript.get_meal_source(current_source_id)
+	var source := _effective_meal_source(current_source_id)
 	var record := MealResolverScript.build_record(phase, source, foods)
 	if int(record["total_cost"]) > int(state["balance"]):
 		_post("余额不够，先拿掉一样。", "warning")
@@ -477,12 +533,12 @@ func _apply_meal_record(record: Dictionary) -> void:
 
 
 func _check_meal_combos(record: Dictionary) -> void:
-	if not combos_today.has("balanced_plate") and MealResolverScript.has_balanced_plate(record):
-		combos_today.append("balanced_plate")
+	if not combos_today.has("meal_group_mix") and MealResolverScript.has_meal_group_combination(record):
+		combos_today.append("meal_group_mix")
 		state["energy"] = int(state["energy"]) + 5
 		state["mood"] = int(state["mood"]) + 3
 		state["diet_burden"] = int(state["diet_burden"]) - 2
-		_post("这一盘主食、蛋白质和蔬果都齐了。", "good")
+		_post("这餐同时包含谷薯类、蔬菜类和蛋白质食物来源。", "good")
 	if not combos_today.has("comfort_chain") and MealResolverScript.comfort_meal_count(today_meal_records) >= 2:
 		combos_today.append("comfort_chain")
 		state["mood"] = int(state["mood"]) + 4
@@ -512,7 +568,7 @@ func _apply_action(action_id: String) -> void:
 		return
 	if not GameDataScript.get_action_ids_for_scene(phase).has(action_id):
 		return
-	var action := GameDataScript.get_action(action_id)
+	var action := _effective_action(action_id)
 	if not _can_use_action(action):
 		var reason := _action_disabled_reason(action)
 		if not reason.is_empty():
@@ -526,17 +582,29 @@ func _apply_action(action_id: String) -> void:
 	used_action_names.append(display_name)
 	used_action_ids.append(action_id)
 	state["balance"] = int(state["balance"]) - int(action.get("cost", 0))
-	_apply_stat_delta({
+	var delta := {
 		"energy": int(action.get("energy", 0)),
 		"mood": int(action.get("mood", 0)),
 		"stress": int(action.get("stress", 0)),
 		"study_progress": int(action.get("study", 0)),
 		"satiety": int(action.get("satiety", 0)),
 		"diet_burden": int(action.get("burden", 0)),
+	}
+	_apply_stat_delta(delta)
+	var stock_added := _apply_action_stock(action)
+	today_action_records.append({
+		"id": action_id,
+		"name": display_name,
+		"cost": int(action.get("cost", 0)),
+		"stat_delta": delta.duplicate(true),
+		"stock_added": stock_added,
 	})
 	_clamp_stats()
 	_update_stability()
-	_post(display_name, "info")
+	if stock_added.is_empty():
+		_post(display_name, "info")
+	else:
+		_post("%s：燕麦、牛奶和苹果放进柜子了。" % display_name, "good")
 	_advance_after_action()
 
 
@@ -562,7 +630,11 @@ func _can_use_action(action: Dictionary) -> bool:
 		return false
 	if int(action.get("cost", 0)) > int(state["balance"]):
 		return false
+	if int(state.get("energy", 0)) < int(action.get("min_energy", 0)):
+		return false
 	if String(action.get("id", "")) == "drink_water" and drink_water_used >= 2:
+		return false
+	if _action_is_once_per_day(action) and used_action_ids.has(String(action.get("id", ""))):
 		return false
 	return true
 
@@ -570,11 +642,79 @@ func _can_use_action(action: Dictionary) -> bool:
 func _action_disabled_reason(action: Dictionary) -> String:
 	if String(action.get("id", "")) == "drink_water" and drink_water_used >= 2:
 		return "今天已经接过两杯水。"
+	if _action_is_once_per_day(action) and used_action_ids.has(String(action.get("id", ""))):
+		return "今天已经补过一次存粮。"
 	if actions_used_today + int(action.get("slots", 1)) > MAX_DAILY_ACTIONS:
 		return "今天的安排位已经用完。"
 	if int(action.get("cost", 0)) > int(state["balance"]):
 		return "余额不够。"
+	var min_energy := int(action.get("min_energy", 0))
+	if int(state.get("energy", 0)) < min_energy:
+		return "至少需要 %d 精力，现在先缓一缓。" % min_energy
 	return ""
+
+
+func _effective_action(action_id: String) -> Dictionary:
+	var base_action := GameDataScript.get_action(action_id)
+	var action := WeeklyEventServiceScript.apply_action(
+		day,
+		action_id,
+		base_action
+	)
+	if action_id != "study":
+		return action
+	var carryover_modifier := int(current_learning_state.get("study_modifier", 0))
+	var live_modifier := 0
+	var live_reasons: Array[String] = []
+	if int(state.get("energy", 0)) < 25:
+		live_modifier -= 3
+		live_reasons.append("精力偏低")
+	if int(state.get("stress", 0)) >= 70:
+		live_modifier -= 2
+		live_reasons.append("压力偏高")
+	var total_modifier := carryover_modifier + live_modifier
+	if total_modifier != 0:
+		action["study"] = maxi(1, int(action.get("study", 0)) + total_modifier)
+	var notes: Array[String] = []
+	var carryover_text := "不变" if carryover_modifier == 0 else _signed_delta(carryover_modifier)
+	notes.append("今日学习状态：%s（每次复习 %s）" % [
+		String(current_learning_state.get("title", "状态平稳")),
+		carryover_text,
+	])
+	var event_modifier := int(action.get("study", 0)) - int(base_action.get("study", 0)) - total_modifier
+	if event_modifier != 0:
+		notes.append("今日事件：复习收益 %s" % _signed_delta(event_modifier))
+	if live_modifier != 0:
+		notes.append("当前%s：临时 %s" % [
+			"且".join(live_reasons),
+			_signed_delta(live_modifier),
+		])
+	var existing := String(action.get("rule_hint", ""))
+	var state_notes := "\n".join(notes)
+	action["rule_hint"] = "%s\n%s" % [existing, state_notes] if not existing.is_empty() else state_notes
+	return action
+
+
+func _action_is_once_per_day(action: Dictionary) -> bool:
+	var raw: Variant = action.get("once_per_day", false)
+	if raw is bool:
+		return raw
+	return String(raw).to_lower() == "true"
+
+
+func _apply_action_stock(action: Dictionary) -> Dictionary:
+	var added := {}
+	for raw_item in action.get("stock_items", []):
+		var parts := String(raw_item).split(":", false, 1)
+		if parts.is_empty():
+			continue
+		var food_id := String(parts[0])
+		var amount := int(parts[1]) if parts.size() > 1 else 1
+		if amount <= 0 or GameDataScript.get_food(food_id).is_empty():
+			continue
+		dorm_inventory[food_id] = int(dorm_inventory.get(food_id, 0)) + amount
+		added[food_id] = amount
+	return added
 
 
 func _choose_sleep(option_id: String) -> void:
@@ -583,6 +723,8 @@ func _choose_sleep(option_id: String) -> void:
 	if not GameDataScript.get_sleep_option_ids_for_scene("sleep").has(option_id):
 		return
 	var option := GameDataScript.get_sleep_option(option_id)
+	chosen_sleep_id = option_id
+	chosen_sleep_name = String(option.get("name", option_id))
 	_apply_stat_delta({
 		"energy": int(option.get("energy", 0)),
 		"mood": int(option.get("mood", 0)),
@@ -591,17 +733,21 @@ func _choose_sleep(option_id: String) -> void:
 		"satiety": int(option.get("satiety", 0)),
 		"diet_burden": int(option.get("burden", 0)),
 	})
-	_post("夜里：%s" % String(option.get("name", option_id)), "info")
+	_post("夜里：%s" % chosen_sleep_name, "info")
 	_finish_day()
 
 
 func _finish_day() -> void:
-	var average_quality := MealResolverScript.day_quality(today_meal_records)
-	if average_quality >= 66:
+	var nutrition_summary: Dictionary = NutritionLedgerScript.summarize(today_meal_records)
+	var nutrition_score := int(nutrition_summary.get(
+		"score",
+		MealResolverScript.day_quality(today_meal_records)
+	))
+	if nutrition_score >= 66:
 		state["energy"] = int(state["energy"]) + 4
 		state["mood"] = int(state["mood"]) + 4
 		state["diet_burden"] = int(state["diet_burden"]) - 2
-	elif average_quality < 42:
+	elif nutrition_score < 42:
 		state["stress"] = int(state["stress"]) + 5
 		state["diet_burden"] = int(state["diet_burden"]) + 4
 	if int(state["satiety"]) < 20:
@@ -610,11 +756,15 @@ func _finish_day() -> void:
 	if int(state["satiety"]) > 92:
 		state["diet_burden"] = int(state["diet_burden"]) + 4
 		state["energy"] = int(state["energy"]) - 3
-	var remaining_days := maxi(1, GameDataScript.TOTAL_DAYS - day)
-	if int(state["balance"]) < remaining_days * 8:
+	var remaining_days := maxi(0, GameDataScript.TOTAL_DAYS - day)
+	if remaining_days > 0 and int(state["balance"]) < remaining_days * 8:
 		state["stress"] = int(state["stress"]) + 5
 		state["mood"] = int(state["mood"]) - 2
-	if int(state["study_progress"]) < day * 9:
+	var study_pace := mini(
+		GameDataScript.STUDY_TARGET,
+		day * GameDataScript.DAILY_STUDY_PACE
+	)
+	if int(state["study_progress"]) < study_pace:
 		state["stress"] = int(state["stress"]) + 3
 	else:
 		state["mood"] = int(state["mood"]) + 2
@@ -626,12 +776,36 @@ func _finish_day() -> void:
 		low_stability_days += 1
 	else:
 		low_stability_days = 0
+	pending_learning_state = DayCarryoverServiceScript.evaluate_day(
+		nutrition_summary,
+		today_action_records,
+		chosen_sleep_id,
+		state
+	)
+	var day_record := _build_day_record(nutrition_summary)
+	run_history.append(day_record)
+	var detail_text := "营养评分：%d/100 · %s\n%s\n%s" % [
+		nutrition_score,
+		String(nutrition_summary.get("rating", "")),
+		String(nutrition_summary.get("detail_text", "")),
+		_day_change_text(day_record),
+	]
+	nutrition_summary["detail_text"] = detail_text
 	summary_payload = {
 		"day": day,
 		"title": "第 %d 天结束" % day,
 		"stats": state.duplicate(true),
-		"quality": _quality_sentence(average_quality),
-		"advice": _summary_advice(average_quality),
+		"quality": "饮食 %d 分 · %s\n%s" % [
+			nutrition_score,
+			String(nutrition_summary.get("rating", "")),
+			String(nutrition_summary["observation"]),
+		],
+		"advice": "%s\n%s\n%s" % [
+			String(nutrition_summary["action"]),
+			_day_strategy_advice(study_pace, remaining_days),
+			_next_day_preview_text(),
+		],
+		"nutrition": nutrition_summary,
 		"button_text": "睡到第 %d 天" % (day + 1),
 	}
 	if low_stability_days >= 2:
@@ -653,8 +827,65 @@ func _on_summary_advanced() -> void:
 func _next_day() -> void:
 	day += 1
 	_start_day()
-	_post("第 %d 天，天亮了。" % day, "info")
 	_render_phase()
+	_show_new_day_popup()
+
+
+func _show_new_day_popup() -> void:
+	if not is_node_ready():
+		return
+	var display_event := current_event.duplicate(true)
+	if display_event.is_empty():
+		display_event = _quiet_day_event()
+	var event_id := String(display_event.get("id", "quiet_day"))
+	var learning_id := String(current_learning_state.get("id", "steady"))
+	new_day_popup.show_day({
+		"day": day,
+		"title": "第 %d 天开始" % day,
+		"subtitle": (
+			"新的一周从今天开始，先看看今天的状态与安排。"
+			if day == 1
+			else "昨天的饮食与休息留在今天，新的事件也会改变可用策略。"
+		),
+		"learning_state": current_learning_state.duplicate(true),
+		"event": display_event,
+		"status_image": String(LEARNING_STATE_IMAGES.get(
+			learning_id,
+			LEARNING_STATE_IMAGES["steady"]
+		)),
+		"event_image": String(EVENT_IMAGES.get(event_id, EVENT_IMAGES["quiet_day"])),
+		"event_effect": String(EVENT_EFFECT_TEXT.get(
+			event_id,
+			EVENT_EFFECT_TEXT["quiet_day"]
+		)),
+		"button_text": "进入第 %d 天" % day,
+	}, _mobile_mode)
+
+
+func _quiet_day_event() -> Dictionary:
+	if day == 1:
+		return {
+			"id": "quiet_day",
+			"title": "新的一周开始了",
+			"summary": "今天没有额外限制，先按自己的节奏安排三餐与学习。",
+		}
+	if day >= GameDataScript.TOTAL_DAYS:
+		return {
+			"id": "quiet_day",
+			"title": "周末就在眼前",
+			"summary": "今天没有额外变化，把这一周最后的安排稳稳接住。",
+		}
+	return {
+		"id": "quiet_day",
+		"title": "照常安排",
+		"summary": "今天没有额外变化，可以按自己的节奏来。",
+	}
+
+
+func _on_new_day_continue() -> void:
+	# The popup owns its closing animation; the playable stage is already
+	# rendered underneath so continuing never incurs another scene rebuild.
+	pass
 
 
 func _finish_run(result: String) -> void:
@@ -665,15 +896,124 @@ func _finish_run(result: String) -> void:
 
 func _show_ending_summary() -> void:
 	var ending := GameDataScript.get_ending(ending_id)
+	var recap := _build_week_recap()
 	var ending_summary := {
 		"day": day,
 		"title": String(ending.get("title", "这一周结束了")),
 		"stats": state.duplicate(true),
 		"quality": String(ending.get("subtitle", "这一周结束了。")),
-		"advice": "余力 %d，复习 %d，手里还剩 ¥%d。" % [int(state["stability"]), int(state["study_progress"]), int(state["balance"])],
+		"advice": "目标复习 %d，完成 %d；平均饮食 %d 分，手里还剩 ¥%d。" % [
+			GameDataScript.STUDY_TARGET,
+			int(state["study_progress"]),
+			int(recap.get("average_nutrition", 0)),
+			int(state["balance"]),
+		],
+		"ending_image": String(ending.get("image", "")),
+		"layout": "ending",
+		"detail": recap,
+		"detail_button_text": "查看本周轨迹",
+		"detail_button_open_text": "收起本周轨迹",
 		"button_text": "再来一周",
 	}
 	daily_summary.show_summary(ending_summary, _mobile_mode)
+
+
+func _build_day_record(nutrition_summary: Dictionary) -> Dictionary:
+	var action_spend := 0
+	for record in today_action_records:
+		action_spend += int(record.get("cost", 0))
+	return {
+		"day": day,
+		"event": current_event.duplicate(true),
+		"learning_state": current_learning_state.duplicate(true),
+		"next_learning_state": pending_learning_state.duplicate(true),
+		"start_state": _day_start_state.duplicate(true),
+		"end_state": state.duplicate(true),
+		"meals": today_meal_records.duplicate(true),
+		"actions": today_action_records.duplicate(true),
+		"sleep": {"id": chosen_sleep_id, "name": chosen_sleep_name},
+		"spend": MealResolverScript.total_spend(today_meal_records) + action_spend,
+		"combos": combos_today.duplicate(),
+		"nutrition": nutrition_summary.duplicate(true),
+	}
+
+
+func _day_change_text(record: Dictionary) -> String:
+	var start: Dictionary = record.get("start_state", {})
+	var finish: Dictionary = record.get("end_state", {})
+	return "今日变化：余力 %s｜复习 %s｜余额 %s" % [
+		_signed_delta(int(finish.get("stability", 0)) - int(start.get("stability", 0))),
+		_signed_delta(int(finish.get("study_progress", 0)) - int(start.get("study_progress", 0))),
+		_signed_delta(int(finish.get("balance", 0)) - int(start.get("balance", 0))),
+	]
+
+
+func _day_strategy_advice(study_pace: int, remaining_days: int) -> String:
+	var study_gap := study_pace - int(state.get("study_progress", 0))
+	if study_gap > 0:
+		return "复习比今日节奏少 %d；先恢复状态，比带着脑雾硬撑更有效。" % study_gap
+	if int(state.get("energy", 0)) <= 25:
+		return "复习进度跟上了，但精力已经偏低，明天的学习效率会受影响。"
+	if remaining_days > 0 and int(state.get("balance", 0)) < remaining_days * 10:
+		return "进度跟上了；余下 %d 天可以多利用存粮和食堂。" % remaining_days
+	return "复习进度跟上了，也给明天留出了调整空间。"
+
+
+func _next_day_preview_text() -> String:
+	if day >= GameDataScript.TOTAL_DAYS:
+		return "本周已经走完，看看七天里哪些选择真正留下了余力。"
+	var learning_modifier := int(pending_learning_state.get("study_modifier", 0))
+	var modifier_text := "不变" if learning_modifier == 0 else _signed_delta(learning_modifier)
+	var preview := WeeklyEventServiceScript.next_day_preview(day, GameDataScript.TOTAL_DAYS)
+	return "明日学习状态：%s（每次复习 %s）｜事件：%s" % [
+		String(pending_learning_state.get("title", "状态平稳")),
+		modifier_text,
+		String(preview.get("title", "照常安排")),
+	]
+
+
+func _build_week_recap() -> Dictionary:
+	var lines: Array[String] = ["本周轨迹："]
+	var score_total := 0
+	var total_spend := 0
+	var clear_days := 0
+	var strained_days := 0
+	for record in run_history:
+		var nutrition: Dictionary = record.get("nutrition", {})
+		var score := int(nutrition.get("score", 0))
+		var start: Dictionary = record.get("start_state", {})
+		var finish: Dictionary = record.get("end_state", {})
+		var next_condition: Dictionary = record.get("next_learning_state", {})
+		score_total += score
+		total_spend += int(record.get("spend", 0))
+		if String(next_condition.get("id", "")) == "clear_focus":
+			clear_days += 1
+		elif ["fatigued", "brain_fog"].has(String(next_condition.get("id", ""))):
+			strained_days += 1
+		lines.append("第 %d 天｜饮食 %d｜复习 %s｜花费 ¥%d｜次日 %s" % [
+			int(record.get("day", 0)),
+			score,
+			_signed_delta(int(finish.get("study_progress", 0)) - int(start.get("study_progress", 0))),
+			int(record.get("spend", 0)),
+			String(next_condition.get("title", "状态平稳")),
+		])
+	var played_days := run_history.size()
+	var average_nutrition := int(round(float(score_total) / float(played_days))) if played_days > 0 else 0
+	lines.append("合计｜%d 天花费 ¥%d｜清醒加成 %d 次｜疲惫/脑雾 %d 次" % [
+		played_days,
+		total_spend,
+		clear_days,
+		strained_days,
+	])
+	return {
+		"detail_text": "\n".join(lines),
+		"basis": "次日学习状态由前一天的饮食结构、行动、睡眠以及收尾精力和压力共同决定。",
+		"average_nutrition": average_nutrition,
+	}
+
+
+func _signed_delta(value: int) -> String:
+	return "+%d" % value if value > 0 else str(value)
 
 
 func _apply_stat_delta(delta: Dictionary) -> void:
@@ -740,12 +1080,25 @@ func _current_meal_phase() -> String:
 func _source_uses_stock() -> bool:
 	if current_source_id.is_empty():
 		return false
-	return String(GameDataScript.get_meal_source(current_source_id).get("payment_mode", "cash")) == "stock"
+	return String(_effective_meal_source(current_source_id).get("payment_mode", "cash")) == "stock"
 
 
-func _source_selection_limit(_source_id: String) -> int:
-	# 各去处的可见商品数量不同，但一顿仍只取三样，避免数值与触控负担膨胀。
-	return MAX_FOODS_PER_MEAL
+func _effective_meal_source(source_id: String) -> Dictionary:
+	return WeeklyEventServiceScript.apply_meal_source(
+		day,
+		source_id,
+		GameDataScript.get_meal_source(source_id)
+	)
+
+
+func _source_selection_limit(source_id: String) -> int:
+	if source_id.is_empty():
+		return MAX_FOODS_PER_MEAL
+	return clampi(
+		int(_effective_meal_source(source_id).get("selection_limit", MAX_FOODS_PER_MEAL)),
+		1,
+		MAX_FOODS_PER_MEAL
+	)
 
 
 func _is_source_phase() -> bool:
@@ -765,32 +1118,6 @@ func _phase_prompt() -> String:
 		"breakfast_action": return "上午留给哪件事？"
 		"lunch_action": return "下午怎么安排？"
 		_: return "睡前还做什么？"
-
-
-func _quality_sentence(average_quality: int) -> String:
-	var skipped := 0
-	for record in today_meal_records:
-		if bool(record.get("skipped", false)):
-			skipped += 1
-	if skipped > 0:
-		return "今天漏了 %d 顿，晚上有点空。" % skipped
-	if average_quality >= 66:
-		return "三餐都吃到了，搭配也比较稳。"
-	if average_quality >= 45:
-		return "三餐接上了，有一两顿比较简单。"
-	return "三餐都吃了，但搭配偏重。"
-
-
-func _summary_advice(average_quality: int) -> String:
-	if int(state["stability"]) <= 25:
-		return "回宿舍都不想动了。明早先找口热的。"
-	if int(state["study_progress"]) < day * 9:
-		return "书签还停在前几页。明天得补一会儿。"
-	if average_quality < 45:
-		return "今天净是凑合，明天找一顿热的。"
-	if int(state["balance"]) < maxi(10, (GameDataScript.TOTAL_DAYS - day) * 8):
-		return "钱包薄了，明天看看食堂和柜子里还有什么。"
-	return "三顿没落，手头的事也做完了。"
 
 
 func _request_main_menu() -> void:
@@ -842,7 +1169,7 @@ func _background_path_for_phase() -> String:
 		if ResourceLoader.exists(action_path):
 			return action_path
 	if not current_source_id.is_empty():
-		var configured := String(GameDataScript.get_meal_source(current_source_id).get("background", ""))
+		var configured := String(_effective_meal_source(current_source_id).get("background", ""))
 		if ResourceLoader.exists(configured):
 			return configured
 	return DEFAULT_BACKGROUND
@@ -882,6 +1209,8 @@ func _apply_responsive_profile() -> void:
 
 func _apply_shell_profile() -> void:
 	var mobile := _mobile_mode
+	if is_instance_valid(new_day_popup):
+		new_day_popup.set_mobile_mode(mobile)
 	top_safe_area.add_theme_constant_override("margin_left", 14 if mobile else 24)
 	top_safe_area.add_theme_constant_override("margin_right", 14 if mobile else 24)
 	top_safe_area.add_theme_constant_override("margin_top", 12 if mobile else 18)

@@ -1,0 +1,300 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Theme" path="res://scenes/game_v2/V2Theme.tres" id="1_theme"]
+[ext_resource type="Script" path="res://scripts/ui_v2/NewDayPopup.gd" id="2_script"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_card"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(1, 0.966, 0.89, 0.96)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.67, 0.52, 0.32, 0.72)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_status_image"]
+bg_color = Color(0.84, 0.91, 0.79, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_event_image"]
+bg_color = Color(0.94, 0.86, 0.72, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_effect"]
+content_margin_left = 14.0
+content_margin_top = 8.0
+content_margin_right = 14.0
+content_margin_bottom = 8.0
+bg_color = Color(0.46, 0.58, 0.37, 0.16)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.35, 0.49, 0.28, 0.45)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="NewDayPopup" type="Control"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+theme = ExtResource("1_theme")
+script = ExtResource("2_script")
+
+[node name="Dim" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+color = Color(0.02, 0.03, 0.03, 0.58)
+
+[node name="PaperHost" type="Control" parent="."]
+clip_contents = true
+layout_mode = 0
+mouse_filter = 0
+
+[node name="Paper" type="PanelContainer" parent="PaperHost"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Margin" type="Control" parent="PaperHost/Paper"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="Control" parent="PaperHost/Paper/Margin"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DayTitle" type="Label" parent="PaperHost/Paper/Margin/VBox"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 32.0
+offset_top = 24.0
+offset_right = -32.0
+offset_bottom = 70.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 34
+text = "第 2 天开始"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="DaySubtitle" type="Label" parent="PaperHost/Paper/Margin/VBox"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 32.0
+offset_top = 76.0
+offset_right = -32.0
+offset_bottom = 130.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.42, 0.34, 0.26, 1)
+theme_override_font_sizes/font_size = 18
+text = "昨夜的选择留下一点余韵，今天也有新的变化。"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Divider" type="HSeparator" parent="PaperHost/Paper/Margin/VBox"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 32.0
+offset_top = 140.0
+offset_right = -32.0
+offset_bottom = 144.0
+grow_horizontal = 2
+
+[node name="BodyScroll" type="ScrollContainer" parent="PaperHost/Paper/Margin/VBox"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = 154.0
+offset_right = -32.0
+offset_bottom = -104.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+scroll_deadzone = 18
+
+[node name="CardsGrid" type="GridContainer" parent="PaperHost/Paper/Margin/VBox/BodyScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 16
+columns = 2
+
+[node name="LearningCard" type="PanelContainer" parent="PaperHost/Paper/Margin/VBox/BodyScroll/CardsGrid"]
+custom_minimum_size = Vector2(0, 390)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBox_card")
+
+[node name="Margin" type="MarginContainer" parent="PaperHost/Paper/Margin/VBox/BodyScroll/CardsGrid/LearningCard"]
+layout_mode = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 18
+
+[node name="VBox" type="VBoxContainer" parent="PaperHost/Paper/Margin/VBox/BodyScroll/CardsGrid/LearningCard/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ImageFrame" type="PanelContainer" parent="PaperHost/Paper/Margin/VBox/BodyScroll/CardsGrid/LearningCard/Margin/VBox"]
+custom_minimum_size = Vector2(0, 180)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBox_status_image")
+
+[node name="StatusImage" type="TextureRect" parent="PaperHost/Paper/Margin/VBox/BodyScroll/CardsGrid/LearningCard/Margin/VBox/ImageFrame"]
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Eyebrow" type="Label" parent="PaperHost/Paper/Margin/VBox/BodyScroll/CardsGrid/LearningCard/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.27, 0.48, 0.31, 1)
+theme_override_font_sizes/font_size = 17
+text = "今日学习状态"
+
+[node name="Title" type="Label" parent="PaperHost/Paper/Margin/VBox/BodyScroll/CardsGrid/LearningCard/Margin/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "状态还算平稳"
+autowrap_mode = 3
+
+[node name="Summary" type="Label" parent="PaperHost/Paper/Margin/VBox/BodyScroll/CardsGrid/LearningCard/Margin/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.36, 0.3, 0.23, 1)
+theme_override_font_sizes/font_size = 18
+text = "昨天的饮食和休息，让今天的脑子维持在平常水平。"
+autowrap_mode = 3
+
+[node name="Effect" type="PanelContainer" parent="PaperHost/Paper/Margin/VBox/BodyScroll/CardsGrid/LearningCard/Margin/VBox"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_effect")
+
+[node name="Label" type="Label" parent="PaperHost/Paper/Margin/VBox/BodyScroll/CardsGrid/LearningCard/Margin/VBox/Effect"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.25, 0.43, 0.27, 1)
+theme_override_font_sizes/font_size = 17
+text = "每次学习效果不变"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="EventCard" type="PanelContainer" parent="PaperHost/Paper/Margin/VBox/BodyScroll/CardsGrid"]
+custom_minimum_size = Vector2(0, 390)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBox_card")
+
+[node name="Margin" type="MarginContainer" parent="PaperHost/Paper/Margin/VBox/BodyScroll/CardsGrid/EventCard"]
+layout_mode = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 18
+
+[node name="VBox" type="VBoxContainer" parent="PaperHost/Paper/Margin/VBox/BodyScroll/CardsGrid/EventCard/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ImageFrame" type="PanelContainer" parent="PaperHost/Paper/Margin/VBox/BodyScroll/CardsGrid/EventCard/Margin/VBox"]
+custom_minimum_size = Vector2(0, 180)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBox_event_image")
+
+[node name="EventImage" type="TextureRect" parent="PaperHost/Paper/Margin/VBox/BodyScroll/CardsGrid/EventCard/Margin/VBox/ImageFrame"]
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Eyebrow" type="Label" parent="PaperHost/Paper/Margin/VBox/BodyScroll/CardsGrid/EventCard/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.66, 0.39, 0.17, 1)
+theme_override_font_sizes/font_size = 17
+text = "今日事件"
+
+[node name="Title" type="Label" parent="PaperHost/Paper/Margin/VBox/BodyScroll/CardsGrid/EventCard/Margin/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "平常的一天"
+autowrap_mode = 3
+
+[node name="Summary" type="Label" parent="PaperHost/Paper/Margin/VBox/BodyScroll/CardsGrid/EventCard/Margin/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.36, 0.3, 0.23, 1)
+theme_override_font_sizes/font_size = 18
+text = "今天没有额外事件，可以按自己的节奏安排。"
+autowrap_mode = 3
+
+[node name="Effect" type="PanelContainer" parent="PaperHost/Paper/Margin/VBox/BodyScroll/CardsGrid/EventCard/Margin/VBox"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_effect")
+
+[node name="Label" type="Label" parent="PaperHost/Paper/Margin/VBox/BodyScroll/CardsGrid/EventCard/Margin/VBox/Effect"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.51, 0.32, 0.15, 1)
+theme_override_font_sizes/font_size = 17
+text = "没有额外影响"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="ContinueButton" type="Button" parent="PaperHost/Paper/Margin/VBox"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = -86.0
+offset_right = -32.0
+offset_bottom = -26.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 22
+text = "开始今天"

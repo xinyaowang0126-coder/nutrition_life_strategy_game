@@ -27,6 +27,10 @@ window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 window/handheld/orientation=1
 
+[debug]
+
+file_logging/enable_file_logging.pc=false
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/godot_ai/plugin.cfg")

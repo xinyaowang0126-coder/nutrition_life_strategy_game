@@ -7,6 +7,7 @@ Thumbs.db
 .codex/
 .cache/
 downloads/
+artifacts/
 
 # Temporary document rendering output
 docs/.tmp_render/

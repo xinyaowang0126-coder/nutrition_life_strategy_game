@@ -42,7 +42,7 @@ func test_source_rules_and_meal_action_transitions() -> void:
 	assert_eq(game.phase, "breakfast_action")
 	assert_eq(game.today_meal_records.size(), 1)
 	assert_eq(int(game.state["balance"]), opening_balance - 7)
-	assert_true(game.combos_today.has("balanced_plate"))
+	assert_true(game.combos_today.has("meal_group_mix"))
 
 	game._apply_action("study")
 	assert_eq(game.phase, "lunch_source")
@@ -89,6 +89,65 @@ func test_dorm_stock_is_consumed_and_persists_next_day() -> void:
 	assert_eq(int(game.dorm_inventory.get("instant_noodles", 0)), before - 1)
 
 
+func test_source_identity_action_limits_and_pantry_restock_are_enforced() -> void:
+	var game := _new_controller()
+	assert_eq(game._source_selection_limit("cafeteria"), 3)
+	assert_eq(game._source_selection_limit("takeout"), 2)
+	assert_eq(game._source_selection_limit("convenience_store"), 2)
+	assert_eq(game._source_selection_limit("dorm_storage"), 2)
+
+	game.day = 4
+	game._start_day()
+	assert_eq(String(game.current_event.get("id", "")), "delivery_coupon")
+	assert_eq(int(game._effective_meal_source("takeout")["fee"]), 1)
+
+	game.phase = "breakfast_action"
+	var balance_before := int(game.state["balance"])
+	var oatmeal_before := int(game.dorm_inventory.get("oatmeal", 0))
+	game._apply_action("restock_pantry")
+	assert_eq(game.phase, "lunch_source")
+	assert_eq(int(game.state["balance"]), balance_before - 10)
+	assert_eq(int(game.dorm_inventory.get("oatmeal", 0)), oatmeal_before + 1)
+	assert_eq(game.today_action_records.size(), 1)
+
+	game.phase = "lunch_action"
+	game._apply_action("restock_pantry")
+	assert_eq(game.phase, "lunch_action", "restocking twice in one day must be rejected")
+	assert_contains(game._action_disabled_reason(game._effective_action("restock_pantry")), "已经补过")
+
+
+func test_previous_day_learning_state_changes_visible_study_yield() -> void:
+	var game := _new_controller()
+	game.phase = "breakfast_action"
+	game.current_learning_state = {
+		"id": "clear_focus",
+		"title": "脑子很清醒",
+		"study_modifier": 3,
+	}
+	var focused := game._effective_action("study")
+	assert_eq(int(focused["study"]), 13)
+	assert_contains(String(focused["rule_hint"]), "脑子很清醒")
+	var study_card := CompactCardScene.instantiate() as CompactChoiceCardV2
+	study_card.configure(focused, "action")
+	_add_to_test_tree(study_card)
+	assert_eq(study_card.primary_stat.text, "复习 +13")
+	game._apply_action("study")
+	assert_eq(int(game.state["study_progress"]), 13)
+
+	var tired_game := _new_controller()
+	tired_game.phase = "breakfast_action"
+	tired_game.current_learning_state = {
+		"id": "brain_fog",
+		"title": "脑子像蒙着一层雾",
+		"study_modifier": -4,
+	}
+	assert_eq(int(tired_game._effective_action("study")["study"]), 6)
+	tired_game.state["energy"] = 7
+	tired_game._apply_action("study")
+	assert_eq(tired_game.phase, "breakfast_action", "study should not run below its energy floor")
+	assert_eq(int(tired_game.state["study_progress"]), 0)
+
+
 func test_normal_starting_budget_can_reach_seventh_day_ending() -> void:
 	var game := _new_controller()
 	while game.phase != "ending":
@@ -100,8 +159,11 @@ func test_normal_starting_budget_can_reach_seventh_day_ending() -> void:
 	assert_eq(game.day, GameDataScript.TOTAL_DAYS)
 	assert_eq(game.phase, "ending")
 	assert_eq(game.ending_id, "stable_endurance")
-	assert_eq(int(game.state["balance"]), 22)
+	assert_eq(int(game.state["balance"]), 20)
 	assert_eq(game.today_meal_records.size(), 3)
+	assert_eq(game.run_history.size(), GameDataScript.TOTAL_DAYS)
+	assert_eq(int(game.run_history[6]["day"]), 7)
+	assert_true((game.run_history[6]["nutrition"] as Dictionary).has("score"))
 
 
 func test_skipping_everything_can_trigger_early_collapse() -> void:
@@ -289,6 +351,7 @@ func test_v2_root_scene_starts_at_breakfast_source() -> void:
 	assert_eq(game.day, 1)
 	assert_eq(game.phase, "breakfast_source")
 	assert_eq(game.day_label.text, "第 1 天 / 第 7 天")
+	assert_eq(game.character_hud.study_value.text, "复习 0/70")
 	assert_true(game._active_stage is MealSourceStageV2)
 	var hud_font_path := "res://assets/fonts/NotoSansCJKsc-Bold.otf"
 	for node_path in [
@@ -454,6 +517,67 @@ func test_mobile_daily_summary_is_compact_and_actionable() -> void:
 	assert_eq(advance_events.size(), 1, "pressing next-day should emit exactly once")
 
 
+func test_daily_summary_can_expand_optional_nutrition_detail() -> void:
+	var game := GameRootV2Scene.instantiate() as GameRootV2
+	_add_to_test_tree(game)
+	var popup := game.daily_summary
+	popup.show_summary({
+		"day": 1,
+		"quality": "三餐都接住了，其中 1 顿的餐盘构成比较完整。",
+		"advice": "下一餐可以补一份蔬菜。",
+		"nutrition": {
+			"detail_text": "进餐规律：已进餐 3/3 餐\n食物类别分布：谷薯类、蔬菜类、蛋类\n重点营养素来源：膳食纤维、优质蛋白质",
+			"basis": "依据膳食指南进行游戏化反馈，仅用于健康教育。",
+		},
+		"stats": {"stability": 64, "study_progress": 10, "balance": 108},
+	}, true)
+	popup._finish_show()
+
+	assert_true(popup.detail_button.visible)
+	assert_false(popup.detail_panel.visible)
+	assert_eq(popup.detail_button.text, "查看今日膳食记录")
+	popup.detail_button.pressed.emit()
+	assert_true(popup.detail_panel.visible)
+	assert_eq(popup.detail_button.text, "收起膳食记录")
+	assert_contains(popup.detail_label.text, "重点营养素来源")
+	assert_contains(popup.basis_label.text, "仅用于健康教育")
+	assert_true(
+		popup.paper_host.get_global_rect().encloses(popup.next_button.get_global_rect()),
+		"expanded nutrition detail must keep the next-day button inside the paper"
+	)
+
+
+func test_ending_summary_shows_art_and_week_recap() -> void:
+	var game := GameRootV2Scene.instantiate() as GameRootV2
+	_add_to_test_tree(game)
+	var popup := game.daily_summary
+	popup.show_summary({
+		"day": 7,
+		"title": "稳稳到了周末",
+		"layout": "ending",
+		"ending_image": "res://assets/generated/endings/stable_endurance.png",
+		"detail_button_text": "查看本周轨迹",
+		"detail_button_open_text": "收起本周轨迹",
+		"detail": {
+			"detail_text": "第 1 天｜饮食 72｜复习 +10",
+			"basis": "由七天记录生成。",
+		},
+		"stats": {"stability": 64, "study_progress": 70, "study_target": 70, "balance": 20},
+	}, true)
+	popup._finish_show()
+	assert_true(popup.ending_image.visible)
+	assert_eq(popup.ending_image.texture.resource_path, "res://assets/generated/endings/stable_endurance.png")
+	assert_eq(popup.study_value.text, "复习 70/70")
+	assert_eq(popup.detail_button.text, "查看本周轨迹")
+	popup.detail_button.pressed.emit()
+	assert_eq(popup.detail_button.text, "收起本周轨迹")
+	assert_contains(popup.detail_label.text, "第 1 天")
+	assert_true(
+		popup.paper_host.get_global_rect().encloses(popup.next_button.get_global_rect()),
+		"expanded week recap must keep the replay button inside the paper"
+	)
+
+
 func test_rapid_repeat_inputs_do_not_double_advance_or_settle() -> void:
 	var game := _new_controller()
 	game._skip_meal()
@@ -581,11 +705,19 @@ func _play_affordable_study_day(game: GameRootV2) -> void:
 	for meal in ["breakfast", "lunch", "dinner"]:
 		assert_eq(game.phase, "%s_source" % meal)
 		game._choose_meal_source("cafeteria")
-		var plate: Array[String]
+		var preferred: Array[String]
 		if meal == "breakfast":
-			plate = ["rice_plain", "egg"]
+			preferred = ["rice_plain", "egg", "tomato", "mixed_grain_rice"]
 		else:
-			plate = ["rice_plain", "tofu"]
+			preferred = ["rice_plain", "tofu", "greens", "tomato", "mixed_grain_rice"]
+		var plate: Array[String] = []
+		for food_id in preferred:
+			if game.hand.has(food_id) and game._selected_meal_total(food_id) <= int(game.state["balance"]):
+				plate.append(food_id)
+			if plate.size() >= 2:
+				break
+		if plate.is_empty():
+			plate.append(_first_affordable_food(game))
 		game._confirm_food(plate)
 		assert_eq(game.phase, "%s_action" % meal)
 		game._apply_action("study")

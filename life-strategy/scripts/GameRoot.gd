@@ -623,12 +623,12 @@ func _apply_meal_record(record: Dictionary) -> void:
 
 
 func _check_meal_combos(record: Dictionary) -> void:
-	if not combos_today.has("balanced_plate") and MealResolverScript.has_balanced_plate(record):
-		combos_today.append("balanced_plate")
+	if not combos_today.has("meal_group_mix") and MealResolverScript.has_meal_group_combination(record):
+		combos_today.append("meal_group_mix")
 		state["energy"] = int(state["energy"]) + 5
 		state["mood"] = int(state["mood"]) + 3
 		state["diet_burden"] = int(state["diet_burden"]) - 2
-		_add_log("这一顿主食、菜和蛋白质都吃到了。", "good")
+		_add_log("这餐同时包含谷薯类、蔬菜类和蛋白质食物来源。", "good")
 	if not combos_today.has("comfort_chain") and MealResolverScript.comfort_meal_count(today_meal_records) >= 2:
 		combos_today.append("comfort_chain")
 		state["mood"] = int(state["mood"]) + 4

@@ -3,6 +3,8 @@ extends RefCounted
 
 const CardDataStoreScript := preload("res://scripts/CardDataStore.gd")
 const TOTAL_DAYS := 7
+const STUDY_TARGET := 70
+const DAILY_STUDY_PACE := 10
 
 const STAT_LABELS := {
 	"stability": "余力",
@@ -24,6 +26,7 @@ const STARTING_STATS := {
 	"stress": 48,
 	"diet_burden": 24,
 	"study_progress": 0,
+	"study_target": STUDY_TARGET,
 }
 
 const ENDINGS := {

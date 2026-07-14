@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <actions>
-  <action id="study" name="复习" name_breakfast_action="晨读" name_lunch_action="复习" name_dinner_action="夜读" cost="0" slots="1" energy="-8" mood="-2" stress="3" study="10" satiety="-4" burden="0" image="res://assets/generated/actions/study.png" scenes="breakfast_action,lunch_action,dinner_action">
+  <action id="study" name="复习" name_breakfast_action="晨读" name_lunch_action="复习" name_dinner_action="夜读" cost="0" slots="1" min_energy="8" energy="-8" mood="-2" stress="3" study="10" satiety="-4" burden="0" rule_hint="至少需要 8 精力；精力偏低或压力过高时，复习效率会下降" image="res://assets/generated/actions/study.png" scenes="breakfast_action,lunch_action,dinner_action">
     <desc>翻到折角那页，再过一遍。</desc>
   </action>
   <action id="nap" name="歇一会儿" name_breakfast_action="补个觉" name_lunch_action="午睡" name_dinner_action="眯一会儿" cost="0" slots="1" energy="14" mood="2" stress="-4" study="0" satiety="-2" burden="0" image="res://assets/generated/actions/nap.png" scenes="breakfast_action,lunch_action,dinner_action">
     <desc>闹钟调二十分钟。</desc>
   </action>
-  <action id="walk" name="散步" name_breakfast_action="早上走走" name_lunch_action="校园散步" name_dinner_action="晚风里走走" cost="0" slots="1" energy="-3" mood="3" stress="-6" study="0" satiety="-3" burden="-2" image="res://assets/generated/actions/walk.png" scenes="breakfast_action,lunch_action,dinner_action">
+  <action id="walk" name="散步" name_breakfast_action="早上走走" name_lunch_action="校园散步" name_dinner_action="晚风里走走" cost="0" slots="1" min_energy="3" energy="-3" mood="3" stress="-6" study="0" satiety="-3" burden="-2" image="res://assets/generated/actions/walk.png" scenes="breakfast_action,lunch_action,dinner_action">
     <desc>下楼绕一圈，吹吹风。</desc>
   </action>
   <action id="drink_water" name="喝水" name_breakfast_action="喝水" name_lunch_action="喝水" name_dinner_action="喝水" cost="0" slots="1" energy="1" mood="0" stress="-1" study="0" satiety="3" burden="-3" rule_hint="每天最多两次" image="res://assets/generated/actions/drink_water.png" scenes="breakfast_action,lunch_action,dinner_action">
@@ -14,5 +14,8 @@
   </action>
   <action id="allow_imperfection" name="留点空" name_breakfast_action="上午留白" name_lunch_action="下午留白" name_dinner_action="早点收工" cost="0" slots="1" energy="4" mood="7" stress="-8" study="-2" satiety="0" burden="-1" image="res://assets/generated/actions/allow_imperfection.png" scenes="breakfast_action,lunch_action,dinner_action">
     <desc>今天不把行程塞满。</desc>
+  </action>
+  <action id="restock_pantry" name="补充存粮" name_breakfast_action="买点早餐" name_lunch_action="补充存粮" name_dinner_action="顺路补货" cost="10" slots="1" min_energy="4" energy="-4" mood="1" stress="-1" study="0" satiety="0" burden="0" stock_items="oatmeal:1,milk:1,apple:1" once_per_day="true" rule_hint="花 ¥10 补充燕麦、牛奶和苹果各 1 份；每天最多一次" image="res://assets/generated/actions/convenience_store.png" scenes="breakfast_action,lunch_action,dinner_action">
+    <desc>为后面几天留三份能直接吃的东西。</desc>
   </action>
 </actions>

@@ -22,14 +22,35 @@ func test_xml_card_data_exists() -> void:
 
 func test_food_assets_and_costs() -> void:
 	var food_ids := GameDataScript.get_food_ids_for_scene("meal")
-	assert_eq(food_ids.size(), 15)
+	assert_eq(food_ids.size(), 23)
 	for id in food_ids:
 		var food := GameDataScript.get_food(id)
 		assert_true(food.has("name"), "%s missing name" % id)
 		assert_true(int(food["cost"]) >= 0, "%s cost is negative" % id)
 		assert_true(food.has("scenes"), "%s missing scenes" % id)
+		assert_true(food.has("food_groups"), "%s missing professional food-group classification" % id)
 		assert_true(GameDataScript.is_food_available(id, "meal"), "%s should be available in meal scene" % id)
 		assert_true(ResourceLoader.exists(String(food["image"])), "%s image missing: %s" % [id, String(food["image"])])
+
+
+func test_new_foods_match_realistic_meal_sources() -> void:
+	for id in ["mixed_grain_rice", "tomato_egg_stir_fry", "celery_pork_stir_fry"]:
+		assert_true(
+			GameDataScript.get_food_ids_for_context("cafeteria", "lunch").has(id),
+			"%s should appear as a cafeteria lunch option" % id
+		)
+	assert_true(GameDataScript.get_food_ids_for_context("cafeteria", "dinner").has("steamed_fish"))
+	assert_true(GameDataScript.get_food_ids_for_context("takeout", "dinner").has("steamed_fish"))
+	assert_true(GameDataScript.get_food_ids_for_context("takeout", "lunch").has("chicken_vegetable_rice"))
+	for id in ["plain_yogurt", "whole_wheat_bread", "unsalted_nuts"]:
+		assert_true(GameDataScript.get_food_ids_for_context("convenience_store", "breakfast").has(id))
+		assert_true(GameDataScript.get_food_ids_for_context("dorm_storage", "breakfast").has(id))
+	var tomato_egg := GameDataScript.get_food("tomato_egg_stir_fry")
+	assert_true(tomato_egg["food_groups"].has("vegetables"))
+	assert_true(tomato_egg["food_groups"].has("eggs"))
+	assert_true(tomato_egg["nutrient_tags"].has("high_quality_protein_source"))
+	var nuts := GameDataScript.get_food("unsalted_nuts")
+	assert_true(nuts["nutrient_tags"].has("unsaturated_fatty_acid_source"))
 
 
 func test_food_satiety_is_rebalanced() -> void:
@@ -63,7 +84,7 @@ func test_food_satiety_is_rebalanced() -> void:
 
 func test_action_assets_and_rules() -> void:
 	var action_ids := GameDataScript.get_action_ids_for_scene("breakfast_action")
-	assert_eq(action_ids.size(), 5)
+	assert_eq(action_ids.size(), 6)
 	for id in action_ids:
 		var action := GameDataScript.get_action(id)
 		assert_true(action.has("slots"), "%s missing slots" % id)
@@ -71,6 +92,10 @@ func test_action_assets_and_rules() -> void:
 		assert_true(action.has("scenes"), "%s missing scenes" % id)
 		assert_true(ResourceLoader.exists(String(action["image"])), "%s image missing: %s" % [id, String(action["image"])])
 	assert_eq(int(GameDataScript.get_action("drink_water")["slots"]), 1)
+	assert_eq(int(GameDataScript.get_action("study")["min_energy"]), 8)
+	var restock := GameDataScript.get_action("restock_pantry")
+	assert_eq(int(restock["cost"]), 10)
+	assert_eq(restock["stock_items"], ["oatmeal:1", "milk:1", "apple:1"])
 
 
 func test_sleep_early_is_sleep_only() -> void:
@@ -91,6 +116,7 @@ func test_meal_sources_and_pools() -> void:
 	assert_true(GameDataScript.is_meal_source_available("takeout", "lunch"))
 	for id in source_ids:
 		var source := GameDataScript.get_meal_source(id)
+		assert_true(int(source.get("selection_limit", 0)) >= 1, "%s missing selection limit" % id)
 		assert_true(ResourceLoader.exists(String(source["image"])), "%s image missing" % id)
 		assert_true(ResourceLoader.exists(String(source["background"])), "%s background missing" % id)
 		for meal in ["breakfast", "lunch", "dinner"]:
@@ -99,6 +125,8 @@ func test_meal_sources_and_pools() -> void:
 	var inventory := GameDataScript.get_initial_dorm_inventory()
 	assert_eq(int(inventory.get("oatmeal", 0)), 2)
 	assert_eq(int(inventory.get("instant_noodles", 0)), 2)
+	assert_eq(int(GameDataScript.get_meal_source("cafeteria")["selection_limit"]), 3)
+	assert_eq(int(GameDataScript.get_meal_source("takeout")["selection_limit"]), 2)
 
 
 func test_endings_have_images() -> void:

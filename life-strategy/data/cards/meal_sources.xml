@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <meal_sources>
-  <meal_source id="cafeteria" name="食堂" fee="0" hand_size="6" payment_mode="cash" scenes="breakfast,lunch,dinner" image="res://assets/generated/ui_v2/props/cafeteria_window_alpha.png" background="res://assets/generated/backgrounds/cafeteria_background.png" tone="steady">
+  <meal_source id="cafeteria" name="食堂" fee="0" hand_size="6" selection_limit="3" energy="-3" mood="0" stress="0" burden="0" payment_mode="cash" rule_hint="可选 3 样；价格稳定，但要花精力去窗口排队" scenes="breakfast,lunch,dinner" image="res://assets/generated/ui_v2/props/cafeteria_window_alpha.png" background="res://assets/generated/backgrounds/cafeteria_background.png" tone="steady">
     <desc>窗口多，价格也稳。</desc>
   </meal_source>
-  <meal_source id="takeout" name="外卖" fee="3" hand_size="4" payment_mode="cash" scenes="lunch,dinner" image="res://assets/generated/ui_v2/props/takeout_phone_alpha.png" background="res://assets/generated/backgrounds/takeout_background.png" tone="comfort">
+  <meal_source id="takeout" name="外卖" fee="3" hand_size="4" selection_limit="2" energy="4" mood="2" stress="-2" burden="0" payment_mode="cash" rule_hint="最多选 2 样并支付配送费；省下出门的精力" scenes="lunch,dinner" image="res://assets/generated/ui_v2/props/takeout_phone_alpha.png" background="res://assets/generated/backgrounds/takeout_background.png" tone="comfort">
     <desc>不用出门，要多付配送费。</desc>
   </meal_source>
-  <meal_source id="convenience_store" name="便利店" fee="0" hand_size="5" payment_mode="cash" scenes="breakfast,lunch,dinner" image="res://assets/generated/ui_v2/props/convenience_shelf_alpha.png" background="res://assets/generated/backgrounds/convenience_background.png" tone="quick">
+  <meal_source id="convenience_store" name="便利店" fee="0" hand_size="5" selection_limit="2" energy="-1" mood="0" stress="0" burden="0" payment_mode="cash" rule_hint="最多选 2 样；离得近、选择少，适合快速解决" scenes="breakfast,lunch,dinner" image="res://assets/generated/ui_v2/props/convenience_shelf_alpha.png" background="res://assets/generated/backgrounds/convenience_background.png" tone="quick">
     <desc>下楼就到，能选的不多。</desc>
   </meal_source>
-  <meal_source id="dorm_storage" name="宿舍存粮" fee="0" hand_size="4" payment_mode="stock" scenes="breakfast,lunch,dinner" image="res://assets/generated/ui_v2/props/dorm_pantry_alpha.png" background="res://assets/generated/backgrounds/dorm_background.png" tone="quiet">
+  <meal_source id="dorm_storage" name="宿舍存粮" fee="0" hand_size="4" selection_limit="2" energy="0" mood="0" stress="0" burden="0" payment_mode="stock" rule_hint="最多选 2 样；不花现金，但会消耗有限存货" scenes="breakfast,lunch,dinner" image="res://assets/generated/ui_v2/props/dorm_pantry_alpha.png" background="res://assets/generated/backgrounds/dorm_background.png" tone="quiet">
     <desc>不花现金，吃的是现有存货。</desc>
   </meal_source>
 </meal_sources>

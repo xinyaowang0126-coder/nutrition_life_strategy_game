@@ -8,6 +8,7 @@
 [ext_resource type="FontFile" uid="uid://bwr015fuhqxje" path="res://assets/fonts/NotoSansCJKsc-Bold.otf" id="4_vkrue"]
 [ext_resource type="PackedScene" uid="uid://bi8i7mbk8bsla" path="res://scenes/game_v2/components/StickyNotePopup.tscn" id="5_s3rtf"]
 [ext_resource type="PackedScene" uid="uid://cobi5u3x8l5q1" path="res://scenes/game_v2/components/DailySummaryPopup.tscn" id="6_1k0vw"]
+[ext_resource type="PackedScene" path="res://scenes/game_v2/components/NewDayPopup.tscn" id="7_new_day"]
 
 [node name="GameRootV2" type="Control" unique_id=940067868]
 layout_mode = 3
@@ -202,6 +203,11 @@ anchor_bottom = 1.0
 mouse_filter = 2
 
 [node name="DailySummary" parent="HUD/HUDRoot/ModalLayer" unique_id=194952615 instance=ExtResource("6_1k0vw")]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="NewDayPopup" parent="HUD/HUDRoot/ModalLayer" instance=ExtResource("7_new_day")]
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
