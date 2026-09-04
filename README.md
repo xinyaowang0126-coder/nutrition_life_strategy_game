@@ -50,6 +50,14 @@ $env:GODOT_BIN = "C:\path\to\Godot_v4.7-stable_win64_console.exe"
 
 CI 中执行同一脚本即可；它不下载依赖，任何测试、主场景启动、导出或发布包审计失败都会返回非零退出码。
 
+Web 导出需要与当前 Godot 引擎版本匹配的导出模板；例如 4.7.2 引擎需要安装 4.7.2 模板，现有 4.7 或 4.7.1 模板不能算作本机已具备完整导出环境。
+
+## 当前开发进度（2026-09-04）
+
+营养健康升级已完成 NUT-206 的工程部分：23 个食物条目均有独立资料，13 项为固定游戏规格、10 项为保守品类资料，全部仍是 draft；用餐快照和独立健康历史存取已接入 V2 用餐流程，保留当餐资料与版本，加载历史不会用新资料重算，也不会恢复或混入本局游戏状态。四个新健康功能开关保持关闭；下一步是角色偏好、旧状态拆分与评估引擎。任务状态见 [专项 Backlog](life-strategy/docs/plans/nutrition_health_guidance/06_implementation_backlog.md)，未知项和到期证据见 [复核队列](life-strategy/docs/plans/nutrition_health_guidance/07_profile_review_queue.md)。
+
+当前全量测试 157/157、发布配置静态检查和主场景烟测通过，包含完整七天 21 餐记录及开关前后玩法结果一致性验证；两项证据仍待到期复核。当前源码检查点位于开发分支 `codex/nutrition-health-m2`，未合并 main，未导出或发布；仓库 Play/ 包仍对应 2026-07-14 的 v0.3。
+
 ## 项目结构
 
 - `life-strategy/`：Godot 4.7 游戏项目。
