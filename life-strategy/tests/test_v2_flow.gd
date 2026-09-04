@@ -82,6 +82,19 @@ func test_dorm_stock_is_consumed_and_persists_next_day() -> void:
 	game._choose_sleep("sleep_early")
 	assert_eq(game.phase, "summary")
 	assert_eq(int(game.summary_payload["day"]), 1)
+	assert_true(game.summary_payload.has("record_summary"))
+	var meal_stamps: Array = game.summary_payload.get("meal_stamps", [])
+	assert_eq(meal_stamps.size(), 3)
+	assert_eq(String((meal_stamps[0] as Dictionary).get("state", "")), "missing")
+	assert_eq(String((meal_stamps[2] as Dictionary).get("state", "")), "eaten")
+	assert_contains(String((meal_stamps[2] as Dictionary).get("text", "")), "方便面")
+	var visible_summary := (
+		String(game.summary_payload.get("record_summary", ""))
+		+ "\n"
+		+ String((game.summary_payload.get("nutrition", {}) as Dictionary).get("detail_text", ""))
+	)
+	assert_false(visible_summary.contains("营养评分"))
+	assert_false(visible_summary.contains("/100"))
 	game._on_summary_advanced()
 	assert_eq(game.day, 2)
 	assert_eq(game.phase, "breakfast_source")
@@ -121,12 +134,12 @@ func test_previous_day_learning_state_changes_visible_study_yield() -> void:
 	game.phase = "breakfast_action"
 	game.current_learning_state = {
 		"id": "clear_focus",
-		"title": "脑子很清醒",
+		"title": "进入状态较快",
 		"study_modifier": 3,
 	}
 	var focused := game._effective_action("study")
 	assert_eq(int(focused["study"]), 13)
-	assert_contains(String(focused["rule_hint"]), "脑子很清醒")
+	assert_contains(String(focused["rule_hint"]), "进入状态较快")
 	var study_card := CompactCardScene.instantiate() as CompactChoiceCardV2
 	study_card.configure(focused, "action")
 	_add_to_test_tree(study_card)
@@ -138,7 +151,7 @@ func test_previous_day_learning_state_changes_visible_study_yield() -> void:
 	tired_game.phase = "breakfast_action"
 	tired_game.current_learning_state = {
 		"id": "brain_fog",
-		"title": "脑子像蒙着一层雾",
+		"title": "需要先缓一缓",
 		"study_modifier": -4,
 	}
 	assert_eq(int(tired_game._effective_action("study")["study"]), 6)
@@ -164,6 +177,9 @@ func test_normal_starting_budget_can_reach_seventh_day_ending() -> void:
 	assert_eq(game.run_history.size(), GameDataScript.TOTAL_DAYS)
 	assert_eq(int(game.run_history[6]["day"]), 7)
 	assert_true((game.run_history[6]["nutrition"] as Dictionary).has("score"))
+	var recap := game._build_week_recap()
+	assert_false(String(recap["detail_text"]).contains("｜饮食 "))
+	assert_false(recap.has("average_nutrition"))
 
 
 func test_skipping_everything_can_trigger_early_collapse() -> void:
@@ -379,8 +395,8 @@ func test_new_day_popup_uses_live_state_event_rules_and_art() -> void:
 	game.day = 5
 	game.current_learning_state = {
 		"id": "clear_focus",
-		"title": "脑子很清醒",
-		"summary": "三餐接住了，昨晚也睡得早。",
+		"title": "进入状态较快",
+		"summary": "按游戏规则，昨日状态触发了复习加成。",
 		"study_modifier": 3,
 	}
 	game.current_event = {
@@ -390,7 +406,7 @@ func test_new_day_popup_uses_live_state_event_rules_and_art() -> void:
 	}
 	game._show_new_day_popup()
 	game.new_day_popup._finish_show()
-	assert_eq(game.new_day_popup.status_title.text, "脑子很清醒")
+	assert_eq(game.new_day_popup.status_title.text, "进入状态较快")
 	assert_eq(game.new_day_popup.status_effect.text, "每次学习效果 +3")
 	assert_eq(game.new_day_popup.event_title.text, "小测提醒")
 	assert_contains(game.new_day_popup.event_effect.text, "复习收益 +3")
@@ -530,7 +546,7 @@ func test_mobile_daily_summary_is_compact_and_actionable() -> void:
 	popup.show_summary({
 		"day": 1,
 		"title": "第 1 天，过去了",
-		"quality": "三顿饭都接住了。",
+		"record_summary": "三餐都吃了，今天先记到这里。",
 		"advice": "今天先放到这里，剩下的交给明天。",
 		"stats": {
 			"stability": 64,
@@ -568,11 +584,16 @@ func test_daily_summary_can_expand_optional_nutrition_detail() -> void:
 	var popup := game.daily_summary
 	popup.show_summary({
 		"day": 1,
-		"quality": "三餐都接住了，其中 1 顿的餐盘构成比较完整。",
-		"advice": "下一餐可以补一份蔬菜。",
+		"record_summary": "三餐都吃了，今天先记到这里。",
+		"advice": "明天继续照预算、时间和口味做选择。",
+		"meal_stamps": [
+			{"title": "早餐", "text": "食堂 · 白米饭、鸡蛋", "state": "eaten"},
+			{"title": "午餐", "text": "便利店 · 苹果", "state": "eaten"},
+			{"title": "晚餐", "text": "没吃", "state": "skipped"},
+		],
 		"nutrition": {
-			"detail_text": "进餐规律：已进餐 3/3 餐\n食物类别分布：谷薯类、蔬菜类、蛋类\n重点营养素来源：膳食纤维、优质蛋白质",
-			"basis": "依据膳食指南进行游戏化反馈，仅用于健康教育。",
+			"detail_text": "三餐情况　吃了 2/3 餐\n餐盘线索\n主食 1 顿｜蔬菜 1 顿｜水果碰见过\n卡牌资料线索\n膳食纤维来源 2 顿",
+			"basis": "规则小字：本局饮食信息参考《中国居民膳食指南（2022）》的一般原则；卡牌出现不代表现实摄入量足够，也不用于现实健康判断。",
 		},
 		"stats": {"stability": 64, "study_progress": 10, "balance": 108},
 	}, true)
@@ -580,12 +601,16 @@ func test_daily_summary_can_expand_optional_nutrition_detail() -> void:
 
 	assert_true(popup.detail_button.visible)
 	assert_false(popup.detail_panel.visible)
-	assert_eq(popup.detail_button.text, "查看今日膳食记录")
+	assert_true(popup.meal_trail.visible)
+	assert_contains(popup.meal_stamp_labels[0].text, "白米饭")
+	assert_contains(popup.meal_stamp_labels[2].text, "没吃")
+	assert_eq(popup.detail_button.text, "查看三餐详情")
 	popup.detail_button.pressed.emit()
 	assert_true(popup.detail_panel.visible)
-	assert_eq(popup.detail_button.text, "收起膳食记录")
-	assert_contains(popup.detail_label.text, "重点营养素来源")
-	assert_contains(popup.basis_label.text, "仅用于健康教育")
+	assert_eq(popup.detail_button.text, "收起三餐详情")
+	assert_contains(popup.detail_label.text, "卡牌资料线索")
+	assert_contains(popup.basis_label.text, "《中国居民膳食指南（2022）》")
+	assert_false(popup.record_summary_label.text.contains("今日饮食结构记录"))
 	assert_true(
 		popup.paper_host.get_global_rect().encloses(popup.next_button.get_global_rect()),
 		"expanded nutrition detail must keep the next-day button inside the paper"
@@ -604,7 +629,7 @@ func test_ending_summary_shows_art_and_week_recap() -> void:
 		"detail_button_text": "查看本周轨迹",
 		"detail_button_open_text": "收起本周轨迹",
 		"detail": {
-			"detail_text": "第 1 天｜饮食 72｜复习 +10",
+			"detail_text": "第 1 天｜进餐记录 3/3｜复习 +10",
 			"basis": "由七天记录生成。",
 		},
 		"stats": {"stability": 64, "study_progress": 70, "study_target": 70, "balance": 20},

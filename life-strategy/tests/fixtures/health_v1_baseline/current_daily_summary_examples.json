@@ -1,0 +1,35 @@
+{
+  "captured_at": "2026-07-15",
+  "legacy_only": true,
+  "implementation": "NutritionLedger.summarize",
+  "cases": [
+    {
+      "id": "repeated_composite_meal",
+      "meal_food_ids": [
+        ["chicken_vegetable_rice"],
+        ["chicken_vegetable_rice"],
+        ["chicken_vegetable_rice"]
+      ],
+      "legacy_score": 86,
+      "legacy_rating": "餐盘完整",
+      "legacy_unique_foods": 1,
+      "legacy_grain_meals": 3,
+      "legacy_vegetable_meals": 3,
+      "legacy_animal_food_meals": 3
+    },
+    {
+      "id": "repeated_three_card_meal",
+      "meal_food_ids": [
+        ["rice_plain", "egg", "tomato"],
+        ["rice_plain", "egg", "tomato"],
+        ["rice_plain", "egg", "tomato"]
+      ],
+      "legacy_score": 86,
+      "legacy_rating": "餐盘完整",
+      "legacy_unique_foods": 3,
+      "legacy_grain_meals": 3,
+      "legacy_vegetable_meals": 3,
+      "legacy_animal_food_meals": 3
+    }
+  ]
+}

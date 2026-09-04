@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<evidence_registry schema_version="99" registry_version="future" locale="zh-CN" accessed_at="2026-07-15">
+  <evidence evidence_id="MUST_NOT_LOAD" title="Future fixture" publisher="Fixture" url="https://example.test/future" published_at="2026-01-01" accessed_at="2026-07-15" jurisdiction="fixture" population_scope="fixture" supports="FUTURE" does_not_support="CURRENT" scope_note="Fixture." boundary_note="Fixture." review_due_at="2027-01-01" review_reason="Fixture." status="active" source_type="official_fixture" />
+</evidence_registry>

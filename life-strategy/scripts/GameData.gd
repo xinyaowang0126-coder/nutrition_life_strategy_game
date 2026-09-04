@@ -13,7 +13,7 @@ const STAT_LABELS := {
 	"mood": "心情",
 	"satiety": "饱腹",
 	"stress": "压力",
-	"diet_burden": "身体负担",
+	"diet_burden": "角色健康",
 	"study_progress": "复习",
 }
 
@@ -63,6 +63,14 @@ static func ensure_loaded() -> void:
 static func get_starting_stats() -> Dictionary:
 	ensure_loaded()
 	return STARTING_STATS.duplicate(true)
+
+
+static func character_health_from_burden(burden: int) -> int:
+	return clampi(100 - burden, 0, 100)
+
+
+static func character_health_delta_from_burden(burden_delta: int) -> int:
+	return -burden_delta
 
 
 static func get_food(id: String) -> Dictionary:

@@ -3,6 +3,36 @@
 [ext_resource type="Theme" uid="uid://dthxodrk6slpq" path="res://scenes/game_v2/V2Theme.tres" id="1_gjp4g"]
 [ext_resource type="Script" uid="uid://ixsqwols87w0" path="res://scripts/ui_v2/DailySummaryPopup.gd" id="2_r7g2v"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_journal_note"]
+bg_color = Color(0.984, 0.929, 0.761, 0.98)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.647, 0.486, 0.278, 0.62)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0.18, 0.12, 0.06, 0.18)
+shadow_size = 5
+shadow_offset = Vector2(0, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_receipt"]
+bg_color = Color(1, 0.985, 0.93, 0.98)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.55, 0.47, 0.36, 0.5)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+shadow_color = Color(0.12, 0.08, 0.04, 0.12)
+shadow_size = 3
+shadow_offset = Vector2(0, 2)
+
 [node name="DailySummaryPopup" type="Control" unique_id=194952615]
 visible = false
 layout_mode = 3
@@ -112,19 +142,101 @@ clip_text = true
 [node name="Divider" type="HSeparator" parent="PaperHost/Paper/Margin/VBox/ContentScroll/Content" unique_id=650808295]
 layout_mode = 2
 
-[node name="Quality" type="Label" parent="PaperHost/Paper/Margin/VBox/ContentScroll/Content" unique_id=102056602]
+[node name="MealTrailTitle" type="Label" parent="PaperHost/Paper/Margin/VBox/ContentScroll/Content"]
+visible = false
 layout_mode = 2
-theme_override_font_sizes/font_size = 23
-text = "三顿吃得还算齐全。"
+theme_override_colors/font_color = Color(0.55, 0.34, 0.16, 1)
+theme_override_font_sizes/font_size = 17
+text = "今日三餐"
 horizontal_alignment = 1
+
+[node name="MealTrail" type="GridContainer" parent="PaperHost/Paper/Margin/VBox/ContentScroll/Content"]
+visible = false
+layout_mode = 2
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 8
+columns = 3
+
+[node name="Breakfast" type="PanelContainer" parent="PaperHost/Paper/Margin/VBox/ContentScroll/Content/MealTrail"]
+custom_minimum_size = Vector2(0, 78)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="PaperHost/Paper/Margin/VBox/ContentScroll/Content/MealTrail/Breakfast"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+text = "早餐\n没有记录"
+horizontal_alignment = 1
+vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="Advice" type="Label" parent="PaperHost/Paper/Margin/VBox/ContentScroll/Content" unique_id=465984789]
+[node name="Lunch" type="PanelContainer" parent="PaperHost/Paper/Margin/VBox/ContentScroll/Content/MealTrail"]
+custom_minimum_size = Vector2(0, 78)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="PaperHost/Paper/Margin/VBox/ContentScroll/Content/MealTrail/Lunch"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+text = "午餐\n没有记录"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Dinner" type="PanelContainer" parent="PaperHost/Paper/Margin/VBox/ContentScroll/Content/MealTrail"]
+custom_minimum_size = Vector2(0, 78)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="PaperHost/Paper/Margin/VBox/ContentScroll/Content/MealTrail/Dinner"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+text = "晚餐\n没有记录"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="JournalNote" type="PanelContainer" parent="PaperHost/Paper/Margin/VBox/ContentScroll/Content"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_journal_note")
+
+[node name="Margin" type="MarginContainer" parent="PaperHost/Paper/Margin/VBox/ContentScroll/Content/JournalNote"]
+layout_mode = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 14
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 14
+
+[node name="VBox" type="VBoxContainer" parent="PaperHost/Paper/Margin/VBox/ContentScroll/Content/JournalNote/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 7
+
+[node name="RecordKicker" type="Label" parent="PaperHost/Paper/Margin/VBox/ContentScroll/Content/JournalNote/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.37, 0.16, 1)
+theme_override_font_sizes/font_size = 16
+text = "今日小记"
+
+[node name="RecordSummary" type="Label" parent="PaperHost/Paper/Margin/VBox/ContentScroll/Content/JournalNote/Margin/VBox" unique_id=102056602]
+layout_mode = 2
+theme_override_font_sizes/font_size = 23
+text = "今天的三餐先记到这里。"
+autowrap_mode = 3
+
+[node name="NoteDivider" type="HSeparator" parent="PaperHost/Paper/Margin/VBox/ContentScroll/Content/JournalNote/Margin/VBox"]
+layout_mode = 2
+
+[node name="AdviceKicker" type="Label" parent="PaperHost/Paper/Margin/VBox/ContentScroll/Content/JournalNote/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.3, 0.45, 0.29, 1)
+theme_override_font_sizes/font_size = 16
+text = "写给明天"
+
+[node name="Advice" type="Label" parent="PaperHost/Paper/Margin/VBox/ContentScroll/Content/JournalNote/Margin/VBox" unique_id=465984789]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.37, 0.31, 0.24, 1)
 theme_override_font_sizes/font_size = 20
 text = "今天还算顺。照这个节奏，慢慢来。"
-horizontal_alignment = 1
 autowrap_mode = 3
 
 [node name="DetailButton" type="Button" parent="PaperHost/Paper/Margin/VBox/ContentScroll/Content"]
@@ -132,12 +244,13 @@ visible = false
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
-text = "查看今日膳食记录"
+text = "查看三餐详情"
 
 [node name="DetailPanel" type="PanelContainer" parent="PaperHost/Paper/Margin/VBox/ContentScroll/Content"]
 visible = false
 custom_minimum_size = Vector2(0, 310)
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_receipt")
 
 [node name="Margin" type="MarginContainer" parent="PaperHost/Paper/Margin/VBox/ContentScroll/Content/DetailPanel"]
 layout_mode = 2
@@ -160,17 +273,27 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 10
 
+[node name="ReceiptTitle" type="Label" parent="PaperHost/Paper/Margin/VBox/ContentScroll/Content/DetailPanel/Margin/DetailScroll/DetailContent"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.58, 0.34, 0.16, 1)
+theme_override_font_sizes/font_size = 18
+text = "三餐详情 · 本局线索"
+horizontal_alignment = 1
+
+[node name="ReceiptDivider" type="HSeparator" parent="PaperHost/Paper/Margin/VBox/ContentScroll/Content/DetailPanel/Margin/DetailScroll/DetailContent"]
+layout_mode = 2
+
 [node name="Detail" type="Label" parent="PaperHost/Paper/Margin/VBox/ContentScroll/Content/DetailPanel/Margin/DetailScroll/DetailContent"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
-text = "进餐规律：已进餐 3/3 餐\n食物多样性：当前记录到 6 种食物\n食物类别分布：谷薯类、蔬菜类、水果类\n重点营养素来源：膳食纤维、优质蛋白质"
+text = "三餐情况：吃了 3/3 餐\n今天选了：6 种食物卡\n餐盘线索：主食、蔬菜、水果都有出现"
 autowrap_mode = 3
 
 [node name="Basis" type="Label" parent="PaperHost/Paper/Margin/VBox/ContentScroll/Content/DetailPanel/Margin/DetailScroll/DetailContent"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.42, 0.36, 0.29, 1)
 theme_override_font_sizes/font_size = 15
-text = "依据膳食指南进行游戏化记录；食物来源出现不代表摄入量达到推荐值。"
+text = "规则小字：本局饮食信息参考《中国居民膳食指南（2022）》的一般原则；卡牌出现不代表现实摄入量足够，也不用于现实健康判断。"
 autowrap_mode = 3
 
 [node name="Spacer" type="Control" parent="PaperHost/Paper/Margin/VBox" unique_id=1017574170]

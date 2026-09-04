@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<food_health_profiles
+  schema_version="1"
+  model_version="fixture-model-v1.0"
+  locale="zh-CN"
+  reviewed_at="2026-07-15">
+  <profile
+    food_id="fixture_meal"
+    profile_version="3"
+    display_basis="一份测试餐"
+    portion_status="estimated"
+    portion_value="320"
+    portion_unit="g"
+    portion_band="medium"
+    basis_type="standard_recipe_estimate"
+    composition_status="estimated"
+    caffeine_status="not_applicable"
+    caffeine_band="none"
+    serving_time_relevance="none"
+    confidence="low"
+    review_status="draft"
+    evidence_refs="FIXTURE-EVIDENCE,FIXTURE-RECIPE-PENDING">
+    <components>
+      <component
+        ingredient_id="fixture_grain"
+        name="测试谷物"
+        food_group="grains_tubers"
+        contribution_band="dominant"
+        amount_value="200"
+        amount_unit="g"
+        basis_type="visual_estimate"
+        confidence="low" />
+    </components>
+    <cooking_methods>
+      <method id="mixed" />
+    </cooking_methods>
+    <factors>
+      <factor
+        factor_id="sodium"
+        band="unknown"
+        basis_type="unknown"
+        confidence="unknown"
+        evidence_refs="FIXTURE-RECIPE-PENDING" />
+    </factors>
+  </profile>
+</food_health_profiles>

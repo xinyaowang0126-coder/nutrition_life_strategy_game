@@ -206,18 +206,21 @@ func _add_stat_bar(key: String) -> void:
 	var row := VBoxContainer.new()
 	row.add_theme_constant_override("separation", 2)
 	left_content.add_child(row)
+	var display_value := int(state[key])
+	if key == "diet_burden":
+		display_value = GameDataScript.character_health_from_burden(display_value)
 	var label := Label.new()
-	label.text = "%s  %d" % [GameDataScript.STAT_LABELS[key], int(state[key])]
+	label.text = "%s  %d" % [GameDataScript.STAT_LABELS[key], display_value]
 	label.add_theme_font_size_override("font_size", 17)
-	label.add_theme_color_override("font_color", _stat_color(key, int(state[key])))
+	label.add_theme_color_override("font_color", _stat_color(key, display_value))
 	row.add_child(label)
 	var bar := ProgressBar.new()
 	bar.max_value = 100
-	bar.value = float(state[key])
+	bar.value = float(display_value)
 	bar.show_percentage = false
 	bar.custom_minimum_size = Vector2(0, 7)
 	bar.add_theme_stylebox_override("background", _bar_style(Color(0.70, 0.65, 0.55, 0.72)))
-	bar.add_theme_stylebox_override("fill", _bar_style(_stat_color(key, int(state[key]))))
+	bar.add_theme_stylebox_override("fill", _bar_style(_stat_color(key, display_value)))
 	row.add_child(bar)
 
 
@@ -350,7 +353,7 @@ func _build_metrics_guide() -> void:
 	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	label.add_theme_font_size_override("font_size", 22 if not portrait_mode else 58)
-	label.text = "余力：这一周还能不能周转得开。\n\n精力：白天还能做多少事。\n\n心情：过日子的兴致。\n\n饱腹：饿着和吃撑都会难受。\n\n压力：越高，越容易顾此失彼。\n\n身体负担：连续吃得太重，恢复会慢一些。\n\n复习：考试前准备了多少。\n\n一顿最多选 %d 样；三餐后，各能安排一件事。" % MAX_FOODS_PER_MEAL
+	label.text = "余力：这一周还能不能周转得开。\n\n精力：白天还能做多少事。\n\n心情：过日子的兴致。\n\n饱腹：饿着和吃撑都会难受。\n\n压力：越高，越容易顾此失彼。\n\n角色健康：用于玩法结算，越高越好；不是对玩家真实健康的评价，也不参与饮食结构判断。\n\n复习：考试前准备了多少。\n\n一顿最多选 %d 样；三餐后，各能安排一件事。" % MAX_FOODS_PER_MEAL
 	scroll.add_child(label)
 	var close := Button.new()
 	close.text = "回去"
@@ -633,7 +636,7 @@ func _check_meal_combos(record: Dictionary) -> void:
 		combos_today.append("comfort_chain")
 		state["mood"] = int(state["mood"]) + 4
 		state["diet_burden"] = int(state["diet_burden"]) + 3
-		_add_log("连着吃了几样喜欢的，心情好些，身体也有点沉。")
+		_add_log("连续选择了偏好的食物：心情提高，同时触发额外游戏消耗。")
 	if String(record["phase"]) == "dinner" and not combos_today.has("budget_saver"):
 		var all_eaten := today_meal_records.size() >= 3
 		for meal_record in today_meal_records:
@@ -734,11 +737,11 @@ func _finish_day() -> void:
 		state["energy"] = int(state["energy"]) + 4
 		state["mood"] = int(state["mood"]) + 4
 		state["diet_burden"] = int(state["diet_burden"]) - 2
-		_add_log("三顿还算规律，晚上没那么累。", "good")
+		_add_log("本日选择触发了旧版游戏状态加成。", "good")
 	elif avg_quality < 42:
 		state["stress"] = int(state["stress"]) + 5
 		state["diet_burden"] = int(state["diet_burden"]) + 4
-		_add_log("今天吃得有些凑合，晚些时候不太舒服。", "warning")
+		_add_log("本日选择触发了旧版游戏状态减益。", "warning")
 	if int(state["satiety"]) < 20:
 		state["stress"] = int(state["stress"]) + 8
 		state["mood"] = int(state["mood"]) - 5
@@ -866,7 +869,7 @@ func _left_hint() -> String:
 	if int(state["stress"]) >= 75:
 		return "脑子绷得太紧了。出去走走，或者早点睡。"
 	if int(state["diet_burden"]) >= 65:
-		return "身体有点沉，下一顿吃清淡些会舒服一点。"
+		return "当前综合游戏状态偏低，下一步可先留意精力、压力和作息。"
 	if int(state["balance"]) <= max(8, (GameDataScript.TOTAL_DAYS - day + 1) * 7):
 		return "手里的钱不多了。"
 	if int(state["study_progress"]) < day * 8:
@@ -876,10 +879,10 @@ func _left_hint() -> String:
 
 func _quality_sentence(avg_quality: int) -> String:
 	if avg_quality >= 66:
-		return "三顿吃得还算齐全。"
+		return "今日饮食选择已记录；旧版游戏结算为加成档。"
 	if avg_quality >= 45:
-		return "有几顿吃得比较简单。"
-	return "今天有些凑合。"
+		return "今日饮食选择已记录；旧版游戏结算为常规档。"
+	return "今日饮食选择已记录；旧版游戏结算为减益档。"
 
 
 func _summary_advice(avg_quality: int) -> String:
@@ -888,7 +891,7 @@ func _summary_advice(avg_quality: int) -> String:
 	if int(state["study_progress"]) < day * 9:
 		return "书还没看完，明天找个清醒的时候补一点。"
 	if avg_quality < 45:
-		return "明天争取吃顿热乎的。"
+		return "明天如有条件，可先为三餐留出时间。"
 	if int(state["balance"]) < max(10, (GameDataScript.TOTAL_DAYS - day) * 8):
 		return "手里的钱不多了，明天得算着花。"
 	return "今天还算顺。照这个节奏，慢慢来。"
@@ -991,7 +994,7 @@ func _clear_children(node: Node) -> void:
 
 
 func _stat_color(key: String, value: int) -> Color:
-	if key == "stress" or key == "diet_burden":
+	if key == "stress":
 		if value >= 75:
 			return Color(0.79, 0.25, 0.18)
 		if value >= 50:

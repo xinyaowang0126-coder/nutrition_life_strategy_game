@@ -7,6 +7,12 @@ const MealResolverScript := preload("res://scripts/systems/MealResolver.gd")
 const NutritionLedgerScript := preload("res://scripts/systems/NutritionLedger.gd")
 const WeeklyEventServiceScript := preload("res://scripts/systems/WeeklyEventService.gd")
 const DayCarryoverServiceScript := preload("res://scripts/systems/DayCarryoverService.gd")
+const HealthGuidanceFeatureFlagsScript := preload("res://scripts/health/HealthGuidanceFeatureFlags.gd")
+const HealthDataStoreScript := preload("res://scripts/health/HealthDataStore.gd")
+const HealthDataValidatorScript := preload("res://scripts/health/HealthDataValidator.gd")
+const MealHealthSnapshotScript := preload("res://scripts/health/MealHealthSnapshot.gd")
+const MealHealthArchiveScript := preload("res://scripts/health/MealHealthArchive.gd")
+const DEFAULT_HEALTH_HISTORY_PATH := "user://health_guidance/latest_meals.json"
 
 const SOURCE_STAGE_SCENE := preload("res://scenes/game_v2/stages/MealSourceStage.tscn")
 const CAFETERIA_STAGE_SCENE := preload("res://scenes/game_v2/stages/CafeteriaMealStage.tscn")
@@ -116,6 +122,10 @@ var used_action_ids: Array[String] = []
 var today_action_records: Array[Dictionary] = []
 var combos_today: Array[String] = []
 var summary_payload: Dictionary = {}
+var health_guidance_flags: Dictionary = {}
+var health_profiles_path := HealthDataStoreScript.DEFAULT_PROFILES_PATH
+var health_history_path := DEFAULT_HEALTH_HISTORY_PATH
+var health_history_diagnostics: Array[Dictionary] = []
 var ending_id := ""
 var low_stability_days := 0
 var run_history: Array[Dictionary] = []
@@ -133,10 +143,15 @@ var _profile_initialized := false
 var _applying_profile := false
 var _background_path := ""
 var _background_a_is_front := true
+var _health_archive: RefCounted
+var _health_catalog: Dictionary = {}
+var _health_catalog_loaded := false
 
 
 func _ready() -> void:
 	GameDataScript.ensure_loaded()
+	health_guidance_flags = HealthGuidanceFeatureFlagsScript.current()
+	HealthGuidanceFeatureFlagsScript.warn_for_invalid(health_guidance_flags)
 	_deck_service = MealDeckServiceScript.new()
 	menu_button.pressed.connect(_request_main_menu)
 	character_hud.details_requested.connect(_show_detail.bind("state"))
@@ -150,6 +165,11 @@ func _ready() -> void:
 
 
 func start_new_run() -> void:
+	if _health_archive != null:
+		_health_archive.clear()
+	_health_catalog.clear()
+	_health_catalog_loaded = false
+	health_history_diagnostics.clear()
 	state = GameDataScript.get_starting_stats()
 	day = 1
 	low_stability_days = 0
@@ -159,9 +179,10 @@ func start_new_run() -> void:
 	current_event.clear()
 	current_learning_state = DayCarryoverServiceScript.STEADY.duplicate(true)
 	pending_learning_state = current_learning_state.duplicate(true)
-	daily_summary.hide_summary(false)
-	new_day_popup.hide_popup(false)
-	sticky_note.hide_note(false)
+	if is_node_ready():
+		daily_summary.hide_summary(false)
+		new_day_popup.hide_popup(false)
+		sticky_note.hide_note(false)
 	_start_day()
 	_render_phase()
 	_show_new_day_popup()
@@ -511,7 +532,7 @@ func _skip_meal() -> void:
 	var meal := _current_meal_phase()
 	var record := MealResolverScript.build_skipped_record(meal)
 	_apply_meal_record(record)
-	_post("%s没顾上吃。" % String(PHASE_NAMES[meal]), "warning")
+	_post("%s没吃。" % String(PHASE_NAMES[meal]), "warning")
 	selected_food_ids.clear()
 	hand.clear()
 	current_source_id = ""
@@ -526,10 +547,98 @@ func _apply_meal_record(record: Dictionary) -> void:
 		for food_id in record["food_ids"]:
 			var key := String(food_id)
 			dorm_inventory[key] = maxi(0, int(dorm_inventory.get(key, 0)) - 1)
+	_capture_health_snapshot(record)
 	today_meal_records.append(record.duplicate(true))
 	_check_meal_combos(record)
 	_clamp_stats()
 	_update_stability()
+
+
+func get_health_snapshots() -> Array[Dictionary]:
+	if not _health_data_enabled() or _health_archive == null:
+		return []
+	return _health_archive.get_snapshots()
+
+
+func save_health_history(path: String) -> Dictionary:
+	if not _health_data_enabled():
+		return {"ok": false, "error": "health_data_disabled"}
+	_ensure_health_archive()
+	return _health_archive.save_file(path)
+
+
+func load_health_history(path: String) -> Dictionary:
+	if not _health_data_enabled():
+		return {"ok": false, "error": "health_data_disabled"}
+	# Historical inspection is separate from the active run. Loading yesterday's
+	# archive must not mix its meals into new submissions or restore game stats.
+	var archive := MealHealthArchiveScript.new()
+	var result: Dictionary = archive.load_file(path)
+	if bool(result.get("ok", false)):
+		result["snapshots"] = archive.get_snapshots()
+	return result
+
+
+func _health_data_enabled() -> bool:
+	return HealthGuidanceFeatureFlagsScript.is_enabled(health_guidance_flags, "data")
+
+
+func _ensure_health_archive() -> void:
+	if _health_archive == null:
+		_health_archive = MealHealthArchiveScript.new()
+
+
+func _load_health_catalog() -> Dictionary:
+	if _health_catalog_loaded:
+		return _health_catalog
+	_health_catalog_loaded = true
+	var store := HealthDataStoreScript.new()
+	var catalog: Dictionary = store.load_catalog(health_profiles_path)
+	var validation := HealthDataValidatorScript.validate(catalog, {
+		"known_food_ids": GameDataScript.CardDataStoreScript.food_ids,
+	})
+	if not bool(validation.get("valid", false)):
+		health_history_diagnostics.append({
+			"code": "health_catalog_unavailable",
+			"path": health_profiles_path,
+			"status": String(catalog.get("status", "unknown")),
+			"errors": validation.get("errors", []).duplicate(true),
+		})
+		_health_catalog = {}
+	else:
+		_health_catalog = catalog
+	return _health_catalog
+
+
+func _capture_health_snapshot(record: Dictionary) -> void:
+	if not _health_data_enabled():
+		return
+	var snapshot := MealHealthSnapshotScript.build(day, record, _load_health_catalog())
+	_ensure_health_archive()
+	var result: Dictionary = _health_archive.append_snapshot(snapshot)
+	if not bool(result.get("ok", false)):
+		health_history_diagnostics.append({"code": "snapshot_rejected", "result": result})
+		return
+	# Keep the settled record and archive independent of each other's mutations.
+	record["health_snapshot"] = snapshot.duplicate(true)
+	_autosave_health_history()
+
+
+func _autosave_health_history() -> void:
+	if health_history_path.is_empty():
+		return
+	if health_history_path == DEFAULT_HEALTH_HISTORY_PATH:
+		var directory_error := DirAccess.make_dir_recursive_absolute(
+			ProjectSettings.globalize_path("user://health_guidance")
+		)
+		if directory_error != OK:
+			health_history_diagnostics.append({
+				"code": "history_directory_failed", "error": directory_error,
+			})
+			return
+	var result := save_health_history(health_history_path)
+	if not bool(result.get("ok", false)):
+		health_history_diagnostics.append({"code": "history_save_failed", "result": result})
 
 
 func _check_meal_combos(record: Dictionary) -> void:
@@ -543,7 +652,7 @@ func _check_meal_combos(record: Dictionary) -> void:
 		combos_today.append("comfort_chain")
 		state["mood"] = int(state["mood"]) + 4
 		state["diet_burden"] = int(state["diet_burden"]) + 3
-		_post("喜欢的东西吃多了些，心情好了，身体也有点沉。", "info")
+		_post("连续选择了偏好的食物：心情提高，同时触发额外游戏消耗。", "info")
 	if String(record["phase"]) == "dinner" and not combos_today.has("budget_saver"):
 		var all_eaten := today_meal_records.size() >= 3
 		for meal_record in today_meal_records:
@@ -739,15 +848,17 @@ func _choose_sleep(option_id: String) -> void:
 
 func _finish_day() -> void:
 	var nutrition_summary: Dictionary = NutritionLedgerScript.summarize(today_meal_records)
-	var nutrition_score := int(nutrition_summary.get(
+	# Compatibility value for the legacy gameplay settlement only. It is not
+	# exposed as health guidance and will be removed with NUT-308.
+	var legacy_nutrition_score := int(nutrition_summary.get(
 		"score",
 		MealResolverScript.day_quality(today_meal_records)
 	))
-	if nutrition_score >= 66:
+	if legacy_nutrition_score >= 66:
 		state["energy"] = int(state["energy"]) + 4
 		state["mood"] = int(state["mood"]) + 4
 		state["diet_burden"] = int(state["diet_burden"]) - 2
-	elif nutrition_score < 42:
+	elif legacy_nutrition_score < 42:
 		state["stress"] = int(state["stress"]) + 5
 		state["diet_burden"] = int(state["diet_burden"]) + 4
 	if int(state["satiety"]) < 20:
@@ -784,28 +895,25 @@ func _finish_day() -> void:
 	)
 	var day_record := _build_day_record(nutrition_summary)
 	run_history.append(day_record)
-	var detail_text := "营养评分：%d/100 · %s\n%s\n%s" % [
-		nutrition_score,
-		String(nutrition_summary.get("rating", "")),
+	var detail_text := "%s\n\n本局变化\n%s" % [
 		String(nutrition_summary.get("detail_text", "")),
 		_day_change_text(day_record),
 	]
 	nutrition_summary["detail_text"] = detail_text
 	summary_payload = {
 		"day": day,
-		"title": "第 %d 天结束" % day,
+		"title": "第 %d 天，收工" % day,
 		"stats": state.duplicate(true),
-		"quality": "饮食 %d 分 · %s\n%s" % [
-			nutrition_score,
-			String(nutrition_summary.get("rating", "")),
-			String(nutrition_summary["observation"]),
-		],
+		"record_summary": String(nutrition_summary["observation"]),
+		"meal_stamps": _build_meal_stamps(),
 		"advice": "%s\n%s\n%s" % [
 			String(nutrition_summary["action"]),
 			_day_strategy_advice(study_pace, remaining_days),
 			_next_day_preview_text(),
 		],
 		"nutrition": nutrition_summary,
+		"detail_button_text": "查看三餐详情",
+		"detail_button_open_text": "收起三餐详情",
 		"button_text": "睡到第 %d 天" % (day + 1),
 	}
 	if low_stability_days >= 2:
@@ -845,7 +953,7 @@ func _show_new_day_popup() -> void:
 		"subtitle": (
 			"新的一周从今天开始，先看看今天的状态与安排。"
 			if day == 1
-			else "昨天的饮食与休息留在今天，新的事件也会改变可用策略。"
+			else "昨天的游戏内进餐记录、行动与休息参与了今日状态结算；新的事件也会改变可用策略。"
 		),
 		"learning_state": current_learning_state.duplicate(true),
 		"event": display_event,
@@ -901,11 +1009,11 @@ func _show_ending_summary() -> void:
 		"day": day,
 		"title": String(ending.get("title", "这一周结束了")),
 		"stats": state.duplicate(true),
-		"quality": String(ending.get("subtitle", "这一周结束了。")),
-		"advice": "目标复习 %d，完成 %d；平均饮食 %d 分，手里还剩 ¥%d。" % [
+		"record_summary": String(ending.get("subtitle", "这一周结束了。")),
+		"advice": "目标复习 %d，完成 %d；本周记录了 %d 天，手里还剩 ¥%d。" % [
 			GameDataScript.STUDY_TARGET,
 			int(state["study_progress"]),
-			int(recap.get("average_nutrition", 0)),
+			int(recap.get("played_days", 0)),
 			int(state["balance"]),
 		],
 		"ending_image": String(ending.get("image", "")),
@@ -938,6 +1046,53 @@ func _build_day_record(nutrition_summary: Dictionary) -> Dictionary:
 	}
 
 
+func _build_meal_stamps() -> Array[Dictionary]:
+	var stamps: Array[Dictionary] = []
+	for meal_phase in MEAL_PHASES:
+		var meal_record: Dictionary = {}
+		for candidate in today_meal_records:
+			if String(candidate.get("phase", "")) == meal_phase:
+				meal_record = candidate
+				break
+		var meal_title := String(PHASE_NAMES.get(meal_phase, meal_phase))
+		if meal_record.is_empty():
+			stamps.append({
+				"title": meal_title,
+				"text": "没有记录",
+				"state": "missing",
+			})
+			continue
+		if bool(meal_record.get("skipped", false)):
+			stamps.append({
+				"title": meal_title,
+				"text": "没吃",
+				"state": "skipped",
+			})
+			continue
+
+		var food_names: Array = meal_record.get("food_names", [])
+		var visible_foods: Array[String] = []
+		for raw_food_name in food_names:
+			if visible_foods.size() >= 2:
+				break
+			visible_foods.append(String(raw_food_name))
+		var food_text := "、".join(visible_foods)
+		if food_names.size() > visible_foods.size():
+			food_text += "等"
+		if food_text.is_empty():
+			food_text = "已经吃过"
+		var source_name := String(meal_record.get("source_name", ""))
+		var stamp_text := food_text
+		if not source_name.is_empty():
+			stamp_text = "%s · %s" % [source_name, food_text]
+		stamps.append({
+			"title": meal_title,
+			"text": stamp_text,
+			"state": "eaten",
+		})
+	return stamps
+
+
 func _day_change_text(record: Dictionary) -> String:
 	var start: Dictionary = record.get("start_state", {})
 	var finish: Dictionary = record.get("end_state", {})
@@ -951,11 +1106,11 @@ func _day_change_text(record: Dictionary) -> String:
 func _day_strategy_advice(study_pace: int, remaining_days: int) -> String:
 	var study_gap := study_pace - int(state.get("study_progress", 0))
 	if study_gap > 0:
-		return "复习比今日节奏少 %d；先恢复状态，比带着脑雾硬撑更有效。" % study_gap
+		return "今天的复习计划还差 %d。明天电量高时再补一段也来得及。" % study_gap
 	if int(state.get("energy", 0)) <= 25:
-		return "复习进度跟上了，但精力已经偏低，明天的学习效率会受影响。"
+		return "复习进度跟上了，不过电量见底；明天先缓一缓再开书。"
 	if remaining_days > 0 and int(state.get("balance", 0)) < remaining_days * 10:
-		return "进度跟上了；余下 %d 天可以多利用存粮和食堂。" % remaining_days
+		return "进度跟上了。余下 %d 天，存粮和食堂能帮钱包多撑一会儿。" % remaining_days
 	return "复习进度跟上了，也给明天留出了调整空间。"
 
 
@@ -965,7 +1120,7 @@ func _next_day_preview_text() -> String:
 	var learning_modifier := int(pending_learning_state.get("study_modifier", 0))
 	var modifier_text := "不变" if learning_modifier == 0 else _signed_delta(learning_modifier)
 	var preview := WeeklyEventServiceScript.next_day_preview(day, GameDataScript.TOTAL_DAYS)
-	return "明日学习状态：%s（每次复习 %s）｜事件：%s" % [
+	return "明天：%s · 每次复习 %s · %s" % [
 		String(pending_learning_state.get("title", "状态平稳")),
 		modifier_text,
 		String(preview.get("title", "照常安排")),
@@ -974,32 +1129,32 @@ func _next_day_preview_text() -> String:
 
 func _build_week_recap() -> Dictionary:
 	var lines: Array[String] = ["本周轨迹："]
-	var score_total := 0
 	var total_spend := 0
 	var clear_days := 0
 	var strained_days := 0
 	for record in run_history:
 		var nutrition: Dictionary = record.get("nutrition", {})
-		var score := int(nutrition.get("score", 0))
+		var metrics: Dictionary = nutrition.get("metrics", {})
+		var eaten_meals := int(metrics.get("eaten_meals", 0))
+		var expected_meals := int(metrics.get("expected_meals", 3))
 		var start: Dictionary = record.get("start_state", {})
 		var finish: Dictionary = record.get("end_state", {})
 		var next_condition: Dictionary = record.get("next_learning_state", {})
-		score_total += score
 		total_spend += int(record.get("spend", 0))
 		if String(next_condition.get("id", "")) == "clear_focus":
 			clear_days += 1
 		elif ["fatigued", "brain_fog"].has(String(next_condition.get("id", ""))):
 			strained_days += 1
-		lines.append("第 %d 天｜饮食 %d｜复习 %s｜花费 ¥%d｜次日 %s" % [
+		lines.append("第 %d 天｜进餐记录 %d/%d｜复习 %s｜花费 ¥%d｜次日 %s" % [
 			int(record.get("day", 0)),
-			score,
+			eaten_meals,
+			expected_meals,
 			_signed_delta(int(finish.get("study_progress", 0)) - int(start.get("study_progress", 0))),
 			int(record.get("spend", 0)),
 			String(next_condition.get("title", "状态平稳")),
 		])
 	var played_days := run_history.size()
-	var average_nutrition := int(round(float(score_total) / float(played_days))) if played_days > 0 else 0
-	lines.append("合计｜%d 天花费 ¥%d｜清醒加成 %d 次｜疲惫/脑雾 %d 次" % [
+	lines.append("合计｜%d 天花费 ¥%d｜复习加成 %d 次｜状态减益 %d 次" % [
 		played_days,
 		total_spend,
 		clear_days,
@@ -1007,8 +1162,8 @@ func _build_week_recap() -> Dictionary:
 	])
 	return {
 		"detail_text": "\n".join(lines),
-		"basis": "次日学习状态由前一天的饮食结构、行动、睡眠以及收尾精力和压力共同决定。",
-		"average_nutrition": average_nutrition,
+		"basis": "本周轨迹只整理游戏内选择与次日游戏状态，不构成健康评分或医学判断。",
+		"played_days": played_days,
 	}
 
 

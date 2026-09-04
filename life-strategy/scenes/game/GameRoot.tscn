@@ -137,7 +137,7 @@ theme_override_constants/separation = 8
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "此刻
-头像、余力、精力、心情、饱腹、压力、身体负担与复习。"
+头像、余力、精力、心情、饱腹、压力、角色健康与复习；角色健康是游戏属性，不是对玩家真实健康的评价。"
 autowrap_mode = 3
 
 [node name="CenterPanel" type="PanelContainer" parent="RootMargin/RootBox/Body" unique_id=1139893539]

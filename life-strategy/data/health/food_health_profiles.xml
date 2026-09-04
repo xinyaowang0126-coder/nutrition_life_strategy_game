@@ -1,0 +1,1030 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Draft migration data. NUT-204A preserves unknown portions and recipes;
+  NUT-205 adds the remaining four categories without inventing portions, recipes
+  or factor levels. Unknown follow-up owners and deadlines are tracked in
+  docs/plans/nutrition_health_guidance/07_profile_review_queue.md.
+  NUT-204B through NUT-204D define canonical fictional products and dishes
+  through menu_recipe or package_label. review_status="draft" means none of these
+  profiles can generate affirmative player guidance. Gameplay stats and legacy
+  tags are not evidence.
+-->
+<food_health_profiles
+  schema_version="1"
+  model_version="diet-pattern-v2.0"
+  locale="zh-CN"
+  reviewed_at="2026-09-04">
+  <profile
+    food_id="rice_plain"
+    profile_version="2"
+    display_basis="游戏卡牌中的一份白米饭（实际份量待确认）"
+    portion_status="unknown"
+    portion_band="unknown"
+    basis_type="generic_category"
+    composition_status="estimated"
+    confidence="low"
+    review_status="draft"
+    evidence_refs="CDG-2022-DIVERSITY,PRODUCT-RECIPE-PENDING"
+    caffeine_status="unknown"
+    caffeine_band="unknown"
+    serving_time_relevance="unknown">
+    <component
+      ingredient_id="cooked_white_rice"
+      name="未明确份量的熟白米饭"
+      food_group="grains_tubers"
+      contribution_band="dominant"
+      basis_type="generic_category"
+      confidence="low" />
+    <method id="unknown" />
+  </profile>
+  <profile
+    food_id="mixed_grain_rice"
+    profile_version="1"
+    display_basis="游戏卡牌中的一份杂粮饭（品种、比例和份量待确认）"
+    portion_status="unknown"
+    portion_band="unknown"
+    basis_type="generic_category"
+    composition_status="estimated"
+    confidence="low"
+    review_status="draft"
+    evidence_refs="CDG-2022-DIVERSITY,CDG-2022-03,PRODUCT-RECIPE-PENDING"
+    caffeine_status="unknown"
+    caffeine_band="unknown"
+    serving_time_relevance="unknown">
+    <component
+      ingredient_id="mixed_cooked_grains_unspecified"
+      name="未明确品种和比例的杂粮饭"
+      food_group="grains_tubers"
+      contribution_band="dominant"
+      basis_type="generic_category"
+      confidence="low" />
+    <method id="unknown" />
+  </profile>
+  <profile
+    food_id="egg"
+    profile_version="2"
+    display_basis="游戏卡牌中的一份鸡蛋（个数和做法待确认）"
+    portion_status="unknown"
+    portion_band="unknown"
+    basis_type="generic_category"
+    composition_status="estimated"
+    confidence="low"
+    review_status="draft"
+    evidence_refs="CDG-2022-DIVERSITY,PRODUCT-RECIPE-PENDING"
+    caffeine_status="unknown"
+    caffeine_band="unknown"
+    serving_time_relevance="unknown">
+    <component
+      ingredient_id="chicken_egg"
+      name="未明确个数和做法的鸡蛋"
+      food_group="eggs"
+      contribution_band="dominant"
+      basis_type="generic_category"
+      confidence="low" />
+    <method id="unknown" />
+  </profile>
+  <profile
+    food_id="tofu"
+    profile_version="1"
+    display_basis="游戏卡牌中的一份豆腐（品种、份量和酱汁待确认）"
+    portion_status="unknown"
+    portion_band="unknown"
+    basis_type="generic_category"
+    composition_status="estimated"
+    confidence="low"
+    review_status="draft"
+    evidence_refs="CDG-2022-03,PRODUCT-RECIPE-PENDING"
+    caffeine_status="unknown"
+    caffeine_band="unknown"
+    serving_time_relevance="unknown">
+    <component
+      ingredient_id="tofu_unspecified"
+      name="未明确品种和份量的豆腐"
+      food_group="soy_products"
+      contribution_band="dominant"
+      basis_type="generic_category"
+      confidence="low" />
+    <method id="unknown" />
+    <factor
+      factor_id="sodium"
+      band="unknown"
+      basis_type="unknown"
+      confidence="unknown"
+      evidence_refs="PRODUCT-RECIPE-PENDING" />
+  </profile>
+  <profile
+    food_id="greens"
+    profile_version="1"
+    display_basis="游戏卡牌中的一份青菜（品种、份量和油盐待确认）"
+    portion_status="unknown"
+    portion_band="unknown"
+    basis_type="generic_category"
+    composition_status="estimated"
+    confidence="low"
+    review_status="draft"
+    evidence_refs="CDG-2022-03,PRODUCT-RECIPE-PENDING"
+    caffeine_status="unknown"
+    caffeine_band="unknown"
+    serving_time_relevance="unknown">
+    <component
+      ingredient_id="greens_unspecified"
+      name="未明确品种和份量的青菜"
+      food_group="vegetables"
+      contribution_band="dominant"
+      basis_type="generic_category"
+      confidence="low" />
+    <method id="unknown" />
+    <factor
+      factor_id="sodium"
+      band="unknown"
+      basis_type="unknown"
+      confidence="unknown"
+      evidence_refs="PRODUCT-RECIPE-PENDING" />
+  </profile>
+  <profile
+    food_id="tomato"
+    profile_version="2"
+    display_basis="游戏卡牌中的一份番茄（数量、份量和调味待确认）"
+    portion_status="unknown"
+    portion_band="unknown"
+    basis_type="generic_category"
+    composition_status="estimated"
+    confidence="low"
+    review_status="draft"
+    evidence_refs="CDG-2022-03,PRODUCT-RECIPE-PENDING"
+    caffeine_status="unknown"
+    caffeine_band="unknown"
+    serving_time_relevance="unknown">
+    <component
+      ingredient_id="tomato"
+      name="未明确数量和食用情境的番茄"
+      food_group="vegetables"
+      contribution_band="dominant"
+      basis_type="generic_category"
+      confidence="low" />
+    <method id="unknown" />
+    <factor
+      factor_id="sodium"
+      band="unknown"
+      basis_type="unknown"
+      confidence="unknown"
+      evidence_refs="PRODUCT-RECIPE-PENDING" />
+  </profile>
+  <profile
+    food_id="coffee"
+    profile_version="1"
+    display_basis="游戏内固定配方：中杯无糖无奶美式咖啡 350 ml"
+    portion_status="known"
+    portion_value="350"
+    portion_unit="ml"
+    portion_band="medium"
+    basis_type="menu_recipe"
+    composition_status="known"
+    confidence="high"
+    review_status="draft"
+    evidence_refs="GAME-SPEC-204B-V1"
+    caffeine_status="known"
+    caffeine_mg="100"
+    caffeine_band="unknown"
+    serving_time_relevance="unknown">
+    <component
+      ingredient_id="simulated_americano_coffee"
+      name="游戏内固定配方美式咖啡"
+      food_group="beverages"
+      contribution_band="dominant"
+      amount_value="350"
+      amount_unit="ml"
+      basis_type="menu_recipe"
+      confidence="high" />
+    <method id="brewed" />
+    <factor
+      factor_id="added_sugar"
+      band="none"
+      basis_type="menu_recipe"
+      confidence="high"
+      evidence_refs="GAME-SPEC-204B-V1,CDG-2022-05" />
+    <factor
+      factor_id="caffeine"
+      band="unknown"
+      basis_type="menu_recipe"
+      confidence="high"
+      evidence_refs="GAME-SPEC-204B-V1" />
+  </profile>
+  <profile
+    food_id="bubble_tea"
+    profile_version="1"
+    display_basis="游戏内固定配方：半糖珍珠奶茶 500 ml"
+    portion_status="known"
+    portion_value="500"
+    portion_unit="ml"
+    portion_band="large"
+    basis_type="menu_recipe"
+    composition_status="known"
+    confidence="high"
+    review_status="draft"
+    evidence_refs="GAME-SPEC-204B-V1"
+    caffeine_status="known"
+    caffeine_mg="50"
+    caffeine_band="unknown"
+    serving_time_relevance="unknown">
+    <component
+      ingredient_id="simulated_brewed_tea_base"
+      name="游戏内固定茶底"
+      food_group="beverages"
+      contribution_band="dominant"
+      amount_value="340"
+      amount_unit="ml"
+      basis_type="menu_recipe"
+      confidence="high" />
+    <component
+      ingredient_id="simulated_whole_milk"
+      name="游戏内固定牛奶"
+      food_group="dairy"
+      contribution_band="small"
+      amount_value="100"
+      amount_unit="ml"
+      basis_type="menu_recipe"
+      confidence="high" />
+    <component
+      ingredient_id="simulated_tapioca_pearls"
+      name="游戏内固定珍珠"
+      food_group="other"
+      contribution_band="small"
+      amount_value="60"
+      amount_unit="g"
+      basis_type="menu_recipe"
+      confidence="high" />
+    <component
+      ingredient_id="simulated_added_sugar"
+      name="游戏内固定添加糖"
+      food_group="other"
+      contribution_band="small"
+      amount_value="30"
+      amount_unit="g"
+      basis_type="menu_recipe"
+      confidence="high" />
+    <method id="mixed" />
+    <factor
+      factor_id="added_sugar"
+      band="high"
+      basis_type="menu_recipe"
+      confidence="high"
+      evidence_refs="GAME-SPEC-204B-V1,CDG-2022-05" />
+    <factor
+      factor_id="caffeine"
+      band="unknown"
+      basis_type="menu_recipe"
+      confidence="high"
+      evidence_refs="GAME-SPEC-204B-V1" />
+  </profile>
+  <profile
+    food_id="instant_noodles"
+    profile_version="1"
+    display_basis="游戏内模拟标签：一包 100 g（面饼 85 g、调料 15 g，按全部调料和汤食用）"
+    portion_status="known"
+    portion_value="100"
+    portion_unit="g"
+    portion_band="medium"
+    basis_type="package_label"
+    composition_status="known"
+    confidence="high"
+    review_status="draft"
+    evidence_refs="GAME-SPEC-204B-V1"
+    caffeine_status="not_applicable"
+    caffeine_band="none"
+    serving_time_relevance="none">
+    <component
+      ingredient_id="simulated_instant_noodle_cake"
+      name="游戏内模拟方便面面饼"
+      food_group="grains_tubers"
+      contribution_band="dominant"
+      amount_value="85"
+      amount_unit="g"
+      basis_type="package_label"
+      confidence="high" />
+    <component
+      ingredient_id="simulated_instant_noodle_seasoning"
+      name="游戏内模拟调料包"
+      food_group="other"
+      contribution_band="small"
+      amount_value="15"
+      amount_unit="g"
+      basis_type="package_label"
+      confidence="high" />
+    <method id="mixed" />
+    <factor
+      factor_id="sodium"
+      band="high"
+      basis_type="package_label"
+      confidence="high"
+      evidence_refs="GAME-SPEC-204B-V1,CDG-2022-05" />
+  </profile>
+  <profile
+    food_id="fried_chicken"
+    profile_version="1"
+    display_basis="游戏内固定配方：约六块去骨炸鸡 220 g"
+    portion_status="known"
+    portion_value="220"
+    portion_unit="g"
+    portion_band="large"
+    basis_type="menu_recipe"
+    composition_status="known"
+    confidence="high"
+    review_status="draft"
+    evidence_refs="GAME-SPEC-204C-V1,CDG-2022-DIVERSITY"
+    caffeine_status="not_applicable"
+    caffeine_band="none"
+    serving_time_relevance="none">
+    <component
+      ingredient_id="chicken_meat"
+      name="去骨鸡腿肉"
+      food_group="poultry_livestock"
+      contribution_band="dominant"
+      amount_value="150"
+      amount_unit="g"
+      basis_type="menu_recipe"
+      confidence="high" />
+    <component
+      ingredient_id="wheat_flour_coating"
+      name="小麦裹粉"
+      food_group="grains_tubers"
+      contribution_band="small"
+      amount_value="40"
+      amount_unit="g"
+      basis_type="menu_recipe"
+      confidence="high" />
+    <component
+      ingredient_id="absorbed_frying_oil"
+      name="炸制吸收用油"
+      food_group="other"
+      contribution_band="small"
+      amount_value="20"
+      amount_unit="g"
+      basis_type="menu_recipe"
+      confidence="high" />
+    <component
+      ingredient_id="fried_chicken_seasoning"
+      name="炸鸡调味料"
+      food_group="other"
+      contribution_band="trace"
+      amount_value="10"
+      amount_unit="g"
+      basis_type="menu_recipe"
+      confidence="high" />
+    <method id="deep_fried" />
+    <factor
+      factor_id="deep_fried"
+      band="present"
+      basis_type="menu_recipe"
+      confidence="high"
+      evidence_refs="GAME-SPEC-204C-V1,CDG-2022-05" />
+    <factor
+      factor_id="sodium"
+      band="unknown"
+      basis_type="menu_recipe"
+      confidence="high"
+      evidence_refs="GAME-SPEC-204C-V1,CDG-2022-05" />
+  </profile>
+  <profile
+    food_id="salad_bowl"
+    profile_version="1"
+    display_basis="游戏内固定配方：蔬菜沙拉碗 280 g（生菜、黄瓜、番茄、紫甘蓝和油醋汁）"
+    portion_status="known"
+    portion_value="280"
+    portion_unit="g"
+    portion_band="large"
+    basis_type="menu_recipe"
+    composition_status="known"
+    confidence="high"
+    review_status="draft"
+    evidence_refs="GAME-SPEC-204C-V1,CDG-2022-DIVERSITY,CDG-2022-03"
+    caffeine_status="not_applicable"
+    caffeine_band="none"
+    serving_time_relevance="none">
+    <component
+      ingredient_id="romaine_lettuce"
+      name="罗马生菜"
+      food_group="vegetables"
+      contribution_band="material"
+      amount_value="100"
+      amount_unit="g"
+      basis_type="menu_recipe"
+      confidence="high" />
+    <component
+      ingredient_id="cucumber"
+      name="黄瓜"
+      food_group="vegetables"
+      contribution_band="small"
+      amount_value="60"
+      amount_unit="g"
+      basis_type="menu_recipe"
+      confidence="high" />
+    <component
+      ingredient_id="tomato"
+      name="番茄"
+      food_group="vegetables"
+      contribution_band="small"
+      amount_value="60"
+      amount_unit="g"
+      basis_type="menu_recipe"
+      confidence="high" />
+    <component
+      ingredient_id="red_cabbage"
+      name="紫甘蓝"
+      food_group="vegetables"
+      contribution_band="small"
+      amount_value="40"
+      amount_unit="g"
+      basis_type="menu_recipe"
+      confidence="high" />
+    <component
+      ingredient_id="oil_vinegar_dressing"
+      name="油醋汁"
+      food_group="other"
+      contribution_band="small"
+      amount_value="20"
+      amount_unit="g"
+      basis_type="menu_recipe"
+      confidence="high" />
+    <method id="raw_ready_to_eat" />
+    <method id="mixed" />
+    <factor
+      factor_id="sodium"
+      band="unknown"
+      basis_type="menu_recipe"
+      confidence="high"
+      evidence_refs="GAME-SPEC-204C-V1,CDG-2022-05" />
+  </profile>
+  <profile
+    food_id="sandwich"
+    profile_version="1"
+    display_basis="游戏内模拟标签：一包鸡蛋蔬菜三明治 190 g"
+    portion_status="known"
+    portion_value="190"
+    portion_unit="g"
+    portion_band="medium"
+    basis_type="package_label"
+    composition_status="known"
+    confidence="high"
+    review_status="draft"
+    evidence_refs="GAME-SPEC-204C-V1,CDG-2022-DIVERSITY,CDG-2022-03"
+    caffeine_status="not_applicable"
+    caffeine_band="none"
+    serving_time_relevance="none">
+    <component
+      ingredient_id="white_wheat_bread"
+      name="小麦吐司面包"
+      food_group="grains_tubers"
+      contribution_band="dominant"
+      amount_value="90"
+      amount_unit="g"
+      basis_type="package_label"
+      confidence="high" />
+    <component
+      ingredient_id="chicken_egg"
+      name="熟鸡蛋"
+      food_group="eggs"
+      contribution_band="material"
+      amount_value="50"
+      amount_unit="g"
+      basis_type="package_label"
+      confidence="high" />
+    <component
+      ingredient_id="romaine_lettuce"
+      name="罗马生菜"
+      food_group="vegetables"
+      contribution_band="small"
+      amount_value="20"
+      amount_unit="g"
+      basis_type="package_label"
+      confidence="high" />
+    <component
+      ingredient_id="tomato"
+      name="番茄"
+      food_group="vegetables"
+      contribution_band="small"
+      amount_value="20"
+      amount_unit="g"
+      basis_type="package_label"
+      confidence="high" />
+    <component
+      ingredient_id="mayonnaise"
+      name="蛋黄酱"
+      food_group="other"
+      contribution_band="small"
+      amount_value="10"
+      amount_unit="g"
+      basis_type="package_label"
+      confidence="high" />
+    <method id="mixed" />
+    <factor
+      factor_id="sodium"
+      band="unknown"
+      basis_type="package_label"
+      confidence="high"
+      evidence_refs="GAME-SPEC-204C-V1,CDG-2022-05" />
+  </profile>
+  <profile
+    food_id="tomato_egg_stir_fry"
+    profile_version="1"
+    display_basis="游戏内固定配方：西红柿炒鸡蛋 240 g"
+    portion_status="known"
+    portion_value="240"
+    portion_unit="g"
+    portion_band="medium"
+    basis_type="menu_recipe"
+    composition_status="known"
+    confidence="high"
+    review_status="draft"
+    evidence_refs="GAME-SPEC-204C-V1,CDG-2022-DIVERSITY,CDG-2022-03"
+    caffeine_status="not_applicable"
+    caffeine_band="none"
+    serving_time_relevance="none">
+    <component
+      ingredient_id="tomato"
+      name="番茄"
+      food_group="vegetables"
+      contribution_band="dominant"
+      amount_value="130"
+      amount_unit="g"
+      basis_type="menu_recipe"
+      confidence="high" />
+    <component
+      ingredient_id="chicken_egg"
+      name="鸡蛋"
+      food_group="eggs"
+      contribution_band="material"
+      amount_value="90"
+      amount_unit="g"
+      basis_type="menu_recipe"
+      confidence="high" />
+    <component
+      ingredient_id="stir_fry_oil"
+      name="炒制用油"
+      food_group="other"
+      contribution_band="small"
+      amount_value="10"
+      amount_unit="g"
+      basis_type="menu_recipe"
+      confidence="high" />
+    <component
+      ingredient_id="tomato_egg_seasoning"
+      name="调味料"
+      food_group="other"
+      contribution_band="trace"
+      amount_value="10"
+      amount_unit="g"
+      basis_type="menu_recipe"
+      confidence="high" />
+    <method id="stir_fried" />
+    <factor
+      factor_id="sodium"
+      band="unknown"
+      basis_type="menu_recipe"
+      confidence="high"
+      evidence_refs="GAME-SPEC-204C-V1,CDG-2022-05" />
+  </profile>
+  <profile
+    food_id="celery_pork_stir_fry"
+    profile_version="1"
+    display_basis="游戏内固定配方：芹菜炒猪肉 220 g"
+    portion_status="known"
+    portion_value="220"
+    portion_unit="g"
+    portion_band="medium"
+    basis_type="menu_recipe"
+    composition_status="known"
+    confidence="high"
+    review_status="draft"
+    evidence_refs="GAME-SPEC-204C-V1,CDG-2022-DIVERSITY,CDG-2022-03"
+    caffeine_status="not_applicable"
+    caffeine_band="none"
+    serving_time_relevance="none">
+    <component
+      ingredient_id="celery"
+      name="芹菜"
+      food_group="vegetables"
+      contribution_band="dominant"
+      amount_value="120"
+      amount_unit="g"
+      basis_type="menu_recipe"
+      confidence="high" />
+    <component
+      ingredient_id="lean_pork"
+      name="瘦猪肉"
+      food_group="poultry_livestock"
+      contribution_band="material"
+      amount_value="75"
+      amount_unit="g"
+      basis_type="menu_recipe"
+      confidence="high" />
+    <component
+      ingredient_id="stir_fry_oil"
+      name="炒制用油"
+      food_group="other"
+      contribution_band="small"
+      amount_value="10"
+      amount_unit="g"
+      basis_type="menu_recipe"
+      confidence="high" />
+    <component
+      ingredient_id="celery_pork_seasoning"
+      name="芹菜炒肉调味料"
+      food_group="other"
+      contribution_band="small"
+      amount_value="15"
+      amount_unit="g"
+      basis_type="menu_recipe"
+      confidence="high" />
+    <method id="stir_fried" />
+    <factor
+      factor_id="sodium"
+      band="unknown"
+      basis_type="menu_recipe"
+      confidence="high"
+      evidence_refs="GAME-SPEC-204C-V1,CDG-2022-05" />
+  </profile>
+  <profile
+    food_id="steamed_fish"
+    profile_version="1"
+    display_basis="游戏内固定配方：清蒸鲈鱼一份 215 g（按可食成品记录）"
+    portion_status="known"
+    portion_value="215"
+    portion_unit="g"
+    portion_band="medium"
+    basis_type="menu_recipe"
+    composition_status="known"
+    confidence="high"
+    review_status="draft"
+    evidence_refs="GAME-SPEC-204C-V1,CDG-2022-DIVERSITY"
+    caffeine_status="not_applicable"
+    caffeine_band="none"
+    serving_time_relevance="none">
+    <component
+      ingredient_id="sea_bass_meat"
+      name="鲈鱼肉"
+      food_group="fish_seafood"
+      contribution_band="dominant"
+      amount_value="180"
+      amount_unit="g"
+      basis_type="menu_recipe"
+      confidence="high" />
+    <component
+      ingredient_id="scallion_ginger"
+      name="葱姜"
+      food_group="vegetables"
+      contribution_band="trace"
+      amount_value="10"
+      amount_unit="g"
+      basis_type="menu_recipe"
+      confidence="high" />
+    <component
+      ingredient_id="steamed_fish_sauce"
+      name="蒸鱼酱汁"
+      food_group="other"
+      contribution_band="small"
+      amount_value="20"
+      amount_unit="g"
+      basis_type="menu_recipe"
+      confidence="high" />
+    <component
+      ingredient_id="finishing_oil"
+      name="淋面用油"
+      food_group="other"
+      contribution_band="trace"
+      amount_value="5"
+      amount_unit="g"
+      basis_type="menu_recipe"
+      confidence="high" />
+    <method id="steamed" />
+    <factor
+      factor_id="sodium"
+      band="unknown"
+      basis_type="menu_recipe"
+      confidence="high"
+      evidence_refs="GAME-SPEC-204C-V1,CDG-2022-05" />
+  </profile>
+  <profile
+    food_id="chicken_vegetable_rice"
+    profile_version="1"
+    display_basis="游戏内固定配方：鸡肉时蔬饭盒 480 g"
+    portion_status="known"
+    portion_value="480"
+    portion_unit="g"
+    portion_band="large"
+    basis_type="menu_recipe"
+    composition_status="known"
+    confidence="high"
+    review_status="draft"
+    evidence_refs="GAME-SPEC-204C-V1,CDG-2022-DIVERSITY,CDG-2022-03"
+    caffeine_status="not_applicable"
+    caffeine_band="none"
+    serving_time_relevance="none">
+    <component
+      ingredient_id="cooked_white_rice"
+      name="熟白米饭"
+      food_group="grains_tubers"
+      contribution_band="dominant"
+      amount_value="200"
+      amount_unit="g"
+      basis_type="menu_recipe"
+      confidence="high" />
+    <component
+      ingredient_id="chicken_meat"
+      name="熟鸡肉"
+      food_group="poultry_livestock"
+      contribution_band="material"
+      amount_value="100"
+      amount_unit="g"
+      basis_type="menu_recipe"
+      confidence="high" />
+    <component
+      ingredient_id="broccoli"
+      name="西兰花"
+      food_group="vegetables"
+      contribution_band="material"
+      amount_value="70"
+      amount_unit="g"
+      basis_type="menu_recipe"
+      confidence="high" />
+    <component
+      ingredient_id="carrot"
+      name="胡萝卜"
+      food_group="vegetables"
+      contribution_band="small"
+      amount_value="30"
+      amount_unit="g"
+      basis_type="menu_recipe"
+      confidence="high" />
+    <component
+      ingredient_id="bok_choy"
+      name="小青菜"
+      food_group="vegetables"
+      contribution_band="small"
+      amount_value="50"
+      amount_unit="g"
+      basis_type="menu_recipe"
+      confidence="high" />
+    <component
+      ingredient_id="chicken_rice_sauce"
+      name="鸡肉饭调味酱汁"
+      food_group="other"
+      contribution_band="small"
+      amount_value="20"
+      amount_unit="g"
+      basis_type="menu_recipe"
+      confidence="high" />
+    <component
+      ingredient_id="stir_fry_oil"
+      name="烹调用油"
+      food_group="other"
+      contribution_band="small"
+      amount_value="10"
+      amount_unit="g"
+      basis_type="menu_recipe"
+      confidence="high" />
+    <method id="mixed" />
+    <factor
+      factor_id="sodium"
+      band="unknown"
+      basis_type="menu_recipe"
+      confidence="high"
+      evidence_refs="GAME-SPEC-204C-V1,CDG-2022-05" />
+  </profile>
+  <profile
+    food_id="milk"
+    profile_version="1"
+    display_basis="游戏内模拟标签：一盒常温纯牛奶 250 ml（无添加糖）"
+    portion_status="known"
+    portion_value="250"
+    portion_unit="ml"
+    portion_band="medium"
+    basis_type="package_label"
+    composition_status="known"
+    confidence="high"
+    review_status="draft"
+    evidence_refs="GAME-SPEC-204D-V1,CDG-2022-DIVERSITY,CDG-2022-03"
+    caffeine_status="not_applicable"
+    caffeine_band="none"
+    serving_time_relevance="none">
+    <component
+      ingredient_id="simulated_whole_milk"
+      name="游戏内固定纯牛奶"
+      food_group="dairy"
+      contribution_band="dominant"
+      amount_value="250"
+      amount_unit="ml"
+      basis_type="package_label"
+      confidence="high" />
+    <method id="not_applicable" />
+    <factor
+      factor_id="added_sugar"
+      band="none"
+      basis_type="package_label"
+      confidence="high"
+      evidence_refs="GAME-SPEC-204D-V1,CDG-2022-05" />
+  </profile>
+  <profile
+    food_id="plain_yogurt"
+    profile_version="1"
+    display_basis="游戏内模拟标签：一杯微甜原味酸奶 180 g（发酵乳基底 172 g、添加糖 8 g）"
+    portion_status="known"
+    portion_value="180"
+    portion_unit="g"
+    portion_band="medium"
+    basis_type="package_label"
+    composition_status="known"
+    confidence="high"
+    review_status="draft"
+    evidence_refs="GAME-SPEC-204D-V1,CDG-2022-DIVERSITY,CDG-2022-03"
+    caffeine_status="not_applicable"
+    caffeine_band="none"
+    serving_time_relevance="none">
+    <component
+      ingredient_id="simulated_plain_yogurt_base"
+      name="游戏内固定发酵乳基底"
+      food_group="dairy"
+      contribution_band="dominant"
+      amount_value="172"
+      amount_unit="g"
+      basis_type="package_label"
+      confidence="high" />
+    <component
+      ingredient_id="simulated_added_sugar"
+      name="游戏内固定添加糖"
+      food_group="other"
+      contribution_band="small"
+      amount_value="8"
+      amount_unit="g"
+      basis_type="package_label"
+      confidence="high" />
+    <method id="not_applicable" />
+    <factor
+      factor_id="added_sugar"
+      band="unknown"
+      basis_type="package_label"
+      confidence="high"
+      evidence_refs="GAME-SPEC-204D-V1,CDG-2022-05" />
+  </profile>
+  <profile
+    food_id="whole_wheat_bread"
+    profile_version="1"
+    display_basis="游戏内模拟标签：两片全麦面包 70 g（谷物原料只使用全麦粉）"
+    portion_status="known"
+    portion_value="70"
+    portion_unit="g"
+    portion_band="small"
+    basis_type="package_label"
+    composition_status="known"
+    confidence="high"
+    review_status="draft"
+    evidence_refs="GAME-SPEC-204D-V1,CDG-2022-DIVERSITY,CDG-2022-03"
+    caffeine_status="not_applicable"
+    caffeine_band="none"
+    serving_time_relevance="none">
+    <component
+      ingredient_id="simulated_whole_wheat_bread"
+      name="游戏内固定全麦面包"
+      food_group="grains_tubers"
+      contribution_band="dominant"
+      amount_value="70"
+      amount_unit="g"
+      basis_type="package_label"
+      confidence="high" />
+    <method id="baked" />
+    <factor
+      factor_id="added_sugar"
+      band="unknown"
+      basis_type="package_label"
+      confidence="high"
+      evidence_refs="GAME-SPEC-204D-V1,CDG-2022-05" />
+    <factor
+      factor_id="sodium"
+      band="unknown"
+      basis_type="package_label"
+      confidence="high"
+      evidence_refs="GAME-SPEC-204D-V1,CDG-2022-05" />
+  </profile>
+  <profile
+    food_id="oatmeal"
+    profile_version="1"
+    display_basis="游戏卡牌中的一份燕麦（产品形态、干熟基准、加糖或加奶情况待确认）"
+    portion_status="unknown"
+    portion_band="unknown"
+    basis_type="generic_category"
+    composition_status="estimated"
+    confidence="low"
+    review_status="draft"
+    evidence_refs="CDG-2022-DIVERSITY,CDG-2022-03,PRODUCT-RECIPE-PENDING"
+    caffeine_status="unknown"
+    caffeine_band="unknown"
+    serving_time_relevance="unknown">
+    <component
+      ingredient_id="oats_unspecified"
+      name="产品形态和配方未确认的燕麦"
+      food_group="grains_tubers"
+      contribution_band="unknown"
+      basis_type="generic_category"
+      confidence="low" />
+    <method id="unknown" />
+    <factor
+      factor_id="added_sugar"
+      band="unknown"
+      basis_type="unknown"
+      confidence="unknown"
+      evidence_refs="PRODUCT-RECIPE-PENDING" />
+    <factor
+      factor_id="sodium"
+      band="unknown"
+      basis_type="unknown"
+      confidence="unknown"
+      evidence_refs="PRODUCT-RECIPE-PENDING" />
+  </profile>
+  <profile
+    food_id="apple"
+    profile_version="1"
+    display_basis="游戏卡牌中的一份苹果（完整或切片、可食部分和份量待确认）"
+    portion_status="unknown"
+    portion_band="unknown"
+    basis_type="generic_category"
+    composition_status="estimated"
+    confidence="low"
+    review_status="draft"
+    evidence_refs="CDG-2022-DIVERSITY,CDG-2022-03,PRODUCT-RECIPE-PENDING"
+    caffeine_status="unknown"
+    caffeine_band="unknown"
+    serving_time_relevance="unknown">
+    <component
+      ingredient_id="apple"
+      name="未明确可食部分和份量的苹果"
+      food_group="fruits"
+      contribution_band="dominant"
+      basis_type="generic_category"
+      confidence="low" />
+    <method id="unknown" />
+  </profile>
+  <profile
+    food_id="banana"
+    profile_version="1"
+    display_basis="游戏卡牌中的一份香蕉（根数、可食部分和份量待确认）"
+    portion_status="unknown"
+    portion_band="unknown"
+    basis_type="generic_category"
+    composition_status="estimated"
+    confidence="low"
+    review_status="draft"
+    evidence_refs="CDG-2022-DIVERSITY,CDG-2022-03,PRODUCT-RECIPE-PENDING"
+    caffeine_status="unknown"
+    caffeine_band="unknown"
+    serving_time_relevance="unknown">
+    <component
+      ingredient_id="banana"
+      name="未明确可食部分和份量的香蕉"
+      food_group="fruits"
+      contribution_band="dominant"
+      basis_type="generic_category"
+      confidence="low" />
+    <method id="unknown" />
+  </profile>
+  <profile
+    food_id="unsalted_nuts"
+    profile_version="1"
+    display_basis="游戏卡牌中的一份原味坚果（品种、配比、份量和是否额外加盐待确认）"
+    portion_status="unknown"
+    portion_band="unknown"
+    basis_type="generic_category"
+    composition_status="estimated"
+    confidence="low"
+    review_status="draft"
+    evidence_refs="CDG-2022-DIVERSITY,CDG-2022-03,PRODUCT-RECIPE-PENDING"
+    caffeine_status="unknown"
+    caffeine_band="unknown"
+    serving_time_relevance="unknown">
+    <component
+      ingredient_id="nuts_unspecified"
+      name="未明确具体品种和配比的坚果"
+      food_group="nuts_seeds"
+      contribution_band="unknown"
+      basis_type="generic_category"
+      confidence="low" />
+    <method id="unknown" />
+    <factor
+      factor_id="sodium"
+      band="unknown"
+      basis_type="unknown"
+      confidence="unknown"
+      evidence_refs="PRODUCT-RECIPE-PENDING" />
+    <factor
+      factor_id="added_sugar"
+      band="unknown"
+      basis_type="unknown"
+      confidence="unknown"
+      evidence_refs="PRODUCT-RECIPE-PENDING" />
+    <factor
+      factor_id="saturated_fat"
+      band="unknown"
+      basis_type="unknown"
+      confidence="unknown"
+      evidence_refs="PRODUCT-RECIPE-PENDING" />
+  </profile>
+</food_health_profiles>

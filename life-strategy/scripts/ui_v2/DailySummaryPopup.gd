@@ -19,8 +19,23 @@ signal next_day_requested()
 @onready var stability_value: Label = $PaperHost/Paper/Margin/VBox/ContentScroll/Content/CoreStats/StabilityChip/Value
 @onready var study_value: Label = $PaperHost/Paper/Margin/VBox/ContentScroll/Content/CoreStats/StudyChip/Value
 @onready var balance_value: Label = $PaperHost/Paper/Margin/VBox/ContentScroll/Content/CoreStats/BalanceChip/Value
-@onready var quality_label: Label = $PaperHost/Paper/Margin/VBox/ContentScroll/Content/Quality
-@onready var advice_label: Label = $PaperHost/Paper/Margin/VBox/ContentScroll/Content/Advice
+@onready var meal_trail_title: Label = $PaperHost/Paper/Margin/VBox/ContentScroll/Content/MealTrailTitle
+@onready var meal_trail: GridContainer = $PaperHost/Paper/Margin/VBox/ContentScroll/Content/MealTrail
+@onready var meal_stamp_panels: Array[PanelContainer] = [
+	$PaperHost/Paper/Margin/VBox/ContentScroll/Content/MealTrail/Breakfast,
+	$PaperHost/Paper/Margin/VBox/ContentScroll/Content/MealTrail/Lunch,
+	$PaperHost/Paper/Margin/VBox/ContentScroll/Content/MealTrail/Dinner,
+]
+@onready var meal_stamp_labels: Array[Label] = [
+	$PaperHost/Paper/Margin/VBox/ContentScroll/Content/MealTrail/Breakfast/Label,
+	$PaperHost/Paper/Margin/VBox/ContentScroll/Content/MealTrail/Lunch/Label,
+	$PaperHost/Paper/Margin/VBox/ContentScroll/Content/MealTrail/Dinner/Label,
+]
+@onready var journal_note: PanelContainer = $PaperHost/Paper/Margin/VBox/ContentScroll/Content/JournalNote
+@onready var record_kicker: Label = $PaperHost/Paper/Margin/VBox/ContentScroll/Content/JournalNote/Margin/VBox/RecordKicker
+@onready var advice_kicker: Label = $PaperHost/Paper/Margin/VBox/ContentScroll/Content/JournalNote/Margin/VBox/AdviceKicker
+@onready var record_summary_label: Label = $PaperHost/Paper/Margin/VBox/ContentScroll/Content/JournalNote/Margin/VBox/RecordSummary
+@onready var advice_label: Label = $PaperHost/Paper/Margin/VBox/ContentScroll/Content/JournalNote/Margin/VBox/Advice
 @onready var detail_button: Button = $PaperHost/Paper/Margin/VBox/ContentScroll/Content/DetailButton
 @onready var detail_panel: PanelContainer = $PaperHost/Paper/Margin/VBox/ContentScroll/Content/DetailPanel
 @onready var detail_scroll: ScrollContainer = $PaperHost/Paper/Margin/VBox/ContentScroll/Content/DetailPanel/Margin/DetailScroll
@@ -32,8 +47,8 @@ var _summary: Dictionary = {}
 var _mobile_mode := false
 var _ready_finished := false
 var _motion_tween: Tween
-var _detail_closed_text := "查看今日膳食记录"
-var _detail_open_text := "收起膳食记录"
+var _detail_closed_text := "查看三餐详情"
+var _detail_open_text := "收起三餐详情"
 
 
 func _ready() -> void:
@@ -87,15 +102,19 @@ func _apply_summary() -> void:
 	if nested_stats is Dictionary:
 		stats = nested_stats as Dictionary
 	var day := int(_summary.get("day", 1))
-	day_title.text = String(_summary.get("title", "第 %d 天结束" % day))
+	day_title.text = String(_summary.get("title", "第 %d 天，收工" % day))
 	stability_value.text = "余力 %d" % int(stats.get("stability", 0))
 	study_value.text = "复习 %d/%d" % [
 		int(stats.get("study_progress", stats.get("study", 0))),
 		int(stats.get("study_target", _summary.get("study_target", 70))),
 	]
 	balance_value.text = "余额 ¥%d" % int(stats.get("balance", 0))
-	quality_label.text = String(_summary.get("quality", _summary.get("meal_quality", _default_quality(stats))))
+	record_summary_label.text = String(_summary.get(
+		"record_summary",
+		_summary.get("quality", _summary.get("meal_quality", _default_record_summary()))
+	))
 	advice_label.text = String(_summary.get("advice", _summary.get("summary", _default_advice(stats))))
+	_apply_meal_stamps(_summary.get("meal_stamps", []))
 	var image_path := String(_summary.get("ending_image", ""))
 	ending_image.visible = not image_path.is_empty() and ResourceLoader.exists(image_path)
 	if ending_image.visible:
@@ -104,8 +123,8 @@ func _apply_summary() -> void:
 		ending_image.texture = null
 	var detail: Dictionary = _summary.get("detail", _summary.get("nutrition", {}))
 	var detail_text := String(detail.get("detail_text", ""))
-	_detail_closed_text = String(_summary.get("detail_button_text", "查看今日膳食记录"))
-	_detail_open_text = String(_summary.get("detail_button_open_text", "收起膳食记录"))
+	_detail_closed_text = String(_summary.get("detail_button_text", "查看三餐详情"))
+	_detail_open_text = String(_summary.get("detail_button_open_text", "收起三餐详情"))
 	detail_button.visible = not detail_text.is_empty()
 	detail_button.text = _detail_closed_text
 	detail_panel.visible = false
@@ -115,6 +134,50 @@ func _apply_summary() -> void:
 	next_button.text = String(_summary.get("button_text", "睡到明天"))
 	content_scroll.scroll_vertical = 0
 	detail_scroll.scroll_vertical = 0
+
+
+func _apply_meal_stamps(value: Variant) -> void:
+	var entries: Array = []
+	if value is Array:
+		entries = value as Array
+	meal_trail.visible = not entries.is_empty()
+	meal_trail_title.visible = meal_trail.visible
+	if not meal_trail.visible:
+		return
+	var fallback_titles := ["早餐", "午餐", "晚餐"]
+	for index in range(meal_stamp_panels.size()):
+		var entry: Dictionary = {}
+		if index < entries.size() and entries[index] is Dictionary:
+			entry = entries[index] as Dictionary
+		var title := String(entry.get("title", fallback_titles[index]))
+		var text := String(entry.get("text", "没有记录"))
+		var state := String(entry.get("state", "missing"))
+		meal_stamp_labels[index].text = "%s\n%s" % [title, text]
+		meal_stamp_labels[index].add_theme_color_override(
+			"font_color",
+			Color("#6f6252") if state != "eaten" else Color("#4f3d2b")
+		)
+		meal_stamp_panels[index].add_theme_stylebox_override(
+			"panel",
+			_meal_stamp_style(index, state)
+		)
+
+
+func _meal_stamp_style(index: int, state: String) -> StyleBoxFlat:
+	var colors := [Color("#f6d899"), Color("#cfe4bf"), Color("#cbd4ea")]
+	var style := StyleBoxFlat.new()
+	style.bg_color = Color("#ddd3c4") if state != "eaten" else colors[index % colors.size()]
+	style.border_color = Color("#9d7d54") if state == "eaten" else Color("#a89b89")
+	style.set_border_width_all(2)
+	style.set_corner_radius_all(9)
+	style.content_margin_left = 10
+	style.content_margin_top = 8
+	style.content_margin_right = 10
+	style.content_margin_bottom = 8
+	style.shadow_color = Color(0.12, 0.08, 0.04, 0.15)
+	style.shadow_size = 4
+	style.shadow_offset = Vector2(0, 3)
+	return style
 
 
 func _finish_show() -> void:
@@ -132,6 +195,14 @@ func _finish_show() -> void:
 	_motion_tween.tween_property(dim, "modulate:a", 1.0, 0.18)
 	_motion_tween.tween_property(paper_host, "modulate:a", 1.0, 0.18)
 	_motion_tween.tween_property(paper_host, "scale", Vector2.ONE, 0.22)
+	journal_note.pivot_offset = journal_note.size * 0.5
+	journal_note.scale = Vector2(0.97, 0.97)
+	_motion_tween.tween_property(journal_note, "scale", Vector2.ONE, 0.24)
+	for stamp in meal_stamp_panels:
+		stamp.pivot_offset = stamp.size * 0.5
+		stamp.scale = Vector2(0.94, 0.94) if meal_trail.visible else Vector2.ONE
+		if meal_trail.visible:
+			_motion_tween.tween_property(stamp, "scale", Vector2.ONE, 0.24)
 	next_button.grab_focus()
 
 
@@ -143,6 +214,13 @@ func _toggle_nutrition_detail() -> void:
 	detail_scroll.scroll_vertical = 0
 	_layout_popup()
 	if detail_panel.visible:
+		detail_panel.pivot_offset = detail_panel.size * 0.5
+		detail_panel.modulate.a = 0.0
+		detail_panel.scale = Vector2(0.98, 0.98)
+		var reveal_tween := create_tween().set_parallel(true)
+		reveal_tween.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+		reveal_tween.tween_property(detail_panel, "modulate:a", 1.0, 0.14)
+		reveal_tween.tween_property(detail_panel, "scale", Vector2.ONE, 0.16)
 		call_deferred("_reveal_detail")
 	else:
 		content_scroll.scroll_vertical = 0
@@ -171,7 +249,10 @@ func _target_popup_size(viewport_size: Vector2) -> Vector2:
 	elif ending_layout:
 		desired_height = 700.0 if _mobile_mode else 650.0
 	elif detail_button.visible:
-		desired_height = 600.0 if _mobile_mode else 560.0
+		if meal_trail.visible:
+			desired_height = 700.0 if _mobile_mode else 840.0
+		else:
+			desired_height = 600.0 if _mobile_mode else 560.0
 	else:
 		desired_height = 480.0 if _mobile_mode else 430.0
 	var horizontal_inset := 24.0 if _mobile_mode else 48.0
@@ -193,8 +274,11 @@ func _apply_responsive_profile(target_size: Vector2) -> void:
 	root_stack.add_theme_constant_override("separation", 12 if compact else 16)
 	content_stack.add_theme_constant_override("separation", 12 if compact else 16)
 	day_title.add_theme_font_size_override("font_size", 28 if compact else 34)
-	quality_label.add_theme_font_size_override("font_size", 20 if compact else 23)
+	record_summary_label.add_theme_font_size_override("font_size", 20 if compact else 23)
 	advice_label.add_theme_font_size_override("font_size", 18 if compact else 20)
+	record_kicker.add_theme_font_size_override("font_size", 15 if compact else 16)
+	advice_kicker.add_theme_font_size_override("font_size", 15 if compact else 16)
+	meal_trail_title.add_theme_font_size_override("font_size", 16 if compact else 17)
 	detail_button.add_theme_font_size_override("font_size", 18 if compact else 20)
 	next_button.add_theme_font_size_override("font_size", 21 if compact else 23)
 	ending_image.custom_minimum_size.y = 108.0 if compact else 132.0
@@ -202,6 +286,10 @@ func _apply_responsive_profile(target_size: Vector2) -> void:
 	next_button.custom_minimum_size.y = 56.0 if compact else 64.0
 
 	core_stats.columns = 1 if target_size.x < 430.0 else 3
+	meal_trail.columns = 1 if target_size.x < 430.0 else 3
+	for index in range(meal_stamp_panels.size()):
+		meal_stamp_panels[index].custom_minimum_size.y = 64.0 if compact else 78.0
+		meal_stamp_labels[index].add_theme_font_size_override("font_size", 16 if compact else 17)
 	var chip_height := 54.0 if compact else 66.0
 	var chip_width := 0.0 if compact else 150.0
 	for chip: PanelContainer in [stability_chip, study_chip, balance_chip]:
@@ -217,6 +305,8 @@ func _apply_responsive_profile(target_size: Vector2) -> void:
 func _reveal_detail() -> void:
 	if visible and detail_panel.visible:
 		content_scroll.ensure_control_visible(detail_panel)
+		var scroll_bar := content_scroll.get_v_scroll_bar()
+		content_scroll.scroll_vertical = maxi(0, int(scroll_bar.max_value - scroll_bar.page))
 
 
 func _on_popup_resized() -> void:
@@ -246,16 +336,15 @@ func _reset_visuals() -> void:
 	dim.modulate = Color.WHITE
 	paper_host.modulate = Color.WHITE
 	paper_host.scale = Vector2.ONE
+	journal_note.scale = Vector2.ONE
+	detail_panel.modulate = Color.WHITE
+	detail_panel.scale = Vector2.ONE
+	for stamp in meal_stamp_panels:
+		stamp.scale = Vector2.ONE
 
 
-func _default_quality(stats: Dictionary) -> String:
-	var satiety := int(stats.get("satiety", 50))
-	var burden := int(stats.get("diet_burden", stats.get("burden", 0)))
-	if satiety < 25:
-		return "今天有一餐没顾上，肚子还空着。"
-	if burden >= 70:
-		return "吃是吃够了，只是身体有点累。"
-	return "几顿饭都接住了，今天还算踏实。"
+func _default_record_summary() -> String:
+	return "今天的三餐先记到这里，想看时再打开详情。"
 
 
 func _default_advice(stats: Dictionary) -> String:

@@ -14,8 +14,8 @@ func test_desktop_layout_uses_two_cards_and_missing_images_are_safe() -> void:
 	popup.show_day({
 		"day": 3,
 		"learning_state": {
-			"title": "脑子很清醒",
-			"summary": "昨晚睡得不错。",
+			"title": "进入状态较快",
+			"summary": "按游戏规则，昨日状态触发了复习加成。",
 			"study_modifier": 3,
 		},
 		"event": {
@@ -31,7 +31,7 @@ func test_desktop_layout_uses_two_cards_and_missing_images_are_safe() -> void:
 	assert_true(popup.visible)
 	assert_eq(popup.day_title.text, "第 3 天开始")
 	assert_eq(popup.cards_grid.columns, 2)
-	assert_eq(popup.status_title.text, "脑子很清醒")
+	assert_eq(popup.status_title.text, "进入状态较快")
 	assert_eq(popup.status_effect.text, "每次学习效果 +3")
 	assert_eq(popup.event_title.text, "食堂换了菜单")
 	assert_false(popup.status_image.visible)

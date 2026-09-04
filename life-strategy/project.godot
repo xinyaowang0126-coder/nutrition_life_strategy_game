@@ -35,6 +35,13 @@ window/handheld/orientation=1
 
 enabled=PackedStringArray("res://addons/godot_ai/plugin.cfg")
 
+[health_guidance_v2]
+
+data=false
+engine=false
+ui=false
+weekly=false
+
 [physics]
 
 3d/physics_engine="Jolt Physics"

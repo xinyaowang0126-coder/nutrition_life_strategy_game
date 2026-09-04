@@ -1,0 +1,38 @@
+{
+  "captured_at": "2026-07-15",
+  "legacy_only": true,
+  "implementation": "MealResolver.plate_quality",
+  "cases": [
+    {
+      "id": "bubble_tea_only",
+      "phase": "lunch",
+      "food_ids": ["bubble_tea"],
+      "legacy_quality": 20
+    },
+    {
+      "id": "fried_chicken_only",
+      "phase": "dinner",
+      "food_ids": ["fried_chicken"],
+      "legacy_quality": 20
+    },
+    {
+      "id": "skipped_meal",
+      "phase": "breakfast",
+      "food_ids": [],
+      "skipped": true,
+      "legacy_quality": 25
+    },
+    {
+      "id": "rice_egg_tomato",
+      "phase": "lunch",
+      "food_ids": ["rice_plain", "egg", "tomato"],
+      "legacy_quality": 86
+    },
+    {
+      "id": "chicken_vegetable_rice",
+      "phase": "lunch",
+      "food_ids": ["chicken_vegetable_rice"],
+      "legacy_quality": 86
+    }
+  ]
+}

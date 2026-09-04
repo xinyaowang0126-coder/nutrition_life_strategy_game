@@ -4,6 +4,7 @@ extends Control
 signal details_requested(payload: Dictionary, anchor_rect: Rect2, pinned: bool)
 signal detail_dismissed(source_id: String)
 
+const GameDataScript := preload("res://scripts/GameData.gd")
 const DETAIL_SOURCE_ID := "character_status"
 const DESKTOP_STATUS_TOP := -310.0
 const DESKTOP_STATUS_BOTTOM := -90.0
@@ -133,7 +134,7 @@ func _apply_stats(animate: bool, previous: Dictionary = {}) -> void:
 		"mood": "心情 ",
 		"satiety": "饱腹 ",
 		"stress": "压力 ",
-		"diet_burden": "负担 ",
+		"diet_burden": "角色健康 ",
 		"study_progress": "复习 ",
 	}
 	var changed_labels: Array[Label] = []
@@ -148,7 +149,7 @@ func _apply_stats(animate: bool, previous: Dictionary = {}) -> void:
 			]
 		else:
 			label.text = "%s%d" % [String(prefixes[key]), value]
-		if animate and int(previous.get(key, _alias_value(previous, key))) != value:
+		if animate and _stat_value_from(previous, key) != value:
 			changed_labels.append(label)
 	_apply_status_colors(labels)
 	if not changed_labels.is_empty():
@@ -179,7 +180,7 @@ func _status_tone(key: String, value: int) -> Color:
 	var danger := false
 	var warning := false
 	match key:
-		"stress", "diet_burden":
+		"stress":
 			danger = value >= 75
 			warning = value >= 50
 		"satiety":
@@ -241,13 +242,13 @@ func _make_detail_payload() -> Dictionary:
 		"name": "此刻状态",
 		"kind": "状态",
 		"rule_hint": _state_hint(),
-		"desc": "精力、心情和饱腹越高越从容；压力与身体负担越低越轻松。",
+		"desc": "角色健康是用于玩法结算的综合游戏属性，数值越高越好；它不是对玩家真实健康的评价，也不参与饮食结构判断。",
 		"stability": _stat_value("stability"),
 		"energy": _stat_value("energy"),
 		"mood": _stat_value("mood"),
 		"satiety": _stat_value("satiety"),
 		"stress": _stat_value("stress"),
-		"burden": _stat_value("diet_burden"),
+		"character_health": _stat_value("diet_burden"),
 		"study": _stat_value("study_progress"),
 	}
 
@@ -266,9 +267,14 @@ func _state_hint() -> String:
 
 
 func _stat_value(key: String) -> int:
-	if _stats.has(key):
-		return int(_stats[key])
-	return _alias_value(_stats, key)
+	return _stat_value_from(_stats, key)
+
+
+func _stat_value_from(source: Dictionary, key: String) -> int:
+	var value := int(source[key]) if source.has(key) else _alias_value(source, key)
+	if key == "diet_burden":
+		return GameDataScript.character_health_from_burden(value)
+	return value
 
 
 func _alias_value(source: Dictionary, key: String) -> int:

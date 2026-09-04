@@ -4,6 +4,8 @@ extends PanelContainer
 signal closed()
 signal action_requested(item_id: String, payload: Dictionary)
 
+const GameDataScript := preload("res://scripts/GameData.gd")
+
 @onready var title_label: Label = $Margin/VBox/TitleRow/Title
 @onready var cost_label: Label = $Margin/VBox/TitleRow/Cost
 @onready var close_button: Button = $Margin/VBox/TitleRow/CloseButton
@@ -124,7 +126,7 @@ func _apply_payload() -> void:
 	_set_metric(energy_metric, "精力", "energy")
 	_set_metric(mood_metric, "心情", "mood")
 	_set_metric(stress_metric, "压力", "stress")
-	_set_metric(burden_metric, "负担", "burden", "diet_burden")
+	_set_character_health_metric()
 	_set_metric(study_metric, "复习", "study", "study_progress")
 
 
@@ -135,6 +137,20 @@ func _set_metric(label: Label, caption: String, key: String, alias: String = "")
 		return
 	var value := int(_payload.get(key, _payload.get(alias, 0)))
 	label.text = "%s %s" % [caption, _delta(value)]
+
+
+func _set_character_health_metric() -> void:
+	if _payload.has("character_health"):
+		burden_metric.visible = true
+		burden_metric.text = "角色健康 %d" % int(_payload["character_health"])
+		return
+	var has_burden := _payload.has("burden") or _payload.has("diet_burden")
+	burden_metric.visible = has_burden
+	if not has_burden:
+		return
+	var burden_delta := int(_payload.get("burden", _payload.get("diet_burden", 0)))
+	var health_delta := GameDataScript.character_health_delta_from_burden(burden_delta)
+	burden_metric.text = "角色健康 %s" % _delta(health_delta)
 
 
 func _kind_text() -> String:

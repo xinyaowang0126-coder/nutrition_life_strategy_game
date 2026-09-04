@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<food_health_profiles
+  schema_version="0"
+  model_version="legacy-fixture"
+  locale="zh-CN"
+  reviewed_at="2025-01-01">
+  <profile food_id="must_not_be_inferred" profile_version="1" />
+</food_health_profiles>

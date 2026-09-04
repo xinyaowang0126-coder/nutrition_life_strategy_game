@@ -176,9 +176,12 @@ func test_nutrition_ledger_reports_patterns_and_scientific_context() -> void:
 	assert_eq(int(summary["score"]), MealResolverScript.day_quality(records))
 	assert_false(String(summary["rating"]).is_empty())
 	assert_true(int(summary["score"]) >= 0 and int(summary["score"]) <= 100)
-	assert_contains(String(summary["detail_text"]), "食物类别分布")
-	assert_contains(String(summary["detail_text"]), "重点营养素来源")
-	assert_contains(String(summary["basis"]), "仅用于健康教育")
+	assert_contains(String(summary["detail_text"]), "餐盘线索")
+	assert_contains(String(summary["detail_text"]), "卡牌资料线索")
+	assert_contains(String(summary["basis"]), "《中国居民膳食指南（2022）》")
+	assert_contains(String(summary["basis"]), "不用于现实健康判断")
+	assert_false(String(summary["detail_text"]).contains("今日饮食结构记录"))
+	assert_false(String(summary["detail_text"]).contains("营养评分"))
 
 
 func test_low_study_has_its_own_ending() -> void:

@@ -89,7 +89,7 @@ text = "压力 0"
 [node name="Burden" type="Label" parent="Margin/VBox/MetricGrid" unique_id=891301016]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.45, 0.4, 0.55, 1)
-text = "负担 0"
+text = "角色健康 0"
 
 [node name="Study" type="Label" parent="Margin/VBox/MetricGrid" unique_id=2094906508]
 layout_mode = 2

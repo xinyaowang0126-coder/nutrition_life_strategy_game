@@ -8,29 +8,29 @@ extends RefCounted
 
 const CLEAR_FOCUS := {
 	"id": "clear_focus",
-	"title": "脑子很清醒",
-	"summary": "三餐接住了，昨晚也睡得早，今天复习时更容易进入状态。",
+	"title": "进入状态较快",
+	"summary": "按游戏规则，昨日的进餐记录、较早休息和收尾状态共同触发了今日复习加成。",
 	"study_modifier": 3,
 	"opening_delta": {"energy": 3, "mood": 1, "stress": -2},
 }
 const STEADY := {
 	"id": "steady",
-	"title": "状态还算平稳",
-	"summary": "昨天的节奏没有留下明显负担，今天可以照原计划安排。",
+	"title": "状态照常",
+	"summary": "按游戏规则，昨日记录没有触发额外的复习加成或减益。",
 	"study_modifier": 0,
 	"opening_delta": {},
 }
 const FATIGUED := {
 	"id": "fatigued",
-	"title": "起步有点慢",
-	"summary": "昨天消耗得多，今天复习需要更长时间才能进入状态。",
+	"title": "进入状态较慢",
+	"summary": "按游戏规则，昨日的精力、压力、作息或安排触发了轻度复习减益。",
 	"study_modifier": -2,
 	"opening_delta": {"energy": -2, "stress": 2},
 }
 const BRAIN_FOG := {
 	"id": "brain_fog",
-	"title": "脑子像蒙着一层雾",
-	"summary": "漏餐、缺觉或高压力还没缓过来，今天先把基本状态接住。",
+	"title": "需要先缓一缓",
+	"summary": "按游戏规则，昨日多项状态同时触发了较大复习减益；这不是医学判断。",
 	"study_modifier": -4,
 	"opening_delta": {"energy": -3, "mood": -2, "stress": 3},
 }

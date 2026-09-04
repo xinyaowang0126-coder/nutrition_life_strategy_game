@@ -3,6 +3,8 @@ extends PanelContainer
 
 signal chosen(id: String)
 
+const GameDataScript := preload("res://scripts/GameData.gd")
+
 @onready var badge_label: Label = $Margin/Content/TopRow/Badge
 @onready var cost_label: Label = $Margin/Content/TopRow/Cost
 @onready var card_image: TextureRect = $Margin/Content/Image
@@ -141,9 +143,9 @@ func _tooltip_text(payload: Dictionary, mode: String, disabled_reason: String, s
 			_delta(int(payload.get("energy", 0))),
 			_delta(int(payload.get("mood", 0))),
 		])
-		lines.append("压力 %s　身体负担 %s" % [
+		lines.append("压力 %s　角色健康 %s" % [
 			_delta(int(payload.get("stress", 0))),
-			_delta(int(payload.get("burden", 0))),
+			_delta(GameDataScript.character_health_delta_from_burden(int(payload.get("burden", 0)))),
 		])
 		if stock >= 0:
 			lines.append("宿舍还剩 %d 份" % stock)
@@ -154,6 +156,10 @@ func _tooltip_text(payload: Dictionary, mode: String, disabled_reason: String, s
 			_delta(int(payload.get("stress", 0))),
 			_delta(int(payload.get("study", 0))),
 		])
+		if payload.has("burden"):
+			lines.append("角色健康 %s" % _delta(
+				GameDataScript.character_health_delta_from_burden(int(payload.get("burden", 0)))
+			))
 	else:
 		lines.append("可看到 %d 种选择" % int(payload.get("hand_size", 0)))
 	lines.append(String(payload.get("desc", "")))

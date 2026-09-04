@@ -89,60 +89,57 @@ static func summarize(records: Array[Dictionary]) -> Dictionary:
 		"action": _next_action(metrics),
 		"detail_text": _detail_text(metrics),
 		"basis": (
-			"依据《中国居民膳食指南（2022）》的食物多样、合理搭配和规律进餐原则进行游戏化记录。"
-			+ "“来源”仅表示相关食物在当日出现，不代表摄入量达到推荐值；本信息仅用于健康教育，"
-			+ "不用于医学诊断或个体化营养处方。"
+			"规则小字：本局饮食信息参考《中国居民膳食指南（2022）》中的食物多样、"
+			+ "合理搭配和规律进餐原则，只整理本局卡牌。卡牌出现不代表现实摄入量足够，"
+			+ "也不用于现实健康判断。"
 		),
 	}
 
 
-## Uses the same record quality consumed by gameplay rewards and penalties, so
-## the educational summary cannot contradict the mechanical day result.
+## Legacy gameplay compatibility only. New health guidance must not consume it.
 static func calculate_score(records: Array[Dictionary]) -> int:
 	return clamp(MealResolverScript.day_quality(records), 0, 100)
 
 
-static func rating_for_score(score: int) -> String:
-	if score >= 80:
-		return "餐盘完整"
-	if score >= 66:
-		return "搭配较好"
-	if score >= 45:
-		return "基本接住"
-	return "优先补齐"
+static func rating_for_score(_score: int) -> String:
+	return "旧版结算记录（不作健康评价）"
 
 
 static func _observation(metrics: Dictionary) -> String:
 	var skipped := int(metrics["skipped_meals"])
 	var vegetables := int(metrics["vegetable_meals"])
 	if skipped > 0:
-		return "今日漏餐 %d 次，首先应关注进餐规律。" % skipped
+		var skipped_text := "一餐" if skipped == 1 else "%d 餐" % skipped
+		return "今天有%s没吃。先把这件事记下来。" % skipped_text
 	if vegetables < EXPECTED_MEALS:
-		return "今日三餐规律，其中 %d 餐含蔬菜类食物。" % vegetables
-	return "今日三餐规律，三餐均记录到蔬菜类食物。"
+		return "今天吃了 %d 餐，其中 %d 餐有蔬菜类食物出现。" % [
+			int(metrics["eaten_meals"]),
+			vegetables,
+		]
+	return "三餐都吃了，也都有蔬菜类食物出现。这里只记录出现，不判断份量。"
 
 
 static func _next_action(metrics: Dictionary) -> String:
 	if int(metrics["skipped_meals"]) > 0:
-		return "明日可先保证三餐按时，不必在同一天集中补偿。"
+		return "明天要是排得开，先给吃饭留个空档；不用靠下一顿把没吃的‘补回来’。"
 	if int(metrics["vegetable_meals"]) < EXPECTED_MEALS:
-		return "下一餐可增加蔬菜类食物；水果与蔬菜不宜相互替代。"
+		return "下一顿要是窗口里正好有蔬菜，可以顺手换个搭配；水果还是单独算。"
 	if int(metrics["fruit_meals"]) <= 0:
-		return "明日可安排新鲜水果；果汁和含糖饮料不能替代完整水果。"
+		return "下次碰见完整水果，可以按预算和口味拿一份；饮料不算水果卡。"
 	if int(metrics["whole_grain_meals"]) <= 0:
-		return "可将一餐中的部分精制谷物替换为全谷物。"
+		return "碰到标得清楚的全谷物主食时，可以拿来换换口味；看不清配方就先不盖章。"
 	if int(metrics["dairy_meals"]) <= 0:
-		return "可根据个人情况安排奶及奶制品，并结合食品标签选择。"
+		return "奶类卡今天没出现。明天货架上若有，再按预算和口味决定要不要拿。"
 	if int(metrics["soy_meals"]) <= 0:
-		return "可在后续餐次中轮换选择大豆及其制品，增加食物种类。"
+		return "大豆制品今天没碰见；下次窗口里若有，可以拿来换换组合。"
 	var limited := (
 		int(metrics["added_sugar_meals"])
 		+ int(metrics["high_sodium_meals"])
 		+ int(metrics["fried_meals"])
 	)
 	if limited >= 2:
-		return "今日添加糖、高钠或油炸食品出现较多，后续餐次可优先选择较清淡的烹调方式。"
-	return "明日可继续保持规律进餐，并轮换谷薯、蔬果和蛋白质食物来源。"
+		return "今天几张卡带着添加糖、高钠或油炸线索。别的卡不会把它们‘洗掉’，下次可以顺手比较做法。"
+	return "明天继续照预算、时间和口味做选择，餐桌上换点新组合也不错。"
 
 
 static func _detail_text(metrics: Dictionary) -> String:
@@ -153,36 +150,42 @@ static func _detail_text(metrics: Dictionary) -> String:
 		limited_labels.append("高钠选择 %d 餐" % int(metrics["high_sodium_meals"]))
 	if int(metrics["fried_meals"]) > 0:
 		limited_labels.append("油炸食品 %d 餐" % int(metrics["fried_meals"]))
-	var limited_text := "未记录到特别需要提示的项目" if limited_labels.is_empty() else "、".join(limited_labels)
+	var limited_text := (
+		"卡牌上没写到添加糖、高钠或油炸；这不等于一定没有"
+		if limited_labels.is_empty()
+		else "、".join(limited_labels)
+	)
 	return "\n".join([
-		"进餐规律：已进餐 %d/%d 餐" % [int(metrics["eaten_meals"]), EXPECTED_MEALS],
-		"食物多样性：当前记录到 %d 种食物" % int(metrics["unique_foods"]),
-		"食物类别分布：",
-		"谷薯类 %d 餐｜蔬菜类 %d 餐｜水果类 %s" % [
+		"三餐情况　吃了 %d/%d 餐" % [int(metrics["eaten_meals"]), EXPECTED_MEALS],
+		"今天遇到　%d 种食物卡" % int(metrics["unique_foods"]),
+		"",
+		"餐盘线索",
+		"主食 %d 顿｜蔬菜 %d 顿｜水果 %s" % [
 			int(metrics["grain_meals"]),
 			int(metrics["vegetable_meals"]),
 			_present_text(int(metrics["fruit_meals"])),
 		],
-		"鱼禽肉蛋类 %s｜奶及奶制品 %s｜大豆及制品 %s｜坚果 %s" % [
+		"蛋/肉/鱼 %s｜奶类 %s｜大豆制品 %s｜坚果 %s" % [
 			_present_text(int(metrics["animal_food_meals"])),
 			_present_text(int(metrics["dairy_meals"])),
 			_present_text(int(metrics["soy_meals"])),
 			_present_text(int(metrics["nuts_meals"])),
 		],
-		"重点营养素来源：",
-		"碳水化合物来源 %d 餐｜膳食纤维来源 %d 餐" % [
+		"",
+		"卡牌资料线索",
+		"主食来源 %d 顿｜膳食纤维来源 %d 顿" % [
 			int(metrics["carbohydrate_source_meals"]),
 			int(metrics["fiber_source_meals"]),
 		],
-		"优质蛋白质来源 %d 餐｜钙来源 %s" % [
+		"蛋白质来源 %d 顿｜钙来源 %s" % [
 			int(metrics["high_quality_protein_meals"]),
 			_present_text(int(metrics["calcium_source_meals"])),
 		],
-		"全谷物来源 %s｜不饱和脂肪酸来源 %s" % [
+		"全谷物 %s｜不饱和脂肪酸来源 %s" % [
 			_present_text(int(metrics["whole_grain_meals"])),
 			_present_text(int(metrics["unsaturated_fat_source_meals"])),
 		],
-		"需关注的膳食因素：%s" % limited_text,
+		"需留意的卡牌线索：%s" % limited_text,
 	])
 
 
@@ -194,4 +197,4 @@ static func _has_any(values: Array, wanted: Array) -> bool:
 
 
 static func _present_text(count: int) -> String:
-	return "有记录" if count > 0 else "未记录"
+	return "碰见过" if count > 0 else "没碰见"

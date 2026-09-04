@@ -58,7 +58,7 @@
     <desc>鱼肉蒸得刚熟，葱丝和姜片还带着热气。</desc>
   </food>
   <food id="plain_yogurt" name="原味酸奶" kind="奶及奶制品" cost="6" satiety="7" energy="4" mood="4" burden="0" dorm_stock="1" image="res://assets/generated/cards/plain_yogurt.png" scenes="meal,breakfast,lunch,dinner" sources="convenience_store,dorm_storage" food_groups="dairy" nutrient_tags="high_quality_protein_source,calcium_source" tags="protein,dairy,drink">
-    <desc>配料简单的一杯原味酸奶，冰箱里拿出来正凉。</desc>
+    <desc>撕开杯盖就能吃，原味里带一点甜。</desc>
   </food>
   <food id="whole_wheat_bread" name="全麦面包" kind="全谷物食品" cost="5" satiety="14" energy="6" mood="2" burden="0" dorm_stock="2" image="res://assets/generated/cards/whole_wheat_bread.png" scenes="meal,breakfast,lunch,dinner" sources="convenience_store,dorm_storage" food_groups="grains_tubers" nutrient_tags="carbohydrate_source,whole_grain,dietary_fiber_source" tags="staple,whole_grain,fiber,convenient">
     <desc>两片装，赶时间时可以直接带走。</desc>
