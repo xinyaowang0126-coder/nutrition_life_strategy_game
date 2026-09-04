@@ -12,6 +12,7 @@ const HealthDataStoreScript := preload("res://scripts/health/HealthDataStore.gd"
 const HealthDataValidatorScript := preload("res://scripts/health/HealthDataValidator.gd")
 const MealHealthSnapshotScript := preload("res://scripts/health/MealHealthSnapshot.gd")
 const MealHealthArchiveScript := preload("res://scripts/health/MealHealthArchive.gd")
+const FoodPreferenceServiceScript := preload("res://scripts/systems/FoodPreferenceService.gd")
 const DEFAULT_HEALTH_HISTORY_PATH := "user://health_guidance/latest_meals.json"
 
 const SOURCE_STAGE_SCENE := preload("res://scenes/game_v2/stages/MealSourceStage.tscn")
@@ -123,6 +124,7 @@ var today_action_records: Array[Dictionary] = []
 var combos_today: Array[String] = []
 var summary_payload: Dictionary = {}
 var health_guidance_flags: Dictionary = {}
+var food_preferences: Dictionary = {}
 var health_profiles_path := HealthDataStoreScript.DEFAULT_PROFILES_PATH
 var health_history_path := DEFAULT_HEALTH_HISTORY_PATH
 var health_history_diagnostics: Array[Dictionary] = []
@@ -165,6 +167,7 @@ func _ready() -> void:
 
 
 func start_new_run() -> void:
+	food_preferences = FoodPreferenceServiceScript.default_profile()
 	if _health_archive != null:
 		_health_archive.clear()
 	_health_catalog.clear()
@@ -273,7 +276,7 @@ func _show_meal_stage() -> void:
 	_install_stage(stage)
 	var foods: Array[Dictionary] = []
 	for food_id in hand:
-		foods.append(GameDataScript.get_food(food_id))
+		foods.append(get_food_for_character(food_id))
 	var source := _effective_meal_source(current_source_id)
 	var options := {
 		"max_selected": _source_selection_limit(current_source_id),
@@ -505,7 +508,7 @@ func _confirm_food(food_ids: Array) -> void:
 	for food_id in safe_ids:
 		foods.append(GameDataScript.get_food(food_id))
 	var source := _effective_meal_source(current_source_id)
-	var record := MealResolverScript.build_record(phase, source, foods)
+	var record := MealResolverScript.build_record(phase, source, foods, food_preferences)
 	if int(record["total_cost"]) > int(state["balance"]):
 		_post("余额不够，先拿掉一样。", "warning")
 		return
@@ -552,6 +555,18 @@ func _apply_meal_record(record: Dictionary) -> void:
 	_check_meal_combos(record)
 	_clamp_stats()
 	_update_stability()
+
+
+func get_food_for_character(food_id: String) -> Dictionary:
+	return FoodPreferenceServiceScript.decorate_food(GameDataScript.get_food(food_id), food_preferences)
+
+
+func set_food_preferences(profile: Dictionary) -> void:
+	food_preferences = profile.duplicate(true)
+	if is_node_ready():
+		sticky_note.hide_note(false)
+		if _is_meal_phase():
+			_render_phase()
 
 
 func get_health_snapshots() -> Array[Dictionary]:
@@ -1201,6 +1216,8 @@ func _update_shell() -> void:
 
 
 func _show_detail(payload: Dictionary, anchor_rect: Rect2, pinned: bool, mode: String) -> void:
+	if mode == "food":
+		payload = FoodPreferenceServiceScript.decorate_food(payload, food_preferences)
 	var reason := String(payload.get("disabled_reason", ""))
 	var stock := -1
 	if mode == "food" and _source_uses_stock():

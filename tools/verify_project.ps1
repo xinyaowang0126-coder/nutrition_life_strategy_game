@@ -140,6 +140,7 @@ function Assert-ReleaseConfiguration {
         'scripts/systems/*.gd',
         'scripts/ui_v2/*.gd',
         'scripts/ui_v2/stages/*.gd',
+        'data/characters/*.xml',
         'addons/godot_ai/**',
         'tests/**',
         'scenes/game/**'

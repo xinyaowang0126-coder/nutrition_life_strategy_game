@@ -108,7 +108,9 @@ func request_detail(pinned: bool = false) -> void:
 
 func _apply_payload() -> void:
 	name_label.text = String(_payload.get("name", "未命名"))
-	quick_stat.text = "饱腹 %s" % _delta(int(_payload.get("satiety", 0)))
+	quick_stat.text = "饱腹 %s\n%s" % [
+		_delta(int(_payload.get("satiety", 0))), _food_preference_text(),
+	]
 	price_label.text = _cost_text()
 	art.texture = _load_card_art(String(_payload.get("image", "")))
 	art.visible = art.texture != null
@@ -116,6 +118,13 @@ func _apply_payload() -> void:
 	_update_button_text()
 	_update_visual_state(false)
 	tooltip_text = ""
+
+
+func _food_preference_text() -> String:
+	var preference: Variant = _payload.get("food_preference", {})
+	if not preference is Dictionary or String(preference.get("status", "")) != "known":
+		return "口味未设置"
+	return "口味 %s" % _delta(int(preference.get("mood_delta", 0)))
 
 
 func _load_card_art(image_path: String) -> Texture2D:

@@ -96,6 +96,24 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.52, 0.38, 0.16, 1)
 text = "复习 0"
 
+[node name="FoodPreference" type="VBoxContainer" parent="Margin/VBox"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Heading" type="Label" parent="Margin/VBox/FoodPreference"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.43, 0.32, 0.2, 1)
+theme_override_font_sizes/font_size = 19
+text = "角色口味（游戏效果）"
+
+[node name="Reaction" type="Label" parent="Margin/VBox/FoodPreference"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.45, 0.35, 0.31, 1)
+theme_override_font_sizes/font_size = 18
+text = "口味未设置"
+autowrap_mode = 3
+
 [node name="Description" type="Label" parent="Margin/VBox" unique_id=90922428]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.34, 0.29, 0.22, 1)

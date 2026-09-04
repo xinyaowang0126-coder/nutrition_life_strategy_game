@@ -3,6 +3,7 @@ extends Control
 const GameDataScript := preload("res://scripts/GameData.gd")
 const MealDeckServiceScript := preload("res://scripts/systems/MealDeckService.gd")
 const MealResolverScript := preload("res://scripts/systems/MealResolver.gd")
+const FoodPreferenceServiceScript := preload("res://scripts/systems/FoodPreferenceService.gd")
 const CHOICE_CARD_SCENE := preload("res://scenes/game/components/ChoiceCard.tscn")
 const PHASE_VIEW_SCENE := preload("res://scenes/game/components/PhaseChoiceView.tscn")
 const MAIN_MENU := "res://scenes/main_menu/MainMenu.tscn"
@@ -51,6 +52,7 @@ const COLOR_HEADER := Color(1.0, 0.94, 0.76)
 @onready var toast_feed: Node = get_node_or_null("ToastFeed")
 
 var state: Dictionary = {}
+var food_preferences: Dictionary = {}
 var day := 1
 var phase := "breakfast_source"
 var hand: Array[String] = []
@@ -125,6 +127,7 @@ func _apply_responsive_layout() -> void:
 
 
 func start_new_run() -> void:
+	food_preferences = FoodPreferenceServiceScript.default_profile()
 	state = GameDataScript.get_starting_stats()
 	day = 1
 	low_stability_days = 0
@@ -300,7 +303,9 @@ func _build_food_choices() -> void:
 	view.set_primary_enabled(not selected_food_indices.is_empty())
 
 	for index in range(hand.size()):
-		var food := GameDataScript.get_food(hand[index])
+		var food := FoodPreferenceServiceScript.decorate_food(
+			GameDataScript.get_food(hand[index]), food_preferences
+		)
 		var can_toggle := selected_food_indices.has(index) or _can_add_food(index)
 		var stock := int(dorm_inventory.get(hand[index], 0)) if _source_uses_stock() else -1
 		var card := _new_choice_card(
@@ -581,7 +586,7 @@ func _confirm_food() -> void:
 	if foods.is_empty():
 		return
 	var source := GameDataScript.get_meal_source(current_source_id)
-	var record := MealResolverScript.build_record(phase, source, foods)
+	var record := MealResolverScript.build_record(phase, source, foods, food_preferences)
 	if int(record["total_cost"]) > int(state["balance"]):
 		_add_log("钱不够，得少拿一样。", "warning")
 		return

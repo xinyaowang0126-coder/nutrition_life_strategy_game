@@ -11,7 +11,7 @@
 
 ## 2. 当前问题
 
-当前 `data/cards/foods.xml` 同时承载游戏结算和少量营养标签：
+方案起始时，`data/cards/foods.xml` 同时承载游戏结算和少量营养标签：
 
 - `cost`、`satiety`、`energy`、`mood`、`burden` 是游戏平衡值，不是营养测量。
 - `food_groups` 只表示某类“出现”，没有份量和组成依据。
@@ -22,6 +22,8 @@
 
 因此新评估器不得直接把上述字段当作充分的健康依据。
 
+NUT-207 已将全部 23 项食物的 `mood` 迁入独立角色偏好资料，并从食物 `tags` 移除 `favorite`、`mood`。食物剩余的游戏值和旧营养标签仍遵守上述限制；`burden` 与旧结算的拆分继续由 NUT-208 承接，不能据此认定 M2 已整体完成。
+
 ## 3. 推荐存储结构
 
 保留 `foods.xml` 作为游戏卡牌目录，新建独立健康资料层：
@@ -30,6 +32,8 @@
 data/
 ├─ cards/
 │  └─ foods.xml                       # 现有游戏效果与卡牌可见资料
+├─ characters/
+│  └─ default_food_preferences.xml    # NUT-207：本局角色口味，不属于健康资料
 └─ health/
    ├─ food_health_profiles.xml        # 以 food_id 连接食物健康资料
    ├─ evidence_registry.xml           # 证据、适用范围与版本
@@ -510,7 +514,9 @@ CI 中阻断错误必须为 0；警告要有显式白名单、负责人和到期
 | `limit_tags` | 人工核对 factor 候选 | 否 |
 | `tags` | 玩法筛选和内容检索 | 否 |
 | `kind` | 卡牌展示 | 否 |
-| `energy/mood/burden` | 游戏结算 | 否 |
+| `energy/burden` | 游戏结算；burden 的长期拆分由 NUT-208 承接 | 否 |
+| 食物旧 `mood`、`favorite/mood` 标签 | NUT-207 已迁入角色偏好 XML；食物目录不再保存这些字段/标签 | 否 |
+| `food_preference` / `preference_reactions` | 当局口味展示与游戏结算历史 | 否 |
 | `scenes/sources` | 可行建议筛选 | 是，但只判断能否获得 |
 | `dorm_stock` | 库存和可行建议 | 是，但不改变营养分类 |
 
@@ -524,12 +530,60 @@ CI 中阻断错误必须为 0；警告要有显式白名单、负责人和到期
 
 ## 13. 口味和偏好数据分离
 
-“青菜心情 -2”“沙拉心情 -3”不能作为食物固有健康属性。若要保留玩法差异，建议：
+### 13.1 NUT-207 已接入的角色资料
 
-- 将口味反应放入角色/局内 `preference_tags`；
-- 同一食物可因角色偏好或事件产生不同 `mood`；
-- 偏好不改变健康资料；
-- UI 用“角色口味（游戏效果）”解释，不写成“健康食物不好吃”。
+“青菜心情 -2”“沙拉心情 -3”现已明确归于本局角色的口味，不能作为食物固有属性或健康判断。`data/characters/default_food_preferences.xml` 使用独立 schema：
+
+```xml
+<food_preferences schema_version="1" id="campus_student" version="1" name="本局角色">
+  <reaction food_id="greens" mood_delta="-2" comfort="false" />
+  <reaction food_id="bubble_tea" mood_delta="18" comfort="true" />
+</food_preferences>
+```
+
+上例仅展示两个条目；默认文件实际包含全部 23 个 food_id，原有 mood 数值逐项保留。`comfort=true` 仅显式配置在 `bubble_tea`、`instant_noodles`、`fried_chicken`，其余为 false。`schema_version` 表示 XML 格式，`version` 表示角色偏好资料修订号，不与健康 profile/model 版本混用。
+
+`FoodPreferenceService` 返回的角色资料为：
+
+```gdscript
+{
+  "id": "campus_student",
+  "version": 1,
+  "name": "本局角色",
+  "reactions": {
+    "greens": {"mood_delta": -2, "comfort": false}
+  }
+}
+```
+
+解析器校验根节点、格式版本、角色 ID/名称、正整数资料版本、重复 food_id、整数 mood_delta 与显式 true/false。文件缺失、格式不完整、重复条目或未来格式均返回 `{}`，整份失败，不接受前半份资料，也不阻止正常游戏运行。
+
+### 13.2 读取、显示和未知态契约
+
+| 接口 | 行为 |
+| --- | --- |
+| `default_profile()` | 读取默认角色资料；缓存及返回值相互独立，调用方得到深拷贝 |
+| `load_profile(path)` | 显式读取指定 XML；验证失败返回 `{}`，不改用默认角色 |
+| `reaction(food_id, profile)` | 返回 profile_id、profile_version、character_name、status、mood_delta、comfort |
+| `decorate_food(food, profile)` | 返回食物深拷贝，移除顶层 mood，增加由 reaction 生成的 food_preference |
+
+已配置反应使用 `status="known"`；缺失条目或非法资料使用 `status="unspecified" / mood_delta=0 / comfort=false`。这里的 0 是“本次不施加口味心情效果”的游戏处理，并非推断该食物没有健康影响。显式传入 `{}` 必须保持未设置，绝不从食物旧 mood、favorite/mood 标签或健康资料补造偏好。`MealResolver.build_record` 省略偏好参数时才使用默认角色，以兼容已有调用方。
+
+V1 与 V2 的食物显示和结算读取同一份当局偏好。卡片显示“口味”效果，详情将本局角色口味与食物/健康资料分开；未知时显示“口味未设置”，不把负反应写成“健康食物不好吃”。改变偏好会改变游戏心情与 comfort，不改变 `FoodHealthProfile`。
+
+### 13.3 当局生命周期与历史边界
+
+- V2 的 `set_food_preferences(profile)` 复制输入；在餐次界面更新后刷新展示并关闭旧详情，避免显示上一个角色的反应。外部继续修改原字典不会改变本局偏好。
+- 当局偏好跨日保留；重新开始一局时恢复默认角色资料。本轮没有新增角色选择页或偏好事件 UI。
+- `record.preference_reactions` 保存每项 food_id 对应的角色 ID、资料版本、名称、known/unspecified 状态、mood_delta 和 comfort，仅用于游戏历史与结算追溯。
+- `MealHealthSnapshot` 不包含 food_preference 或 preference_reactions，也不读取口味影响组成、因素、confidence 或健康资料版本。该边界与四个健康开关是否开启无关。
+- 行动、睡眠和来源自身的心情效果仍属于原有游戏规则；本次迁移只处理食物口味，不提前拆分 NUT-208 的恢复轨道。
+
+### 13.4 NUT-207 验收结果（2026-09-04）
+
+Godot AI 更新至 3.2.5 后，统一验证 `180/180`、19 个套件通过；偏好数据 `7/7`、流程 `7/7`、UI `9/9`，导出配置回归 `7/7` 已包含在全量内。发布配置静态检查与主场景烟测通过。实际渲染覆盖 `1920×1080`、`720×1280`，分别检查默认青菜、默认沙拉和修改偏好后的青菜，共 6 张截图；文字完整、无越界，`report.json` 的 failures 为空。
+
+验收中已修复详情便签复用旧折行高度导致的越界，以及异步显隐竞态。日志位于 `life-strategy/.godot/logs/nut207-post-upgrade-verification.log`，截图位于 `life-strategy/.godot/nut207-visual/`。本项验收完成；四个健康开关仍关闭，两项到期证据仍待复核，新改动尚未提交、推送、导出或发布。下一步为 NUT-208A 状态矩阵盘点。
 
 ## 14. 验收标准
 

@@ -54,9 +54,11 @@ Web 导出需要与当前 Godot 引擎版本匹配的导出模板；例如 4.7.2
 
 ## 当前开发进度（2026-09-04）
 
-营养健康升级已完成 NUT-206 的工程部分：23 个食物条目均有独立资料，13 项为固定游戏规格、10 项为保守品类资料，全部仍是 draft；用餐快照和独立健康历史存取已接入 V2 用餐流程，保留当餐资料与版本，加载历史不会用新资料重算，也不会恢复或混入本局游戏状态。四个新健康功能开关保持关闭；下一步是角色偏好、旧状态拆分与评估引擎。任务状态见 [专项 Backlog](life-strategy/docs/plans/nutrition_health_guidance/06_implementation_backlog.md)，未知项和到期证据见 [复核队列](life-strategy/docs/plans/nutrition_health_guidance/07_profile_review_queue.md)。
+新任务续接请先读 [开发交接记录](docs/process/DEVELOPMENT_HANDOFF.md)，核对工作目录、未提交改动、验证基线与 NUT-208A 的切入点。
 
-当前全量测试 157/157、发布配置静态检查和主场景烟测通过，包含完整七天 21 餐记录及开关前后玩法结果一致性验证；两项证据仍待到期复核。当前源码检查点位于开发分支 `codex/nutrition-health-m2`，未合并 main，未导出或发布；仓库 Play/ 包仍对应 2026-07-14 的 v0.3。
+营养健康升级已完成 NUT-206 的工程部分：23 个食物条目均有独立资料，13 项为固定游戏规格、10 项为保守品类资料，全部仍是 draft；用餐快照和独立健康历史存取已接入 V2 用餐流程。NUT-207 已把食物心情与偏爱餐迁入独立角色偏好，默认角色保留原数值，卡面和详情明确显示口味的游戏效果；修改偏好不会改变健康资料或已保存的健康快照。桌面与竖屏截图核验已通过，四个新健康功能开关保持关闭。下一步是 NUT-208A 旧状态生产者/消费者盘点与恢复状态矩阵。任务状态见 [专项 Backlog](life-strategy/docs/plans/nutrition_health_guidance/06_implementation_backlog.md)，未知项和到期证据见 [复核队列](life-strategy/docs/plans/nutrition_health_guidance/07_profile_review_queue.md)。
+
+Godot AI 更新至 3.2.5 后，NUT-207 已通过全量测试 180/180（19 个套件）、发布配置静态检查、主场景烟测及两种尺寸的六张实际渲染截图核验，并修复了详情弹窗旧高度缓存导致的越界。两项证据仍待到期复核。开发分支 `codex/nutrition-health-m2` 已保存 NUT-206 检查点，本轮 NUT-207 改动尚未提交或推送，未合并 main，未导出或发布；仓库 Play/ 包仍对应 2026-07-14 的 v0.3。
 
 ## 项目结构
 

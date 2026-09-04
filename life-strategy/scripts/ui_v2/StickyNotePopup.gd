@@ -17,6 +17,8 @@ const GameDataScript := preload("res://scripts/GameData.gd")
 @onready var stress_metric: Label = $Margin/VBox/MetricGrid/Stress
 @onready var burden_metric: Label = $Margin/VBox/MetricGrid/Burden
 @onready var study_metric: Label = $Margin/VBox/MetricGrid/Study
+@onready var preference_section: VBoxContainer = $Margin/VBox/FoodPreference
+@onready var preference_reaction: Label = $Margin/VBox/FoodPreference/Reaction
 @onready var description_label: Label = $Margin/VBox/Description
 @onready var disabled_reason_label: Label = $Margin/VBox/DisabledReason
 @onready var action_button: Button = $Margin/VBox/ActionButton
@@ -31,6 +33,7 @@ var _anchor_rect := Rect2()
 var _mobile_mode := false
 var _ready_finished := false
 var _motion_tween: Tween
+var _show_revision := 0
 
 
 func _ready() -> void:
@@ -57,6 +60,8 @@ func setup(
 	_stock = stock
 	if _ready_finished:
 		_apply_payload()
+		if visible:
+			_queue_show_layout()
 
 
 func present(
@@ -79,11 +84,20 @@ func show_at(anchor_rect: Rect2, mobile: bool = false, is_pinned: bool = false) 
 	pinned = is_pinned
 	visible = true
 	move_to_front()
-	reset_size()
-	call_deferred("_finish_show")
+	_queue_show_layout()
+
+
+func _queue_show_layout() -> void:
+	_show_revision += 1
+	if is_instance_valid(_motion_tween):
+		_motion_tween.kill()
+	modulate.a = 0.0
+	scale = Vector2.ONE
+	call_deferred("_finish_show", _show_revision)
 
 
 func hide_note(animated: bool = true) -> void:
+	_show_revision += 1
 	if not visible:
 		return
 	if is_instance_valid(_motion_tween):
@@ -97,7 +111,7 @@ func hide_note(animated: bool = true) -> void:
 	_motion_tween.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
 	_motion_tween.tween_property(self, "modulate:a", 0.0, 0.10)
 	_motion_tween.tween_property(self, "scale", Vector2(0.97, 0.97), 0.10)
-	_motion_tween.chain().tween_callback(_finish_hide)
+	_motion_tween.chain().tween_callback(_finish_hide.bind(_show_revision))
 
 
 func is_showing_item(item_id: String) -> bool:
@@ -124,10 +138,34 @@ func _apply_payload() -> void:
 	action_button.disabled = not _disabled_reason.is_empty()
 	_set_metric(satiety_metric, "饱腹", "satiety")
 	_set_metric(energy_metric, "精力", "energy")
-	_set_metric(mood_metric, "心情", "mood")
+	if _mode == "food":
+		mood_metric.visible = false
+	else:
+		_set_metric(mood_metric, "心情", "mood")
 	_set_metric(stress_metric, "压力", "stress")
 	_set_character_health_metric()
 	_set_metric(study_metric, "复习", "study", "study_progress")
+	_apply_food_preference()
+
+
+func _apply_food_preference() -> void:
+	preference_section.visible = _mode == "food"
+	preference_reaction.text = ""
+	if _mode != "food":
+		return
+	var preference: Variant = _payload.get("food_preference", {})
+	if not preference is Dictionary or String(preference.get("status", "")) != "known":
+		preference_reaction.text = "口味未设置"
+		return
+	var value := int(preference.get("mood_delta", 0))
+	var reaction := "本局角色没有特别偏好"
+	if value < 0:
+		reaction = "不太合本局角色的口味"
+	elif bool(preference.get("comfort", false)):
+		reaction = "本局角色偏爱这一口"
+	elif value > 0:
+		reaction = "合本局角色的口味"
+	preference_reaction.text = "%s · 心情 %s" % [reaction, _delta(value)]
 
 
 func _set_metric(label: Label, caption: String, key: String, alias: String = "") -> void:
@@ -200,16 +238,36 @@ func _cost_text() -> String:
 	return ""
 
 
-func _finish_show() -> void:
-	if not visible:
+func _finish_show(revision: int) -> void:
+	if not _show_is_current(revision):
 		return
 	var viewport_rect := get_viewport().get_visible_rect()
 	var safe_margin := 24.0
-	var minimum := get_combined_minimum_size()
-	var target_width := minimum.x
+	var target_width := get_combined_minimum_size().x
 	if _mobile_mode:
 		target_width = maxf(320.0, viewport_rect.size.x - safe_margin * 2.0)
-	size = Vector2(target_width, minimum.y)
+	# Wrapped labels may initially report the height of a nearly zero-width
+	# column. First let the chosen width reach the nested containers and labels;
+	# then discard that stale height. Two frames bound the layout work.
+	size.x = target_width
+	await get_tree().process_frame
+	if not _show_is_current(revision):
+		return
+	await get_tree().process_frame
+	_finish_show_layout(revision, target_width)
+
+
+func _show_is_current(revision: int) -> bool:
+	return is_inside_tree() and visible and revision == _show_revision
+
+
+func _finish_show_layout(revision: int, target_width: float) -> void:
+	if not _show_is_current(revision):
+		return
+	var viewport_rect := get_viewport().get_visible_rect()
+	var safe_margin := 24.0
+	_refresh_wrapped_text(self)
+	size = Vector2(target_width, get_combined_minimum_size().y)
 	var target_position: Vector2
 	if _mobile_mode:
 		target_position = Vector2(
@@ -238,6 +296,17 @@ func _finish_show() -> void:
 	_play_open_animation()
 
 
+func _refresh_wrapped_text(node: Node) -> void:
+	for child in node.get_children():
+		_refresh_wrapped_text(child)
+	if node is Label and (node as Label).autowrap_mode != TextServer.AUTOWRAP_OFF:
+		# Shaping is lazy, and the measuring pass is deliberately transparent.
+		# Asking for line count refreshes wrapping without relying on a draw.
+		(node as Label).get_line_count()
+	if node is Control:
+		(node as Control).update_minimum_size()
+
+
 func _play_open_animation() -> void:
 	if is_instance_valid(_motion_tween):
 		_motion_tween.kill()
@@ -259,7 +328,9 @@ func _on_action_pressed() -> void:
 	action_requested.emit(String(_payload.get("id", "")), _payload.duplicate(true))
 
 
-func _finish_hide() -> void:
+func _finish_hide(revision: int) -> void:
+	if revision != _show_revision:
+		return
 	visible = false
 	modulate = Color.WHITE
 	scale = Vector2.ONE

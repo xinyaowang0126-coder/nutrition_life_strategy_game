@@ -1,7 +1,7 @@
 class_name MealResolver
 extends RefCounted
 
-const COMFORT_TAGS := ["favorite", "instant", "high_sugar", "high_fat", "high_sodium"]
+const FoodPreferenceServiceScript := preload("res://scripts/systems/FoodPreferenceService.gd")
 const PROTEIN_FOOD_GROUPS := [
 	"fish_seafood",
 	"poultry_livestock",
@@ -16,7 +16,8 @@ const PROTEIN_FOOD_GROUPS := [
 static func build_record(
 	meal_phase: String,
 	source: Dictionary,
-	foods: Array[Dictionary]
+	foods: Array[Dictionary],
+	preferences: Variant = null
 ) -> Dictionary:
 	var food_ids: Array[String] = []
 	var food_names: Array[String] = []
@@ -24,25 +25,14 @@ static func build_record(
 	var food_groups: Array[String] = []
 	var nutrient_tags: Array[String] = []
 	var limit_tags: Array[String] = []
-	var delta := {
-		"satiety": 0,
-		"energy": 0,
-		"mood": 0,
-		"stress": 0,
-		"diet_burden": 0,
-		"study_progress": 0,
-	}
+	var reactions := _preference_reactions(foods, preferences)
+	var delta := _stat_delta(foods, source, reactions)
 	var food_cost := 0
 
 	for food in foods:
 		food_ids.append(String(food["id"]))
 		food_names.append(String(food["name"]))
 		food_cost += int(food.get("cost", 0))
-		delta["satiety"] += int(food.get("satiety", 0))
-		delta["energy"] += int(food.get("energy", 0))
-		delta["mood"] += int(food.get("mood", 0))
-		delta["stress"] += int(food.get("stress", 0))
-		delta["diet_burden"] += int(food.get("burden", 0))
 		for tag in food.get("tags", []):
 			var normalized := String(tag)
 			if not tags.has(normalized):
@@ -50,13 +40,6 @@ static func build_record(
 		_merge_unique(food_groups, food.get("food_groups", []))
 		_merge_unique(nutrient_tags, food.get("nutrient_tags", []))
 		_merge_unique(limit_tags, food.get("limit_tags", []))
-
-	# A source can trade time/effort for money. Keeping these effects in the
-	# resolver also lets temporary events pass an adjusted source dictionary.
-	delta["energy"] += int(source.get("energy", 0))
-	delta["mood"] += int(source.get("mood", 0))
-	delta["stress"] += int(source.get("stress", 0))
-	delta["diet_burden"] += int(source.get("burden", 0))
 
 	var uses_stock := String(source.get("payment_mode", "cash")) == "stock"
 	var source_fee := 0 if uses_stock else int(source.get("fee", 0))
@@ -76,10 +59,41 @@ static func build_record(
 		"nutrient_tags": nutrient_tags,
 		"limit_tags": limit_tags,
 		"stat_delta": delta,
+		"preference_reactions": reactions,
 		"skipped": false,
 		"uses_stock": uses_stock,
-		"comfort": has_any_tag(tags, COMFORT_TAGS),
+		"comfort": reactions.any(func(reaction: Dictionary) -> bool: return reaction["comfort"]),
 	}
+
+
+static func _preference_reactions(foods: Array[Dictionary], preferences: Variant) -> Array[Dictionary]:
+	# null preserves existing callers; an explicitly empty profile means no
+	# declared tastes. Never infer preferences from food or health metadata.
+	var profile: Dictionary = FoodPreferenceServiceScript.default_profile() if preferences == null else (
+		preferences if preferences is Dictionary else {}
+	)
+	var reactions: Array[Dictionary] = []
+	for food in foods:
+		var food_id := String(food["id"])
+		var reaction: Dictionary = FoodPreferenceServiceScript.reaction(food_id, profile)
+		reaction["food_id"] = food_id
+		reactions.append(reaction)
+	return reactions
+
+
+static func _stat_delta(foods: Array[Dictionary], source: Dictionary, reactions: Array[Dictionary]) -> Dictionary:
+	var delta := {"satiety": 0, "energy": 0, "mood": 0, "stress": 0, "diet_burden": 0, "study_progress": 0}
+	for food in foods:
+		for key in ["satiety", "energy", "stress"]:
+			delta[key] += int(food.get(key, 0))
+		delta["diet_burden"] += int(food.get("burden", 0))
+	for reaction in reactions:
+		delta["mood"] += int(reaction["mood_delta"])
+	# Source events still express effort/mood costs independently of taste.
+	for key in ["energy", "mood", "stress"]:
+		delta[key] += int(source.get(key, 0))
+	delta["diet_burden"] += int(source.get("burden", 0))
+	return delta
 
 
 static func build_skipped_record(meal_phase: String) -> Dictionary:
@@ -106,6 +120,7 @@ static func build_skipped_record(meal_phase: String) -> Dictionary:
 			"study_progress": 0,
 		},
 		"skipped": true,
+		"preference_reactions": [],
 		"uses_stock": false,
 		"comfort": false,
 	}

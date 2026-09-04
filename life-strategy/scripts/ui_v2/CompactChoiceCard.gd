@@ -190,6 +190,17 @@ func _apply_quick_stats() -> void:
 		_:
 			primary_stat.add_theme_color_override("font_color", Color("#387f4a"))
 			_set_quick_stat(primary_stat, "饱腹 ", int(_payload.get("satiety", 0)))
+			if _mode == "food":
+				secondary_stat.visible = true
+				secondary_stat.add_theme_color_override("font_color", Color("#80594a"))
+				secondary_stat.text = _food_preference_text()
+
+
+func _food_preference_text() -> String:
+	var preference: Variant = _payload.get("food_preference", {})
+	if not preference is Dictionary or String(preference.get("status", "")) != "known":
+		return "口味未设置"
+	return "口味 %s" % _delta(int(preference.get("mood_delta", 0)))
 
 
 func _apply_strongest_stat(stats: Array) -> void:

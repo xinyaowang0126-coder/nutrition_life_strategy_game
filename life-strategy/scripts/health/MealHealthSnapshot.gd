@@ -20,6 +20,7 @@ const FORBIDDEN_FIELDS := [
 	"quality", "average_quality", "nutrition_score", "health_score", "cost",
 	"total_cost", "mood", "energy", "burden", "diet_burden", "stat_delta",
 	"tags", "food_groups", "nutrient_tags", "limit_tags",
+	"food_preference", "preference_reactions", "mood_delta", "comfort",
 ]
 
 

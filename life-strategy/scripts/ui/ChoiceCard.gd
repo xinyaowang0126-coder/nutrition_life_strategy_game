@@ -115,10 +115,10 @@ func _summary_text(payload: Dictionary, mode: String) -> String:
 	if mode == "source":
 		return "最多 %d 种" % int(payload.get("hand_size", 0))
 	if mode == "food":
-		return "饱腹 %s · 精力 %s · 心情 %s" % [
+		return "饱腹 %s · 精力 %s · %s" % [
 			_delta(int(payload.get("satiety", 0))),
 			_delta(int(payload.get("energy", 0))),
-			_delta(int(payload.get("mood", 0))),
+			_food_preference_summary(payload),
 		]
 	if mode == "action":
 		return "精力 %s · 压力 %s · 复习 %s" % [
@@ -138,10 +138,9 @@ func _tooltip_text(payload: Dictionary, mode: String, disabled_reason: String, s
 	if not disabled_reason.is_empty():
 		lines.append(disabled_reason)
 	if mode == "food":
-		lines.append("饱腹 %s　精力 %s　心情 %s" % [
+		lines.append("饱腹 %s　精力 %s" % [
 			_delta(int(payload.get("satiety", 0))),
 			_delta(int(payload.get("energy", 0))),
-			_delta(int(payload.get("mood", 0))),
 		])
 		lines.append("压力 %s　角色健康 %s" % [
 			_delta(int(payload.get("stress", 0))),
@@ -149,6 +148,8 @@ func _tooltip_text(payload: Dictionary, mode: String, disabled_reason: String, s
 		])
 		if stock >= 0:
 			lines.append("宿舍还剩 %d 份" % stock)
+		lines.append("角色口味（游戏效果）")
+		lines.append(_food_preference_detail(payload))
 	elif mode == "action" or mode == "sleep":
 		lines.append("精力 %s　心情 %s　压力 %s　复习 %s" % [
 			_delta(int(payload.get("energy", 0))),
@@ -164,6 +165,28 @@ func _tooltip_text(payload: Dictionary, mode: String, disabled_reason: String, s
 		lines.append("可看到 %d 种选择" % int(payload.get("hand_size", 0)))
 	lines.append(String(payload.get("desc", "")))
 	return "\n".join(lines)
+
+
+func _food_preference_summary(payload: Dictionary) -> String:
+	var preference: Variant = payload.get("food_preference", {})
+	if not preference is Dictionary or String(preference.get("status", "")) != "known":
+		return "口味未设置"
+	return "口味 %s" % _delta(int(preference.get("mood_delta", 0)))
+
+
+func _food_preference_detail(payload: Dictionary) -> String:
+	var preference: Variant = payload.get("food_preference", {})
+	if not preference is Dictionary or String(preference.get("status", "")) != "known":
+		return "口味未设置"
+	var value := int(preference.get("mood_delta", 0))
+	var reaction := "本局角色没有特别偏好"
+	if value < 0:
+		reaction = "不太合本局角色的口味"
+	elif bool(preference.get("comfort", false)):
+		reaction = "本局角色偏爱这一口"
+	elif value > 0:
+		reaction = "合本局角色的口味"
+	return "%s · 心情 %s" % [reaction, _delta(value)]
 
 
 func _make_custom_tooltip(for_text: String) -> Object:

@@ -48,7 +48,7 @@ flowchart TD
 | --- | --- | --- |
 | M0 基线与开关 | NUT-000–002 完成；决策签署和 PR 模板待办 | 旧行为有快照、功能开关可用 |
 | M1 安全校正 | NUT-101–102、104–105 完成；NUT-103 工程完成待签署 | 玩家界面无营养总分/抵消暗示；日结已完成游戏化与自然语言收口 |
-| M2 数据底座与旧状态拆分 | NUT-201–203、204A–D、205–206 工程完成；偏好与 NUT-208 待办 | 23 个 draft 资料全覆盖；data on 时用餐快照可保存/重载，旧记录明确降级；不含整局续玩。两项证据仍到期，allergen/food safety 尚未进入生产解析 |
+| M2 数据底座与旧状态拆分 | NUT-201–203、204A–D、205–207 工程完成，NUT-207 已通过全量与界面验收；NUT-208 待办 | 23 个 draft 资料全覆盖；独立健康历史可读；食物口味已归于角色资料。恢复轨道尚未拆分，M2 未整体完成；两项证据仍到期，allergen/food safety 尚未进入生产解析 |
 | M3 评估与建议 | 未开始 | 四维输出、无总分、建议可行 |
 | M4 UI/UX | 正式健康输出未开始；NUT-105 已提前完成可复用的日结游戏外壳 | 选择期、日结、周结和依据入口完成 |
 | M5 内容扩展 | 未开始 | 来源缺口、标签和食安按范围上线 |
@@ -315,9 +315,19 @@ NUT-204D 当前结果：
 
 ### NUT-207 偏好与游戏数值分离
 
-- [ ] 把青菜/沙拉固定负 mood 的健康暗示迁移到角色偏好或明确游戏设定。
+- [x] 工程与验收完成：食物口味迁入当局角色偏好，V1/V2 展示与结算同源；最终全量 180/180 及桌面/竖屏实际截图通过。本轮改动尚未提交、推送、导出或发布。
 - 依赖：NUT-205。
-- 验收：改变偏好不改变 profile；详情分区正确。
+- 改动：`data/characters/default_food_preferences.xml`、`foods.xml`、`FoodPreferenceService`、`MealResolver`、V1/V2 GameRoot、食物卡片/详情及对应测试。
+- 实际范围（2026-09-04）：
+  - 全部 23 项原食物 mood 数值精确迁入 `campus_student / version=1 / 本局角色`；food XML 移除顶层 mood 与 favorite/mood 标签。comfort 仅在奶茶、方便面、炸鸡三项显式设为 true。
+  - 角色 XML 使用独立 schema v1，读取时检查根节点、版本、ID、重复条目、整数和布尔；失败整份返回 `{}`，不部分接受。
+  - `default_profile / load_profile / reaction / decorate_food` 输出深拷贝。显式空偏好、缺失或非法数据均为 unspecified、0 心情增量、false comfort，不从标签、旧 mood 或健康 profile 回退。
+  - V1/V2 卡片、详情和 MealResolver 共用当局偏好；V2 `set_food_preferences` 复制输入并刷新餐次展示，防止旧详情与新结算不一致。
+  - 偏好跨日保留，重开恢复默认；`record.preference_reactions` 只保存游戏历史，健康快照不包含偏好。没有新增角色选择页或偏好事件 UI。
+- 验收：23 项默认值与三项 comfort 保持；改偏好不改健康 profile/快照；同一食物显示与结算一致；未知/非法资料中性降级；桌面/竖屏详情分区和七日流程通过。
+- 验证记录：Godot AI 3.2.5 更新后，`tools/verify_project.ps1` 全量 `180/180`、19 个套件通过；偏好数据 `7/7`、流程 `7/7`、UI `9/9`，导出配置回归 `7/7` 已包含在全量内。发布配置静态检查与主场景烟测通过，日志为 `life-strategy/.godot/logs/nut207-post-upgrade-verification.log`。
+- 界面验收：`1920×1080`、`720×1280` 分别真实渲染 `greens-default`、`salad_bowl-default`、`greens-changed`，共 6 张截图，文字完整、无越界；`life-strategy/.godot/nut207-visual/report.json` 的 failures 为空。已修复 StickyNote 旧折行高度缓存导致的越界和异步显隐竞态。
+- 边界：四个健康功能开关仍全部关闭；本项不拆除旧 quality/diet_burden，不代表 M2 整体完成。下一步为 NUT-208A 生产者/消费者盘点与新状态矩阵。
 - 规模：M。
 
 ### NUT-208 拆解旧 `diet_burden` / “角色健康”
@@ -579,7 +589,7 @@ NUT-204D 当前结果：
 | 9 | 单餐评估器 + 金样例 | NUT-301–302 | 影子运行 |
 | 10 | 日/周聚合 + 可行建议基础 | NUT-303–305A | 影子运行 |
 
-NUT-208A 可与 profile 工作并行；NUT-208B–D 必须在 M3 对外展示前完成。之后按 NUT-306 → 307 → 308 → 401–407 推进。每个 PR 以测试和可回退为边界，不按“尽量多改文件”组织。
+NUT-207 已验收完成，下一片推进 NUT-208A：盘点旧混合值的全部生产者/消费者，形成并确认新状态矩阵。NUT-208B–D 必须在 M3 对外展示前完成。之后按 NUT-306 → 307 → 308 → 401–407 推进。每个 PR 以测试和可回退为边界，不按“尽量多改文件”组织。
 
 ## 12. PR 描述模板
 
