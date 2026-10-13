@@ -1,0 +1,180 @@
+{
+  "date": "2026-10-12",
+  "milestone": "G4A6",
+  "session_id": "life-strategy@53a996abc03d386b",
+  "godot_version": "4.7.2-stable",
+  "plugin_version": "4.3.0",
+  "scene": "res://scenes/game_v2/GameRootV2.tscn",
+  "tests": {
+    "result": {
+      "balance": 150,
+      "failed": 0,
+      "failures": [],
+      "menu": {
+        "x": 1843,
+        "y": 47
+      },
+      "passed": 12,
+      "selected": [
+        "tomato"
+      ],
+      "total": 12
+    },
+    "source": "game"
+  },
+  "menu_mouse_open": {
+    "result": {
+      "eaten": 0,
+      "health_loaded": false,
+      "unchanged": true,
+      "visible": true
+    },
+    "source": "game"
+  },
+  "menu_escape_close": {
+    "result": {
+      "phase": "breakfast",
+      "unchanged": true,
+      "visible": false
+    },
+    "source": "game"
+  },
+  "summary_open": {
+    "result": {
+      "eaten": 2,
+      "next_disabled": true,
+      "open": true,
+      "phase": "summary",
+      "skipped": 1
+    },
+    "source": "game"
+  },
+  "summary_enter": {
+    "result": {
+      "day": 1,
+      "next_enabled": false,
+      "phase": "summary",
+      "record_visible": true,
+      "summary_visible": true,
+      "unchanged": true
+    },
+    "source": "game"
+  },
+  "final_relaunch": {
+    "autosave": false,
+    "current_run_errors": [],
+    "game_status": {
+      "active": true,
+      "editor_log_cursor": 0,
+      "elapsed_msec": 1877,
+      "helper_expected": true,
+      "helper_live": true,
+      "ready": true,
+      "ready_wait_msec": 3000,
+      "run_started_msec": 732045,
+      "run_token": 2,
+      "session_active": true,
+      "status": "live"
+    },
+    "helper_live": true,
+    "mode": "custom",
+    "reason": "Game launched and the Godot AI game helper is live.",
+    "recent_errors": [],
+    "recent_errors_may_predate_run": false,
+    "recent_errors_scope": "none",
+    "recent_errors_truncated": false,
+    "retained_errors": [],
+    "scene": "res://scenes/game_v2/GameRootV2.tscn",
+    "session_active": true,
+    "undoable": false,
+    "was_already_running": false
+  },
+  "summary_mouse_setup": {
+    "result": {
+      "button_visible": true,
+      "center": {
+        "x": 955.963073730469,
+        "y": 961.856201171875
+      },
+      "day": 1,
+      "phase": "summary",
+      "summary_visible": true
+    },
+    "source": "game"
+  },
+  "summary_scroll": {
+    "result": {
+      "center": {
+        "x": 956,
+        "y": 797
+      },
+      "scroll_vertical": 161
+    },
+    "source": "game"
+  },
+  "summary_mouse_open": {
+    "result": {
+      "day": 1,
+      "next_enabled": false,
+      "phase": "summary",
+      "record_visible": true,
+      "summary_visible": true
+    },
+    "source": "game"
+  },
+  "summary_escape_restore": {
+    "result": {
+      "day": 1,
+      "next_enabled": true,
+      "phase": "summary",
+      "record_visible": false,
+      "summary_visible": true,
+      "unchanged": true
+    },
+    "source": "game"
+  },
+  "final_run_logs": {
+    "source": "game",
+    "lines": [
+      {
+        "level": "info",
+        "run_id": "r732046-2",
+        "source": "game",
+        "text": "[godot_ai game_helper] registered mcp capture (debugger active=true, logger=true)\n"
+      }
+    ],
+    "total_count": 1,
+    "returned_count": 1,
+    "offset": 0,
+    "limit": 10,
+    "has_more": false,
+    "run_id": "r732046-2",
+    "is_running": true,
+    "dropped_count": 0,
+    "stale_run_id": false,
+    "current_run_id": "r732046-2",
+    "helper_live": true,
+    "session_active": true,
+    "game_status": {
+      "active": true,
+      "editor_log_cursor": 0,
+      "elapsed_msec": 68394,
+      "helper_expected": true,
+      "helper_live": true,
+      "ready": true,
+      "ready_wait_msec": 20000,
+      "run_started_msec": 732045,
+      "run_token": 2,
+      "session_active": true,
+      "status": "live"
+    }
+  },
+  "notes": [
+    "Enter was consumed while the record book remained open in this run; it did not advance the day or mutate game state. Closing behavior depends on the focused button.",
+    "The summary record button is in the scroll content. The final mouse click used its observed center after ensure_control_visible.",
+    "A supplemental eval used the wrong inventory field pantry_stock and triggered an eval runtime error. The probe was corrected to dorm_inventory, the game was relaunched, and the final mouse/Escape check passed with clean current-run logs.",
+    "The earlier October 11 native mouse/Enter and confirmed egg record observations are documented in the milestone report and screenshots, not represented as raw October 12 responses.",
+    "The test game was stopped after the final check. No editor debugger history was cleared."
+  ],
+  "published": false
+}

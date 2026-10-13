@@ -1,0 +1,559 @@
+{
+  "recovery_conditions": {
+    "depleted": 49,
+    "strained": 283,
+    "rested": 96,
+    "steady": 16
+  },
+  "future_effect_differences": [
+    {
+      "legacy_study_modifier": 0,
+      "recovery_study_modifier": 3,
+      "recovery_opening_delta": {
+        "energy": 3,
+        "mood": 1,
+        "stress": -2
+      },
+      "policy": "cafeteria_paced_early",
+      "seed": 1,
+      "legacy_id": "steady",
+      "day": 3,
+      "legacy_opening_delta": {},
+      "recovery_condition": "rested"
+    },
+    {
+      "legacy_study_modifier": 0,
+      "recovery_study_modifier": 3,
+      "recovery_opening_delta": {
+        "energy": 3,
+        "mood": 1,
+        "stress": -2
+      },
+      "policy": "cafeteria_paced_early",
+      "seed": 1,
+      "legacy_id": "steady",
+      "day": 4,
+      "legacy_opening_delta": {},
+      "recovery_condition": "rested"
+    },
+    {
+      "legacy_study_modifier": 0,
+      "recovery_study_modifier": 3,
+      "recovery_opening_delta": {
+        "energy": 3,
+        "mood": 1,
+        "stress": -2
+      },
+      "policy": "cafeteria_paced_early",
+      "seed": 2,
+      "legacy_id": "steady",
+      "day": 3,
+      "legacy_opening_delta": {},
+      "recovery_condition": "rested"
+    },
+    {
+      "legacy_study_modifier": 0,
+      "recovery_study_modifier": 3,
+      "recovery_opening_delta": {
+        "energy": 3,
+        "mood": 1,
+        "stress": -2
+      },
+      "policy": "cafeteria_paced_early",
+      "seed": 2,
+      "legacy_id": "steady",
+      "day": 7,
+      "legacy_opening_delta": {},
+      "recovery_condition": "rested"
+    },
+    {
+      "legacy_study_modifier": 0,
+      "recovery_study_modifier": 3,
+      "recovery_opening_delta": {
+        "energy": 3,
+        "mood": 1,
+        "stress": -2
+      },
+      "policy": "cafeteria_paced_early",
+      "seed": 3,
+      "legacy_id": "steady",
+      "day": 3,
+      "legacy_opening_delta": {},
+      "recovery_condition": "rested"
+    },
+    {
+      "legacy_study_modifier": 0,
+      "recovery_study_modifier": 3,
+      "recovery_opening_delta": {
+        "energy": 3,
+        "mood": 1,
+        "stress": -2
+      },
+      "policy": "cafeteria_paced_early",
+      "seed": 3,
+      "legacy_id": "steady",
+      "day": 4,
+      "legacy_opening_delta": {},
+      "recovery_condition": "rested"
+    },
+    {
+      "legacy_study_modifier": 0,
+      "recovery_study_modifier": 3,
+      "recovery_opening_delta": {
+        "energy": 3,
+        "mood": 1,
+        "stress": -2
+      },
+      "policy": "cafeteria_paced_early",
+      "seed": 7,
+      "legacy_id": "steady",
+      "day": 1,
+      "legacy_opening_delta": {},
+      "recovery_condition": "rested"
+    },
+    {
+      "legacy_study_modifier": 0,
+      "recovery_study_modifier": 3,
+      "recovery_opening_delta": {
+        "energy": 3,
+        "mood": 1,
+        "stress": -2
+      },
+      "policy": "cafeteria_paced_early",
+      "seed": 7,
+      "legacy_id": "steady",
+      "day": 3,
+      "legacy_opening_delta": {},
+      "recovery_condition": "rested"
+    },
+    {
+      "legacy_study_modifier": 0,
+      "recovery_study_modifier": 3,
+      "recovery_opening_delta": {
+        "energy": 3,
+        "mood": 1,
+        "stress": -2
+      },
+      "policy": "cafeteria_paced_early",
+      "seed": 7,
+      "legacy_id": "steady",
+      "day": 4,
+      "legacy_opening_delta": {},
+      "recovery_condition": "rested"
+    },
+    {
+      "legacy_study_modifier": 0,
+      "recovery_study_modifier": 3,
+      "recovery_opening_delta": {
+        "energy": 3,
+        "mood": 1,
+        "stress": -2
+      },
+      "policy": "cafeteria_paced_early",
+      "seed": 13,
+      "legacy_id": "steady",
+      "day": 3,
+      "legacy_opening_delta": {},
+      "recovery_condition": "rested"
+    },
+    {
+      "legacy_study_modifier": 0,
+      "recovery_study_modifier": 3,
+      "recovery_opening_delta": {
+        "energy": 3,
+        "mood": 1,
+        "stress": -2
+      },
+      "policy": "cafeteria_paced_early",
+      "seed": 13,
+      "legacy_id": "steady",
+      "day": 4,
+      "legacy_opening_delta": {},
+      "recovery_condition": "rested"
+    },
+    {
+      "legacy_study_modifier": 0,
+      "recovery_study_modifier": 3,
+      "recovery_opening_delta": {
+        "energy": 3,
+        "mood": 1,
+        "stress": -2
+      },
+      "policy": "cafeteria_paced_early",
+      "seed": 13,
+      "legacy_id": "steady",
+      "day": 5,
+      "legacy_opening_delta": {},
+      "recovery_condition": "rested"
+    },
+    {
+      "legacy_study_modifier": 0,
+      "recovery_study_modifier": 3,
+      "recovery_opening_delta": {
+        "energy": 3,
+        "mood": 1,
+        "stress": -2
+      },
+      "policy": "cafeteria_paced_early",
+      "seed": 42,
+      "legacy_id": "steady",
+      "day": 2,
+      "legacy_opening_delta": {},
+      "recovery_condition": "rested"
+    },
+    {
+      "legacy_study_modifier": 0,
+      "recovery_study_modifier": 3,
+      "recovery_opening_delta": {
+        "energy": 3,
+        "mood": 1,
+        "stress": -2
+      },
+      "policy": "cafeteria_paced_early",
+      "seed": 42,
+      "legacy_id": "steady",
+      "day": 4,
+      "legacy_opening_delta": {},
+      "recovery_condition": "rested"
+    },
+    {
+      "legacy_study_modifier": 0,
+      "recovery_study_modifier": 3,
+      "recovery_opening_delta": {
+        "energy": 3,
+        "mood": 1,
+        "stress": -2
+      },
+      "policy": "cafeteria_paced_early",
+      "seed": 101,
+      "legacy_id": "steady",
+      "day": 2,
+      "legacy_opening_delta": {},
+      "recovery_condition": "rested"
+    },
+    {
+      "legacy_study_modifier": 0,
+      "recovery_study_modifier": 3,
+      "recovery_opening_delta": {
+        "energy": 3,
+        "mood": 1,
+        "stress": -2
+      },
+      "policy": "cafeteria_paced_early",
+      "seed": 101,
+      "legacy_id": "steady",
+      "day": 3,
+      "legacy_opening_delta": {},
+      "recovery_condition": "rested"
+    },
+    {
+      "legacy_study_modifier": 0,
+      "recovery_study_modifier": 3,
+      "recovery_opening_delta": {
+        "energy": 3,
+        "mood": 1,
+        "stress": -2
+      },
+      "policy": "cafeteria_paced_early",
+      "seed": 211,
+      "legacy_id": "steady",
+      "day": 1,
+      "legacy_opening_delta": {},
+      "recovery_condition": "rested"
+    },
+    {
+      "legacy_study_modifier": 0,
+      "recovery_study_modifier": 3,
+      "recovery_opening_delta": {
+        "energy": 3,
+        "mood": 1,
+        "stress": -2
+      },
+      "policy": "cafeteria_paced_early",
+      "seed": 211,
+      "legacy_id": "steady",
+      "day": 3,
+      "legacy_opening_delta": {},
+      "recovery_condition": "rested"
+    },
+    {
+      "legacy_study_modifier": 0,
+      "recovery_study_modifier": 3,
+      "recovery_opening_delta": {
+        "energy": 3,
+        "mood": 1,
+        "stress": -2
+      },
+      "policy": "cafeteria_paced_early",
+      "seed": 997,
+      "legacy_id": "steady",
+      "day": 2,
+      "legacy_opening_delta": {},
+      "recovery_condition": "rested"
+    },
+    {
+      "legacy_study_modifier": 0,
+      "recovery_study_modifier": 3,
+      "recovery_opening_delta": {
+        "energy": 3,
+        "mood": 1,
+        "stress": -2
+      },
+      "policy": "cafeteria_paced_early",
+      "seed": 997,
+      "legacy_id": "steady",
+      "day": 6,
+      "legacy_opening_delta": {},
+      "recovery_condition": "rested"
+    },
+    {
+      "legacy_study_modifier": 0,
+      "recovery_study_modifier": 3,
+      "recovery_opening_delta": {
+        "energy": 3,
+        "mood": 1,
+        "stress": -2
+      },
+      "policy": "cafeteria_paced_early",
+      "seed": 20260905,
+      "legacy_id": "steady",
+      "day": 4,
+      "legacy_opening_delta": {},
+      "recovery_condition": "rested"
+    },
+    {
+      "legacy_study_modifier": 0,
+      "recovery_study_modifier": 3,
+      "recovery_opening_delta": {
+        "energy": 3,
+        "mood": 1,
+        "stress": -2
+      },
+      "policy": "cafeteria_paced_early",
+      "seed": 20260905,
+      "legacy_id": "steady",
+      "day": 5,
+      "legacy_opening_delta": {},
+      "recovery_condition": "rested"
+    },
+    {
+      "legacy_study_modifier": 0,
+      "recovery_study_modifier": 3,
+      "recovery_opening_delta": {
+        "energy": 3,
+        "mood": 1,
+        "stress": -2
+      },
+      "policy": "cafeteria_adaptive_early",
+      "seed": 13,
+      "legacy_id": "steady",
+      "day": 5,
+      "legacy_opening_delta": {},
+      "recovery_condition": "rested"
+    },
+    {
+      "legacy_study_modifier": 0,
+      "recovery_study_modifier": 3,
+      "recovery_opening_delta": {
+        "energy": 3,
+        "mood": 1,
+        "stress": -2
+      },
+      "policy": "cafeteria_adaptive_early",
+      "seed": 20260905,
+      "legacy_id": "steady",
+      "day": 5,
+      "legacy_opening_delta": {},
+      "recovery_condition": "rested"
+    },
+    {
+      "legacy_study_modifier": -4,
+      "recovery_study_modifier": -2,
+      "recovery_opening_delta": {
+        "energy": -2,
+        "stress": 2
+      },
+      "policy": "takeout_adaptive_early",
+      "seed": 0,
+      "legacy_id": "brain_fog",
+      "day": 5,
+      "legacy_opening_delta": {
+        "energy": -3,
+        "mood": -2,
+        "stress": 3
+      },
+      "recovery_condition": "strained"
+    },
+    {
+      "legacy_study_modifier": -4,
+      "recovery_study_modifier": -2,
+      "recovery_opening_delta": {
+        "energy": -2,
+        "stress": 2
+      },
+      "policy": "takeout_adaptive_early",
+      "seed": 1,
+      "legacy_id": "brain_fog",
+      "day": 5,
+      "legacy_opening_delta": {
+        "energy": -3,
+        "mood": -2,
+        "stress": 3
+      },
+      "recovery_condition": "strained"
+    },
+    {
+      "legacy_study_modifier": -4,
+      "recovery_study_modifier": -2,
+      "recovery_opening_delta": {
+        "energy": -2,
+        "stress": 2
+      },
+      "policy": "takeout_adaptive_early",
+      "seed": 2,
+      "legacy_id": "brain_fog",
+      "day": 5,
+      "legacy_opening_delta": {
+        "energy": -3,
+        "mood": -2,
+        "stress": 3
+      },
+      "recovery_condition": "strained"
+    },
+    {
+      "legacy_study_modifier": -4,
+      "recovery_study_modifier": -2,
+      "recovery_opening_delta": {
+        "energy": -2,
+        "stress": 2
+      },
+      "policy": "takeout_adaptive_early",
+      "seed": 7,
+      "legacy_id": "brain_fog",
+      "day": 5,
+      "legacy_opening_delta": {
+        "energy": -3,
+        "mood": -2,
+        "stress": 3
+      },
+      "recovery_condition": "strained"
+    },
+    {
+      "legacy_study_modifier": -4,
+      "recovery_study_modifier": -2,
+      "recovery_opening_delta": {
+        "energy": -2,
+        "stress": 2
+      },
+      "policy": "takeout_adaptive_early",
+      "seed": 13,
+      "legacy_id": "brain_fog",
+      "day": 5,
+      "legacy_opening_delta": {
+        "energy": -3,
+        "mood": -2,
+        "stress": 3
+      },
+      "recovery_condition": "strained"
+    },
+    {
+      "legacy_study_modifier": -4,
+      "recovery_study_modifier": -2,
+      "recovery_opening_delta": {
+        "energy": -2,
+        "stress": 2
+      },
+      "policy": "takeout_adaptive_early",
+      "seed": 42,
+      "legacy_id": "brain_fog",
+      "day": 5,
+      "legacy_opening_delta": {
+        "energy": -3,
+        "mood": -2,
+        "stress": 3
+      },
+      "recovery_condition": "strained"
+    },
+    {
+      "legacy_study_modifier": -4,
+      "recovery_study_modifier": -2,
+      "recovery_opening_delta": {
+        "energy": -2,
+        "stress": 2
+      },
+      "policy": "takeout_adaptive_early",
+      "seed": 73,
+      "legacy_id": "brain_fog",
+      "day": 5,
+      "legacy_opening_delta": {
+        "energy": -3,
+        "mood": -2,
+        "stress": 3
+      },
+      "recovery_condition": "strained"
+    },
+    {
+      "legacy_study_modifier": -4,
+      "recovery_study_modifier": -2,
+      "recovery_opening_delta": {
+        "energy": -2,
+        "stress": 2
+      },
+      "policy": "takeout_adaptive_early",
+      "seed": 101,
+      "legacy_id": "brain_fog",
+      "day": 5,
+      "legacy_opening_delta": {
+        "energy": -3,
+        "mood": -2,
+        "stress": 3
+      },
+      "recovery_condition": "strained"
+    },
+    {
+      "legacy_study_modifier": -4,
+      "recovery_study_modifier": -2,
+      "recovery_opening_delta": {
+        "energy": -2,
+        "stress": 2
+      },
+      "policy": "takeout_adaptive_early",
+      "seed": 211,
+      "legacy_id": "brain_fog",
+      "day": 5,
+      "legacy_opening_delta": {
+        "energy": -3,
+        "mood": -2,
+        "stress": 3
+      },
+      "recovery_condition": "strained"
+    },
+    {
+      "legacy_study_modifier": -4,
+      "recovery_study_modifier": -2,
+      "recovery_opening_delta": {
+        "energy": -2,
+        "stress": 2
+      },
+      "policy": "takeout_adaptive_early",
+      "seed": 997,
+      "legacy_id": "brain_fog",
+      "day": 5,
+      "legacy_opening_delta": {
+        "energy": -3,
+        "mood": -2,
+        "stress": 3
+      },
+      "recovery_condition": "strained"
+    }
+  ],
+  "before_source_sha256": "75f4622d17eae50c6dea062d0a53ef4856d4cda1b97380420a66d89dd97f2b85",
+  "future_effect_difference_count": 34,
+  "recorded_days": 444,
+  "rows": 72,
+  "schema": "nut208c1.comparison.v1",
+  "scope": "C1 records only; C2/C3/D not active; fixed scripted policies are not human playtests",
+  "after_source_sha256": "389a70e373eeb6849b1e283707fc46041fd7abe9ecd8e8a40f87029bb900f8a8",
+  "gameplay_differences": [],
+  "baseline_replay_source_sha256": "bee0971422525ffc189b55bc121ef33ad673abe503f70d9ba860b2f9a0388b8e"
+}

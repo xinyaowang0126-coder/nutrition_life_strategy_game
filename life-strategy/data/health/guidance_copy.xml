@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- G4A1 copy candidates. Nutrition observations remain draft and blocked.
+     Boundary/record templates state only data availability or meal facts. -->
+<guidance_copy schema_version="1" model_version="diet-pattern-v2.0" rules_version="meal-composition-v1" locale="zh-CN">
+  <copy id="MEAL_COMPOSITION_RECORDED" type="nutrition_observation" review_status="draft" reviewed_by="" reviewed_at="" evidence_refs="CDG-2022-DIVERSITY" variables="food_groups_text">
+    <text>这份有{food_groups_text}。</text>
+  </copy>
+  <copy id="MEAL_COMPOSITION_PARTIAL" type="nutrition_observation" review_status="draft" reviewed_by="" reviewed_at="" evidence_refs="CDG-2022-DIVERSITY" variables="food_groups_text">
+    <text>能确认{food_groups_text}，其他配料没写全。</text>
+  </copy>
+  <copy id="MEAL_COMPOSITION_UNKNOWN" type="boundary" review_status="draft" variables="">
+    <text>配料还在核对。</text>
+  </copy>
+  <copy id="MEAL_SKIPPED_RECORD" type="record_fact" review_status="draft" variables="">
+    <text>这顿没吃。</text>
+  </copy>
+  <copy id="MEAL_LEGACY_UNKNOWN" type="boundary" review_status="draft" variables="">
+    <text>这顿没记配料。</text>
+  </copy>
+  <copy id="MEAL_DATA_UNAVAILABLE" type="boundary" review_status="draft" variables="">
+    <text>暂时查不到配料。</text>
+  </copy>
+</guidance_copy>

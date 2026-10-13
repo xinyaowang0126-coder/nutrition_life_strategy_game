@@ -1,0 +1,30 @@
+[
+  {
+    "file": ".godot/exported/133200997/export-e37aaf7a74d12f5fd0a9e0632ff85425-CharacterHUDFont.res",
+    "bytes": 734
+  },
+  {
+    "file": ".godot/imported/CampusHUDSerif-Semibold.ttf-9e0f89cf801864681dab7960e397701e.fontdata",
+    "bytes": 84695
+  },
+  {
+    "file": ".godot/imported/study_book.png-e09991201d23ab017a3c4fb5cd847421.ctex",
+    "bytes": 1413716
+  },
+  {
+    "file": "assets/fonts/CampusHUDSerif-Semibold.ttf.import",
+    "bytes": 180
+  },
+  {
+    "file": "assets/fonts/NotoSerifSC-OFL.txt",
+    "bytes": 4350
+  },
+  {
+    "file": "assets/generated/ui_v3/icons/study_book.png.import",
+    "bytes": 199
+  },
+  {
+    "file": "scenes/game_v2/components/CharacterHUDFont.tres.remap",
+    "bytes": 109
+  }
+]

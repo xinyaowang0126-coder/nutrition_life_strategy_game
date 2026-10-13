@@ -1,0 +1,175 @@
+{
+  "date": "2026-10-09",
+  "runtime_tests": {
+    "result": {
+      "balance": 20,
+      "failed": 0,
+      "failures": [],
+      "fold_button": {
+        "x": 1433.5,
+        "y": 545
+      },
+      "offer": {
+        "action": {
+          "context_token": "",
+          "day": 1,
+          "food_id": "fixture_vegetable",
+          "food_name": "番茄",
+          "kind": "add_food",
+          "phase": "breakfast",
+          "policy_token": "02b303088bc08973804950714776c40381084d4a0c45ecd8976f3eaf558f1aac",
+          "remove_food_id": "",
+          "remove_food_name": "",
+          "revision": 2,
+          "selection": [
+            "fixture_rice",
+            "fixture_egg",
+            "fixture_vegetable"
+          ],
+          "source_id": "cafeteria",
+          "suggestion_key": "vegetable:fixture_vegetable:cafeteria",
+          "suggestion_rules_version": "feasible-options-v2",
+          "target_role": "vegetable",
+          "total_cost": 7
+        },
+        "alternative": {
+          "context_token": "",
+          "day": 1,
+          "food_id": "fixture_mixed",
+          "food_name": "番茄鸡蛋饭",
+          "kind": "add_food",
+          "phase": "breakfast",
+          "policy_token": "02b303088bc08973804950714776c40381084d4a0c45ecd8976f3eaf558f1aac",
+          "remove_food_id": "",
+          "remove_food_name": "",
+          "revision": 2,
+          "selection": [
+            "fixture_rice",
+            "fixture_egg",
+            "fixture_mixed"
+          ],
+          "source_id": "cafeteria",
+          "suggestion_key": "vegetable:fixture_mixed:cafeteria",
+          "suggestion_rules_version": "feasible-options-v2",
+          "target_role": "vegetable",
+          "total_cost": 11
+        },
+        "plan": null,
+        "reason": "current_hand_option",
+        "verified": true
+      },
+      "passed": 14,
+      "records": 0,
+      "selected": [
+        "fixture_rice",
+        "fixture_egg"
+      ],
+      "total": 14
+    },
+    "source": "game"
+  },
+  "folded_alternative": {
+    "result": {
+      "balance": 20,
+      "button": {
+        "x": 1433.5,
+        "y": 617
+      },
+      "records": 0,
+      "text": "再加番茄鸡蛋饭 · 合计 ¥11",
+      "visible": true
+    },
+    "source": "game"
+  },
+  "selection_before_confirmation": {
+    "result": {
+      "balance": 20,
+      "confirm": {
+        "x": 1786,
+        "y": 1028
+      },
+      "records": 0,
+      "selected": [
+        "fixture_rice",
+        "fixture_egg",
+        "fixture_mixed"
+      ]
+    },
+    "source": "game"
+  },
+  "confirmation_and_plan": {
+    "result": {
+      "balance": 20,
+      "capture_error": 0,
+      "confirm_enabled": true,
+      "confirmation": {
+        "balance": 9,
+        "ids": [
+          "fixture_rice",
+          "fixture_egg",
+          "fixture_mixed"
+        ],
+        "phase": "lunch",
+        "records": 1
+      },
+      "current_action_visible": false,
+      "plan": {
+        "executable_now": false,
+        "food_ids": [],
+        "kind": "plan_next_meal",
+        "requires_recheck": true,
+        "source_id": "",
+        "suggestion_rules_version": "feasible-options-v2",
+        "target_day": 1,
+        "target_phase": "lunch",
+        "target_role": "vegetable"
+      },
+      "plan_text": "午饭再看看配料。",
+      "plan_visible": true,
+      "records": 0
+    },
+    "source": "game"
+  },
+  "game_logs": {
+    "source": "game",
+    "lines": [
+      {
+        "level": "info",
+        "run_id": "r3703941-8",
+        "source": "game",
+        "text": "[godot_ai game_helper] registered mcp capture (debugger active=true, logger=true)\n"
+      }
+    ],
+    "total_count": 1,
+    "returned_count": 1,
+    "offset": 0,
+    "limit": 10,
+    "has_more": false,
+    "run_id": "r3703941-8",
+    "is_running": true,
+    "dropped_count": 0,
+    "stale_run_id": false,
+    "current_run_id": "r3703941-8",
+    "helper_live": true,
+    "session_active": true,
+    "game_status": {
+      "active": true,
+      "editor_log_cursor": 2,
+      "elapsed_msec": 804598,
+      "helper_expected": true,
+      "helper_live": true,
+      "ready": true,
+      "ready_wait_msec": 20000,
+      "run_started_msec": 3703940,
+      "run_token": 8,
+      "session_active": true,
+      "status": "live"
+    }
+  },
+  "scope": "Isolated G4 preview; initial selection and dismissals used game_eval, unfolding/applying an alternative and confirming used actual MCP mouse input. Test reviews remain simulated; production flags stay off.",
+  "notes": [
+    "Under parallel verification load two MCP calls returned PORT_OCCUPIED before dispatch; session listing subsequently confirmed the same live editor and a fresh run was used.",
+    "A fresh preview took longer than the 3-second helper-ready window once; the later eval succeeded and 14/14 was verified.",
+    "Test setup initially put greens in breakfast; the real adapter correctly rejected it. Tests now use the eligible lunch phase. Explicit types repaired initial GDScript test-declaration errors."
+  ]
+}

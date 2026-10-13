@@ -45,11 +45,15 @@ text = "明天的状态，从今晚开始。"
 horizontal_alignment = 1
 
 [node name="SleepRail" type="ScrollContainer" parent="Layout" unique_id=1999133163]
+offset_bottom = 0
+offset_right = 0
+offset_top = 0
+offset_left = 0
 layout_mode = 0
-anchor_left = 0.24
-anchor_top = 0.25
-anchor_right = 0.92
-anchor_bottom = 0.72
+anchor_left = 0.2
+anchor_top = 0.11
+anchor_right = 0.96
+anchor_bottom = 0.58
 horizontal_scroll_mode = 3
 vertical_scroll_mode = 0
 scroll_deadzone = 18
@@ -62,10 +66,14 @@ theme_override_constants/separation = 26
 alignment = 1
 
 [node name="AlarmNote" type="PanelContainer" parent="Layout" unique_id=2042389004]
+offset_bottom = 0
+offset_right = 0
+offset_top = 0
+offset_left = 0
 layout_mode = 0
-anchor_left = 0.5
-anchor_top = 0.76
-anchor_right = 0.78
+anchor_left = 0.44
+anchor_top = 0.6
+anchor_right = 0.84
 anchor_bottom = 0.91
 mouse_filter = 2
 
@@ -91,11 +99,15 @@ size_flags_horizontal = 3
 
 [node name="Tomorrow" type="Label" parent="Layout/AlarmNote/AlarmMargin/Alarm/AlarmText" unique_id=1122701622]
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 22
 text = "明早还有安排"
+autowrap_mode = 3
 
 [node name="Hint" type="Label" parent="Layout/AlarmNote/AlarmMargin/Alarm/AlarmText" unique_id=2054214896]
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.42745098, 0.38431373, 0.32941177, 1)
 theme_override_font_sizes/font_size = 16
 text = "悬停或点开便利贴，看清代价再选。"
+autowrap_mode = 3

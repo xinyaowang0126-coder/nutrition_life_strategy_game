@@ -1,0 +1,7 @@
+{
+  "date": "2026-10-12",
+  "formula_body_identical": true,
+  "previous_source": ".cache/g4a8/MealResolver-before.gd.txt",
+  "current_source": "life-strategy/scripts/systems/GameReserveCalculator.gd",
+  "scope": "Signature moved to a resource-only calculator; every formula-body line is identical after CRLF normalization. Legacy positional callers delegate without using the former meal score."
+}

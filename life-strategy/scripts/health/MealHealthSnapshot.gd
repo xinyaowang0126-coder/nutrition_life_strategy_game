@@ -21,6 +21,7 @@ const FORBIDDEN_FIELDS := [
 	"total_cost", "mood", "energy", "burden", "diet_burden", "stat_delta",
 	"tags", "food_groups", "nutrient_tags", "limit_tags",
 	"food_preference", "preference_reactions", "mood_delta", "comfort",
+	"recovery_state", "gameplay_state_version", "sleep_snapshot", "next_day_effect",
 ]
 
 

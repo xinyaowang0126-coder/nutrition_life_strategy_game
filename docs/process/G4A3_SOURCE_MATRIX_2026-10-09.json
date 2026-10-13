@@ -1,0 +1,45 @@
+{
+  "budget_boundary_cases": 1178,
+  "date": "2026-10-09",
+  "days": [
+    1,
+    3,
+    4,
+    6,
+    7
+  ],
+  "dealt_contexts": {
+    "cafeteria": 2548,
+    "convenience_store": 900,
+    "dorm_storage": 600,
+    "takeout": 440
+  },
+  "duration_ms": 312980,
+  "errors": [],
+  "isolation": {
+    "approval_metadata": "test-only simulation",
+    "controllers_in_tree": false,
+    "health_flags": "all_off",
+    "history_path": ""
+  },
+  "matrix_scope": "Actual V2 dealt hands, every nonempty selection within each source limit. Suggestions use isolated synthetic composition and reviews, real price/fees/stock, and execute through normal confirmation.",
+  "production_combinations": {
+    "cafeteria": 375,
+    "convenience_store": 155,
+    "dorm_storage": 84,
+    "takeout": 42
+  },
+  "production_scope": "All allowed source/phase selections from the real pools at day 1; full pools cover possible selections, not a claim that all cards are dealt together.",
+  "schema_version": 1,
+  "seeds": [
+    0,
+    7,
+    42,
+    73
+  ],
+  "verified_actions": {
+    "cafeteria": 1000,
+    "convenience_store": 110,
+    "takeout": 68
+  }
+}

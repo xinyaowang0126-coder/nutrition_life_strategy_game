@@ -1,0 +1,19 @@
+{
+  "generator": "built-in image_gen",
+  "prompt": "Generate a production game UI icon asset using the attached selected HUD concept as the visual reference. Extract and faithfully recreate ONLY the small slate-blue open-book outline icon immediately before '复习' in the lower row. It must be a single open study notebook viewed straight-on, with two cream-tinted paper pages, restrained hand-drawn slate-blue ink contours, a central book crease and a few short horizontal page strokes. Match the exact quiet watercolor/ink card-game style of the reference. Output one crisp, centered icon in a square canvas, designed to remain clearly readable at 28-32 px in game. The icon occupies about 80 percent of the canvas. GENUINELY TRANSPARENT background outside the icon, not a checkerboard; preserve page interiors as subtle cream. No surrounding panel, borders, girl, scene, words, letters, numbers, extra symbols, shadow, mockup or duplicate icons. This is an isolated asset for the accepted existing UI, not a new design direction.",
+  "source": "../character-status-concepts-2026-10-09/merged-compact-ledger.png",
+  "asset": "res://assets/generated/ui_v3/icons/study_book.png",
+  "transparency": "RGBA alpha ranges 0 to 255",
+  "font": {
+    "name": "Noto Serif SC",
+    "source": "https://github.com/google/fonts/tree/main/ofl/notoserifsc",
+    "license_file": "res://assets/fonts/NotoSerifSC-OFL.txt",
+    "weight": 650,
+    "runtime_file": "res://assets/fonts/CampusHUDSerif-Semibold.ttf",
+    "runtime_family": "Campus HUD Serif",
+    "subset_bytes": 114780,
+    "requested_characters": 369,
+    "fallback": "res://assets/fonts/NotoSansCJKsc-Bold.otf",
+    "subset_script": "artifacts/character-hud-2026-10-09/subset_hud_font.py"
+  }
+}

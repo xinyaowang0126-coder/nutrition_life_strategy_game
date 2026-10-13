@@ -2,6 +2,7 @@ class_name MealResolver
 extends RefCounted
 
 const FoodPreferenceServiceScript := preload("res://scripts/systems/FoodPreferenceService.gd")
+const Reserve := preload("res://scripts/systems/GameReserveCalculator.gd")
 const PROTEIN_FOOD_GROUPS := [
 	"fish_seafood",
 	"poultry_livestock",
@@ -53,7 +54,6 @@ static func build_record(
 		"food_cost": charged_food_cost,
 		"source_fee": source_fee,
 		"total_cost": charged_food_cost + source_fee,
-		"quality": plate_quality(food_groups, nutrient_tags, limit_tags),
 		"tags": tags,
 		"food_groups": food_groups,
 		"nutrient_tags": nutrient_tags,
@@ -82,17 +82,15 @@ static func _preference_reactions(foods: Array[Dictionary], preferences: Variant
 
 
 static func _stat_delta(foods: Array[Dictionary], source: Dictionary, reactions: Array[Dictionary]) -> Dictionary:
-	var delta := {"satiety": 0, "energy": 0, "mood": 0, "stress": 0, "diet_burden": 0, "study_progress": 0}
+	var delta := {"satiety": 0, "energy": 0, "mood": 0, "stress": 0, "study_progress": 0}
 	for food in foods:
 		for key in ["satiety", "energy", "stress"]:
 			delta[key] += int(food.get(key, 0))
-		delta["diet_burden"] += int(food.get("burden", 0))
 	for reaction in reactions:
 		delta["mood"] += int(reaction["mood_delta"])
 	# Source events still express effort/mood costs independently of taste.
 	for key in ["energy", "mood", "stress"]:
 		delta[key] += int(source.get(key, 0))
-	delta["diet_burden"] += int(source.get("burden", 0))
 	return delta
 
 
@@ -106,17 +104,15 @@ static func build_skipped_record(meal_phase: String) -> Dictionary:
 		"food_cost": 0,
 		"source_fee": 0,
 		"total_cost": 0,
-		"quality": 25,
 		"tags": [],
 		"food_groups": [],
 		"nutrient_tags": [],
 		"limit_tags": [],
 		"stat_delta": {
-			"satiety": -16,
-			"energy": -5,
-			"mood": -4,
-			"stress": 7,
-			"diet_burden": 0,
+			"satiety": 0,
+			"energy": -2,
+			"mood": -2,
+			"stress": 3,
 			"study_progress": 0,
 		},
 		"skipped": true,
@@ -126,59 +122,6 @@ static func build_skipped_record(meal_phase: String) -> Dictionary:
 	}
 
 
-static func food_quality(food: Dictionary) -> int:
-	return plate_quality(
-		food.get("food_groups", []),
-		food.get("nutrient_tags", []),
-		food.get("limit_tags", [])
-	)
-
-
-## Rates the structure of the whole plate instead of averaging unrelated
-## single-food scores. The inputs deliberately use the professional food data;
-## presentation tags and price do not stand in for nutritional composition.
-static func plate_quality(food_groups: Array, nutrient_tags: Array, limit_tags: Array) -> int:
-	var quality := 20
-	var has_grain := food_groups.has("grains_tubers")
-	var has_vegetable := food_groups.has("vegetables")
-	var has_protein_food := _has_any_value(food_groups, PROTEIN_FOOD_GROUPS)
-
-	quality += 12 if has_grain else 0
-	quality += 15 if has_vegetable else 0
-	quality += 10 if food_groups.has("fruits") else 0
-	quality += 14 if has_protein_food else 0
-	quality += 3 if food_groups.has("dairy") else 0
-
-	quality += 4 if nutrient_tags.has("carbohydrate_source") else 0
-	quality += 5 if nutrient_tags.has("dietary_fiber_source") else 0
-	quality += 6 if nutrient_tags.has("high_quality_protein_source") else 0
-	quality += 4 if nutrient_tags.has("whole_grain") else 0
-	quality += 3 if nutrient_tags.has("calcium_source") else 0
-	quality += 3 if nutrient_tags.has("unsaturated_fatty_acid_source") else 0
-
-	if has_grain and has_vegetable and has_protein_food:
-		quality += 10
-
-	quality -= 12 if limit_tags.has("added_sugar") else 0
-	quality -= 10 if limit_tags.has("high_sodium") else 0
-	quality -= 12 if limit_tags.has("fried") else 0
-	return clamp(quality, 20, 95)
-
-
-static func average_scores(scores: Array[int]) -> int:
-	if scores.is_empty():
-		return 25
-	var total := 0
-	for score in scores:
-		total += score
-	return int(round(float(total) / float(scores.size())))
-
-
-static func day_quality(records: Array[Dictionary]) -> int:
-	var scores: Array[int] = []
-	for record in records:
-		scores.append(int(record.get("quality", 25)))
-	return average_scores(scores)
 
 
 static func has_meal_group_combination(record: Dictionary) -> bool:
@@ -227,39 +170,18 @@ static func _has_any_value(values: Array, wanted: Array) -> bool:
 	return false
 
 
-static func calculate_stability(state: Dictionary, avg_quality: int, day: int, total_days: int) -> int:
-	var mental := float(state["mood"]) * 0.55 + (100.0 - float(state["stress"])) * 0.45
-	var remaining_days: int = max(0, total_days - day)
-	var budget_safety := 100.0
-	if remaining_days > 0:
-		budget_safety = clamp(float(state["balance"]) / (float(remaining_days) * 10.0) * 100.0, 0.0, 100.0)
-	var diet_control := 100.0 - float(state["diet_burden"])
-	var score := float(avg_quality) * 0.20
-	score += mental * 0.25
-	score += float(state["energy"]) * 0.20
-	score += float(state["satiety"]) * 0.10
-	score += diet_control * 0.10
-	score += float(state["study_progress"]) * 0.10
-	score += budget_safety * 0.05
-	if int(state["energy"]) < 16:
-		score -= 10
-	if int(state["mood"]) < 16:
-		score -= 10
-	if int(state["satiety"]) < 12:
-		score -= 8
-	if int(state["stress"]) > 88:
-		score -= 10
-	if remaining_days > 0 and int(state["balance"]) < remaining_days * 6:
-		score -= 8
-	return int(round(clamp(score, 0.0, 100.0)))
+## Deprecated positional compatibility for existing gameplay callers.
+## The former meal-quality argument has no effect on game reserve.
+static func calculate_stability(state: Dictionary, _avg_quality: int, day: int, total_days: int, recovery_contribution: float) -> int:
+	return Reserve.calculate(state, day, total_days, recovery_contribution)
 
 
-static func select_ending(state: Dictionary) -> String:
+static func select_ending(state: Dictionary, _recovery_rules: bool = true) -> String:
 	if int(state["stability"]) <= 15:
 		return "collapsed"
 	if int(state["study_progress"]) < 50:
 		return "study_shortfall"
-	if int(state["study_progress"]) >= 70 and int(state["stability"]) >= 60 and int(state["diet_burden"]) <= 60:
+	if int(state["study_progress"]) >= 70 and int(state["stability"]) >= 60:
 		return "stable_endurance"
 	if int(state["stability"]) >= 25:
 		return "barely_survived"

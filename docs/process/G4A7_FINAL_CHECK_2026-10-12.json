@@ -1,0 +1,74 @@
+{
+  "date": "2026-10-12",
+  "milestone": "G4A7",
+  "valid": true,
+  "tests": {
+    "passed": 416,
+    "failed": 0,
+    "skipped": 0,
+    "total": 416,
+    "suite_count": 37,
+    "new_suite_passed": 16,
+    "extra_layout_test_passed": 1,
+    "main_scene_smoke": true,
+    "result": ".cache/g4a7/full-final-result.json",
+    "log": ".cache/g4a7/full-final.log"
+  },
+  "mcp": {
+    "passed": 16,
+    "failed": 0,
+    "detail_auto_reveal": true,
+    "legacy_fallback_safe": true,
+    "record_close_restored_input": true,
+    "final_game_errors": [],
+    "test_game_stopped": true,
+    "evidence": "docs/process/G4A7_MCP_2026-10-12.json"
+  },
+  "visual": {
+    "valid": true,
+    "layouts": 6,
+    "images": 28,
+    "native_windows": [
+      [
+        1920,
+        1080
+      ],
+      [
+        390,
+        640
+      ]
+    ],
+    "errors": [],
+    "report": "docs/assets/g4a7-2026-10-12/report.json"
+  },
+  "gameplay": {
+    "runs": 510,
+    "budget": 150,
+    "differences": 0,
+    "errors": 0,
+    "evidence": "docs/process/G4A7_COMPARISON_2026-10-12.json",
+    "scope": "All rows compared with the balance v2 report: 17 policies x 30 seeds; record popup closed. Normal UI and unknown/legacy cases are checked separately."
+  },
+  "boundaries": {
+    "protected_files": 16,
+    "changed": 0,
+    "play_untouched": true,
+    "evidence": "docs/process/G4A7_BOUNDARIES_2026-10-12.json"
+  },
+  "tool_gates": {
+    "passed": 25,
+    "log": ".cache/g4a7/gates.log"
+  },
+  "web_export": {
+    "path": "artifacts/g4a7-2026-10-12-web",
+    "pck_size_mib": 67.83,
+    "pck_sha256": "0C8EC52ACDAE5148C5A07DDD08BF26484CAEF98F9DD56E0EC51324FFA60DC3A6",
+    "audited": true,
+    "published": false
+  },
+  "scope_notes": [
+    "NUT-308 player reads and daily legacy aggregates retired. Raw MealResolver quality generation and compatibility API retirement remain pending.",
+    "Four health guidance flags remain closed; 23 food profiles remain draft. No professional or physical-device acceptance is implied.",
+    "The final scroll change affects popup layout only; gameplay comparison was completed against the same controller/rules implementation."
+  ]
+}

@@ -1,0 +1,407 @@
+{
+  "date": "2026-10-09",
+  "session": "life-strategy@cee49bd07575681e",
+  "editor_version": "4.7.2",
+  "plugin_version": "4.3.0",
+  "server_version": "4.3.0",
+  "runtime_tests": {
+    "result": {
+      "failed": 0,
+      "failures": [],
+      "health_flags": {
+        "data": false,
+        "engine": false,
+        "ui": false,
+        "warnings": [],
+        "weekly": false
+      },
+      "main_input_unchanged": true,
+      "passed": 14,
+      "total": 14
+    },
+    "source": "game"
+  },
+  "cafeteria_read": {
+    "result": {
+      "health_data_loaded": false,
+      "input": {
+        "balance": 120,
+        "day": 1,
+        "hand_ids": [
+          "egg",
+          "oatmeal",
+          "rice_plain",
+          "tomato",
+          "mixed_grain_rice"
+        ],
+        "inventory": {
+          "apple": 1,
+          "instant_noodles": 2,
+          "milk": 1,
+          "oatmeal": 2,
+          "plain_yogurt": 1,
+          "unsalted_nuts": 1,
+          "whole_wheat_bread": 2
+        },
+        "phase": "breakfast",
+        "selected_ids": [
+          "egg"
+        ],
+        "source_id": "cafeteria"
+      },
+      "production_guidance": false,
+      "production_suggestion": false,
+      "read_unchanged": true,
+      "record_count": 0,
+      "simulated_suggestion": {
+        "action": {
+          "context_token": "7c08e056e086f23bcc44742c42aafbc08886aa7c125f25b08de1fad7cadddb8f",
+          "day": 1,
+          "food_id": "tomato",
+          "food_name": "番茄",
+          "kind": "add_food",
+          "phase": "breakfast",
+          "remove_food_id": "",
+          "remove_food_name": "",
+          "revision": 0,
+          "selection": [
+            "egg",
+            "tomato"
+          ],
+          "source_id": "cafeteria",
+          "total_cost": 5
+        },
+        "reason": "current_hand_option",
+        "verified": true
+      }
+    },
+    "source": "game"
+  },
+  "cafeteria_final_selection": {
+    "result": {
+      "health_flags": {
+        "data": false,
+        "engine": false,
+        "ui": false,
+        "warnings": [],
+        "weekly": false
+      },
+      "input": {
+        "balance": 120,
+        "day": 1,
+        "hand_ids": [
+          "egg",
+          "oatmeal",
+          "rice_plain",
+          "tomato",
+          "mixed_grain_rice"
+        ],
+        "inventory": {
+          "apple": 1,
+          "instant_noodles": 2,
+          "milk": 1,
+          "oatmeal": 2,
+          "plain_yogurt": 1,
+          "unsalted_nuts": 1,
+          "whole_wheat_bread": 2
+        },
+        "phase": "breakfast",
+        "selected_ids": [
+          "egg",
+          "rice_plain",
+          "tomato"
+        ],
+        "source_id": "cafeteria"
+      },
+      "record_count": 0,
+      "total": 7,
+      "unchanged": true
+    },
+    "source": "game"
+  },
+  "cafeteria_confirmation": {
+    "result": {
+      "balance": 113,
+      "day_view": {
+        "diary": {
+          "eaten": 1,
+          "observation": "吃了 1 顿。",
+          "rows": [
+            {
+              "phase": "breakfast",
+              "text": "鸡蛋、白米饭、番茄",
+              "title": "早饭"
+            }
+          ],
+          "skipped": 0,
+          "spent": 7,
+          "title": "今天吃了什么"
+        },
+        "reason": "frozen_day",
+        "valid": true
+      },
+      "health_data_loaded": false,
+      "phase": "breakfast_action",
+      "record": {
+        "food_ids": [
+          "egg",
+          "rice_plain",
+          "tomato"
+        ],
+        "phase": "breakfast",
+        "total_cost": 7
+      },
+      "record_count": 1,
+      "stock": {
+        "apple": 1,
+        "instant_noodles": 2,
+        "milk": 1,
+        "oatmeal": 2,
+        "plain_yogurt": 1,
+        "unsalted_nuts": 1,
+        "whole_wheat_bread": 2
+      }
+    },
+    "source": "game"
+  },
+  "capture": {
+    "result": {
+      "error": 0,
+      "height": 1080,
+      "path": "E:/nutrition_life_strategy_game/docs/assets/g4a3-2026-10-09/mcp-confirmed.png",
+      "width": 1920
+    },
+    "source": "game"
+  },
+  "pantry_open": {
+    "result": {
+      "cards": [
+        {
+          "center": {
+            "x": 545.800048828125,
+            "y": 454.760009765625
+          },
+          "id": "oatmeal"
+        },
+        {
+          "center": {
+            "x": 771.800048828125,
+            "y": 454.760009765625
+          },
+          "id": "apple"
+        },
+        {
+          "center": {
+            "x": 997.800048828125,
+            "y": 454.760009765625
+          },
+          "id": "whole_wheat_bread"
+        },
+        {
+          "center": {
+            "x": 1223.80004882813,
+            "y": 454.760009765625
+          },
+          "id": "instant_noodles"
+        }
+      ],
+      "input": {
+        "balance": 120,
+        "day": 1,
+        "hand_ids": [
+          "oatmeal",
+          "apple",
+          "whole_wheat_bread",
+          "instant_noodles"
+        ],
+        "inventory": {
+          "apple": 1,
+          "instant_noodles": 2,
+          "milk": 1,
+          "oatmeal": 2,
+          "plain_yogurt": 1,
+          "unsalted_nuts": 1,
+          "whole_wheat_bread": 2
+        },
+        "phase": "breakfast",
+        "selected_ids": [],
+        "source_id": "dorm_storage"
+      }
+    },
+    "source": "game"
+  },
+  "pantry_confirmation": {
+    "result": {
+      "after": {
+        "balance": 120,
+        "phase": "breakfast_action",
+        "record_count": 1,
+        "records": [
+          {
+            "comfort": false,
+            "food_cost": 0,
+            "food_groups": [
+              "grains_tubers"
+            ],
+            "food_ids": [
+              "oatmeal"
+            ],
+            "food_names": [
+              "燕麦"
+            ],
+            "limit_tags": [],
+            "nutrient_tags": [
+              "carbohydrate_source",
+              "whole_grain",
+              "dietary_fiber_source"
+            ],
+            "phase": "breakfast",
+            "preference_reactions": [
+              {
+                "character_name": "本局角色",
+                "comfort": false,
+                "food_id": "oatmeal",
+                "mood_delta": 0,
+                "profile_id": "campus_student",
+                "profile_version": 1,
+                "status": "known"
+              }
+            ],
+            "quality": 45,
+            "skipped": false,
+            "source_fee": 0,
+            "source_id": "dorm_storage",
+            "source_name": "宿舍存粮",
+            "stat_delta": {
+              "energy": 7,
+              "mood": 0,
+              "satiety": 18,
+              "stress": 0,
+              "study_progress": 0
+            },
+            "tags": [
+              "staple",
+              "whole_grain",
+              "fiber",
+              "cheap"
+            ],
+            "total_cost": 0,
+            "uses_stock": true
+          }
+        ],
+        "stock": {
+          "apple": 1,
+          "instant_noodles": 2,
+          "milk": 1,
+          "oatmeal": 1,
+          "plain_yogurt": 1,
+          "unsalted_nuts": 1,
+          "whole_wheat_bread": 2
+        }
+      },
+      "cash_unchanged": true,
+      "context_total": 0,
+      "duplicate_confirm_ignored": true,
+      "health_data_loaded": false,
+      "health_flags": {
+        "data": false,
+        "engine": false,
+        "ui": false,
+        "warnings": [],
+        "weekly": false
+      },
+      "input_before": {
+        "balance": 120,
+        "day": 1,
+        "hand_ids": [
+          "oatmeal",
+          "apple",
+          "whole_wheat_bread",
+          "instant_noodles"
+        ],
+        "inventory": {
+          "apple": 1,
+          "instant_noodles": 2,
+          "milk": 1,
+          "oatmeal": 2,
+          "plain_yogurt": 1,
+          "unsalted_nuts": 1,
+          "whole_wheat_bread": 2
+        },
+        "phase": "breakfast",
+        "selected_ids": [],
+        "source_id": "dorm_storage"
+      },
+      "oatmeal_consumed_once": true,
+      "ok": true,
+      "selecting": {
+        "balance": 120,
+        "day": 1,
+        "hand_ids": [
+          "oatmeal",
+          "apple",
+          "whole_wheat_bread",
+          "instant_noodles"
+        ],
+        "inventory": {
+          "apple": 1,
+          "instant_noodles": 2,
+          "milk": 1,
+          "oatmeal": 2,
+          "plain_yogurt": 1,
+          "unsalted_nuts": 1,
+          "whole_wheat_bread": 2
+        },
+        "phase": "breakfast",
+        "selected_ids": [
+          "oatmeal"
+        ],
+        "source_id": "dorm_storage"
+      }
+    },
+    "source": "game"
+  },
+  "final_game_logs": {
+    "source": "game",
+    "lines": [
+      {
+        "level": "info",
+        "run_id": "r1297052-5",
+        "source": "game",
+        "text": "[godot_ai game_helper] registered mcp capture (debugger active=true, logger=true)\n"
+      }
+    ],
+    "total_count": 1,
+    "returned_count": 1,
+    "offset": 0,
+    "limit": 10,
+    "has_more": false,
+    "run_id": "r1297052-5",
+    "is_running": true,
+    "dropped_count": 0,
+    "stale_run_id": false,
+    "current_run_id": "r1297052-5",
+    "helper_live": true,
+    "session_active": true,
+    "game_status": {
+      "active": true,
+      "editor_log_cursor": 2,
+      "elapsed_msec": 94206,
+      "helper_expected": true,
+      "helper_live": true,
+      "ready": true,
+      "ready_wait_msec": 20000,
+      "run_started_msec": 1297052,
+      "run_token": 5,
+      "session_active": true,
+      "status": "live"
+    }
+  },
+  "scope": "Cafeteria used actual MCP mouse input; pantry used the live V2 command methods through game_eval after native clicks did not select. Synthetic guidance is diagnostic only; all production flags remained off.",
+  "diagnostic_notes": [
+    "Initial test declaration lacked an explicit Dictionary type; fixed before 14/14 runtime tests and 346/346 full verification.",
+    "Two temporary game_eval queries used a wrong pantry footer path or indexed an empty hand after a missed source click; both caused debugger breaks. Stopped and relaunched each time; final pantry run is live with no game log errors.",
+    "Card selection initially had missed clicks; observed current phase and rects before continuing. Hidden SelectButton rects were discarded. Cafeteria final confirmation was verified from actual selected IDs and balance.",
+    "editor_screenshot with a 1200-pixel image failed in transport. Metadata capture at 640px succeeded, and the original framebuffer was saved using game_eval, then visually inspected."
+  ]
+}

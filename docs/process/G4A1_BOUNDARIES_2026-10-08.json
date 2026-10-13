@@ -1,0 +1,32 @@
+[
+  {
+    "path": "life-strategy/data/health/food_health_profiles.xml",
+    "before_sha256": "E4EF1E7424DED285613FA5864B09896B2DD63028BA511D55ABCD512ACCADF083",
+    "after_sha256": "E4EF1E7424DED285613FA5864B09896B2DD63028BA511D55ABCD512ACCADF083",
+    "unchanged": true
+  },
+  {
+    "path": "life-strategy/data/health/evidence_registry.xml",
+    "before_sha256": "05BD2DB0A23D307FE85216F50B8A07E43862707393A4642A55C1D4499888C18A",
+    "after_sha256": "05BD2DB0A23D307FE85216F50B8A07E43862707393A4642A55C1D4499888C18A",
+    "unchanged": true
+  },
+  {
+    "path": "life-strategy/project.godot",
+    "before_sha256": "7A0504158141FEFD59678CF0AA176275552AAC3003319BE0ECACC366A13C0536",
+    "after_sha256": "7A0504158141FEFD59678CF0AA176275552AAC3003319BE0ECACC366A13C0536",
+    "unchanged": true
+  },
+  {
+    "path": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+    "before_sha256": "E12963EAEACD2C17880D41D6D1CAB2FBD8D8EC1BDEA74F1282B7834755579988",
+    "after_sha256": "E12963EAEACD2C17880D41D6D1CAB2FBD8D8EC1BDEA74F1282B7834755579988",
+    "unchanged": true
+  },
+  {
+    "path": "life-strategy/scripts/systems/MealResolver.gd",
+    "before_sha256": "9BBCDF45496F3587B37F8FB7F4FD3B4514F32A855EE015C01BBA6B1A3BEC0C68",
+    "after_sha256": "9BBCDF45496F3587B37F8FB7F4FD3B4514F32A855EE015C01BBA6B1A3BEC0C68",
+    "unchanged": true
+  }
+]

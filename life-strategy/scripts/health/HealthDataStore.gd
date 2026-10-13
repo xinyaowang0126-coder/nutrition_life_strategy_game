@@ -5,6 +5,7 @@ extends RefCounted
 ## does not consult legacy card tags or gameplay stats when a profile is absent.
 
 const DEFAULT_PROFILES_PATH := "res://data/health/food_health_profiles.xml"
+const XmlStructure := preload("res://scripts/health/HealthXmlStructure.gd")
 const ROOT_ELEMENT := "food_health_profiles"
 const SUPPORTED_SCHEMA_VERSION := 1
 
@@ -36,15 +37,20 @@ func load_catalog(path: String = DEFAULT_PROFILES_PATH) -> Dictionary:
 			"Health profile catalog is missing: %s" % path,
 			true
 		)
-	if FileAccess.get_file_as_string(path).strip_edges().is_empty():
+	var xml := FileAccess.get_file_as_string(path).strip_edges()
+	if xml.is_empty():
 		return _fail(
 			STATUS_EMPTY_FILE,
 			"Health profile catalog contains no XML root: %s" % path,
 			true
 		)
 
+	var buffer := xml.to_utf8_buffer()
+	var structure_error := XmlStructure.validate(buffer)
+	if not structure_error.is_empty():
+		return _fail(STATUS_INVALID_XML, structure_error, true)
 	var parser := XMLParser.new()
-	var open_error := parser.open(path)
+	var open_error := parser.open_buffer(buffer)
 	if open_error != OK:
 		return _fail(
 			STATUS_INVALID_XML,

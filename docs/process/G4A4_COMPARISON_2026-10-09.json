@@ -1,0 +1,11 @@
+{
+  "date": "2026-10-09",
+  "baseline": "G4A3",
+  "runs": 72,
+  "recovery_records": 444,
+  "errors": [],
+  "differences": [],
+  "baseline_source_sha256": "d6037e0bbc85c325ecd0301aa50fe2c8509b0f97b1ef17891e5034c342c027f1",
+  "current_source_sha256": "d6037e0bbc85c325ecd0301aa50fe2c8509b0f97b1ef17891e5034c342c027f1",
+  "scope": "All reported gameplay state, source counts, inventory, recovery and endings; not a player study"
+}

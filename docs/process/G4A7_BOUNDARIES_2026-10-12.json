@@ -1,0 +1,103 @@
+{
+  "date": "2026-10-12",
+  "files": [
+    {
+      "path": "life-strategy/project.godot",
+      "before": "7A0504158141FEFD59678CF0AA176275552AAC3003319BE0ECACC366A13C0536",
+      "after": "7A0504158141FEFD59678CF0AA176275552AAC3003319BE0ECACC366A13C0536",
+      "unchanged": true
+    },
+    {
+      "path": "life-strategy/data/cards/foods.xml",
+      "before": "4F086B792B7717EFCBCA96AC5CFEA2D9310958957F3040E3C1AFE64A335B12A8",
+      "after": "4F086B792B7717EFCBCA96AC5CFEA2D9310958957F3040E3C1AFE64A335B12A8",
+      "unchanged": true
+    },
+    {
+      "path": "life-strategy/data/cards/actions.xml",
+      "before": "38B60DA3ABAA98DFABC49A0EACC7E74CD8D910DF68EB078427322A87AFF7C632",
+      "after": "38B60DA3ABAA98DFABC49A0EACC7E74CD8D910DF68EB078427322A87AFF7C632",
+      "unchanged": true
+    },
+    {
+      "path": "life-strategy/data/cards/meal_sources.xml",
+      "before": "7C7279EAA7CAABE1EAB1F3B7934180A4D90980BD7BF1767053984799D193B76C",
+      "after": "7C7279EAA7CAABE1EAB1F3B7934180A4D90980BD7BF1767053984799D193B76C",
+      "unchanged": true
+    },
+    {
+      "path": "life-strategy/data/cards/sleep_options.xml",
+      "before": "C2F99258D3D7B3C1CC54CE7D9B058F12BA925AA6E6678F163C63830DDC69FEF9",
+      "after": "C2F99258D3D7B3C1CC54CE7D9B058F12BA925AA6E6678F163C63830DDC69FEF9",
+      "unchanged": true
+    },
+    {
+      "path": "life-strategy/scripts/GameData.gd",
+      "before": "2448EDABC9FA6AEAE0F52584E7C1070FE62EEE27B9048DFDC10C064977033307",
+      "after": "2448EDABC9FA6AEAE0F52584E7C1070FE62EEE27B9048DFDC10C064977033307",
+      "unchanged": true
+    },
+    {
+      "path": "life-strategy/scripts/systems/GameplayBalanceRules.gd",
+      "before": "4993D525AC105E983349774D04412669D7B00C3F758EF69DA0A3396BB9B957C3",
+      "after": "4993D525AC105E983349774D04412669D7B00C3F758EF69DA0A3396BB9B957C3",
+      "unchanged": true
+    },
+    {
+      "path": "life-strategy/scripts/systems/RecoveryRules.gd",
+      "before": "A7072926557F3533913254F1673ED08678436003781FBDFC1130FCBB75993689",
+      "after": "A7072926557F3533913254F1673ED08678436003781FBDFC1130FCBB75993689",
+      "unchanged": true
+    },
+    {
+      "path": "life-strategy/scripts/systems/MealResolver.gd",
+      "before": "22F19A5608EB3F21B7F480081E12AF41935603FD83A3340CE644AE89B034DC80",
+      "after": "22F19A5608EB3F21B7F480081E12AF41935603FD83A3340CE644AE89B034DC80",
+      "unchanged": true
+    },
+    {
+      "path": "life-strategy/data/health/food_health_profiles.xml",
+      "before": "E4EF1E7424DED285613FA5864B09896B2DD63028BA511D55ABCD512ACCADF083",
+      "after": "E4EF1E7424DED285613FA5864B09896B2DD63028BA511D55ABCD512ACCADF083",
+      "unchanged": true
+    },
+    {
+      "path": "life-strategy/data/health/evidence_registry.xml",
+      "before": "05BD2DB0A23D307FE85216F50B8A07E43862707393A4642A55C1D4499888C18A",
+      "after": "05BD2DB0A23D307FE85216F50B8A07E43862707393A4642A55C1D4499888C18A",
+      "unchanged": true
+    },
+    {
+      "path": "life-strategy/data/health/guidance_copy.xml",
+      "before": "074CE5E8F9446C7711AA5E995A5B5CF67C8D855CB8BE760D052EBD4B8D2D5765",
+      "after": "074CE5E8F9446C7711AA5E995A5B5CF67C8D855CB8BE760D052EBD4B8D2D5765",
+      "unchanged": true
+    },
+    {
+      "path": "life-strategy/scripts/health/MealHealthSnapshot.gd",
+      "before": "C6CA57A81E3C401F20302CE013CDE62B42C9C0E8BDA094E31F61FB93FA9E3BF7",
+      "after": "C6CA57A81E3C401F20302CE013CDE62B42C9C0E8BDA094E31F61FB93FA9E3BF7",
+      "unchanged": true
+    },
+    {
+      "path": "life-strategy/scripts/health/MealHealthArchive.gd",
+      "before": "3B82AF892E24210860E644F4AB2F92B322885571C284E2AEFD3C2309D22D9322",
+      "after": "3B82AF892E24210860E644F4AB2F92B322885571C284E2AEFD3C2309D22D9322",
+      "unchanged": true
+    },
+    {
+      "path": "life-strategy/scripts/health/DietPatternLedger.gd",
+      "before": "3958BCDBE4242B71839C2918FD502E8AD502232F542F8DA7B6E65788A6FEFEE4",
+      "after": "3958BCDBE4242B71839C2918FD502E8AD502232F542F8DA7B6E65788A6FEFEE4",
+      "unchanged": true
+    },
+    {
+      "path": "life-strategy/tests/test_gameplay_balance.gd",
+      "before": "AE2EDBEB8C44E77B51C06E2ACFF9B672C053C67E01E6A61F6A097EA9F3F94107",
+      "after": "AE2EDBEB8C44E77B51C06E2ACFF9B672C053C67E01E6A61F6A097EA9F3F94107",
+      "unchanged": true
+    }
+  ],
+  "play_untouched": true,
+  "scope": "Gameplay parameters, balance test suite, raw meal resolver, health flags/data/schema and G4A5 frozen ledger remain unchanged; UI/presentation and the recovery-only compatibility entry point are intentionally edited."
+}

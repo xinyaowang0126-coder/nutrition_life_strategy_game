@@ -1,0 +1,135 @@
+{
+  "date": "2026-10-12",
+  "milestone": "G4A6",
+  "valid": true,
+  "tests": {
+    "passed": 399,
+    "failed": 0,
+    "skipped": 0,
+    "total": 399,
+    "suite_count": 36,
+    "new_suite_passed": 12,
+    "result": ".cache/g4a6/final-2026-10-12-result.json",
+    "verification_log": ".cache/g4a6/final-2026-10-12.log",
+    "main_scene_smoke": true
+  },
+  "mcp": {
+    "evidence": "docs/process/G4A6_MCP_2026-10-12.json",
+    "passed": 12,
+    "failed": 0,
+    "summary_mouse_and_escape_passed": true,
+    "enter_preserved_state": true,
+    "final_run_errors": [],
+    "test_game_stopped": true
+  },
+  "visual": {
+    "report": "docs/assets/g4a6-2026-10-11/report.json",
+    "valid": true,
+    "layout_count": 6,
+    "image_count": 26,
+    "native_windows": [
+      [
+        1920,
+        1080
+      ],
+      [
+        390,
+        640
+      ]
+    ],
+    "errors": []
+  },
+  "gameplay": {
+    "budget": 150,
+    "runs": 510,
+    "differences": 0,
+    "errors": 0,
+    "evidence": "docs/process/G4A6_COMPARISON_2026-10-11.json",
+    "scope": "Compare all rows of original 17 policies x 30 seeds; new record book is closed during this gameplay regression"
+  },
+  "tool_gates": {
+    "passed": 25,
+    "log": ".cache/g4a6/gates-final.log"
+  },
+  "web_export": {
+    "path": "artifacts/g4a6-2026-10-12-web",
+    "pck_size_mib": 67.83,
+    "pck_sha256": "87CC91CC43A979DF1D8F02D3E65C957539CBDAC84EA99E702CC8DFB5245A6C19",
+    "audited": true,
+    "published": false
+  },
+  "protected_files": [
+    {
+      "path": "life-strategy/project.godot",
+      "before": "7A0504158141FEFD59678CF0AA176275552AAC3003319BE0ECACC366A13C0536",
+      "current": "7A0504158141FEFD59678CF0AA176275552AAC3003319BE0ECACC366A13C0536",
+      "unchanged": true
+    },
+    {
+      "path": "life-strategy/data/health/food_health_profiles.xml",
+      "before": "E4EF1E7424DED285613FA5864B09896B2DD63028BA511D55ABCD512ACCADF083",
+      "current": "E4EF1E7424DED285613FA5864B09896B2DD63028BA511D55ABCD512ACCADF083",
+      "unchanged": true
+    },
+    {
+      "path": "life-strategy/data/health/evidence_registry.xml",
+      "before": "05BD2DB0A23D307FE85216F50B8A07E43862707393A4642A55C1D4499888C18A",
+      "current": "05BD2DB0A23D307FE85216F50B8A07E43862707393A4642A55C1D4499888C18A",
+      "unchanged": true
+    },
+    {
+      "path": "life-strategy/data/health/guidance_copy.xml",
+      "before": "074CE5E8F9446C7711AA5E995A5B5CF67C8D855CB8BE760D052EBD4B8D2D5765",
+      "current": "074CE5E8F9446C7711AA5E995A5B5CF67C8D855CB8BE760D052EBD4B8D2D5765",
+      "unchanged": true
+    },
+    {
+      "path": "life-strategy/scripts/GameData.gd",
+      "before": "2448EDABC9FA6AEAE0F52584E7C1070FE62EEE27B9048DFDC10C064977033307",
+      "current": "2448EDABC9FA6AEAE0F52584E7C1070FE62EEE27B9048DFDC10C064977033307",
+      "unchanged": true
+    },
+    {
+      "path": "life-strategy/scripts/systems/GameplayBalanceRules.gd",
+      "before": "4993D525AC105E983349774D04412669D7B00C3F758EF69DA0A3396BB9B957C3",
+      "current": "4993D525AC105E983349774D04412669D7B00C3F758EF69DA0A3396BB9B957C3",
+      "unchanged": true
+    },
+    {
+      "path": "life-strategy/scripts/systems/MealResolver.gd",
+      "before": "22F19A5608EB3F21B7F480081E12AF41935603FD83A3340CE644AE89B034DC80",
+      "current": "22F19A5608EB3F21B7F480081E12AF41935603FD83A3340CE644AE89B034DC80",
+      "unchanged": true
+    },
+    {
+      "path": "life-strategy/scripts/systems/RecoveryRules.gd",
+      "before": "A7072926557F3533913254F1673ED08678436003781FBDFC1130FCBB75993689",
+      "current": "A7072926557F3533913254F1673ED08678436003781FBDFC1130FCBB75993689",
+      "unchanged": true
+    },
+    {
+      "path": "life-strategy/scripts/health/MealHealthSnapshot.gd",
+      "before": "C6CA57A81E3C401F20302CE013CDE62B42C9C0E8BDA094E31F61FB93FA9E3BF7",
+      "current": "C6CA57A81E3C401F20302CE013CDE62B42C9C0E8BDA094E31F61FB93FA9E3BF7",
+      "unchanged": true
+    },
+    {
+      "path": "life-strategy/scripts/health/MealHealthArchive.gd",
+      "before": "3B82AF892E24210860E644F4AB2F92B322885571C284E2AEFD3C2309D22D9322",
+      "current": "3B82AF892E24210860E644F4AB2F92B322885571C284E2AEFD3C2309D22D9322",
+      "unchanged": true
+    },
+    {
+      "path": "life-strategy/scripts/health/DietPatternLedger.gd",
+      "before": "3958BCDBE4242B71839C2918FD502E8AD502232F542F8DA7B6E65788A6FEFEE4",
+      "current": "3958BCDBE4242B71839C2918FD502E8AD502232F542F8DA7B6E65788A6FEFEE4",
+      "unchanged": true
+    }
+  ],
+  "play_untouched": true,
+  "notes": [
+    "Normal record entry displays frozen meal facts only; health guidance production flags remain closed.",
+    "No cross-run persistence or professional nutrition review is implied by this milestone.",
+    "A supplemental MCP eval field error was corrected and the final normal game was relaunched; see MCP evidence for probe history."
+  ]
+}

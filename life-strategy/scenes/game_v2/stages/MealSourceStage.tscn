@@ -7,6 +7,22 @@
 [ext_resource type="Texture2D" uid="uid://cm5deawtdrsir" path="res://assets/generated/ui_v2/props/convenience_shelf_alpha.png" id="5_ftemt"]
 [ext_resource type="Texture2D" uid="uid://bmburgrrpync6" path="res://assets/generated/ui_v2/props/dorm_pantry_alpha.png" id="6_gtk66"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_source_name"]
+content_margin_left = 8.0
+content_margin_top = 4.0
+content_margin_right = 8.0
+content_margin_bottom = 4.0
+bg_color = Color(0.96862745, 0.92156863, 0.83137256, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.55, 0.43, 0.28, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
 [sub_resource type="Animation" id="Animation_xn4im"]
 length = 4.8
 loop_mode = 2
@@ -108,15 +124,15 @@ anchor_bottom = 1.0
 [node name="CafeteriaProp" type="Control" parent="PropLayer" unique_id=351882381]
 z_index = 10
 anchors_preset = 0
-anchor_left = 0.38
-anchor_top = 0.28
-anchor_right = 0.38
-anchor_bottom = 0.28
-offset_left = -140.0
-offset_top = -125.0
-offset_right = 140.0
-offset_bottom = 175.0
-pivot_offset = Vector2(140, 150)
+anchor_left = 0.32
+anchor_top = 0.3
+anchor_right = 0.32
+anchor_bottom = 0.3
+offset_left = -120.0
+offset_top = -105.0
+offset_right = 120.0
+offset_bottom = 155.0
+pivot_offset = Vector2(120, 130)
 
 [node name="ShadowSoft" type="TextureRect" parent="PropLayer/CafeteriaProp" unique_id=665860864]
 modulate = Color(1, 1, 1, 0.25)
@@ -165,7 +181,10 @@ layout_mode = 0
 anchor_top = 0.82
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme_override_font_sizes/font_size = 34
+offset_bottom = 18.0
+theme_override_colors/font_color = Color(0.22, 0.16, 0.1, 1)
+theme_override_font_sizes/font_size = 27
+theme_override_styles/normal = SubResource("StyleBoxFlat_source_name")
 text = "食堂"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -186,14 +205,14 @@ text = "?"
 z_index = 10
 anchors_preset = 0
 anchor_left = 0.64
-anchor_top = 0.3
+anchor_top = 0.53
 anchor_right = 0.64
-anchor_bottom = 0.3
-offset_left = -140.0
-offset_top = -125.0
-offset_right = 140.0
-offset_bottom = 175.0
-pivot_offset = Vector2(140, 150)
+anchor_bottom = 0.53
+offset_left = -120.0
+offset_top = -105.0
+offset_right = 120.0
+offset_bottom = 155.0
+pivot_offset = Vector2(120, 130)
 
 [node name="ShadowSoft" type="TextureRect" parent="PropLayer/TakeoutProp" unique_id=1074442848]
 modulate = Color(1, 1, 1, 0.25)
@@ -242,7 +261,10 @@ layout_mode = 0
 anchor_top = 0.82
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme_override_font_sizes/font_size = 34
+offset_bottom = 18.0
+theme_override_colors/font_color = Color(0.22, 0.16, 0.1, 1)
+theme_override_font_sizes/font_size = 27
+theme_override_styles/normal = SubResource("StyleBoxFlat_source_name")
 text = "外卖"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -253,11 +275,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -40.0
-offset_top = -11.5
-offset_right = 40.0
-offset_bottom = 11.5
+offset_left = -78.0
+offset_top = -18.0
+offset_right = 78.0
+offset_bottom = 18.0
+theme_override_colors/font_color = Color(0.22, 0.16, 0.1, 1)
 theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_source_name")
 text = "午餐开放"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -277,15 +301,15 @@ text = "?"
 [node name="ConvenienceProp" type="Control" parent="PropLayer" unique_id=1810540262]
 z_index = 10
 anchors_preset = 0
-anchor_left = 0.46
-anchor_top = 0.61
-anchor_right = 0.46
-anchor_bottom = 0.61
-offset_left = -140.0
-offset_top = -125.0
-offset_right = 140.0
-offset_bottom = 175.0
-pivot_offset = Vector2(140, 150)
+anchor_left = 0.78
+anchor_top = 0.26
+anchor_right = 0.78
+anchor_bottom = 0.26
+offset_left = -120.0
+offset_top = -105.0
+offset_right = 120.0
+offset_bottom = 155.0
+pivot_offset = Vector2(120, 130)
 
 [node name="ShadowSoft" type="TextureRect" parent="PropLayer/ConvenienceProp" unique_id=1698900535]
 modulate = Color(1, 1, 1, 0.25)
@@ -334,7 +358,10 @@ layout_mode = 0
 anchor_top = 0.82
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme_override_font_sizes/font_size = 34
+offset_bottom = 18.0
+theme_override_colors/font_color = Color(0.22, 0.16, 0.1, 1)
+theme_override_font_sizes/font_size = 27
+theme_override_styles/normal = SubResource("StyleBoxFlat_source_name")
 text = "便利店"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -354,15 +381,15 @@ text = "?"
 [node name="DormProp" type="Control" parent="PropLayer" unique_id=1767964600]
 z_index = 10
 anchors_preset = 0
-anchor_left = 0.74
-anchor_top = 0.61
-anchor_right = 0.74
-anchor_bottom = 0.61
-offset_left = -140.0
-offset_top = -125.0
-offset_right = 140.0
-offset_bottom = 175.0
-pivot_offset = Vector2(140, 150)
+anchor_left = 0.84
+anchor_top = 0.67
+anchor_right = 0.84
+anchor_bottom = 0.67
+offset_left = -120.0
+offset_top = -105.0
+offset_right = 120.0
+offset_bottom = 155.0
+pivot_offset = Vector2(120, 130)
 
 [node name="ShadowSoft" type="TextureRect" parent="PropLayer/DormProp" unique_id=1250186697]
 modulate = Color(1, 1, 1, 0.25)
@@ -411,7 +438,10 @@ layout_mode = 0
 anchor_top = 0.82
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme_override_font_sizes/font_size = 34
+offset_bottom = 18.0
+theme_override_colors/font_color = Color(0.22, 0.16, 0.1, 1)
+theme_override_font_sizes/font_size = 27
+theme_override_styles/normal = SubResource("StyleBoxFlat_source_name")
 text = "宿舍存粮"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -434,21 +464,21 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -350.0
-offset_top = -78.0
+offset_left = -358.0
+offset_top = -72.0
 offset_right = -18.0
-offset_bottom = -16.0
+offset_bottom = -12.0
 theme_override_constants/separation = 10
 
 [node name="SkipButton" type="Button" parent="Footer" unique_id=456528675]
-custom_minimum_size = Vector2(150, 62)
+custom_minimum_size = Vector2(140, 60)
 layout_mode = 2
-text = "这顿先算了"
+text = "先不吃"
 
 [node name="MenuHintButton" type="Button" parent="Footer" unique_id=14396171]
-custom_minimum_size = Vector2(170, 62)
+custom_minimum_size = Vector2(190, 60)
 layout_mode = 2
-text = "玩法说明"
+text = "规则"
 
 [node name="IdleAnimation" type="AnimationPlayer" parent="." unique_id=1953240274]
 libraries/ = SubResource("AnimationLibrary_w7stn")

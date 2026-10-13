@@ -1,0 +1,104 @@
+{
+  "date": "2026-10-08",
+  "scope": "Separate development scene with simulated menu/profile reviews. Real MCP mouse input selects food, optional addition, confirmation and skipped meal; not production nutrition UI.",
+  "final_selection": {
+    "balance": 20,
+    "ingredients": "米饭 · 鸡蛋",
+    "offer": "再加番茄 · 合计 ¥7",
+    "phase": "breakfast",
+    "portion": "份量未标",
+    "records": 0,
+    "saved": true,
+    "selected": [
+      "fixture_rice",
+      "fixture_egg"
+    ],
+    "summary_visible": false
+  },
+  "earlier_confirm": {
+    "balance": 13,
+    "phase": "lunch",
+    "records": 1
+  },
+  "earlier_diary": {
+    "balance": 13,
+    "diary": {
+      "eaten": 1,
+      "observation": "午饭没吃。",
+      "rows": [
+        {
+          "phase": "breakfast",
+          "text": "白米饭、鸡蛋、番茄",
+          "title": "早饭"
+        },
+        {
+          "phase": "lunch",
+          "text": "没吃",
+          "title": "午饭"
+        }
+      ],
+      "skipped": 1,
+      "spent": 7,
+      "title": "今天吃了什么"
+    },
+    "phase": "dinner",
+    "records": 2,
+    "saved": true,
+    "visible": true
+  },
+  "game_log": {
+    "source": "game",
+    "lines": [
+      {
+        "level": "info",
+        "run_id": "r18720834-13",
+        "source": "game",
+        "text": "[godot_ai game_helper] registered mcp capture (debugger active=true, logger=true)\n"
+      }
+    ],
+    "total_count": 1,
+    "returned_count": 1,
+    "offset": 0,
+    "limit": 15,
+    "has_more": false,
+    "run_id": "r18720834-13",
+    "is_running": true,
+    "dropped_count": 0,
+    "stale_run_id": false,
+    "current_run_id": "r18720834-13",
+    "helper_live": true,
+    "session_active": true,
+    "game_status": {
+      "active": true,
+      "editor_log_cursor": 4,
+      "elapsed_msec": 101811,
+      "helper_expected": true,
+      "helper_live": true,
+      "ready": true,
+      "ready_wait_msec": 20000,
+      "run_started_msec": 18720833,
+      "run_token": 12,
+      "session_active": true,
+      "status": "live"
+    }
+  },
+  "editor_new_log": {
+    "source": "editor",
+    "lines": [],
+    "total_count": 4,
+    "returned_count": 0,
+    "offset": 0,
+    "limit": 20,
+    "has_more": false,
+    "run_id": "",
+    "is_running": false,
+    "dropped_count": 0,
+    "stale_run_id": false,
+    "cursor": 4,
+    "oldest_cursor": 0,
+    "next_cursor": 4,
+    "appended_total": 4,
+    "truncated": false
+  },
+  "retained_editor_errors_note": "Four editor errors came from early scaffold before row type was fixed. New run has no startup errors; editor error rows were not cleared."
+}

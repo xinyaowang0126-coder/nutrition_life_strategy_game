@@ -4,13 +4,29 @@ extends McpTestSuite
 const PreferenceScript := preload("res://scripts/systems/FoodPreferenceService.gd")
 const CardsScript := preload("res://scripts/CardDataStore.gd")
 const EXPECTED_MOODS := {
-	"rice_plain": 0, "oatmeal": 0, "egg": 0, "tofu": 0, "greens": -2,
-	"tomato": 3, "apple": 5, "banana": 5, "milk": 3, "coffee": 5,
-	"bubble_tea": 18, "instant_noodles": 8, "fried_chicken": 20,
-	"salad_bowl": -3, "sandwich": 3, "mixed_grain_rice": 1,
-	"tomato_egg_stir_fry": 7, "celery_pork_stir_fry": 5, "steamed_fish": 7,
-	"plain_yogurt": 4, "whole_wheat_bread": 2, "unsalted_nuts": 4,
-	"chicken_vegetable_rice": 9,
+	"rice_plain": 0,
+	"oatmeal": 0,
+	"egg": 0,
+	"tofu": 0,
+	"greens": -2,
+	"tomato": 1,
+	"apple": 2,
+	"banana": 2,
+	"milk": 1,
+	"coffee": 2,
+	"bubble_tea": 6,
+	"instant_noodles": 2,
+	"fried_chicken": 6,
+	"salad_bowl": -1,
+	"sandwich": 2,
+	"mixed_grain_rice": 1,
+	"tomato_egg_stir_fry": 3,
+	"celery_pork_stir_fry": 2,
+	"steamed_fish": 3,
+	"plain_yogurt": 2,
+	"whole_wheat_bread": 1,
+	"unsalted_nuts": 2,
+	"chicken_vegetable_rice": 3,
 }
 const COMFORT_FOODS := ["bubble_tea", "instant_noodles", "fried_chicken"]
 
@@ -40,7 +56,7 @@ func teardown() -> void:
 func test_default_character_preserves_all_23_mood_values_and_explicit_comfort() -> void:
 	var profile: Dictionary = PreferenceScript.default_profile()
 	assert_eq(profile.get("id"), "campus_student")
-	assert_eq(profile.get("version"), 1)
+	assert_eq(profile.get("version"), 2)
 	assert_eq(profile.get("name"), "本局角色")
 	assert_eq((profile["reactions"] as Dictionary).size(), 23)
 	for food_id in EXPECTED_MOODS:
@@ -49,7 +65,7 @@ func test_default_character_preserves_all_23_mood_values_and_explicit_comfort() 
 		assert_eq(response["mood_delta"], EXPECTED_MOODS[food_id], food_id)
 		assert_eq(response["comfort"], COMFORT_FOODS.has(food_id), food_id)
 		assert_eq(response["profile_id"], "campus_student")
-		assert_eq(response["profile_version"], 1)
+		assert_eq(response["profile_version"], 2)
 		assert_eq(response["character_name"], "本局角色")
 
 
@@ -135,14 +151,14 @@ func test_profile_loader_rejects_missing_malformed_duplicate_and_future_data() -
 	var valid := FileAccess.get_file_as_string(PreferenceScript.DEFAULT_PROFILE_PATH)
 	var invalid_documents: Array[String] = [
 		"", "<wrong />", valid.replace("schema_version=\"1\"", "schema_version=\"2\""),
-		valid.replace("version=\"1\" name", "version=\"1.5\" name"),
+		valid.replace("version=\"2\" name", "version=\"1.5\" name"),
 		valid.replace("id=\"campus_student\"", "id=\"\""),
 		valid.replace("food_id=\"oatmeal\"", "food_id=\"rice_plain\""),
-		valid.replace("mood_delta=\"18\"", "mood_delta=\"18.5\""),
+		valid.replace("mood_delta=\"6\"", "mood_delta=\"18.5\""),
 		valid.replace("comfort=\"true\"", "comfort=\"yes\""),
 		valid.replace("</food_preferences>", ""),
 		valid.replace("</food_preferences>", "</other>"),
-		valid + "<food_preferences schema_version=\"1\" id=\"other\" version=\"1\" name=\"other\" />",
+		valid + "<food_preferences schema_version=\"1\" id=\"other\" version=\"2\" name=\"other\" />",
 	]
 	for index in range(invalid_documents.size()):
 		var path := _write_xml("invalid-%d.xml" % index, invalid_documents[index])

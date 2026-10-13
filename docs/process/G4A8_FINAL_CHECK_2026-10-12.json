@@ -1,0 +1,80 @@
+{
+  "date": "2026-10-12",
+  "milestone": "G4A8",
+  "valid": true,
+  "tests": {
+    "passed": 425,
+    "failed": 0,
+    "skipped": 0,
+    "total": 425,
+    "suites": 38,
+    "new_suite_passed": 9,
+    "main_scene_smoke": true,
+    "result": ".cache/g4a8/full-final-result.json",
+    "log": ".cache/g4a8/full-final.log"
+  },
+  "mcp": {
+    "passed": 9,
+    "failed": 0,
+    "ready": true,
+    "new_records_score_free": true,
+    "detail_click_unchanged": true,
+    "test_game_stopped": true,
+    "errors": [],
+    "evidence": "docs/process/G4A8_MCP_2026-10-12.json"
+  },
+  "visual": {
+    "layouts": 6,
+    "images": 28,
+    "valid": true,
+    "errors": [],
+    "native_windows": [
+      [
+        1920,
+        1080
+      ],
+      [
+        390,
+        640
+      ]
+    ],
+    "report": "docs/assets/g4a8-2026-10-12/report.json"
+  },
+  "gameplay": {
+    "date": "2026-10-12",
+    "budget": 150,
+    "runs": 510,
+    "errors": [],
+    "differences": [],
+    "removed_quality_fields": 10260,
+    "unexpected_new_quality_fields": 0,
+    "baseline_sha256": "19B6577DC3C40DEB3F2DF4F57A84900414B93AA323ACB9806F149BAF0F75D885",
+    "baseline_unchanged": true,
+    "scope": "Only quality keys inside baseline day.meals were removed in memory for comparison. Every other row field, including costs, inventory/periods, actions, resource states, recovery conditions, sources and endings, must match. The frozen baseline file was not rewritten."
+  },
+  "formula_parity": {
+    "date": "2026-10-12",
+    "formula_body_identical": true,
+    "previous_source": ".cache/g4a8/MealResolver-before.gd.txt",
+    "current_source": "life-strategy/scripts/systems/GameReserveCalculator.gd",
+    "scope": "Signature moved to a resource-only calculator; every formula-body line is identical after CRLF normalization. Legacy positional callers delegate without using the former meal score."
+  },
+  "boundaries": {
+    "protected_files": 15,
+    "changed": 0,
+    "play_untouched": true,
+    "evidence": "docs/process/G4A8_BOUNDARIES_2026-10-12.json"
+  },
+  "tool_gates": {
+    "passed": 25,
+    "log": ".cache/g4a8/gates.log"
+  },
+  "web_export": {
+    "path": "artifacts/g4a8-2026-10-12-web",
+    "pck_size_mib": 67.82,
+    "sha256": "AC42EBCE14C3430934E99037CBFB2E760AF026F3A3564ACA0B725191D77C2B1D",
+    "audited": true,
+    "published": false
+  },
+  "scope": "NUT-308 diet-score production and player health reads retired. Legacy positional game reserve APIs remain deprecated proxies. Health guidance flags/data approvals are unchanged; no professional, human or physical-device acceptance is implied."
+}

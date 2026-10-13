@@ -12,7 +12,7 @@ $ErrorActionPreference = "Stop"
 $repoRoot = Split-Path -Parent $PSScriptRoot
 $projectDir = Join-Path $repoRoot "life-strategy"
 $presetPath = Join-Path $projectDir "export_presets.cfg"
-$exportPluginPath = Join-Path $projectDir "addons\godot_ai\export\mcp_export_plugin.gd"
+$exportPluginPath = Join-Path $projectDir "addons\release_guard\export_guard.gd"
 $verificationLogDir = Join-Path $projectDir ".godot\logs"
 
 
@@ -124,6 +124,31 @@ function Assert-NoScriptFailures {
 }
 
 
+function Assert-HeadlessTestResult {
+    param([string[]]$Output)
+
+    # Suite setup/teardown and autoload errors can occur outside the test
+    # framework's per-test capture window, even with failed=0 and exit=0.
+    Assert-NoScriptFailures -Label "Headless tests" -Output $Output
+    $resultLine = $Output | Where-Object { $_.StartsWith("MCP_TEST_RESULT=") } | Select-Object -Last 1
+    if ([string]::IsNullOrWhiteSpace($resultLine)) {
+        throw "Headless tests did not emit MCP_TEST_RESULT."
+    }
+    $result = $resultLine.Substring("MCP_TEST_RESULT=".Length) | ConvertFrom-Json
+    if ([int]$result.total -le 0 -or [int]$result.suite_count -le 0 -or [int]$result.passed -le 0) {
+        throw "Headless test run executed no passing tests."
+    }
+    if ([int]$result.failed -gt 0) {
+        throw "Headless test run reported $($result.failed) failure(s)."
+    }
+    if ([int]$result.failed -lt 0 -or [int]$result.skipped -lt 0 -or
+        ([int]$result.passed + [int]$result.failed + [int]$result.skipped) -ne [int]$result.total) {
+        throw "Headless test run reported inconsistent result counts."
+    }
+    return $result
+}
+
+
 function Assert-ReleaseConfiguration {
     $preset = Get-Content -LiteralPath $presetPath -Raw -Encoding UTF8
     foreach ($requiredText in @(
@@ -138,10 +163,13 @@ function Assert-ReleaseConfiguration {
         'scripts/CardDataStore.gd',
         'scripts/GameData.gd',
         'scripts/systems/*.gd',
+        'scripts/health/*.gd',
         'scripts/ui_v2/*.gd',
         'scripts/ui_v2/stages/*.gd',
         'data/characters/*.xml',
+        'data/health/*.xml',
         'addons/godot_ai/**',
+        'addons/release_guard/**',
         'tests/**',
         'scenes/game/**'
     )) {
@@ -154,14 +182,22 @@ function Assert-ReleaseConfiguration {
     }
 
     $exportPlugin = Get-Content -LiteralPath $exportPluginPath -Raw -Encoding UTF8
+    $projectSettings = Get-Content -LiteralPath (Join-Path $projectDir "project.godot") -Raw -Encoding UTF8
+    if ($projectSettings -notmatch '(?m)^enabled=PackedStringArray\([^\r\n]*"res://addons/release_guard/plugin\.cfg"') {
+        throw "Project release guard is not enabled."
+    }
     foreach ($requiredText in @(
-        'autoload/_mcp_game_helper',
         'editor_plugins/enabled',
-        'ProjectSettings.set_setting(AUTOLOAD_KEY, null)',
         'ProjectSettings.set_setting(EDITOR_PLUGINS_KEY, null)'
     )) {
         if ($exportPlugin.IndexOf($requiredText, [StringComparison]::Ordinal) -lt 0) {
             throw "Export plugin does not strip a development-only setting: $requiredText"
+        }
+    }
+    $mcpExportPlugin = Get-Content -LiteralPath (Join-Path $projectDir "addons\godot_ai\export\mcp_export_plugin.gd") -Raw -Encoding UTF8
+    foreach ($requiredText in @('autoload/_mcp_game_helper', 'ProjectSettings.set_setting(AUTOLOAD_KEY, null)')) {
+        if ($mcpExportPlugin.IndexOf($requiredText, [StringComparison]::Ordinal) -lt 0) {
+            throw "MCP export plugin no longer strips its helper: $requiredText"
         }
     }
 }
@@ -175,10 +211,13 @@ function Assert-CleanWebPack {
     }
     $packBytes = [IO.File]::ReadAllBytes($PackPath)
     $packText = [Text.Encoding]::ASCII.GetString($packBytes)
+    $packPaths = Get-WebPackPaths -PackBytes $packBytes
+    $directoryText = $packPaths -join "`n"
 
     $forbidden = [ordered]@{
         "MCP autoload" = "autoload/_mcp_game_helper"
         "Godot AI development plugin" = "addons/godot_ai/"
+        "project release guard" = "addons/release_guard/"
         "test suites" = "tests/test_"
         "legacy game scene" = "scenes/game/GameRoot"
         "legacy game controller" = "scripts/GameRoot.gd"
@@ -195,6 +234,7 @@ function Assert-CleanWebPack {
     }
 
     foreach ($requiredPath in @(
+        "project.binary",
         "scenes/main_menu/MainMenu",
         "scenes/game_v2/GameRootV2",
         "scenes/game_v2/components/CompactChoiceCard",
@@ -205,15 +245,28 @@ function Assert-CleanWebPack {
         "scripts/systems/NutritionLedger",
         "scripts/systems/WeeklyEventService",
         "scripts/systems/DayCarryoverService",
+        "scripts/systems/RecoveryStateService",
+        "scripts/systems/RecoveryRules",
+        "scripts/systems/RecoveryGameplayService",
+        "scripts/systems/GameplayBalanceRules",
+        "scripts/health/HealthGuidanceFeatureFlags",
+        "scripts/health/HealthDataStore",
+        "scripts/health/HealthDataValidator",
+        "scripts/health/HealthEvidenceRegistry",
+        "scripts/health/HealthXmlStructure",
+        "scripts/health/MealHealthSnapshot",
+        "scripts/health/MealHealthArchive",
         "scripts/ui_v2/NewDayPopup",
         "scripts/ui_v2/stages/MealStageBase",
         "data/cards/foods.xml",
+        "data/health/food_health_profiles.xml",
+        "data/health/evidence_registry.xml",
         "assets/generated/cards/",
         "assets/generated/ui_v2/day_popup/states/clear_focus",
         "assets/generated/ui_v2/day_popup/events/mock_exam_notice",
         "assets/generated/ui_v2/day_popup/events/rainy_day"
     )) {
-        if ($packText.IndexOf($requiredPath, [StringComparison]::OrdinalIgnoreCase) -lt 0) {
+        if ($directoryText.IndexOf($requiredPath, [StringComparison]::OrdinalIgnoreCase) -lt 0) {
             throw "Web PCK is missing required production content: $requiredPath"
         }
     }
@@ -223,12 +276,85 @@ function Assert-CleanWebPack {
 }
 
 
+function Get-WebPackPaths {
+    param([byte[]]$PackBytes)
+
+    # Read the standalone, unencrypted PCK directory. Searching payload text
+    # alone accepts a missing XML file when a script contains its path constant.
+    # Format reference: Godot core/io/file_access_pack.cpp, try_open_pack().
+    $stream = New-Object IO.MemoryStream(,$PackBytes)
+    $reader = New-Object IO.BinaryReader($stream)
+    try {
+        if ($reader.ReadUInt32() -ne 0x43504447) {
+            throw "Web PCK has an invalid header."
+        }
+        $version = $reader.ReadUInt32()
+        if ($version -notin @(2, 3, 4)) {
+            throw "Unsupported Web PCK format: $version."
+        }
+        $null = $reader.ReadBytes(12) # Engine version.
+        $flags = $reader.ReadUInt32()
+        if (($flags -band (-bnot 2)) -ne 0) {
+            throw "Web PCK must be a standalone, unencrypted full pack."
+        }
+        $fileBase = $reader.ReadUInt64()
+        if ($version -ge 3) {
+            $directoryOffset = $reader.ReadUInt64()
+            if ($directoryOffset -gt ($stream.Length - 4)) {
+                throw "Web PCK directory is outside the file."
+            }
+            $stream.Position = $directoryOffset
+        }
+        else {
+            $null = $reader.ReadBytes(64) # Reserved v2 header fields.
+        }
+        $fileCount = $reader.ReadUInt32()
+        if ($fileCount -le 0 -or $fileCount -gt (($stream.Length - $stream.Position) / 40)) {
+            throw "Web PCK has an invalid file count."
+        }
+        $paths = New-Object System.Collections.Generic.List[string]
+        for ($index = 0; $index -lt $fileCount; $index++) {
+            $pathLength = $reader.ReadUInt32()
+            if ($pathLength -le 0 -or $pathLength -gt 1MB -or
+                $pathLength + 36 -gt ($stream.Length - $stream.Position)) {
+                throw "Web PCK has a truncated or invalid directory entry."
+            }
+            $path = [Text.Encoding]::UTF8.GetString($reader.ReadBytes($pathLength)).TrimEnd([char]0)
+            $offset = $reader.ReadUInt64()
+            $size = $reader.ReadUInt64()
+            if ($path -match '(^|/)project\.binary$' -and $size -eq 0) {
+                throw "Web PCK contains empty project settings: $path"
+            }
+            $null = $reader.ReadBytes(16) # MD5; content hashes are not verified here.
+            $entryFlags = $reader.ReadUInt32()
+            if ($entryFlags -ne 0 -or ([decimal]$fileBase + $offset + $size) -gt $stream.Length) {
+                throw "Web PCK contains an unsupported or out-of-bounds file entry: $path"
+            }
+            $paths.Add($path)
+        }
+        return ,$paths.ToArray()
+    }
+    finally {
+        $reader.Dispose()
+        $stream.Dispose()
+    }
+}
+
+
 $godotExecutable = Resolve-GodotExecutable -RequestedPath $GodotPath
 Write-Host "Godot: $godotExecutable"
 Write-Host "Project: $projectDir"
 
 Assert-ReleaseConfiguration
 Write-Host "Release configuration check passed." -ForegroundColor Green
+
+$importOutput = Invoke-GodotStep -Label "Import resources and global script classes" -Arguments @(
+    "--headless",
+    "--path", $projectDir,
+    "--editor",
+    "--import"
+)
+Assert-NoScriptFailures -Label "Resource import" -Output $importOutput
 
 $testArguments = @(
     "--headless",
@@ -240,17 +366,7 @@ if (-not [string]::IsNullOrWhiteSpace($Suite)) {
     $testArguments += "--suite=$Suite"
 }
 $testOutput = Invoke-GodotStep -Label "Headless tests" -Arguments $testArguments
-$resultLine = $testOutput | Where-Object { $_.StartsWith("MCP_TEST_RESULT=") } | Select-Object -Last 1
-if ([string]::IsNullOrWhiteSpace($resultLine)) {
-    throw "Headless tests did not emit MCP_TEST_RESULT."
-}
-$testResult = $resultLine.Substring("MCP_TEST_RESULT=".Length) | ConvertFrom-Json
-if ([int]$testResult.total -le 0 -or [int]$testResult.suite_count -le 0) {
-    throw "Headless test run executed no tests."
-}
-if ([int]$testResult.failed -gt 0) {
-    throw "Headless test run reported $($testResult.failed) failure(s)."
-}
+$testResult = Assert-HeadlessTestResult -Output $testOutput
 Write-Host "Headless tests passed: $($testResult.passed)/$($testResult.total)." -ForegroundColor Green
 
 $smokeOutput = Invoke-GodotStep -Label "Main scene smoke test" -Arguments @(

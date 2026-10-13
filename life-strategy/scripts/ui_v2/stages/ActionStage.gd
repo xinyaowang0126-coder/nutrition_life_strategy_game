@@ -7,6 +7,7 @@ signal detail_requested(payload: Dictionary, anchor_rect: Rect2, pinned: bool)
 signal detail_dismissed(item_id: String)
 
 const CARD_SCENE := preload("res://scenes/game_v2/components/CompactChoiceCard.tscn")
+const BalanceRules := preload("res://scripts/systems/GameplayBalanceRules.gd")
 
 @onready var time_label: Label = $Layout/Header/TimeTag/TimeLabel
 @onready var prompt_label: Label = $Layout/Header/PromptTag/Prompt
@@ -49,6 +50,7 @@ func set_usage(used: int, maximum: int, used_names: Array = [], water_count: int
 
 func _ready() -> void:
 	skip_button.pressed.connect(func() -> void: skip_requested.emit())
+	skip_button.tooltip_text = BalanceRules.PERIOD_HINT
 	_ready_finished = true
 	if _has_setup:
 		_apply_setup()
@@ -68,7 +70,7 @@ func _apply_setup() -> void:
 			continue
 		actions_container.add_child(card)
 		_cards_by_id[action_id] = card
-		card.configure(payload, "action", false, enabled, -1, reason, "安排")
+		card.configure(payload, "action", false, enabled, -1, reason, "接水" if int(payload.get("slots", 1)) == 0 else "安排")
 		card.selected.connect(_on_action_pressed)
 		card.detail_requested.connect(_forward_detail)
 		card.detail_dismissed.connect(_forward_detail_dismissed)

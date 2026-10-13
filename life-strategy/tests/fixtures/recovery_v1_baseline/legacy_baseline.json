@@ -1,0 +1,7395 @@
+{
+	"action_observations": [
+		{
+			"action_id": "drink_water",
+			"after": {
+				"balance": 120,
+				"diet_burden": 47,
+				"energy": 61,
+				"mood": 60,
+				"satiety": 53,
+				"stability": 65,
+				"stress": 39,
+				"study_progress": 70,
+				"study_target": 70
+			},
+			"before": {
+				"balance": 120,
+				"diet_burden": 50,
+				"energy": 60,
+				"mood": 60,
+				"satiety": 50,
+				"stability": 65,
+				"stress": 40,
+				"study_progress": 70,
+				"study_target": 70
+			},
+			"day": 1,
+			"observed_delta": {
+				"balance": 0,
+				"diet_burden": -3,
+				"energy": 1,
+				"mood": 0,
+				"satiety": 3,
+				"stability": 0,
+				"stress": -1,
+				"study_progress": 0,
+				"study_target": 0
+			},
+			"records": [
+				{
+					"cost": 0,
+					"id": "drink_water",
+					"name": "喝水",
+					"stat_delta": {
+						"diet_burden": -3,
+						"energy": 1,
+						"mood": 0,
+						"satiety": 3,
+						"stress": -1,
+						"study_progress": 0
+					},
+					"stock_added": {}
+				}
+			]
+		},
+		{
+			"action_id": "walk",
+			"after": {
+				"balance": 120,
+				"diet_burden": 48,
+				"energy": 57,
+				"mood": 63,
+				"satiety": 47,
+				"stability": 65,
+				"stress": 34,
+				"study_progress": 70,
+				"study_target": 70
+			},
+			"before": {
+				"balance": 120,
+				"diet_burden": 50,
+				"energy": 60,
+				"mood": 60,
+				"satiety": 50,
+				"stability": 65,
+				"stress": 40,
+				"study_progress": 70,
+				"study_target": 70
+			},
+			"day": 1,
+			"observed_delta": {
+				"balance": 0,
+				"diet_burden": -2,
+				"energy": -3,
+				"mood": 3,
+				"satiety": -3,
+				"stability": 0,
+				"stress": -6,
+				"study_progress": 0,
+				"study_target": 0
+			},
+			"records": [
+				{
+					"cost": 0,
+					"id": "walk",
+					"name": "早上走走",
+					"stat_delta": {
+						"diet_burden": -2,
+						"energy": -3,
+						"mood": 3,
+						"satiety": -3,
+						"stress": -6,
+						"study_progress": 0
+					},
+					"stock_added": {}
+				}
+			]
+		},
+		{
+			"action_id": "allow_imperfection",
+			"after": {
+				"balance": 120,
+				"diet_burden": 49,
+				"energy": 64,
+				"mood": 67,
+				"satiety": 50,
+				"stability": 65,
+				"stress": 32,
+				"study_progress": 68,
+				"study_target": 70
+			},
+			"before": {
+				"balance": 120,
+				"diet_burden": 50,
+				"energy": 60,
+				"mood": 60,
+				"satiety": 50,
+				"stability": 65,
+				"stress": 40,
+				"study_progress": 70,
+				"study_target": 70
+			},
+			"day": 1,
+			"observed_delta": {
+				"balance": 0,
+				"diet_burden": -1,
+				"energy": 4,
+				"mood": 7,
+				"satiety": 0,
+				"stability": 0,
+				"stress": -8,
+				"study_progress": -2,
+				"study_target": 0
+			},
+			"records": [
+				{
+					"cost": 0,
+					"id": "allow_imperfection",
+					"name": "上午留白",
+					"stat_delta": {
+						"diet_burden": -1,
+						"energy": 4,
+						"mood": 7,
+						"satiety": 0,
+						"stress": -8,
+						"study_progress": -2
+					},
+					"stock_added": {}
+				}
+			]
+		},
+		{
+			"action_id": "nap",
+			"after": {
+				"balance": 120,
+				"diet_burden": 50,
+				"energy": 74,
+				"mood": 62,
+				"satiety": 48,
+				"stability": 65,
+				"stress": 36,
+				"study_progress": 70,
+				"study_target": 70
+			},
+			"before": {
+				"balance": 120,
+				"diet_burden": 50,
+				"energy": 60,
+				"mood": 60,
+				"satiety": 50,
+				"stability": 65,
+				"stress": 40,
+				"study_progress": 70,
+				"study_target": 70
+			},
+			"day": 1,
+			"observed_delta": {
+				"balance": 0,
+				"diet_burden": 0,
+				"energy": 14,
+				"mood": 2,
+				"satiety": -2,
+				"stability": 0,
+				"stress": -4,
+				"study_progress": 0,
+				"study_target": 0
+			},
+			"records": [
+				{
+					"cost": 0,
+					"id": "nap",
+					"name": "补个觉",
+					"stat_delta": {
+						"diet_burden": 0,
+						"energy": 14,
+						"mood": 2,
+						"satiety": -2,
+						"stress": -4,
+						"study_progress": 0
+					},
+					"stock_added": {}
+				}
+			]
+		},
+		{
+			"action_id": "drink_water",
+			"after": {
+				"balance": 120,
+				"diet_burden": 47,
+				"energy": 61,
+				"mood": 60,
+				"satiety": 53,
+				"stability": 65,
+				"stress": 39,
+				"study_progress": 70,
+				"study_target": 70
+			},
+			"before": {
+				"balance": 120,
+				"diet_burden": 50,
+				"energy": 60,
+				"mood": 60,
+				"satiety": 50,
+				"stability": 65,
+				"stress": 40,
+				"study_progress": 70,
+				"study_target": 70
+			},
+			"day": 2,
+			"observed_delta": {
+				"balance": 0,
+				"diet_burden": -3,
+				"energy": 1,
+				"mood": 0,
+				"satiety": 3,
+				"stability": 0,
+				"stress": -1,
+				"study_progress": 0,
+				"study_target": 0
+			},
+			"records": [
+				{
+					"cost": 0,
+					"id": "drink_water",
+					"name": "喝水",
+					"stat_delta": {
+						"diet_burden": -3,
+						"energy": 1,
+						"mood": 0,
+						"satiety": 3,
+						"stress": -1,
+						"study_progress": 0
+					},
+					"stock_added": {}
+				}
+			]
+		},
+		{
+			"action_id": "walk",
+			"after": {
+				"balance": 120,
+				"diet_burden": 48,
+				"energy": 57,
+				"mood": 65,
+				"satiety": 47,
+				"stability": 65,
+				"stress": 32,
+				"study_progress": 70,
+				"study_target": 70
+			},
+			"before": {
+				"balance": 120,
+				"diet_burden": 50,
+				"energy": 60,
+				"mood": 60,
+				"satiety": 50,
+				"stability": 65,
+				"stress": 40,
+				"study_progress": 70,
+				"study_target": 70
+			},
+			"day": 2,
+			"observed_delta": {
+				"balance": 0,
+				"diet_burden": -2,
+				"energy": -3,
+				"mood": 5,
+				"satiety": -3,
+				"stability": 0,
+				"stress": -8,
+				"study_progress": 0,
+				"study_target": 0
+			},
+			"records": [
+				{
+					"cost": 0,
+					"id": "walk",
+					"name": "早上走走",
+					"stat_delta": {
+						"diet_burden": -2,
+						"energy": -3,
+						"mood": 5,
+						"satiety": -3,
+						"stress": -8,
+						"study_progress": 0
+					},
+					"stock_added": {}
+				}
+			]
+		},
+		{
+			"action_id": "allow_imperfection",
+			"after": {
+				"balance": 120,
+				"diet_burden": 49,
+				"energy": 64,
+				"mood": 67,
+				"satiety": 50,
+				"stability": 65,
+				"stress": 32,
+				"study_progress": 68,
+				"study_target": 70
+			},
+			"before": {
+				"balance": 120,
+				"diet_burden": 50,
+				"energy": 60,
+				"mood": 60,
+				"satiety": 50,
+				"stability": 65,
+				"stress": 40,
+				"study_progress": 70,
+				"study_target": 70
+			},
+			"day": 2,
+			"observed_delta": {
+				"balance": 0,
+				"diet_burden": -1,
+				"energy": 4,
+				"mood": 7,
+				"satiety": 0,
+				"stability": 0,
+				"stress": -8,
+				"study_progress": -2,
+				"study_target": 0
+			},
+			"records": [
+				{
+					"cost": 0,
+					"id": "allow_imperfection",
+					"name": "上午留白",
+					"stat_delta": {
+						"diet_burden": -1,
+						"energy": 4,
+						"mood": 7,
+						"satiety": 0,
+						"stress": -8,
+						"study_progress": -2
+					},
+					"stock_added": {}
+				}
+			]
+		},
+		{
+			"action_id": "nap",
+			"after": {
+				"balance": 120,
+				"diet_burden": 50,
+				"energy": 74,
+				"mood": 62,
+				"satiety": 48,
+				"stability": 65,
+				"stress": 36,
+				"study_progress": 70,
+				"study_target": 70
+			},
+			"before": {
+				"balance": 120,
+				"diet_burden": 50,
+				"energy": 60,
+				"mood": 60,
+				"satiety": 50,
+				"stability": 65,
+				"stress": 40,
+				"study_progress": 70,
+				"study_target": 70
+			},
+			"day": 2,
+			"observed_delta": {
+				"balance": 0,
+				"diet_burden": 0,
+				"energy": 14,
+				"mood": 2,
+				"satiety": -2,
+				"stability": 0,
+				"stress": -4,
+				"study_progress": 0,
+				"study_target": 0
+			},
+			"records": [
+				{
+					"cost": 0,
+					"id": "nap",
+					"name": "补个觉",
+					"stat_delta": {
+						"diet_burden": 0,
+						"energy": 14,
+						"mood": 2,
+						"satiety": -2,
+						"stress": -4,
+						"study_progress": 0
+					},
+					"stock_added": {}
+				}
+			]
+		},
+		{
+			"action_id": "drink_water",
+			"after": {
+				"balance": 120,
+				"diet_burden": 47,
+				"energy": 61,
+				"mood": 60,
+				"satiety": 53,
+				"stability": 65,
+				"stress": 39,
+				"study_progress": 70,
+				"study_target": 70
+			},
+			"before": {
+				"balance": 120,
+				"diet_burden": 50,
+				"energy": 60,
+				"mood": 60,
+				"satiety": 50,
+				"stability": 65,
+				"stress": 40,
+				"study_progress": 70,
+				"study_target": 70
+			},
+			"day": 6,
+			"observed_delta": {
+				"balance": 0,
+				"diet_burden": -3,
+				"energy": 1,
+				"mood": 0,
+				"satiety": 3,
+				"stability": 0,
+				"stress": -1,
+				"study_progress": 0,
+				"study_target": 0
+			},
+			"records": [
+				{
+					"cost": 0,
+					"id": "drink_water",
+					"name": "喝水",
+					"stat_delta": {
+						"diet_burden": -3,
+						"energy": 1,
+						"mood": 0,
+						"satiety": 3,
+						"stress": -1,
+						"study_progress": 0
+					},
+					"stock_added": {}
+				}
+			]
+		},
+		{
+			"action_id": "walk",
+			"after": {
+				"balance": 120,
+				"diet_burden": 48,
+				"energy": 55,
+				"mood": 61,
+				"satiety": 47,
+				"stability": 65,
+				"stress": 37,
+				"study_progress": 70,
+				"study_target": 70
+			},
+			"before": {
+				"balance": 120,
+				"diet_burden": 50,
+				"energy": 60,
+				"mood": 60,
+				"satiety": 50,
+				"stability": 65,
+				"stress": 40,
+				"study_progress": 70,
+				"study_target": 70
+			},
+			"day": 6,
+			"observed_delta": {
+				"balance": 0,
+				"diet_burden": -2,
+				"energy": -5,
+				"mood": 1,
+				"satiety": -3,
+				"stability": 0,
+				"stress": -3,
+				"study_progress": 0,
+				"study_target": 0
+			},
+			"records": [
+				{
+					"cost": 0,
+					"id": "walk",
+					"name": "早上走走",
+					"stat_delta": {
+						"diet_burden": -2,
+						"energy": -5,
+						"mood": 1,
+						"satiety": -3,
+						"stress": -3,
+						"study_progress": 0
+					},
+					"stock_added": {}
+				}
+			]
+		},
+		{
+			"action_id": "allow_imperfection",
+			"after": {
+				"balance": 120,
+				"diet_burden": 49,
+				"energy": 64,
+				"mood": 67,
+				"satiety": 50,
+				"stability": 65,
+				"stress": 32,
+				"study_progress": 68,
+				"study_target": 70
+			},
+			"before": {
+				"balance": 120,
+				"diet_burden": 50,
+				"energy": 60,
+				"mood": 60,
+				"satiety": 50,
+				"stability": 65,
+				"stress": 40,
+				"study_progress": 70,
+				"study_target": 70
+			},
+			"day": 6,
+			"observed_delta": {
+				"balance": 0,
+				"diet_burden": -1,
+				"energy": 4,
+				"mood": 7,
+				"satiety": 0,
+				"stability": 0,
+				"stress": -8,
+				"study_progress": -2,
+				"study_target": 0
+			},
+			"records": [
+				{
+					"cost": 0,
+					"id": "allow_imperfection",
+					"name": "上午留白",
+					"stat_delta": {
+						"diet_burden": -1,
+						"energy": 4,
+						"mood": 7,
+						"satiety": 0,
+						"stress": -8,
+						"study_progress": -2
+					},
+					"stock_added": {}
+				}
+			]
+		},
+		{
+			"action_id": "nap",
+			"after": {
+				"balance": 120,
+				"diet_burden": 50,
+				"energy": 74,
+				"mood": 62,
+				"satiety": 48,
+				"stability": 65,
+				"stress": 36,
+				"study_progress": 70,
+				"study_target": 70
+			},
+			"before": {
+				"balance": 120,
+				"diet_burden": 50,
+				"energy": 60,
+				"mood": 60,
+				"satiety": 50,
+				"stability": 65,
+				"stress": 40,
+				"study_progress": 70,
+				"study_target": 70
+			},
+			"day": 6,
+			"observed_delta": {
+				"balance": 0,
+				"diet_burden": 0,
+				"energy": 14,
+				"mood": 2,
+				"satiety": -2,
+				"stability": 0,
+				"stress": -4,
+				"study_progress": 0,
+				"study_target": 0
+			},
+			"records": [
+				{
+					"cost": 0,
+					"id": "nap",
+					"name": "补个觉",
+					"stat_delta": {
+						"diet_burden": 0,
+						"energy": 14,
+						"mood": 2,
+						"satiety": -2,
+						"stress": -4,
+						"study_progress": 0
+					},
+					"stock_added": {}
+				}
+			]
+		}
+	],
+	"burden_catalog": {
+		"actions": [
+			{
+				"burden": 0,
+				"id": "study",
+				"name": "复习"
+			},
+			{
+				"burden": 0,
+				"id": "nap",
+				"name": "歇一会儿"
+			},
+			{
+				"burden": -2,
+				"id": "walk",
+				"name": "散步"
+			},
+			{
+				"burden": -3,
+				"id": "drink_water",
+				"name": "喝水"
+			},
+			{
+				"burden": -1,
+				"id": "allow_imperfection",
+				"name": "留点空"
+			},
+			{
+				"burden": 0,
+				"id": "restock_pantry",
+				"name": "补充存粮"
+			}
+		],
+		"foods": [
+			{
+				"burden": 0,
+				"id": "rice_plain",
+				"name": "白米饭"
+			},
+			{
+				"burden": 0,
+				"id": "oatmeal",
+				"name": "燕麦"
+			},
+			{
+				"burden": 0,
+				"id": "egg",
+				"name": "鸡蛋"
+			},
+			{
+				"burden": 0,
+				"id": "tofu",
+				"name": "豆腐"
+			},
+			{
+				"burden": -2,
+				"id": "greens",
+				"name": "青菜"
+			},
+			{
+				"burden": -1,
+				"id": "tomato",
+				"name": "番茄"
+			},
+			{
+				"burden": -1,
+				"id": "apple",
+				"name": "苹果"
+			},
+			{
+				"burden": 0,
+				"id": "banana",
+				"name": "香蕉"
+			},
+			{
+				"burden": 1,
+				"id": "milk",
+				"name": "牛奶"
+			},
+			{
+				"burden": 1,
+				"id": "coffee",
+				"name": "咖啡"
+			},
+			{
+				"burden": 8,
+				"id": "bubble_tea",
+				"name": "奶茶"
+			},
+			{
+				"burden": 11,
+				"id": "instant_noodles",
+				"name": "方便面"
+			},
+			{
+				"burden": 12,
+				"id": "fried_chicken",
+				"name": "炸鸡"
+			},
+			{
+				"burden": -4,
+				"id": "salad_bowl",
+				"name": "沙拉碗"
+			},
+			{
+				"burden": 2,
+				"id": "sandwich",
+				"name": "三明治"
+			},
+			{
+				"burden": 0,
+				"id": "mixed_grain_rice",
+				"name": "杂粮饭"
+			},
+			{
+				"burden": 1,
+				"id": "tomato_egg_stir_fry",
+				"name": "西红柿炒鸡蛋"
+			},
+			{
+				"burden": 2,
+				"id": "celery_pork_stir_fry",
+				"name": "芹菜炒肉"
+			},
+			{
+				"burden": 0,
+				"id": "steamed_fish",
+				"name": "清蒸鱼"
+			},
+			{
+				"burden": 0,
+				"id": "plain_yogurt",
+				"name": "原味酸奶"
+			},
+			{
+				"burden": 0,
+				"id": "whole_wheat_bread",
+				"name": "全麦面包"
+			},
+			{
+				"burden": 0,
+				"id": "unsalted_nuts",
+				"name": "原味坚果"
+			},
+			{
+				"burden": 3,
+				"id": "chicken_vegetable_rice",
+				"name": "鸡肉时蔬饭"
+			}
+		],
+		"meal_sources": [
+			{
+				"burden": 0,
+				"id": "cafeteria",
+				"name": "食堂"
+			},
+			{
+				"burden": 0,
+				"id": "takeout",
+				"name": "外卖"
+			},
+			{
+				"burden": 0,
+				"id": "convenience_store",
+				"name": "便利店"
+			},
+			{
+				"burden": 0,
+				"id": "dorm_storage",
+				"name": "宿舍存粮"
+			}
+		],
+		"sleep_options": [
+			{
+				"burden": -4,
+				"id": "sleep_early",
+				"name": "早点睡"
+			},
+			{
+				"burden": 2,
+				"id": "night_study",
+				"name": "再看一会儿"
+			},
+			{
+				"burden": 1,
+				"id": "scroll_phone",
+				"name": "刷会儿手机"
+			}
+		]
+	},
+	"carryover_burden_boundaries": {
+		"actions": [],
+		"base_state": {
+			"balance": 120,
+			"diet_burden": 50,
+			"energy": 60,
+			"mood": 60,
+			"satiety": 50,
+			"stability": 65,
+			"stress": 40,
+			"study_progress": 70,
+			"study_target": 70
+		},
+		"rows": [
+			{
+				"burden": 55,
+				"result": {
+					"id": "clear_focus",
+					"opening_delta": {
+						"energy": 3,
+						"mood": 1,
+						"stress": -2
+					},
+					"study_modifier": 3,
+					"summary": "按游戏规则，昨日的进餐记录、较早休息和收尾状态共同触发了今日复习加成。",
+					"title": "进入状态较快"
+				}
+			},
+			{
+				"burden": 56,
+				"result": {
+					"id": "steady",
+					"opening_delta": {},
+					"study_modifier": 0,
+					"summary": "按游戏规则，昨日记录没有触发额外的复习加成或减益。",
+					"title": "状态照常"
+				}
+			},
+			{
+				"burden": 67,
+				"result": {
+					"id": "steady",
+					"opening_delta": {},
+					"study_modifier": 0,
+					"summary": "按游戏规则，昨日记录没有触发额外的复习加成或减益。",
+					"title": "状态照常"
+				}
+			},
+			{
+				"burden": 68,
+				"result": {
+					"id": "fatigued",
+					"opening_delta": {
+						"energy": -2,
+						"stress": 2
+					},
+					"study_modifier": -2,
+					"summary": "按游戏规则，昨日的精力、压力、作息或安排触发了轻度复习减益。",
+					"title": "进入状态较慢"
+				}
+			},
+			{
+				"burden": 81,
+				"result": {
+					"id": "fatigued",
+					"opening_delta": {
+						"energy": -2,
+						"stress": 2
+					},
+					"study_modifier": -2,
+					"summary": "按游戏规则，昨日的精力、压力、作息或安排触发了轻度复习减益。",
+					"title": "进入状态较慢"
+				}
+			},
+			{
+				"burden": 82,
+				"result": {
+					"id": "brain_fog",
+					"opening_delta": {
+						"energy": -3,
+						"mood": -2,
+						"stress": 3
+					},
+					"study_modifier": -4,
+					"summary": "按游戏规则，昨日多项状态同时触发了较大复习减益；这不是医学判断。",
+					"title": "需要先缓一缓"
+				}
+			}
+		],
+		"sleep_id": "sleep_early",
+		"summary": {
+			"action": "下次碰见完整水果，可以按预算和口味拿一份；饮料不算水果卡。",
+			"basis": "规则小字：本局饮食信息参考《中国居民膳食指南（2022）》中的食物多样、合理搭配和规律进餐原则，只整理本局卡牌。卡牌出现不代表现实摄入量足够，也不用于现实健康判断。",
+			"detail_text": "三餐情况　吃了 3/3 餐\n今天遇到　3 种食物卡\n\n餐盘线索\n主食 3 顿｜蔬菜 3 顿｜水果 没碰见\n蛋/肉/鱼 碰见过｜奶类 没碰见｜大豆制品 没碰见｜坚果 没碰见\n\n卡牌资料线索\n主食来源 3 顿｜膳食纤维来源 3 顿\n蛋白质来源 3 顿｜钙来源 没碰见\n全谷物 没碰见｜不饱和脂肪酸来源 没碰见\n需留意的卡牌线索：卡牌上没写到添加糖、高钠或油炸；这不等于一定没有",
+			"metrics": {
+				"added_sugar_meals": 0,
+				"animal_food_meals": 3,
+				"calcium_source_meals": 0,
+				"carbohydrate_source_meals": 3,
+				"dairy_meals": 0,
+				"eaten_meals": 3,
+				"expected_meals": 3,
+				"fiber_source_meals": 3,
+				"fried_meals": 0,
+				"fruit_meals": 0,
+				"grain_meals": 3,
+				"high_quality_protein_meals": 3,
+				"high_sodium_meals": 0,
+				"nuts_meals": 0,
+				"skipped_meals": 0,
+				"soy_meals": 0,
+				"unique_foods": 3,
+				"unsaturated_fat_source_meals": 0,
+				"vegetable_meals": 3,
+				"whole_grain_meals": 0
+			},
+			"observation": "三餐都吃了，也都有蔬菜类食物出现。这里只记录出现，不判断份量。",
+			"rating": "旧版结算记录（不作健康评价）",
+			"score": 86
+		}
+	},
+	"clamp_and_hud_conversion": [
+		{
+			"character_health_display": 100,
+			"clamped_burden": 0,
+			"delta_display_for_same_input": 1,
+			"input_burden": -1
+		},
+		{
+			"character_health_display": 100,
+			"clamped_burden": 0,
+			"delta_display_for_same_input": 0,
+			"input_burden": 0
+		},
+		{
+			"character_health_display": 99,
+			"clamped_burden": 1,
+			"delta_display_for_same_input": -1,
+			"input_burden": 1
+		},
+		{
+			"character_health_display": 1,
+			"clamped_burden": 99,
+			"delta_display_for_same_input": -99,
+			"input_burden": 99
+		},
+		{
+			"character_health_display": 0,
+			"clamped_burden": 100,
+			"delta_display_for_same_input": -100,
+			"input_burden": 100
+		},
+		{
+			"character_health_display": 0,
+			"clamped_burden": 100,
+			"delta_display_for_same_input": -101,
+			"input_burden": 101
+		}
+	],
+	"combo_observations": [
+		{
+			"after": {
+				"balance": 113,
+				"diet_burden": 47,
+				"energy": 73,
+				"mood": 66,
+				"satiety": 80,
+				"stability": 73,
+				"stress": 40,
+				"study_progress": 70,
+				"study_target": 70
+			},
+			"before": {
+				"balance": 120,
+				"diet_burden": 50,
+				"energy": 60,
+				"mood": 60,
+				"satiety": 50,
+				"stability": 65,
+				"stress": 40,
+				"study_progress": 70,
+				"study_target": 70
+			},
+			"combos_after": [
+				"meal_group_mix"
+			],
+			"observed_delta": {
+				"balance": -7,
+				"diet_burden": -3,
+				"energy": 13,
+				"mood": 6,
+				"satiety": 30,
+				"stability": 8,
+				"stress": 0,
+				"study_progress": 0,
+				"study_target": 0
+			},
+			"record": {
+				"comfort": false,
+				"food_cost": 7,
+				"food_groups": [
+					"grains_tubers",
+					"eggs",
+					"vegetables"
+				],
+				"food_ids": [
+					"rice_plain",
+					"egg",
+					"tomato"
+				],
+				"food_names": [
+					"白米饭",
+					"鸡蛋",
+					"番茄"
+				],
+				"limit_tags": [],
+				"nutrient_tags": [
+					"carbohydrate_source",
+					"high_quality_protein_source",
+					"dietary_fiber_source"
+				],
+				"phase": "breakfast",
+				"preference_reactions": [
+					{
+						"character_name": "本局角色",
+						"comfort": false,
+						"food_id": "rice_plain",
+						"mood_delta": 0,
+						"profile_id": "campus_student",
+						"profile_version": 1,
+						"status": "known"
+					},
+					{
+						"character_name": "本局角色",
+						"comfort": false,
+						"food_id": "egg",
+						"mood_delta": 0,
+						"profile_id": "campus_student",
+						"profile_version": 1,
+						"status": "known"
+					},
+					{
+						"character_name": "本局角色",
+						"comfort": false,
+						"food_id": "tomato",
+						"mood_delta": 3,
+						"profile_id": "campus_student",
+						"profile_version": 1,
+						"status": "known"
+					}
+				],
+				"quality": 86,
+				"skipped": false,
+				"source_fee": 0,
+				"source_id": "cafeteria",
+				"source_name": "食堂",
+				"stat_delta": {
+					"diet_burden": -1,
+					"energy": 8,
+					"mood": 3,
+					"satiety": 30,
+					"stress": 0,
+					"study_progress": 0
+				},
+				"tags": [
+					"staple",
+					"cheap",
+					"plain",
+					"protein",
+					"vegetable",
+					"fiber"
+				],
+				"total_cost": 7,
+				"uses_stock": false
+			}
+		},
+		{
+			"after": {
+				"balance": 95,
+				"diet_burden": 55,
+				"energy": 81,
+				"mood": 86,
+				"satiety": 84,
+				"stability": 71,
+				"stress": 38,
+				"study_progress": 70,
+				"study_target": 70
+			},
+			"before": {
+				"balance": 113,
+				"diet_burden": 47,
+				"energy": 73,
+				"mood": 66,
+				"satiety": 80,
+				"stability": 73,
+				"stress": 40,
+				"study_progress": 70,
+				"study_target": 70
+			},
+			"combos_after": [
+				"meal_group_mix"
+			],
+			"observed_delta": {
+				"balance": -18,
+				"diet_burden": 8,
+				"energy": 8,
+				"mood": 20,
+				"satiety": 4,
+				"stability": -2,
+				"stress": -2,
+				"study_progress": 0,
+				"study_target": 0
+			},
+			"record": {
+				"comfort": true,
+				"food_cost": 15,
+				"food_groups": [
+					"beverages"
+				],
+				"food_ids": [
+					"bubble_tea"
+				],
+				"food_names": [
+					"奶茶"
+				],
+				"limit_tags": [
+					"added_sugar"
+				],
+				"nutrient_tags": [],
+				"phase": "lunch",
+				"preference_reactions": [
+					{
+						"character_name": "本局角色",
+						"comfort": true,
+						"food_id": "bubble_tea",
+						"mood_delta": 18,
+						"profile_id": "campus_student",
+						"profile_version": 1,
+						"status": "known"
+					}
+				],
+				"quality": 20,
+				"skipped": false,
+				"source_fee": 3,
+				"source_id": "takeout",
+				"source_name": "外卖",
+				"stat_delta": {
+					"diet_burden": 8,
+					"energy": 8,
+					"mood": 20,
+					"satiety": 4,
+					"stress": -2,
+					"study_progress": 0
+				},
+				"tags": [
+					"drink",
+					"snack",
+					"high_sugar"
+				],
+				"total_cost": 18,
+				"uses_stock": false
+			}
+		},
+		{
+			"after": {
+				"balance": 95,
+				"diet_burden": 69,
+				"energy": 86,
+				"mood": 98,
+				"satiety": 100,
+				"stability": 72,
+				"stress": 38,
+				"study_progress": 70,
+				"study_target": 70
+			},
+			"before": {
+				"balance": 95,
+				"diet_burden": 55,
+				"energy": 81,
+				"mood": 86,
+				"satiety": 84,
+				"stability": 71,
+				"stress": 38,
+				"study_progress": 70,
+				"study_target": 70
+			},
+			"combos_after": [
+				"meal_group_mix",
+				"comfort_chain"
+			],
+			"observed_delta": {
+				"balance": 0,
+				"diet_burden": 14,
+				"energy": 5,
+				"mood": 12,
+				"satiety": 16,
+				"stability": 1,
+				"stress": 0,
+				"study_progress": 0,
+				"study_target": 0
+			},
+			"record": {
+				"comfort": true,
+				"food_cost": 0,
+				"food_groups": [
+					"grains_tubers"
+				],
+				"food_ids": [
+					"instant_noodles"
+				],
+				"food_names": [
+					"方便面"
+				],
+				"limit_tags": [
+					"high_sodium"
+				],
+				"nutrient_tags": [
+					"carbohydrate_source"
+				],
+				"phase": "dinner",
+				"preference_reactions": [
+					{
+						"character_name": "本局角色",
+						"comfort": true,
+						"food_id": "instant_noodles",
+						"mood_delta": 8,
+						"profile_id": "campus_student",
+						"profile_version": 1,
+						"status": "known"
+					}
+				],
+				"quality": 26,
+				"skipped": false,
+				"source_fee": 0,
+				"source_id": "dorm_storage",
+				"source_name": "宿舍存粮",
+				"stat_delta": {
+					"diet_burden": 11,
+					"energy": 5,
+					"mood": 8,
+					"satiety": 20,
+					"stress": 0,
+					"study_progress": 0
+				},
+				"tags": [
+					"instant",
+					"cheap",
+					"high_sodium",
+					"high_fat"
+				],
+				"total_cost": 0,
+				"uses_stock": true
+			}
+		}
+	],
+	"day_end_boundaries": [
+		{
+			"after": {
+				"balance": 120,
+				"diet_burden": 51,
+				"energy": 60,
+				"mood": 62,
+				"satiety": 86,
+				"stability": 60,
+				"stress": 45,
+				"study_progress": 70,
+				"study_target": 70
+			},
+			"before": {
+				"balance": 120,
+				"diet_burden": 50,
+				"energy": 60,
+				"mood": 60,
+				"satiety": 92,
+				"stability": 65,
+				"stress": 40,
+				"study_progress": 70,
+				"study_target": 70
+			},
+			"observed_delta": {
+				"balance": 0,
+				"diet_burden": 1,
+				"energy": 0,
+				"mood": 2,
+				"satiety": -6,
+				"stability": -5,
+				"stress": 5,
+				"study_progress": 0,
+				"study_target": 0
+			},
+			"satiety_input": 92,
+			"synthetic_quality_input": 41
+		},
+		{
+			"after": {
+				"balance": 120,
+				"diet_burden": 55,
+				"energy": 57,
+				"mood": 62,
+				"satiety": 87,
+				"stability": 60,
+				"stress": 45,
+				"study_progress": 70,
+				"study_target": 70
+			},
+			"before": {
+				"balance": 120,
+				"diet_burden": 50,
+				"energy": 60,
+				"mood": 60,
+				"satiety": 93,
+				"stability": 65,
+				"stress": 40,
+				"study_progress": 70,
+				"study_target": 70
+			},
+			"observed_delta": {
+				"balance": 0,
+				"diet_burden": 5,
+				"energy": -3,
+				"mood": 2,
+				"satiety": -6,
+				"stability": -5,
+				"stress": 5,
+				"study_progress": 0,
+				"study_target": 0
+			},
+			"satiety_input": 93,
+			"synthetic_quality_input": 41
+		},
+		{
+			"after": {
+				"balance": 120,
+				"diet_burden": 47,
+				"energy": 60,
+				"mood": 62,
+				"satiety": 86,
+				"stability": 62,
+				"stress": 40,
+				"study_progress": 70,
+				"study_target": 70
+			},
+			"before": {
+				"balance": 120,
+				"diet_burden": 50,
+				"energy": 60,
+				"mood": 60,
+				"satiety": 92,
+				"stability": 65,
+				"stress": 40,
+				"study_progress": 70,
+				"study_target": 70
+			},
+			"observed_delta": {
+				"balance": 0,
+				"diet_burden": -3,
+				"energy": 0,
+				"mood": 2,
+				"satiety": -6,
+				"stability": -3,
+				"stress": 0,
+				"study_progress": 0,
+				"study_target": 0
+			},
+			"satiety_input": 92,
+			"synthetic_quality_input": 42
+		},
+		{
+			"after": {
+				"balance": 120,
+				"diet_burden": 51,
+				"energy": 57,
+				"mood": 62,
+				"satiety": 87,
+				"stability": 61,
+				"stress": 40,
+				"study_progress": 70,
+				"study_target": 70
+			},
+			"before": {
+				"balance": 120,
+				"diet_burden": 50,
+				"energy": 60,
+				"mood": 60,
+				"satiety": 93,
+				"stability": 65,
+				"stress": 40,
+				"study_progress": 70,
+				"study_target": 70
+			},
+			"observed_delta": {
+				"balance": 0,
+				"diet_burden": 1,
+				"energy": -3,
+				"mood": 2,
+				"satiety": -6,
+				"stability": -4,
+				"stress": 0,
+				"study_progress": 0,
+				"study_target": 0
+			},
+			"satiety_input": 93,
+			"synthetic_quality_input": 42
+		},
+		{
+			"after": {
+				"balance": 120,
+				"diet_burden": 47,
+				"energy": 60,
+				"mood": 62,
+				"satiety": 86,
+				"stability": 66,
+				"stress": 40,
+				"study_progress": 70,
+				"study_target": 70
+			},
+			"before": {
+				"balance": 120,
+				"diet_burden": 50,
+				"energy": 60,
+				"mood": 60,
+				"satiety": 92,
+				"stability": 65,
+				"stress": 40,
+				"study_progress": 70,
+				"study_target": 70
+			},
+			"observed_delta": {
+				"balance": 0,
+				"diet_burden": -3,
+				"energy": 0,
+				"mood": 2,
+				"satiety": -6,
+				"stability": 1,
+				"stress": 0,
+				"study_progress": 0,
+				"study_target": 0
+			},
+			"satiety_input": 92,
+			"synthetic_quality_input": 65
+		},
+		{
+			"after": {
+				"balance": 120,
+				"diet_burden": 51,
+				"energy": 57,
+				"mood": 62,
+				"satiety": 87,
+				"stability": 65,
+				"stress": 40,
+				"study_progress": 70,
+				"study_target": 70
+			},
+			"before": {
+				"balance": 120,
+				"diet_burden": 50,
+				"energy": 60,
+				"mood": 60,
+				"satiety": 93,
+				"stability": 65,
+				"stress": 40,
+				"study_progress": 70,
+				"study_target": 70
+			},
+			"observed_delta": {
+				"balance": 0,
+				"diet_burden": 1,
+				"energy": -3,
+				"mood": 2,
+				"satiety": -6,
+				"stability": 0,
+				"stress": 0,
+				"study_progress": 0,
+				"study_target": 0
+			},
+			"satiety_input": 93,
+			"synthetic_quality_input": 65
+		},
+		{
+			"after": {
+				"balance": 120,
+				"diet_burden": 45,
+				"energy": 64,
+				"mood": 66,
+				"satiety": 86,
+				"stability": 68,
+				"stress": 40,
+				"study_progress": 70,
+				"study_target": 70
+			},
+			"before": {
+				"balance": 120,
+				"diet_burden": 50,
+				"energy": 60,
+				"mood": 60,
+				"satiety": 92,
+				"stability": 65,
+				"stress": 40,
+				"study_progress": 70,
+				"study_target": 70
+			},
+			"observed_delta": {
+				"balance": 0,
+				"diet_burden": -5,
+				"energy": 4,
+				"mood": 6,
+				"satiety": -6,
+				"stability": 3,
+				"stress": 0,
+				"study_progress": 0,
+				"study_target": 0
+			},
+			"satiety_input": 92,
+			"synthetic_quality_input": 66
+		},
+		{
+			"after": {
+				"balance": 120,
+				"diet_burden": 49,
+				"energy": 61,
+				"mood": 66,
+				"satiety": 87,
+				"stability": 67,
+				"stress": 40,
+				"study_progress": 70,
+				"study_target": 70
+			},
+			"before": {
+				"balance": 120,
+				"diet_burden": 50,
+				"energy": 60,
+				"mood": 60,
+				"satiety": 93,
+				"stability": 65,
+				"stress": 40,
+				"study_progress": 70,
+				"study_target": 70
+			},
+			"observed_delta": {
+				"balance": 0,
+				"diet_burden": -1,
+				"energy": 1,
+				"mood": 6,
+				"satiety": -6,
+				"stability": 2,
+				"stress": 0,
+				"study_progress": 0,
+				"study_target": 0
+			},
+			"satiety_input": 93,
+			"synthetic_quality_input": 66
+		}
+	],
+	"early_collapse_flow": {
+		"days": [
+			{
+				"actions": [],
+				"combos": [],
+				"day": 1,
+				"end_state": {
+					"balance": 120,
+					"diet_burden": 27,
+					"energy": 15,
+					"mood": 35,
+					"satiety": 0,
+					"stability": 0,
+					"stress": 94,
+					"study_progress": 16,
+					"study_target": 70
+				},
+				"event": {},
+				"learning_state": {
+					"id": "steady",
+					"opening_delta": {},
+					"study_modifier": 0,
+					"summary": "按游戏规则，昨日记录没有触发额外的复习加成或减益。",
+					"title": "状态照常"
+				},
+				"meals": [
+					{
+						"comfort": false,
+						"food_cost": 0,
+						"food_groups": [],
+						"food_ids": [],
+						"food_names": [],
+						"limit_tags": [],
+						"nutrient_tags": [],
+						"phase": "breakfast",
+						"preference_reactions": [],
+						"quality": 25,
+						"skipped": true,
+						"source_fee": 0,
+						"source_id": "",
+						"source_name": "",
+						"stat_delta": {
+							"diet_burden": 0,
+							"energy": -5,
+							"mood": -4,
+							"satiety": -16,
+							"stress": 7,
+							"study_progress": 0
+						},
+						"tags": [],
+						"total_cost": 0,
+						"uses_stock": false
+					},
+					{
+						"comfort": false,
+						"food_cost": 0,
+						"food_groups": [],
+						"food_ids": [],
+						"food_names": [],
+						"limit_tags": [],
+						"nutrient_tags": [],
+						"phase": "lunch",
+						"preference_reactions": [],
+						"quality": 25,
+						"skipped": true,
+						"source_fee": 0,
+						"source_id": "",
+						"source_name": "",
+						"stat_delta": {
+							"diet_burden": 0,
+							"energy": -5,
+							"mood": -4,
+							"satiety": -16,
+							"stress": 7,
+							"study_progress": 0
+						},
+						"tags": [],
+						"total_cost": 0,
+						"uses_stock": false
+					},
+					{
+						"comfort": false,
+						"food_cost": 0,
+						"food_groups": [],
+						"food_ids": [],
+						"food_names": [],
+						"limit_tags": [],
+						"nutrient_tags": [],
+						"phase": "dinner",
+						"preference_reactions": [],
+						"quality": 25,
+						"skipped": true,
+						"source_fee": 0,
+						"source_id": "",
+						"source_name": "",
+						"stat_delta": {
+							"diet_burden": 0,
+							"energy": -5,
+							"mood": -4,
+							"satiety": -16,
+							"stress": 7,
+							"study_progress": 0
+						},
+						"tags": [],
+						"total_cost": 0,
+						"uses_stock": false
+					}
+				],
+				"next_learning_state": {
+					"id": "brain_fog",
+					"opening_delta": {
+						"energy": -3,
+						"mood": -2,
+						"stress": 3
+					},
+					"study_modifier": -4,
+					"summary": "按游戏规则，昨日多项状态同时触发了较大复习减益；这不是医学判断。",
+					"title": "需要先缓一缓"
+				},
+				"nutrition": {
+					"action": "明天要是排得开，先给吃饭留个空档；不用靠下一顿把没吃的‘补回来’。",
+					"basis": "规则小字：本局饮食信息参考《中国居民膳食指南（2022）》中的食物多样、合理搭配和规律进餐原则，只整理本局卡牌。卡牌出现不代表现实摄入量足够，也不用于现实健康判断。",
+					"detail_text": "三餐情况　吃了 0/3 餐\n今天遇到　0 种食物卡\n\n餐盘线索\n主食 0 顿｜蔬菜 0 顿｜水果 没碰见\n蛋/肉/鱼 没碰见｜奶类 没碰见｜大豆制品 没碰见｜坚果 没碰见\n\n卡牌资料线索\n主食来源 0 顿｜膳食纤维来源 0 顿\n蛋白质来源 0 顿｜钙来源 没碰见\n全谷物 没碰见｜不饱和脂肪酸来源 没碰见\n需留意的卡牌线索：卡牌上没写到添加糖、高钠或油炸；这不等于一定没有",
+					"metrics": {
+						"added_sugar_meals": 0,
+						"animal_food_meals": 0,
+						"calcium_source_meals": 0,
+						"carbohydrate_source_meals": 0,
+						"dairy_meals": 0,
+						"eaten_meals": 0,
+						"expected_meals": 3,
+						"fiber_source_meals": 0,
+						"fried_meals": 0,
+						"fruit_meals": 0,
+						"grain_meals": 0,
+						"high_quality_protein_meals": 0,
+						"high_sodium_meals": 0,
+						"nuts_meals": 0,
+						"skipped_meals": 3,
+						"soy_meals": 0,
+						"unique_foods": 0,
+						"unsaturated_fat_source_meals": 0,
+						"vegetable_meals": 0,
+						"whole_grain_meals": 0
+					},
+					"observation": "今天有3 餐没吃。先把这件事记下来。",
+					"rating": "旧版结算记录（不作健康评价）",
+					"score": 25
+				},
+				"sleep": {
+					"id": "night_study",
+					"name": "再看一会儿"
+				},
+				"spend": 0,
+				"start_state": {
+					"balance": 120,
+					"diet_burden": 24,
+					"energy": 52,
+					"mood": 55,
+					"satiety": 58,
+					"stability": 65,
+					"stress": 48,
+					"study_progress": 0,
+					"study_target": 70
+				}
+			},
+			{
+				"actions": [],
+				"combos": [],
+				"day": 2,
+				"end_state": {
+					"balance": 120,
+					"diet_burden": 30,
+					"energy": 0,
+					"mood": 16,
+					"satiety": 0,
+					"stability": 0,
+					"stress": 100,
+					"study_progress": 32,
+					"study_target": 70
+				},
+				"event": {
+					"action_deltas": {
+						"walk": {
+							"mood": 2,
+							"stress": -2
+						}
+					},
+					"day": 2,
+					"id": "clear_skies",
+					"opening_delta": {
+						"mood": 3,
+						"stress": -2
+					},
+					"preview": "明天天气放晴，散步会比平时更解压。",
+					"source_deltas": {},
+					"summary": "风不大，校园里适合走一走。",
+					"title": "天气放晴",
+					"tone": "good"
+				},
+				"learning_state": {
+					"id": "brain_fog",
+					"opening_delta": {
+						"energy": -3,
+						"mood": -2,
+						"stress": 3
+					},
+					"study_modifier": -4,
+					"summary": "按游戏规则，昨日多项状态同时触发了较大复习减益；这不是医学判断。",
+					"title": "需要先缓一缓"
+				},
+				"meals": [
+					{
+						"comfort": false,
+						"food_cost": 0,
+						"food_groups": [],
+						"food_ids": [],
+						"food_names": [],
+						"limit_tags": [],
+						"nutrient_tags": [],
+						"phase": "breakfast",
+						"preference_reactions": [],
+						"quality": 25,
+						"skipped": true,
+						"source_fee": 0,
+						"source_id": "",
+						"source_name": "",
+						"stat_delta": {
+							"diet_burden": 0,
+							"energy": -5,
+							"mood": -4,
+							"satiety": -16,
+							"stress": 7,
+							"study_progress": 0
+						},
+						"tags": [],
+						"total_cost": 0,
+						"uses_stock": false
+					},
+					{
+						"comfort": false,
+						"food_cost": 0,
+						"food_groups": [],
+						"food_ids": [],
+						"food_names": [],
+						"limit_tags": [],
+						"nutrient_tags": [],
+						"phase": "lunch",
+						"preference_reactions": [],
+						"quality": 25,
+						"skipped": true,
+						"source_fee": 0,
+						"source_id": "",
+						"source_name": "",
+						"stat_delta": {
+							"diet_burden": 0,
+							"energy": -5,
+							"mood": -4,
+							"satiety": -16,
+							"stress": 7,
+							"study_progress": 0
+						},
+						"tags": [],
+						"total_cost": 0,
+						"uses_stock": false
+					},
+					{
+						"comfort": false,
+						"food_cost": 0,
+						"food_groups": [],
+						"food_ids": [],
+						"food_names": [],
+						"limit_tags": [],
+						"nutrient_tags": [],
+						"phase": "dinner",
+						"preference_reactions": [],
+						"quality": 25,
+						"skipped": true,
+						"source_fee": 0,
+						"source_id": "",
+						"source_name": "",
+						"stat_delta": {
+							"diet_burden": 0,
+							"energy": -5,
+							"mood": -4,
+							"satiety": -16,
+							"stress": 7,
+							"study_progress": 0
+						},
+						"tags": [],
+						"total_cost": 0,
+						"uses_stock": false
+					}
+				],
+				"next_learning_state": {
+					"id": "brain_fog",
+					"opening_delta": {
+						"energy": -3,
+						"mood": -2,
+						"stress": 3
+					},
+					"study_modifier": -4,
+					"summary": "按游戏规则，昨日多项状态同时触发了较大复习减益；这不是医学判断。",
+					"title": "需要先缓一缓"
+				},
+				"nutrition": {
+					"action": "明天要是排得开，先给吃饭留个空档；不用靠下一顿把没吃的‘补回来’。",
+					"basis": "规则小字：本局饮食信息参考《中国居民膳食指南（2022）》中的食物多样、合理搭配和规律进餐原则，只整理本局卡牌。卡牌出现不代表现实摄入量足够，也不用于现实健康判断。",
+					"detail_text": "三餐情况　吃了 0/3 餐\n今天遇到　0 种食物卡\n\n餐盘线索\n主食 0 顿｜蔬菜 0 顿｜水果 没碰见\n蛋/肉/鱼 没碰见｜奶类 没碰见｜大豆制品 没碰见｜坚果 没碰见\n\n卡牌资料线索\n主食来源 0 顿｜膳食纤维来源 0 顿\n蛋白质来源 0 顿｜钙来源 没碰见\n全谷物 没碰见｜不饱和脂肪酸来源 没碰见\n需留意的卡牌线索：卡牌上没写到添加糖、高钠或油炸；这不等于一定没有",
+					"metrics": {
+						"added_sugar_meals": 0,
+						"animal_food_meals": 0,
+						"calcium_source_meals": 0,
+						"carbohydrate_source_meals": 0,
+						"dairy_meals": 0,
+						"eaten_meals": 0,
+						"expected_meals": 3,
+						"fiber_source_meals": 0,
+						"fried_meals": 0,
+						"fruit_meals": 0,
+						"grain_meals": 0,
+						"high_quality_protein_meals": 0,
+						"high_sodium_meals": 0,
+						"nuts_meals": 0,
+						"skipped_meals": 3,
+						"soy_meals": 0,
+						"unique_foods": 0,
+						"unsaturated_fat_source_meals": 0,
+						"vegetable_meals": 0,
+						"whole_grain_meals": 0
+					},
+					"observation": "今天有3 餐没吃。先把这件事记下来。",
+					"rating": "旧版结算记录（不作健康评价）",
+					"score": 25
+				},
+				"sleep": {
+					"id": "night_study",
+					"name": "再看一会儿"
+				},
+				"spend": 0,
+				"start_state": {
+					"balance": 120,
+					"diet_burden": 27,
+					"energy": 15,
+					"mood": 35,
+					"satiety": 0,
+					"stability": 0,
+					"stress": 94,
+					"study_progress": 16,
+					"study_target": 70
+				}
+			}
+		],
+		"ending_id": "collapsed",
+		"final_state": {
+			"balance": 120,
+			"diet_burden": 30,
+			"energy": 0,
+			"mood": 16,
+			"satiety": 0,
+			"stability": 0,
+			"stress": 100,
+			"study_progress": 32,
+			"study_target": 70
+		},
+		"low_stability_days": 2,
+		"route": "Skip every meal and action; night_study at sleep.",
+		"transitions": [
+			{
+				"from": {
+					"day": 1,
+					"phase": "breakfast_source"
+				},
+				"to": {
+					"day": 1,
+					"phase": "breakfast_action"
+				}
+			},
+			{
+				"from": {
+					"day": 1,
+					"phase": "breakfast_action"
+				},
+				"to": {
+					"day": 1,
+					"phase": "lunch_source"
+				}
+			},
+			{
+				"from": {
+					"day": 1,
+					"phase": "lunch_source"
+				},
+				"to": {
+					"day": 1,
+					"phase": "lunch_action"
+				}
+			},
+			{
+				"from": {
+					"day": 1,
+					"phase": "lunch_action"
+				},
+				"to": {
+					"day": 1,
+					"phase": "dinner_source"
+				}
+			},
+			{
+				"from": {
+					"day": 1,
+					"phase": "dinner_source"
+				},
+				"to": {
+					"day": 1,
+					"phase": "dinner_action"
+				}
+			},
+			{
+				"from": {
+					"day": 1,
+					"phase": "dinner_action"
+				},
+				"to": {
+					"day": 1,
+					"phase": "sleep"
+				}
+			},
+			{
+				"from": {
+					"day": 1,
+					"phase": "sleep"
+				},
+				"to": {
+					"day": 1,
+					"phase": "summary"
+				}
+			},
+			{
+				"from": {
+					"day": 1,
+					"phase": "summary"
+				},
+				"to": {
+					"day": 2,
+					"phase": "breakfast_source"
+				}
+			},
+			{
+				"from": {
+					"day": 2,
+					"phase": "breakfast_source"
+				},
+				"to": {
+					"day": 2,
+					"phase": "breakfast_action"
+				}
+			},
+			{
+				"from": {
+					"day": 2,
+					"phase": "breakfast_action"
+				},
+				"to": {
+					"day": 2,
+					"phase": "lunch_source"
+				}
+			},
+			{
+				"from": {
+					"day": 2,
+					"phase": "lunch_source"
+				},
+				"to": {
+					"day": 2,
+					"phase": "lunch_action"
+				}
+			},
+			{
+				"from": {
+					"day": 2,
+					"phase": "lunch_action"
+				},
+				"to": {
+					"day": 2,
+					"phase": "dinner_source"
+				}
+			},
+			{
+				"from": {
+					"day": 2,
+					"phase": "dinner_source"
+				},
+				"to": {
+					"day": 2,
+					"phase": "dinner_action"
+				}
+			},
+			{
+				"from": {
+					"day": 2,
+					"phase": "dinner_action"
+				},
+				"to": {
+					"day": 2,
+					"phase": "sleep"
+				}
+			},
+			{
+				"from": {
+					"day": 2,
+					"phase": "sleep"
+				},
+				"to": {
+					"day": 2,
+					"phase": "ending"
+				}
+			}
+		]
+	},
+	"ending_boundaries": [
+		{
+			"burden": 60,
+			"ending_id": "collapsed",
+			"stability": 15,
+			"study_progress": 49
+		},
+		{
+			"burden": 61,
+			"ending_id": "collapsed",
+			"stability": 15,
+			"study_progress": 49
+		},
+		{
+			"burden": 60,
+			"ending_id": "collapsed",
+			"stability": 15,
+			"study_progress": 50
+		},
+		{
+			"burden": 61,
+			"ending_id": "collapsed",
+			"stability": 15,
+			"study_progress": 50
+		},
+		{
+			"burden": 60,
+			"ending_id": "collapsed",
+			"stability": 15,
+			"study_progress": 69
+		},
+		{
+			"burden": 61,
+			"ending_id": "collapsed",
+			"stability": 15,
+			"study_progress": 69
+		},
+		{
+			"burden": 60,
+			"ending_id": "collapsed",
+			"stability": 15,
+			"study_progress": 70
+		},
+		{
+			"burden": 61,
+			"ending_id": "collapsed",
+			"stability": 15,
+			"study_progress": 70
+		},
+		{
+			"burden": 60,
+			"ending_id": "study_shortfall",
+			"stability": 16,
+			"study_progress": 49
+		},
+		{
+			"burden": 61,
+			"ending_id": "study_shortfall",
+			"stability": 16,
+			"study_progress": 49
+		},
+		{
+			"burden": 60,
+			"ending_id": "collapsed",
+			"stability": 16,
+			"study_progress": 50
+		},
+		{
+			"burden": 61,
+			"ending_id": "collapsed",
+			"stability": 16,
+			"study_progress": 50
+		},
+		{
+			"burden": 60,
+			"ending_id": "collapsed",
+			"stability": 16,
+			"study_progress": 69
+		},
+		{
+			"burden": 61,
+			"ending_id": "collapsed",
+			"stability": 16,
+			"study_progress": 69
+		},
+		{
+			"burden": 60,
+			"ending_id": "collapsed",
+			"stability": 16,
+			"study_progress": 70
+		},
+		{
+			"burden": 61,
+			"ending_id": "collapsed",
+			"stability": 16,
+			"study_progress": 70
+		},
+		{
+			"burden": 60,
+			"ending_id": "study_shortfall",
+			"stability": 24,
+			"study_progress": 49
+		},
+		{
+			"burden": 61,
+			"ending_id": "study_shortfall",
+			"stability": 24,
+			"study_progress": 49
+		},
+		{
+			"burden": 60,
+			"ending_id": "collapsed",
+			"stability": 24,
+			"study_progress": 50
+		},
+		{
+			"burden": 61,
+			"ending_id": "collapsed",
+			"stability": 24,
+			"study_progress": 50
+		},
+		{
+			"burden": 60,
+			"ending_id": "collapsed",
+			"stability": 24,
+			"study_progress": 69
+		},
+		{
+			"burden": 61,
+			"ending_id": "collapsed",
+			"stability": 24,
+			"study_progress": 69
+		},
+		{
+			"burden": 60,
+			"ending_id": "collapsed",
+			"stability": 24,
+			"study_progress": 70
+		},
+		{
+			"burden": 61,
+			"ending_id": "collapsed",
+			"stability": 24,
+			"study_progress": 70
+		},
+		{
+			"burden": 60,
+			"ending_id": "study_shortfall",
+			"stability": 25,
+			"study_progress": 49
+		},
+		{
+			"burden": 61,
+			"ending_id": "study_shortfall",
+			"stability": 25,
+			"study_progress": 49
+		},
+		{
+			"burden": 60,
+			"ending_id": "barely_survived",
+			"stability": 25,
+			"study_progress": 50
+		},
+		{
+			"burden": 61,
+			"ending_id": "barely_survived",
+			"stability": 25,
+			"study_progress": 50
+		},
+		{
+			"burden": 60,
+			"ending_id": "barely_survived",
+			"stability": 25,
+			"study_progress": 69
+		},
+		{
+			"burden": 61,
+			"ending_id": "barely_survived",
+			"stability": 25,
+			"study_progress": 69
+		},
+		{
+			"burden": 60,
+			"ending_id": "barely_survived",
+			"stability": 25,
+			"study_progress": 70
+		},
+		{
+			"burden": 61,
+			"ending_id": "barely_survived",
+			"stability": 25,
+			"study_progress": 70
+		},
+		{
+			"burden": 60,
+			"ending_id": "study_shortfall",
+			"stability": 59,
+			"study_progress": 49
+		},
+		{
+			"burden": 61,
+			"ending_id": "study_shortfall",
+			"stability": 59,
+			"study_progress": 49
+		},
+		{
+			"burden": 60,
+			"ending_id": "barely_survived",
+			"stability": 59,
+			"study_progress": 50
+		},
+		{
+			"burden": 61,
+			"ending_id": "barely_survived",
+			"stability": 59,
+			"study_progress": 50
+		},
+		{
+			"burden": 60,
+			"ending_id": "barely_survived",
+			"stability": 59,
+			"study_progress": 69
+		},
+		{
+			"burden": 61,
+			"ending_id": "barely_survived",
+			"stability": 59,
+			"study_progress": 69
+		},
+		{
+			"burden": 60,
+			"ending_id": "barely_survived",
+			"stability": 59,
+			"study_progress": 70
+		},
+		{
+			"burden": 61,
+			"ending_id": "barely_survived",
+			"stability": 59,
+			"study_progress": 70
+		},
+		{
+			"burden": 60,
+			"ending_id": "study_shortfall",
+			"stability": 60,
+			"study_progress": 49
+		},
+		{
+			"burden": 61,
+			"ending_id": "study_shortfall",
+			"stability": 60,
+			"study_progress": 49
+		},
+		{
+			"burden": 60,
+			"ending_id": "barely_survived",
+			"stability": 60,
+			"study_progress": 50
+		},
+		{
+			"burden": 61,
+			"ending_id": "barely_survived",
+			"stability": 60,
+			"study_progress": 50
+		},
+		{
+			"burden": 60,
+			"ending_id": "barely_survived",
+			"stability": 60,
+			"study_progress": 69
+		},
+		{
+			"burden": 61,
+			"ending_id": "barely_survived",
+			"stability": 60,
+			"study_progress": 69
+		},
+		{
+			"burden": 60,
+			"ending_id": "stable_endurance",
+			"stability": 60,
+			"study_progress": 70
+		},
+		{
+			"burden": 61,
+			"ending_id": "barely_survived",
+			"stability": 60,
+			"study_progress": 70
+		}
+	],
+	"engine": "4.7.2-stable (official)",
+	"isolation": {
+		"controller_added_to_tree": false,
+		"health_flags": "all_off",
+		"health_history_path": ""
+	},
+	"legacy_evidence_only": true,
+	"mixed_day": {
+		"combos": [
+			"comfort_chain",
+			"meal_group_mix"
+		],
+		"controlled_fixture": true,
+		"day_end_change": {
+			"after": {
+				"balance": 69,
+				"diet_burden": 65,
+				"energy": 100,
+				"mood": 100,
+				"satiety": 82,
+				"stability": 75,
+				"stress": 21,
+				"study_progress": 70,
+				"study_target": 70
+			},
+			"before": {
+				"balance": 69,
+				"diet_burden": 68,
+				"energy": 115,
+				"mood": 103,
+				"satiety": 88,
+				"stability": 73,
+				"stress": 21,
+				"study_progress": 70,
+				"study_target": 70
+			},
+			"observed_delta": {
+				"balance": 0,
+				"diet_burden": -3,
+				"energy": -15,
+				"mood": -3,
+				"satiety": -6,
+				"stability": 2,
+				"stress": 0,
+				"study_progress": 0,
+				"study_target": 0
+			}
+		},
+		"meal_records_after_actions_and_sleep": [
+			{
+				"comfort": true,
+				"food_cost": 0,
+				"food_groups": [
+					"grains_tubers"
+				],
+				"food_ids": [
+					"instant_noodles"
+				],
+				"food_names": [
+					"方便面"
+				],
+				"limit_tags": [
+					"high_sodium"
+				],
+				"nutrient_tags": [
+					"carbohydrate_source"
+				],
+				"phase": "breakfast",
+				"preference_reactions": [
+					{
+						"character_name": "本局角色",
+						"comfort": true,
+						"food_id": "instant_noodles",
+						"mood_delta": 8,
+						"profile_id": "campus_student",
+						"profile_version": 1,
+						"status": "known"
+					}
+				],
+				"quality": 26,
+				"skipped": false,
+				"source_fee": 0,
+				"source_id": "dorm_storage",
+				"source_name": "宿舍存粮",
+				"stat_delta": {
+					"diet_burden": 11,
+					"energy": 5,
+					"mood": 8,
+					"satiety": 20,
+					"stress": 0,
+					"study_progress": 0
+				},
+				"tags": [
+					"instant",
+					"cheap",
+					"high_sodium",
+					"high_fat"
+				],
+				"total_cost": 0,
+				"uses_stock": true
+			},
+			{
+				"comfort": true,
+				"food_cost": 40,
+				"food_groups": [
+					"poultry_livestock",
+					"beverages"
+				],
+				"food_ids": [
+					"fried_chicken",
+					"bubble_tea"
+				],
+				"food_names": [
+					"炸鸡",
+					"奶茶"
+				],
+				"limit_tags": [
+					"fried",
+					"high_sodium",
+					"added_sugar"
+				],
+				"nutrient_tags": [
+					"high_quality_protein_source"
+				],
+				"phase": "lunch",
+				"preference_reactions": [
+					{
+						"character_name": "本局角色",
+						"comfort": true,
+						"food_id": "fried_chicken",
+						"mood_delta": 20,
+						"profile_id": "campus_student",
+						"profile_version": 1,
+						"status": "known"
+					},
+					{
+						"character_name": "本局角色",
+						"comfort": true,
+						"food_id": "bubble_tea",
+						"mood_delta": 18,
+						"profile_id": "campus_student",
+						"profile_version": 1,
+						"status": "known"
+					}
+				],
+				"quality": 20,
+				"skipped": false,
+				"source_fee": 3,
+				"source_id": "takeout",
+				"source_name": "外卖",
+				"stat_delta": {
+					"diet_burden": 20,
+					"energy": 13,
+					"mood": 40,
+					"satiety": 26,
+					"stress": -2,
+					"study_progress": 0
+				},
+				"tags": [
+					"fastfood",
+					"high_fat",
+					"high_sodium",
+					"tasty",
+					"drink",
+					"snack",
+					"high_sugar"
+				],
+				"total_cost": 43,
+				"uses_stock": false
+			},
+			{
+				"comfort": false,
+				"food_cost": 8,
+				"food_groups": [
+					"grains_tubers",
+					"soy_products",
+					"vegetables"
+				],
+				"food_ids": [
+					"rice_plain",
+					"tofu",
+					"greens"
+				],
+				"food_names": [
+					"白米饭",
+					"豆腐",
+					"青菜"
+				],
+				"limit_tags": [],
+				"nutrient_tags": [
+					"carbohydrate_source",
+					"high_quality_protein_source",
+					"dietary_fiber_source"
+				],
+				"phase": "dinner",
+				"preference_reactions": [
+					{
+						"character_name": "本局角色",
+						"comfort": false,
+						"food_id": "rice_plain",
+						"mood_delta": 0,
+						"profile_id": "campus_student",
+						"profile_version": 1,
+						"status": "known"
+					},
+					{
+						"character_name": "本局角色",
+						"comfort": false,
+						"food_id": "tofu",
+						"mood_delta": 0,
+						"profile_id": "campus_student",
+						"profile_version": 1,
+						"status": "known"
+					},
+					{
+						"character_name": "本局角色",
+						"comfort": false,
+						"food_id": "greens",
+						"mood_delta": -2,
+						"profile_id": "campus_student",
+						"profile_version": 1,
+						"status": "known"
+					}
+				],
+				"quality": 86,
+				"skipped": false,
+				"source_fee": 0,
+				"source_id": "cafeteria",
+				"source_name": "食堂",
+				"stat_delta": {
+					"diet_burden": -2,
+					"energy": 7,
+					"mood": -2,
+					"satiety": 32,
+					"stress": 0,
+					"study_progress": 0
+				},
+				"tags": [
+					"staple",
+					"cheap",
+					"plain",
+					"protein",
+					"soy",
+					"legume",
+					"vegetable",
+					"fiber"
+				],
+				"total_cost": 8,
+				"uses_stock": false
+			}
+		],
+		"next_day_state": {
+			"id": "steady",
+			"opening_delta": {},
+			"study_modifier": 0,
+			"summary": "按游戏规则，昨日记录没有触发额外的复习加成或减益。",
+			"title": "状态照常"
+		},
+		"nutrition_after_actions_and_sleep": {
+			"action": "下一顿要是窗口里正好有蔬菜，可以顺手换个搭配；水果还是单独算。",
+			"basis": "规则小字：本局饮食信息参考《中国居民膳食指南（2022）》中的食物多样、合理搭配和规律进餐原则，只整理本局卡牌。卡牌出现不代表现实摄入量足够，也不用于现实健康判断。",
+			"detail_text": "三餐情况　吃了 3/3 餐\n今天遇到　6 种食物卡\n\n餐盘线索\n主食 2 顿｜蔬菜 1 顿｜水果 没碰见\n蛋/肉/鱼 碰见过｜奶类 没碰见｜大豆制品 碰见过｜坚果 没碰见\n\n卡牌资料线索\n主食来源 2 顿｜膳食纤维来源 1 顿\n蛋白质来源 2 顿｜钙来源 没碰见\n全谷物 没碰见｜不饱和脂肪酸来源 没碰见\n需留意的卡牌线索：含添加糖选择 1 餐、高钠选择 2 餐、油炸食品 1 餐",
+			"metrics": {
+				"added_sugar_meals": 1,
+				"animal_food_meals": 1,
+				"calcium_source_meals": 0,
+				"carbohydrate_source_meals": 2,
+				"dairy_meals": 0,
+				"eaten_meals": 3,
+				"expected_meals": 3,
+				"fiber_source_meals": 1,
+				"fried_meals": 1,
+				"fruit_meals": 0,
+				"grain_meals": 2,
+				"high_quality_protein_meals": 2,
+				"high_sodium_meals": 2,
+				"nuts_meals": 0,
+				"skipped_meals": 0,
+				"soy_meals": 1,
+				"unique_foods": 6,
+				"unsaturated_fat_source_meals": 0,
+				"vegetable_meals": 1,
+				"whole_grain_meals": 0
+			},
+			"observation": "今天吃了 3 餐，其中 1 餐有蔬菜类食物出现。",
+			"rating": "旧版结算记录（不作健康评价）",
+			"score": 44
+		},
+		"sleep_change": {
+			"after": {
+				"balance": 69,
+				"diet_burden": 68,
+				"energy": 115,
+				"mood": 103,
+				"satiety": 88,
+				"stability": 73,
+				"stress": 21,
+				"study_progress": 70,
+				"study_target": 70
+			},
+			"before": {
+				"balance": 69,
+				"diet_burden": 72,
+				"energy": 89,
+				"mood": 100,
+				"satiety": 100,
+				"stability": 73,
+				"stress": 30,
+				"study_progress": 70,
+				"study_target": 70
+			},
+			"observed_delta": {
+				"balance": 0,
+				"diet_burden": -4,
+				"energy": 26,
+				"mood": 3,
+				"satiety": -12,
+				"stability": 0,
+				"stress": -9,
+				"study_progress": 0,
+				"study_target": 0
+			}
+		},
+		"steps": [
+			{
+				"action_change": {
+					"after": {
+						"balance": 120,
+						"diet_burden": 58,
+						"energy": 66,
+						"mood": 68,
+						"satiety": 73,
+						"stability": 58,
+						"stress": 39,
+						"study_progress": 70,
+						"study_target": 70
+					},
+					"before": {
+						"balance": 120,
+						"diet_burden": 61,
+						"energy": 65,
+						"mood": 68,
+						"satiety": 70,
+						"stability": 57,
+						"stress": 40,
+						"study_progress": 70,
+						"study_target": 70
+					},
+					"observed_delta": {
+						"balance": 0,
+						"diet_burden": -3,
+						"energy": 1,
+						"mood": 0,
+						"satiety": 3,
+						"stability": 1,
+						"stress": -1,
+						"study_progress": 0,
+						"study_target": 0
+					}
+				},
+				"action_id": "drink_water",
+				"meal": {
+					"comfort": true,
+					"food_cost": 0,
+					"food_groups": [
+						"grains_tubers"
+					],
+					"food_ids": [
+						"instant_noodles"
+					],
+					"food_names": [
+						"方便面"
+					],
+					"limit_tags": [
+						"high_sodium"
+					],
+					"nutrient_tags": [
+						"carbohydrate_source"
+					],
+					"phase": "breakfast",
+					"preference_reactions": [
+						{
+							"character_name": "本局角色",
+							"comfort": true,
+							"food_id": "instant_noodles",
+							"mood_delta": 8,
+							"profile_id": "campus_student",
+							"profile_version": 1,
+							"status": "known"
+						}
+					],
+					"quality": 26,
+					"skipped": false,
+					"source_fee": 0,
+					"source_id": "dorm_storage",
+					"source_name": "宿舍存粮",
+					"stat_delta": {
+						"diet_burden": 11,
+						"energy": 5,
+						"mood": 8,
+						"satiety": 20,
+						"stress": 0,
+						"study_progress": 0
+					},
+					"tags": [
+						"instant",
+						"cheap",
+						"high_sodium",
+						"high_fat"
+					],
+					"total_cost": 0,
+					"uses_stock": true
+				},
+				"meal_change": {
+					"after": {
+						"balance": 120,
+						"diet_burden": 61,
+						"energy": 65,
+						"mood": 68,
+						"satiety": 70,
+						"stability": 57,
+						"stress": 40,
+						"study_progress": 70,
+						"study_target": 70
+					},
+					"before": {
+						"balance": 120,
+						"diet_burden": 50,
+						"energy": 60,
+						"mood": 60,
+						"satiety": 50,
+						"stability": 65,
+						"stress": 40,
+						"study_progress": 70,
+						"study_target": 70
+					},
+					"observed_delta": {
+						"balance": 0,
+						"diet_burden": 11,
+						"energy": 5,
+						"mood": 8,
+						"satiety": 20,
+						"stability": -8,
+						"stress": 0,
+						"study_progress": 0,
+						"study_target": 0
+					}
+				}
+			},
+			{
+				"action_change": {
+					"after": {
+						"balance": 77,
+						"diet_burden": 79,
+						"energy": 76,
+						"mood": 100,
+						"satiety": 96,
+						"stability": 65,
+						"stress": 31,
+						"study_progress": 70,
+						"study_target": 70
+					},
+					"before": {
+						"balance": 77,
+						"diet_burden": 81,
+						"energy": 79,
+						"mood": 100,
+						"satiety": 99,
+						"stability": 65,
+						"stress": 37,
+						"study_progress": 70,
+						"study_target": 70
+					},
+					"observed_delta": {
+						"balance": 0,
+						"diet_burden": -2,
+						"energy": -3,
+						"mood": 0,
+						"satiety": -3,
+						"stability": 0,
+						"stress": -6,
+						"study_progress": 0,
+						"study_target": 0
+					}
+				},
+				"action_id": "walk",
+				"meal": {
+					"comfort": true,
+					"food_cost": 40,
+					"food_groups": [
+						"poultry_livestock",
+						"beverages"
+					],
+					"food_ids": [
+						"fried_chicken",
+						"bubble_tea"
+					],
+					"food_names": [
+						"炸鸡",
+						"奶茶"
+					],
+					"limit_tags": [
+						"fried",
+						"high_sodium",
+						"added_sugar"
+					],
+					"nutrient_tags": [
+						"high_quality_protein_source"
+					],
+					"phase": "lunch",
+					"preference_reactions": [
+						{
+							"character_name": "本局角色",
+							"comfort": true,
+							"food_id": "fried_chicken",
+							"mood_delta": 20,
+							"profile_id": "campus_student",
+							"profile_version": 1,
+							"status": "known"
+						},
+						{
+							"character_name": "本局角色",
+							"comfort": true,
+							"food_id": "bubble_tea",
+							"mood_delta": 18,
+							"profile_id": "campus_student",
+							"profile_version": 1,
+							"status": "known"
+						}
+					],
+					"quality": 20,
+					"skipped": false,
+					"source_fee": 3,
+					"source_id": "takeout",
+					"source_name": "外卖",
+					"stat_delta": {
+						"diet_burden": 20,
+						"energy": 13,
+						"mood": 40,
+						"satiety": 26,
+						"stress": -2,
+						"study_progress": 0
+					},
+					"tags": [
+						"fastfood",
+						"high_fat",
+						"high_sodium",
+						"tasty",
+						"drink",
+						"snack",
+						"high_sugar"
+					],
+					"total_cost": 43,
+					"uses_stock": false
+				},
+				"meal_change": {
+					"after": {
+						"balance": 77,
+						"diet_burden": 81,
+						"energy": 79,
+						"mood": 100,
+						"satiety": 99,
+						"stability": 65,
+						"stress": 37,
+						"study_progress": 70,
+						"study_target": 70
+					},
+					"before": {
+						"balance": 120,
+						"diet_burden": 58,
+						"energy": 66,
+						"mood": 68,
+						"satiety": 73,
+						"stability": 58,
+						"stress": 39,
+						"study_progress": 70,
+						"study_target": 70
+					},
+					"observed_delta": {
+						"balance": -43,
+						"diet_burden": 23,
+						"energy": 13,
+						"mood": 32,
+						"satiety": 26,
+						"stability": 7,
+						"stress": -2,
+						"study_progress": 0,
+						"study_target": 0
+					}
+				}
+			},
+			{
+				"action_change": {
+					"after": {
+						"balance": 69,
+						"diet_burden": 72,
+						"energy": 89,
+						"mood": 100,
+						"satiety": 100,
+						"stability": 73,
+						"stress": 30,
+						"study_progress": 70,
+						"study_target": 70
+					},
+					"before": {
+						"balance": 69,
+						"diet_burden": 75,
+						"energy": 88,
+						"mood": 100,
+						"satiety": 100,
+						"stability": 72,
+						"stress": 31,
+						"study_progress": 70,
+						"study_target": 70
+					},
+					"observed_delta": {
+						"balance": 0,
+						"diet_burden": -3,
+						"energy": 1,
+						"mood": 0,
+						"satiety": 0,
+						"stability": 1,
+						"stress": -1,
+						"study_progress": 0,
+						"study_target": 0
+					}
+				},
+				"action_id": "drink_water",
+				"meal": {
+					"comfort": false,
+					"food_cost": 8,
+					"food_groups": [
+						"grains_tubers",
+						"soy_products",
+						"vegetables"
+					],
+					"food_ids": [
+						"rice_plain",
+						"tofu",
+						"greens"
+					],
+					"food_names": [
+						"白米饭",
+						"豆腐",
+						"青菜"
+					],
+					"limit_tags": [],
+					"nutrient_tags": [
+						"carbohydrate_source",
+						"high_quality_protein_source",
+						"dietary_fiber_source"
+					],
+					"phase": "dinner",
+					"preference_reactions": [
+						{
+							"character_name": "本局角色",
+							"comfort": false,
+							"food_id": "rice_plain",
+							"mood_delta": 0,
+							"profile_id": "campus_student",
+							"profile_version": 1,
+							"status": "known"
+						},
+						{
+							"character_name": "本局角色",
+							"comfort": false,
+							"food_id": "tofu",
+							"mood_delta": 0,
+							"profile_id": "campus_student",
+							"profile_version": 1,
+							"status": "known"
+						},
+						{
+							"character_name": "本局角色",
+							"comfort": false,
+							"food_id": "greens",
+							"mood_delta": -2,
+							"profile_id": "campus_student",
+							"profile_version": 1,
+							"status": "known"
+						}
+					],
+					"quality": 86,
+					"skipped": false,
+					"source_fee": 0,
+					"source_id": "cafeteria",
+					"source_name": "食堂",
+					"stat_delta": {
+						"diet_burden": -2,
+						"energy": 7,
+						"mood": -2,
+						"satiety": 32,
+						"stress": 0,
+						"study_progress": 0
+					},
+					"tags": [
+						"staple",
+						"cheap",
+						"plain",
+						"protein",
+						"soy",
+						"legume",
+						"vegetable",
+						"fiber"
+					],
+					"total_cost": 8,
+					"uses_stock": false
+				},
+				"meal_change": {
+					"after": {
+						"balance": 69,
+						"diet_burden": 75,
+						"energy": 88,
+						"mood": 100,
+						"satiety": 100,
+						"stability": 72,
+						"stress": 31,
+						"study_progress": 70,
+						"study_target": 70
+					},
+					"before": {
+						"balance": 77,
+						"diet_burden": 79,
+						"energy": 76,
+						"mood": 100,
+						"satiety": 96,
+						"stability": 65,
+						"stress": 31,
+						"study_progress": 70,
+						"study_target": 70
+					},
+					"observed_delta": {
+						"balance": -8,
+						"diet_burden": -4,
+						"energy": 12,
+						"mood": 0,
+						"satiety": 4,
+						"stability": 7,
+						"stress": 0,
+						"study_progress": 0,
+						"study_target": 0
+					}
+				}
+			}
+		]
+	},
+	"not_replacement_rule_expectations": true,
+	"probe_errors": [],
+	"purpose": "Frozen observations for migration review; no clinical meaning or new-rule acceptance criteria.",
+	"representative_meals": [
+		{
+			"comfort": false,
+			"food_cost": 8,
+			"food_groups": [
+				"grains_tubers",
+				"soy_products",
+				"vegetables"
+			],
+			"food_ids": [
+				"rice_plain",
+				"tofu",
+				"greens"
+			],
+			"food_names": [
+				"白米饭",
+				"豆腐",
+				"青菜"
+			],
+			"limit_tags": [],
+			"nutrient_tags": [
+				"carbohydrate_source",
+				"high_quality_protein_source",
+				"dietary_fiber_source"
+			],
+			"phase": "lunch",
+			"preference_reactions": [
+				{
+					"character_name": "本局角色",
+					"comfort": false,
+					"food_id": "rice_plain",
+					"mood_delta": 0,
+					"profile_id": "campus_student",
+					"profile_version": 1,
+					"status": "known"
+				},
+				{
+					"character_name": "本局角色",
+					"comfort": false,
+					"food_id": "tofu",
+					"mood_delta": 0,
+					"profile_id": "campus_student",
+					"profile_version": 1,
+					"status": "known"
+				},
+				{
+					"character_name": "本局角色",
+					"comfort": false,
+					"food_id": "greens",
+					"mood_delta": -2,
+					"profile_id": "campus_student",
+					"profile_version": 1,
+					"status": "known"
+				}
+			],
+			"quality": 86,
+			"skipped": false,
+			"source_fee": 0,
+			"source_id": "cafeteria",
+			"source_name": "食堂",
+			"stat_delta": {
+				"diet_burden": -2,
+				"energy": 7,
+				"mood": -2,
+				"satiety": 32,
+				"stress": 0,
+				"study_progress": 0
+			},
+			"tags": [
+				"staple",
+				"cheap",
+				"plain",
+				"protein",
+				"soy",
+				"legume",
+				"vegetable",
+				"fiber"
+			],
+			"total_cost": 8,
+			"uses_stock": false
+		},
+		{
+			"comfort": true,
+			"food_cost": 40,
+			"food_groups": [
+				"poultry_livestock",
+				"beverages"
+			],
+			"food_ids": [
+				"fried_chicken",
+				"bubble_tea"
+			],
+			"food_names": [
+				"炸鸡",
+				"奶茶"
+			],
+			"limit_tags": [
+				"fried",
+				"high_sodium",
+				"added_sugar"
+			],
+			"nutrient_tags": [
+				"high_quality_protein_source"
+			],
+			"phase": "lunch",
+			"preference_reactions": [
+				{
+					"character_name": "本局角色",
+					"comfort": true,
+					"food_id": "fried_chicken",
+					"mood_delta": 20,
+					"profile_id": "campus_student",
+					"profile_version": 1,
+					"status": "known"
+				},
+				{
+					"character_name": "本局角色",
+					"comfort": true,
+					"food_id": "bubble_tea",
+					"mood_delta": 18,
+					"profile_id": "campus_student",
+					"profile_version": 1,
+					"status": "known"
+				}
+			],
+			"quality": 20,
+			"skipped": false,
+			"source_fee": 3,
+			"source_id": "takeout",
+			"source_name": "外卖",
+			"stat_delta": {
+				"diet_burden": 20,
+				"energy": 13,
+				"mood": 40,
+				"satiety": 26,
+				"stress": -2,
+				"study_progress": 0
+			},
+			"tags": [
+				"fastfood",
+				"high_fat",
+				"high_sodium",
+				"tasty",
+				"drink",
+				"snack",
+				"high_sugar"
+			],
+			"total_cost": 43,
+			"uses_stock": false
+		},
+		{
+			"comfort": false,
+			"food_cost": 7,
+			"food_groups": [
+				"dairy",
+				"fruits"
+			],
+			"food_ids": [
+				"milk",
+				"apple"
+			],
+			"food_names": [
+				"牛奶",
+				"苹果"
+			],
+			"limit_tags": [],
+			"nutrient_tags": [
+				"high_quality_protein_source",
+				"calcium_source",
+				"dietary_fiber_source"
+			],
+			"phase": "breakfast",
+			"preference_reactions": [
+				{
+					"character_name": "本局角色",
+					"comfort": false,
+					"food_id": "milk",
+					"mood_delta": 3,
+					"profile_id": "campus_student",
+					"profile_version": 1,
+					"status": "known"
+				},
+				{
+					"character_name": "本局角色",
+					"comfort": false,
+					"food_id": "apple",
+					"mood_delta": 5,
+					"profile_id": "campus_student",
+					"profile_version": 1,
+					"status": "known"
+				}
+			],
+			"quality": 61,
+			"skipped": false,
+			"source_fee": 0,
+			"source_id": "convenience_store",
+			"source_name": "便利店",
+			"stat_delta": {
+				"diet_burden": 0,
+				"energy": 7,
+				"mood": 8,
+				"satiety": 12,
+				"stress": 0,
+				"study_progress": 0
+			},
+			"tags": [
+				"protein",
+				"dairy",
+				"drink",
+				"fruit",
+				"fiber"
+			],
+			"total_cost": 7,
+			"uses_stock": false
+		},
+		{
+			"comfort": true,
+			"food_cost": 0,
+			"food_groups": [
+				"grains_tubers"
+			],
+			"food_ids": [
+				"instant_noodles"
+			],
+			"food_names": [
+				"方便面"
+			],
+			"limit_tags": [
+				"high_sodium"
+			],
+			"nutrient_tags": [
+				"carbohydrate_source"
+			],
+			"phase": "dinner",
+			"preference_reactions": [
+				{
+					"character_name": "本局角色",
+					"comfort": true,
+					"food_id": "instant_noodles",
+					"mood_delta": 8,
+					"profile_id": "campus_student",
+					"profile_version": 1,
+					"status": "known"
+				}
+			],
+			"quality": 26,
+			"skipped": false,
+			"source_fee": 0,
+			"source_id": "dorm_storage",
+			"source_name": "宿舍存粮",
+			"stat_delta": {
+				"diet_burden": 11,
+				"energy": 5,
+				"mood": 8,
+				"satiety": 20,
+				"stress": 0,
+				"study_progress": 0
+			},
+			"tags": [
+				"instant",
+				"cheap",
+				"high_sodium",
+				"high_fat"
+			],
+			"total_cost": 0,
+			"uses_stock": true
+		},
+		{
+			"comfort": false,
+			"food_cost": 0,
+			"food_groups": [],
+			"food_ids": [],
+			"food_names": [],
+			"limit_tags": [],
+			"nutrient_tags": [],
+			"phase": "lunch",
+			"preference_reactions": [],
+			"quality": 25,
+			"skipped": true,
+			"source_fee": 0,
+			"source_id": "",
+			"source_name": "",
+			"stat_delta": {
+				"diet_burden": 0,
+				"energy": -5,
+				"mood": -4,
+				"satiety": -16,
+				"stress": 7,
+				"study_progress": 0
+			},
+			"tags": [],
+			"total_cost": 0,
+			"uses_stock": false
+		}
+	],
+	"schema": "nut208a.legacy_recovery_evidence.v1",
+	"seed": 20260711,
+	"seven_day_flow": {
+		"days": [
+			{
+				"day": 1,
+				"day_end_change": {
+					"after": {
+						"balance": 104,
+						"diet_burden": 13,
+						"energy": 66,
+						"mood": 59,
+						"satiety": 78,
+						"stability": 62,
+						"stress": 48,
+						"study_progress": 30,
+						"study_target": 70
+					},
+					"before": {
+						"balance": 104,
+						"diet_burden": 16,
+						"energy": 66,
+						"mood": 57,
+						"satiety": 84,
+						"stability": 56,
+						"stress": 48,
+						"study_progress": 30,
+						"study_target": 70
+					},
+					"observed_delta": {
+						"balance": 0,
+						"diet_burden": -3,
+						"energy": 0,
+						"mood": 2,
+						"satiety": -6,
+						"stability": 6,
+						"stress": 0,
+						"study_progress": 0,
+						"study_target": 0
+					}
+				},
+				"day_record": {
+					"actions": [
+						{
+							"cost": 0,
+							"id": "study",
+							"name": "晨读",
+							"stat_delta": {
+								"diet_burden": 0,
+								"energy": -8,
+								"mood": -2,
+								"satiety": -4,
+								"stress": 3,
+								"study_progress": 10
+							},
+							"stock_added": {}
+						},
+						{
+							"cost": 0,
+							"id": "study",
+							"name": "复习",
+							"stat_delta": {
+								"diet_burden": 0,
+								"energy": -8,
+								"mood": -2,
+								"satiety": -4,
+								"stress": 3,
+								"study_progress": 10
+							},
+							"stock_added": {}
+						},
+						{
+							"cost": 0,
+							"id": "study",
+							"name": "夜读",
+							"stat_delta": {
+								"diet_burden": 0,
+								"energy": -8,
+								"mood": -2,
+								"satiety": -4,
+								"stress": 3,
+								"study_progress": 10
+							},
+							"stock_added": {}
+						}
+					],
+					"combos": [],
+					"day": 1,
+					"end_state": {
+						"balance": 104,
+						"diet_burden": 13,
+						"energy": 66,
+						"mood": 59,
+						"satiety": 78,
+						"stability": 62,
+						"stress": 48,
+						"study_progress": 30,
+						"study_target": 70
+					},
+					"event": {},
+					"learning_state": {
+						"id": "steady",
+						"opening_delta": {},
+						"study_modifier": 0,
+						"summary": "按游戏规则，昨日记录没有触发额外的复习加成或减益。",
+						"title": "状态照常"
+					},
+					"meals": [
+						{
+							"comfort": false,
+							"food_cost": 4,
+							"food_groups": [
+								"grains_tubers",
+								"eggs"
+							],
+							"food_ids": [
+								"rice_plain",
+								"egg"
+							],
+							"food_names": [
+								"白米饭",
+								"鸡蛋"
+							],
+							"limit_tags": [],
+							"nutrient_tags": [
+								"carbohydrate_source",
+								"high_quality_protein_source"
+							],
+							"phase": "breakfast",
+							"preference_reactions": [
+								{
+									"character_name": "本局角色",
+									"comfort": false,
+									"food_id": "rice_plain",
+									"mood_delta": 0,
+									"profile_id": "campus_student",
+									"profile_version": 1,
+									"status": "known"
+								},
+								{
+									"character_name": "本局角色",
+									"comfort": false,
+									"food_id": "egg",
+									"mood_delta": 0,
+									"profile_id": "campus_student",
+									"profile_version": 1,
+									"status": "known"
+								}
+							],
+							"quality": 56,
+							"skipped": false,
+							"source_fee": 0,
+							"source_id": "cafeteria",
+							"source_name": "食堂",
+							"stat_delta": {
+								"diet_burden": 0,
+								"energy": 6,
+								"mood": 0,
+								"satiety": 26,
+								"stress": 0,
+								"study_progress": 0
+							},
+							"tags": [
+								"staple",
+								"cheap",
+								"plain",
+								"protein"
+							],
+							"total_cost": 4,
+							"uses_stock": false
+						},
+						{
+							"comfort": false,
+							"food_cost": 6,
+							"food_groups": [
+								"vegetables",
+								"grains_tubers"
+							],
+							"food_ids": [
+								"tomato",
+								"mixed_grain_rice"
+							],
+							"food_names": [
+								"番茄",
+								"杂粮饭"
+							],
+							"limit_tags": [],
+							"nutrient_tags": [
+								"dietary_fiber_source",
+								"carbohydrate_source",
+								"whole_grain"
+							],
+							"phase": "lunch",
+							"preference_reactions": [
+								{
+									"character_name": "本局角色",
+									"comfort": false,
+									"food_id": "tomato",
+									"mood_delta": 3,
+									"profile_id": "campus_student",
+									"profile_version": 1,
+									"status": "known"
+								},
+								{
+									"character_name": "本局角色",
+									"comfort": false,
+									"food_id": "mixed_grain_rice",
+									"mood_delta": 1,
+									"profile_id": "campus_student",
+									"profile_version": 1,
+									"status": "known"
+								}
+							],
+							"quality": 60,
+							"skipped": false,
+							"source_fee": 0,
+							"source_id": "cafeteria",
+							"source_name": "食堂",
+							"stat_delta": {
+								"diet_burden": -1,
+								"energy": 5,
+								"mood": 4,
+								"satiety": 22,
+								"stress": 0,
+								"study_progress": 0
+							},
+							"tags": [
+								"vegetable",
+								"fiber",
+								"staple",
+								"whole_grain",
+								"cheap"
+							],
+							"total_cost": 6,
+							"uses_stock": false
+						},
+						{
+							"comfort": false,
+							"food_cost": 6,
+							"food_groups": [
+								"vegetables"
+							],
+							"food_ids": [
+								"greens",
+								"tomato"
+							],
+							"food_names": [
+								"青菜",
+								"番茄"
+							],
+							"limit_tags": [],
+							"nutrient_tags": [
+								"dietary_fiber_source"
+							],
+							"phase": "dinner",
+							"preference_reactions": [
+								{
+									"character_name": "本局角色",
+									"comfort": false,
+									"food_id": "greens",
+									"mood_delta": -2,
+									"profile_id": "campus_student",
+									"profile_version": 1,
+									"status": "known"
+								},
+								{
+									"character_name": "本局角色",
+									"comfort": false,
+									"food_id": "tomato",
+									"mood_delta": 3,
+									"profile_id": "campus_student",
+									"profile_version": 1,
+									"status": "known"
+								}
+							],
+							"quality": 40,
+							"skipped": false,
+							"source_fee": 0,
+							"source_id": "cafeteria",
+							"source_name": "食堂",
+							"stat_delta": {
+								"diet_burden": -3,
+								"energy": 1,
+								"mood": 1,
+								"satiety": 9,
+								"stress": 0,
+								"study_progress": 0
+							},
+							"tags": [
+								"vegetable",
+								"fiber",
+								"plain"
+							],
+							"total_cost": 6,
+							"uses_stock": false
+						}
+					],
+					"next_learning_state": {
+						"id": "fatigued",
+						"opening_delta": {
+							"energy": -2,
+							"stress": 2
+						},
+						"study_modifier": -2,
+						"summary": "按游戏规则，昨日的精力、压力、作息或安排触发了轻度复习减益。",
+						"title": "进入状态较慢"
+					},
+					"nutrition": {
+						"action": "下一顿要是窗口里正好有蔬菜，可以顺手换个搭配；水果还是单独算。",
+						"basis": "规则小字：本局饮食信息参考《中国居民膳食指南（2022）》中的食物多样、合理搭配和规律进餐原则，只整理本局卡牌。卡牌出现不代表现实摄入量足够，也不用于现实健康判断。",
+						"detail_text": "三餐情况　吃了 3/3 餐\n今天遇到　5 种食物卡\n\n餐盘线索\n主食 2 顿｜蔬菜 2 顿｜水果 没碰见\n蛋/肉/鱼 碰见过｜奶类 没碰见｜大豆制品 没碰见｜坚果 没碰见\n\n卡牌资料线索\n主食来源 2 顿｜膳食纤维来源 2 顿\n蛋白质来源 1 顿｜钙来源 没碰见\n全谷物 碰见过｜不饱和脂肪酸来源 没碰见\n需留意的卡牌线索：卡牌上没写到添加糖、高钠或油炸；这不等于一定没有",
+						"metrics": {
+							"added_sugar_meals": 0,
+							"animal_food_meals": 1,
+							"calcium_source_meals": 0,
+							"carbohydrate_source_meals": 2,
+							"dairy_meals": 0,
+							"eaten_meals": 3,
+							"expected_meals": 3,
+							"fiber_source_meals": 2,
+							"fried_meals": 0,
+							"fruit_meals": 0,
+							"grain_meals": 2,
+							"high_quality_protein_meals": 1,
+							"high_sodium_meals": 0,
+							"nuts_meals": 0,
+							"skipped_meals": 0,
+							"soy_meals": 0,
+							"unique_foods": 5,
+							"unsaturated_fat_source_meals": 0,
+							"vegetable_meals": 2,
+							"whole_grain_meals": 1
+						},
+						"observation": "今天吃了 3 餐，其中 2 餐有蔬菜类食物出现。",
+						"rating": "旧版结算记录（不作健康评价）",
+						"score": 52
+					},
+					"sleep": {
+						"id": "sleep_early",
+						"name": "早点睡"
+					},
+					"spend": 16,
+					"start_state": {
+						"balance": 120,
+						"diet_burden": 24,
+						"energy": 52,
+						"mood": 55,
+						"satiety": 58,
+						"stability": 65,
+						"stress": 48,
+						"study_progress": 0,
+						"study_target": 70
+					}
+				},
+				"opening_state": {
+					"balance": 120,
+					"diet_burden": 24,
+					"energy": 52,
+					"mood": 55,
+					"satiety": 58,
+					"stability": 65,
+					"stress": 48,
+					"study_progress": 0,
+					"study_target": 70
+				},
+				"sleep_change": {
+					"after": {
+						"balance": 104,
+						"diet_burden": 16,
+						"energy": 66,
+						"mood": 57,
+						"satiety": 84,
+						"stability": 56,
+						"stress": 48,
+						"study_progress": 30,
+						"study_target": 70
+					},
+					"before": {
+						"balance": 104,
+						"diet_burden": 20,
+						"energy": 40,
+						"mood": 54,
+						"satiety": 96,
+						"stability": 56,
+						"stress": 57,
+						"study_progress": 30,
+						"study_target": 70
+					},
+					"observed_delta": {
+						"balance": 0,
+						"diet_burden": -4,
+						"energy": 26,
+						"mood": 3,
+						"satiety": -12,
+						"stability": 0,
+						"stress": -9,
+						"study_progress": 0,
+						"study_target": 0
+					}
+				}
+			},
+			{
+				"day": 2,
+				"day_end_change": {
+					"after": {
+						"balance": 90,
+						"diet_burden": 4,
+						"energy": 80,
+						"mood": 59,
+						"satiety": 78,
+						"stability": 69,
+						"stress": 48,
+						"study_progress": 54,
+						"study_target": 70
+					},
+					"before": {
+						"balance": 90,
+						"diet_burden": 7,
+						"energy": 80,
+						"mood": 57,
+						"satiety": 84,
+						"stability": 63,
+						"stress": 48,
+						"study_progress": 54,
+						"study_target": 70
+					},
+					"observed_delta": {
+						"balance": 0,
+						"diet_burden": -3,
+						"energy": 0,
+						"mood": 2,
+						"satiety": -6,
+						"stability": 6,
+						"stress": 0,
+						"study_progress": 0,
+						"study_target": 0
+					}
+				},
+				"day_record": {
+					"actions": [
+						{
+							"cost": 0,
+							"id": "study",
+							"name": "晨读",
+							"stat_delta": {
+								"diet_burden": 0,
+								"energy": -8,
+								"mood": -2,
+								"satiety": -4,
+								"stress": 3,
+								"study_progress": 8
+							},
+							"stock_added": {}
+						},
+						{
+							"cost": 0,
+							"id": "study",
+							"name": "复习",
+							"stat_delta": {
+								"diet_burden": 0,
+								"energy": -8,
+								"mood": -2,
+								"satiety": -4,
+								"stress": 3,
+								"study_progress": 8
+							},
+							"stock_added": {}
+						},
+						{
+							"cost": 0,
+							"id": "study",
+							"name": "夜读",
+							"stat_delta": {
+								"diet_burden": 0,
+								"energy": -8,
+								"mood": -2,
+								"satiety": -4,
+								"stress": 3,
+								"study_progress": 8
+							},
+							"stock_added": {}
+						}
+					],
+					"combos": [],
+					"day": 2,
+					"end_state": {
+						"balance": 90,
+						"diet_burden": 4,
+						"energy": 80,
+						"mood": 59,
+						"satiety": 78,
+						"stability": 69,
+						"stress": 48,
+						"study_progress": 54,
+						"study_target": 70
+					},
+					"event": {
+						"action_deltas": {
+							"walk": {
+								"mood": 2,
+								"stress": -2
+							}
+						},
+						"day": 2,
+						"id": "clear_skies",
+						"opening_delta": {
+							"mood": 3,
+							"stress": -2
+						},
+						"preview": "明天天气放晴，散步会比平时更解压。",
+						"source_deltas": {},
+						"summary": "风不大，校园里适合走一走。",
+						"title": "天气放晴",
+						"tone": "good"
+					},
+					"learning_state": {
+						"id": "fatigued",
+						"opening_delta": {
+							"energy": -2,
+							"stress": 2
+						},
+						"study_modifier": -2,
+						"summary": "按游戏规则，昨日的精力、压力、作息或安排触发了轻度复习减益。",
+						"title": "进入状态较慢"
+					},
+					"meals": [
+						{
+							"comfort": false,
+							"food_cost": 4,
+							"food_groups": [
+								"grains_tubers",
+								"eggs"
+							],
+							"food_ids": [
+								"rice_plain",
+								"egg"
+							],
+							"food_names": [
+								"白米饭",
+								"鸡蛋"
+							],
+							"limit_tags": [],
+							"nutrient_tags": [
+								"carbohydrate_source",
+								"high_quality_protein_source"
+							],
+							"phase": "breakfast",
+							"preference_reactions": [
+								{
+									"character_name": "本局角色",
+									"comfort": false,
+									"food_id": "rice_plain",
+									"mood_delta": 0,
+									"profile_id": "campus_student",
+									"profile_version": 1,
+									"status": "known"
+								},
+								{
+									"character_name": "本局角色",
+									"comfort": false,
+									"food_id": "egg",
+									"mood_delta": 0,
+									"profile_id": "campus_student",
+									"profile_version": 1,
+									"status": "known"
+								}
+							],
+							"quality": 56,
+							"skipped": false,
+							"source_fee": 0,
+							"source_id": "cafeteria",
+							"source_name": "食堂",
+							"stat_delta": {
+								"diet_burden": 0,
+								"energy": 6,
+								"mood": 0,
+								"satiety": 26,
+								"stress": 0,
+								"study_progress": 0
+							},
+							"tags": [
+								"staple",
+								"cheap",
+								"plain",
+								"protein"
+							],
+							"total_cost": 4,
+							"uses_stock": false
+						},
+						{
+							"comfort": false,
+							"food_cost": 5,
+							"food_groups": [
+								"grains_tubers",
+								"soy_products"
+							],
+							"food_ids": [
+								"rice_plain",
+								"tofu"
+							],
+							"food_names": [
+								"白米饭",
+								"豆腐"
+							],
+							"limit_tags": [],
+							"nutrient_tags": [
+								"carbohydrate_source",
+								"high_quality_protein_source"
+							],
+							"phase": "lunch",
+							"preference_reactions": [
+								{
+									"character_name": "本局角色",
+									"comfort": false,
+									"food_id": "rice_plain",
+									"mood_delta": 0,
+									"profile_id": "campus_student",
+									"profile_version": 1,
+									"status": "known"
+								},
+								{
+									"character_name": "本局角色",
+									"comfort": false,
+									"food_id": "tofu",
+									"mood_delta": 0,
+									"profile_id": "campus_student",
+									"profile_version": 1,
+									"status": "known"
+								}
+							],
+							"quality": 56,
+							"skipped": false,
+							"source_fee": 0,
+							"source_id": "cafeteria",
+							"source_name": "食堂",
+							"stat_delta": {
+								"diet_burden": 0,
+								"energy": 5,
+								"mood": 0,
+								"satiety": 27,
+								"stress": 0,
+								"study_progress": 0
+							},
+							"tags": [
+								"staple",
+								"cheap",
+								"plain",
+								"protein",
+								"soy",
+								"legume"
+							],
+							"total_cost": 5,
+							"uses_stock": false
+						},
+						{
+							"comfort": false,
+							"food_cost": 5,
+							"food_groups": [
+								"grains_tubers",
+								"vegetables"
+							],
+							"food_ids": [
+								"rice_plain",
+								"greens"
+							],
+							"food_names": [
+								"白米饭",
+								"青菜"
+							],
+							"limit_tags": [],
+							"nutrient_tags": [
+								"carbohydrate_source",
+								"dietary_fiber_source"
+							],
+							"phase": "dinner",
+							"preference_reactions": [
+								{
+									"character_name": "本局角色",
+									"comfort": false,
+									"food_id": "rice_plain",
+									"mood_delta": 0,
+									"profile_id": "campus_student",
+									"profile_version": 1,
+									"status": "known"
+								},
+								{
+									"character_name": "本局角色",
+									"comfort": false,
+									"food_id": "greens",
+									"mood_delta": -2,
+									"profile_id": "campus_student",
+									"profile_version": 1,
+									"status": "known"
+								}
+							],
+							"quality": 56,
+							"skipped": false,
+							"source_fee": 0,
+							"source_id": "cafeteria",
+							"source_name": "食堂",
+							"stat_delta": {
+								"diet_burden": -2,
+								"energy": 3,
+								"mood": -2,
+								"satiety": 21,
+								"stress": 0,
+								"study_progress": 0
+							},
+							"tags": [
+								"staple",
+								"cheap",
+								"plain",
+								"vegetable",
+								"fiber"
+							],
+							"total_cost": 5,
+							"uses_stock": false
+						}
+					],
+					"next_learning_state": {
+						"id": "fatigued",
+						"opening_delta": {
+							"energy": -2,
+							"stress": 2
+						},
+						"study_modifier": -2,
+						"summary": "按游戏规则，昨日的精力、压力、作息或安排触发了轻度复习减益。",
+						"title": "进入状态较慢"
+					},
+					"nutrition": {
+						"action": "下一顿要是窗口里正好有蔬菜，可以顺手换个搭配；水果还是单独算。",
+						"basis": "规则小字：本局饮食信息参考《中国居民膳食指南（2022）》中的食物多样、合理搭配和规律进餐原则，只整理本局卡牌。卡牌出现不代表现实摄入量足够，也不用于现实健康判断。",
+						"detail_text": "三餐情况　吃了 3/3 餐\n今天遇到　4 种食物卡\n\n餐盘线索\n主食 3 顿｜蔬菜 1 顿｜水果 没碰见\n蛋/肉/鱼 碰见过｜奶类 没碰见｜大豆制品 碰见过｜坚果 没碰见\n\n卡牌资料线索\n主食来源 3 顿｜膳食纤维来源 1 顿\n蛋白质来源 2 顿｜钙来源 没碰见\n全谷物 没碰见｜不饱和脂肪酸来源 没碰见\n需留意的卡牌线索：卡牌上没写到添加糖、高钠或油炸；这不等于一定没有",
+						"metrics": {
+							"added_sugar_meals": 0,
+							"animal_food_meals": 1,
+							"calcium_source_meals": 0,
+							"carbohydrate_source_meals": 3,
+							"dairy_meals": 0,
+							"eaten_meals": 3,
+							"expected_meals": 3,
+							"fiber_source_meals": 1,
+							"fried_meals": 0,
+							"fruit_meals": 0,
+							"grain_meals": 3,
+							"high_quality_protein_meals": 2,
+							"high_sodium_meals": 0,
+							"nuts_meals": 0,
+							"skipped_meals": 0,
+							"soy_meals": 1,
+							"unique_foods": 4,
+							"unsaturated_fat_source_meals": 0,
+							"vegetable_meals": 1,
+							"whole_grain_meals": 0
+						},
+						"observation": "今天吃了 3 餐，其中 1 餐有蔬菜类食物出现。",
+						"rating": "旧版结算记录（不作健康评价）",
+						"score": 56
+					},
+					"sleep": {
+						"id": "sleep_early",
+						"name": "早点睡"
+					},
+					"spend": 14,
+					"start_state": {
+						"balance": 104,
+						"diet_burden": 13,
+						"energy": 66,
+						"mood": 59,
+						"satiety": 78,
+						"stability": 62,
+						"stress": 48,
+						"study_progress": 30,
+						"study_target": 70
+					}
+				},
+				"opening_state": {
+					"balance": 104,
+					"diet_burden": 13,
+					"energy": 64,
+					"mood": 62,
+					"satiety": 78,
+					"stability": 62,
+					"stress": 48,
+					"study_progress": 30,
+					"study_target": 70
+				},
+				"sleep_change": {
+					"after": {
+						"balance": 90,
+						"diet_burden": 7,
+						"energy": 80,
+						"mood": 57,
+						"satiety": 84,
+						"stability": 63,
+						"stress": 48,
+						"study_progress": 54,
+						"study_target": 70
+					},
+					"before": {
+						"balance": 90,
+						"diet_burden": 11,
+						"energy": 54,
+						"mood": 54,
+						"satiety": 96,
+						"stability": 63,
+						"stress": 57,
+						"study_progress": 54,
+						"study_target": 70
+					},
+					"observed_delta": {
+						"balance": 0,
+						"diet_burden": -4,
+						"energy": 26,
+						"mood": 3,
+						"satiety": -12,
+						"stability": 0,
+						"stress": -9,
+						"study_progress": 0,
+						"study_target": 0
+					}
+				}
+			},
+			{
+				"day": 3,
+				"day_end_change": {
+					"after": {
+						"balance": 76,
+						"diet_burden": 0,
+						"energy": 94,
+						"mood": 56,
+						"satiety": 78,
+						"stability": 74,
+						"stress": 50,
+						"study_progress": 78,
+						"study_target": 70
+					},
+					"before": {
+						"balance": 76,
+						"diet_burden": -2,
+						"energy": 94,
+						"mood": 54,
+						"satiety": 84,
+						"stability": 69,
+						"stress": 50,
+						"study_progress": 78,
+						"study_target": 70
+					},
+					"observed_delta": {
+						"balance": 0,
+						"diet_burden": 2,
+						"energy": 0,
+						"mood": 2,
+						"satiety": -6,
+						"stability": 5,
+						"stress": 0,
+						"study_progress": 0,
+						"study_target": 0
+					}
+				},
+				"day_record": {
+					"actions": [
+						{
+							"cost": 0,
+							"id": "study",
+							"name": "晨读",
+							"stat_delta": {
+								"diet_burden": 0,
+								"energy": -8,
+								"mood": -2,
+								"satiety": -4,
+								"stress": 3,
+								"study_progress": 8
+							},
+							"stock_added": {}
+						},
+						{
+							"cost": 0,
+							"id": "study",
+							"name": "复习",
+							"stat_delta": {
+								"diet_burden": 0,
+								"energy": -8,
+								"mood": -2,
+								"satiety": -4,
+								"stress": 3,
+								"study_progress": 8
+							},
+							"stock_added": {}
+						},
+						{
+							"cost": 0,
+							"id": "study",
+							"name": "夜读",
+							"stat_delta": {
+								"diet_burden": 0,
+								"energy": -8,
+								"mood": -2,
+								"satiety": -4,
+								"stress": 3,
+								"study_progress": 8
+							},
+							"stock_added": {}
+						}
+					],
+					"combos": [],
+					"day": 3,
+					"end_state": {
+						"balance": 76,
+						"diet_burden": 0,
+						"energy": 94,
+						"mood": 56,
+						"satiety": 78,
+						"stability": 74,
+						"stress": 50,
+						"study_progress": 78,
+						"study_target": 70
+					},
+					"event": {
+						"action_deltas": {},
+						"day": 3,
+						"id": "cafeteria_rotation",
+						"opening_delta": {},
+						"preview": "明天食堂换菜单，可看到的菜会更多。",
+						"source_deltas": {
+							"cafeteria": {
+								"hand_size": 2
+							}
+						},
+						"summary": "窗口多开了几样菜，今天更容易配齐一餐。",
+						"title": "食堂换菜单",
+						"tone": "good"
+					},
+					"learning_state": {
+						"id": "fatigued",
+						"opening_delta": {
+							"energy": -2,
+							"stress": 2
+						},
+						"study_modifier": -2,
+						"summary": "按游戏规则，昨日的精力、压力、作息或安排触发了轻度复习减益。",
+						"title": "进入状态较慢"
+					},
+					"meals": [
+						{
+							"comfort": false,
+							"food_cost": 4,
+							"food_groups": [
+								"grains_tubers",
+								"eggs"
+							],
+							"food_ids": [
+								"rice_plain",
+								"egg"
+							],
+							"food_names": [
+								"白米饭",
+								"鸡蛋"
+							],
+							"limit_tags": [],
+							"nutrient_tags": [
+								"carbohydrate_source",
+								"high_quality_protein_source"
+							],
+							"phase": "breakfast",
+							"preference_reactions": [
+								{
+									"character_name": "本局角色",
+									"comfort": false,
+									"food_id": "rice_plain",
+									"mood_delta": 0,
+									"profile_id": "campus_student",
+									"profile_version": 1,
+									"status": "known"
+								},
+								{
+									"character_name": "本局角色",
+									"comfort": false,
+									"food_id": "egg",
+									"mood_delta": 0,
+									"profile_id": "campus_student",
+									"profile_version": 1,
+									"status": "known"
+								}
+							],
+							"quality": 56,
+							"skipped": false,
+							"source_fee": 0,
+							"source_id": "cafeteria",
+							"source_name": "食堂",
+							"stat_delta": {
+								"diet_burden": 0,
+								"energy": 6,
+								"mood": 0,
+								"satiety": 26,
+								"stress": 0,
+								"study_progress": 0
+							},
+							"tags": [
+								"staple",
+								"cheap",
+								"plain",
+								"protein"
+							],
+							"total_cost": 4,
+							"uses_stock": false
+						},
+						{
+							"comfort": false,
+							"food_cost": 5,
+							"food_groups": [
+								"grains_tubers",
+								"vegetables"
+							],
+							"food_ids": [
+								"rice_plain",
+								"greens"
+							],
+							"food_names": [
+								"白米饭",
+								"青菜"
+							],
+							"limit_tags": [],
+							"nutrient_tags": [
+								"carbohydrate_source",
+								"dietary_fiber_source"
+							],
+							"phase": "lunch",
+							"preference_reactions": [
+								{
+									"character_name": "本局角色",
+									"comfort": false,
+									"food_id": "rice_plain",
+									"mood_delta": 0,
+									"profile_id": "campus_student",
+									"profile_version": 1,
+									"status": "known"
+								},
+								{
+									"character_name": "本局角色",
+									"comfort": false,
+									"food_id": "greens",
+									"mood_delta": -2,
+									"profile_id": "campus_student",
+									"profile_version": 1,
+									"status": "known"
+								}
+							],
+							"quality": 56,
+							"skipped": false,
+							"source_fee": 0,
+							"source_id": "cafeteria",
+							"source_name": "食堂",
+							"stat_delta": {
+								"diet_burden": -2,
+								"energy": 3,
+								"mood": -2,
+								"satiety": 21,
+								"stress": 0,
+								"study_progress": 0
+							},
+							"tags": [
+								"staple",
+								"cheap",
+								"plain",
+								"vegetable",
+								"fiber"
+							],
+							"total_cost": 5,
+							"uses_stock": false
+						},
+						{
+							"comfort": false,
+							"food_cost": 5,
+							"food_groups": [
+								"grains_tubers",
+								"soy_products"
+							],
+							"food_ids": [
+								"rice_plain",
+								"tofu"
+							],
+							"food_names": [
+								"白米饭",
+								"豆腐"
+							],
+							"limit_tags": [],
+							"nutrient_tags": [
+								"carbohydrate_source",
+								"high_quality_protein_source"
+							],
+							"phase": "dinner",
+							"preference_reactions": [
+								{
+									"character_name": "本局角色",
+									"comfort": false,
+									"food_id": "rice_plain",
+									"mood_delta": 0,
+									"profile_id": "campus_student",
+									"profile_version": 1,
+									"status": "known"
+								},
+								{
+									"character_name": "本局角色",
+									"comfort": false,
+									"food_id": "tofu",
+									"mood_delta": 0,
+									"profile_id": "campus_student",
+									"profile_version": 1,
+									"status": "known"
+								}
+							],
+							"quality": 56,
+							"skipped": false,
+							"source_fee": 0,
+							"source_id": "cafeteria",
+							"source_name": "食堂",
+							"stat_delta": {
+								"diet_burden": 0,
+								"energy": 5,
+								"mood": 0,
+								"satiety": 27,
+								"stress": 0,
+								"study_progress": 0
+							},
+							"tags": [
+								"staple",
+								"cheap",
+								"plain",
+								"protein",
+								"soy",
+								"legume"
+							],
+							"total_cost": 5,
+							"uses_stock": false
+						}
+					],
+					"next_learning_state": {
+						"id": "fatigued",
+						"opening_delta": {
+							"energy": -2,
+							"stress": 2
+						},
+						"study_modifier": -2,
+						"summary": "按游戏规则，昨日的精力、压力、作息或安排触发了轻度复习减益。",
+						"title": "进入状态较慢"
+					},
+					"nutrition": {
+						"action": "下一顿要是窗口里正好有蔬菜，可以顺手换个搭配；水果还是单独算。",
+						"basis": "规则小字：本局饮食信息参考《中国居民膳食指南（2022）》中的食物多样、合理搭配和规律进餐原则，只整理本局卡牌。卡牌出现不代表现实摄入量足够，也不用于现实健康判断。",
+						"detail_text": "三餐情况　吃了 3/3 餐\n今天遇到　4 种食物卡\n\n餐盘线索\n主食 3 顿｜蔬菜 1 顿｜水果 没碰见\n蛋/肉/鱼 碰见过｜奶类 没碰见｜大豆制品 碰见过｜坚果 没碰见\n\n卡牌资料线索\n主食来源 3 顿｜膳食纤维来源 1 顿\n蛋白质来源 2 顿｜钙来源 没碰见\n全谷物 没碰见｜不饱和脂肪酸来源 没碰见\n需留意的卡牌线索：卡牌上没写到添加糖、高钠或油炸；这不等于一定没有",
+						"metrics": {
+							"added_sugar_meals": 0,
+							"animal_food_meals": 1,
+							"calcium_source_meals": 0,
+							"carbohydrate_source_meals": 3,
+							"dairy_meals": 0,
+							"eaten_meals": 3,
+							"expected_meals": 3,
+							"fiber_source_meals": 1,
+							"fried_meals": 0,
+							"fruit_meals": 0,
+							"grain_meals": 3,
+							"high_quality_protein_meals": 2,
+							"high_sodium_meals": 0,
+							"nuts_meals": 0,
+							"skipped_meals": 0,
+							"soy_meals": 1,
+							"unique_foods": 4,
+							"unsaturated_fat_source_meals": 0,
+							"vegetable_meals": 1,
+							"whole_grain_meals": 0
+						},
+						"observation": "今天吃了 3 餐，其中 1 餐有蔬菜类食物出现。",
+						"rating": "旧版结算记录（不作健康评价）",
+						"score": 56
+					},
+					"sleep": {
+						"id": "sleep_early",
+						"name": "早点睡"
+					},
+					"spend": 14,
+					"start_state": {
+						"balance": 90,
+						"diet_burden": 4,
+						"energy": 80,
+						"mood": 59,
+						"satiety": 78,
+						"stability": 69,
+						"stress": 48,
+						"study_progress": 54,
+						"study_target": 70
+					}
+				},
+				"opening_state": {
+					"balance": 90,
+					"diet_burden": 4,
+					"energy": 78,
+					"mood": 59,
+					"satiety": 78,
+					"stability": 69,
+					"stress": 50,
+					"study_progress": 54,
+					"study_target": 70
+				},
+				"sleep_change": {
+					"after": {
+						"balance": 76,
+						"diet_burden": -2,
+						"energy": 94,
+						"mood": 54,
+						"satiety": 84,
+						"stability": 69,
+						"stress": 50,
+						"study_progress": 78,
+						"study_target": 70
+					},
+					"before": {
+						"balance": 76,
+						"diet_burden": 2,
+						"energy": 68,
+						"mood": 51,
+						"satiety": 96,
+						"stability": 69,
+						"stress": 59,
+						"study_progress": 78,
+						"study_target": 70
+					},
+					"observed_delta": {
+						"balance": 0,
+						"diet_burden": -4,
+						"energy": 26,
+						"mood": 3,
+						"satiety": -12,
+						"stability": 0,
+						"stress": -9,
+						"study_progress": 0,
+						"study_target": 0
+					}
+				}
+			},
+			{
+				"day": 4,
+				"day_end_change": {
+					"after": {
+						"balance": 62,
+						"diet_burden": 0,
+						"energy": 100,
+						"mood": 51,
+						"satiety": 78,
+						"stability": 76,
+						"stress": 52,
+						"study_progress": 100,
+						"study_target": 70
+					},
+					"before": {
+						"balance": 62,
+						"diet_burden": -4,
+						"energy": 106,
+						"mood": 49,
+						"satiety": 84,
+						"stability": 73,
+						"stress": 52,
+						"study_progress": 100,
+						"study_target": 70
+					},
+					"observed_delta": {
+						"balance": 0,
+						"diet_burden": 4,
+						"energy": -6,
+						"mood": 2,
+						"satiety": -6,
+						"stability": 3,
+						"stress": 0,
+						"study_progress": 0,
+						"study_target": 0
+					}
+				},
+				"day_record": {
+					"actions": [
+						{
+							"cost": 0,
+							"id": "study",
+							"name": "晨读",
+							"stat_delta": {
+								"diet_burden": 0,
+								"energy": -8,
+								"mood": -2,
+								"satiety": -4,
+								"stress": 3,
+								"study_progress": 8
+							},
+							"stock_added": {}
+						},
+						{
+							"cost": 0,
+							"id": "study",
+							"name": "复习",
+							"stat_delta": {
+								"diet_burden": 0,
+								"energy": -8,
+								"mood": -2,
+								"satiety": -4,
+								"stress": 3,
+								"study_progress": 8
+							},
+							"stock_added": {}
+						},
+						{
+							"cost": 0,
+							"id": "study",
+							"name": "夜读",
+							"stat_delta": {
+								"diet_burden": 0,
+								"energy": -8,
+								"mood": -2,
+								"satiety": -4,
+								"stress": 3,
+								"study_progress": 8
+							},
+							"stock_added": {}
+						}
+					],
+					"combos": [],
+					"day": 4,
+					"end_state": {
+						"balance": 62,
+						"diet_burden": 0,
+						"energy": 100,
+						"mood": 51,
+						"satiety": 78,
+						"stability": 76,
+						"stress": 52,
+						"study_progress": 100,
+						"study_target": 70
+					},
+					"event": {
+						"action_deltas": {},
+						"day": 4,
+						"id": "delivery_coupon",
+						"opening_delta": {},
+						"preview": "明天有一张外卖券，配送费会降低，菜单也会多一项。",
+						"source_deltas": {
+							"takeout": {
+								"fee": -2,
+								"hand_size": 1
+							}
+						},
+						"summary": "手机里多了一张配送券，外卖暂时没那么贵。",
+						"title": "外卖优惠券",
+						"tone": "info"
+					},
+					"learning_state": {
+						"id": "fatigued",
+						"opening_delta": {
+							"energy": -2,
+							"stress": 2
+						},
+						"study_modifier": -2,
+						"summary": "按游戏规则，昨日的精力、压力、作息或安排触发了轻度复习减益。",
+						"title": "进入状态较慢"
+					},
+					"meals": [
+						{
+							"comfort": false,
+							"food_cost": 4,
+							"food_groups": [
+								"grains_tubers",
+								"eggs"
+							],
+							"food_ids": [
+								"rice_plain",
+								"egg"
+							],
+							"food_names": [
+								"白米饭",
+								"鸡蛋"
+							],
+							"limit_tags": [],
+							"nutrient_tags": [
+								"carbohydrate_source",
+								"high_quality_protein_source"
+							],
+							"phase": "breakfast",
+							"preference_reactions": [
+								{
+									"character_name": "本局角色",
+									"comfort": false,
+									"food_id": "rice_plain",
+									"mood_delta": 0,
+									"profile_id": "campus_student",
+									"profile_version": 1,
+									"status": "known"
+								},
+								{
+									"character_name": "本局角色",
+									"comfort": false,
+									"food_id": "egg",
+									"mood_delta": 0,
+									"profile_id": "campus_student",
+									"profile_version": 1,
+									"status": "known"
+								}
+							],
+							"quality": 56,
+							"skipped": false,
+							"source_fee": 0,
+							"source_id": "cafeteria",
+							"source_name": "食堂",
+							"stat_delta": {
+								"diet_burden": 0,
+								"energy": 6,
+								"mood": 0,
+								"satiety": 26,
+								"stress": 0,
+								"study_progress": 0
+							},
+							"tags": [
+								"staple",
+								"cheap",
+								"plain",
+								"protein"
+							],
+							"total_cost": 4,
+							"uses_stock": false
+						},
+						{
+							"comfort": false,
+							"food_cost": 5,
+							"food_groups": [
+								"grains_tubers",
+								"vegetables"
+							],
+							"food_ids": [
+								"rice_plain",
+								"greens"
+							],
+							"food_names": [
+								"白米饭",
+								"青菜"
+							],
+							"limit_tags": [],
+							"nutrient_tags": [
+								"carbohydrate_source",
+								"dietary_fiber_source"
+							],
+							"phase": "lunch",
+							"preference_reactions": [
+								{
+									"character_name": "本局角色",
+									"comfort": false,
+									"food_id": "rice_plain",
+									"mood_delta": 0,
+									"profile_id": "campus_student",
+									"profile_version": 1,
+									"status": "known"
+								},
+								{
+									"character_name": "本局角色",
+									"comfort": false,
+									"food_id": "greens",
+									"mood_delta": -2,
+									"profile_id": "campus_student",
+									"profile_version": 1,
+									"status": "known"
+								}
+							],
+							"quality": 56,
+							"skipped": false,
+							"source_fee": 0,
+							"source_id": "cafeteria",
+							"source_name": "食堂",
+							"stat_delta": {
+								"diet_burden": -2,
+								"energy": 3,
+								"mood": -2,
+								"satiety": 21,
+								"stress": 0,
+								"study_progress": 0
+							},
+							"tags": [
+								"staple",
+								"cheap",
+								"plain",
+								"vegetable",
+								"fiber"
+							],
+							"total_cost": 5,
+							"uses_stock": false
+						},
+						{
+							"comfort": false,
+							"food_cost": 5,
+							"food_groups": [
+								"grains_tubers",
+								"vegetables"
+							],
+							"food_ids": [
+								"rice_plain",
+								"greens"
+							],
+							"food_names": [
+								"白米饭",
+								"青菜"
+							],
+							"limit_tags": [],
+							"nutrient_tags": [
+								"carbohydrate_source",
+								"dietary_fiber_source"
+							],
+							"phase": "dinner",
+							"preference_reactions": [
+								{
+									"character_name": "本局角色",
+									"comfort": false,
+									"food_id": "rice_plain",
+									"mood_delta": 0,
+									"profile_id": "campus_student",
+									"profile_version": 1,
+									"status": "known"
+								},
+								{
+									"character_name": "本局角色",
+									"comfort": false,
+									"food_id": "greens",
+									"mood_delta": -2,
+									"profile_id": "campus_student",
+									"profile_version": 1,
+									"status": "known"
+								}
+							],
+							"quality": 56,
+							"skipped": false,
+							"source_fee": 0,
+							"source_id": "cafeteria",
+							"source_name": "食堂",
+							"stat_delta": {
+								"diet_burden": -2,
+								"energy": 3,
+								"mood": -2,
+								"satiety": 21,
+								"stress": 0,
+								"study_progress": 0
+							},
+							"tags": [
+								"staple",
+								"cheap",
+								"plain",
+								"vegetable",
+								"fiber"
+							],
+							"total_cost": 5,
+							"uses_stock": false
+						}
+					],
+					"next_learning_state": {
+						"id": "fatigued",
+						"opening_delta": {
+							"energy": -2,
+							"stress": 2
+						},
+						"study_modifier": -2,
+						"summary": "按游戏规则，昨日的精力、压力、作息或安排触发了轻度复习减益。",
+						"title": "进入状态较慢"
+					},
+					"nutrition": {
+						"action": "下一顿要是窗口里正好有蔬菜，可以顺手换个搭配；水果还是单独算。",
+						"basis": "规则小字：本局饮食信息参考《中国居民膳食指南（2022）》中的食物多样、合理搭配和规律进餐原则，只整理本局卡牌。卡牌出现不代表现实摄入量足够，也不用于现实健康判断。",
+						"detail_text": "三餐情况　吃了 3/3 餐\n今天遇到　3 种食物卡\n\n餐盘线索\n主食 3 顿｜蔬菜 2 顿｜水果 没碰见\n蛋/肉/鱼 碰见过｜奶类 没碰见｜大豆制品 没碰见｜坚果 没碰见\n\n卡牌资料线索\n主食来源 3 顿｜膳食纤维来源 2 顿\n蛋白质来源 1 顿｜钙来源 没碰见\n全谷物 没碰见｜不饱和脂肪酸来源 没碰见\n需留意的卡牌线索：卡牌上没写到添加糖、高钠或油炸；这不等于一定没有",
+						"metrics": {
+							"added_sugar_meals": 0,
+							"animal_food_meals": 1,
+							"calcium_source_meals": 0,
+							"carbohydrate_source_meals": 3,
+							"dairy_meals": 0,
+							"eaten_meals": 3,
+							"expected_meals": 3,
+							"fiber_source_meals": 2,
+							"fried_meals": 0,
+							"fruit_meals": 0,
+							"grain_meals": 3,
+							"high_quality_protein_meals": 1,
+							"high_sodium_meals": 0,
+							"nuts_meals": 0,
+							"skipped_meals": 0,
+							"soy_meals": 0,
+							"unique_foods": 3,
+							"unsaturated_fat_source_meals": 0,
+							"vegetable_meals": 2,
+							"whole_grain_meals": 0
+						},
+						"observation": "今天吃了 3 餐，其中 2 餐有蔬菜类食物出现。",
+						"rating": "旧版结算记录（不作健康评价）",
+						"score": 56
+					},
+					"sleep": {
+						"id": "sleep_early",
+						"name": "早点睡"
+					},
+					"spend": 14,
+					"start_state": {
+						"balance": 76,
+						"diet_burden": 0,
+						"energy": 94,
+						"mood": 56,
+						"satiety": 78,
+						"stability": 74,
+						"stress": 50,
+						"study_progress": 78,
+						"study_target": 70
+					}
+				},
+				"opening_state": {
+					"balance": 76,
+					"diet_burden": 0,
+					"energy": 92,
+					"mood": 56,
+					"satiety": 78,
+					"stability": 74,
+					"stress": 52,
+					"study_progress": 78,
+					"study_target": 70
+				},
+				"sleep_change": {
+					"after": {
+						"balance": 62,
+						"diet_burden": -4,
+						"energy": 106,
+						"mood": 49,
+						"satiety": 84,
+						"stability": 73,
+						"stress": 52,
+						"study_progress": 100,
+						"study_target": 70
+					},
+					"before": {
+						"balance": 62,
+						"diet_burden": 0,
+						"energy": 80,
+						"mood": 46,
+						"satiety": 96,
+						"stability": 73,
+						"stress": 61,
+						"study_progress": 100,
+						"study_target": 70
+					},
+					"observed_delta": {
+						"balance": 0,
+						"diet_burden": -4,
+						"energy": 26,
+						"mood": 3,
+						"satiety": -12,
+						"stability": 0,
+						"stress": -9,
+						"study_progress": 0,
+						"study_target": 0
+					}
+				}
+			},
+			{
+				"day": 5,
+				"day_end_change": {
+					"after": {
+						"balance": 48,
+						"diet_burden": 0,
+						"energy": 100,
+						"mood": 48,
+						"satiety": 78,
+						"stability": 75,
+						"stress": 61,
+						"study_progress": 100,
+						"study_target": 70
+					},
+					"before": {
+						"balance": 48,
+						"diet_burden": -4,
+						"energy": 104,
+						"mood": 46,
+						"satiety": 84,
+						"stability": 71,
+						"stress": 61,
+						"study_progress": 100,
+						"study_target": 70
+					},
+					"observed_delta": {
+						"balance": 0,
+						"diet_burden": 4,
+						"energy": -4,
+						"mood": 2,
+						"satiety": -6,
+						"stability": 4,
+						"stress": 0,
+						"study_progress": 0,
+						"study_target": 0
+					}
+				},
+				"day_record": {
+					"actions": [
+						{
+							"cost": 0,
+							"id": "study",
+							"name": "晨读",
+							"stat_delta": {
+								"diet_burden": 0,
+								"energy": -10,
+								"mood": -2,
+								"satiety": -4,
+								"stress": 4,
+								"study_progress": 11
+							},
+							"stock_added": {}
+						},
+						{
+							"cost": 0,
+							"id": "study",
+							"name": "复习",
+							"stat_delta": {
+								"diet_burden": 0,
+								"energy": -10,
+								"mood": -2,
+								"satiety": -4,
+								"stress": 4,
+								"study_progress": 11
+							},
+							"stock_added": {}
+						},
+						{
+							"cost": 0,
+							"id": "study",
+							"name": "夜读",
+							"stat_delta": {
+								"diet_burden": 0,
+								"energy": -10,
+								"mood": -2,
+								"satiety": -4,
+								"stress": 4,
+								"study_progress": 11
+							},
+							"stock_added": {}
+						}
+					],
+					"combos": [],
+					"day": 5,
+					"end_state": {
+						"balance": 48,
+						"diet_burden": 0,
+						"energy": 100,
+						"mood": 48,
+						"satiety": 78,
+						"stability": 75,
+						"stress": 61,
+						"study_progress": 100,
+						"study_target": 70
+					},
+					"event": {
+						"action_deltas": {
+							"study": {
+								"energy": -2,
+								"stress": 1,
+								"study": 3
+							}
+						},
+						"day": 5,
+						"id": "mock_exam_notice",
+						"opening_delta": {
+							"stress": 4
+						},
+						"preview": "明天会公布小测范围：复习收益提高，但会更累、更紧张。",
+						"source_deltas": {},
+						"summary": "群里发来了小测范围，复习更有方向，也更费神。",
+						"title": "小测提醒",
+						"tone": "warning"
+					},
+					"learning_state": {
+						"id": "fatigued",
+						"opening_delta": {
+							"energy": -2,
+							"stress": 2
+						},
+						"study_modifier": -2,
+						"summary": "按游戏规则，昨日的精力、压力、作息或安排触发了轻度复习减益。",
+						"title": "进入状态较慢"
+					},
+					"meals": [
+						{
+							"comfort": false,
+							"food_cost": 4,
+							"food_groups": [
+								"grains_tubers",
+								"eggs"
+							],
+							"food_ids": [
+								"rice_plain",
+								"egg"
+							],
+							"food_names": [
+								"白米饭",
+								"鸡蛋"
+							],
+							"limit_tags": [],
+							"nutrient_tags": [
+								"carbohydrate_source",
+								"high_quality_protein_source"
+							],
+							"phase": "breakfast",
+							"preference_reactions": [
+								{
+									"character_name": "本局角色",
+									"comfort": false,
+									"food_id": "rice_plain",
+									"mood_delta": 0,
+									"profile_id": "campus_student",
+									"profile_version": 1,
+									"status": "known"
+								},
+								{
+									"character_name": "本局角色",
+									"comfort": false,
+									"food_id": "egg",
+									"mood_delta": 0,
+									"profile_id": "campus_student",
+									"profile_version": 1,
+									"status": "known"
+								}
+							],
+							"quality": 56,
+							"skipped": false,
+							"source_fee": 0,
+							"source_id": "cafeteria",
+							"source_name": "食堂",
+							"stat_delta": {
+								"diet_burden": 0,
+								"energy": 6,
+								"mood": 0,
+								"satiety": 26,
+								"stress": 0,
+								"study_progress": 0
+							},
+							"tags": [
+								"staple",
+								"cheap",
+								"plain",
+								"protein"
+							],
+							"total_cost": 4,
+							"uses_stock": false
+						},
+						{
+							"comfort": false,
+							"food_cost": 5,
+							"food_groups": [
+								"grains_tubers",
+								"vegetables"
+							],
+							"food_ids": [
+								"rice_plain",
+								"greens"
+							],
+							"food_names": [
+								"白米饭",
+								"青菜"
+							],
+							"limit_tags": [],
+							"nutrient_tags": [
+								"carbohydrate_source",
+								"dietary_fiber_source"
+							],
+							"phase": "lunch",
+							"preference_reactions": [
+								{
+									"character_name": "本局角色",
+									"comfort": false,
+									"food_id": "rice_plain",
+									"mood_delta": 0,
+									"profile_id": "campus_student",
+									"profile_version": 1,
+									"status": "known"
+								},
+								{
+									"character_name": "本局角色",
+									"comfort": false,
+									"food_id": "greens",
+									"mood_delta": -2,
+									"profile_id": "campus_student",
+									"profile_version": 1,
+									"status": "known"
+								}
+							],
+							"quality": 56,
+							"skipped": false,
+							"source_fee": 0,
+							"source_id": "cafeteria",
+							"source_name": "食堂",
+							"stat_delta": {
+								"diet_burden": -2,
+								"energy": 3,
+								"mood": -2,
+								"satiety": 21,
+								"stress": 0,
+								"study_progress": 0
+							},
+							"tags": [
+								"staple",
+								"cheap",
+								"plain",
+								"vegetable",
+								"fiber"
+							],
+							"total_cost": 5,
+							"uses_stock": false
+						},
+						{
+							"comfort": false,
+							"food_cost": 5,
+							"food_groups": [
+								"grains_tubers",
+								"soy_products"
+							],
+							"food_ids": [
+								"rice_plain",
+								"tofu"
+							],
+							"food_names": [
+								"白米饭",
+								"豆腐"
+							],
+							"limit_tags": [],
+							"nutrient_tags": [
+								"carbohydrate_source",
+								"high_quality_protein_source"
+							],
+							"phase": "dinner",
+							"preference_reactions": [
+								{
+									"character_name": "本局角色",
+									"comfort": false,
+									"food_id": "rice_plain",
+									"mood_delta": 0,
+									"profile_id": "campus_student",
+									"profile_version": 1,
+									"status": "known"
+								},
+								{
+									"character_name": "本局角色",
+									"comfort": false,
+									"food_id": "tofu",
+									"mood_delta": 0,
+									"profile_id": "campus_student",
+									"profile_version": 1,
+									"status": "known"
+								}
+							],
+							"quality": 56,
+							"skipped": false,
+							"source_fee": 0,
+							"source_id": "cafeteria",
+							"source_name": "食堂",
+							"stat_delta": {
+								"diet_burden": 0,
+								"energy": 5,
+								"mood": 0,
+								"satiety": 27,
+								"stress": 0,
+								"study_progress": 0
+							},
+							"tags": [
+								"staple",
+								"cheap",
+								"plain",
+								"protein",
+								"soy",
+								"legume"
+							],
+							"total_cost": 5,
+							"uses_stock": false
+						}
+					],
+					"next_learning_state": {
+						"id": "fatigued",
+						"opening_delta": {
+							"energy": -2,
+							"stress": 2
+						},
+						"study_modifier": -2,
+						"summary": "按游戏规则，昨日的精力、压力、作息或安排触发了轻度复习减益。",
+						"title": "进入状态较慢"
+					},
+					"nutrition": {
+						"action": "下一顿要是窗口里正好有蔬菜，可以顺手换个搭配；水果还是单独算。",
+						"basis": "规则小字：本局饮食信息参考《中国居民膳食指南（2022）》中的食物多样、合理搭配和规律进餐原则，只整理本局卡牌。卡牌出现不代表现实摄入量足够，也不用于现实健康判断。",
+						"detail_text": "三餐情况　吃了 3/3 餐\n今天遇到　4 种食物卡\n\n餐盘线索\n主食 3 顿｜蔬菜 1 顿｜水果 没碰见\n蛋/肉/鱼 碰见过｜奶类 没碰见｜大豆制品 碰见过｜坚果 没碰见\n\n卡牌资料线索\n主食来源 3 顿｜膳食纤维来源 1 顿\n蛋白质来源 2 顿｜钙来源 没碰见\n全谷物 没碰见｜不饱和脂肪酸来源 没碰见\n需留意的卡牌线索：卡牌上没写到添加糖、高钠或油炸；这不等于一定没有",
+						"metrics": {
+							"added_sugar_meals": 0,
+							"animal_food_meals": 1,
+							"calcium_source_meals": 0,
+							"carbohydrate_source_meals": 3,
+							"dairy_meals": 0,
+							"eaten_meals": 3,
+							"expected_meals": 3,
+							"fiber_source_meals": 1,
+							"fried_meals": 0,
+							"fruit_meals": 0,
+							"grain_meals": 3,
+							"high_quality_protein_meals": 2,
+							"high_sodium_meals": 0,
+							"nuts_meals": 0,
+							"skipped_meals": 0,
+							"soy_meals": 1,
+							"unique_foods": 4,
+							"unsaturated_fat_source_meals": 0,
+							"vegetable_meals": 1,
+							"whole_grain_meals": 0
+						},
+						"observation": "今天吃了 3 餐，其中 1 餐有蔬菜类食物出现。",
+						"rating": "旧版结算记录（不作健康评价）",
+						"score": 56
+					},
+					"sleep": {
+						"id": "sleep_early",
+						"name": "早点睡"
+					},
+					"spend": 14,
+					"start_state": {
+						"balance": 62,
+						"diet_burden": 0,
+						"energy": 100,
+						"mood": 51,
+						"satiety": 78,
+						"stability": 76,
+						"stress": 52,
+						"study_progress": 100,
+						"study_target": 70
+					}
+				},
+				"opening_state": {
+					"balance": 62,
+					"diet_burden": 0,
+					"energy": 98,
+					"mood": 51,
+					"satiety": 78,
+					"stability": 76,
+					"stress": 58,
+					"study_progress": 100,
+					"study_target": 70
+				},
+				"sleep_change": {
+					"after": {
+						"balance": 48,
+						"diet_burden": -4,
+						"energy": 104,
+						"mood": 46,
+						"satiety": 84,
+						"stability": 71,
+						"stress": 61,
+						"study_progress": 100,
+						"study_target": 70
+					},
+					"before": {
+						"balance": 48,
+						"diet_burden": 0,
+						"energy": 78,
+						"mood": 43,
+						"satiety": 96,
+						"stability": 71,
+						"stress": 70,
+						"study_progress": 100,
+						"study_target": 70
+					},
+					"observed_delta": {
+						"balance": 0,
+						"diet_burden": -4,
+						"energy": 26,
+						"mood": 3,
+						"satiety": -12,
+						"stability": 0,
+						"stress": -9,
+						"study_progress": 0,
+						"study_target": 0
+					}
+				}
+			},
+			{
+				"day": 6,
+				"day_end_change": {
+					"after": {
+						"balance": 34,
+						"diet_burden": 0,
+						"energy": 100,
+						"mood": 48,
+						"satiety": 78,
+						"stability": 75,
+						"stress": 65,
+						"study_progress": 100,
+						"study_target": 70
+					},
+					"before": {
+						"balance": 34,
+						"diet_burden": -4,
+						"energy": 110,
+						"mood": 46,
+						"satiety": 84,
+						"stability": 71,
+						"stress": 65,
+						"study_progress": 100,
+						"study_target": 70
+					},
+					"observed_delta": {
+						"balance": 0,
+						"diet_burden": 4,
+						"energy": -10,
+						"mood": 2,
+						"satiety": -6,
+						"stability": 4,
+						"stress": 0,
+						"study_progress": 0,
+						"study_target": 0
+					}
+				},
+				"day_record": {
+					"actions": [
+						{
+							"cost": 0,
+							"id": "study",
+							"name": "晨读",
+							"stat_delta": {
+								"diet_burden": 0,
+								"energy": -8,
+								"mood": -2,
+								"satiety": -4,
+								"stress": 3,
+								"study_progress": 8
+							},
+							"stock_added": {}
+						},
+						{
+							"cost": 0,
+							"id": "study",
+							"name": "复习",
+							"stat_delta": {
+								"diet_burden": 0,
+								"energy": -8,
+								"mood": -2,
+								"satiety": -4,
+								"stress": 3,
+								"study_progress": 8
+							},
+							"stock_added": {}
+						},
+						{
+							"cost": 0,
+							"id": "study",
+							"name": "夜读",
+							"stat_delta": {
+								"diet_burden": 0,
+								"energy": -8,
+								"mood": -2,
+								"satiety": -4,
+								"stress": 3,
+								"study_progress": 6
+							},
+							"stock_added": {}
+						}
+					],
+					"combos": [],
+					"day": 6,
+					"end_state": {
+						"balance": 34,
+						"diet_burden": 0,
+						"energy": 100,
+						"mood": 48,
+						"satiety": 78,
+						"stability": 75,
+						"stress": 65,
+						"study_progress": 100,
+						"study_target": 70
+					},
+					"event": {
+						"action_deltas": {
+							"walk": {
+								"energy": -2,
+								"mood": -2,
+								"stress": 3
+							}
+						},
+						"day": 6,
+						"id": "rainy_day",
+						"opening_delta": {
+							"mood": -2,
+							"stress": 2
+						},
+						"preview": "明天有雨：外卖配送费上涨，散步的恢复效果也会变弱。",
+						"source_deltas": {
+							"takeout": {
+								"fee": 2
+							}
+						},
+						"summary": "天色一直发灰，出门和点外卖都没有平时轻松。",
+						"title": "下了一整天雨",
+						"tone": "warning"
+					},
+					"learning_state": {
+						"id": "fatigued",
+						"opening_delta": {
+							"energy": -2,
+							"stress": 2
+						},
+						"study_modifier": -2,
+						"summary": "按游戏规则，昨日的精力、压力、作息或安排触发了轻度复习减益。",
+						"title": "进入状态较慢"
+					},
+					"meals": [
+						{
+							"comfort": false,
+							"food_cost": 4,
+							"food_groups": [
+								"grains_tubers",
+								"eggs"
+							],
+							"food_ids": [
+								"rice_plain",
+								"egg"
+							],
+							"food_names": [
+								"白米饭",
+								"鸡蛋"
+							],
+							"limit_tags": [],
+							"nutrient_tags": [
+								"carbohydrate_source",
+								"high_quality_protein_source"
+							],
+							"phase": "breakfast",
+							"preference_reactions": [
+								{
+									"character_name": "本局角色",
+									"comfort": false,
+									"food_id": "rice_plain",
+									"mood_delta": 0,
+									"profile_id": "campus_student",
+									"profile_version": 1,
+									"status": "known"
+								},
+								{
+									"character_name": "本局角色",
+									"comfort": false,
+									"food_id": "egg",
+									"mood_delta": 0,
+									"profile_id": "campus_student",
+									"profile_version": 1,
+									"status": "known"
+								}
+							],
+							"quality": 56,
+							"skipped": false,
+							"source_fee": 0,
+							"source_id": "cafeteria",
+							"source_name": "食堂",
+							"stat_delta": {
+								"diet_burden": 0,
+								"energy": 6,
+								"mood": 0,
+								"satiety": 26,
+								"stress": 0,
+								"study_progress": 0
+							},
+							"tags": [
+								"staple",
+								"cheap",
+								"plain",
+								"protein"
+							],
+							"total_cost": 4,
+							"uses_stock": false
+						},
+						{
+							"comfort": false,
+							"food_cost": 5,
+							"food_groups": [
+								"grains_tubers",
+								"vegetables"
+							],
+							"food_ids": [
+								"rice_plain",
+								"tomato"
+							],
+							"food_names": [
+								"白米饭",
+								"番茄"
+							],
+							"limit_tags": [],
+							"nutrient_tags": [
+								"carbohydrate_source",
+								"dietary_fiber_source"
+							],
+							"phase": "lunch",
+							"preference_reactions": [
+								{
+									"character_name": "本局角色",
+									"comfort": false,
+									"food_id": "rice_plain",
+									"mood_delta": 0,
+									"profile_id": "campus_student",
+									"profile_version": 1,
+									"status": "known"
+								},
+								{
+									"character_name": "本局角色",
+									"comfort": false,
+									"food_id": "tomato",
+									"mood_delta": 3,
+									"profile_id": "campus_student",
+									"profile_version": 1,
+									"status": "known"
+								}
+							],
+							"quality": 56,
+							"skipped": false,
+							"source_fee": 0,
+							"source_id": "cafeteria",
+							"source_name": "食堂",
+							"stat_delta": {
+								"diet_burden": -1,
+								"energy": 3,
+								"mood": 3,
+								"satiety": 20,
+								"stress": 0,
+								"study_progress": 0
+							},
+							"tags": [
+								"staple",
+								"cheap",
+								"plain",
+								"vegetable",
+								"fiber"
+							],
+							"total_cost": 5,
+							"uses_stock": false
+						},
+						{
+							"comfort": false,
+							"food_cost": 5,
+							"food_groups": [
+								"grains_tubers",
+								"soy_products"
+							],
+							"food_ids": [
+								"rice_plain",
+								"tofu"
+							],
+							"food_names": [
+								"白米饭",
+								"豆腐"
+							],
+							"limit_tags": [],
+							"nutrient_tags": [
+								"carbohydrate_source",
+								"high_quality_protein_source"
+							],
+							"phase": "dinner",
+							"preference_reactions": [
+								{
+									"character_name": "本局角色",
+									"comfort": false,
+									"food_id": "rice_plain",
+									"mood_delta": 0,
+									"profile_id": "campus_student",
+									"profile_version": 1,
+									"status": "known"
+								},
+								{
+									"character_name": "本局角色",
+									"comfort": false,
+									"food_id": "tofu",
+									"mood_delta": 0,
+									"profile_id": "campus_student",
+									"profile_version": 1,
+									"status": "known"
+								}
+							],
+							"quality": 56,
+							"skipped": false,
+							"source_fee": 0,
+							"source_id": "cafeteria",
+							"source_name": "食堂",
+							"stat_delta": {
+								"diet_burden": 0,
+								"energy": 5,
+								"mood": 0,
+								"satiety": 27,
+								"stress": 0,
+								"study_progress": 0
+							},
+							"tags": [
+								"staple",
+								"cheap",
+								"plain",
+								"protein",
+								"soy",
+								"legume"
+							],
+							"total_cost": 5,
+							"uses_stock": false
+						}
+					],
+					"next_learning_state": {
+						"id": "fatigued",
+						"opening_delta": {
+							"energy": -2,
+							"stress": 2
+						},
+						"study_modifier": -2,
+						"summary": "按游戏规则，昨日的精力、压力、作息或安排触发了轻度复习减益。",
+						"title": "进入状态较慢"
+					},
+					"nutrition": {
+						"action": "下一顿要是窗口里正好有蔬菜，可以顺手换个搭配；水果还是单独算。",
+						"basis": "规则小字：本局饮食信息参考《中国居民膳食指南（2022）》中的食物多样、合理搭配和规律进餐原则，只整理本局卡牌。卡牌出现不代表现实摄入量足够，也不用于现实健康判断。",
+						"detail_text": "三餐情况　吃了 3/3 餐\n今天遇到　4 种食物卡\n\n餐盘线索\n主食 3 顿｜蔬菜 1 顿｜水果 没碰见\n蛋/肉/鱼 碰见过｜奶类 没碰见｜大豆制品 碰见过｜坚果 没碰见\n\n卡牌资料线索\n主食来源 3 顿｜膳食纤维来源 1 顿\n蛋白质来源 2 顿｜钙来源 没碰见\n全谷物 没碰见｜不饱和脂肪酸来源 没碰见\n需留意的卡牌线索：卡牌上没写到添加糖、高钠或油炸；这不等于一定没有",
+						"metrics": {
+							"added_sugar_meals": 0,
+							"animal_food_meals": 1,
+							"calcium_source_meals": 0,
+							"carbohydrate_source_meals": 3,
+							"dairy_meals": 0,
+							"eaten_meals": 3,
+							"expected_meals": 3,
+							"fiber_source_meals": 1,
+							"fried_meals": 0,
+							"fruit_meals": 0,
+							"grain_meals": 3,
+							"high_quality_protein_meals": 2,
+							"high_sodium_meals": 0,
+							"nuts_meals": 0,
+							"skipped_meals": 0,
+							"soy_meals": 1,
+							"unique_foods": 4,
+							"unsaturated_fat_source_meals": 0,
+							"vegetable_meals": 1,
+							"whole_grain_meals": 0
+						},
+						"observation": "今天吃了 3 餐，其中 1 餐有蔬菜类食物出现。",
+						"rating": "旧版结算记录（不作健康评价）",
+						"score": 56
+					},
+					"sleep": {
+						"id": "sleep_early",
+						"name": "早点睡"
+					},
+					"spend": 14,
+					"start_state": {
+						"balance": 48,
+						"diet_burden": 0,
+						"energy": 100,
+						"mood": 48,
+						"satiety": 78,
+						"stability": 75,
+						"stress": 61,
+						"study_progress": 100,
+						"study_target": 70
+					}
+				},
+				"opening_state": {
+					"balance": 48,
+					"diet_burden": 0,
+					"energy": 98,
+					"mood": 46,
+					"satiety": 78,
+					"stability": 75,
+					"stress": 65,
+					"study_progress": 100,
+					"study_target": 70
+				},
+				"sleep_change": {
+					"after": {
+						"balance": 34,
+						"diet_burden": -4,
+						"energy": 110,
+						"mood": 46,
+						"satiety": 84,
+						"stability": 71,
+						"stress": 65,
+						"study_progress": 100,
+						"study_target": 70
+					},
+					"before": {
+						"balance": 34,
+						"diet_burden": 0,
+						"energy": 84,
+						"mood": 43,
+						"satiety": 96,
+						"stability": 71,
+						"stress": 74,
+						"study_progress": 100,
+						"study_target": 70
+					},
+					"observed_delta": {
+						"balance": 0,
+						"diet_burden": -4,
+						"energy": 26,
+						"mood": 3,
+						"satiety": -12,
+						"stability": 0,
+						"stress": -9,
+						"study_progress": 0,
+						"study_target": 0
+					}
+				}
+			},
+			{
+				"day": 7,
+				"day_end_change": {
+					"after": {
+						"balance": 20,
+						"diet_burden": 0,
+						"energy": 100,
+						"mood": 45,
+						"satiety": 78,
+						"stability": 74,
+						"stress": 67,
+						"study_progress": 100,
+						"study_target": 70
+					},
+					"before": {
+						"balance": 20,
+						"diet_burden": -4,
+						"energy": 110,
+						"mood": 43,
+						"satiety": 84,
+						"stability": 71,
+						"stress": 67,
+						"study_progress": 100,
+						"study_target": 70
+					},
+					"observed_delta": {
+						"balance": 0,
+						"diet_burden": 4,
+						"energy": -10,
+						"mood": 2,
+						"satiety": -6,
+						"stability": 3,
+						"stress": 0,
+						"study_progress": 0,
+						"study_target": 0
+					}
+				},
+				"day_record": {
+					"actions": [
+						{
+							"cost": 0,
+							"id": "study",
+							"name": "晨读",
+							"stat_delta": {
+								"diet_burden": 0,
+								"energy": -8,
+								"mood": -2,
+								"satiety": -4,
+								"stress": 3,
+								"study_progress": 8
+							},
+							"stock_added": {}
+						},
+						{
+							"cost": 0,
+							"id": "study",
+							"name": "复习",
+							"stat_delta": {
+								"diet_burden": 0,
+								"energy": -8,
+								"mood": -2,
+								"satiety": -4,
+								"stress": 3,
+								"study_progress": 6
+							},
+							"stock_added": {}
+						},
+						{
+							"cost": 0,
+							"id": "study",
+							"name": "夜读",
+							"stat_delta": {
+								"diet_burden": 0,
+								"energy": -8,
+								"mood": -2,
+								"satiety": -4,
+								"stress": 3,
+								"study_progress": 6
+							},
+							"stock_added": {}
+						}
+					],
+					"combos": [],
+					"day": 7,
+					"end_state": {
+						"balance": 20,
+						"diet_burden": 0,
+						"energy": 100,
+						"mood": 45,
+						"satiety": 78,
+						"stability": 74,
+						"stress": 67,
+						"study_progress": 100,
+						"study_target": 70
+					},
+					"event": {},
+					"learning_state": {
+						"id": "fatigued",
+						"opening_delta": {
+							"energy": -2,
+							"stress": 2
+						},
+						"study_modifier": -2,
+						"summary": "按游戏规则，昨日的精力、压力、作息或安排触发了轻度复习减益。",
+						"title": "进入状态较慢"
+					},
+					"meals": [
+						{
+							"comfort": false,
+							"food_cost": 4,
+							"food_groups": [
+								"grains_tubers",
+								"eggs"
+							],
+							"food_ids": [
+								"rice_plain",
+								"egg"
+							],
+							"food_names": [
+								"白米饭",
+								"鸡蛋"
+							],
+							"limit_tags": [],
+							"nutrient_tags": [
+								"carbohydrate_source",
+								"high_quality_protein_source"
+							],
+							"phase": "breakfast",
+							"preference_reactions": [
+								{
+									"character_name": "本局角色",
+									"comfort": false,
+									"food_id": "rice_plain",
+									"mood_delta": 0,
+									"profile_id": "campus_student",
+									"profile_version": 1,
+									"status": "known"
+								},
+								{
+									"character_name": "本局角色",
+									"comfort": false,
+									"food_id": "egg",
+									"mood_delta": 0,
+									"profile_id": "campus_student",
+									"profile_version": 1,
+									"status": "known"
+								}
+							],
+							"quality": 56,
+							"skipped": false,
+							"source_fee": 0,
+							"source_id": "cafeteria",
+							"source_name": "食堂",
+							"stat_delta": {
+								"diet_burden": 0,
+								"energy": 6,
+								"mood": 0,
+								"satiety": 26,
+								"stress": 0,
+								"study_progress": 0
+							},
+							"tags": [
+								"staple",
+								"cheap",
+								"plain",
+								"protein"
+							],
+							"total_cost": 4,
+							"uses_stock": false
+						},
+						{
+							"comfort": false,
+							"food_cost": 5,
+							"food_groups": [
+								"grains_tubers",
+								"soy_products"
+							],
+							"food_ids": [
+								"rice_plain",
+								"tofu"
+							],
+							"food_names": [
+								"白米饭",
+								"豆腐"
+							],
+							"limit_tags": [],
+							"nutrient_tags": [
+								"carbohydrate_source",
+								"high_quality_protein_source"
+							],
+							"phase": "lunch",
+							"preference_reactions": [
+								{
+									"character_name": "本局角色",
+									"comfort": false,
+									"food_id": "rice_plain",
+									"mood_delta": 0,
+									"profile_id": "campus_student",
+									"profile_version": 1,
+									"status": "known"
+								},
+								{
+									"character_name": "本局角色",
+									"comfort": false,
+									"food_id": "tofu",
+									"mood_delta": 0,
+									"profile_id": "campus_student",
+									"profile_version": 1,
+									"status": "known"
+								}
+							],
+							"quality": 56,
+							"skipped": false,
+							"source_fee": 0,
+							"source_id": "cafeteria",
+							"source_name": "食堂",
+							"stat_delta": {
+								"diet_burden": 0,
+								"energy": 5,
+								"mood": 0,
+								"satiety": 27,
+								"stress": 0,
+								"study_progress": 0
+							},
+							"tags": [
+								"staple",
+								"cheap",
+								"plain",
+								"protein",
+								"soy",
+								"legume"
+							],
+							"total_cost": 5,
+							"uses_stock": false
+						},
+						{
+							"comfort": false,
+							"food_cost": 5,
+							"food_groups": [
+								"grains_tubers",
+								"vegetables"
+							],
+							"food_ids": [
+								"rice_plain",
+								"greens"
+							],
+							"food_names": [
+								"白米饭",
+								"青菜"
+							],
+							"limit_tags": [],
+							"nutrient_tags": [
+								"carbohydrate_source",
+								"dietary_fiber_source"
+							],
+							"phase": "dinner",
+							"preference_reactions": [
+								{
+									"character_name": "本局角色",
+									"comfort": false,
+									"food_id": "rice_plain",
+									"mood_delta": 0,
+									"profile_id": "campus_student",
+									"profile_version": 1,
+									"status": "known"
+								},
+								{
+									"character_name": "本局角色",
+									"comfort": false,
+									"food_id": "greens",
+									"mood_delta": -2,
+									"profile_id": "campus_student",
+									"profile_version": 1,
+									"status": "known"
+								}
+							],
+							"quality": 56,
+							"skipped": false,
+							"source_fee": 0,
+							"source_id": "cafeteria",
+							"source_name": "食堂",
+							"stat_delta": {
+								"diet_burden": -2,
+								"energy": 3,
+								"mood": -2,
+								"satiety": 21,
+								"stress": 0,
+								"study_progress": 0
+							},
+							"tags": [
+								"staple",
+								"cheap",
+								"plain",
+								"vegetable",
+								"fiber"
+							],
+							"total_cost": 5,
+							"uses_stock": false
+						}
+					],
+					"next_learning_state": {
+						"id": "fatigued",
+						"opening_delta": {
+							"energy": -2,
+							"stress": 2
+						},
+						"study_modifier": -2,
+						"summary": "按游戏规则，昨日的精力、压力、作息或安排触发了轻度复习减益。",
+						"title": "进入状态较慢"
+					},
+					"nutrition": {
+						"action": "下一顿要是窗口里正好有蔬菜，可以顺手换个搭配；水果还是单独算。",
+						"basis": "规则小字：本局饮食信息参考《中国居民膳食指南（2022）》中的食物多样、合理搭配和规律进餐原则，只整理本局卡牌。卡牌出现不代表现实摄入量足够，也不用于现实健康判断。",
+						"detail_text": "三餐情况　吃了 3/3 餐\n今天遇到　4 种食物卡\n\n餐盘线索\n主食 3 顿｜蔬菜 1 顿｜水果 没碰见\n蛋/肉/鱼 碰见过｜奶类 没碰见｜大豆制品 碰见过｜坚果 没碰见\n\n卡牌资料线索\n主食来源 3 顿｜膳食纤维来源 1 顿\n蛋白质来源 2 顿｜钙来源 没碰见\n全谷物 没碰见｜不饱和脂肪酸来源 没碰见\n需留意的卡牌线索：卡牌上没写到添加糖、高钠或油炸；这不等于一定没有",
+						"metrics": {
+							"added_sugar_meals": 0,
+							"animal_food_meals": 1,
+							"calcium_source_meals": 0,
+							"carbohydrate_source_meals": 3,
+							"dairy_meals": 0,
+							"eaten_meals": 3,
+							"expected_meals": 3,
+							"fiber_source_meals": 1,
+							"fried_meals": 0,
+							"fruit_meals": 0,
+							"grain_meals": 3,
+							"high_quality_protein_meals": 2,
+							"high_sodium_meals": 0,
+							"nuts_meals": 0,
+							"skipped_meals": 0,
+							"soy_meals": 1,
+							"unique_foods": 4,
+							"unsaturated_fat_source_meals": 0,
+							"vegetable_meals": 1,
+							"whole_grain_meals": 0
+						},
+						"observation": "今天吃了 3 餐，其中 1 餐有蔬菜类食物出现。",
+						"rating": "旧版结算记录（不作健康评价）",
+						"score": 56
+					},
+					"sleep": {
+						"id": "sleep_early",
+						"name": "早点睡"
+					},
+					"spend": 14,
+					"start_state": {
+						"balance": 34,
+						"diet_burden": 0,
+						"energy": 100,
+						"mood": 48,
+						"satiety": 78,
+						"stability": 75,
+						"stress": 65,
+						"study_progress": 100,
+						"study_target": 70
+					}
+				},
+				"opening_state": {
+					"balance": 34,
+					"diet_burden": 0,
+					"energy": 98,
+					"mood": 48,
+					"satiety": 78,
+					"stability": 75,
+					"stress": 67,
+					"study_progress": 100,
+					"study_target": 70
+				},
+				"sleep_change": {
+					"after": {
+						"balance": 20,
+						"diet_burden": -4,
+						"energy": 110,
+						"mood": 43,
+						"satiety": 84,
+						"stability": 71,
+						"stress": 67,
+						"study_progress": 100,
+						"study_target": 70
+					},
+					"before": {
+						"balance": 20,
+						"diet_burden": 0,
+						"energy": 84,
+						"mood": 40,
+						"satiety": 96,
+						"stability": 71,
+						"stress": 76,
+						"study_progress": 100,
+						"study_target": 70
+					},
+					"observed_delta": {
+						"balance": 0,
+						"diet_burden": -4,
+						"energy": 26,
+						"mood": 3,
+						"satiety": -12,
+						"stability": 0,
+						"stress": -9,
+						"study_progress": 0,
+						"study_target": 0
+					}
+				}
+			}
+		],
+		"ending_id": "stable_endurance",
+		"final_state": {
+			"balance": 20,
+			"diet_burden": 0,
+			"energy": 100,
+			"mood": 45,
+			"satiety": 78,
+			"stability": 74,
+			"stress": 67,
+			"study_progress": 100,
+			"study_target": 70
+		},
+		"phase": "ending",
+		"route": "Seeded live source selection and affordable two-card cafeteria meals; three study actions and sleep_early daily; default character preferences.",
+		"seed": 20260711
+	},
+	"sleep_observations": [
+		{
+			"after_sleep_before_finish": {
+				"balance": 120,
+				"diet_burden": 46,
+				"energy": 86,
+				"mood": 63,
+				"satiety": 38,
+				"stability": 65,
+				"stress": 31,
+				"study_progress": 70,
+				"study_target": 70
+			},
+			"before_sleep": {
+				"balance": 120,
+				"diet_burden": 50,
+				"energy": 60,
+				"mood": 60,
+				"satiety": 50,
+				"stability": 65,
+				"stress": 40,
+				"study_progress": 70,
+				"study_target": 70
+			},
+			"controlled_fixture": true,
+			"final_state": {
+				"balance": 120,
+				"diet_burden": 41,
+				"energy": 90,
+				"mood": 69,
+				"satiety": 32,
+				"stability": 74,
+				"stress": 31,
+				"study_progress": 70,
+				"study_target": 70
+			},
+			"meal_records": [
+				{
+					"comfort": false,
+					"food_cost": 7,
+					"food_groups": [
+						"grains_tubers",
+						"eggs",
+						"vegetables"
+					],
+					"food_ids": [
+						"rice_plain",
+						"egg",
+						"tomato"
+					],
+					"food_names": [
+						"白米饭",
+						"鸡蛋",
+						"番茄"
+					],
+					"limit_tags": [],
+					"nutrient_tags": [
+						"carbohydrate_source",
+						"high_quality_protein_source",
+						"dietary_fiber_source"
+					],
+					"phase": "breakfast",
+					"preference_reactions": [
+						{
+							"character_name": "本局角色",
+							"comfort": false,
+							"food_id": "rice_plain",
+							"mood_delta": 0,
+							"profile_id": "campus_student",
+							"profile_version": 1,
+							"status": "known"
+						},
+						{
+							"character_name": "本局角色",
+							"comfort": false,
+							"food_id": "egg",
+							"mood_delta": 0,
+							"profile_id": "campus_student",
+							"profile_version": 1,
+							"status": "known"
+						},
+						{
+							"character_name": "本局角色",
+							"comfort": false,
+							"food_id": "tomato",
+							"mood_delta": 3,
+							"profile_id": "campus_student",
+							"profile_version": 1,
+							"status": "known"
+						}
+					],
+					"quality": 86,
+					"skipped": false,
+					"source_fee": 0,
+					"source_id": "cafeteria",
+					"source_name": "食堂",
+					"stat_delta": {
+						"diet_burden": -1,
+						"energy": 8,
+						"mood": 3,
+						"satiety": 30,
+						"stress": 0,
+						"study_progress": 0
+					},
+					"tags": [
+						"staple",
+						"cheap",
+						"plain",
+						"protein",
+						"vegetable",
+						"fiber"
+					],
+					"total_cost": 7,
+					"uses_stock": false
+				},
+				{
+					"comfort": false,
+					"food_cost": 7,
+					"food_groups": [
+						"grains_tubers",
+						"eggs",
+						"vegetables"
+					],
+					"food_ids": [
+						"rice_plain",
+						"egg",
+						"tomato"
+					],
+					"food_names": [
+						"白米饭",
+						"鸡蛋",
+						"番茄"
+					],
+					"limit_tags": [],
+					"nutrient_tags": [
+						"carbohydrate_source",
+						"high_quality_protein_source",
+						"dietary_fiber_source"
+					],
+					"phase": "lunch",
+					"preference_reactions": [
+						{
+							"character_name": "本局角色",
+							"comfort": false,
+							"food_id": "rice_plain",
+							"mood_delta": 0,
+							"profile_id": "campus_student",
+							"profile_version": 1,
+							"status": "known"
+						},
+						{
+							"character_name": "本局角色",
+							"comfort": false,
+							"food_id": "egg",
+							"mood_delta": 0,
+							"profile_id": "campus_student",
+							"profile_version": 1,
+							"status": "known"
+						},
+						{
+							"character_name": "本局角色",
+							"comfort": false,
+							"food_id": "tomato",
+							"mood_delta": 3,
+							"profile_id": "campus_student",
+							"profile_version": 1,
+							"status": "known"
+						}
+					],
+					"quality": 86,
+					"skipped": false,
+					"source_fee": 0,
+					"source_id": "cafeteria",
+					"source_name": "食堂",
+					"stat_delta": {
+						"diet_burden": -1,
+						"energy": 8,
+						"mood": 3,
+						"satiety": 30,
+						"stress": 0,
+						"study_progress": 0
+					},
+					"tags": [
+						"staple",
+						"cheap",
+						"plain",
+						"protein",
+						"vegetable",
+						"fiber"
+					],
+					"total_cost": 7,
+					"uses_stock": false
+				},
+				{
+					"comfort": false,
+					"food_cost": 7,
+					"food_groups": [
+						"grains_tubers",
+						"eggs",
+						"vegetables"
+					],
+					"food_ids": [
+						"rice_plain",
+						"egg",
+						"tomato"
+					],
+					"food_names": [
+						"白米饭",
+						"鸡蛋",
+						"番茄"
+					],
+					"limit_tags": [],
+					"nutrient_tags": [
+						"carbohydrate_source",
+						"high_quality_protein_source",
+						"dietary_fiber_source"
+					],
+					"phase": "dinner",
+					"preference_reactions": [
+						{
+							"character_name": "本局角色",
+							"comfort": false,
+							"food_id": "rice_plain",
+							"mood_delta": 0,
+							"profile_id": "campus_student",
+							"profile_version": 1,
+							"status": "known"
+						},
+						{
+							"character_name": "本局角色",
+							"comfort": false,
+							"food_id": "egg",
+							"mood_delta": 0,
+							"profile_id": "campus_student",
+							"profile_version": 1,
+							"status": "known"
+						},
+						{
+							"character_name": "本局角色",
+							"comfort": false,
+							"food_id": "tomato",
+							"mood_delta": 3,
+							"profile_id": "campus_student",
+							"profile_version": 1,
+							"status": "known"
+						}
+					],
+					"quality": 86,
+					"skipped": false,
+					"source_fee": 0,
+					"source_id": "cafeteria",
+					"source_name": "食堂",
+					"stat_delta": {
+						"diet_burden": -1,
+						"energy": 8,
+						"mood": 3,
+						"satiety": 30,
+						"stress": 0,
+						"study_progress": 0
+					},
+					"tags": [
+						"staple",
+						"cheap",
+						"plain",
+						"protein",
+						"vegetable",
+						"fiber"
+					],
+					"total_cost": 7,
+					"uses_stock": false
+				}
+			],
+			"pending_learning_state": {
+				"id": "clear_focus",
+				"opening_delta": {
+					"energy": 3,
+					"mood": 1,
+					"stress": -2
+				},
+				"study_modifier": 3,
+				"summary": "按游戏规则，昨日的进餐记录、较早休息和收尾状态共同触发了今日复习加成。",
+				"title": "进入状态较快"
+			},
+			"sleep_option": {
+				"burden": -4,
+				"desc": "把灯关了，剩下的明天再说。",
+				"energy": 26,
+				"id": "sleep_early",
+				"image": "res://assets/generated/actions/sleep_early.png",
+				"mood": 3,
+				"name": "早点睡",
+				"satiety": -12,
+				"scenes": [
+					"sleep"
+				],
+				"stress": -9,
+				"study": 0,
+				"tags": []
+			}
+		},
+		{
+			"after_sleep_before_finish": {
+				"balance": 120,
+				"diet_burden": 52,
+				"energy": 38,
+				"mood": 55,
+				"satiety": 39,
+				"stability": 65,
+				"stress": 52,
+				"study_progress": 86,
+				"study_target": 70
+			},
+			"before_sleep": {
+				"balance": 120,
+				"diet_burden": 50,
+				"energy": 60,
+				"mood": 60,
+				"satiety": 50,
+				"stability": 65,
+				"stress": 40,
+				"study_progress": 70,
+				"study_target": 70
+			},
+			"controlled_fixture": true,
+			"final_state": {
+				"balance": 120,
+				"diet_burden": 47,
+				"energy": 42,
+				"mood": 61,
+				"satiety": 33,
+				"stability": 62,
+				"stress": 52,
+				"study_progress": 86,
+				"study_target": 70
+			},
+			"meal_records": [
+				{
+					"comfort": false,
+					"food_cost": 7,
+					"food_groups": [
+						"grains_tubers",
+						"eggs",
+						"vegetables"
+					],
+					"food_ids": [
+						"rice_plain",
+						"egg",
+						"tomato"
+					],
+					"food_names": [
+						"白米饭",
+						"鸡蛋",
+						"番茄"
+					],
+					"limit_tags": [],
+					"nutrient_tags": [
+						"carbohydrate_source",
+						"high_quality_protein_source",
+						"dietary_fiber_source"
+					],
+					"phase": "breakfast",
+					"preference_reactions": [
+						{
+							"character_name": "本局角色",
+							"comfort": false,
+							"food_id": "rice_plain",
+							"mood_delta": 0,
+							"profile_id": "campus_student",
+							"profile_version": 1,
+							"status": "known"
+						},
+						{
+							"character_name": "本局角色",
+							"comfort": false,
+							"food_id": "egg",
+							"mood_delta": 0,
+							"profile_id": "campus_student",
+							"profile_version": 1,
+							"status": "known"
+						},
+						{
+							"character_name": "本局角色",
+							"comfort": false,
+							"food_id": "tomato",
+							"mood_delta": 3,
+							"profile_id": "campus_student",
+							"profile_version": 1,
+							"status": "known"
+						}
+					],
+					"quality": 86,
+					"skipped": false,
+					"source_fee": 0,
+					"source_id": "cafeteria",
+					"source_name": "食堂",
+					"stat_delta": {
+						"diet_burden": -1,
+						"energy": 8,
+						"mood": 3,
+						"satiety": 30,
+						"stress": 0,
+						"study_progress": 0
+					},
+					"tags": [
+						"staple",
+						"cheap",
+						"plain",
+						"protein",
+						"vegetable",
+						"fiber"
+					],
+					"total_cost": 7,
+					"uses_stock": false
+				},
+				{
+					"comfort": false,
+					"food_cost": 7,
+					"food_groups": [
+						"grains_tubers",
+						"eggs",
+						"vegetables"
+					],
+					"food_ids": [
+						"rice_plain",
+						"egg",
+						"tomato"
+					],
+					"food_names": [
+						"白米饭",
+						"鸡蛋",
+						"番茄"
+					],
+					"limit_tags": [],
+					"nutrient_tags": [
+						"carbohydrate_source",
+						"high_quality_protein_source",
+						"dietary_fiber_source"
+					],
+					"phase": "lunch",
+					"preference_reactions": [
+						{
+							"character_name": "本局角色",
+							"comfort": false,
+							"food_id": "rice_plain",
+							"mood_delta": 0,
+							"profile_id": "campus_student",
+							"profile_version": 1,
+							"status": "known"
+						},
+						{
+							"character_name": "本局角色",
+							"comfort": false,
+							"food_id": "egg",
+							"mood_delta": 0,
+							"profile_id": "campus_student",
+							"profile_version": 1,
+							"status": "known"
+						},
+						{
+							"character_name": "本局角色",
+							"comfort": false,
+							"food_id": "tomato",
+							"mood_delta": 3,
+							"profile_id": "campus_student",
+							"profile_version": 1,
+							"status": "known"
+						}
+					],
+					"quality": 86,
+					"skipped": false,
+					"source_fee": 0,
+					"source_id": "cafeteria",
+					"source_name": "食堂",
+					"stat_delta": {
+						"diet_burden": -1,
+						"energy": 8,
+						"mood": 3,
+						"satiety": 30,
+						"stress": 0,
+						"study_progress": 0
+					},
+					"tags": [
+						"staple",
+						"cheap",
+						"plain",
+						"protein",
+						"vegetable",
+						"fiber"
+					],
+					"total_cost": 7,
+					"uses_stock": false
+				},
+				{
+					"comfort": false,
+					"food_cost": 7,
+					"food_groups": [
+						"grains_tubers",
+						"eggs",
+						"vegetables"
+					],
+					"food_ids": [
+						"rice_plain",
+						"egg",
+						"tomato"
+					],
+					"food_names": [
+						"白米饭",
+						"鸡蛋",
+						"番茄"
+					],
+					"limit_tags": [],
+					"nutrient_tags": [
+						"carbohydrate_source",
+						"high_quality_protein_source",
+						"dietary_fiber_source"
+					],
+					"phase": "dinner",
+					"preference_reactions": [
+						{
+							"character_name": "本局角色",
+							"comfort": false,
+							"food_id": "rice_plain",
+							"mood_delta": 0,
+							"profile_id": "campus_student",
+							"profile_version": 1,
+							"status": "known"
+						},
+						{
+							"character_name": "本局角色",
+							"comfort": false,
+							"food_id": "egg",
+							"mood_delta": 0,
+							"profile_id": "campus_student",
+							"profile_version": 1,
+							"status": "known"
+						},
+						{
+							"character_name": "本局角色",
+							"comfort": false,
+							"food_id": "tomato",
+							"mood_delta": 3,
+							"profile_id": "campus_student",
+							"profile_version": 1,
+							"status": "known"
+						}
+					],
+					"quality": 86,
+					"skipped": false,
+					"source_fee": 0,
+					"source_id": "cafeteria",
+					"source_name": "食堂",
+					"stat_delta": {
+						"diet_burden": -1,
+						"energy": 8,
+						"mood": 3,
+						"satiety": 30,
+						"stress": 0,
+						"study_progress": 0
+					},
+					"tags": [
+						"staple",
+						"cheap",
+						"plain",
+						"protein",
+						"vegetable",
+						"fiber"
+					],
+					"total_cost": 7,
+					"uses_stock": false
+				}
+			],
+			"pending_learning_state": {
+				"id": "fatigued",
+				"opening_delta": {
+					"energy": -2,
+					"stress": 2
+				},
+				"study_modifier": -2,
+				"summary": "按游戏规则，昨日的精力、压力、作息或安排触发了轻度复习减益。",
+				"title": "进入状态较慢"
+			},
+			"sleep_option": {
+				"burden": 2,
+				"desc": "台灯再亮一阵。",
+				"energy": -22,
+				"id": "night_study",
+				"image": "res://assets/generated/ui_v2/card_art/sleep/night_study_art.png",
+				"mood": -5,
+				"name": "再看一会儿",
+				"satiety": -11,
+				"scenes": [
+					"sleep"
+				],
+				"stress": 12,
+				"study": 16,
+				"tags": []
+			}
+		},
+		{
+			"after_sleep_before_finish": {
+				"balance": 120,
+				"diet_burden": 51,
+				"energy": 50,
+				"mood": 68,
+				"satiety": 42,
+				"stability": 65,
+				"stress": 38,
+				"study_progress": 70,
+				"study_target": 70
+			},
+			"before_sleep": {
+				"balance": 120,
+				"diet_burden": 50,
+				"energy": 60,
+				"mood": 60,
+				"satiety": 50,
+				"stability": 65,
+				"stress": 40,
+				"study_progress": 70,
+				"study_target": 70
+			},
+			"controlled_fixture": true,
+			"final_state": {
+				"balance": 120,
+				"diet_burden": 46,
+				"energy": 54,
+				"mood": 74,
+				"satiety": 36,
+				"stability": 66,
+				"stress": 38,
+				"study_progress": 70,
+				"study_target": 70
+			},
+			"meal_records": [
+				{
+					"comfort": false,
+					"food_cost": 7,
+					"food_groups": [
+						"grains_tubers",
+						"eggs",
+						"vegetables"
+					],
+					"food_ids": [
+						"rice_plain",
+						"egg",
+						"tomato"
+					],
+					"food_names": [
+						"白米饭",
+						"鸡蛋",
+						"番茄"
+					],
+					"limit_tags": [],
+					"nutrient_tags": [
+						"carbohydrate_source",
+						"high_quality_protein_source",
+						"dietary_fiber_source"
+					],
+					"phase": "breakfast",
+					"preference_reactions": [
+						{
+							"character_name": "本局角色",
+							"comfort": false,
+							"food_id": "rice_plain",
+							"mood_delta": 0,
+							"profile_id": "campus_student",
+							"profile_version": 1,
+							"status": "known"
+						},
+						{
+							"character_name": "本局角色",
+							"comfort": false,
+							"food_id": "egg",
+							"mood_delta": 0,
+							"profile_id": "campus_student",
+							"profile_version": 1,
+							"status": "known"
+						},
+						{
+							"character_name": "本局角色",
+							"comfort": false,
+							"food_id": "tomato",
+							"mood_delta": 3,
+							"profile_id": "campus_student",
+							"profile_version": 1,
+							"status": "known"
+						}
+					],
+					"quality": 86,
+					"skipped": false,
+					"source_fee": 0,
+					"source_id": "cafeteria",
+					"source_name": "食堂",
+					"stat_delta": {
+						"diet_burden": -1,
+						"energy": 8,
+						"mood": 3,
+						"satiety": 30,
+						"stress": 0,
+						"study_progress": 0
+					},
+					"tags": [
+						"staple",
+						"cheap",
+						"plain",
+						"protein",
+						"vegetable",
+						"fiber"
+					],
+					"total_cost": 7,
+					"uses_stock": false
+				},
+				{
+					"comfort": false,
+					"food_cost": 7,
+					"food_groups": [
+						"grains_tubers",
+						"eggs",
+						"vegetables"
+					],
+					"food_ids": [
+						"rice_plain",
+						"egg",
+						"tomato"
+					],
+					"food_names": [
+						"白米饭",
+						"鸡蛋",
+						"番茄"
+					],
+					"limit_tags": [],
+					"nutrient_tags": [
+						"carbohydrate_source",
+						"high_quality_protein_source",
+						"dietary_fiber_source"
+					],
+					"phase": "lunch",
+					"preference_reactions": [
+						{
+							"character_name": "本局角色",
+							"comfort": false,
+							"food_id": "rice_plain",
+							"mood_delta": 0,
+							"profile_id": "campus_student",
+							"profile_version": 1,
+							"status": "known"
+						},
+						{
+							"character_name": "本局角色",
+							"comfort": false,
+							"food_id": "egg",
+							"mood_delta": 0,
+							"profile_id": "campus_student",
+							"profile_version": 1,
+							"status": "known"
+						},
+						{
+							"character_name": "本局角色",
+							"comfort": false,
+							"food_id": "tomato",
+							"mood_delta": 3,
+							"profile_id": "campus_student",
+							"profile_version": 1,
+							"status": "known"
+						}
+					],
+					"quality": 86,
+					"skipped": false,
+					"source_fee": 0,
+					"source_id": "cafeteria",
+					"source_name": "食堂",
+					"stat_delta": {
+						"diet_burden": -1,
+						"energy": 8,
+						"mood": 3,
+						"satiety": 30,
+						"stress": 0,
+						"study_progress": 0
+					},
+					"tags": [
+						"staple",
+						"cheap",
+						"plain",
+						"protein",
+						"vegetable",
+						"fiber"
+					],
+					"total_cost": 7,
+					"uses_stock": false
+				},
+				{
+					"comfort": false,
+					"food_cost": 7,
+					"food_groups": [
+						"grains_tubers",
+						"eggs",
+						"vegetables"
+					],
+					"food_ids": [
+						"rice_plain",
+						"egg",
+						"tomato"
+					],
+					"food_names": [
+						"白米饭",
+						"鸡蛋",
+						"番茄"
+					],
+					"limit_tags": [],
+					"nutrient_tags": [
+						"carbohydrate_source",
+						"high_quality_protein_source",
+						"dietary_fiber_source"
+					],
+					"phase": "dinner",
+					"preference_reactions": [
+						{
+							"character_name": "本局角色",
+							"comfort": false,
+							"food_id": "rice_plain",
+							"mood_delta": 0,
+							"profile_id": "campus_student",
+							"profile_version": 1,
+							"status": "known"
+						},
+						{
+							"character_name": "本局角色",
+							"comfort": false,
+							"food_id": "egg",
+							"mood_delta": 0,
+							"profile_id": "campus_student",
+							"profile_version": 1,
+							"status": "known"
+						},
+						{
+							"character_name": "本局角色",
+							"comfort": false,
+							"food_id": "tomato",
+							"mood_delta": 3,
+							"profile_id": "campus_student",
+							"profile_version": 1,
+							"status": "known"
+						}
+					],
+					"quality": 86,
+					"skipped": false,
+					"source_fee": 0,
+					"source_id": "cafeteria",
+					"source_name": "食堂",
+					"stat_delta": {
+						"diet_burden": -1,
+						"energy": 8,
+						"mood": 3,
+						"satiety": 30,
+						"stress": 0,
+						"study_progress": 0
+					},
+					"tags": [
+						"staple",
+						"cheap",
+						"plain",
+						"protein",
+						"vegetable",
+						"fiber"
+					],
+					"total_cost": 7,
+					"uses_stock": false
+				}
+			],
+			"pending_learning_state": {
+				"id": "steady",
+				"opening_delta": {},
+				"study_modifier": 0,
+				"summary": "按游戏规则，昨日记录没有触发额外的复习加成或减益。",
+				"title": "状态照常"
+			},
+			"sleep_option": {
+				"burden": 1,
+				"desc": "本来只想看十分钟。",
+				"energy": -10,
+				"id": "scroll_phone",
+				"image": "res://assets/generated/ui_v2/card_art/sleep/scroll_phone_art.png",
+				"mood": 8,
+				"name": "刷会儿手机",
+				"satiety": -8,
+				"scenes": [
+					"sleep"
+				],
+				"stress": -2,
+				"study": 0,
+				"tags": []
+			}
+		}
+	],
+	"source_sha256": {
+		"res://data/cards/actions.xml": "08cc8a469ee2525ed7587fda8319dd71378793f900d6e3c3f400aa758ad649dc",
+		"res://data/cards/foods.xml": "a102337fac89e296b35a878d52d507dab6e8fcfc414567030931dd87e73f9826",
+		"res://data/cards/meal_sources.xml": "a90780480dae9ee5414f748db4dc225f86118d471f941b24d53566ad557be437",
+		"res://data/cards/sleep_options.xml": "65f05e7d7c14cf97aafb3db4e354333ba54ebc63bc57929b8dcd2361e0aafe88",
+		"res://data/characters/default_food_preferences.xml": "aa69551e6b9d10ed66010d15d6095a5ff9d5c06ed16b0f3b29452d67dfa9ced9",
+		"res://scripts/CardDataStore.gd": "30e44e371883c4860ee5eaa67eb194055edd8cf6a57f0f914ba7918409c56b07",
+		"res://scripts/GameData.gd": "cfd3d38e1fec83e73c6eb87290dc278a9bc0f4a2a6bdb9e8b90099e75806a9a8",
+		"res://scripts/systems/DayCarryoverService.gd": "8e7361a7c62ac361885623fb72370a084e79064c665d8fdb32957909307c6522",
+		"res://scripts/systems/FoodPreferenceService.gd": "54e46c4d231fd48154682530fdbdf563dee9186f9245f20ae40329721dc64a9b",
+		"res://scripts/systems/MealDeckService.gd": "138dfd163ae1363a7ad8152f540d64bf7047d5602e7f46e296444ba4a5e74f2b",
+		"res://scripts/systems/MealResolver.gd": "a9e7852466b1a87b593c108b7b900a65c6446c631dded158adc7f6657b3118e3",
+		"res://scripts/systems/NutritionLedger.gd": "9be336067bec2db4c4d9b10e3628422802ff225cedf649eb3f4780e58a6dc2ae",
+		"res://scripts/systems/WeeklyEventService.gd": "3b74bedd744b1f5c4b601d087a298a6f3bf0459f8ed2054a4abfc54e1bd42035",
+		"res://scripts/ui_v2/GameRootV2.gd": "64bf74d48733e2df6cf3c8d8b686b9bbf4af31aef4083543027f802ba8dc6081"
+	},
+	"stability_boundaries": {
+		"avg_quality": 70,
+		"base_state": {
+			"balance": 120,
+			"diet_burden": 50,
+			"energy": 60,
+			"mood": 60,
+			"satiety": 50,
+			"stability": 65,
+			"stress": 40,
+			"study_progress": 70,
+			"study_target": 70
+		},
+		"day": 1,
+		"rows": [
+			{
+				"key": "diet_burden",
+				"stability": 68,
+				"value": 0
+			},
+			{
+				"key": "diet_burden",
+				"stability": 66,
+				"value": 24
+			},
+			{
+				"key": "diet_burden",
+				"stability": 63,
+				"value": 50
+			},
+			{
+				"key": "diet_burden",
+				"stability": 62,
+				"value": 60
+			},
+			{
+				"key": "diet_burden",
+				"stability": 62,
+				"value": 61
+			},
+			{
+				"key": "diet_burden",
+				"stability": 58,
+				"value": 100
+			},
+			{
+				"key": "energy",
+				"stability": 44,
+				"value": 15
+			},
+			{
+				"key": "energy",
+				"stability": 54,
+				"value": 16
+			},
+			{
+				"key": "mood",
+				"stability": 47,
+				"value": 15
+			},
+			{
+				"key": "mood",
+				"stability": 57,
+				"value": 16
+			},
+			{
+				"key": "satiety",
+				"stability": 51,
+				"value": 11
+			},
+			{
+				"key": "satiety",
+				"stability": 59,
+				"value": 12
+			},
+			{
+				"key": "stress",
+				"stability": 58,
+				"value": 88
+			},
+			{
+				"key": "stress",
+				"stability": 47,
+				"value": 89
+			},
+			{
+				"key": "balance",
+				"stability": 53,
+				"value": 35
+			},
+			{
+				"key": "balance",
+				"stability": 61,
+				"value": 36
+			},
+			{
+				"key": "balance",
+				"stability": 63,
+				"value": 59
+			},
+			{
+				"key": "balance",
+				"stability": 63,
+				"value": 60
+			}
+		],
+		"total_days": 7
+	},
+	"starting_state": {
+		"balance": 120,
+		"diet_burden": 24,
+		"energy": 52,
+		"mood": 55,
+		"satiety": 58,
+		"stability": 65,
+		"stress": 48,
+		"study_progress": 0,
+		"study_target": 70
+	}
+}

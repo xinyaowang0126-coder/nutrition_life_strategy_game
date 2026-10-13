@@ -2,6 +2,7 @@ class_name NewDayPopupV2
 extends Control
 
 signal continue_requested()
+signal recovery_details_requested()
 
 @onready var dim: ColorRect = $Dim
 @onready var paper_host: Control = $PaperHost
@@ -16,6 +17,7 @@ signal continue_requested()
 @onready var status_title: Label = $PaperHost/Paper/Margin/VBox/BodyScroll/CardsGrid/LearningCard/Margin/VBox/Title
 @onready var status_summary: Label = $PaperHost/Paper/Margin/VBox/BodyScroll/CardsGrid/LearningCard/Margin/VBox/Summary
 @onready var status_effect: Label = $PaperHost/Paper/Margin/VBox/BodyScroll/CardsGrid/LearningCard/Margin/VBox/Effect/Label
+@onready var recovery_details_button: Button = $PaperHost/Paper/Margin/VBox/BodyScroll/CardsGrid/LearningCard/Margin/VBox/RecoveryDetails
 @onready var event_card: PanelContainer = $PaperHost/Paper/Margin/VBox/BodyScroll/CardsGrid/EventCard
 @onready var event_image_frame: PanelContainer = $PaperHost/Paper/Margin/VBox/BodyScroll/CardsGrid/EventCard/Margin/VBox/ImageFrame
 @onready var event_image: TextureRect = $PaperHost/Paper/Margin/VBox/BodyScroll/CardsGrid/EventCard/Margin/VBox/ImageFrame/EventImage
@@ -34,6 +36,7 @@ var _continue_locked := false
 func _ready() -> void:
 	_ready_finished = true
 	continue_button.pressed.connect(_on_continue_pressed)
+	recovery_details_button.pressed.connect(func() -> void: recovery_details_requested.emit())
 	resized.connect(_apply_layout)
 	if not _payload.is_empty():
 		_apply_payload()
@@ -90,7 +93,8 @@ func _apply_payload() -> void:
 	day_title.text = String(_payload.get("title", "第 %d 天开始" % day))
 	day_subtitle.text = String(_payload.get(
 		"subtitle",
-		"昨夜的选择留下一点余韵，今天也有新的变化。"
+		"新的一周从今天开始，先安排好今天的三餐与休息。"
+		if day == 1 else "今天的游戏状态与事件已准备好，可以开始新的安排。"
 	))
 	day_subtitle.visible = not day_subtitle.text.is_empty()
 
@@ -100,13 +104,15 @@ func _apply_payload() -> void:
 		"summary",
 		learning_state.get(
 			"description",
-			"昨天的饮食和休息，让今天的脑子维持在平常水平。"
+			"这是本周的起步状态，今天的安排会影响后续游戏状态。"
+			if day == 1 else "今日状态按游戏规则显示，详细原因以实际记录为准。"
 		)
 	))
 	status_effect.text = String(_payload.get(
 		"status_effect",
 		learning_state.get("effect_text", _learning_effect_text(learning_state))
 	))
+	recovery_details_button.visible = _payload.has("recovery")
 
 	var event := _dictionary_value("event", "today_event")
 	event_title.text = String(event.get("title", event.get("name", "平常的一天")))
@@ -135,7 +141,7 @@ func _dictionary_value(primary_key: String, fallback_key: String) -> Dictionary:
 
 func _learning_effect_text(learning_state: Dictionary) -> String:
 	if not learning_state.has("study_modifier"):
-		return "每次学习效果不变"
+		return "恢复效果未提供"
 	var modifier := int(learning_state.get("study_modifier", 0))
 	if modifier == 0:
 		return "每次学习效果不变"
@@ -202,6 +208,8 @@ func _sort_container_tree(container: Container) -> void:
 
 
 func _on_continue_pressed() -> void:
+	if continue_button.disabled:
+		return
 	if _continue_locked:
 		return
 	_continue_locked = true

@@ -3,6 +3,8 @@
 [ext_resource type="Theme" uid="uid://dthxodrk6slpq" path="res://scenes/game_v2/V2Theme.tres" id="1_wm2xb"]
 [ext_resource type="Script" uid="uid://gpg46mrf5xoa" path="res://scripts/ui_v2/stages/DormPantryStage.gd" id="2_vhsom"]
 
+[ext_resource type="PackedScene" path="res://scenes/game_v2/components/SelectedFoodCard.tscn" id="3_selected"]
+
 [node name="DormPantryStage" type="Control" unique_id=1951703082]
 layout_mode = 3
 anchors_preset = 15
@@ -54,18 +56,22 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="PantryPanel" type="PanelContainer" parent="Layout" unique_id=591252920]
+offset_bottom = 0
+offset_right = 0
+offset_top = 0
+offset_left = 0
 layout_mode = 0
 anchor_left = 0.2
-anchor_top = 0.17
-anchor_right = 0.52
-anchor_bottom = 0.7
+anchor_top = 0.11
+anchor_right = 0.96
+anchor_bottom = 0.58
 
 [node name="PantryMargin" type="MarginContainer" parent="Layout/PantryPanel" unique_id=1590115351]
 layout_mode = 2
 theme_override_constants/margin_left = 26
-theme_override_constants/margin_top = 22
+theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 26
-theme_override_constants/margin_bottom = 22
+theme_override_constants/margin_bottom = 10
 
 [node name="Pantry" type="VBoxContainer" parent="Layout/PantryPanel/PantryMargin" unique_id=654989290]
 layout_mode = 2
@@ -96,7 +102,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 horizontal_scroll_mode = 0
-vertical_scroll_mode = 3
+vertical_scroll_mode = 1
 scroll_deadzone = 18
 
 [node name="StockGrid" type="GridContainer" parent="Layout/PantryPanel/PantryMargin/Pantry/PantryScroll" unique_id=951026272]
@@ -104,14 +110,18 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/h_separation = 16
 theme_override_constants/v_separation = 16
-columns = 2
+columns = 5
 
 [node name="BowlPanel" type="PanelContainer" parent="Layout" unique_id=1222789545]
+offset_bottom = 0
+offset_right = 0
+offset_top = 0
+offset_left = 0
 layout_mode = 0
-anchor_left = 0.58
-anchor_top = 0.35
-anchor_right = 0.87
-anchor_bottom = 0.75
+anchor_left = 0.44
+anchor_top = 0.6
+anchor_right = 0.84
+anchor_bottom = 0.91
 
 [node name="BowlMargin" type="MarginContainer" parent="Layout/BowlPanel" unique_id=968088406]
 layout_mode = 2
@@ -124,11 +134,34 @@ theme_override_constants/margin_bottom = 18
 layout_mode = 2
 theme_override_constants/separation = 14
 
-[node name="BowlTitle" type="Label" parent="Layout/BowlPanel/BowlMargin/Bowl" unique_id=1911424870]
+[node name="BowlHeader" type="HBoxContainer" parent="Layout/BowlPanel/BowlMargin/Bowl"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 30
+theme_override_constants/separation = 12
+
+[node name="BowlTitle" type="Label" parent="Layout/BowlPanel/BowlMargin/Bowl/BowlHeader" unique_id=1911424870]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 22
 text = "凑一顿"
 horizontal_alignment = 1
+
+[node name="BowlReceipt" type="HBoxContainer" parent="Layout/BowlPanel/BowlMargin/Bowl/BowlHeader" unique_id=1478317284]
+layout_mode = 2
+
+[node name="FreeTag" type="Label" parent="Layout/BowlPanel/BowlMargin/Bowl/BowlHeader/BowlReceipt" unique_id=94105593]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "不花现金 · 消耗库存"
+
+[node name="Spacer" type="Control" parent="Layout/BowlPanel/BowlMargin/Bowl/BowlHeader/BowlReceipt" unique_id=867959006]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Status" type="Label" parent="Layout/BowlPanel/BowlMargin/Bowl/BowlHeader/BowlReceipt" unique_id=805087843]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7882353, 0.4, 0.15294118, 1)
+theme_override_font_sizes/font_size = 23
+text = "已选 0/3"
 
 [node name="BowlHint" type="Label" parent="Layout/BowlPanel/BowlMargin/Bowl" unique_id=895931999]
 layout_mode = 2
@@ -143,80 +176,14 @@ size_flags_vertical = 3
 theme_override_constants/separation = 12
 alignment = 1
 
-[node name="Slot1" type="PanelContainer" parent="Layout/BowlPanel/BowlMargin/Bowl/SelectedSlots" unique_id=92068496]
-custom_minimum_size = Vector2(132, 158)
+[node name="Slot1" parent="Layout/BowlPanel/BowlMargin/Bowl/SelectedSlots" unique_id=92068496 instance=ExtResource("3_selected")]
 layout_mode = 2
 
-[node name="Empty" type="Label" parent="Layout/BowlPanel/BowlMargin/Bowl/SelectedSlots/Slot1" unique_id=1664427204]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.54901963, 0.4745098, 0.4, 0.33333334)
-theme_override_font_sizes/font_size = 38
-text = "+"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Preview" type="TextureRect" parent="Layout/BowlPanel/BowlMargin/Bowl/SelectedSlots/Slot1" unique_id=827840455]
-visible = false
-layout_mode = 2
-mouse_filter = 2
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Slot2" type="PanelContainer" parent="Layout/BowlPanel/BowlMargin/Bowl/SelectedSlots" unique_id=1381427755]
-custom_minimum_size = Vector2(132, 158)
+[node name="Slot2" parent="Layout/BowlPanel/BowlMargin/Bowl/SelectedSlots" unique_id=1381427755 instance=ExtResource("3_selected")]
 layout_mode = 2
 
-[node name="Empty" type="Label" parent="Layout/BowlPanel/BowlMargin/Bowl/SelectedSlots/Slot2" unique_id=942745083]
+[node name="Slot3" parent="Layout/BowlPanel/BowlMargin/Bowl/SelectedSlots" unique_id=83921231 instance=ExtResource("3_selected")]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.54901963, 0.4745098, 0.4, 0.33333334)
-theme_override_font_sizes/font_size = 38
-text = "+"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Preview" type="TextureRect" parent="Layout/BowlPanel/BowlMargin/Bowl/SelectedSlots/Slot2" unique_id=2063531299]
-visible = false
-layout_mode = 2
-mouse_filter = 2
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Slot3" type="PanelContainer" parent="Layout/BowlPanel/BowlMargin/Bowl/SelectedSlots" unique_id=83921231]
-custom_minimum_size = Vector2(132, 158)
-layout_mode = 2
-
-[node name="Empty" type="Label" parent="Layout/BowlPanel/BowlMargin/Bowl/SelectedSlots/Slot3" unique_id=318320133]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.54901963, 0.4745098, 0.4, 0.33333334)
-theme_override_font_sizes/font_size = 38
-text = "+"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Preview" type="TextureRect" parent="Layout/BowlPanel/BowlMargin/Bowl/SelectedSlots/Slot3" unique_id=1625174901]
-visible = false
-layout_mode = 2
-mouse_filter = 2
-expand_mode = 1
-stretch_mode = 5
-
-[node name="BowlReceipt" type="HBoxContainer" parent="Layout/BowlPanel/BowlMargin/Bowl" unique_id=1478317284]
-layout_mode = 2
-
-[node name="FreeTag" type="Label" parent="Layout/BowlPanel/BowlMargin/Bowl/BowlReceipt" unique_id=94105593]
-layout_mode = 2
-theme_override_font_sizes/font_size = 18
-text = "不花现金 · 消耗库存"
-
-[node name="Spacer" type="Control" parent="Layout/BowlPanel/BowlMargin/Bowl/BowlReceipt" unique_id=867959006]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Status" type="Label" parent="Layout/BowlPanel/BowlMargin/Bowl/BowlReceipt" unique_id=805087843]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.7882353, 0.4, 0.15294118, 1)
-theme_override_font_sizes/font_size = 23
-text = "已选 0/3"
 
 [node name="Footer" type="HBoxContainer" parent="Layout" unique_id=860695879]
 layout_mode = 0

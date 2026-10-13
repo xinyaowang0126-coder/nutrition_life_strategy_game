@@ -1,12 +1,14 @@
 @tool
 extends McpTestSuite
 
-const EXPORT_PLUGIN_PATH := "res://addons/godot_ai/export/mcp_export_plugin.gd"
+const EXPORT_PLUGIN_PATH := "res://addons/release_guard/export_guard.gd"
 const AUTOLOAD_KEY := "autoload/_mcp_game_helper"
 const EDITOR_PLUGINS_KEY := "editor_plugins/enabled"
 const HELPER_PATH := "*res://addons/godot_ai/runtime/game_helper.gd"
 
 var _plugin: Variant
+var _mcp_plugin: Variant
+var _mcp_testable_script: GDScript
 var _testable_script: GDScript
 var _original_settings: Dictionary = {}
 var _project_bytes := PackedByteArray()
@@ -26,6 +28,12 @@ func suite_setup(_ctx: Dictionary) -> void:
 	)
 	if _testable_script.reload() != OK:
 		fail_setup("Could not load the export callback test host")
+	_mcp_testable_script = GDScript.new()
+	_mcp_testable_script.source_code = FileAccess.get_file_as_string("res://addons/godot_ai/export/mcp_export_plugin.gd").replace(
+		"extends EditorExportPlugin", "extends RefCounted"
+	)
+	if _mcp_testable_script.reload() != OK:
+		fail_setup("Could not load the signed MCP export callback host")
 
 
 func setup() -> void:
@@ -36,11 +44,13 @@ func setup() -> void:
 	_project_bytes = FileAccess.get_file_as_bytes("res://project.godot")
 	_plugin = _testable_script.new()
 	track(_plugin)
+	_mcp_plugin = _mcp_testable_script.new()
+	track(_mcp_plugin)
 
 
 func teardown() -> void:
 	if _plugin != null:
-		_plugin._export_end()
+		_end()
 	for key in [AUTOLOAD_KEY, EDITOR_PLUGINS_KEY]:
 		ProjectSettings.set_setting(key, _original_settings.get(key, null))
 	assert_eq(
@@ -57,7 +67,7 @@ func test_both_development_settings_are_stripped_and_restored_exactly() -> void:
 	ProjectSettings.set_setting(EDITOR_PLUGINS_KEY, plugins)
 	_begin()
 	_assert_stripped()
-	_plugin._export_end()
+	_end()
 	assert_eq(ProjectSettings.get_setting(AUTOLOAD_KEY), HELPER_PATH)
 	assert_eq(ProjectSettings.get_setting(EDITOR_PLUGINS_KEY), plugins)
 
@@ -68,7 +78,7 @@ func test_editor_plugins_are_stripped_without_a_helper_autoload() -> void:
 	ProjectSettings.set_setting(EDITOR_PLUGINS_KEY, plugins)
 	_begin()
 	_assert_stripped()
-	_plugin._export_end()
+	_end()
 	assert_false(ProjectSettings.has_setting(AUTOLOAD_KEY))
 	assert_eq(ProjectSettings.get_setting(EDITOR_PLUGINS_KEY), plugins)
 
@@ -78,7 +88,7 @@ func test_autoload_is_restored_without_creating_editor_plugins() -> void:
 	ProjectSettings.set_setting(EDITOR_PLUGINS_KEY, null)
 	_begin()
 	_assert_stripped()
-	_plugin._export_end()
+	_end()
 	assert_eq(ProjectSettings.get_setting(AUTOLOAD_KEY), HELPER_PATH)
 	assert_false(ProjectSettings.has_setting(EDITOR_PLUGINS_KEY))
 
@@ -89,8 +99,8 @@ func test_absent_settings_and_repeated_callbacks_preserve_original_absence() -> 
 	_begin()
 	_begin()
 	_assert_stripped()
-	_plugin._export_end()
-	_plugin._export_end()
+	_end()
+	_end()
 	_assert_stripped()
 
 
@@ -101,8 +111,8 @@ func test_repeated_begin_does_not_overwrite_the_original_snapshot() -> void:
 	_begin()
 	_begin()
 	_assert_stripped()
-	_plugin._export_end()
-	_plugin._export_end()
+	_end()
+	_end()
 	assert_eq(ProjectSettings.get_setting(AUTOLOAD_KEY), HELPER_PATH)
 	assert_eq(ProjectSettings.get_setting(EDITOR_PLUGINS_KEY), plugins)
 
@@ -111,25 +121,49 @@ func test_next_export_takes_a_fresh_snapshot_and_preserves_an_empty_array() -> v
 	ProjectSettings.set_setting(AUTOLOAD_KEY, HELPER_PATH)
 	ProjectSettings.set_setting(EDITOR_PLUGINS_KEY, PackedStringArray(["first"]))
 	_begin()
-	_plugin._export_end()
+	_end()
 	ProjectSettings.set_setting(AUTOLOAD_KEY, "res://custom_helper.gd")
 	ProjectSettings.set_setting(EDITOR_PLUGINS_KEY, PackedStringArray())
 	_begin()
 	_assert_stripped()
-	_plugin._export_end()
+	_end()
 	assert_eq(ProjectSettings.get_setting(AUTOLOAD_KEY), "res://custom_helper.gd")
 	assert_true(ProjectSettings.has_setting(EDITOR_PLUGINS_KEY))
 	assert_eq(ProjectSettings.get_setting(EDITOR_PLUGINS_KEY), PackedStringArray())
 
 
 func test_end_before_begin_does_not_change_settings() -> void:
-	_plugin._export_end()
+	_end()
 	for key in [AUTOLOAD_KEY, EDITOR_PLUGINS_KEY]:
 		assert_eq(ProjectSettings.has_setting(key), _original_settings.has(key))
 		assert_eq(ProjectSettings.get_setting(key, null), _original_settings.get(key, null))
 
 
+func test_project_guard_and_signed_mcp_callbacks_restore_in_either_order() -> void:
+	var plugins := PackedStringArray([
+		"res://addons/godot_ai/plugin.cfg", "res://addons/release_guard/plugin.cfg"
+	])
+	var orders := [[_plugin, _mcp_plugin], [_mcp_plugin, _plugin]]
+	for begin_order in orders:
+		for end_order in orders:
+			ProjectSettings.set_setting(AUTOLOAD_KEY, HELPER_PATH)
+			ProjectSettings.set_setting(EDITOR_PLUGINS_KEY, plugins)
+			for callback in begin_order:
+				callback._export_begin(PackedStringArray(["web"]), false, "unused.pck", 0)
+			_assert_stripped()
+			for callback in end_order:
+				callback._export_end()
+			assert_eq(ProjectSettings.get_setting(AUTOLOAD_KEY), HELPER_PATH)
+			assert_eq(ProjectSettings.get_setting(EDITOR_PLUGINS_KEY), plugins)
+
+
+func _end() -> void:
+	_mcp_plugin._export_end()
+	_plugin._export_end()
+
+
 func _begin() -> void:
+	_mcp_plugin._export_begin(PackedStringArray(["web"]), false, "unused.pck", 0)
 	_plugin._export_begin(PackedStringArray(["web"]), false, "unused.pck", 0)
 
 

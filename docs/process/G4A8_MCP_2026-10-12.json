@@ -1,0 +1,172 @@
+{
+  "date": "2026-10-12",
+  "milestone": "G4A8",
+  "session_id": "life-strategy@53a996abc03d386b",
+  "godot_version": "4.7.2-stable",
+  "plugin_version": "4.3.0",
+  "launch": {
+    "autosave": false,
+    "current_run_errors": [],
+    "game_status": {
+      "active": true,
+      "editor_log_cursor": 0,
+      "elapsed_msec": 3005,
+      "helper_expected": true,
+      "helper_live": false,
+      "ready": false,
+      "ready_wait_msec": 3000,
+      "run_started_msec": 8675584,
+      "run_token": 5,
+      "session_active": false,
+      "status": "not_live"
+    },
+    "helper_live": false,
+    "mode": "custom",
+    "reason": "Game launched but did not become live before the helper-ready window elapsed. It may still be booting or may have failed silently; check logs_read(source='editor', include_details=true) and poll editor_state.",
+    "recent_errors": [],
+    "recent_errors_may_predate_run": false,
+    "recent_errors_scope": "none",
+    "recent_errors_truncated": false,
+    "retained_errors": [],
+    "scene": "res://scenes/game_v2/GameRootV2.tscn",
+    "session_active": false,
+    "undoable": false,
+    "was_already_running": false
+  },
+  "ready": {
+    "current_scene": "res://scenes/game_v2/components/CharacterHUD.tscn",
+    "game_capture_ready": true,
+    "game_status": {
+      "active": true,
+      "editor_log_cursor": 0,
+      "elapsed_msec": 111711,
+      "helper_expected": true,
+      "helper_live": true,
+      "ready": true,
+      "ready_wait_msec": 20000,
+      "run_started_msec": 8675584,
+      "run_token": 5,
+      "session_active": true,
+      "status": "live"
+    },
+    "godot_version": "4.7.2-stable (official)",
+    "helper_live": true,
+    "is_playing": true,
+    "project_name": "撑过这一周",
+    "readiness": "playing",
+    "session_active": true
+  },
+  "tests": {
+    "result": {
+      "failed": 0,
+      "failures": [],
+      "passed": 9,
+      "total": 9
+    },
+    "source": "game"
+  },
+  "normal_flow": {
+    "result": {
+      "day": 1,
+      "detail": "选餐记录\n吃了 2 餐｜跳过 1 餐\n早餐｜食堂｜白米饭｜¥2\n午餐｜跳过\n晚餐｜宿舍存粮｜原味坚果｜使用存粮",
+      "detail_center": {
+        "x": 956,
+        "y": 797
+      },
+      "health_loaded": false,
+      "meal_keys": [
+        "phase",
+        "source_id",
+        "source_name",
+        "food_ids",
+        "food_names",
+        "food_cost",
+        "source_fee",
+        "total_cost",
+        "tags",
+        "food_groups",
+        "nutrient_tags",
+        "limit_tags",
+        "stat_delta",
+        "preference_reactions",
+        "skipped",
+        "uses_stock",
+        "comfort"
+      ],
+      "metrics": {
+        "eaten_meals": 2,
+        "expected_meals": 3,
+        "skipped_meals": 1,
+        "unknown_meals": 0,
+        "unplaced_records": 0,
+        "unrecorded_meals": 0
+      },
+      "phase": "summary",
+      "score_free": true
+    },
+    "source": "game"
+  },
+  "detail_click": {
+    "result": {
+      "detail_in_view": true,
+      "detail_open": true,
+      "footer_in_view": true,
+      "health_loaded": false,
+      "save_error": 0,
+      "unchanged": true
+    },
+    "source": "game"
+  },
+  "logs": {
+    "source": "game",
+    "lines": [
+      {
+        "level": "info",
+        "run_id": "r8675587-5",
+        "source": "game",
+        "text": "[godot_ai game_helper] registered mcp capture (debugger active=true, logger=true)\n"
+      }
+    ],
+    "total_count": 1,
+    "returned_count": 1,
+    "offset": 0,
+    "limit": 12,
+    "has_more": false,
+    "run_id": "r8675587-5",
+    "is_running": true,
+    "dropped_count": 0,
+    "stale_run_id": false,
+    "current_run_id": "r8675587-5",
+    "helper_live": true,
+    "session_active": true,
+    "game_status": {
+      "active": true,
+      "editor_log_cursor": 0,
+      "elapsed_msec": 353633,
+      "helper_expected": true,
+      "helper_live": true,
+      "ready": true,
+      "ready_wait_msec": 20000,
+      "run_started_msec": 8675584,
+      "run_token": 5,
+      "session_active": true,
+      "status": "live"
+    }
+  },
+  "stop": {
+    "readiness_after": "ready",
+    "reason": "Play/stop is a runtime action",
+    "stopped": true,
+    "undoable": false,
+    "was_running": true
+  },
+  "screenshots": [
+    "docs/assets/g4a8-2026-10-12/mcp-normal-detail.png"
+  ],
+  "notes": [
+    "Initial launch exceeded the 3-second helper-ready window under concurrent verification load. Subsequent runtime tests and editor-state inspection confirmed a live helper; initial not_live is not counted as a clean-ready launch.",
+    "Normal confirmed cafeteria/stock meals and an explicit skip all lacked quality. No health catalog was loaded.",
+    "An actual detail-button click preserved day, phase, resources, inventory, frozen history and RNG; detail and footer remained visible. The game was stopped after checks."
+  ],
+  "published": false
+}

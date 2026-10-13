@@ -46,9 +46,9 @@ func test_meal_record_charges_source_fee_once() -> void:
 		GameDataScript.get_food("bubble_tea"),
 	]
 	var record := MealResolverScript.build_record("lunch", source, foods)
-	assert_eq(int(record["food_cost"]), 30)
+	assert_eq(int(record["food_cost"]), 19)
 	assert_eq(int(record["source_fee"]), 3)
-	assert_eq(int(record["total_cost"]), 33)
+	assert_eq(int(record["total_cost"]), 22)
 
 
 func test_meal_record_includes_source_stat_effects() -> void:
@@ -70,7 +70,8 @@ func test_meal_record_includes_source_stat_effects() -> void:
 	assert_eq(int(adjusted_delta["energy"]), int(neutral_delta["energy"]) + 4)
 	assert_eq(int(adjusted_delta["mood"]), int(neutral_delta["mood"]) - 2)
 	assert_eq(int(adjusted_delta["stress"]), int(neutral_delta["stress"]) + 3)
-	assert_eq(int(adjusted_delta["diet_burden"]), int(neutral_delta["diet_burden"]) + 1)
+	assert_false(adjusted_delta.has("diet_burden"), "retired source fields cannot produce a gameplay delta")
+	assert_false(neutral_delta.has("diet_burden"))
 
 
 func test_meal_group_combination_is_same_meal_only() -> void:
@@ -87,53 +88,42 @@ func test_meal_group_combination_is_same_meal_only() -> void:
 	assert_false(MealResolverScript.has_meal_group_combination(plain))
 
 
-func test_plate_quality_rewards_a_complete_plate_over_a_single_fruit() -> void:
-	var cafeteria := GameDataScript.get_meal_source("cafeteria")
-	var convenience := GameDataScript.get_meal_source("convenience_store")
-	var complete := MealResolverScript.build_record("lunch", cafeteria, [
-		GameDataScript.get_food("rice_plain"),
-		GameDataScript.get_food("egg"),
-		GameDataScript.get_food("tomato"),
-	])
-	var apple_only := MealResolverScript.build_record(
-		"lunch",
-		convenience,
-		[GameDataScript.get_food("apple")]
-	)
-	assert_gt(int(complete["quality"]), int(apple_only["quality"]))
-	assert_gt(int(complete["quality"]), 65, "a complete plate should reach the good-day band")
-	assert_false(int(apple_only["quality"]) >= 66, "a single apple is not a complete meal")
+func test_new_meal_records_have_no_legacy_nutrition_score() -> void:
+	var source := GameDataScript.get_meal_source("cafeteria")
+	for ids in [["rice_plain", "egg", "tomato"], ["apple"]]:
+		var foods: Array[Dictionary] = []
+		for id in ids:
+			foods.append(GameDataScript.get_food(id))
+		var record := MealResolverScript.build_record("lunch", source, foods)
+		assert_false(record.has("quality"))
+		assert_false(record.has("nutrition_score"))
+		assert_eq(record["food_ids"], ids)
 
 
-func test_plate_quality_uses_professional_fields_not_presentation_tags() -> void:
-	var complete_fields := {
-		"food_groups": ["grains_tubers", "vegetables", "eggs"],
-		"nutrient_tags": [
-			"carbohydrate_source",
-			"dietary_fiber_source",
-			"high_quality_protein_source",
-		],
-		"limit_tags": [],
-	}
-	var misleading_tags := complete_fields.duplicate(true)
-	misleading_tags["tags"] = ["high_sugar", "high_fat", "instant"]
-	assert_eq(
-		MealResolverScript.food_quality(complete_fields),
-		MealResolverScript.food_quality(misleading_tags),
-		"legacy display tags must not alter the professional plate score"
-	)
+func test_legacy_tags_are_frozen_metadata_without_a_score_or_resource_bonus() -> void:
+	var original := GameDataScript.get_food("rice_plain")
+	var changed := original.duplicate(true)
+	changed["food_groups"] = ["vegetables", "fruits", "dairy"]
+	changed["nutrient_tags"] = ["dietary_fiber_source", "calcium_source"]
+	changed["limit_tags"] = ["high_sodium", "fried"]
+	var source := GameDataScript.get_meal_source("cafeteria")
+	var first := MealResolverScript.build_record("lunch", source, [original])
+	var second := MealResolverScript.build_record("lunch", source, [changed])
+	assert_eq(first["stat_delta"], second["stat_delta"])
+	assert_eq(first["total_cost"], second["total_cost"])
+	assert_eq(second["food_groups"], changed["food_groups"])
+	assert_eq(second["nutrient_tags"], changed["nutrient_tags"])
+	assert_eq(second["limit_tags"], changed["limit_tags"])
+	assert_false(second.has("quality"))
 
 
-func test_plate_quality_penalizes_limit_factors() -> void:
-	var groups := ["grains_tubers", "vegetables", "poultry_livestock"]
-	var nutrients := [
-		"carbohydrate_source",
-		"dietary_fiber_source",
-		"high_quality_protein_source",
-	]
-	var unrestricted := MealResolverScript.plate_quality(groups, nutrients, [])
-	var limited := MealResolverScript.plate_quality(groups, nutrients, ["high_sodium", "fried"])
-	assert_gt(unrestricted, limited)
+func test_skipped_records_do_not_receive_a_default_diet_score() -> void:
+	for phase in ["breakfast", "lunch", "dinner"]:
+		var record := MealResolverScript.build_skipped_record(phase)
+		assert_false(record.has("quality"))
+		assert_true(record["skipped"])
+		assert_eq(record["total_cost"], 0)
+		assert_true(record["food_ids"].is_empty())
 
 
 func test_food_groups_do_not_substitute_for_each_other() -> void:
@@ -151,7 +141,7 @@ func test_food_groups_do_not_substitute_for_each_other() -> void:
 	assert_false(MealResolverScript.has_meal_group_combination(record), "rice and tofu still need a vegetable")
 
 
-func test_nutrition_ledger_reports_patterns_and_scientific_context() -> void:
+func test_daily_ledger_reports_only_confirmed_meal_facts() -> void:
 	var cafeteria := GameDataScript.get_meal_source("cafeteria")
 	var convenience := GameDataScript.get_meal_source("convenience_store")
 	var records: Array[Dictionary] = [
@@ -167,19 +157,18 @@ func test_nutrition_ledger_reports_patterns_and_scientific_context() -> void:
 	var metrics: Dictionary = summary["metrics"]
 	assert_eq(int(metrics["eaten_meals"]), 2)
 	assert_eq(int(metrics["skipped_meals"]), 1)
-	assert_eq(int(metrics["vegetable_meals"]), 1)
-	assert_eq(int(metrics["fruit_meals"]), 1)
-	assert_eq(int(metrics["unique_foods"]), 4)
-	assert_eq(int(metrics["animal_food_meals"]), 1)
-	assert_eq(int(metrics["fiber_source_meals"]), 2)
-	assert_eq(int(metrics["high_quality_protein_meals"]), 1)
-	assert_eq(int(summary["score"]), MealResolverScript.day_quality(records))
-	assert_false(String(summary["rating"]).is_empty())
-	assert_true(int(summary["score"]) >= 0 and int(summary["score"]) <= 100)
-	assert_contains(String(summary["detail_text"]), "餐盘线索")
-	assert_contains(String(summary["detail_text"]), "卡牌资料线索")
-	assert_contains(String(summary["basis"]), "《中国居民膳食指南（2022）》")
-	assert_contains(String(summary["basis"]), "不用于现实健康判断")
+	assert_eq(int(metrics["unknown_meals"]), 0)
+	assert_eq(int(metrics["unrecorded_meals"]), 0)
+	assert_eq(int(metrics["unplaced_records"]), 0)
+	assert_false(summary.has("score"))
+	assert_false(summary.has("rating"))
+	assert_false(metrics.has("fiber_source_meals"))
+	assert_contains(String(summary["detail_text"]), "选餐记录")
+	assert_contains(String(summary["detail_text"]), "白米饭、鸡蛋、番茄")
+	assert_contains(String(summary["detail_text"]), "晚餐｜跳过")
+	assert_contains(String(summary["basis"]), "尚未核对")
+	assert_false(String(summary["detail_text"]).contains("膳食纤维来源"))
+	assert_false(String(summary["detail_text"]).contains("高钠"))
 	assert_false(String(summary["detail_text"]).contains("今日饮食结构记录"))
 	assert_false(String(summary["detail_text"]).contains("营养评分"))
 
@@ -202,7 +191,7 @@ func test_ending_boundary_matrix_has_no_unclassified_gap() -> void:
 		{"stability": 60, "study": 69, "burden": 0, "ending": "barely_survived"},
 		{"stability": 59, "study": 70, "burden": 0, "ending": "barely_survived"},
 		{"stability": 60, "study": 70, "burden": 60, "ending": "stable_endurance"},
-		{"stability": 60, "study": 70, "burden": 61, "ending": "barely_survived"},
+		{"stability": 60, "study": 70, "burden": 61, "ending": "stable_endurance"},
 	]
 	for case in cases:
 		var state := base_state.duplicate(true)
@@ -223,13 +212,13 @@ func test_ending_boundary_matrix_has_no_unclassified_gap() -> void:
 func test_final_day_stability_does_not_reserve_phantom_budget() -> void:
 	var state := GameDataScript.get_starting_stats()
 	state["balance"] = 0
-	var final_day_broke := MealResolverScript.calculate_stability(state, 66, 7, 7)
+	var final_day_broke := MealResolverScript.calculate_stability(state, 66, 7, 7, 7.0)
 	state["balance"] = 120
-	var final_day_funded := MealResolverScript.calculate_stability(state, 66, 7, 7)
+	var final_day_funded := MealResolverScript.calculate_stability(state, 66, 7, 7, 7.0)
 	assert_eq(final_day_broke, final_day_funded, "ending day has no future meal budget to reserve")
 
 	state["balance"] = 0
-	var penultimate_broke := MealResolverScript.calculate_stability(state, 66, 6, 7)
+	var penultimate_broke := MealResolverScript.calculate_stability(state, 66, 6, 7, 7.0)
 	state["balance"] = 120
-	var penultimate_funded := MealResolverScript.calculate_stability(state, 66, 6, 7)
+	var penultimate_funded := MealResolverScript.calculate_stability(state, 66, 6, 7, 7.0)
 	assert_gt(penultimate_funded, penultimate_broke, "budget should still matter while a future day remains")

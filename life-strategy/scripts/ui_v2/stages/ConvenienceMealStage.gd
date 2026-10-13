@@ -43,3 +43,7 @@ func _default_max_selected() -> int:
 
 func _card_button_text() -> String:
 	return "放进篮子"
+
+
+func _get_layout_paths() -> Dictionary:
+	return {"header": "Layout/Header", "cards": "Layout/ShelfPanel", "selection": "Layout/BasketPanel", "footer": "Layout/Footer", "selection_margin": "Layout/BasketPanel/BasketMargin", "selection_box": "Layout/BasketPanel/BasketMargin/Basket", "hide": ["Layout/BasketPanel/BasketMargin/Basket/BasketHeader/BasketHint"]}

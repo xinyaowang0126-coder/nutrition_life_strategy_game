@@ -154,9 +154,9 @@ func _update_button_text() -> void:
 
 
 func _update_visual_state(animate: bool) -> void:
-	self_modulate = Color(0.67, 0.67, 0.64, 0.88) if not _enabled else Color.WHITE
+	self_modulate = Color(0.67, 0.67, 0.64, 0.88) if not _enabled else (Color(1.0, 0.88, 0.68, 1.0) if _selected else Color.WHITE)
 	var frame := StyleBoxFlat.new()
-	frame.bg_color = Color("#fff3dff2")
+	frame.bg_color = Color("#f5dbac") if _selected else Color("#fff3dff2")
 	frame.border_color = Color("#d18a32") if _selected else Color("#8da36b")
 	frame.set_border_width_all(4 if _selected else 2)
 	frame.set_corner_radius_all(16)

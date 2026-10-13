@@ -51,48 +51,47 @@ func test_health_guidance_v2_flags_downgrade_invalid_dependencies() -> void:
 	assert_false(FlagsScript.is_enabled(flags, "not_a_flag"))
 
 
-func test_character_health_is_positive_direction_and_labeled_as_a_game_mechanic() -> void:
+func test_retired_health_numeric_widgets_ignore_legacy_values() -> void:
 	var tree := Engine.get_main_loop() as SceneTree
 	var hud := CharacterHUDScene.instantiate() as CharacterHUDV2
 	track(hud)
 	tree.root.add_child(hud)
-	hud.update_stats({
-		"stability": 60,
-		"energy": 50,
-		"mood": 50,
-		"satiety": 50,
-		"stress": 50,
-		"diet_burden": 24,
-		"study_progress": 10,
-		"study_target": 70,
-	}, false)
-	assert_eq(hud.burden_value.text, "角色健康 76")
-	assert_eq(int(hud._make_detail_payload()["character_health"]), 76)
-	assert_contains(String(hud._make_detail_payload()["desc"]), "不是对玩家真实健康的评价")
-	assert_contains(String(hud._make_detail_payload()["desc"]), "不参与饮食结构判断")
-
+	hud.update_stats({"stability": 60, "energy": 50, "mood": 50, "satiety": 50, "stress": 50, "diet_burden": 24, "study_progress": 10, "study_target": 70}, false)
+	assert_false(hud.has_node("StatusBoard/Margin/VBox/StatGrid/BurdenChip"))
+	assert_contains(hud.recovery_value.text, "不可用")
+	var detail := hud._make_detail_payload()
+	for key in ["character_health", "diet_burden", "burden"]:
+		assert_false(detail.has(key))
+	assert_contains(String(detail["desc"]), "不是对玩家真实健康的评价")
 	var note := StickyNoteScene.instantiate() as StickyNotePopupV2
 	track(note)
 	tree.root.add_child(note)
-	note.setup({"id": "sample", "name": "示例", "burden": 3}, "food")
-	assert_eq(note.burden_metric.text, "角色健康 -3")
-	note.setup(hud._make_detail_payload(), "state")
-	assert_eq(note.burden_metric.text, "角色健康 76")
+	for payload in [{"id": "sample", "name": "示例", "burden": 3}, {"id": "sample2", "name": "示例", "character_health": 76}, detail]:
+		note.setup(payload, "state")
+		assert_false(note.has_node("Margin/VBox/MetricGrid/Burden"))
 
-
-func test_legacy_rating_no_longer_exposes_a_health_tier() -> void:
-	var low_copy := NutritionLedgerScript.rating_for_score(20)
-	var high_copy := NutritionLedgerScript.rating_for_score(90)
-	assert_eq(low_copy, high_copy)
-	assert_contains(low_copy, "不作健康评价")
+func test_legacy_scores_no_longer_produce_a_daily_health_tier() -> void:
+	var records: Array[Dictionary] = [{"phase": "breakfast", "skipped": false, "food_ids": ["old_food"], "food_names": ["旧记录食物"], "quality": 90}]
+	var view := NutritionLedgerScript.summarize(records)
+	assert_false(view.has("score"))
+	assert_false(view.has("rating"))
+	assert_contains(view["detail_text"], "旧记录食物")
+	assert_contains(view["basis"], "不作营养评价")
 
 
 func test_carryover_copy_is_explicitly_gameplay_not_medical() -> void:
-	assert_eq(String(DayCarryoverServiceScript.CLEAR_FOCUS["title"]), "进入状态较快")
-	assert_eq(String(DayCarryoverServiceScript.BRAIN_FOG["title"]), "需要先缓一缓")
-	assert_contains(String(DayCarryoverServiceScript.CLEAR_FOCUS["summary"]), "按游戏规则")
-	assert_contains(String(DayCarryoverServiceScript.BRAIN_FOG["summary"]), "不是医学判断")
-
+	var Recovery := load("res://scripts/systems/RecoveryStateService.gd")
+	var Data := load("res://scripts/GameData.gd")
+	var card = Data.get_sleep_option("sleep_early")
+	var snapshot := {"id": "sleep_early"}
+	for key in ["energy", "mood", "stress", "study", "satiety"]:
+		snapshot[key] = card[key]
+	var record = Recovery.settle(1, {"energy": 45, "stress": 45}, snapshot, {})["recovery_state"]
+	var prepared = DayCarryoverServiceScript.from_recovery(record, 1)
+	assert_true(prepared["valid"])
+	assert_eq(prepared["learning_state"]["title"], "恢复充分")
+	assert_contains(String(prepared["learning_state"]["summary"]), "按游戏规则")
+	assert_false(String(prepared["learning_state"]["summary"]).contains("饮食"))
 
 func test_risky_legacy_copy_is_absent_from_current_player_scripts() -> void:
 	var source := "\n".join([

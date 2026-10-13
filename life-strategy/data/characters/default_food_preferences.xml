@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Character preferences preserve the existing game's mood balance. They are
+<!-- Character preferences use the campus-balance-v2 mood scale. They are
      personal reactions, not claims about a food's health effects. -->
-<food_preferences schema_version="1" id="campus_student" version="1" name="本局角色">
+<food_preferences schema_version="1" id="campus_student" version="2" name="本局角色">
   <reaction food_id="rice_plain" mood_delta="0" comfort="false" />
   <reaction food_id="oatmeal" mood_delta="0" comfort="false" />
   <reaction food_id="egg" mood_delta="0" comfort="false" />
   <reaction food_id="tofu" mood_delta="0" comfort="false" />
   <reaction food_id="greens" mood_delta="-2" comfort="false" />
-  <reaction food_id="tomato" mood_delta="3" comfort="false" />
-  <reaction food_id="apple" mood_delta="5" comfort="false" />
-  <reaction food_id="banana" mood_delta="5" comfort="false" />
-  <reaction food_id="milk" mood_delta="3" comfort="false" />
-  <reaction food_id="coffee" mood_delta="5" comfort="false" />
-  <reaction food_id="bubble_tea" mood_delta="18" comfort="true" />
-  <reaction food_id="instant_noodles" mood_delta="8" comfort="true" />
-  <reaction food_id="fried_chicken" mood_delta="20" comfort="true" />
-  <reaction food_id="salad_bowl" mood_delta="-3" comfort="false" />
-  <reaction food_id="sandwich" mood_delta="3" comfort="false" />
+  <reaction food_id="tomato" mood_delta="1" comfort="false" />
+  <reaction food_id="apple" mood_delta="2" comfort="false" />
+  <reaction food_id="banana" mood_delta="2" comfort="false" />
+  <reaction food_id="milk" mood_delta="1" comfort="false" />
+  <reaction food_id="coffee" mood_delta="2" comfort="false" />
+  <reaction food_id="bubble_tea" mood_delta="6" comfort="true" />
+  <reaction food_id="instant_noodles" mood_delta="2" comfort="true" />
+  <reaction food_id="fried_chicken" mood_delta="6" comfort="true" />
+  <reaction food_id="salad_bowl" mood_delta="-1" comfort="false" />
+  <reaction food_id="sandwich" mood_delta="2" comfort="false" />
   <reaction food_id="mixed_grain_rice" mood_delta="1" comfort="false" />
-  <reaction food_id="tomato_egg_stir_fry" mood_delta="7" comfort="false" />
-  <reaction food_id="celery_pork_stir_fry" mood_delta="5" comfort="false" />
-  <reaction food_id="steamed_fish" mood_delta="7" comfort="false" />
-  <reaction food_id="plain_yogurt" mood_delta="4" comfort="false" />
-  <reaction food_id="whole_wheat_bread" mood_delta="2" comfort="false" />
-  <reaction food_id="unsalted_nuts" mood_delta="4" comfort="false" />
-  <reaction food_id="chicken_vegetable_rice" mood_delta="9" comfort="false" />
+  <reaction food_id="tomato_egg_stir_fry" mood_delta="3" comfort="false" />
+  <reaction food_id="celery_pork_stir_fry" mood_delta="2" comfort="false" />
+  <reaction food_id="steamed_fish" mood_delta="3" comfort="false" />
+  <reaction food_id="plain_yogurt" mood_delta="2" comfort="false" />
+  <reaction food_id="whole_wheat_bread" mood_delta="1" comfort="false" />
+  <reaction food_id="unsalted_nuts" mood_delta="2" comfort="false" />
+  <reaction food_id="chicken_vegetable_rice" mood_delta="3" comfort="false" />
 </food_preferences>

@@ -1,0 +1,658 @@
+{
+	"errors": [],
+	"images": [
+		"E:/nutrition_life_strategy_game/docs/assets/ui-v3-2026-10-08/1920x1080-menu.png",
+		"E:/nutrition_life_strategy_game/docs/assets/ui-v3-2026-10-08/1920x1080-map.png",
+		"E:/nutrition_life_strategy_game/docs/assets/ui-v3-2026-10-08/1920x1080-map-hover.png",
+		"E:/nutrition_life_strategy_game/docs/assets/ui-v3-2026-10-08/1920x1080-selected.png",
+		"E:/nutrition_life_strategy_game/docs/assets/ui-v3-2026-10-08/1920x1080-hover.png",
+		"E:/nutrition_life_strategy_game/docs/assets/ui-v3-2026-10-08/1920x1080-focus.png",
+		"E:/nutrition_life_strategy_game/docs/assets/ui-v3-2026-10-08/1920x1080-morning-actions.png",
+		"E:/nutrition_life_strategy_game/docs/assets/ui-v3-2026-10-08/1920x1080-lunch_action.png",
+		"E:/nutrition_life_strategy_game/docs/assets/ui-v3-2026-10-08/1920x1080-dinner_action.png",
+		"E:/nutrition_life_strategy_game/docs/assets/ui-v3-2026-10-08/1920x1080-sleep.png",
+		"E:/nutrition_life_strategy_game/docs/assets/ui-v3-2026-10-08/1920x1080-day-summary.png",
+		"E:/nutrition_life_strategy_game/docs/assets/ui-v3-2026-10-08/1920x1080-takeout.png",
+		"E:/nutrition_life_strategy_game/docs/assets/ui-v3-2026-10-08/1366x768-menu.png",
+		"E:/nutrition_life_strategy_game/docs/assets/ui-v3-2026-10-08/1366x768-map.png",
+		"E:/nutrition_life_strategy_game/docs/assets/ui-v3-2026-10-08/1366x768-map-hover.png",
+		"E:/nutrition_life_strategy_game/docs/assets/ui-v3-2026-10-08/1366x768-selected.png",
+		"E:/nutrition_life_strategy_game/docs/assets/ui-v3-2026-10-08/1366x768-hover.png",
+		"E:/nutrition_life_strategy_game/docs/assets/ui-v3-2026-10-08/1366x768-focus.png",
+		"E:/nutrition_life_strategy_game/docs/assets/ui-v3-2026-10-08/1366x768-morning-actions.png",
+		"E:/nutrition_life_strategy_game/docs/assets/ui-v3-2026-10-08/1366x768-takeout.png",
+		"E:/nutrition_life_strategy_game/docs/assets/ui-v3-2026-10-08/390x844-menu.png",
+		"E:/nutrition_life_strategy_game/docs/assets/ui-v3-2026-10-08/390x844-map.png",
+		"E:/nutrition_life_strategy_game/docs/assets/ui-v3-2026-10-08/390x844-map-hover.png",
+		"E:/nutrition_life_strategy_game/docs/assets/ui-v3-2026-10-08/390x844-selected.png",
+		"E:/nutrition_life_strategy_game/docs/assets/ui-v3-2026-10-08/390x844-hover.png",
+		"E:/nutrition_life_strategy_game/docs/assets/ui-v3-2026-10-08/390x844-focus.png",
+		"E:/nutrition_life_strategy_game/docs/assets/ui-v3-2026-10-08/390x844-morning-actions.png",
+		"E:/nutrition_life_strategy_game/docs/assets/ui-v3-2026-10-08/390x844-takeout.png"
+	],
+	"input_reports": [
+		{
+			"actual_size": "(1920, 1080)",
+			"after": {
+				"meal_count": 0,
+				"phase": "breakfast",
+				"selected": [
+					"egg"
+				],
+				"state": {
+					"balance": 120,
+					"energy": 52,
+					"mood": 55,
+					"satiety": 58,
+					"stability": 65,
+					"stress": 48,
+					"study_progress": 0,
+					"study_target": 70
+				},
+				"stock": {
+					"apple": 1,
+					"instant_noodles": 2,
+					"milk": 1,
+					"oatmeal": 2,
+					"plain_yogurt": 1,
+					"unsalted_nuts": 1,
+					"whole_wheat_bread": 2
+				}
+			},
+			"before": {
+				"meal_count": 0,
+				"phase": "breakfast",
+				"selected": [
+					"egg"
+				],
+				"state": {
+					"balance": 120,
+					"energy": 52,
+					"mood": 55,
+					"satiety": 58,
+					"stability": 65,
+					"stress": 48,
+					"study_progress": 0,
+					"study_target": 70
+				},
+				"stock": {
+					"apple": 1,
+					"instant_noodles": 2,
+					"milk": 1,
+					"oatmeal": 2,
+					"plain_yogurt": 1,
+					"unsalted_nuts": 1,
+					"whole_wheat_bread": 2
+				}
+			},
+			"checks": [
+				"hover_readonly",
+				"pinned_stable",
+				"close_no_settlement",
+				"escape_no_settlement",
+				"touch_hold_release"
+			],
+			"errors": [],
+			"food_id": "egg",
+			"logical_size": "(1920.0, 1080.0)",
+			"requested_size": "(1920, 1080)",
+			"resolution_matched": true,
+			"source_id": "cafeteria",
+			"valid": true
+		},
+		{
+			"actual_size": "(1920, 1080)",
+			"after": {
+				"meal_count": 0,
+				"phase": "breakfast",
+				"selected": [
+					"coffee"
+				],
+				"state": {
+					"balance": 120,
+					"energy": 52,
+					"mood": 55,
+					"satiety": 58,
+					"stability": 65,
+					"stress": 48,
+					"study_progress": 0,
+					"study_target": 70
+				},
+				"stock": {
+					"apple": 1,
+					"instant_noodles": 2,
+					"milk": 1,
+					"oatmeal": 2,
+					"plain_yogurt": 1,
+					"unsalted_nuts": 1,
+					"whole_wheat_bread": 2
+				}
+			},
+			"before": {
+				"meal_count": 0,
+				"phase": "breakfast",
+				"selected": [
+					"coffee"
+				],
+				"state": {
+					"balance": 120,
+					"energy": 52,
+					"mood": 55,
+					"satiety": 58,
+					"stability": 65,
+					"stress": 48,
+					"study_progress": 0,
+					"study_target": 70
+				},
+				"stock": {
+					"apple": 1,
+					"instant_noodles": 2,
+					"milk": 1,
+					"oatmeal": 2,
+					"plain_yogurt": 1,
+					"unsalted_nuts": 1,
+					"whole_wheat_bread": 2
+				}
+			},
+			"checks": [
+				"hover_readonly",
+				"pinned_stable",
+				"close_no_settlement",
+				"escape_no_settlement",
+				"touch_hold_release"
+			],
+			"errors": [],
+			"food_id": "coffee",
+			"logical_size": "(1920.0, 1080.0)",
+			"requested_size": "(1920, 1080)",
+			"resolution_matched": true,
+			"source_id": "convenience_store",
+			"valid": true
+		},
+		{
+			"actual_size": "(1920, 1080)",
+			"after": {
+				"meal_count": 0,
+				"phase": "breakfast",
+				"selected": [
+					"whole_wheat_bread"
+				],
+				"state": {
+					"balance": 120,
+					"energy": 52,
+					"mood": 55,
+					"satiety": 58,
+					"stability": 65,
+					"stress": 48,
+					"study_progress": 0,
+					"study_target": 70
+				},
+				"stock": {
+					"apple": 1,
+					"instant_noodles": 2,
+					"milk": 1,
+					"oatmeal": 2,
+					"plain_yogurt": 1,
+					"unsalted_nuts": 1,
+					"whole_wheat_bread": 2
+				}
+			},
+			"before": {
+				"meal_count": 0,
+				"phase": "breakfast",
+				"selected": [
+					"whole_wheat_bread"
+				],
+				"state": {
+					"balance": 120,
+					"energy": 52,
+					"mood": 55,
+					"satiety": 58,
+					"stability": 65,
+					"stress": 48,
+					"study_progress": 0,
+					"study_target": 70
+				},
+				"stock": {
+					"apple": 1,
+					"instant_noodles": 2,
+					"milk": 1,
+					"oatmeal": 2,
+					"plain_yogurt": 1,
+					"unsalted_nuts": 1,
+					"whole_wheat_bread": 2
+				}
+			},
+			"checks": [
+				"hover_readonly",
+				"pinned_stable",
+				"close_no_settlement",
+				"escape_no_settlement",
+				"touch_hold_release"
+			],
+			"errors": [],
+			"food_id": "whole_wheat_bread",
+			"logical_size": "(1920.0, 1080.0)",
+			"requested_size": "(1920, 1080)",
+			"resolution_matched": true,
+			"source_id": "dorm_storage",
+			"valid": true
+		},
+		{
+			"actual_size": "(1366, 768)",
+			"after": {
+				"meal_count": 0,
+				"phase": "breakfast",
+				"selected": [
+					"egg"
+				],
+				"state": {
+					"balance": 120,
+					"energy": 52,
+					"mood": 55,
+					"satiety": 58,
+					"stability": 65,
+					"stress": 48,
+					"study_progress": 0,
+					"study_target": 70
+				},
+				"stock": {
+					"apple": 1,
+					"instant_noodles": 2,
+					"milk": 1,
+					"oatmeal": 2,
+					"plain_yogurt": 1,
+					"unsalted_nuts": 1,
+					"whole_wheat_bread": 2
+				}
+			},
+			"before": {
+				"meal_count": 0,
+				"phase": "breakfast",
+				"selected": [
+					"egg"
+				],
+				"state": {
+					"balance": 120,
+					"energy": 52,
+					"mood": 55,
+					"satiety": 58,
+					"stability": 65,
+					"stress": 48,
+					"study_progress": 0,
+					"study_target": 70
+				},
+				"stock": {
+					"apple": 1,
+					"instant_noodles": 2,
+					"milk": 1,
+					"oatmeal": 2,
+					"plain_yogurt": 1,
+					"unsalted_nuts": 1,
+					"whole_wheat_bread": 2
+				}
+			},
+			"checks": [
+				"hover_readonly",
+				"pinned_stable",
+				"close_no_settlement",
+				"escape_no_settlement",
+				"touch_hold_release"
+			],
+			"errors": [],
+			"food_id": "egg",
+			"logical_size": "(1920.0, 1080.0)",
+			"requested_size": "(1366, 768)",
+			"resolution_matched": true,
+			"source_id": "cafeteria",
+			"valid": true
+		},
+		{
+			"actual_size": "(1366, 768)",
+			"after": {
+				"meal_count": 0,
+				"phase": "breakfast",
+				"selected": [
+					"coffee"
+				],
+				"state": {
+					"balance": 120,
+					"energy": 52,
+					"mood": 55,
+					"satiety": 58,
+					"stability": 65,
+					"stress": 48,
+					"study_progress": 0,
+					"study_target": 70
+				},
+				"stock": {
+					"apple": 1,
+					"instant_noodles": 2,
+					"milk": 1,
+					"oatmeal": 2,
+					"plain_yogurt": 1,
+					"unsalted_nuts": 1,
+					"whole_wheat_bread": 2
+				}
+			},
+			"before": {
+				"meal_count": 0,
+				"phase": "breakfast",
+				"selected": [
+					"coffee"
+				],
+				"state": {
+					"balance": 120,
+					"energy": 52,
+					"mood": 55,
+					"satiety": 58,
+					"stability": 65,
+					"stress": 48,
+					"study_progress": 0,
+					"study_target": 70
+				},
+				"stock": {
+					"apple": 1,
+					"instant_noodles": 2,
+					"milk": 1,
+					"oatmeal": 2,
+					"plain_yogurt": 1,
+					"unsalted_nuts": 1,
+					"whole_wheat_bread": 2
+				}
+			},
+			"checks": [
+				"hover_readonly",
+				"pinned_stable",
+				"close_no_settlement",
+				"escape_no_settlement",
+				"touch_hold_release"
+			],
+			"errors": [],
+			"food_id": "coffee",
+			"logical_size": "(1920.0, 1080.0)",
+			"requested_size": "(1366, 768)",
+			"resolution_matched": true,
+			"source_id": "convenience_store",
+			"valid": true
+		},
+		{
+			"actual_size": "(1366, 768)",
+			"after": {
+				"meal_count": 0,
+				"phase": "breakfast",
+				"selected": [
+					"whole_wheat_bread"
+				],
+				"state": {
+					"balance": 120,
+					"energy": 52,
+					"mood": 55,
+					"satiety": 58,
+					"stability": 65,
+					"stress": 48,
+					"study_progress": 0,
+					"study_target": 70
+				},
+				"stock": {
+					"apple": 1,
+					"instant_noodles": 2,
+					"milk": 1,
+					"oatmeal": 2,
+					"plain_yogurt": 1,
+					"unsalted_nuts": 1,
+					"whole_wheat_bread": 2
+				}
+			},
+			"before": {
+				"meal_count": 0,
+				"phase": "breakfast",
+				"selected": [
+					"whole_wheat_bread"
+				],
+				"state": {
+					"balance": 120,
+					"energy": 52,
+					"mood": 55,
+					"satiety": 58,
+					"stability": 65,
+					"stress": 48,
+					"study_progress": 0,
+					"study_target": 70
+				},
+				"stock": {
+					"apple": 1,
+					"instant_noodles": 2,
+					"milk": 1,
+					"oatmeal": 2,
+					"plain_yogurt": 1,
+					"unsalted_nuts": 1,
+					"whole_wheat_bread": 2
+				}
+			},
+			"checks": [
+				"hover_readonly",
+				"pinned_stable",
+				"close_no_settlement",
+				"escape_no_settlement",
+				"touch_hold_release"
+			],
+			"errors": [],
+			"food_id": "whole_wheat_bread",
+			"logical_size": "(1920.0, 1080.0)",
+			"requested_size": "(1366, 768)",
+			"resolution_matched": true,
+			"source_id": "dorm_storage",
+			"valid": true
+		},
+		{
+			"actual_size": "(390, 844)",
+			"after": {
+				"meal_count": 0,
+				"phase": "breakfast",
+				"selected": [
+					"egg"
+				],
+				"state": {
+					"balance": 120,
+					"energy": 52,
+					"mood": 55,
+					"satiety": 58,
+					"stability": 65,
+					"stress": 48,
+					"study_progress": 0,
+					"study_target": 70
+				},
+				"stock": {
+					"apple": 1,
+					"instant_noodles": 2,
+					"milk": 1,
+					"oatmeal": 2,
+					"plain_yogurt": 1,
+					"unsalted_nuts": 1,
+					"whole_wheat_bread": 2
+				}
+			},
+			"before": {
+				"meal_count": 0,
+				"phase": "breakfast",
+				"selected": [
+					"egg"
+				],
+				"state": {
+					"balance": 120,
+					"energy": 52,
+					"mood": 55,
+					"satiety": 58,
+					"stability": 65,
+					"stress": 48,
+					"study_progress": 0,
+					"study_target": 70
+				},
+				"stock": {
+					"apple": 1,
+					"instant_noodles": 2,
+					"milk": 1,
+					"oatmeal": 2,
+					"plain_yogurt": 1,
+					"unsalted_nuts": 1,
+					"whole_wheat_bread": 2
+				}
+			},
+			"checks": [
+				"hover_readonly",
+				"pinned_stable",
+				"close_no_settlement",
+				"escape_no_settlement",
+				"touch_hold_release"
+			],
+			"errors": [],
+			"food_id": "egg",
+			"logical_size": "(720.0, 1558.0)",
+			"requested_size": "(390, 844)",
+			"resolution_matched": true,
+			"source_id": "cafeteria",
+			"valid": true
+		},
+		{
+			"actual_size": "(390, 844)",
+			"after": {
+				"meal_count": 0,
+				"phase": "breakfast",
+				"selected": [
+					"coffee"
+				],
+				"state": {
+					"balance": 120,
+					"energy": 52,
+					"mood": 55,
+					"satiety": 58,
+					"stability": 65,
+					"stress": 48,
+					"study_progress": 0,
+					"study_target": 70
+				},
+				"stock": {
+					"apple": 1,
+					"instant_noodles": 2,
+					"milk": 1,
+					"oatmeal": 2,
+					"plain_yogurt": 1,
+					"unsalted_nuts": 1,
+					"whole_wheat_bread": 2
+				}
+			},
+			"before": {
+				"meal_count": 0,
+				"phase": "breakfast",
+				"selected": [
+					"coffee"
+				],
+				"state": {
+					"balance": 120,
+					"energy": 52,
+					"mood": 55,
+					"satiety": 58,
+					"stability": 65,
+					"stress": 48,
+					"study_progress": 0,
+					"study_target": 70
+				},
+				"stock": {
+					"apple": 1,
+					"instant_noodles": 2,
+					"milk": 1,
+					"oatmeal": 2,
+					"plain_yogurt": 1,
+					"unsalted_nuts": 1,
+					"whole_wheat_bread": 2
+				}
+			},
+			"checks": [
+				"hover_readonly",
+				"pinned_stable",
+				"close_no_settlement",
+				"escape_no_settlement",
+				"touch_hold_release"
+			],
+			"errors": [],
+			"food_id": "coffee",
+			"logical_size": "(720.0, 1558.0)",
+			"requested_size": "(390, 844)",
+			"resolution_matched": true,
+			"source_id": "convenience_store",
+			"valid": true
+		},
+		{
+			"actual_size": "(390, 844)",
+			"after": {
+				"meal_count": 0,
+				"phase": "breakfast",
+				"selected": [
+					"whole_wheat_bread"
+				],
+				"state": {
+					"balance": 120,
+					"energy": 52,
+					"mood": 55,
+					"satiety": 58,
+					"stability": 65,
+					"stress": 48,
+					"study_progress": 0,
+					"study_target": 70
+				},
+				"stock": {
+					"apple": 1,
+					"instant_noodles": 2,
+					"milk": 1,
+					"oatmeal": 2,
+					"plain_yogurt": 1,
+					"unsalted_nuts": 1,
+					"whole_wheat_bread": 2
+				}
+			},
+			"before": {
+				"meal_count": 0,
+				"phase": "breakfast",
+				"selected": [
+					"whole_wheat_bread"
+				],
+				"state": {
+					"balance": 120,
+					"energy": 52,
+					"mood": 55,
+					"satiety": 58,
+					"stability": 65,
+					"stress": 48,
+					"study_progress": 0,
+					"study_target": 70
+				},
+				"stock": {
+					"apple": 1,
+					"instant_noodles": 2,
+					"milk": 1,
+					"oatmeal": 2,
+					"plain_yogurt": 1,
+					"unsalted_nuts": 1,
+					"whole_wheat_bread": 2
+				}
+			},
+			"checks": [
+				"hover_readonly",
+				"pinned_stable",
+				"close_no_settlement",
+				"escape_no_settlement",
+				"touch_hold_release"
+			],
+			"errors": [],
+			"food_id": "whole_wheat_bread",
+			"logical_size": "(720.0, 1558.0)",
+			"requested_size": "(390, 844)",
+			"resolution_matched": true,
+			"source_id": "dorm_storage",
+			"valid": true
+		}
+	],
+	"scope": "Native Windows rendering and injected GUI events; no physical touch-device claim.",
+	"valid": true
+}

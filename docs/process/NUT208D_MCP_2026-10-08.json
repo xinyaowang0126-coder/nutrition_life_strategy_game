@@ -1,0 +1,195 @@
+{
+  "session_id": "life-strategy@c20c919acb0f3453",
+  "engine": "4.7.2",
+  "plugin": "4.3.0",
+  "helper_live": true,
+  "source": "Godot MCP runtime input and game_eval",
+  "initial": {
+    "details_button": {
+      "x": 739,
+      "y": 729
+    },
+    "history_size": 0,
+    "hud": "起步状态",
+    "inventory": {
+      "apple": 1,
+      "instant_noodles": 2,
+      "milk": 1,
+      "oatmeal": 2,
+      "plain_yogurt": 1,
+      "unsalted_nuts": 1,
+      "whole_wheat_bread": 2
+    },
+    "logical_size": {
+      "x": 1920,
+      "y": 1080
+    },
+    "new_day_title": "起步状态",
+    "phase": "breakfast_source",
+    "scene": "res://scenes/game_v2/GameRootV2.tscn",
+    "state": {
+      "balance": 120,
+      "energy": 52,
+      "mood": 55,
+      "satiety": 58,
+      "stability": 65,
+      "stress": 48,
+      "study_progress": 0,
+      "study_target": 70
+    }
+  },
+  "after_close": {
+    "continue_disabled": false,
+    "history_size": 0,
+    "inventory": {
+      "apple": 1,
+      "instant_noodles": 2,
+      "milk": 1,
+      "oatmeal": 2,
+      "plain_yogurt": 1,
+      "unsalted_nuts": 1,
+      "whole_wheat_bread": 2
+    },
+    "note_visible": false,
+    "state": {
+      "balance": 120,
+      "energy": 52,
+      "mood": 55,
+      "satiety": 58,
+      "stability": 65,
+      "stress": 48,
+      "study_progress": 0,
+      "study_target": 70
+    }
+  },
+  "readonly_unchanged": true,
+  "day1": {
+    "day": 1,
+    "diagnostics": [],
+    "history_size": 1,
+    "phase": "summary",
+    "recovery": {
+      "after_sleep": {
+        "energy": 99,
+        "stress": 32
+      },
+      "before_sleep": {
+        "energy": 73,
+        "stress": 41
+      },
+      "clamp_delta": {
+        "energy": 0,
+        "stress": 0
+      },
+      "condition": "rested",
+      "end_of_day": {
+        "energy": 99,
+        "stress": 32
+      },
+      "evaluated_day": 1,
+      "inputs": {
+        "action_counts": {
+          "nap": 1,
+          "study": 1,
+          "walk": 1
+        },
+        "energy": 99,
+        "sleep_id": "sleep_early",
+        "stress": 32
+      },
+      "matched_rule_ids": [
+        "EARLY_SLEEP_READY"
+      ],
+      "next_day_effect": {
+        "opening_delta": {
+          "energy": 3,
+          "mood": 1,
+          "stress": -2
+        },
+        "study_modifier": 3
+      },
+      "origin": "day_settlement",
+      "reason_ids": [
+        "EARLY_SLEEP",
+        "EARLY_SLEEP_READY"
+      ],
+      "rules_version": "recovery-gameplay-v1",
+      "schema_version": 1,
+      "settlement_effects": [
+        {
+          "requested_delta": {
+            "mood": 2
+          },
+          "source_id": "study_on_pace"
+        },
+        {
+          "requested_delta": {
+            "satiety": -6
+          },
+          "source_id": "end_of_day_decay"
+        }
+      ],
+      "sleep_snapshot": {
+        "energy": 26,
+        "id": "sleep_early",
+        "mood": 3,
+        "satiety": -12,
+        "stress": -9,
+        "study": 0
+      },
+      "status": "known"
+    },
+    "state": {
+      "balance": 100,
+      "energy": 99,
+      "mood": 69,
+      "satiety": 80,
+      "stability": 73,
+      "stress": 32,
+      "study_progress": 10,
+      "study_target": 70
+    },
+    "summary": "今天吃了 3 餐，其中 2 餐有蔬菜类食物出现。\n\n今晚恢复 · 恢复充分\n选择早点睡，收工时精力充足、压力较低。\n明天每次复习收益 +3；开场精力 +3、心情 +1、压力 -2"
+  },
+  "day2": {
+    "actual_study": 13,
+    "condition": "rested",
+    "day": 2,
+    "diagnostics": [],
+    "effects": "今天每次复习收益 +3；开场精力 +3、心情 +1、压力 -2",
+    "hud": "昨夜恢复\n恢复充分",
+    "reopen_unchanged": true,
+    "state": {
+      "balance": 100,
+      "energy": 100,
+      "mood": 73,
+      "satiety": 80,
+      "stability": 73,
+      "stress": 28,
+      "study_progress": 10,
+      "study_target": 70
+    },
+    "title": "恢复充分"
+  },
+  "game_log_errors": [],
+  "editor_errors": [],
+  "editor_warnings": [
+    {
+      "path": "res://scripts/health/HealthDataStore.gd",
+      "line": 338,
+      "text": "GDScript::reload: Values of the ternary operator are not mutually compatible."
+    },
+    {
+      "path": "res://scripts/health/HealthDataStore.gd",
+      "line": 342,
+      "text": "GDScript::reload: Values of the ternary operator are not mutually compatible."
+    },
+    {
+      "path": "res://scripts/ui_v2/GameRootV2.gd",
+      "line": 219,
+      "text": "GDScript::reload: Values of the ternary operator are not mutually compatible."
+    }
+  ],
+  "screenshot": "docs/assets/nut208d-2026-10-08/mcp-1920x1080-day2.png",
+  "scope": "Actual V2 desktop first day to second day and MCP mouse/Escape. The editor embedded game stayed 1920x1080 when a smaller size was requested; mobile input is covered by the separate native-window probe."
+}

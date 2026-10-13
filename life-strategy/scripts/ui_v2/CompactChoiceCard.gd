@@ -48,6 +48,10 @@ func _ready() -> void:
 	info_button.focus_exited.connect(_dismiss_detail)
 	select_button.focus_entered.connect(_request_preview_detail)
 	select_button.focus_exited.connect(_dismiss_detail)
+	# Keyboard focus on a child button must also identify the whole card.
+	for button in [info_button, select_button]:
+		button.focus_entered.connect(_apply_frame_style)
+		button.focus_exited.connect(_apply_frame_style)
 	long_press_timer.timeout.connect(_on_long_press_timeout)
 	mouse_entered.connect(_on_hover_started)
 	mouse_exited.connect(_on_hover_ended)
@@ -245,6 +249,8 @@ func _cost_text() -> String:
 		return "不加价" if fee <= 0 else "+¥%d" % fee
 	if _payload.has("cost"):
 		var cost := int(_payload.get("cost", 0))
+		if cost <= 0 and _mode in ["action", "sleep"]:
+			return ""
 		return "免费" if cost <= 0 else "¥%d" % cost
 	return ""
 
@@ -265,18 +271,19 @@ func _update_button_text() -> void:
 
 
 func _update_visual_state(animate: bool) -> void:
-	var target_color := Color.WHITE
-	if not _enabled:
-		target_color = Color(0.68, 0.68, 0.65, 0.88)
-	elif _selected:
-		target_color = Color(1.0, 0.88, 0.68, 1.0)
-	self_modulate = target_color
+	# Printed card text stays readable; only unavailable artwork is muted.
+	self_modulate = Color(1.0, 0.88, 0.68, 1.0) if _selected else Color.WHITE
+	art.modulate = Color.WHITE if _enabled else Color(0.68, 0.68, 0.65, 0.90)
+	kind_label.visible = _selected or not _enabled
+	kind_label.text = "已选" if _selected else ("用完了" if _stock == 0 else "暂不可选")
+	kind_label.add_theme_color_override("font_color", Color("#a26525") if _selected else Color("#746b5c"))
 	_apply_frame_style()
 	_animate_scale(_target_scale(), 0.14 if animate else 0.0)
 
 
 func _apply_frame_style() -> void:
-	var inherited := get_theme_stylebox("panel")
+	# Always start from the shared paper, not a previous selected override.
+	var inherited := theme.get_stylebox("panel", "PanelContainer")
 	var frame: StyleBoxFlat
 	if inherited is StyleBoxFlat:
 		frame = (inherited as StyleBoxFlat).duplicate() as StyleBoxFlat
@@ -292,13 +299,22 @@ func _apply_frame_style() -> void:
 		"source": border_color = Color("#ae824d")
 	if _selected:
 		border_color = Color("#d18a32")
+		frame.bg_color = Color("#f5dbac")
 	elif not _enabled:
 		border_color = Color("#9a968c")
+		frame.bg_color = Color("#ebe4d7")
+	else:
+		frame.bg_color.a = 0.97
+	var focused := has_focus() or info_button.has_focus() or select_button.has_focus()
+	if focused:
+		border_color = Color("#9c641f")
 	frame.border_color = border_color
-	frame.set_border_width_all(4 if _selected else 3)
+	frame.set_border_width_all(5 if focused else (4 if _selected else 3))
 	frame.shadow_color = Color(0.12, 0.08, 0.04, 0.22)
-	frame.shadow_size = 8
-	frame.shadow_offset = Vector2(0, 5)
+	frame.shadow_size = 12 if _hovered else 8
+	frame.shadow_offset = Vector2(0, 7 if _hovered else 5)
+	if _selected:
+		frame.shadow_color = Color(0.55, 0.30, 0.08, 0.30)
 	add_theme_stylebox_override("panel", frame)
 
 
@@ -344,6 +360,7 @@ func _on_hover_started() -> void:
 	_hovered = true
 	z_index = 4
 	request_detail(false)
+	_apply_frame_style()
 	_animate_scale(_target_scale())
 
 
@@ -351,6 +368,7 @@ func _on_hover_ended() -> void:
 	_hovered = false
 	z_index = 0
 	detail_dismissed.emit(item_id)
+	_apply_frame_style()
 	_animate_scale(_target_scale())
 
 
@@ -358,11 +376,13 @@ func _on_focus_entered() -> void:
 	if _should_ignore_pointer_preview():
 		return
 	request_detail(false)
+	_apply_frame_style()
 	_animate_scale(Vector2(1.035, 1.035))
 
 
 func _on_focus_exited() -> void:
 	detail_dismissed.emit(item_id)
+	_apply_frame_style()
 	_animate_scale(_target_scale())
 
 

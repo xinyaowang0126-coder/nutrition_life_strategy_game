@@ -1,0 +1,4732 @@
+{
+  "schema": "edu03.copy-candidates.v1",
+  "snapshot_date": "2026-10-08",
+  "scope": "Chinese quoted literals and card descriptions in production script/scene/card paths, including V1 compatibility. Fragments and unreachable defaults remain candidates; this is not proof that every row is shown.",
+  "excludes": [
+    "health service diagnostics",
+    "tests",
+    "addons",
+    "assets",
+    "Play"
+  ],
+  "source_file_count": 61,
+  "candidate_count": 786,
+  "rows": [
+    {
+      "file": "life-strategy/data/cards/sleep_options.xml",
+      "line": 3,
+      "kind": "quoted_candidate",
+      "text": "早点睡"
+    },
+    {
+      "file": "life-strategy/data/cards/sleep_options.xml",
+      "line": 4,
+      "kind": "card_description",
+      "text": "把灯关了，剩下的明天再说。"
+    },
+    {
+      "file": "life-strategy/data/cards/sleep_options.xml",
+      "line": 6,
+      "kind": "quoted_candidate",
+      "text": "再看一会儿"
+    },
+    {
+      "file": "life-strategy/data/cards/sleep_options.xml",
+      "line": 7,
+      "kind": "card_description",
+      "text": "台灯再亮一阵。"
+    },
+    {
+      "file": "life-strategy/data/cards/sleep_options.xml",
+      "line": 9,
+      "kind": "quoted_candidate",
+      "text": "刷会儿手机"
+    },
+    {
+      "file": "life-strategy/data/cards/sleep_options.xml",
+      "line": 10,
+      "kind": "card_description",
+      "text": "本来只想看十分钟。"
+    },
+    {
+      "file": "life-strategy/data/cards/meal_sources.xml",
+      "line": 3,
+      "kind": "quoted_candidate",
+      "text": "食堂"
+    },
+    {
+      "file": "life-strategy/data/cards/meal_sources.xml",
+      "line": 3,
+      "kind": "quoted_candidate",
+      "text": "可选 3 样；价格稳定，但要花精力去窗口排队"
+    },
+    {
+      "file": "life-strategy/data/cards/meal_sources.xml",
+      "line": 4,
+      "kind": "card_description",
+      "text": "窗口多，价格也稳。"
+    },
+    {
+      "file": "life-strategy/data/cards/meal_sources.xml",
+      "line": 6,
+      "kind": "quoted_candidate",
+      "text": "外卖"
+    },
+    {
+      "file": "life-strategy/data/cards/meal_sources.xml",
+      "line": 6,
+      "kind": "quoted_candidate",
+      "text": "最多选 2 样并支付配送费；省下出门的精力"
+    },
+    {
+      "file": "life-strategy/data/cards/meal_sources.xml",
+      "line": 7,
+      "kind": "card_description",
+      "text": "不用出门，要多付配送费。"
+    },
+    {
+      "file": "life-strategy/data/cards/meal_sources.xml",
+      "line": 9,
+      "kind": "quoted_candidate",
+      "text": "便利店"
+    },
+    {
+      "file": "life-strategy/data/cards/meal_sources.xml",
+      "line": 9,
+      "kind": "quoted_candidate",
+      "text": "最多选 2 样；离得近、选择少，适合快速解决"
+    },
+    {
+      "file": "life-strategy/data/cards/meal_sources.xml",
+      "line": 10,
+      "kind": "card_description",
+      "text": "下楼就到，能选的不多。"
+    },
+    {
+      "file": "life-strategy/data/cards/meal_sources.xml",
+      "line": 12,
+      "kind": "quoted_candidate",
+      "text": "宿舍存粮"
+    },
+    {
+      "file": "life-strategy/data/cards/meal_sources.xml",
+      "line": 12,
+      "kind": "quoted_candidate",
+      "text": "最多选 2 样；不花现金，但会消耗有限存货"
+    },
+    {
+      "file": "life-strategy/data/cards/meal_sources.xml",
+      "line": 13,
+      "kind": "card_description",
+      "text": "不花现金，吃的是现有存货。"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 3,
+      "kind": "quoted_candidate",
+      "text": "白米饭"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 3,
+      "kind": "quoted_candidate",
+      "text": "谷薯类"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 4,
+      "kind": "card_description",
+      "text": "窗口刚盛出来，还冒着热气。"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 6,
+      "kind": "quoted_candidate",
+      "text": "燕麦"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 6,
+      "kind": "quoted_candidate",
+      "text": "主食"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 7,
+      "kind": "card_description",
+      "text": "黏糊糊一碗，吃到碗底还是热的。"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 9,
+      "kind": "quoted_candidate",
+      "text": "鸡蛋"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 9,
+      "kind": "quoted_candidate",
+      "text": "蛋类"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 10,
+      "kind": "card_description",
+      "text": "先放到餐盘边上。"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 12,
+      "kind": "quoted_candidate",
+      "text": "豆腐"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 12,
+      "kind": "quoted_candidate",
+      "text": "大豆及制品"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 13,
+      "kind": "card_description",
+      "text": "筷子夹轻点，会碎。"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 15,
+      "kind": "quoted_candidate",
+      "text": "青菜"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 15,
+      "kind": "quoted_candidate",
+      "text": "蔬菜类"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 16,
+      "kind": "card_description",
+      "text": "刚出锅，菜叶还亮着。"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 18,
+      "kind": "quoted_candidate",
+      "text": "番茄"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 18,
+      "kind": "quoted_candidate",
+      "text": "蔬菜类"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 19,
+      "kind": "card_description",
+      "text": "有点酸，配米饭正好。"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 21,
+      "kind": "quoted_candidate",
+      "text": "苹果"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 21,
+      "kind": "quoted_candidate",
+      "text": "水果类"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 22,
+      "kind": "card_description",
+      "text": "洗一洗，连皮啃。"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 24,
+      "kind": "quoted_candidate",
+      "text": "香蕉"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 24,
+      "kind": "quoted_candidate",
+      "text": "水果类"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 25,
+      "kind": "card_description",
+      "text": "不用洗，赶时间最省事。"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 27,
+      "kind": "quoted_candidate",
+      "text": "牛奶"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 27,
+      "kind": "quoted_candidate",
+      "text": "奶及奶制品"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 28,
+      "kind": "card_description",
+      "text": "带一盒，路上也能喝。"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 30,
+      "kind": "quoted_candidate",
+      "text": "咖啡"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 30,
+      "kind": "quoted_candidate",
+      "text": "饮品"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 31,
+      "kind": "card_description",
+      "text": "扣好杯盖，带回桌边。"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 33,
+      "kind": "quoted_candidate",
+      "text": "奶茶"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 33,
+      "kind": "quoted_candidate",
+      "text": "饮品"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 34,
+      "kind": "card_description",
+      "text": "备注了半糖，喝着还是甜。"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 36,
+      "kind": "quoted_candidate",
+      "text": "方便面"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 36,
+      "kind": "quoted_candidate",
+      "text": "预包装谷类食品"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 37,
+      "kind": "card_description",
+      "text": "三分钟开盖，宿舍里全是调料味。"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 39,
+      "kind": "quoted_candidate",
+      "text": "炸鸡"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 39,
+      "kind": "quoted_candidate",
+      "text": "禽肉类"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 40,
+      "kind": "card_description",
+      "text": "纸袋烫手，脆皮还在响。"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 42,
+      "kind": "quoted_candidate",
+      "text": "沙拉碗"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 42,
+      "kind": "quoted_candidate",
+      "text": "沙拉"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 43,
+      "kind": "card_description",
+      "text": "一大盒，点到付款页还是会犹豫。"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 45,
+      "kind": "quoted_candidate",
+      "text": "三明治"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 45,
+      "kind": "quoted_candidate",
+      "text": "复合食品"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 46,
+      "kind": "card_description",
+      "text": "撕开包装，边走边吃。"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 48,
+      "kind": "quoted_candidate",
+      "text": "杂粮饭"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 48,
+      "kind": "quoted_candidate",
+      "text": "谷薯类"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 49,
+      "kind": "card_description",
+      "text": "米饭里混着糙米和杂粮，口感更有嚼劲。"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 51,
+      "kind": "quoted_candidate",
+      "text": "西红柿炒鸡蛋"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 51,
+      "kind": "quoted_candidate",
+      "text": "复合菜品"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 52,
+      "kind": "card_description",
+      "text": "酸甜的汤汁裹着鸡蛋，食堂窗口刚盛出一勺。"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 54,
+      "kind": "quoted_candidate",
+      "text": "芹菜炒肉"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 54,
+      "kind": "quoted_candidate",
+      "text": "复合菜品"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 55,
+      "kind": "card_description",
+      "text": "芹菜清脆，肉片切得薄，适合配一份米饭。"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 57,
+      "kind": "quoted_candidate",
+      "text": "清蒸鱼"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 57,
+      "kind": "quoted_candidate",
+      "text": "水产类"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 58,
+      "kind": "card_description",
+      "text": "鱼肉蒸得刚熟，葱丝和姜片还带着热气。"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 60,
+      "kind": "quoted_candidate",
+      "text": "原味酸奶"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 60,
+      "kind": "quoted_candidate",
+      "text": "奶及奶制品"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 61,
+      "kind": "card_description",
+      "text": "撕开杯盖就能吃，原味里带一点甜。"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 63,
+      "kind": "quoted_candidate",
+      "text": "全麦面包"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 63,
+      "kind": "quoted_candidate",
+      "text": "面包"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 64,
+      "kind": "card_description",
+      "text": "两片装，赶时间时可以直接带走。"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 66,
+      "kind": "quoted_candidate",
+      "text": "原味坚果"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 66,
+      "kind": "quoted_candidate",
+      "text": "坚果类"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 67,
+      "kind": "card_description",
+      "text": "一小袋没有额外调味的混合坚果。"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 69,
+      "kind": "quoted_candidate",
+      "text": "鸡肉时蔬饭"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 69,
+      "kind": "quoted_candidate",
+      "text": "复合主食"
+    },
+    {
+      "file": "life-strategy/data/cards/foods.xml",
+      "line": 70,
+      "kind": "card_description",
+      "text": "米饭、鸡肉和时蔬装在同一只餐盒里。"
+    },
+    {
+      "file": "life-strategy/data/cards/actions.xml",
+      "line": 3,
+      "kind": "quoted_candidate",
+      "text": "复习"
+    },
+    {
+      "file": "life-strategy/data/cards/actions.xml",
+      "line": 3,
+      "kind": "quoted_candidate",
+      "text": "晨读"
+    },
+    {
+      "file": "life-strategy/data/cards/actions.xml",
+      "line": 3,
+      "kind": "quoted_candidate",
+      "text": "复习"
+    },
+    {
+      "file": "life-strategy/data/cards/actions.xml",
+      "line": 3,
+      "kind": "quoted_candidate",
+      "text": "夜读"
+    },
+    {
+      "file": "life-strategy/data/cards/actions.xml",
+      "line": 3,
+      "kind": "quoted_candidate",
+      "text": "至少需要 8 精力；精力偏低或压力过高时，复习效率会下降"
+    },
+    {
+      "file": "life-strategy/data/cards/actions.xml",
+      "line": 4,
+      "kind": "card_description",
+      "text": "翻到折角那页，再过一遍。"
+    },
+    {
+      "file": "life-strategy/data/cards/actions.xml",
+      "line": 6,
+      "kind": "quoted_candidate",
+      "text": "歇一会儿"
+    },
+    {
+      "file": "life-strategy/data/cards/actions.xml",
+      "line": 6,
+      "kind": "quoted_candidate",
+      "text": "补个觉"
+    },
+    {
+      "file": "life-strategy/data/cards/actions.xml",
+      "line": 6,
+      "kind": "quoted_candidate",
+      "text": "午睡"
+    },
+    {
+      "file": "life-strategy/data/cards/actions.xml",
+      "line": 6,
+      "kind": "quoted_candidate",
+      "text": "眯一会儿"
+    },
+    {
+      "file": "life-strategy/data/cards/actions.xml",
+      "line": 7,
+      "kind": "card_description",
+      "text": "闹钟调二十分钟。"
+    },
+    {
+      "file": "life-strategy/data/cards/actions.xml",
+      "line": 9,
+      "kind": "quoted_candidate",
+      "text": "散步"
+    },
+    {
+      "file": "life-strategy/data/cards/actions.xml",
+      "line": 9,
+      "kind": "quoted_candidate",
+      "text": "早上走走"
+    },
+    {
+      "file": "life-strategy/data/cards/actions.xml",
+      "line": 9,
+      "kind": "quoted_candidate",
+      "text": "校园散步"
+    },
+    {
+      "file": "life-strategy/data/cards/actions.xml",
+      "line": 9,
+      "kind": "quoted_candidate",
+      "text": "晚风里走走"
+    },
+    {
+      "file": "life-strategy/data/cards/actions.xml",
+      "line": 10,
+      "kind": "card_description",
+      "text": "下楼绕一圈，吹吹风。"
+    },
+    {
+      "file": "life-strategy/data/cards/actions.xml",
+      "line": 12,
+      "kind": "quoted_candidate",
+      "text": "喝水"
+    },
+    {
+      "file": "life-strategy/data/cards/actions.xml",
+      "line": 12,
+      "kind": "quoted_candidate",
+      "text": "喝水"
+    },
+    {
+      "file": "life-strategy/data/cards/actions.xml",
+      "line": 12,
+      "kind": "quoted_candidate",
+      "text": "喝水"
+    },
+    {
+      "file": "life-strategy/data/cards/actions.xml",
+      "line": 12,
+      "kind": "quoted_candidate",
+      "text": "喝水"
+    },
+    {
+      "file": "life-strategy/data/cards/actions.xml",
+      "line": 12,
+      "kind": "quoted_candidate",
+      "text": "每天最多两次"
+    },
+    {
+      "file": "life-strategy/data/cards/actions.xml",
+      "line": 13,
+      "kind": "card_description",
+      "text": "接满水杯，顺便伸个懒腰。"
+    },
+    {
+      "file": "life-strategy/data/cards/actions.xml",
+      "line": 15,
+      "kind": "quoted_candidate",
+      "text": "留点空"
+    },
+    {
+      "file": "life-strategy/data/cards/actions.xml",
+      "line": 15,
+      "kind": "quoted_candidate",
+      "text": "上午留白"
+    },
+    {
+      "file": "life-strategy/data/cards/actions.xml",
+      "line": 15,
+      "kind": "quoted_candidate",
+      "text": "下午留白"
+    },
+    {
+      "file": "life-strategy/data/cards/actions.xml",
+      "line": 15,
+      "kind": "quoted_candidate",
+      "text": "早点收工"
+    },
+    {
+      "file": "life-strategy/data/cards/actions.xml",
+      "line": 16,
+      "kind": "card_description",
+      "text": "今天不把行程塞满。"
+    },
+    {
+      "file": "life-strategy/data/cards/actions.xml",
+      "line": 18,
+      "kind": "quoted_candidate",
+      "text": "补充存粮"
+    },
+    {
+      "file": "life-strategy/data/cards/actions.xml",
+      "line": 18,
+      "kind": "quoted_candidate",
+      "text": "买点早餐"
+    },
+    {
+      "file": "life-strategy/data/cards/actions.xml",
+      "line": 18,
+      "kind": "quoted_candidate",
+      "text": "补充存粮"
+    },
+    {
+      "file": "life-strategy/data/cards/actions.xml",
+      "line": 18,
+      "kind": "quoted_candidate",
+      "text": "顺路补货"
+    },
+    {
+      "file": "life-strategy/data/cards/actions.xml",
+      "line": 18,
+      "kind": "quoted_candidate",
+      "text": "花 ¥10 补充燕麦、牛奶和苹果各 1 份；每天最多一次"
+    },
+    {
+      "file": "life-strategy/data/cards/actions.xml",
+      "line": 19,
+      "kind": "card_description",
+      "text": "添三份存粮，后面几天有个备用。"
+    },
+    {
+      "file": "life-strategy/scenes/main_menu/MainMenu.tscn",
+      "line": 72,
+      "kind": "quoted_candidate",
+      "text": "撑过这一周"
+    },
+    {
+      "file": "life-strategy/scenes/main_menu/MainMenu.tscn",
+      "line": 79,
+      "kind": "quoted_candidate",
+      "text": "离考试还有七天"
+    },
+    {
+      "file": "life-strategy/scenes/main_menu/MainMenu.tscn",
+      "line": 92,
+      "kind": "quoted_candidate",
+      "text": "吃饭、复习、睡觉。钱和精力，都得算着用。"
+    },
+    {
+      "file": "life-strategy/scenes/main_menu/MainMenu.tscn",
+      "line": 105,
+      "kind": "quoted_candidate",
+      "text": "开始这一周"
+    },
+    {
+      "file": "life-strategy/scenes/main_menu/MainMenu.tscn",
+      "line": 111,
+      "kind": "quoted_candidate",
+      "text": "退出"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/TakeoutFoodRowCard.gd",
+      "line": 24,
+      "kind": "quoted_candidate",
+      "text": "加购"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/TakeoutFoodRowCard.gd",
+      "line": 70,
+      "kind": "quoted_candidate",
+      "text": "加购"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/TakeoutFoodRowCard.gd",
+      "line": 110,
+      "kind": "quoted_candidate",
+      "text": "未命名"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/TakeoutFoodRowCard.gd",
+      "line": 111,
+      "kind": "quoted_candidate",
+      "text": "饱腹 %s\\n%s"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/TakeoutFoodRowCard.gd",
+      "line": 126,
+      "kind": "quoted_candidate",
+      "text": "口味未设置"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/TakeoutFoodRowCard.gd",
+      "line": 127,
+      "kind": "quoted_candidate",
+      "text": "口味 %s"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/TakeoutFoodRowCard.gd",
+      "line": 149,
+      "kind": "quoted_candidate",
+      "text": "免费"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/TakeoutFoodRowCard.gd",
+      "line": 153,
+      "kind": "quoted_candidate",
+      "text": "移出"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/StickyNotePopup.gd",
+      "line": 131,
+      "kind": "quoted_candidate",
+      "text": "详情"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/StickyNotePopup.gd",
+      "line": 143,
+      "kind": "quoted_candidate",
+      "text": "饱腹"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/StickyNotePopup.gd",
+      "line": 144,
+      "kind": "quoted_candidate",
+      "text": "精力"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/StickyNotePopup.gd",
+      "line": 148,
+      "kind": "quoted_candidate",
+      "text": "心情"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/StickyNotePopup.gd",
+      "line": 149,
+      "kind": "quoted_candidate",
+      "text": "压力"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/StickyNotePopup.gd",
+      "line": 150,
+      "kind": "quoted_candidate",
+      "text": "复习"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/StickyNotePopup.gd",
+      "line": 151,
+      "kind": "quoted_candidate",
+      "text": "当前游戏数值"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/StickyNotePopup.gd",
+      "line": 151,
+      "kind": "quoted_candidate",
+      "text": "游戏即时效果"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/StickyNotePopup.gd",
+      "line": 158,
+      "kind": "quoted_candidate",
+      "text": "\\n今晚的恢复，收工后再看精力、压力和今天的安排。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/StickyNotePopup.gd",
+      "line": 179,
+      "kind": "quoted_candidate",
+      "text": "口味未设置"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/StickyNotePopup.gd",
+      "line": 182,
+      "kind": "quoted_candidate",
+      "text": "本局角色没有特别偏好"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/StickyNotePopup.gd",
+      "line": 184,
+      "kind": "quoted_candidate",
+      "text": "不太合本局角色的口味"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/StickyNotePopup.gd",
+      "line": 186,
+      "kind": "quoted_candidate",
+      "text": "本局角色偏爱这一口"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/StickyNotePopup.gd",
+      "line": 188,
+      "kind": "quoted_candidate",
+      "text": "合本局角色的口味"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/StickyNotePopup.gd",
+      "line": 189,
+      "kind": "quoted_candidate",
+      "text": "%s · 心情 %s"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/StickyNotePopup.gd",
+      "line": 206,
+      "kind": "quoted_candidate",
+      "text": "食物"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/StickyNotePopup.gd",
+      "line": 208,
+      "kind": "quoted_candidate",
+      "text": "用餐去处"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/StickyNotePopup.gd",
+      "line": 210,
+      "kind": "quoted_candidate",
+      "text": "行动"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/StickyNotePopup.gd",
+      "line": 212,
+      "kind": "quoted_candidate",
+      "text": "今晚"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/StickyNotePopup.gd",
+      "line": 214,
+      "kind": "quoted_candidate",
+      "text": "当前状态"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/StickyNotePopup.gd",
+      "line": 216,
+      "kind": "quoted_candidate",
+      "text": "详情"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/StickyNotePopup.gd",
+      "line": 225,
+      "kind": "quoted_candidate",
+      "text": "点一下卡牌，把它加入这一餐。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/StickyNotePopup.gd",
+      "line": 227,
+      "kind": "quoted_candidate",
+      "text": "这里能看到 %d 种选择。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/StickyNotePopup.gd",
+      "line": 229,
+      "kind": "quoted_candidate",
+      "text": "会占用 %d 个安排位。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/StickyNotePopup.gd",
+      "line": 231,
+      "kind": "quoted_candidate",
+      "text": "今晚就按这个节奏收尾。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/StickyNotePopup.gd",
+      "line": 238,
+      "kind": "quoted_candidate",
+      "text": "还剩 ×%d"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/StickyNotePopup.gd",
+      "line": 241,
+      "kind": "quoted_candidate",
+      "text": "不加价"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/StickyNotePopup.gd",
+      "line": 241,
+      "kind": "quoted_candidate",
+      "text": "另付 ¥%d"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/StickyNotePopup.gd",
+      "line": 244,
+      "kind": "quoted_candidate",
+      "text": "免费"
+    },
+    {
+      "file": "life-strategy/scenes/game/GameRoot.tscn",
+      "line": 100,
+      "kind": "quoted_candidate",
+      "text": "第 1 天 / 7"
+    },
+    {
+      "file": "life-strategy/scenes/game/GameRoot.tscn",
+      "line": 107,
+      "kind": "quoted_candidate",
+      "text": "早餐 · 余 ¥120 · 今日安排 0/3"
+    },
+    {
+      "file": "life-strategy/scenes/game/GameRoot.tscn",
+      "line": 114,
+      "kind": "quoted_candidate",
+      "text": "重新开始"
+    },
+    {
+      "file": "life-strategy/scenes/game/GameRoot.tscn",
+      "line": 120,
+      "kind": "quoted_candidate",
+      "text": "主菜单"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/GameRootV2.tscn",
+      "line": 114,
+      "kind": "quoted_candidate",
+      "text": "第 1 天 / 第 7 天"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/GameRootV2.tscn",
+      "line": 132,
+      "kind": "quoted_candidate",
+      "text": "早餐"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/GameRootV2.tscn",
+      "line": 154,
+      "kind": "quoted_candidate",
+      "text": "菜单"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/CharacterHUD.gd",
+      "line": 110,
+      "kind": "quoted_candidate",
+      "text": "昨夜恢复\\n"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/CharacterHUD.gd",
+      "line": 110,
+      "kind": "quoted_candidate",
+      "text": "起步状态"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/CharacterHUD.gd",
+      "line": 110,
+      "kind": "quoted_candidate",
+      "text": "起步状态"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/CharacterHUD.gd",
+      "line": 146,
+      "kind": "quoted_candidate",
+      "text": "精力 "
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/CharacterHUD.gd",
+      "line": 147,
+      "kind": "quoted_candidate",
+      "text": "心情 "
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/CharacterHUD.gd",
+      "line": 148,
+      "kind": "quoted_candidate",
+      "text": "饱腹 "
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/CharacterHUD.gd",
+      "line": 149,
+      "kind": "quoted_candidate",
+      "text": "压力 "
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/CharacterHUD.gd",
+      "line": 150,
+      "kind": "quoted_candidate",
+      "text": "复习 "
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/CharacterHUD.gd",
+      "line": 255,
+      "kind": "quoted_candidate",
+      "text": "此刻状态"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/CharacterHUD.gd",
+      "line": 256,
+      "kind": "quoted_candidate",
+      "text": "状态"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/CharacterHUD.gd",
+      "line": 258,
+      "kind": "quoted_candidate",
+      "text": "这些数值描述角色当前的游戏状态，不是对玩家真实健康的评价。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/CharacterHUD.gd",
+      "line": 274,
+      "kind": "quoted_candidate",
+      "text": "肚子已经在提醒你了，下一餐别再拖。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/CharacterHUD.gd",
+      "line": 276,
+      "kind": "quoted_candidate",
+      "text": "今天的电量不多，留一点给真正要紧的事。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/CharacterHUD.gd",
+      "line": 278,
+      "kind": "quoted_candidate",
+      "text": "脑子绷得有点紧，先找机会喘口气。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/CharacterHUD.gd",
+      "line": 279,
+      "kind": "quoted_candidate",
+      "text": "目前还稳得住。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 65,
+      "kind": "quoted_candidate",
+      "text": "心情 +3｜压力 -2｜散步恢复增强"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 66,
+      "kind": "quoted_candidate",
+      "text": "食堂候选菜品 +2"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 67,
+      "kind": "quoted_candidate",
+      "text": "外卖配送费 -2｜候选餐品 +1"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 68,
+      "kind": "quoted_candidate",
+      "text": "复习收益 +3｜额外精力 -2、压力 +1"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 69,
+      "kind": "quoted_candidate",
+      "text": "心情 -2｜压力 +2｜外卖费 +2，散步恢复减弱"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 70,
+      "kind": "quoted_candidate",
+      "text": "没有额外规则变化"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 77,
+      "kind": "quoted_candidate",
+      "text": "早餐"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 78,
+      "kind": "quoted_candidate",
+      "text": "早餐"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 79,
+      "kind": "quoted_candidate",
+      "text": "早餐后"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 80,
+      "kind": "quoted_candidate",
+      "text": "午餐"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 81,
+      "kind": "quoted_candidate",
+      "text": "午餐"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 82,
+      "kind": "quoted_candidate",
+      "text": "午餐后"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 83,
+      "kind": "quoted_candidate",
+      "text": "晚餐"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 84,
+      "kind": "quoted_candidate",
+      "text": "晚餐"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 85,
+      "kind": "quoted_candidate",
+      "text": "晚餐后"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 86,
+      "kind": "quoted_candidate",
+      "text": "夜里"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 87,
+      "kind": "quoted_candidate",
+      "text": "今日小结"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 88,
+      "kind": "quoted_candidate",
+      "text": "周末"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 378,
+      "kind": "quoted_candidate",
+      "text": "周末就要到了"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 381,
+      "kind": "quoted_candidate",
+      "text": "明日安排"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 388,
+      "kind": "quoted_candidate",
+      "text": "夜深了，几点睡？"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 389,
+      "kind": "quoted_candidate",
+      "text": "闹钟还没响，先把今晚定下来。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 391,
+      "kind": "quoted_candidate",
+      "text": "点小圆标看清代价，再决定。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 495,
+      "kind": "quoted_candidate",
+      "text": "这个时段还没营业。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 502,
+      "kind": "quoted_candidate",
+      "text": "柜子已经空了。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 507,
+      "kind": "quoted_candidate",
+      "text": "余额不够在这里买一份。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 565,
+      "kind": "quoted_candidate",
+      "text": "余额不够，先拿掉一样。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 570,
+      "kind": "quoted_candidate",
+      "text": "这份存粮刚好吃完了。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 590,
+      "kind": "quoted_candidate",
+      "text": "%s没吃。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 716,
+      "kind": "quoted_candidate",
+      "text": "餐盘组合奖励（游戏）：精力 +5、心情 +3。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 720,
+      "kind": "quoted_candidate",
+      "text": "今天已有两餐合口味，心情 +4（游戏）。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 729,
+      "kind": "quoted_candidate",
+      "text": "三餐花费不超过 ¥12，压力 -3（游戏）。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 780,
+      "kind": "quoted_candidate",
+      "text": "%s：燕麦、牛奶和苹果放进柜子了。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 787,
+      "kind": "quoted_candidate",
+      "text": "%s没有再排事情。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 787,
+      "kind": "quoted_candidate",
+      "text": "餐后"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 817,
+      "kind": "quoted_candidate",
+      "text": "今天已经接过两杯水。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 819,
+      "kind": "quoted_candidate",
+      "text": "今天已经补过一次存粮。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 821,
+      "kind": "quoted_candidate",
+      "text": "今天的安排位已经用完。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 823,
+      "kind": "quoted_candidate",
+      "text": "余额不够。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 826,
+      "kind": "quoted_candidate",
+      "text": "至少需要 %d 精力，现在先缓一缓。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 844,
+      "kind": "quoted_candidate",
+      "text": "精力偏低"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 847,
+      "kind": "quoted_candidate",
+      "text": "压力偏高"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 852,
+      "kind": "quoted_candidate",
+      "text": "不变"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 853,
+      "kind": "quoted_candidate",
+      "text": "昨夜恢复：%s（每次复习 %s）"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 859,
+      "kind": "quoted_candidate",
+      "text": "今日事件：复习收益 %s"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 861,
+      "kind": "quoted_candidate",
+      "text": "当前%s：临时 %s"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 862,
+      "kind": "quoted_candidate",
+      "text": "且"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 914,
+      "kind": "quoted_candidate",
+      "text": "夜里：%s"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 960,
+      "kind": "quoted_candidate",
+      "text": "%s\\n\\n本局变化\\n%s"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 965,
+      "kind": "quoted_candidate",
+      "text": "\\n\\n恢复依据\\n"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 968,
+      "kind": "quoted_candidate",
+      "text": "第 %d 天，收工"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 980,
+      "kind": "quoted_candidate",
+      "text": "查看三餐与恢复依据"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 981,
+      "kind": "quoted_candidate",
+      "text": "收起三餐与恢复依据"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 982,
+      "kind": "quoted_candidate",
+      "text": "睡到第 %d 天"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 987,
+      "kind": "quoted_candidate",
+      "text": "恢复记录暂时不可用，请通过菜单重新开始这一周。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 1053,
+      "kind": "quoted_candidate",
+      "text": "恢复记录暂时不可用，请通过菜单重新开始这一周。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 1070,
+      "kind": "quoted_candidate",
+      "text": "第 %d 天开始"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 1072,
+      "kind": "quoted_candidate",
+      "text": "用现有预算安排这一周的三餐、复习和休息，先从早餐开始。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 1074,
+      "kind": "quoted_candidate",
+      "text": "昨夜的恢复影响今天的复习节奏；今天的事件也会改变可用策略。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 1089,
+      "kind": "quoted_candidate",
+      "text": "进入第 %d 天"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 1097,
+      "kind": "quoted_candidate",
+      "text": "新的一周开始了"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 1098,
+      "kind": "quoted_candidate",
+      "text": "今天没有额外限制，先按自己的节奏安排三餐与学习。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 1103,
+      "kind": "quoted_candidate",
+      "text": "周末就在眼前"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 1104,
+      "kind": "quoted_candidate",
+      "text": "今天没有额外变化，把这一周最后的安排稳稳接住。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 1108,
+      "kind": "quoted_candidate",
+      "text": "照常安排"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 1109,
+      "kind": "quoted_candidate",
+      "text": "今天没有额外变化，可以按自己的节奏来。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 1124,
+      "kind": "quoted_candidate",
+      "text": "恢复依据"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 1124,
+      "kind": "quoted_candidate",
+      "text": "游戏恢复"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 1138,
+      "kind": "quoted_candidate",
+      "text": "这一周结束了"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 1141,
+      "kind": "quoted_candidate",
+      "text": "目标复习 %d，完成 %d；本周记录了 %d 天，手里还剩 ¥%d。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 1150,
+      "kind": "quoted_candidate",
+      "text": "查看本周轨迹"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 1151,
+      "kind": "quoted_candidate",
+      "text": "收起本周轨迹"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 1152,
+      "kind": "quoted_candidate",
+      "text": "再来一周"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 1190,
+      "kind": "quoted_candidate",
+      "text": "没有记录"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 1197,
+      "kind": "quoted_candidate",
+      "text": "没吃"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 1210,
+      "kind": "quoted_candidate",
+      "text": "等"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 1212,
+      "kind": "quoted_candidate",
+      "text": "已经吃过"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 1228,
+      "kind": "quoted_candidate",
+      "text": "今日变化：余力 %s｜复习 %s｜余额 %s"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 1238,
+      "kind": "quoted_candidate",
+      "text": "今天离复习计划还差 %d。明天看看精力，再安排下一段。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 1240,
+      "kind": "quoted_candidate",
+      "text": "复习进度跟上了，不过电量见底；明天先缓一缓再开书。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 1242,
+      "kind": "quoted_candidate",
+      "text": "进度跟上了。余下 %d 天，存粮和食堂能帮钱包多撑一会儿。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 1243,
+      "kind": "quoted_candidate",
+      "text": "复习进度跟上了，也给明天留出了调整空间。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 1249,
+      "kind": "quoted_candidate",
+      "text": "恢复记录暂时不可用，请通过菜单重新开始这一周。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 1251,
+      "kind": "quoted_candidate",
+      "text": "本周已经走完，看看七天里哪些选择真正留下了余力。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 1253,
+      "kind": "quoted_candidate",
+      "text": "明天的事件："
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 1253,
+      "kind": "quoted_candidate",
+      "text": "照常安排"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 1257,
+      "kind": "quoted_candidate",
+      "text": "本周轨迹："
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 1269,
+      "kind": "quoted_candidate",
+      "text": "第 %d 天｜进餐记录 %d/%d｜复习 %s｜花费 ¥%d\\n收工后：%s\\n%s"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 1279,
+      "kind": "quoted_candidate",
+      "text": "合计｜%d 天花费 ¥%d"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 1285,
+      "kind": "quoted_candidate",
+      "text": "本周轨迹只整理游戏内选择与次日游戏状态，不构成健康评分或医学判断。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 1329,
+      "kind": "quoted_candidate",
+      "text": "第 %d 天 / 第 %d 天"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 1408,
+      "kind": "quoted_candidate",
+      "text": "上午留给哪件事？"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 1409,
+      "kind": "quoted_candidate",
+      "text": "下午怎么安排？"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 1410,
+      "kind": "quoted_candidate",
+      "text": "睡前还做什么？"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 1418,
+      "kind": "quoted_candidate",
+      "text": "回到主菜单？\\n这一周的进度不会保留。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 1419,
+      "kind": "quoted_candidate",
+      "text": "回主菜单"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "line": 1420,
+      "kind": "quoted_candidate",
+      "text": "继续"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/DailySummaryPopup.gd",
+      "line": 50,
+      "kind": "quoted_candidate",
+      "text": "查看三餐详情"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/DailySummaryPopup.gd",
+      "line": 51,
+      "kind": "quoted_candidate",
+      "text": "收起三餐详情"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/DailySummaryPopup.gd",
+      "line": 105,
+      "kind": "quoted_candidate",
+      "text": "第 %d 天，收工"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/DailySummaryPopup.gd",
+      "line": 106,
+      "kind": "quoted_candidate",
+      "text": "余力 %d"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/DailySummaryPopup.gd",
+      "line": 107,
+      "kind": "quoted_candidate",
+      "text": "复习 %d/%d"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/DailySummaryPopup.gd",
+      "line": 111,
+      "kind": "quoted_candidate",
+      "text": "余额 ¥%d"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/DailySummaryPopup.gd",
+      "line": 129,
+      "kind": "quoted_candidate",
+      "text": "查看三餐详情"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/DailySummaryPopup.gd",
+      "line": 130,
+      "kind": "quoted_candidate",
+      "text": "收起三餐详情"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/DailySummaryPopup.gd",
+      "line": 137,
+      "kind": "quoted_candidate",
+      "text": "睡到明天"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/DailySummaryPopup.gd",
+      "line": 150,
+      "kind": "quoted_candidate",
+      "text": "早餐"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/DailySummaryPopup.gd",
+      "line": 150,
+      "kind": "quoted_candidate",
+      "text": "午餐"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/DailySummaryPopup.gd",
+      "line": 150,
+      "kind": "quoted_candidate",
+      "text": "晚餐"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/DailySummaryPopup.gd",
+      "line": 156,
+      "kind": "quoted_candidate",
+      "text": "没有记录"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/DailySummaryPopup.gd",
+      "line": 350,
+      "kind": "quoted_candidate",
+      "text": "今天的三餐先记到这里，想看时再打开详情。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/DailySummaryPopup.gd",
+      "line": 357,
+      "kind": "quoted_candidate",
+      "text": "电量见底了。今晚别再和自己较劲。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/DailySummaryPopup.gd",
+      "line": 359,
+      "kind": "quoted_candidate",
+      "text": "脑子还没松下来，明天少塞一件事也没关系。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/DailySummaryPopup.gd",
+      "line": 360,
+      "kind": "quoted_candidate",
+      "text": "今天先放到这里。灯一关，剩下的交给明天。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/CompactChoiceCard.gd",
+      "line": 125,
+      "kind": "quoted_candidate",
+      "text": "未命名"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/CompactChoiceCard.gd",
+      "line": 171,
+      "kind": "quoted_candidate",
+      "text": "可看 "
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/CompactChoiceCard.gd",
+      "line": 175,
+      "kind": "quoted_candidate",
+      "text": "复习 "
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/CompactChoiceCard.gd",
+      "line": 178,
+      "kind": "quoted_candidate",
+      "text": "精力 "
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/CompactChoiceCard.gd",
+      "line": 179,
+      "kind": "quoted_candidate",
+      "text": "压力 "
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/CompactChoiceCard.gd",
+      "line": 180,
+      "kind": "quoted_candidate",
+      "text": "复习 "
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/CompactChoiceCard.gd",
+      "line": 181,
+      "kind": "quoted_candidate",
+      "text": "心情 "
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/CompactChoiceCard.gd",
+      "line": 185,
+      "kind": "quoted_candidate",
+      "text": "精力 "
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/CompactChoiceCard.gd",
+      "line": 186,
+      "kind": "quoted_candidate",
+      "text": "压力 "
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/CompactChoiceCard.gd",
+      "line": 187,
+      "kind": "quoted_candidate",
+      "text": "复习 "
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/CompactChoiceCard.gd",
+      "line": 188,
+      "kind": "quoted_candidate",
+      "text": "心情 "
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/CompactChoiceCard.gd",
+      "line": 192,
+      "kind": "quoted_candidate",
+      "text": "饱腹 "
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/CompactChoiceCard.gd",
+      "line": 202,
+      "kind": "quoted_candidate",
+      "text": "口味未设置"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/CompactChoiceCard.gd",
+      "line": 203,
+      "kind": "quoted_candidate",
+      "text": "口味 %s"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/CompactChoiceCard.gd",
+      "line": 231,
+      "kind": "quoted_candidate",
+      "text": "去处"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/CompactChoiceCard.gd",
+      "line": 233,
+      "kind": "quoted_candidate",
+      "text": "行动"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/CompactChoiceCard.gd",
+      "line": 235,
+      "kind": "quoted_candidate",
+      "text": "今晚"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/CompactChoiceCard.gd",
+      "line": 237,
+      "kind": "quoted_candidate",
+      "text": "食物"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/CompactChoiceCard.gd",
+      "line": 245,
+      "kind": "quoted_candidate",
+      "text": "不加价"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/CompactChoiceCard.gd",
+      "line": 248,
+      "kind": "quoted_candidate",
+      "text": "免费"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/CompactChoiceCard.gd",
+      "line": 257,
+      "kind": "quoted_candidate",
+      "text": "去这里"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/CompactChoiceCard.gd",
+      "line": 259,
+      "kind": "quoted_candidate",
+      "text": "安排"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/CompactChoiceCard.gd",
+      "line": 261,
+      "kind": "quoted_candidate",
+      "text": "就这样"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/CompactChoiceCard.gd",
+      "line": 263,
+      "kind": "quoted_candidate",
+      "text": "加入"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/CompactChoiceCard.gd",
+      "line": 264,
+      "kind": "quoted_candidate",
+      "text": "移出"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/stages/ActionStage.gd",
+      "line": 71,
+      "kind": "quoted_candidate",
+      "text": "安排"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/stages/ActionStage.gd",
+      "line": 81,
+      "kind": "quoted_candidate",
+      "text": "餐后"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/stages/ActionStage.gd",
+      "line": 82,
+      "kind": "quoted_candidate",
+      "text": "接下来做点什么？"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/stages/ActionStage.gd",
+      "line": 83,
+      "kind": "quoted_candidate",
+      "text": "安排 %d/%d"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/stages/ActionStage.gd",
+      "line": 84,
+      "kind": "quoted_candidate",
+      "text": "水杯 %d/%d"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/NewDayPopup.gd",
+      "line": 93,
+      "kind": "quoted_candidate",
+      "text": "第 %d 天开始"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/NewDayPopup.gd",
+      "line": 96,
+      "kind": "quoted_candidate",
+      "text": "新的一周从今天开始，先安排好今天的三餐与休息。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/NewDayPopup.gd",
+      "line": 97,
+      "kind": "quoted_candidate",
+      "text": "今天的游戏状态与事件已准备好，可以开始新的安排。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/NewDayPopup.gd",
+      "line": 102,
+      "kind": "quoted_candidate",
+      "text": "状态还算平稳"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/NewDayPopup.gd",
+      "line": 107,
+      "kind": "quoted_candidate",
+      "text": "这是本周的起步状态，今天的安排会影响后续游戏状态。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/NewDayPopup.gd",
+      "line": 108,
+      "kind": "quoted_candidate",
+      "text": "今日状态按游戏规则显示，详细原因以实际记录为准。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/NewDayPopup.gd",
+      "line": 118,
+      "kind": "quoted_candidate",
+      "text": "平常的一天"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/NewDayPopup.gd",
+      "line": 121,
+      "kind": "quoted_candidate",
+      "text": "今天没有额外事件，可以按自己的节奏安排。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/NewDayPopup.gd",
+      "line": 125,
+      "kind": "quoted_candidate",
+      "text": "没有额外影响"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/NewDayPopup.gd",
+      "line": 130,
+      "kind": "quoted_candidate",
+      "text": "开始今天"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/NewDayPopup.gd",
+      "line": 144,
+      "kind": "quoted_candidate",
+      "text": "恢复效果未提供"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/NewDayPopup.gd",
+      "line": 147,
+      "kind": "quoted_candidate",
+      "text": "每次学习效果不变"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/NewDayPopup.gd",
+      "line": 148,
+      "kind": "quoted_candidate",
+      "text": "每次学习效果 %s%d"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/stages/CafeteriaMealStage.gd",
+      "line": 35,
+      "kind": "quoted_candidate",
+      "text": "%s · 食堂窗口"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/stages/CafeteriaMealStage.gd",
+      "line": 36,
+      "kind": "quoted_candidate",
+      "text": "已选 %d/%d"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/stages/CafeteriaMealStage.gd",
+      "line": 37,
+      "kind": "quoted_candidate",
+      "text": "合计 ¥%d"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/stages/CafeteriaMealStage.gd",
+      "line": 41,
+      "kind": "quoted_candidate",
+      "text": "放进餐盘"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/stages/ConvenienceMealStage.gd",
+      "line": 35,
+      "kind": "quoted_candidate",
+      "text": "%s · 便利店"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/stages/ConvenienceMealStage.gd",
+      "line": 36,
+      "kind": "quoted_candidate",
+      "text": "篮子 %d/%d"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/stages/ConvenienceMealStage.gd",
+      "line": 37,
+      "kind": "quoted_candidate",
+      "text": "合计 ¥%d"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/stages/ConvenienceMealStage.gd",
+      "line": 45,
+      "kind": "quoted_candidate",
+      "text": "放进篮子"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 23,
+      "kind": "quoted_candidate",
+      "text": "早餐"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 24,
+      "kind": "quoted_candidate",
+      "text": "早餐"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 25,
+      "kind": "quoted_candidate",
+      "text": "早餐后"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 26,
+      "kind": "quoted_candidate",
+      "text": "午餐"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 27,
+      "kind": "quoted_candidate",
+      "text": "午餐"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 28,
+      "kind": "quoted_candidate",
+      "text": "午餐后"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 29,
+      "kind": "quoted_candidate",
+      "text": "晚餐"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 30,
+      "kind": "quoted_candidate",
+      "text": "晚餐"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 31,
+      "kind": "quoted_candidate",
+      "text": "晚餐后"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 32,
+      "kind": "quoted_candidate",
+      "text": "夜里"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 33,
+      "kind": "quoted_candidate",
+      "text": "日结"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 34,
+      "kind": "quoted_candidate",
+      "text": "周末"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 163,
+      "kind": "quoted_candidate",
+      "text": "第一天。先吃点早饭。"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 216,
+      "kind": "quoted_candidate",
+      "text": "第 %d 天 / %d"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 217,
+      "kind": "quoted_candidate",
+      "text": "%s · 余 ¥%d · 今日安排 %d/%d"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 227,
+      "kind": "quoted_candidate",
+      "text": "此刻"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 245,
+      "kind": "quoted_candidate",
+      "text": "今天花了 ¥%d\\n还可安排 %d 件事"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 258,
+      "kind": "quoted_candidate",
+      "text": "状态怎么看"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 327,
+      "kind": "quoted_candidate",
+      "text": "%s · 去哪里吃？"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 328,
+      "kind": "quoted_candidate",
+      "text": "先选个地方。详细规则可以悬停查看。"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 329,
+      "kind": "quoted_candidate",
+      "text": "换地方不会扣钱，确认吃下去才结账。"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 332,
+      "kind": "quoted_candidate",
+      "text": "先不吃"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 338,
+      "kind": "quoted_candidate",
+      "text": "去看看"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 338,
+      "kind": "quoted_candidate",
+      "text": "未营业"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 338,
+      "kind": "quoted_candidate",
+      "text": "不可用"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 350,
+      "kind": "quoted_candidate",
+      "text": "已选 %d/%d · 合计 ¥%d"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 353,
+      "kind": "quoted_candidate",
+      "text": "换个地方"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 353,
+      "kind": "quoted_candidate",
+      "text": "先不吃"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 353,
+      "kind": "quoted_candidate",
+      "text": "就吃这些"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 370,
+      "kind": "quoted_candidate",
+      "text": "钱不够，或者已经选满了。"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 381,
+      "kind": "quoted_candidate",
+      "text": "餐后"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 383,
+      "kind": "quoted_candidate",
+      "text": "今天还可安排 %d 件事。"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 386,
+      "kind": "quoted_candidate",
+      "text": "不安排"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 391,
+      "kind": "quoted_candidate",
+      "text": "就做这个"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 397,
+      "kind": "quoted_candidate",
+      "text": "今天就到这里"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 397,
+      "kind": "quoted_candidate",
+      "text": "睡前，最后选一次。"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 401,
+      "kind": "quoted_candidate",
+      "text": "就这样"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 407,
+      "kind": "quoted_candidate",
+      "text": "状态怎么看"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 415,
+      "kind": "quoted_candidate",
+      "text": "余力：这一周还能不能周转得开。\\n\\n精力：白天还能做多少事。\\n\\n心情：过日子的兴致。\\n\\n饱腹：饿着和吃撑都会难受。\\n\\n压力：越高，越容易顾此失彼。\\n\\n复习：考试前准备了多少。\\n\\n一顿最多选 %d 样；三餐后，各能安排一件事。"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 419,
+      "kind": "quoted_candidate",
+      "text": "回去"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 426,
+      "kind": "quoted_candidate",
+      "text": "灯关了"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 438,
+      "kind": "quoted_candidate",
+      "text": "开始第 %d 天"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 461,
+      "kind": "quoted_candidate",
+      "text": "%s\\n\\n余力 %d · 复习 %d · 余额 ¥%d\\n\\n%s"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 476,
+      "kind": "quoted_candidate",
+      "text": "再来一周"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 480,
+      "kind": "quoted_candidate",
+      "text": "回主菜单"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 487,
+      "kind": "quoted_candidate",
+      "text": "今天"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 490,
+      "kind": "quoted_candidate",
+      "text": "还没开饭。"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 501,
+      "kind": "quoted_candidate",
+      "text": "此刻"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 576,
+      "kind": "quoted_candidate",
+      "text": "这个时段还没有营业。"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 583,
+      "kind": "quoted_candidate",
+      "text": "柜子里已经吃空了。"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 588,
+      "kind": "quoted_candidate",
+      "text": "手里的钱不够在这里吃一顿。"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 629,
+      "kind": "quoted_candidate",
+      "text": "移除"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 631,
+      "kind": "quoted_candidate",
+      "text": "已选满"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 633,
+      "kind": "quoted_candidate",
+      "text": "不可用"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 634,
+      "kind": "quoted_candidate",
+      "text": "选这个"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 649,
+      "kind": "quoted_candidate",
+      "text": "钱不够，得少拿一样。"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 654,
+      "kind": "quoted_candidate",
+      "text": "这份已经吃完了。"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 658,
+      "kind": "quoted_candidate",
+      "text": "%s吃了%s。"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 669,
+      "kind": "quoted_candidate",
+      "text": "%s没吃，肚子一直空着。"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 696,
+      "kind": "quoted_candidate",
+      "text": "餐盘组合奖励（游戏）：精力 +5、心情 +3。"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 700,
+      "kind": "quoted_candidate",
+      "text": "今天已有两餐合口味，心情 +4（游戏）。"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 709,
+      "kind": "quoted_candidate",
+      "text": "三餐花费不超过 ¥12，压力 -3（游戏）。"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 753,
+      "kind": "quoted_candidate",
+      "text": "餐后 · %s"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 760,
+      "kind": "quoted_candidate",
+      "text": "%s，没再安排什么。"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 760,
+      "kind": "quoted_candidate",
+      "text": "餐后"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 794,
+      "kind": "quoted_candidate",
+      "text": "精力不够，先留一点余地。"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 798,
+      "kind": "quoted_candidate",
+      "text": "今天已经做过了。"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 800,
+      "kind": "quoted_candidate",
+      "text": "今天已经喝过两次了。"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 802,
+      "kind": "quoted_candidate",
+      "text": "今天已经排满了。"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 804,
+      "kind": "quoted_candidate",
+      "text": "余额不够。"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 825,
+      "kind": "quoted_candidate",
+      "text": "夜里，%s。"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 836,
+      "kind": "quoted_candidate",
+      "text": "本日选择触发了旧版游戏状态加成。"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 839,
+      "kind": "quoted_candidate",
+      "text": "本日选择触发了旧版游戏状态减益。"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 847,
+      "kind": "quoted_candidate",
+      "text": "手里的钱不多了，明天得算着花。"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 861,
+      "kind": "quoted_candidate",
+      "text": "第 %d 天，过去了。\\n\\n余力 %d · 复习 %d · 余额 ¥%d\\n\\n%s\\n%s"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 872,
+      "kind": "quoted_candidate",
+      "text": "恢复记录暂时不可用，请通过菜单重新开始这一周。"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 949,
+      "kind": "quoted_candidate",
+      "text": "恢复记录暂时不可用，请通过菜单重新开始这一周。"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 952,
+      "kind": "quoted_candidate",
+      "text": "第 %d 天，天亮了。"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 959,
+      "kind": "quoted_candidate",
+      "text": "周末到了。"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 959,
+      "kind": "quoted_candidate",
+      "text": "这一局先停在这里。"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 1037,
+      "kind": "quoted_candidate",
+      "text": "上午还能安排一件事。"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 1039,
+      "kind": "quoted_candidate",
+      "text": "下午怎么过？"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 1040,
+      "kind": "quoted_candidate",
+      "text": "睡前，还能做一件事。"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 1045,
+      "kind": "quoted_candidate",
+      "text": "脑子绷得太紧了。出去走走，或者早点睡。"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 1047,
+      "kind": "quoted_candidate",
+      "text": "手里的钱不多了。"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 1049,
+      "kind": "quoted_candidate",
+      "text": "书还欠着几页，今晚也不一定非得熬。"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 1050,
+      "kind": "quoted_candidate",
+      "text": "今天还有些余地。"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 1054,
+      "kind": "quoted_candidate",
+      "text": "今天选过的食物已经记下，成分与份量还待核对。"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 1059,
+      "kind": "quoted_candidate",
+      "text": "这一周先记到这里，下次想换个什么安排？"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 1061,
+      "kind": "quoted_candidate",
+      "text": "余力不多了，明天的安排可以留点空。"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 1063,
+      "kind": "quoted_candidate",
+      "text": "复习进度还没跟上，明天看看精力，再安排一段。"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 1066,
+      "kind": "quoted_candidate",
+      "text": "明天的安排里，可以先给吃饭留个空档。"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 1068,
+      "kind": "quoted_candidate",
+      "text": "手里的钱不多了，明天得算着花。"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 1069,
+      "kind": "quoted_candidate",
+      "text": "今天还算顺。照这个节奏，慢慢来。"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 1073,
+      "kind": "quoted_candidate",
+      "text": "这一顿"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 1075,
+      "kind": "quoted_candidate",
+      "text": "%s · 没吃"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 1094,
+      "kind": "quoted_candidate",
+      "text": "重新开始这一周？\\n现在的进度不会保留。"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 1101,
+      "kind": "quoted_candidate",
+      "text": "回到主菜单？\\n现在的进度不会保留。"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 1107,
+      "kind": "quoted_candidate",
+      "text": "确定"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 1108,
+      "kind": "quoted_candidate",
+      "text": "再想想"
+    },
+    {
+      "file": "life-strategy/scripts/GameRoot.gd",
+      "line": 1147,
+      "kind": "quoted_candidate",
+      "text": "第 %d 天 · %s"
+    },
+    {
+      "file": "life-strategy/scripts/GameData.gd",
+      "line": 10,
+      "kind": "quoted_candidate",
+      "text": "余力"
+    },
+    {
+      "file": "life-strategy/scripts/GameData.gd",
+      "line": 11,
+      "kind": "quoted_candidate",
+      "text": "余额"
+    },
+    {
+      "file": "life-strategy/scripts/GameData.gd",
+      "line": 12,
+      "kind": "quoted_candidate",
+      "text": "精力"
+    },
+    {
+      "file": "life-strategy/scripts/GameData.gd",
+      "line": 13,
+      "kind": "quoted_candidate",
+      "text": "心情"
+    },
+    {
+      "file": "life-strategy/scripts/GameData.gd",
+      "line": 14,
+      "kind": "quoted_candidate",
+      "text": "饱腹"
+    },
+    {
+      "file": "life-strategy/scripts/GameData.gd",
+      "line": 15,
+      "kind": "quoted_candidate",
+      "text": "压力"
+    },
+    {
+      "file": "life-strategy/scripts/GameData.gd",
+      "line": 16,
+      "kind": "quoted_candidate",
+      "text": "复习"
+    },
+    {
+      "file": "life-strategy/scripts/GameData.gd",
+      "line": 33,
+      "kind": "quoted_candidate",
+      "text": "稳稳到了周末"
+    },
+    {
+      "file": "life-strategy/scripts/GameData.gd",
+      "line": 34,
+      "kind": "quoted_candidate",
+      "text": "复习目标完成了，也给自己留了些余力。"
+    },
+    {
+      "file": "life-strategy/scripts/GameData.gd",
+      "line": 39,
+      "kind": "quoted_candidate",
+      "text": "总算到了周末"
+    },
+    {
+      "file": "life-strategy/scripts/GameData.gd",
+      "line": 40,
+      "kind": "quoted_candidate",
+      "text": "这一周走完了。下次换个安排，再试试看。"
+    },
+    {
+      "file": "life-strategy/scripts/GameData.gd",
+      "line": 45,
+      "kind": "quoted_candidate",
+      "text": "先歇一会儿"
+    },
+    {
+      "file": "life-strategy/scripts/GameData.gd",
+      "line": 46,
+      "kind": "quoted_candidate",
+      "text": "这次的安排没能撑下去。先停在这里，下次换个节奏。"
+    },
+    {
+      "file": "life-strategy/scripts/GameData.gd",
+      "line": 51,
+      "kind": "quoted_candidate",
+      "text": "这次没赶上"
+    },
+    {
+      "file": "life-strategy/scripts/GameData.gd",
+      "line": 52,
+      "kind": "quoted_candidate",
+      "text": "这一周走完了，复习目标还没完成。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/stages/DormPantryStage.gd",
+      "line": 41,
+      "kind": "quoted_candidate",
+      "text": "%s · 宿舍存粮"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/stages/DormPantryStage.gd",
+      "line": 45,
+      "kind": "quoted_candidate",
+      "text": "存货 %d 件"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/stages/DormPantryStage.gd",
+      "line": 46,
+      "kind": "quoted_candidate",
+      "text": "已选 %d/%d"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/stages/DormPantryStage.gd",
+      "line": 54,
+      "kind": "quoted_candidate",
+      "text": "放进碗里"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/stages/DormPantryStage.gd",
+      "line": 59,
+      "kind": "quoted_candidate",
+      "text": "%s\\n余 %d"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/stages/DormPantryStage.gd",
+      "line": 59,
+      "kind": "quoted_candidate",
+      "text": "已选"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/stages/MealSourceStage.gd",
+      "line": 25,
+      "kind": "quoted_candidate",
+      "text": "这一顿"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/stages/MealSourceStage.gd",
+      "line": 32,
+      "kind": "quoted_candidate",
+      "text": "这一顿"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/stages/MealSourceStage.gd",
+      "line": 99,
+      "kind": "quoted_candidate",
+      "text": "%s怎么解决？"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/stages/MealSourceStage.gd",
+      "line": 100,
+      "kind": "quoted_candidate",
+      "text": "挑个去处，点小圆标看规则"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/stages/MealSourceStage.gd",
+      "line": 210,
+      "kind": "quoted_candidate",
+      "text": "这一顿怎么玩"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/stages/MealSourceStage.gd",
+      "line": 211,
+      "kind": "quoted_candidate",
+      "text": "玩法"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/stages/MealSourceStage.gd",
+      "line": 212,
+      "kind": "quoted_candidate",
+      "text": "食堂把菜放进餐盘；外卖在手机里滑动加购；便利店从货架放进篮子；宿舍会消耗已有存粮。真正确认前都不会扣钱。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/stages/MealSourceStage.gd",
+      "line": 213,
+      "kind": "quoted_candidate",
+      "text": "轻点道具进入，点小圆标查看详细规则。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/stages/MealSourceStage.gd",
+      "line": 227,
+      "kind": "quoted_candidate",
+      "text": "暂时不可用"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/stages/MealSourceStage.gd",
+      "line": 233,
+      "kind": "quoted_candidate",
+      "text": "暂未开放"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/stages/TakeoutMealStage.gd",
+      "line": 44,
+      "kind": "quoted_candidate",
+      "text": "%s · 外卖 App"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/stages/TakeoutMealStage.gd",
+      "line": 45,
+      "kind": "quoted_candidate",
+      "text": "购物袋 %d/%d"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/stages/TakeoutMealStage.gd",
+      "line": 46,
+      "kind": "quoted_candidate",
+      "text": "配送 ¥%d"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/stages/TakeoutMealStage.gd",
+      "line": 47,
+      "kind": "quoted_candidate",
+      "text": "购物袋 %d/%d"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/stages/TakeoutMealStage.gd",
+      "line": 48,
+      "kind": "quoted_candidate",
+      "text": "合计 ¥%d"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/stages/TakeoutMealStage.gd",
+      "line": 56,
+      "kind": "quoted_candidate",
+      "text": "加购"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/stages/SleepStage.gd",
+      "line": 57,
+      "kind": "quoted_candidate",
+      "text": "就这样"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/stages/SleepStage.gd",
+      "line": 61,
+      "kind": "quoted_candidate",
+      "text": "夜深了，几点睡？"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/stages/SleepStage.gd",
+      "line": 62,
+      "kind": "quoted_candidate",
+      "text": "明天的状态，从今晚开始。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/stages/SleepStage.gd",
+      "line": 63,
+      "kind": "quoted_candidate",
+      "text": "明早还有安排"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/stages/SleepStage.gd",
+      "line": 64,
+      "kind": "quoted_candidate",
+      "text": "点小圆标看清代价，再做决定。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/stages/MealStageBase.gd",
+      "line": 23,
+      "kind": "quoted_candidate",
+      "text": "这一顿"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/stages/MealStageBase.gd",
+      "line": 46,
+      "kind": "quoted_candidate",
+      "text": "这一顿"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/stages/MealStageBase.gd",
+      "line": 105,
+      "kind": "quoted_candidate",
+      "text": "%s 没有可用的卡片容器。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/stages/MealStageBase.gd",
+      "line": 233,
+      "kind": "quoted_candidate",
+      "text": "这张卡暂时不可用。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/stages/MealStageBase.gd",
+      "line": 238,
+      "kind": "quoted_candidate",
+      "text": "现在还不能选它。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/stages/MealStageBase.gd",
+      "line": 242,
+      "kind": "quoted_candidate",
+      "text": "已经放满了，先移出一样。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/stages/MealStageBase.gd",
+      "line": 244,
+      "kind": "quoted_candidate",
+      "text": "柜子里已经没有了。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/stages/MealStageBase.gd",
+      "line": 250,
+      "kind": "quoted_candidate",
+      "text": "余额不够，再换一样吧。"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/stages/MealStageBase.gd",
+      "line": 356,
+      "kind": "quoted_candidate",
+      "text": "加入"
+    },
+    {
+      "file": "life-strategy/scripts/ui_v2/stages/MealStageBase.gd",
+      "line": 360,
+      "kind": "quoted_candidate",
+      "text": "已选"
+    },
+    {
+      "file": "life-strategy/scenes/game/components/PhaseChoiceView.tscn",
+      "line": 14,
+      "kind": "quoted_candidate",
+      "text": "阶段标题"
+    },
+    {
+      "file": "life-strategy/scenes/game/components/PhaseChoiceView.tscn",
+      "line": 19,
+      "kind": "quoted_candidate",
+      "text": "一句提示"
+    },
+    {
+      "file": "life-strategy/scenes/game/components/PhaseChoiceView.tscn",
+      "line": 25,
+      "kind": "quoted_candidate",
+      "text": "状态"
+    },
+    {
+      "file": "life-strategy/scenes/game/components/PhaseChoiceView.tscn",
+      "line": 48,
+      "kind": "quoted_candidate",
+      "text": "返回"
+    },
+    {
+      "file": "life-strategy/scenes/game/components/PhaseChoiceView.tscn",
+      "line": 58,
+      "kind": "quoted_candidate",
+      "text": "次要"
+    },
+    {
+      "file": "life-strategy/scenes/game/components/PhaseChoiceView.tscn",
+      "line": 64,
+      "kind": "quoted_candidate",
+      "text": "确认"
+    },
+    {
+      "file": "life-strategy/scenes/game/components/ChoiceCard.tscn",
+      "line": 28,
+      "kind": "quoted_candidate",
+      "text": "食物"
+    },
+    {
+      "file": "life-strategy/scenes/game/components/ChoiceCard.tscn",
+      "line": 49,
+      "kind": "quoted_candidate",
+      "text": "卡牌名称"
+    },
+    {
+      "file": "life-strategy/scenes/game/components/ChoiceCard.tscn",
+      "line": 56,
+      "kind": "quoted_candidate",
+      "text": "简要效果"
+    },
+    {
+      "file": "life-strategy/scenes/game/components/ChoiceCard.tscn",
+      "line": 63,
+      "kind": "quoted_candidate",
+      "text": "选这个"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/components/ToastItem.tscn",
+      "line": 28,
+      "kind": "quoted_candidate",
+      "text": "今天的记录"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/components/TakeoutFoodRowCard.tscn",
+      "line": 43,
+      "kind": "quoted_candidate",
+      "text": "番茄"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/components/TakeoutFoodRowCard.tscn",
+      "line": 50,
+      "kind": "quoted_candidate",
+      "text": "饱腹 +4"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/components/TakeoutFoodRowCard.tscn",
+      "line": 85,
+      "kind": "quoted_candidate",
+      "text": "加购"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/components/StickyNotePopup.tscn",
+      "line": 30,
+      "kind": "quoted_candidate",
+      "text": "白米饭"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/components/StickyNotePopup.tscn",
+      "line": 55,
+      "kind": "quoted_candidate",
+      "text": "主食"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/components/StickyNotePopup.tscn",
+      "line": 60,
+      "kind": "quoted_candidate",
+      "text": "一碗热饭，适合和蛋白质、蔬菜一起搭配。"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/components/StickyNotePopup.tscn",
+      "line": 66,
+      "kind": "quoted_candidate",
+      "text": "游戏即时效果"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/components/StickyNotePopup.tscn",
+      "line": 77,
+      "kind": "quoted_candidate",
+      "text": "饱腹 +16"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/components/StickyNotePopup.tscn",
+      "line": 82,
+      "kind": "quoted_candidate",
+      "text": "精力 +4"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/components/StickyNotePopup.tscn",
+      "line": 87,
+      "kind": "quoted_candidate",
+      "text": "心情 0"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/components/StickyNotePopup.tscn",
+      "line": 92,
+      "kind": "quoted_candidate",
+      "text": "压力 0"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/components/StickyNotePopup.tscn",
+      "line": 97,
+      "kind": "quoted_candidate",
+      "text": "复习 0"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/components/StickyNotePopup.tscn",
+      "line": 108,
+      "kind": "quoted_candidate",
+      "text": "角色口味（游戏效果）"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/components/StickyNotePopup.tscn",
+      "line": 114,
+      "kind": "quoted_candidate",
+      "text": "口味未设置"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/components/StickyNotePopup.tscn",
+      "line": 133,
+      "kind": "quoted_candidate",
+      "text": "热乎的一碗，简单也踏实。"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/components/StickyNotePopup.tscn",
+      "line": 147,
+      "kind": "quoted_candidate",
+      "text": "放进餐盘"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/components/NewDayPopup.tscn",
+      "line": 113,
+      "kind": "quoted_candidate",
+      "text": "第 2 天开始"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/components/NewDayPopup.tscn",
+      "line": 128,
+      "kind": "quoted_candidate",
+      "text": "昨夜的选择留下一点余韵，今天也有新的变化。"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/components/NewDayPopup.tscn",
+      "line": 197,
+      "kind": "quoted_candidate",
+      "text": "游戏恢复记录"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/components/NewDayPopup.tscn",
+      "line": 202,
+      "kind": "quoted_candidate",
+      "text": "状态还算平稳"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/components/NewDayPopup.tscn",
+      "line": 210,
+      "kind": "quoted_candidate",
+      "text": "昨天的饮食和休息，让今天的脑子维持在平常水平。"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/components/NewDayPopup.tscn",
+      "line": 221,
+      "kind": "quoted_candidate",
+      "text": "每次学习效果不变"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/components/NewDayPopup.tscn",
+      "line": 228,
+      "kind": "quoted_candidate",
+      "text": "查看恢复依据"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/components/NewDayPopup.tscn",
+      "line": 263,
+      "kind": "quoted_candidate",
+      "text": "今日事件"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/components/NewDayPopup.tscn",
+      "line": 268,
+      "kind": "quoted_candidate",
+      "text": "平常的一天"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/components/NewDayPopup.tscn",
+      "line": 276,
+      "kind": "quoted_candidate",
+      "text": "今天没有额外事件，可以按自己的节奏安排。"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/components/NewDayPopup.tscn",
+      "line": 287,
+      "kind": "quoted_candidate",
+      "text": "没有额外影响"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/components/NewDayPopup.tscn",
+      "line": 305,
+      "kind": "quoted_candidate",
+      "text": "开始今天"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/components/DailySummaryPopup.tscn",
+      "line": 86,
+      "kind": "quoted_candidate",
+      "text": "第 1 天，过去了"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/components/DailySummaryPopup.tscn",
+      "line": 111,
+      "kind": "quoted_candidate",
+      "text": "余力 65"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/components/DailySummaryPopup.tscn",
+      "line": 124,
+      "kind": "quoted_candidate",
+      "text": "复习 10/70"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/components/DailySummaryPopup.tscn",
+      "line": 137,
+      "kind": "quoted_candidate",
+      "text": "余额 ¥100"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/components/DailySummaryPopup.tscn",
+      "line": 150,
+      "kind": "quoted_candidate",
+      "text": "今日三餐"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/components/DailySummaryPopup.tscn",
+      "line": 168,
+      "kind": "quoted_candidate",
+      "text": "早餐\\n没有记录"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/components/DailySummaryPopup.tscn",
+      "line": 181,
+      "kind": "quoted_candidate",
+      "text": "午餐\\n没有记录"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/components/DailySummaryPopup.tscn",
+      "line": 194,
+      "kind": "quoted_candidate",
+      "text": "晚餐\\n没有记录"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/components/DailySummaryPopup.tscn",
+      "line": 218,
+      "kind": "quoted_candidate",
+      "text": "今日小记"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/components/DailySummaryPopup.tscn",
+      "line": 223,
+      "kind": "quoted_candidate",
+      "text": "今天的三餐先记到这里。"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/components/DailySummaryPopup.tscn",
+      "line": 233,
+      "kind": "quoted_candidate",
+      "text": "写给明天"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/components/DailySummaryPopup.tscn",
+      "line": 239,
+      "kind": "quoted_candidate",
+      "text": "今天还算顺。照这个节奏，慢慢来。"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/components/DailySummaryPopup.tscn",
+      "line": 247,
+      "kind": "quoted_candidate",
+      "text": "查看三餐详情"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/components/DailySummaryPopup.tscn",
+      "line": 280,
+      "kind": "quoted_candidate",
+      "text": "三餐详情 · 本局线索"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/components/DailySummaryPopup.tscn",
+      "line": 289,
+      "kind": "quoted_candidate",
+      "text": "三餐情况：吃了 3/3 餐\\n今天选了：6 种食物卡\\n餐盘线索：主食、蔬菜、水果都有出现"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/components/DailySummaryPopup.tscn",
+      "line": 296,
+      "kind": "quoted_candidate",
+      "text": "规则小字：本局饮食信息参考《中国居民膳食指南（2022）》的一般原则；卡牌出现不代表现实摄入量足够，也不用于现实健康判断。"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/components/DailySummaryPopup.tscn",
+      "line": 307,
+      "kind": "quoted_candidate",
+      "text": "睡到明天"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/components/CompactChoiceCard.tscn",
+      "line": 32,
+      "kind": "quoted_candidate",
+      "text": "主食"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/components/CompactChoiceCard.tscn",
+      "line": 60,
+      "kind": "quoted_candidate",
+      "text": "白米饭"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/components/CompactChoiceCard.tscn",
+      "line": 92,
+      "kind": "quoted_candidate",
+      "text": "选择"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/components/CharacterHUD.tscn",
+      "line": 96,
+      "kind": "quoted_candidate",
+      "text": "余力"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/components/CharacterHUD.tscn",
+      "line": 120,
+      "kind": "quoted_candidate",
+      "text": "精力 52"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/components/CharacterHUD.tscn",
+      "line": 131,
+      "kind": "quoted_candidate",
+      "text": "心情 55"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/components/CharacterHUD.tscn",
+      "line": 142,
+      "kind": "quoted_candidate",
+      "text": "饱腹 58"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/components/CharacterHUD.tscn",
+      "line": 153,
+      "kind": "quoted_candidate",
+      "text": "压力 48"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/components/CharacterHUD.tscn",
+      "line": 164,
+      "kind": "quoted_candidate",
+      "text": "起步状态"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/components/CharacterHUD.tscn",
+      "line": 176,
+      "kind": "quoted_candidate",
+      "text": "复习 0"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/components/CharacterHUD.tscn",
+      "line": 188,
+      "kind": "quoted_candidate",
+      "text": "查看完整状态"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/ActionStage.tscn",
+      "line": 40,
+      "kind": "quoted_candidate",
+      "text": "早餐后"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/ActionStage.tscn",
+      "line": 52,
+      "kind": "quoted_candidate",
+      "text": "接下来做点什么？"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/ActionStage.tscn",
+      "line": 64,
+      "kind": "quoted_candidate",
+      "text": "安排 0/3"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/ActionStage.tscn",
+      "line": 110,
+      "kind": "quoted_candidate",
+      "text": "今日安排"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/ActionStage.tscn",
+      "line": 120,
+      "kind": "quoted_candidate",
+      "text": "水杯 0/2"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/ActionStage.tscn",
+      "line": 135,
+      "kind": "quoted_candidate",
+      "text": "空位"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/ActionStage.tscn",
+      "line": 154,
+      "kind": "quoted_candidate",
+      "text": "空位"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/ActionStage.tscn",
+      "line": 173,
+      "kind": "quoted_candidate",
+      "text": "空位"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/ActionStage.tscn",
+      "line": 195,
+      "kind": "quoted_candidate",
+      "text": "先缓一缓"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/TakeoutMealStage.tscn",
+      "line": 40,
+      "kind": "quoted_candidate",
+      "text": "早餐 · 外卖 App"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/TakeoutMealStage.tscn",
+      "line": 52,
+      "kind": "quoted_candidate",
+      "text": "购物袋 0/4"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/TakeoutMealStage.tscn",
+      "line": 95,
+      "kind": "quoted_candidate",
+      "text": "附近好吃的"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/TakeoutMealStage.tscn",
+      "line": 101,
+      "kind": "quoted_candidate",
+      "text": "预计 28 分钟送达"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/TakeoutMealStage.tscn",
+      "line": 109,
+      "kind": "quoted_candidate",
+      "text": "配送 ¥3"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/TakeoutMealStage.tscn",
+      "line": 147,
+      "kind": "quoted_candidate",
+      "text": "还没选餐"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/TakeoutMealStage.tscn",
+      "line": 153,
+      "kind": "quoted_candidate",
+      "text": "合计 ¥3"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/TakeoutMealStage.tscn",
+      "line": 159,
+      "kind": "quoted_candidate",
+      "text": "下单"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/TakeoutMealStage.tscn",
+      "line": 193,
+      "kind": "quoted_candidate",
+      "text": "在手机里滑动挑选\\\\n点菜名可看小票详情"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/TakeoutMealStage.tscn",
+      "line": 211,
+      "kind": "quoted_candidate",
+      "text": "换个地方"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/TakeoutMealStage.tscn",
+      "line": 216,
+      "kind": "quoted_candidate",
+      "text": "先不吃"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/SleepStage.tscn",
+      "line": 37,
+      "kind": "quoted_candidate",
+      "text": "夜深了，几点睡？"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/SleepStage.tscn",
+      "line": 44,
+      "kind": "quoted_candidate",
+      "text": "明天的状态，从今晚开始。"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/SleepStage.tscn",
+      "line": 96,
+      "kind": "quoted_candidate",
+      "text": "明早还有安排"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/SleepStage.tscn",
+      "line": 104,
+      "kind": "quoted_candidate",
+      "text": "悬停或点开便利贴，看清代价再选。"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/MealSourceStage.tscn",
+      "line": 110,
+      "kind": "quoted_candidate",
+      "text": "早餐怎么解决？"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/MealSourceStage.tscn",
+      "line": 116,
+      "kind": "quoted_candidate",
+      "text": "挑个去处。"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/MealSourceStage.tscn",
+      "line": 174,
+      "kind": "quoted_candidate",
+      "text": "去食堂"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/MealSourceStage.tscn",
+      "line": 188,
+      "kind": "quoted_candidate",
+      "text": "食堂"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/MealSourceStage.tscn",
+      "line": 254,
+      "kind": "quoted_candidate",
+      "text": "点外卖"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/MealSourceStage.tscn",
+      "line": 268,
+      "kind": "quoted_candidate",
+      "text": "外卖"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/MealSourceStage.tscn",
+      "line": 285,
+      "kind": "quoted_candidate",
+      "text": "午餐开放"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/MealSourceStage.tscn",
+      "line": 351,
+      "kind": "quoted_candidate",
+      "text": "便利店"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/MealSourceStage.tscn",
+      "line": 365,
+      "kind": "quoted_candidate",
+      "text": "便利店"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/MealSourceStage.tscn",
+      "line": 431,
+      "kind": "quoted_candidate",
+      "text": "翻翻存粮"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/MealSourceStage.tscn",
+      "line": 445,
+      "kind": "quoted_candidate",
+      "text": "宿舍存粮"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/MealSourceStage.tscn",
+      "line": 476,
+      "kind": "quoted_candidate",
+      "text": "这顿先算了"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/MealSourceStage.tscn",
+      "line": 481,
+      "kind": "quoted_candidate",
+      "text": "玩法说明"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/DormPantryStage.tscn",
+      "line": 40,
+      "kind": "quoted_candidate",
+      "text": "早餐 · 宿舍存粮"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/DormPantryStage.tscn",
+      "line": 52,
+      "kind": "quoted_candidate",
+      "text": "存货 0 件"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/DormPantryStage.tscn",
+      "line": 80,
+      "kind": "quoted_candidate",
+      "text": "床边小柜"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/DormPantryStage.tscn",
+      "line": 90,
+      "kind": "quoted_candidate",
+      "text": "库存吃完就没有了"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/DormPantryStage.tscn",
+      "line": 130,
+      "kind": "quoted_candidate",
+      "text": "凑一顿"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/DormPantryStage.tscn",
+      "line": 137,
+      "kind": "quoted_candidate",
+      "text": "点一下存粮，放进碗里"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/DormPantryStage.tscn",
+      "line": 209,
+      "kind": "quoted_candidate",
+      "text": "不花现金 · 消耗库存"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/DormPantryStage.tscn",
+      "line": 219,
+      "kind": "quoted_candidate",
+      "text": "已选 0/3"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/DormPantryStage.tscn",
+      "line": 236,
+      "kind": "quoted_candidate",
+      "text": "换个地方"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/DormPantryStage.tscn",
+      "line": 241,
+      "kind": "quoted_candidate",
+      "text": "先不吃"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/DormPantryStage.tscn",
+      "line": 247,
+      "kind": "quoted_candidate",
+      "text": "开吃"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/ConvenienceMealStage.tscn",
+      "line": 40,
+      "kind": "quoted_candidate",
+      "text": "早餐 · 便利店货架"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/ConvenienceMealStage.tscn",
+      "line": 52,
+      "kind": "quoted_candidate",
+      "text": "篮子 0/5"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/ConvenienceMealStage.tscn",
+      "line": 80,
+      "kind": "quoted_candidate",
+      "text": "即食区"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/ConvenienceMealStage.tscn",
+      "line": 90,
+      "kind": "quoted_candidate",
+      "text": "左右滑货架 · 点一下放进篮子"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/ConvenienceMealStage.tscn",
+      "line": 131,
+      "kind": "quoted_candidate",
+      "text": "帆布购物篮"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/ConvenienceMealStage.tscn",
+      "line": 137,
+      "kind": "quoted_candidate",
+      "text": "  选中的东西会落进来"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/ConvenienceMealStage.tscn",
+      "line": 147,
+      "kind": "quoted_candidate",
+      "text": "合计 ¥0"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/ConvenienceMealStage.tscn",
+      "line": 264,
+      "kind": "quoted_candidate",
+      "text": "换个地方"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/ConvenienceMealStage.tscn",
+      "line": 269,
+      "kind": "quoted_candidate",
+      "text": "先不吃"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/ConvenienceMealStage.tscn",
+      "line": 275,
+      "kind": "quoted_candidate",
+      "text": "去结账"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/CafeteriaMealStage.tscn",
+      "line": 35,
+      "kind": "quoted_candidate",
+      "text": "早餐 · 食堂窗口"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/CafeteriaMealStage.tscn",
+      "line": 47,
+      "kind": "quoted_candidate",
+      "text": "已选 0/3 · ¥0"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/CafeteriaMealStage.tscn",
+      "line": 91,
+      "kind": "quoted_candidate",
+      "text": "我的餐盘"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/CafeteriaMealStage.tscn",
+      "line": 97,
+      "kind": "quoted_candidate",
+      "text": "点击卡牌，食物会放到这里"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/CafeteriaMealStage.tscn",
+      "line": 107,
+      "kind": "quoted_candidate",
+      "text": "合计 ¥0"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/CafeteriaMealStage.tscn",
+      "line": 186,
+      "kind": "quoted_candidate",
+      "text": "换个地方"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/CafeteriaMealStage.tscn",
+      "line": 191,
+      "kind": "quoted_candidate",
+      "text": "先不吃"
+    },
+    {
+      "file": "life-strategy/scenes/game_v2/stages/CafeteriaMealStage.tscn",
+      "line": 197,
+      "kind": "quoted_candidate",
+      "text": "端走餐盘"
+    },
+    {
+      "file": "life-strategy/scripts/ui/ChoiceCard.gd",
+      "line": 63,
+      "kind": "quoted_candidate",
+      "text": "移除"
+    },
+    {
+      "file": "life-strategy/scripts/ui/ChoiceCard.gd",
+      "line": 63,
+      "kind": "quoted_candidate",
+      "text": "选这个"
+    },
+    {
+      "file": "life-strategy/scripts/ui/ChoiceCard.gd",
+      "line": 95,
+      "kind": "quoted_candidate",
+      "text": "食物"
+    },
+    {
+      "file": "life-strategy/scripts/ui/ChoiceCard.gd",
+      "line": 97,
+      "kind": "quoted_candidate",
+      "text": "地点"
+    },
+    {
+      "file": "life-strategy/scripts/ui/ChoiceCard.gd",
+      "line": 99,
+      "kind": "quoted_candidate",
+      "text": "今晚"
+    },
+    {
+      "file": "life-strategy/scripts/ui/ChoiceCard.gd",
+      "line": 100,
+      "kind": "quoted_candidate",
+      "text": "安排"
+    },
+    {
+      "file": "life-strategy/scripts/ui/ChoiceCard.gd",
+      "line": 105,
+      "kind": "quoted_candidate",
+      "text": "存量 ×%d"
+    },
+    {
+      "file": "life-strategy/scripts/ui/ChoiceCard.gd",
+      "line": 108,
+      "kind": "quoted_candidate",
+      "text": "无额外费"
+    },
+    {
+      "file": "life-strategy/scripts/ui/ChoiceCard.gd",
+      "line": 108,
+      "kind": "quoted_candidate",
+      "text": "另付 ¥%d"
+    },
+    {
+      "file": "life-strategy/scripts/ui/ChoiceCard.gd",
+      "line": 116,
+      "kind": "quoted_candidate",
+      "text": "最多 %d 种"
+    },
+    {
+      "file": "life-strategy/scripts/ui/ChoiceCard.gd",
+      "line": 118,
+      "kind": "quoted_candidate",
+      "text": "饱腹 %s · 精力 %s · %s"
+    },
+    {
+      "file": "life-strategy/scripts/ui/ChoiceCard.gd",
+      "line": 124,
+      "kind": "quoted_candidate",
+      "text": "精力 %s · 压力 %s · 复习 %s"
+    },
+    {
+      "file": "life-strategy/scripts/ui/ChoiceCard.gd",
+      "line": 129,
+      "kind": "quoted_candidate",
+      "text": "精力 %s · 心情 %s · 压力 %s"
+    },
+    {
+      "file": "life-strategy/scripts/ui/ChoiceCard.gd",
+      "line": 141,
+      "kind": "quoted_candidate",
+      "text": "饱腹 %s　精力 %s"
+    },
+    {
+      "file": "life-strategy/scripts/ui/ChoiceCard.gd",
+      "line": 145,
+      "kind": "quoted_candidate",
+      "text": "压力 %s"
+    },
+    {
+      "file": "life-strategy/scripts/ui/ChoiceCard.gd",
+      "line": 147,
+      "kind": "quoted_candidate",
+      "text": "宿舍还剩 %d 份"
+    },
+    {
+      "file": "life-strategy/scripts/ui/ChoiceCard.gd",
+      "line": 148,
+      "kind": "quoted_candidate",
+      "text": "角色口味（游戏效果）"
+    },
+    {
+      "file": "life-strategy/scripts/ui/ChoiceCard.gd",
+      "line": 151,
+      "kind": "quoted_candidate",
+      "text": "精力 %s　心情 %s　压力 %s　复习 %s"
+    },
+    {
+      "file": "life-strategy/scripts/ui/ChoiceCard.gd",
+      "line": 158,
+      "kind": "quoted_candidate",
+      "text": "可看到 %d 种选择"
+    },
+    {
+      "file": "life-strategy/scripts/ui/ChoiceCard.gd",
+      "line": 166,
+      "kind": "quoted_candidate",
+      "text": "口味未设置"
+    },
+    {
+      "file": "life-strategy/scripts/ui/ChoiceCard.gd",
+      "line": 167,
+      "kind": "quoted_candidate",
+      "text": "口味 %s"
+    },
+    {
+      "file": "life-strategy/scripts/ui/ChoiceCard.gd",
+      "line": 173,
+      "kind": "quoted_candidate",
+      "text": "口味未设置"
+    },
+    {
+      "file": "life-strategy/scripts/ui/ChoiceCard.gd",
+      "line": 175,
+      "kind": "quoted_candidate",
+      "text": "本局角色没有特别偏好"
+    },
+    {
+      "file": "life-strategy/scripts/ui/ChoiceCard.gd",
+      "line": 177,
+      "kind": "quoted_candidate",
+      "text": "不太合本局角色的口味"
+    },
+    {
+      "file": "life-strategy/scripts/ui/ChoiceCard.gd",
+      "line": 179,
+      "kind": "quoted_candidate",
+      "text": "本局角色偏爱这一口"
+    },
+    {
+      "file": "life-strategy/scripts/ui/ChoiceCard.gd",
+      "line": 181,
+      "kind": "quoted_candidate",
+      "text": "合本局角色的口味"
+    },
+    {
+      "file": "life-strategy/scripts/ui/ChoiceCard.gd",
+      "line": 182,
+      "kind": "quoted_candidate",
+      "text": "%s · 心情 %s"
+    },
+    {
+      "file": "life-strategy/scripts/systems/WeeklyEventService.gd",
+      "line": 12,
+      "kind": "quoted_candidate",
+      "text": "天气放晴"
+    },
+    {
+      "file": "life-strategy/scripts/systems/WeeklyEventService.gd",
+      "line": 13,
+      "kind": "quoted_candidate",
+      "text": "风不大，校园里适合走一走。"
+    },
+    {
+      "file": "life-strategy/scripts/systems/WeeklyEventService.gd",
+      "line": 14,
+      "kind": "quoted_candidate",
+      "text": "明天天气放晴，散步会比平时更解压。"
+    },
+    {
+      "file": "life-strategy/scripts/systems/WeeklyEventService.gd",
+      "line": 25,
+      "kind": "quoted_candidate",
+      "text": "食堂换菜单"
+    },
+    {
+      "file": "life-strategy/scripts/systems/WeeklyEventService.gd",
+      "line": 26,
+      "kind": "quoted_candidate",
+      "text": "窗口多开了几样菜，今天更容易配齐一餐。"
+    },
+    {
+      "file": "life-strategy/scripts/systems/WeeklyEventService.gd",
+      "line": 27,
+      "kind": "quoted_candidate",
+      "text": "明天食堂换菜单，可看到的菜会更多。"
+    },
+    {
+      "file": "life-strategy/scripts/systems/WeeklyEventService.gd",
+      "line": 38,
+      "kind": "quoted_candidate",
+      "text": "外卖优惠券"
+    },
+    {
+      "file": "life-strategy/scripts/systems/WeeklyEventService.gd",
+      "line": 39,
+      "kind": "quoted_candidate",
+      "text": "手机里多了一张配送券，外卖暂时没那么贵。"
+    },
+    {
+      "file": "life-strategy/scripts/systems/WeeklyEventService.gd",
+      "line": 40,
+      "kind": "quoted_candidate",
+      "text": "明天有一张外卖券，配送费会降低，菜单也会多一项。"
+    },
+    {
+      "file": "life-strategy/scripts/systems/WeeklyEventService.gd",
+      "line": 51,
+      "kind": "quoted_candidate",
+      "text": "小测提醒"
+    },
+    {
+      "file": "life-strategy/scripts/systems/WeeklyEventService.gd",
+      "line": 52,
+      "kind": "quoted_candidate",
+      "text": "群里发来了小测范围，复习更有方向，也更费神。"
+    },
+    {
+      "file": "life-strategy/scripts/systems/WeeklyEventService.gd",
+      "line": 53,
+      "kind": "quoted_candidate",
+      "text": "明天会公布小测范围：复习收益提高，但会更累、更紧张。"
+    },
+    {
+      "file": "life-strategy/scripts/systems/WeeklyEventService.gd",
+      "line": 64,
+      "kind": "quoted_candidate",
+      "text": "下了一整天雨"
+    },
+    {
+      "file": "life-strategy/scripts/systems/WeeklyEventService.gd",
+      "line": 65,
+      "kind": "quoted_candidate",
+      "text": "天色一直发灰，出门和点外卖都没有平时轻松。"
+    },
+    {
+      "file": "life-strategy/scripts/systems/WeeklyEventService.gd",
+      "line": 66,
+      "kind": "quoted_candidate",
+      "text": "明天有雨：外卖配送费上涨，散步的恢复效果也会变弱。"
+    },
+    {
+      "file": "life-strategy/scripts/systems/WeeklyEventService.gd",
+      "line": 131,
+      "kind": "quoted_candidate",
+      "text": "照常安排"
+    },
+    {
+      "file": "life-strategy/scripts/systems/WeeklyEventService.gd",
+      "line": 132,
+      "kind": "quoted_candidate",
+      "text": "明天没有额外变化，按自己的节奏来。"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 7,
+      "kind": "quoted_candidate",
+      "text": "早点睡"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 7,
+      "kind": "quoted_candidate",
+      "text": "再复习一会儿"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 7,
+      "kind": "quoted_candidate",
+      "text": "刷一会儿手机"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 9,
+      "kind": "quoted_candidate",
+      "text": "收工时精力很低"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 10,
+      "kind": "quoted_candidate",
+      "text": "收工时压力很高"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 11,
+      "kind": "quoted_candidate",
+      "text": "晚间复习后精力偏低"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 12,
+      "kind": "quoted_candidate",
+      "text": "晚间复习后压力偏高"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 13,
+      "kind": "quoted_candidate",
+      "text": "三个安排位都用于复习，收工时精力偏低"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 14,
+      "kind": "quoted_candidate",
+      "text": "收工时压力偏高、精力偏低"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 15,
+      "kind": "quoted_candidate",
+      "text": "晚间继续复习"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 16,
+      "kind": "quoted_candidate",
+      "text": "收工时精力偏低"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 17,
+      "kind": "quoted_candidate",
+      "text": "收工时压力偏高"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 18,
+      "kind": "quoted_candidate",
+      "text": "三个安排位都用来复习，没留休息时间"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 19,
+      "kind": "quoted_candidate",
+      "text": "选择早点睡，收工时精力充足、压力较低"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 20,
+      "kind": "quoted_candidate",
+      "text": "收工时的精力、压力和安排让复习收益保持照常"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 22,
+      "kind": "quoted_candidate",
+      "text": "昨夜恢复在每天收工后记录一次，白天保持这条记录。判断会一起看精力、压力、当天行动和晚间安排。\\n恢复会影响第二天的开场与复习收益。这些是游戏规则，不用于判断真实健康；休息也不会改掉已经记下的饮食选择。"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 24,
+      "kind": "quoted_candidate",
+      "text": "餐食游戏加成"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 24,
+      "kind": "quoted_candidate",
+      "text": "餐食游戏压力变化"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 25,
+      "kind": "quoted_candidate",
+      "text": "餐食游戏加成"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 25,
+      "kind": "quoted_candidate",
+      "text": "餐食游戏压力变化"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 26,
+      "kind": "quoted_candidate",
+      "text": "低饱腹日终效果"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 26,
+      "kind": "quoted_candidate",
+      "text": "高饱腹日终效果"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 27,
+      "kind": "quoted_candidate",
+      "text": "预算紧张"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 27,
+      "kind": "quoted_candidate",
+      "text": "复习进度落后"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 28,
+      "kind": "quoted_candidate",
+      "text": "复习进度跟上"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 28,
+      "kind": "quoted_candidate",
+      "text": "日终饱腹消耗"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 30,
+      "kind": "quoted_candidate",
+      "text": "精力"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 30,
+      "kind": "quoted_candidate",
+      "text": "心情"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 30,
+      "kind": "quoted_candidate",
+      "text": "压力"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 30,
+      "kind": "quoted_candidate",
+      "text": "饱腹"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 30,
+      "kind": "quoted_candidate",
+      "text": "复习"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 30,
+      "kind": "quoted_candidate",
+      "text": "余额"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 43,
+      "kind": "quoted_candidate",
+      "text": "起步状态"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 43,
+      "kind": "quoted_candidate",
+      "text": "起步状态"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 43,
+      "kind": "quoted_candidate",
+      "text": "新的一周开始了，还没有昨夜的恢复记录。"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 43,
+      "kind": "quoted_candidate",
+      "text": "今天从起步状态开始"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 43,
+      "kind": "quoted_candidate",
+      "text": "这是这一周的起点。今晚怎么安排，收工后再记。\\n\\n"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 45,
+      "kind": "quoted_candidate",
+      "text": "今晚恢复"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 45,
+      "kind": "quoted_candidate",
+      "text": "昨夜恢复"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 53,
+      "kind": "quoted_candidate",
+      "text": "；完整依据见详情"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 56,
+      "kind": "quoted_candidate",
+      "text": "。这晚刷了手机，恢复仍看实际精力、压力和安排"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 57,
+      "kind": "quoted_candidate",
+      "text": "。这晚刷了手机，恢复仍看实际精力、压力和安排"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 59,
+      "kind": "quoted_candidate",
+      "text": "。虽然早点睡了，收工时仍有这些情况"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 60,
+      "kind": "quoted_candidate",
+      "text": "。虽然早点睡了，收工时仍有这些情况"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 62,
+      "kind": "quoted_candidate",
+      "text": "第 %d 天收工后 · %s"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 62,
+      "kind": "quoted_candidate",
+      "text": "判断依据："
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 62,
+      "kind": "quoted_candidate",
+      "text": "晚间安排："
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 66,
+      "kind": "quoted_candidate",
+      "text": "精力 %d → %d → %d；压力 %d → %d → %d\\n依次为睡前、晚间安排后、收工时。"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 67,
+      "kind": "quoted_candidate",
+      "text": "晚间安排实际效果："
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 71,
+      "kind": "quoted_candidate",
+      "text": "无数值变化"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 72,
+      "kind": "quoted_candidate",
+      "text": "其他日终游戏效果"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 74,
+      "kind": "quoted_candidate",
+      "text": "其他日终效果（按执行顺序）：\\n"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 75,
+      "kind": "quoted_candidate",
+      "text": "数值保持在0–100，这次调整："
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 76,
+      "kind": "quoted_candidate",
+      "text": "。当天事件、精力和压力也会影响实际复习收益；数值到顶或到底时，只记实际变化。"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 78,
+      "kind": "quoted_candidate",
+      "text": "本周已收尾，这条记录的次日效果没有在本局应用。"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 84,
+      "kind": "quoted_candidate",
+      "text": "恢复记录暂时不可用"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 85,
+      "kind": "quoted_candidate",
+      "text": "这条记录读不完整，暂时看不到恢复依据和效果。"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 87,
+      "kind": "quoted_candidate",
+      "text": "这段历史没有恢复记录"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 88,
+      "kind": "quoted_candidate",
+      "text": "旧记录没有保存恢复依据，这一晚的状态无法确定。"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 90,
+      "kind": "quoted_candidate",
+      "text": "恢复记录版本暂不支持"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 91,
+      "kind": "quoted_candidate",
+      "text": "当前版本无法读取这条恢复记录。"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 92,
+      "kind": "quoted_candidate",
+      "text": "恢复效果暂不可用"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 92,
+      "kind": "quoted_candidate",
+      "text": "\\n这条记录不参与恢复效果计算。"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 97,
+      "kind": "quoted_candidate",
+      "text": "本周已收尾，不再应用次日效果"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 98,
+      "kind": "quoted_candidate",
+      "text": "明天"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 98,
+      "kind": "quoted_candidate",
+      "text": "今天"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 100,
+      "kind": "quoted_candidate",
+      "text": "每次复习收益不变"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 100,
+      "kind": "quoted_candidate",
+      "text": "每次复习收益 "
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 102,
+      "kind": "quoted_candidate",
+      "text": "%s%s；开场%s"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 112,
+      "kind": "quoted_candidate",
+      "text": "复习 "
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 113,
+      "kind": "quoted_candidate",
+      "text": "无数值变化"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 122,
+      "kind": "quoted_candidate",
+      "text": "复习目标完成了，也给自己留了些余力。"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 123,
+      "kind": "quoted_candidate",
+      "text": "这一周走完了。下次换个安排，再试试看。"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 124,
+      "kind": "quoted_candidate",
+      "text": "这次的安排没能撑下去。先停在这里，下次换个节奏。"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 125,
+      "kind": "quoted_candidate",
+      "text": "这一周走完了，复习目标还没完成。"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 126,
+      "kind": "quoted_candidate",
+      "text": "这一局先记到这里。"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 128,
+      "kind": "quoted_candidate",
+      "text": "\\n还没有可回顾的日记录。"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 144,
+      "kind": "quoted_candidate",
+      "text": "这 %d 天吃了 %d 餐。"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 146,
+      "kind": "quoted_candidate",
+      "text": "有 %d 晚选择早点睡。"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 148,
+      "kind": "quoted_candidate",
+      "text": "有 %d 晚继续复习。"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryPresenter.gd",
+      "line": 150,
+      "kind": "quoted_candidate",
+      "text": "另外跳过了 %d 餐。"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryGameplayService.gd",
+      "line": 10,
+      "kind": "quoted_candidate",
+      "text": "恢复充分"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryGameplayService.gd",
+      "line": 10,
+      "kind": "quoted_candidate",
+      "text": "状态照常"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryGameplayService.gd",
+      "line": 10,
+      "kind": "quoted_candidate",
+      "text": "有些疲惫"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryGameplayService.gd",
+      "line": 10,
+      "kind": "quoted_candidate",
+      "text": "需要缓缓"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryGameplayService.gd",
+      "line": 12,
+      "kind": "quoted_candidate",
+      "text": "按游戏规则，昨晚的休息、实际精力与压力支持了今天的复习加成。"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryGameplayService.gd",
+      "line": 13,
+      "kind": "quoted_candidate",
+      "text": "按游戏规则，昨晚的恢复记录没有触发额外复习加成或减益。"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryGameplayService.gd",
+      "line": 14,
+      "kind": "quoted_candidate",
+      "text": "按游戏规则，昨晚的精力、压力或安排触发了轻度复习减益。"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryGameplayService.gd",
+      "line": 15,
+      "kind": "quoted_candidate",
+      "text": "按游戏规则，昨晚的精力、压力或安排触发了较大复习减益。"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryGameplayService.gd",
+      "line": 44,
+      "kind": "quoted_candidate",
+      "text": "恢复记录暂时不可用"
+    },
+    {
+      "file": "life-strategy/scripts/systems/RecoveryGameplayService.gd",
+      "line": 44,
+      "kind": "quoted_candidate",
+      "text": "这一天的恢复记录无法使用，请通过菜单重新开始这一周。"
+    },
+    {
+      "file": "life-strategy/scripts/systems/NutritionLedger.gd",
+      "line": 91,
+      "kind": "quoted_candidate",
+      "text": "这里只记录本周选过的食物。成分与份量尚未核对，暂不作营养评价。"
+    },
+    {
+      "file": "life-strategy/scripts/systems/NutritionLedger.gd",
+      "line": 101,
+      "kind": "quoted_candidate",
+      "text": "选餐记录（不作健康评价）"
+    },
+    {
+      "file": "life-strategy/scripts/systems/NutritionLedger.gd",
+      "line": 108,
+      "kind": "quoted_candidate",
+      "text": "今天吃了 %d 餐，跳过了 %d 餐。"
+    },
+    {
+      "file": "life-strategy/scripts/systems/NutritionLedger.gd",
+      "line": 110,
+      "kind": "quoted_candidate",
+      "text": "还没有选餐记录。"
+    },
+    {
+      "file": "life-strategy/scripts/systems/NutritionLedger.gd",
+      "line": 111,
+      "kind": "quoted_candidate",
+      "text": "今天吃了 %d 餐。选过的食物记在下面。"
+    },
+    {
+      "file": "life-strategy/scripts/systems/NutritionLedger.gd",
+      "line": 116,
+      "kind": "quoted_candidate",
+      "text": "明天的安排里，可以先给吃饭留个空档。"
+    },
+    {
+      "file": "life-strategy/scripts/systems/NutritionLedger.gd",
+      "line": 117,
+      "kind": "quoted_candidate",
+      "text": "明天先看看预算和存粮，再决定去哪儿吃。"
+    },
+    {
+      "file": "life-strategy/scripts/systems/NutritionLedger.gd",
+      "line": 121,
+      "kind": "quoted_candidate",
+      "text": "选餐记录"
+    },
+    {
+      "file": "life-strategy/scripts/systems/NutritionLedger.gd",
+      "line": 121,
+      "kind": "quoted_candidate",
+      "text": "吃了 %d 餐｜跳过 %d 餐"
+    },
+    {
+      "file": "life-strategy/scripts/systems/NutritionLedger.gd",
+      "line": 122,
+      "kind": "quoted_candidate",
+      "text": "早餐"
+    },
+    {
+      "file": "life-strategy/scripts/systems/NutritionLedger.gd",
+      "line": 122,
+      "kind": "quoted_candidate",
+      "text": "午餐"
+    },
+    {
+      "file": "life-strategy/scripts/systems/NutritionLedger.gd",
+      "line": 122,
+      "kind": "quoted_candidate",
+      "text": "晚餐"
+    },
+    {
+      "file": "life-strategy/scripts/systems/NutritionLedger.gd",
+      "line": 124,
+      "kind": "quoted_candidate",
+      "text": "这一餐"
+    },
+    {
+      "file": "life-strategy/scripts/systems/NutritionLedger.gd",
+      "line": 126,
+      "kind": "quoted_candidate",
+      "text": "｜跳过"
+    },
+    {
+      "file": "life-strategy/scripts/systems/NutritionLedger.gd",
+      "line": 131,
+      "kind": "quoted_candidate",
+      "text": "食物名称未记录"
+    },
+    {
+      "file": "life-strategy/scripts/systems/NutritionLedger.gd",
+      "line": 135,
+      "kind": "quoted_candidate",
+      "text": "还没有记录。"
+    }
+  ]
+}

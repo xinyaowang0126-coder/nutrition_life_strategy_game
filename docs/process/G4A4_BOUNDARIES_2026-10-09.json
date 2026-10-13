@@ -1,0 +1,60 @@
+{
+  "date": "2026-10-09",
+  "files": [
+    {
+      "path": "life-strategy/project.godot",
+      "before": "7A0504158141FEFD59678CF0AA176275552AAC3003319BE0ECACC366A13C0536",
+      "after": "7A0504158141FEFD59678CF0AA176275552AAC3003319BE0ECACC366A13C0536",
+      "unchanged": true
+    },
+    {
+      "path": "life-strategy/data/health/food_health_profiles.xml",
+      "before": "E4EF1E7424DED285613FA5864B09896B2DD63028BA511D55ABCD512ACCADF083",
+      "after": "E4EF1E7424DED285613FA5864B09896B2DD63028BA511D55ABCD512ACCADF083",
+      "unchanged": true
+    },
+    {
+      "path": "life-strategy/data/health/evidence_registry.xml",
+      "before": "05BD2DB0A23D307FE85216F50B8A07E43862707393A4642A55C1D4499888C18A",
+      "after": "05BD2DB0A23D307FE85216F50B8A07E43862707393A4642A55C1D4499888C18A",
+      "unchanged": true
+    },
+    {
+      "path": "life-strategy/data/health/guidance_copy.xml",
+      "before": "074CE5E8F9446C7711AA5E995A5B5CF67C8D855CB8BE760D052EBD4B8D2D5765",
+      "after": "074CE5E8F9446C7711AA5E995A5B5CF67C8D855CB8BE760D052EBD4B8D2D5765",
+      "unchanged": true
+    },
+    {
+      "path": "life-strategy/scripts/systems/MealResolver.gd",
+      "before": "9BBCDF45496F3587B37F8FB7F4FD3B4514F32A855EE015C01BBA6B1A3BEC0C68",
+      "after": "9BBCDF45496F3587B37F8FB7F4FD3B4514F32A855EE015C01BBA6B1A3BEC0C68",
+      "unchanged": true
+    },
+    {
+      "path": "life-strategy/scripts/systems/RecoveryRules.gd",
+      "before": "26AE085E7A4155644F83CE78DCFF203F4136B79249B9336B9B26798F6E9678B1",
+      "after": "26AE085E7A4155644F83CE78DCFF203F4136B79249B9336B9B26798F6E9678B1",
+      "unchanged": true
+    },
+    {
+      "path": "life-strategy/scripts/health/MealHealthSnapshot.gd",
+      "before": "C6CA57A81E3C401F20302CE013CDE62B42C9C0E8BDA094E31F61FB93FA9E3BF7",
+      "after": "C6CA57A81E3C401F20302CE013CDE62B42C9C0E8BDA094E31F61FB93FA9E3BF7",
+      "unchanged": true
+    },
+    {
+      "path": "life-strategy/scripts/health/MealHealthArchive.gd",
+      "before": "3B82AF892E24210860E644F4AB2F92B322885571C284E2AEFD3C2309D22D9322",
+      "after": "3B82AF892E24210860E644F4AB2F92B322885571C284E2AEFD3C2309D22D9322",
+      "unchanged": true
+    },
+    {
+      "path": "life-strategy/scripts/ui_v2/GameRootV2.gd",
+      "before": "D6037E0BBC85C325ECD0301AA50FE2C8509B0F97B1EF17891E5034C342C027F1",
+      "after": "D6037E0BBC85C325ECD0301AA50FE2C8509B0F97B1EF17891E5034C342C027F1",
+      "unchanged": true
+    }
+  ],
+  "play_untouched": true
+}

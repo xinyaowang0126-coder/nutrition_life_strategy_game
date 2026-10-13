@@ -4,6 +4,32 @@
 [ext_resource type="Script" uid="uid://dyrivohky7fqj" path="res://scripts/ui_v2/CharacterHUD.gd" id="2_xagrg"]
 [ext_resource type="Texture2D" uid="uid://dndhghoal2pvt" path="res://assets/generated/ui_v2/characters/student_bust.png" id="3_xagrg"]
 
+[ext_resource type="Texture2D" path="res://assets/generated/ui_v3/icons/study_book.png" id="4_book"]
+[ext_resource type="Script" path="res://scripts/ui_v2/HudStudyProgressStrip.gd" id="5_track"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_inner"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.75, 0.59, 0.36, 0.8)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_left = 10
+corner_radius_bottom_right = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_recovery"]
+bg_color = Color(0.88, 0.72, 0.47, 0.32)
+content_margin_left = 10
+content_margin_right = 10
+content_margin_top = 5
+content_margin_bottom = 5
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_left = 10
+corner_radius_bottom_right = 10
+
 [sub_resource type="Animation" id="Animation_xagrg"]
 length = 3.6
 loop_mode = 2
@@ -66,20 +92,27 @@ layout_mode = 0
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 300.0
-offset_top = -310.0
+offset_top = -280.0
 offset_right = 780.0
 offset_bottom = -90.0
 
+[node name="InnerBorder" type="PanelContainer" parent="StatusBoard"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_inner")
+
 [node name="Margin" type="MarginContainer" parent="StatusBoard" unique_id=876156865]
 layout_mode = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 12
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 12
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 6
 
 [node name="VBox" type="VBoxContainer" parent="StatusBoard/Margin" unique_id=907121185]
 layout_mode = 2
-theme_override_constants/separation = 8
+theme_override_constants/separation = 5
+
+alignment = 1
 
 [node name="StabilityRow" type="HBoxContainer" parent="StatusBoard/Margin/VBox" unique_id=272839824]
 layout_mode = 2
@@ -95,97 +128,185 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 22
 text = "余力"
 
-[node name="Spacer" type="Control" parent="StatusBoard/Margin/VBox/StabilityRow" unique_id=829313834]
-layout_mode = 2
-size_flags_horizontal = 3
-
 [node name="StabilityValue" type="Label" parent="StatusBoard/Margin/VBox/StabilityRow" unique_id=80251167]
 layout_mode = 2
 theme_override_font_sizes/font_size = 38
 text = "65"
 
+[node name="Spacer" type="Control" parent="StatusBoard/Margin/VBox/StabilityRow" unique_id=829313834]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RecoveryChip" type="PanelContainer" parent="StatusBoard/Margin/VBox/StabilityRow" unique_id=2703781]
+custom_minimum_size = Vector2(76, 32)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_recovery")
+
+[node name="Value" type="Label" parent="StatusBoard/Margin/VBox/StabilityRow/RecoveryChip" unique_id=323946094]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "起步"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 0
+
+[node name="DetailsSpace" type="Control" parent="StatusBoard/Margin/VBox/StabilityRow"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="TopRule" type="ColorRect" parent="StatusBoard/Margin/VBox"]
+custom_minimum_size = Vector2(0, 1)
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.67, 0.51, 0.31, 0.45)
+
 [node name="StatGrid" type="GridContainer" parent="StatusBoard/Margin/VBox" unique_id=500009878]
 layout_mode = 2
-theme_override_constants/h_separation = 8
+theme_override_constants/h_separation = 6
 theme_override_constants/v_separation = 8
-columns = 3
+columns = 4
 
 [node name="EnergyChip" type="PanelContainer" parent="StatusBoard/Margin/VBox/StatGrid" unique_id=1929253765]
-custom_minimum_size = Vector2(135, 54)
+custom_minimum_size = Vector2(101, 32)
 layout_mode = 2
 
-[node name="Value" type="Label" parent="StatusBoard/Margin/VBox/StatGrid/EnergyChip" unique_id=1481239642]
+size_flags_horizontal = 3
+
+[node name="Line" type="HBoxContainer" parent="StatusBoard/Margin/VBox/StatGrid/EnergyChip"]
 layout_mode = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="Name" type="Label" parent="StatusBoard/Margin/VBox/StatGrid/EnergyChip/Line"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.29, 0.22, 0.14, 1)
 theme_override_font_sizes/font_size = 18
-text = "精力 52"
-horizontal_alignment = 1
+text = "精力"
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="StatusBoard/Margin/VBox/StatGrid/EnergyChip/Line" unique_id=1481239642]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "52"
 vertical_alignment = 1
 
 [node name="MoodChip" type="PanelContainer" parent="StatusBoard/Margin/VBox/StatGrid" unique_id=2076009226]
-custom_minimum_size = Vector2(135, 54)
+custom_minimum_size = Vector2(101, 32)
 layout_mode = 2
 
-[node name="Value" type="Label" parent="StatusBoard/Margin/VBox/StatGrid/MoodChip" unique_id=1998757399]
+size_flags_horizontal = 3
+
+[node name="Line" type="HBoxContainer" parent="StatusBoard/Margin/VBox/StatGrid/MoodChip"]
 layout_mode = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="Name" type="Label" parent="StatusBoard/Margin/VBox/StatGrid/MoodChip/Line"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.29, 0.22, 0.14, 1)
 theme_override_font_sizes/font_size = 18
-text = "心情 55"
-horizontal_alignment = 1
+text = "心情"
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="StatusBoard/Margin/VBox/StatGrid/MoodChip/Line" unique_id=1998757399]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "55"
 vertical_alignment = 1
 
 [node name="SatietyChip" type="PanelContainer" parent="StatusBoard/Margin/VBox/StatGrid" unique_id=486934674]
-custom_minimum_size = Vector2(135, 54)
+custom_minimum_size = Vector2(101, 32)
 layout_mode = 2
 
-[node name="Value" type="Label" parent="StatusBoard/Margin/VBox/StatGrid/SatietyChip" unique_id=265415250]
+size_flags_horizontal = 3
+
+[node name="Line" type="HBoxContainer" parent="StatusBoard/Margin/VBox/StatGrid/SatietyChip"]
 layout_mode = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="Name" type="Label" parent="StatusBoard/Margin/VBox/StatGrid/SatietyChip/Line"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.29, 0.22, 0.14, 1)
 theme_override_font_sizes/font_size = 18
-text = "饱腹 58"
-horizontal_alignment = 1
+text = "饱腹"
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="StatusBoard/Margin/VBox/StatGrid/SatietyChip/Line" unique_id=265415250]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "58"
 vertical_alignment = 1
 
 [node name="StressChip" type="PanelContainer" parent="StatusBoard/Margin/VBox/StatGrid" unique_id=1792947719]
-custom_minimum_size = Vector2(135, 54)
+custom_minimum_size = Vector2(101, 32)
 layout_mode = 2
 
-[node name="Value" type="Label" parent="StatusBoard/Margin/VBox/StatGrid/StressChip" unique_id=931143315]
+size_flags_horizontal = 3
+
+[node name="Line" type="HBoxContainer" parent="StatusBoard/Margin/VBox/StatGrid/StressChip"]
 layout_mode = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="Name" type="Label" parent="StatusBoard/Margin/VBox/StatGrid/StressChip/Line"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.29, 0.22, 0.14, 1)
 theme_override_font_sizes/font_size = 18
-text = "压力 48"
-horizontal_alignment = 1
+text = "压力"
 vertical_alignment = 1
 
-[node name="BurdenChip" type="PanelContainer" parent="StatusBoard/Margin/VBox/StatGrid" unique_id=2703781]
-custom_minimum_size = Vector2(135, 54)
+[node name="Value" type="Label" parent="StatusBoard/Margin/VBox/StatGrid/StressChip/Line" unique_id=931143315]
 layout_mode = 2
-
-[node name="Value" type="Label" parent="StatusBoard/Margin/VBox/StatGrid/BurdenChip" unique_id=323946094]
-layout_mode = 2
-theme_override_font_sizes/font_size = 18
-text = "角色健康 76"
-horizontal_alignment = 1
+theme_override_font_sizes/font_size = 22
+text = "48"
 vertical_alignment = 1
 
-[node name="StudyChip" type="PanelContainer" parent="StatusBoard/Margin/VBox/StatGrid" unique_id=171221196]
-custom_minimum_size = Vector2(135, 54)
+[node name="BottomRule" type="ColorRect" parent="StatusBoard/Margin/VBox"]
+custom_minimum_size = Vector2(0, 1)
 layout_mode = 2
+mouse_filter = 2
+color = Color(0.67, 0.51, 0.31, 0.45)
 
-[node name="Value" type="Label" parent="StatusBoard/Margin/VBox/StatGrid/StudyChip" unique_id=302654922]
+[node name="StudyRow" type="HBoxContainer" parent="StatusBoard/Margin/VBox"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 18
-text = "复习 0"
-horizontal_alignment = 1
+theme_override_constants/separation = 8
+
+[node name="Book" type="TextureRect" parent="StatusBoard/Margin/VBox/StudyRow"]
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+texture_filter = 4
+mouse_filter = 2
+texture = ExtResource("4_book")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Value" type="Label" parent="StatusBoard/Margin/VBox/StudyRow" unique_id=302654922]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "复习 0/70"
 vertical_alignment = 1
+
+[node name="Track" type="Control" parent="StatusBoard/Margin/VBox/StudyRow"]
+custom_minimum_size = Vector2(120, 22)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+mouse_filter = 2
+script = ExtResource("5_track")
 
 [node name="DetailsButton" type="Button" parent="." unique_id=152763218]
 layout_mode = 0
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 720.0
-offset_top = -147.0
+offset_top = -268.0
 offset_right = 770.0
-offset_bottom = -99.0
+offset_bottom = -220.0
 tooltip_text = "查看完整状态"
-theme_override_font_sizes/font_size = 22
+theme_override_font_sizes/font_size = 18
 text = "…"
 
 [node name="PortraitShadow" type="TextureRect" parent="." unique_id=409103913]

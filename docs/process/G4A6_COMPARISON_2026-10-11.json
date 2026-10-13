@@ -1,0 +1,8 @@
+{
+  "date": "2026-10-11",
+  "budget": 150,
+  "runs": 510,
+  "errors": [],
+  "differences": [],
+  "scope": "Compare all rows of original 17 policies x 30 seeds; new record book is closed during this gameplay regression"
+}

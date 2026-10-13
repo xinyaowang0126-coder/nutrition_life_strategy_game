@@ -1,0 +1,10 @@
+{
+  "before_source_sha256": "eeaf02a912afeb7fe9edc4b3e8d2b845c41c6525cec2349f5814da148dac3c09",
+  "after_source_sha256": "8942e5bc4dc680cec2e032dd06fe9bc42b47cbbb1da6c230b1c603d86b4ec064",
+  "errors": [],
+  "schema": "nut208c3.comparison.v1",
+  "gameplay_differences": [],
+  "recorded_days": 444,
+  "rows": 72,
+  "scope": "V2 C2-to-C3 comparison excluding retired fields; scripted legal choices, not player tests"
+}

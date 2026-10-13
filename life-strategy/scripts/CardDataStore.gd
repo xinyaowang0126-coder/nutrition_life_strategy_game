@@ -12,7 +12,6 @@ const INT_FIELDS := [
 	"satiety",
 	"energy",
 	"mood",
-	"burden",
 	"stress",
 	"study",
 	"fee",
@@ -224,6 +223,8 @@ static func _read_attributes(parser: XMLParser) -> Dictionary:
 	var out := {}
 	for index in range(parser.get_attribute_count()):
 		var key := parser.get_attribute_name(index)
+		if key in ["burden", "diet_burden", "character_health"]:
+			continue
 		var value := parser.get_attribute_value(index)
 		if CSV_FIELDS.has(key):
 			out[key] = _split_csv(value)

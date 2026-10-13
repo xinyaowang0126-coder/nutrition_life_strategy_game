@@ -1,0 +1,11 @@
+{
+  "valid": true,
+  "states": 12,
+  "resolutions": [
+    "(1920, 1080)",
+    "(1366, 768)",
+    "(720, 1280)",
+    "(390, 844)"
+  ],
+  "scope": "Native renders plus actual read-only mouse interaction; not physical device testing."
+}

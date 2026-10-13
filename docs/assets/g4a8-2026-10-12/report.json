@@ -1,0 +1,46 @@
+{
+	"errors": [],
+	"images": [
+		"E:/nutrition_life_strategy_game/docs/assets/g4a8-2026-10-12/1920x1080-100-unconfirmed.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a8-2026-10-12/1920x1080-100-day.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a8-2026-10-12/1920x1080-100-week.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a8-2026-10-12/1920x1080-100-day2.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a8-2026-10-12/1920x1080-130-unconfirmed.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a8-2026-10-12/1920x1080-130-day.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a8-2026-10-12/1920x1080-130-week.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a8-2026-10-12/1920x1080-130-day2.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a8-2026-10-12/720x1280-100-unconfirmed.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a8-2026-10-12/720x1280-100-day.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a8-2026-10-12/720x1280-100-week.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a8-2026-10-12/720x1280-100-day2.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a8-2026-10-12/720x1280-130-unconfirmed.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a8-2026-10-12/720x1280-130-day.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a8-2026-10-12/720x1280-130-week.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a8-2026-10-12/720x1280-130-day2.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a8-2026-10-12/780x1280-100-unconfirmed.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a8-2026-10-12/780x1280-100-day.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a8-2026-10-12/780x1280-100-week.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a8-2026-10-12/780x1280-100-day2.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a8-2026-10-12/780x1280-130-unconfirmed.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a8-2026-10-12/780x1280-130-day.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a8-2026-10-12/780x1280-130-week.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a8-2026-10-12/780x1280-130-day2.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a8-2026-10-12/1920x1080-native-summary-detail.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a8-2026-10-12/1920x1080-native-summary-records.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a8-2026-10-12/390x640-native-summary-detail.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a8-2026-10-12/390x640-native-summary-records.png"
+	],
+	"layouts": 6,
+	"native_windows": [
+		[
+			1920,
+			1080
+		],
+		[
+			390,
+			640
+		]
+	],
+	"scope": "Real normal V2 facts with health flags off; logical canvases/native windows, not physical phone/browser acceptance.",
+	"valid": true
+}

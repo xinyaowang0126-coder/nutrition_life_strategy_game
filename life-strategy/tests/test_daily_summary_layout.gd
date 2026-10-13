@@ -43,9 +43,9 @@ func test_desktop_meal_summary_keeps_details_entry_above_the_fold() -> void:
 			{"title": "午餐", "text": "便利店 · 苹果、牛奶", "state": "eaten"},
 			{"title": "晚餐", "text": "没吃", "state": "skipped"},
 		],
-		"nutrition": {
-			"detail_text": "三餐情况　吃了 2/3 餐\n餐盘线索\n卡牌资料线索",
-			"basis": "规则小字：本局饮食信息参考《中国居民膳食指南（2022）》的一般原则。",
+		"detail": {
+			"detail_text": "选餐记录\n早餐｜食堂｜白米饭、鸡蛋\n午餐｜便利店｜苹果、牛奶\n晚餐｜跳过",
+			"basis": "成分与份量尚未核对，暂不作营养评价。",
 		},
 		"stats": {"stability": 64, "study_progress": 30, "balance": 82},
 	}, false)
@@ -86,6 +86,30 @@ func test_narrow_mobile_profile_stays_bounded_and_stacks_stats() -> void:
 	assert_true(popup.next_button.custom_minimum_size.y >= 48.0)
 
 
+func test_legacy_payload_without_record_detail_keeps_footer_accessible() -> void:
+	for canvas in [Vector2i(1920, 1080), Vector2i(720, 1280), Vector2i(390, 640)]:
+		var popup := _popup_in_viewport(canvas)
+		popup.show_summary({
+			"quality": "旧营养评分 95",
+			"nutrition": {"detail_text": "旧营养评级"},
+			"advice": "这一天先记到这里。\n明天按预算和时间安排。\n还有记录未记清。",
+			"meal_stamps": [
+				{"title": "早餐", "text": "未记", "state": "missing"},
+				{"title": "午餐", "text": "未记", "state": "missing"},
+				{"title": "晚餐", "text": "未记", "state": "missing"},
+			],
+			"stats": {"stability": 60, "study_progress": 10, "balance": 100},
+		}, canvas.y > canvas.x)
+		popup._finish_show()
+		for _pass in range(4):
+			popup._layout_popup()
+			_force_container_layout(popup.paper)
+		assert_eq(popup.record_summary_label.text, "选餐记录暂时不可用。")
+		assert_false(popup.detail_button.visible)
+		assert_true(popup.paper_host.get_global_rect().encloses(popup.next_button.get_global_rect()), "unknown fallback footer clipped at %s" % canvas)
+		assert_eq(popup.next_button.get_parent(), popup.root_stack)
+
+
 func _popup_in_viewport(viewport_size: Vector2i) -> DailySummaryPopupV2:
 	var viewport := SubViewport.new()
 	viewport.size = viewport_size
@@ -111,9 +135,9 @@ func _show_long_summary(popup: DailySummaryPopupV2, mobile: bool) -> void:
 			{"title": "午餐", "text": "便利店 · 苹果、牛奶", "state": "eaten"},
 			{"title": "晚餐", "text": "宿舍存粮 · 燕麦片", "state": "eaten"},
 		],
-		"nutrition": {
+		"detail": {
 			"detail_text": "\n".join(detail_lines),
-			"basis": "规则小字：本局饮食信息参考《中国居民膳食指南（2022）》的一般原则；卡牌出现不代表现实摄入量足够，也不用于现实健康判断。",
+			"basis": "这里只记录确认过的食物与游戏变化，成分与份量尚未核对。",
 		},
 		"stats": {"stability": 64, "study_progress": 20, "balance": 108},
 	}, mobile)

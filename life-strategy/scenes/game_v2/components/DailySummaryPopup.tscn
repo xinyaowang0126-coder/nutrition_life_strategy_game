@@ -230,7 +230,7 @@ layout_mode = 2
 layout_mode = 2
 theme_override_colors/font_color = Color(0.3, 0.45, 0.29, 1)
 theme_override_font_sizes/font_size = 16
-text = "写给明天"
+text = "明天"
 
 [node name="Advice" type="Label" parent="PaperHost/Paper/Margin/VBox/ContentScroll/Content/JournalNote/Margin/VBox" unique_id=465984789]
 layout_mode = 2
@@ -286,14 +286,14 @@ layout_mode = 2
 [node name="Detail" type="Label" parent="PaperHost/Paper/Margin/VBox/ContentScroll/Content/DetailPanel/Margin/DetailScroll/DetailContent"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
-text = "三餐情况：吃了 3/3 餐\n今天选了：6 种食物卡\n餐盘线索：主食、蔬菜、水果都有出现"
+text = "选餐记录暂时不可用。"
 autowrap_mode = 3
 
 [node name="Basis" type="Label" parent="PaperHost/Paper/Margin/VBox/ContentScroll/Content/DetailPanel/Margin/DetailScroll/DetailContent"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.42, 0.36, 0.29, 1)
 theme_override_font_sizes/font_size = 15
-text = "规则小字：本局饮食信息参考《中国居民膳食指南（2022）》的一般原则；卡牌出现不代表现实摄入量足够，也不用于现实健康判断。"
+text = "成分与份量尚未核对，暂不作营养评价。"
 autowrap_mode = 3
 
 [node name="Spacer" type="Control" parent="PaperHost/Paper/Margin/VBox" unique_id=1017574170]

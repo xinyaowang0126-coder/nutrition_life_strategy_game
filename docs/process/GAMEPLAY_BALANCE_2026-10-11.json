@@ -1,0 +1,1010 @@
+{
+  "date": "2026-10-11",
+  "balance_version": "campus-balance-v2",
+  "scope": "Local gameplay rebalance; scripted diagnostics do not measure player success rates or educational outcomes.",
+  "tests": {
+    "total": 386,
+    "passed": 386,
+    "failed": 0,
+    "suite_count": 35
+  },
+  "verification_gates": 25,
+  "runs": 1530,
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    7,
+    13,
+    42,
+    73,
+    101,
+    211,
+    997,
+    20260905,
+    4,
+    5,
+    6,
+    8,
+    9,
+    10,
+    11,
+    12,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23
+  ],
+  "summaries": {
+    "120": [
+      {
+        "policy": "cafeteria_study_early",
+        "name": "食堂／连续复习／早睡",
+        "runs": 30,
+        "endings": {
+          "study_shortfall": 30
+        },
+        "energy": "22",
+        "stress": "95",
+        "study": "34–35",
+        "balance": "0–17",
+        "satiety": "62",
+        "skips": "0",
+        "target_days": {
+          "0": 30
+        }
+      },
+      {
+        "policy": "cafeteria_paced_early",
+        "name": "食堂／复习＋散步＋午睡／早睡",
+        "runs": 30,
+        "endings": {
+          "stable_endurance": 30
+        },
+        "energy": "87–93",
+        "stress": "0",
+        "study": "77",
+        "balance": "0–17",
+        "satiety": "62",
+        "skips": "0",
+        "target_days": {
+          "7": 30
+        }
+      },
+      {
+        "policy": "cafeteria_adaptive_early",
+        "name": "食堂／按状态调整／早睡",
+        "runs": 30,
+        "endings": {
+          "stable_endurance": 30
+        },
+        "energy": "100",
+        "stress": "0–7",
+        "study": "70–73",
+        "balance": "0–17",
+        "satiety": "62",
+        "skips": "0",
+        "target_days": {
+          "6": 30
+        }
+      },
+      {
+        "policy": "pantry_adaptive_early",
+        "name": "存粮优先／按状态调整／早睡",
+        "runs": 30,
+        "endings": {
+          "stable_endurance": 30
+        },
+        "energy": "100",
+        "stress": "0",
+        "study": "71",
+        "balance": "32–43",
+        "satiety": "62",
+        "skips": "0",
+        "target_days": {
+          "6": 30
+        }
+      },
+      {
+        "policy": "takeout_adaptive_early",
+        "name": "外卖优先，付不起时换来源／早睡",
+        "runs": 30,
+        "endings": {
+          "barely_survived": 30
+        },
+        "energy": "46–78",
+        "stress": "32–48",
+        "study": "70–73",
+        "balance": "0–1",
+        "satiety": "0–8",
+        "skips": "2–5",
+        "target_days": {
+          "6": 30
+        }
+      },
+      {
+        "policy": "convenience_adaptive_early",
+        "name": "便利店优先／按状态调整／早睡",
+        "runs": 30,
+        "endings": {
+          "stable_endurance": 24,
+          "barely_survived": 6
+        },
+        "energy": "51–100",
+        "stress": "0–59",
+        "study": "68–78",
+        "balance": "0–4",
+        "satiety": "0–62",
+        "skips": "0",
+        "target_days": {
+          "6": 27,
+          "7": 2,
+          "0": 1
+        }
+      },
+      {
+        "policy": "mixed_adaptive_early",
+        "name": "混合来源／按状态调整／早睡",
+        "runs": 30,
+        "endings": {
+          "stable_endurance": 30
+        },
+        "energy": "100",
+        "stress": "0",
+        "study": "71–74",
+        "balance": "5–32",
+        "satiety": "62",
+        "skips": "0",
+        "target_days": {
+          "6": 30
+        }
+      },
+      {
+        "policy": "restock_adaptive_early",
+        "name": "存粮一空就补货／早睡",
+        "runs": 30,
+        "endings": {
+          "barely_survived": 28,
+          "study_shortfall": 1,
+          "stable_endurance": 1
+        },
+        "energy": "51–69",
+        "stress": "30–56",
+        "study": "48–73",
+        "balance": "33–51",
+        "satiety": "38–62",
+        "skips": "0",
+        "target_days": {
+          "0": 29,
+          "7": 1
+        }
+      },
+      {
+        "policy": "restock_planned_early",
+        "name": "第2、4天补货／复习＋休息／早睡",
+        "runs": 30,
+        "endings": {
+          "stable_endurance": 30
+        },
+        "energy": "96–100",
+        "stress": "0",
+        "study": "77",
+        "balance": "38–47",
+        "satiety": "62",
+        "skips": "0",
+        "target_days": {
+          "7": 30
+        }
+      },
+      {
+        "policy": "mixed_paced_early",
+        "name": "混合来源／复习＋散步＋午睡／早睡",
+        "runs": 30,
+        "endings": {
+          "stable_endurance": 30
+        },
+        "energy": "100",
+        "stress": "0",
+        "study": "77",
+        "balance": "5–32",
+        "satiety": "56–62",
+        "skips": "0",
+        "target_days": {
+          "7": 30
+        }
+      },
+      {
+        "policy": "mixed_adaptive_phone",
+        "name": "混合来源／按状态调整／刷手机后睡",
+        "runs": 30,
+        "endings": {
+          "barely_survived": 27,
+          "stable_endurance": 3
+        },
+        "energy": "36–59",
+        "stress": "47–62",
+        "study": "64–73",
+        "balance": "0–26",
+        "satiety": "38–62",
+        "skips": "0–1",
+        "target_days": {
+          "0": 26,
+          "7": 4
+        }
+      },
+      {
+        "policy": "mixed_paced_phone",
+        "name": "混合来源／固定一次复习／刷手机后睡",
+        "runs": 30,
+        "endings": {
+          "barely_survived": 29,
+          "study_shortfall": 1
+        },
+        "energy": "18–19",
+        "stress": "34–53",
+        "study": "48–55",
+        "balance": "0–10",
+        "satiety": "36–62",
+        "skips": "0–1",
+        "target_days": {
+          "0": 30
+        }
+      },
+      {
+        "policy": "mixed_paced_late",
+        "name": "混合来源／固定一次复习／夜夜加练",
+        "runs": 30,
+        "endings": {
+          "barely_survived": 28,
+          "collapsed": 2
+        },
+        "energy": "12–13",
+        "stress": "95–100",
+        "study": "95–100",
+        "balance": "0–10",
+        "satiety": "24–62",
+        "skips": "0–1",
+        "target_days": {
+          "5": 30
+        }
+      },
+      {
+        "policy": "mixed_no_study",
+        "name": "只休息，不复习",
+        "runs": 30,
+        "endings": {
+          "study_shortfall": 30
+        },
+        "energy": "100",
+        "stress": "0",
+        "study": "0",
+        "balance": "5–32",
+        "satiety": "60–62",
+        "skips": "0",
+        "target_days": {
+          "0": 30
+        }
+      },
+      {
+        "policy": "mixed_no_recovery",
+        "name": "混合来源／连续复习／早睡",
+        "runs": 30,
+        "endings": {
+          "study_shortfall": 30
+        },
+        "energy": "22",
+        "stress": "95",
+        "study": "35",
+        "balance": "0–10",
+        "satiety": "28–62",
+        "skips": "0–1",
+        "target_days": {
+          "0": 30
+        }
+      },
+      {
+        "policy": "mixed_water_early",
+        "name": "混合来源／额外接水／按状态调整",
+        "runs": 30,
+        "endings": {
+          "stable_endurance": 30
+        },
+        "energy": "100",
+        "stress": "0",
+        "study": "71–74",
+        "balance": "5–32",
+        "satiety": "62",
+        "skips": "0",
+        "target_days": {
+          "6": 30
+        }
+      },
+      {
+        "policy": "skip_night_study",
+        "name": "三餐全跳过／只在晚上复习",
+        "runs": 30,
+        "endings": {
+          "collapsed": 30
+        },
+        "energy": "0",
+        "stress": "100",
+        "study": "20",
+        "balance": "120",
+        "satiety": "0",
+        "skips": "6",
+        "target_days": {
+          "0": 30
+        }
+      }
+    ],
+    "150": [
+      {
+        "policy": "cafeteria_study_early",
+        "name": "食堂／连续复习／早睡",
+        "runs": 30,
+        "endings": {
+          "study_shortfall": 30
+        },
+        "energy": "22",
+        "stress": "95",
+        "study": "34–35",
+        "balance": "30–47",
+        "satiety": "62",
+        "skips": "0",
+        "target_days": {
+          "0": 30
+        }
+      },
+      {
+        "policy": "cafeteria_paced_early",
+        "name": "食堂／复习＋散步＋午睡／早睡",
+        "runs": 30,
+        "endings": {
+          "stable_endurance": 30
+        },
+        "energy": "87–93",
+        "stress": "0",
+        "study": "77",
+        "balance": "30–47",
+        "satiety": "62",
+        "skips": "0",
+        "target_days": {
+          "7": 30
+        }
+      },
+      {
+        "policy": "cafeteria_adaptive_early",
+        "name": "食堂／按状态调整／早睡",
+        "runs": 30,
+        "endings": {
+          "stable_endurance": 30
+        },
+        "energy": "100",
+        "stress": "0–7",
+        "study": "70–73",
+        "balance": "30–47",
+        "satiety": "62",
+        "skips": "0",
+        "target_days": {
+          "6": 30
+        }
+      },
+      {
+        "policy": "pantry_adaptive_early",
+        "name": "存粮优先／按状态调整／早睡",
+        "runs": 30,
+        "endings": {
+          "stable_endurance": 30
+        },
+        "energy": "100",
+        "stress": "0",
+        "study": "71",
+        "balance": "62–73",
+        "satiety": "62",
+        "skips": "0",
+        "target_days": {
+          "6": 30
+        }
+      },
+      {
+        "policy": "takeout_adaptive_early",
+        "name": "外卖优先，付不起时换来源／早睡",
+        "runs": 30,
+        "endings": {
+          "stable_endurance": 27,
+          "barely_survived": 3
+        },
+        "energy": "100",
+        "stress": "11–29",
+        "study": "71",
+        "balance": "0–1",
+        "satiety": "0–62",
+        "skips": "0–2",
+        "target_days": {
+          "6": 30
+        }
+      },
+      {
+        "policy": "convenience_adaptive_early",
+        "name": "便利店优先／按状态调整／早睡",
+        "runs": 30,
+        "endings": {
+          "stable_endurance": 24,
+          "barely_survived": 6
+        },
+        "energy": "48–100",
+        "stress": "0–42",
+        "study": "70–78",
+        "balance": "3–34",
+        "satiety": "0–62",
+        "skips": "0",
+        "target_days": {
+          "6": 28,
+          "7": 2
+        }
+      },
+      {
+        "policy": "mixed_adaptive_early",
+        "name": "混合来源／按状态调整／早睡",
+        "runs": 30,
+        "endings": {
+          "stable_endurance": 30
+        },
+        "energy": "100",
+        "stress": "0",
+        "study": "71–74",
+        "balance": "26–58",
+        "satiety": "50–62",
+        "skips": "0",
+        "target_days": {
+          "6": 30
+        }
+      },
+      {
+        "policy": "restock_adaptive_early",
+        "name": "存粮一空就补货／早睡",
+        "runs": 30,
+        "endings": {
+          "barely_survived": 28,
+          "study_shortfall": 1,
+          "stable_endurance": 1
+        },
+        "energy": "51–69",
+        "stress": "30–56",
+        "study": "48–73",
+        "balance": "63–81",
+        "satiety": "38–62",
+        "skips": "0",
+        "target_days": {
+          "0": 29,
+          "7": 1
+        }
+      },
+      {
+        "policy": "restock_planned_early",
+        "name": "第2、4天补货／复习＋休息／早睡",
+        "runs": 30,
+        "endings": {
+          "stable_endurance": 30
+        },
+        "energy": "96–100",
+        "stress": "0",
+        "study": "77",
+        "balance": "68–77",
+        "satiety": "62",
+        "skips": "0",
+        "target_days": {
+          "7": 30
+        }
+      },
+      {
+        "policy": "mixed_paced_early",
+        "name": "混合来源／复习＋散步＋午睡／早睡",
+        "runs": 30,
+        "endings": {
+          "stable_endurance": 30
+        },
+        "energy": "100",
+        "stress": "0",
+        "study": "77",
+        "balance": "35–62",
+        "satiety": "56–62",
+        "skips": "0",
+        "target_days": {
+          "7": 30
+        }
+      },
+      {
+        "policy": "mixed_adaptive_phone",
+        "name": "混合来源／按状态调整／刷手机后睡",
+        "runs": 30,
+        "endings": {
+          "stable_endurance": 2,
+          "barely_survived": 28
+        },
+        "energy": "36–59",
+        "stress": "51–62",
+        "study": "67–75",
+        "balance": "1–27",
+        "satiety": "48–62",
+        "skips": "0",
+        "target_days": {
+          "7": 7,
+          "0": 23
+        }
+      },
+      {
+        "policy": "mixed_paced_phone",
+        "name": "混合来源／固定一次复习／刷手机后睡",
+        "runs": 30,
+        "endings": {
+          "barely_survived": 30
+        },
+        "energy": "18–21",
+        "stress": "36–42",
+        "study": "55",
+        "balance": "0–11",
+        "satiety": "40–62",
+        "skips": "0",
+        "target_days": {
+          "0": 30
+        }
+      },
+      {
+        "policy": "mixed_paced_late",
+        "name": "混合来源／固定一次复习／夜夜加练",
+        "runs": 30,
+        "endings": {
+          "barely_survived": 27,
+          "collapsed": 3
+        },
+        "energy": "12–13",
+        "stress": "94–100",
+        "study": "98",
+        "balance": "0–10",
+        "satiety": "40–62",
+        "skips": "0–1",
+        "target_days": {
+          "5": 30
+        }
+      },
+      {
+        "policy": "mixed_no_study",
+        "name": "只休息，不复习",
+        "runs": 30,
+        "endings": {
+          "study_shortfall": 30
+        },
+        "energy": "100",
+        "stress": "0",
+        "study": "0",
+        "balance": "35–62",
+        "satiety": "60–62",
+        "skips": "0",
+        "target_days": {
+          "0": 30
+        }
+      },
+      {
+        "policy": "mixed_no_recovery",
+        "name": "混合来源／连续复习／早睡",
+        "runs": 30,
+        "endings": {
+          "study_shortfall": 30
+        },
+        "energy": "22",
+        "stress": "95",
+        "study": "35–37",
+        "balance": "0–8",
+        "satiety": "44–62",
+        "skips": "0",
+        "target_days": {
+          "0": 30
+        }
+      },
+      {
+        "policy": "mixed_water_early",
+        "name": "混合来源／额外接水／按状态调整",
+        "runs": 30,
+        "endings": {
+          "stable_endurance": 30
+        },
+        "energy": "100",
+        "stress": "0",
+        "study": "71–74",
+        "balance": "26–58",
+        "satiety": "50–62",
+        "skips": "0",
+        "target_days": {
+          "6": 30
+        }
+      },
+      {
+        "policy": "skip_night_study",
+        "name": "三餐全跳过／只在晚上复习",
+        "runs": 30,
+        "endings": {
+          "collapsed": 30
+        },
+        "energy": "0",
+        "stress": "100",
+        "study": "20",
+        "balance": "150",
+        "satiety": "0",
+        "skips": "6",
+        "target_days": {
+          "0": 30
+        }
+      }
+    ],
+    "180": [
+      {
+        "policy": "cafeteria_study_early",
+        "name": "食堂／连续复习／早睡",
+        "runs": 30,
+        "endings": {
+          "study_shortfall": 30
+        },
+        "energy": "22",
+        "stress": "95",
+        "study": "34–35",
+        "balance": "60–77",
+        "satiety": "62",
+        "skips": "0",
+        "target_days": {
+          "0": 30
+        }
+      },
+      {
+        "policy": "cafeteria_paced_early",
+        "name": "食堂／复习＋散步＋午睡／早睡",
+        "runs": 30,
+        "endings": {
+          "stable_endurance": 30
+        },
+        "energy": "87–93",
+        "stress": "0",
+        "study": "77",
+        "balance": "60–77",
+        "satiety": "62",
+        "skips": "0",
+        "target_days": {
+          "7": 30
+        }
+      },
+      {
+        "policy": "cafeteria_adaptive_early",
+        "name": "食堂／按状态调整／早睡",
+        "runs": 30,
+        "endings": {
+          "stable_endurance": 30
+        },
+        "energy": "100",
+        "stress": "0–7",
+        "study": "70–73",
+        "balance": "60–77",
+        "satiety": "62",
+        "skips": "0",
+        "target_days": {
+          "6": 30
+        }
+      },
+      {
+        "policy": "pantry_adaptive_early",
+        "name": "存粮优先／按状态调整／早睡",
+        "runs": 30,
+        "endings": {
+          "stable_endurance": 30
+        },
+        "energy": "100",
+        "stress": "0",
+        "study": "71",
+        "balance": "92–103",
+        "satiety": "62",
+        "skips": "0",
+        "target_days": {
+          "6": 30
+        }
+      },
+      {
+        "policy": "takeout_adaptive_early",
+        "name": "外卖优先，付不起时换来源／早睡",
+        "runs": 30,
+        "endings": {
+          "stable_endurance": 30
+        },
+        "energy": "100",
+        "stress": "4–11",
+        "study": "71",
+        "balance": "0–1",
+        "satiety": "60–62",
+        "skips": "0",
+        "target_days": {
+          "6": 30
+        }
+      },
+      {
+        "policy": "convenience_adaptive_early",
+        "name": "便利店优先／按状态调整／早睡",
+        "runs": 30,
+        "endings": {
+          "stable_endurance": 24,
+          "barely_survived": 6
+        },
+        "energy": "48–100",
+        "stress": "0–42",
+        "study": "70–78",
+        "balance": "33–64",
+        "satiety": "0–62",
+        "skips": "0",
+        "target_days": {
+          "6": 28,
+          "7": 2
+        }
+      },
+      {
+        "policy": "mixed_adaptive_early",
+        "name": "混合来源／按状态调整／早睡",
+        "runs": 30,
+        "endings": {
+          "stable_endurance": 30
+        },
+        "energy": "100",
+        "stress": "0",
+        "study": "71–74",
+        "balance": "56–88",
+        "satiety": "50–62",
+        "skips": "0",
+        "target_days": {
+          "6": 30
+        }
+      },
+      {
+        "policy": "restock_adaptive_early",
+        "name": "存粮一空就补货／早睡",
+        "runs": 30,
+        "endings": {
+          "barely_survived": 28,
+          "study_shortfall": 1,
+          "stable_endurance": 1
+        },
+        "energy": "51–69",
+        "stress": "30–56",
+        "study": "48–73",
+        "balance": "93–111",
+        "satiety": "38–62",
+        "skips": "0",
+        "target_days": {
+          "0": 29,
+          "7": 1
+        }
+      },
+      {
+        "policy": "restock_planned_early",
+        "name": "第2、4天补货／复习＋休息／早睡",
+        "runs": 30,
+        "endings": {
+          "stable_endurance": 30
+        },
+        "energy": "96–100",
+        "stress": "0",
+        "study": "77",
+        "balance": "98–107",
+        "satiety": "62",
+        "skips": "0",
+        "target_days": {
+          "7": 30
+        }
+      },
+      {
+        "policy": "mixed_paced_early",
+        "name": "混合来源／复习＋散步＋午睡／早睡",
+        "runs": 30,
+        "endings": {
+          "stable_endurance": 30
+        },
+        "energy": "100",
+        "stress": "0",
+        "study": "77",
+        "balance": "65–92",
+        "satiety": "56–62",
+        "skips": "0",
+        "target_days": {
+          "7": 30
+        }
+      },
+      {
+        "policy": "mixed_adaptive_phone",
+        "name": "混合来源／按状态调整／刷手机后睡",
+        "runs": 30,
+        "endings": {
+          "stable_endurance": 2,
+          "barely_survived": 28
+        },
+        "energy": "36–59",
+        "stress": "50–62",
+        "study": "67–75",
+        "balance": "10–57",
+        "satiety": "48–62",
+        "skips": "0",
+        "target_days": {
+          "7": 7,
+          "0": 23
+        }
+      },
+      {
+        "policy": "mixed_paced_phone",
+        "name": "混合来源／固定一次复习／刷手机后睡",
+        "runs": 30,
+        "endings": {
+          "barely_survived": 30
+        },
+        "energy": "19–25",
+        "stress": "38–42",
+        "study": "55",
+        "balance": "5–27",
+        "satiety": "46–62",
+        "skips": "0",
+        "target_days": {
+          "0": 30
+        }
+      },
+      {
+        "policy": "mixed_paced_late",
+        "name": "混合来源／固定一次复习／夜夜加练",
+        "runs": 30,
+        "endings": {
+          "barely_survived": 30
+        },
+        "energy": "12–14",
+        "stress": "96–100",
+        "study": "98",
+        "balance": "2–13",
+        "satiety": "60–62",
+        "skips": "0",
+        "target_days": {
+          "5": 30
+        }
+      },
+      {
+        "policy": "mixed_no_study",
+        "name": "只休息，不复习",
+        "runs": 30,
+        "endings": {
+          "study_shortfall": 30
+        },
+        "energy": "100",
+        "stress": "0",
+        "study": "0",
+        "balance": "65–92",
+        "satiety": "60–62",
+        "skips": "0",
+        "target_days": {
+          "0": 30
+        }
+      },
+      {
+        "policy": "mixed_no_recovery",
+        "name": "混合来源／连续复习／早睡",
+        "runs": 30,
+        "endings": {
+          "study_shortfall": 30
+        },
+        "energy": "22",
+        "stress": "95",
+        "study": "35–37",
+        "balance": "0–15",
+        "satiety": "36–62",
+        "skips": "0–1",
+        "target_days": {
+          "0": 30
+        }
+      },
+      {
+        "policy": "mixed_water_early",
+        "name": "混合来源／额外接水／按状态调整",
+        "runs": 30,
+        "endings": {
+          "stable_endurance": 30
+        },
+        "energy": "100",
+        "stress": "0",
+        "study": "71–74",
+        "balance": "56–88",
+        "satiety": "50–62",
+        "skips": "0",
+        "target_days": {
+          "6": 30
+        }
+      },
+      {
+        "policy": "skip_night_study",
+        "name": "三餐全跳过／只在晚上复习",
+        "runs": 30,
+        "endings": {
+          "collapsed": 30
+        },
+        "energy": "0",
+        "stress": "100",
+        "study": "20",
+        "balance": "180",
+        "satiety": "0",
+        "skips": "6",
+        "target_days": {
+          "0": 30
+        }
+      }
+    ]
+  },
+  "health_data_and_flags_unchanged": true,
+  "changed_existing_files": [
+    "docs/process/DEVELOPMENT_HANDOFF.md",
+    "docs/README.md",
+    "docs/ROADMAP.md",
+    "life-strategy/data/cards/actions.xml",
+    "life-strategy/data/cards/foods.xml",
+    "life-strategy/data/cards/meal_sources.xml",
+    "life-strategy/data/cards/sleep_options.xml",
+    "life-strategy/data/characters/default_food_preferences.xml",
+    "life-strategy/scripts/GameData.gd",
+    "life-strategy/scripts/GameRoot.gd",
+    "life-strategy/scripts/systems/MealResolver.gd",
+    "life-strategy/scripts/systems/RecoveryRules.gd",
+    "life-strategy/scripts/ui_v2/GameRootV2.gd",
+    "life-strategy/scripts/ui_v2/stages/ActionStage.gd",
+    "life-strategy/tests/test_food_preference_flow.gd",
+    "life-strategy/tests/test_food_preferences.gd",
+    "life-strategy/tests/test_g4_ledger.gd",
+    "life-strategy/tests/test_g4_sources.gd",
+    "life-strategy/tests/test_g4_suggestions.gd",
+    "life-strategy/tests/test_health_snapshot_flow.gd",
+    "life-strategy/tests/test_meal_systems.gd",
+    "life-strategy/tests/test_mvp_content.gd",
+    "life-strategy/tests/test_player_copy.gd",
+    "life-strategy/tests/test_recovery_flow.gd",
+    "life-strategy/tests/test_recovery_gameplay.gd",
+    "life-strategy/tests/test_recovery_presentation.gd",
+    "life-strategy/tests/test_recovery_retirement.gd",
+    "life-strategy/tests/test_recovery_rules.gd",
+    "life-strategy/tests/test_recovery_state.gd",
+    "life-strategy/tests/test_v2_flow.gd",
+    "README.md",
+    "tools/test_verification_gates.ps1",
+    "tools/verify_project.ps1"
+  ],
+  "new_runtime_files": [
+    "life-strategy/scripts/systems/GameplayBalanceRules.gd"
+  ],
+  "source_sha256": {
+    "docs/process/DEVELOPMENT_HANDOFF.md": "dc044a128a1d8a3bf18bb971d6631bcce56371c1551b743e0b545c1ec85ec786",
+    "docs/README.md": "2128ffbad5b2d8c987bce67aa2cddce83b39f707831a551bba7d14b7f82cd39b",
+    "docs/ROADMAP.md": "b510f4fb6fbfb15b1c43e770474475f603f23dc20d6d40f5a4773136092d78f1",
+    "life-strategy/data/cards/actions.xml": "38b60da3abaa98dfabc49a0eacc7e74cd8d910df68eb078427322a87aff7c632",
+    "life-strategy/data/cards/foods.xml": "4f086b792b7717efcbca96ac5cfea2d9310958957f3040e3c1afe64a335b12a8",
+    "life-strategy/data/cards/meal_sources.xml": "7c7279eaa7caabe1eab1f3b7934180a4d90980bd7bf1767053984799d193b76c",
+    "life-strategy/data/cards/sleep_options.xml": "c2f99258d3d7b3c1cc54ce7d9b058f12ba925aa6e6678f163c63830ddc69fef9",
+    "life-strategy/data/characters/default_food_preferences.xml": "c07d3ed20828fc07dcffcc4a0374950ad78cb2768902e3f537cc7bb11fbc182b",
+    "life-strategy/scripts/GameData.gd": "2448edabc9fa6aeae0f52584e7c1070fe62eee27b9048dfdc10c064977033307",
+    "life-strategy/scripts/GameRoot.gd": "2e0b4ce6b595c635c5d8c45d392817fda28bb6888226d12500216a14f2b3b117",
+    "life-strategy/scripts/systems/MealResolver.gd": "22f19a5608eb3f21b7f480081e12af41935603fd83a3340ce644ae89b034dc80",
+    "life-strategy/scripts/systems/RecoveryRules.gd": "a7072926557f3533913254f1673ed08678436003781fbdfc1130fcbb75993689",
+    "life-strategy/scripts/ui_v2/GameRootV2.gd": "76ed6af1a7b7317f5773e88c30887bb21954a55c258e3304ba68f9cc87153260",
+    "life-strategy/scripts/ui_v2/stages/ActionStage.gd": "f43da66d3c1343c4892cedce567d08953d7a71ee739614882f3a548859255eb4",
+    "README.md": "d58d8fc4d204b93a015f7de9b24ef7ba7a3395b0e69d963da9c2c3f96fc7dfb0",
+    "tools/test_verification_gates.ps1": "6c608c88865ef0ff8c25b5eb23f280f5980ad94b8dcd87788974877e698ed31e",
+    "tools/verify_project.ps1": "dafc93bb560b3b63cfe8596cd73e99e2328691aa6978b7d7c6414bf4b300d3a6"
+  },
+  "web": {
+    "directory": "artifacts/balance-2026-10-11/web",
+    "boot_verified": true,
+    "scope": "Local browser main menu boot, not a complete seven-day browser or device study."
+  },
+  "published": false
+}

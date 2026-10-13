@@ -1,0 +1,81 @@
+{
+	"errors": [],
+	"images": [
+		"E:/nutrition_life_strategy_game/docs/assets/nut208c3-2026-10-08/803x1280-first-day.png",
+		"E:/nutrition_life_strategy_game/docs/assets/nut208c3-2026-10-08/803x1280-night-sources.png",
+		"E:/nutrition_life_strategy_game/docs/assets/nut208c3-2026-10-08/803x1280-pantry-top.png",
+		"E:/nutrition_life_strategy_game/docs/assets/nut208c3-2026-10-08/803x1280-pantry-bottom.png",
+		"E:/nutrition_life_strategy_game/docs/assets/nut208c3-2026-10-08/803x1280-sleep-preview.png"
+	],
+	"physical_window_size": [
+		720,
+		1280
+	],
+	"rows": [
+		{
+			"canvas_size": [
+				803,
+				1280
+			],
+			"day": 1,
+			"note_rect": "[P: (346.97, 785.92), S: (428.45, 145.0)]",
+			"tomorrow": "天气放晴 · 明天天气放晴，散步会比平时更解压。"
+		},
+		{
+			"canvas_size": [
+				803,
+				1280
+			],
+			"day": 2,
+			"note_rect": "[P: (346.97, 785.92), S: (428.45, 145.0)]",
+			"tomorrow": "食堂换菜单 · 明天食堂换菜单，可看到的菜会更多。"
+		},
+		{
+			"canvas_size": [
+				803,
+				1280
+			],
+			"day": 3,
+			"note_rect": "[P: (346.97, 785.92), S: (428.45, 181.0)]",
+			"tomorrow": "外卖优惠券 · 明天有一张外卖券，配送费会降低，菜单也会多一项。"
+		},
+		{
+			"canvas_size": [
+				803,
+				1280
+			],
+			"day": 4,
+			"note_rect": "[P: (346.97, 785.92), S: (428.45, 181.0)]",
+			"tomorrow": "小测提醒 · 明天会公布小测范围：复习收益提高，但会更累、更紧张。"
+		},
+		{
+			"canvas_size": [
+				803,
+				1280
+			],
+			"day": 5,
+			"note_rect": "[P: (346.97, 785.92), S: (428.45, 181.0)]",
+			"tomorrow": "下了一整天雨 · 明天有雨：外卖配送费上涨，散步的恢复效果也会变弱。"
+		},
+		{
+			"canvas_size": [
+				803,
+				1280
+			],
+			"day": 6,
+			"note_rect": "[P: (346.97, 785.92), S: (428.45, 145.0)]",
+			"tomorrow": "照常安排 · 明天没有额外变化，按自己的节奏来。"
+		},
+		{
+			"canvas_size": [
+				803,
+				1280
+			],
+			"day": 7,
+			"note_rect": "[P: (346.97, 785.92), S: (428.45, 134.54)]",
+			"tomorrow": "周末就要到了"
+		}
+	],
+	"scope": "Rendered SubViewports; health output off, no history writes, not physical-device verification",
+	"valid": true
+}

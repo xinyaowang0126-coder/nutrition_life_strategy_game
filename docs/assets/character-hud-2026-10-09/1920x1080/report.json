@@ -1,0 +1,26 @@
+{
+	"cases": [
+		{
+			"board": "[P: (268.0, 800.0), S: (480.0, 190.0)]",
+			"details": "[P: (688.0, 823.0), S: (50.0, 48.0)]",
+			"profile": "desktop",
+			"state": "normal"
+		},
+		{
+			"board": "[P: (268.0, 800.0), S: (480.0, 190.0)]",
+			"details": "[P: (688.0, 823.0), S: (50.0, 48.0)]",
+			"profile": "desktop",
+			"state": "warning"
+		},
+		{
+			"board": "[P: (268.0, 800.0), S: (480.0, 190.0)]",
+			"details": "[P: (688.0, 823.0), S: (50.0, 48.0)]",
+			"profile": "desktop",
+			"state": "completed"
+		}
+	],
+	"errors": [],
+	"physical_size": "(1920, 1080)",
+	"scope": "Native Windows rendering and mouse input, not physical-device testing.",
+	"valid": true
+}

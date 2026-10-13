@@ -1,0 +1,112 @@
+{
+  "schema": "edu02.review-packet.v1",
+  "snapshot_date": "2026-10-08",
+  "model_version": "diet-pattern-v2.0",
+  "status": "review_packet_prepared_expert_review_pending",
+  "professional_reviewer": null,
+  "approved_for_player_output": false,
+  "profile_source": "life-strategy/data/health/food_health_profiles.xml",
+  "profile_source_sha256": "E4EF1E7424DED285613FA5864B09896B2DD63028BA511D55ABCD512ACCADF083",
+  "evidence_source": "life-strategy/data/health/evidence_registry.xml",
+  "evidence_source_sha256": "05BD2DB0A23D307FE85216F50B8A07E43862707393A4642A55C1D4499888C18A",
+  "card_source": "life-strategy/data/cards/foods.xml",
+  "card_source_sha256": "A706DAEFC14587C7218115654DBE148916CFB87428C20EBAD10A6F3DC134F9C3",
+  "entries": [
+    {
+      "food_id": "rice_plain",
+      "name": "白米饭",
+      "profile_version": "2",
+      "basis_type": "generic_category",
+      "composition_status": "estimated",
+      "portion_status": "unknown",
+      "review_status": "draft",
+      "approved_for_player_output": false,
+      "source_profile_xml": "<profile food_id=\"rice_plain\" profile_version=\"2\" display_basis=\"游戏卡牌中的一份白米饭（实际份量待确认）\" portion_status=\"unknown\" portion_band=\"unknown\" basis_type=\"generic_category\" composition_status=\"estimated\" confidence=\"low\" review_status=\"draft\" evidence_refs=\"CDG-2022-DIVERSITY,PRODUCT-RECIPE-PENDING\" caffeine_status=\"unknown\" caffeine_band=\"unknown\" serving_time_relevance=\"unknown\"><component ingredient_id=\"cooked_white_rice\" name=\"未明确份量的熟白米饭\" food_group=\"grains_tubers\" contribution_band=\"dominant\" basis_type=\"generic_category\" confidence=\"low\" /><method id=\"unknown\" /></profile>",
+      "source_card_xml": "<food id=\"rice_plain\" name=\"白米饭\" kind=\"谷薯类\" cost=\"2\" satiety=\"16\" energy=\"4\" image=\"res://assets/generated/cards/rice_plain.png\" scenes=\"meal,breakfast,lunch,dinner\" sources=\"cafeteria\" food_groups=\"grains_tubers\" nutrient_tags=\"carbohydrate_source\" tags=\"staple,cheap,plain\"><desc>窗口刚盛出来，还冒着热气。</desc></food>"
+    },
+    {
+      "food_id": "egg",
+      "name": "鸡蛋",
+      "profile_version": "2",
+      "basis_type": "generic_category",
+      "composition_status": "estimated",
+      "portion_status": "unknown",
+      "review_status": "draft",
+      "approved_for_player_output": false,
+      "source_profile_xml": "<profile food_id=\"egg\" profile_version=\"2\" display_basis=\"游戏卡牌中的一份鸡蛋（个数和做法待确认）\" portion_status=\"unknown\" portion_band=\"unknown\" basis_type=\"generic_category\" composition_status=\"estimated\" confidence=\"low\" review_status=\"draft\" evidence_refs=\"CDG-2022-DIVERSITY,PRODUCT-RECIPE-PENDING\" caffeine_status=\"unknown\" caffeine_band=\"unknown\" serving_time_relevance=\"unknown\"><component ingredient_id=\"chicken_egg\" name=\"未明确个数和做法的鸡蛋\" food_group=\"eggs\" contribution_band=\"dominant\" basis_type=\"generic_category\" confidence=\"low\" /><method id=\"unknown\" /></profile>",
+      "source_card_xml": "<food id=\"egg\" name=\"鸡蛋\" kind=\"蛋类\" cost=\"2\" satiety=\"10\" energy=\"5\" image=\"res://assets/generated/cards/egg.png\" scenes=\"meal,breakfast,lunch,dinner\" sources=\"cafeteria\" food_groups=\"eggs\" nutrient_tags=\"high_quality_protein_source\" tags=\"protein,cheap\"><desc>先放到餐盘边上。</desc></food>"
+    },
+    {
+      "food_id": "tomato_egg_stir_fry",
+      "name": "西红柿炒鸡蛋",
+      "profile_version": "1",
+      "basis_type": "menu_recipe",
+      "composition_status": "known",
+      "portion_status": "known",
+      "review_status": "draft",
+      "approved_for_player_output": false,
+      "source_profile_xml": "<profile food_id=\"tomato_egg_stir_fry\" profile_version=\"1\" display_basis=\"游戏内固定配方：西红柿炒鸡蛋 240 g\" portion_status=\"known\" portion_value=\"240\" portion_unit=\"g\" portion_band=\"medium\" basis_type=\"menu_recipe\" composition_status=\"known\" confidence=\"high\" review_status=\"draft\" evidence_refs=\"GAME-SPEC-204C-V1,CDG-2022-DIVERSITY,CDG-2022-03\" caffeine_status=\"not_applicable\" caffeine_band=\"none\" serving_time_relevance=\"none\"><component ingredient_id=\"tomato\" name=\"番茄\" food_group=\"vegetables\" contribution_band=\"dominant\" amount_value=\"130\" amount_unit=\"g\" basis_type=\"menu_recipe\" confidence=\"high\" /><component ingredient_id=\"chicken_egg\" name=\"鸡蛋\" food_group=\"eggs\" contribution_band=\"material\" amount_value=\"90\" amount_unit=\"g\" basis_type=\"menu_recipe\" confidence=\"high\" /><component ingredient_id=\"stir_fry_oil\" name=\"炒制用油\" food_group=\"other\" contribution_band=\"small\" amount_value=\"10\" amount_unit=\"g\" basis_type=\"menu_recipe\" confidence=\"high\" /><component ingredient_id=\"tomato_egg_seasoning\" name=\"调味料\" food_group=\"other\" contribution_band=\"trace\" amount_value=\"10\" amount_unit=\"g\" basis_type=\"menu_recipe\" confidence=\"high\" /><method id=\"stir_fried\" /><factor factor_id=\"sodium\" band=\"unknown\" basis_type=\"menu_recipe\" confidence=\"high\" evidence_refs=\"GAME-SPEC-204C-V1,CDG-2022-05\" /></profile>",
+      "source_card_xml": "<food id=\"tomato_egg_stir_fry\" name=\"西红柿炒鸡蛋\" kind=\"复合菜品\" cost=\"7\" satiety=\"14\" energy=\"5\" image=\"res://assets/generated/cards/tomato_egg_stir_fry.png\" scenes=\"meal,lunch,dinner\" sources=\"cafeteria\" food_groups=\"vegetables,eggs\" nutrient_tags=\"dietary_fiber_source,high_quality_protein_source\" tags=\"vegetable,protein,home_style\"><desc>酸甜的汤汁裹着鸡蛋，食堂窗口刚盛出一勺。</desc></food>"
+    },
+    {
+      "food_id": "chicken_vegetable_rice",
+      "name": "鸡肉时蔬饭",
+      "profile_version": "1",
+      "basis_type": "menu_recipe",
+      "composition_status": "known",
+      "portion_status": "known",
+      "review_status": "draft",
+      "approved_for_player_output": false,
+      "source_profile_xml": "<profile food_id=\"chicken_vegetable_rice\" profile_version=\"1\" display_basis=\"游戏内固定配方：鸡肉时蔬饭盒 480 g\" portion_status=\"known\" portion_value=\"480\" portion_unit=\"g\" portion_band=\"large\" basis_type=\"menu_recipe\" composition_status=\"known\" confidence=\"high\" review_status=\"draft\" evidence_refs=\"GAME-SPEC-204C-V1,CDG-2022-DIVERSITY,CDG-2022-03\" caffeine_status=\"not_applicable\" caffeine_band=\"none\" serving_time_relevance=\"none\"><component ingredient_id=\"cooked_white_rice\" name=\"熟白米饭\" food_group=\"grains_tubers\" contribution_band=\"dominant\" amount_value=\"200\" amount_unit=\"g\" basis_type=\"menu_recipe\" confidence=\"high\" /><component ingredient_id=\"chicken_meat\" name=\"熟鸡肉\" food_group=\"poultry_livestock\" contribution_band=\"material\" amount_value=\"100\" amount_unit=\"g\" basis_type=\"menu_recipe\" confidence=\"high\" /><component ingredient_id=\"broccoli\" name=\"西兰花\" food_group=\"vegetables\" contribution_band=\"material\" amount_value=\"70\" amount_unit=\"g\" basis_type=\"menu_recipe\" confidence=\"high\" /><component ingredient_id=\"carrot\" name=\"胡萝卜\" food_group=\"vegetables\" contribution_band=\"small\" amount_value=\"30\" amount_unit=\"g\" basis_type=\"menu_recipe\" confidence=\"high\" /><component ingredient_id=\"bok_choy\" name=\"小青菜\" food_group=\"vegetables\" contribution_band=\"small\" amount_value=\"50\" amount_unit=\"g\" basis_type=\"menu_recipe\" confidence=\"high\" /><component ingredient_id=\"chicken_rice_sauce\" name=\"鸡肉饭调味酱汁\" food_group=\"other\" contribution_band=\"small\" amount_value=\"20\" amount_unit=\"g\" basis_type=\"menu_recipe\" confidence=\"high\" /><component ingredient_id=\"stir_fry_oil\" name=\"烹调用油\" food_group=\"other\" contribution_band=\"small\" amount_value=\"10\" amount_unit=\"g\" basis_type=\"menu_recipe\" confidence=\"high\" /><method id=\"mixed\" /><factor factor_id=\"sodium\" band=\"unknown\" basis_type=\"menu_recipe\" confidence=\"high\" evidence_refs=\"GAME-SPEC-204C-V1,CDG-2022-05\" /></profile>",
+      "source_card_xml": "<food id=\"chicken_vegetable_rice\" name=\"鸡肉时蔬饭\" kind=\"复合主食\" cost=\"22\" satiety=\"28\" energy=\"9\" image=\"res://assets/generated/cards/chicken_vegetable_rice.png\" scenes=\"meal,lunch,dinner\" sources=\"takeout\" food_groups=\"grains_tubers,vegetables,poultry_livestock\" nutrient_tags=\"carbohydrate_source,dietary_fiber_source,high_quality_protein_source\" tags=\"staple,vegetable,protein,takeout\"><desc>米饭、鸡肉和时蔬装在同一只餐盒里。</desc></food>"
+    },
+    {
+      "food_id": "apple",
+      "name": "苹果",
+      "profile_version": "1",
+      "basis_type": "generic_category",
+      "composition_status": "estimated",
+      "portion_status": "unknown",
+      "review_status": "draft",
+      "approved_for_player_output": false,
+      "source_profile_xml": "<profile food_id=\"apple\" profile_version=\"1\" display_basis=\"游戏卡牌中的一份苹果（完整或切片、可食部分和份量待确认）\" portion_status=\"unknown\" portion_band=\"unknown\" basis_type=\"generic_category\" composition_status=\"estimated\" confidence=\"low\" review_status=\"draft\" evidence_refs=\"CDG-2022-DIVERSITY,CDG-2022-03,PRODUCT-RECIPE-PENDING\" caffeine_status=\"unknown\" caffeine_band=\"unknown\" serving_time_relevance=\"unknown\"><component ingredient_id=\"apple\" name=\"未明确可食部分和份量的苹果\" food_group=\"fruits\" contribution_band=\"dominant\" basis_type=\"generic_category\" confidence=\"low\" /><method id=\"unknown\" /></profile>",
+      "source_card_xml": "<food id=\"apple\" name=\"苹果\" kind=\"水果类\" cost=\"3\" satiety=\"6\" energy=\"3\" dorm_stock=\"1\" image=\"res://assets/generated/cards/apple.png\" scenes=\"meal,breakfast,lunch,dinner\" sources=\"convenience_store,dorm_storage\" food_groups=\"fruits\" nutrient_tags=\"dietary_fiber_source\" tags=\"fruit,fiber\"><desc>洗一洗，连皮啃。</desc></food>"
+    },
+    {
+      "food_id": "plain_yogurt",
+      "name": "原味酸奶",
+      "profile_version": "1",
+      "basis_type": "package_label",
+      "composition_status": "known",
+      "portion_status": "known",
+      "review_status": "draft",
+      "approved_for_player_output": false,
+      "source_profile_xml": "<profile food_id=\"plain_yogurt\" profile_version=\"1\" display_basis=\"游戏内模拟标签：一杯微甜原味酸奶 180 g（发酵乳基底 172 g、添加糖 8 g）\" portion_status=\"known\" portion_value=\"180\" portion_unit=\"g\" portion_band=\"medium\" basis_type=\"package_label\" composition_status=\"known\" confidence=\"high\" review_status=\"draft\" evidence_refs=\"GAME-SPEC-204D-V1,CDG-2022-DIVERSITY,CDG-2022-03\" caffeine_status=\"not_applicable\" caffeine_band=\"none\" serving_time_relevance=\"none\"><component ingredient_id=\"simulated_plain_yogurt_base\" name=\"游戏内固定发酵乳基底\" food_group=\"dairy\" contribution_band=\"dominant\" amount_value=\"172\" amount_unit=\"g\" basis_type=\"package_label\" confidence=\"high\" /><component ingredient_id=\"simulated_added_sugar\" name=\"游戏内固定添加糖\" food_group=\"other\" contribution_band=\"small\" amount_value=\"8\" amount_unit=\"g\" basis_type=\"package_label\" confidence=\"high\" /><method id=\"not_applicable\" /><factor factor_id=\"added_sugar\" band=\"unknown\" basis_type=\"package_label\" confidence=\"high\" evidence_refs=\"GAME-SPEC-204D-V1,CDG-2022-05\" /></profile>",
+      "source_card_xml": "<food id=\"plain_yogurt\" name=\"原味酸奶\" kind=\"奶及奶制品\" cost=\"6\" satiety=\"7\" energy=\"4\" dorm_stock=\"1\" image=\"res://assets/generated/cards/plain_yogurt.png\" scenes=\"meal,breakfast,lunch,dinner\" sources=\"convenience_store,dorm_storage\" food_groups=\"dairy\" nutrient_tags=\"high_quality_protein_source,calcium_source\" tags=\"protein,dairy,drink\"><desc>撕开杯盖就能吃，原味里带一点甜。</desc></food>"
+    },
+    {
+      "food_id": "whole_wheat_bread",
+      "name": "全麦面包",
+      "profile_version": "1",
+      "basis_type": "package_label",
+      "composition_status": "known",
+      "portion_status": "known",
+      "review_status": "draft",
+      "approved_for_player_output": false,
+      "source_profile_xml": "<profile food_id=\"whole_wheat_bread\" profile_version=\"1\" display_basis=\"游戏内模拟标签：两片全麦面包 70 g（谷物原料只使用全麦粉）\" portion_status=\"known\" portion_value=\"70\" portion_unit=\"g\" portion_band=\"small\" basis_type=\"package_label\" composition_status=\"known\" confidence=\"high\" review_status=\"draft\" evidence_refs=\"GAME-SPEC-204D-V1,CDG-2022-DIVERSITY,CDG-2022-03\" caffeine_status=\"not_applicable\" caffeine_band=\"none\" serving_time_relevance=\"none\"><component ingredient_id=\"simulated_whole_wheat_bread\" name=\"游戏内固定全麦面包\" food_group=\"grains_tubers\" contribution_band=\"dominant\" amount_value=\"70\" amount_unit=\"g\" basis_type=\"package_label\" confidence=\"high\" /><method id=\"baked\" /><factor factor_id=\"added_sugar\" band=\"unknown\" basis_type=\"package_label\" confidence=\"high\" evidence_refs=\"GAME-SPEC-204D-V1,CDG-2022-05\" /><factor factor_id=\"sodium\" band=\"unknown\" basis_type=\"package_label\" confidence=\"high\" evidence_refs=\"GAME-SPEC-204D-V1,CDG-2022-05\" /></profile>",
+      "source_card_xml": "<food id=\"whole_wheat_bread\" name=\"全麦面包\" kind=\"面包\" cost=\"5\" satiety=\"14\" energy=\"6\" dorm_stock=\"2\" image=\"res://assets/generated/cards/whole_wheat_bread.png\" scenes=\"meal,breakfast,lunch,dinner\" sources=\"convenience_store,dorm_storage\" food_groups=\"grains_tubers\" nutrient_tags=\"carbohydrate_source,whole_grain,dietary_fiber_source\" tags=\"staple,whole_grain,fiber,convenient\"><desc>两片装，赶时间时可以直接带走。</desc></food>"
+    },
+    {
+      "food_id": "bubble_tea",
+      "name": "奶茶",
+      "profile_version": "1",
+      "basis_type": "menu_recipe",
+      "composition_status": "known",
+      "portion_status": "known",
+      "review_status": "draft",
+      "approved_for_player_output": false,
+      "source_profile_xml": "<profile food_id=\"bubble_tea\" profile_version=\"1\" display_basis=\"游戏内固定配方：半糖珍珠奶茶 500 ml\" portion_status=\"known\" portion_value=\"500\" portion_unit=\"ml\" portion_band=\"large\" basis_type=\"menu_recipe\" composition_status=\"known\" confidence=\"high\" review_status=\"draft\" evidence_refs=\"GAME-SPEC-204B-V1\" caffeine_status=\"known\" caffeine_mg=\"50\" caffeine_band=\"unknown\" serving_time_relevance=\"unknown\"><component ingredient_id=\"simulated_brewed_tea_base\" name=\"游戏内固定茶底\" food_group=\"beverages\" contribution_band=\"dominant\" amount_value=\"340\" amount_unit=\"ml\" basis_type=\"menu_recipe\" confidence=\"high\" /><component ingredient_id=\"simulated_whole_milk\" name=\"游戏内固定牛奶\" food_group=\"dairy\" contribution_band=\"small\" amount_value=\"100\" amount_unit=\"ml\" basis_type=\"menu_recipe\" confidence=\"high\" /><component ingredient_id=\"simulated_tapioca_pearls\" name=\"游戏内固定珍珠\" food_group=\"other\" contribution_band=\"small\" amount_value=\"60\" amount_unit=\"g\" basis_type=\"menu_recipe\" confidence=\"high\" /><component ingredient_id=\"simulated_added_sugar\" name=\"游戏内固定添加糖\" food_group=\"other\" contribution_band=\"small\" amount_value=\"30\" amount_unit=\"g\" basis_type=\"menu_recipe\" confidence=\"high\" /><method id=\"mixed\" /><factor factor_id=\"added_sugar\" band=\"high\" basis_type=\"menu_recipe\" confidence=\"high\" evidence_refs=\"GAME-SPEC-204B-V1,CDG-2022-05\" /><factor factor_id=\"caffeine\" band=\"unknown\" basis_type=\"menu_recipe\" confidence=\"high\" evidence_refs=\"GAME-SPEC-204B-V1\" /></profile>",
+      "source_card_xml": "<food id=\"bubble_tea\" name=\"奶茶\" kind=\"饮品\" cost=\"15\" satiety=\"4\" energy=\"4\" image=\"res://assets/generated/cards/bubble_tea.png\" scenes=\"meal,lunch,dinner\" sources=\"takeout,convenience_store\" food_groups=\"beverages\" limit_tags=\"added_sugar\" tags=\"drink,snack,high_sugar\"><desc>备注了半糖，喝着还是甜。</desc></food>"
+    }
+  ]
+}

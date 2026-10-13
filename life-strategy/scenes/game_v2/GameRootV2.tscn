@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bq7d41g0mn03c"]
 
 [ext_resource type="Theme" uid="uid://dthxodrk6slpq" path="res://scenes/game_v2/V2Theme.tres" id="1_h6bss"]
-[ext_resource type="Texture2D" uid="uid://dbshyue1ehyvx" path="res://assets/generated/backgrounds/dorm_background.png" id="2_qokeg"]
+[ext_resource type="Texture2D" path="res://assets/generated/ui_v3/backgrounds/campus_map.png" id="2_qokeg"]
 [ext_resource type="Script" uid="uid://dhmfwqcpyw68a" path="res://scripts/ui_v2/GameRootV2.gd" id="2_vkrue"]
 [ext_resource type="PackedScene" uid="uid://dvqv5q3midb81" path="res://scenes/game_v2/components/CharacterHUD.tscn" id="3_vkrue"]
 [ext_resource type="PackedScene" uid="uid://blrnkwlhh2ct2" path="res://scenes/game_v2/components/ToastFeedV2.tscn" id="4_4rjd0"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bi8i7mbk8bsla" path="res://scenes/game_v2/components/StickyNotePopup.tscn" id="5_s3rtf"]
 [ext_resource type="PackedScene" uid="uid://cobi5u3x8l5q1" path="res://scenes/game_v2/components/DailySummaryPopup.tscn" id="6_1k0vw"]
 [ext_resource type="PackedScene" path="res://scenes/game_v2/components/NewDayPopup.tscn" id="7_new_day"]
+[ext_resource type="Script" path="res://scripts/ui_v2/WeekRibbon.gd" id="8_week"]
 
 [node name="GameRootV2" type="Control" unique_id=940067868]
 layout_mode = 3
@@ -80,6 +81,7 @@ size_flags_vertical = 3
 [node name="HUD" type="CanvasLayer" parent="." unique_id=4321493]
 
 [node name="HUDRoot" type="Control" parent="HUD" unique_id=981326613]
+theme = ExtResource("1_h6bss")
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -115,10 +117,12 @@ text = "第 1 天 / 第 7 天"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TopSpacer" type="Control" parent="HUD/HUDRoot/TopSafeArea/TopHUD" unique_id=221649562]
+[node name="TopSpacer" type="HBoxContainer" parent="HUD/HUDRoot/TopSafeArea/TopHUD" unique_id=221649562]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
+alignment = 1
+script = ExtResource("8_week")
 
 [node name="PhaseTag" type="PanelContainer" parent="HUD/HUDRoot/TopSafeArea/TopHUD" unique_id=1852102882]
 custom_minimum_size = Vector2(190, 54)

@@ -1,0 +1,275 @@
+{
+	"cases": [
+		{
+			"canvas": [
+				720,
+				1280
+			],
+			"font_percent": 100,
+			"valid": true
+		},
+		{
+			"canvas": [
+				720,
+				1280
+			],
+			"font_percent": 130,
+			"valid": true
+		},
+		{
+			"canvas": [
+				780,
+				1280
+			],
+			"font_percent": 100,
+			"valid": true
+		},
+		{
+			"canvas": [
+				780,
+				1280
+			],
+			"font_percent": 130,
+			"valid": true
+		},
+		{
+			"canvas": [
+				1920,
+				1080
+			],
+			"font_percent": 100,
+			"valid": true
+		},
+		{
+			"canvas": [
+				1920,
+				1080
+			],
+			"font_percent": 130,
+			"valid": true
+		}
+	],
+	"errors": [],
+	"images": [
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/720x1280-100-new-run.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/720x1280-100-rested-new-day.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/720x1280-100-steady-new-day.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/720x1280-100-strained-new-day.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/720x1280-100-depleted-new-day.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/720x1280-100-hud-detail.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/720x1280-100-unknown-history.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/720x1280-100-day-summary.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/720x1280-100-summary-detail.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/720x1280-100-ending.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/720x1280-130-new-run.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/720x1280-130-rested-new-day.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/720x1280-130-steady-new-day.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/720x1280-130-strained-new-day.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/720x1280-130-depleted-new-day.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/720x1280-130-hud-detail.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/720x1280-130-unknown-history.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/720x1280-130-day-summary.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/720x1280-130-summary-detail.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/720x1280-130-ending.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/780x1280-100-new-run.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/780x1280-100-rested-new-day.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/780x1280-100-steady-new-day.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/780x1280-100-strained-new-day.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/780x1280-100-depleted-new-day.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/780x1280-100-hud-detail.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/780x1280-100-unknown-history.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/780x1280-100-day-summary.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/780x1280-100-summary-detail.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/780x1280-100-ending.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/780x1280-130-new-run.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/780x1280-130-rested-new-day.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/780x1280-130-steady-new-day.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/780x1280-130-strained-new-day.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/780x1280-130-depleted-new-day.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/780x1280-130-hud-detail.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/780x1280-130-unknown-history.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/780x1280-130-day-summary.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/780x1280-130-summary-detail.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/780x1280-130-ending.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/1920x1080-100-new-run.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/1920x1080-100-rested-new-day.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/1920x1080-100-steady-new-day.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/1920x1080-100-strained-new-day.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/1920x1080-100-depleted-new-day.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/1920x1080-100-hud-detail.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/1920x1080-100-unknown-history.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/1920x1080-100-day-summary.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/1920x1080-100-summary-detail.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/1920x1080-100-ending.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/1920x1080-130-new-run.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/1920x1080-130-rested-new-day.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/1920x1080-130-steady-new-day.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/1920x1080-130-strained-new-day.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/1920x1080-130-depleted-new-day.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/1920x1080-130-hud-detail.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/1920x1080-130-unknown-history.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/1920x1080-130-day-summary.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/1920x1080-130-summary-detail.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/1920x1080-130-ending.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/1920x1080-native-recovery.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/1920x1080-native-new-day.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/390x640-native-recovery.png",
+		"E:/nutrition_life_strategy_game/docs/assets/edu02-edu03-2026-10-08/390x640-native-new-day.png"
+	],
+	"input": [
+		{
+			"actual_size": "(1920, 1080)",
+			"after": {
+				"meal_count": 0,
+				"phase": "breakfast",
+				"selected": [
+					"egg"
+				],
+				"state": {
+					"balance": 120,
+					"energy": 52,
+					"mood": 55,
+					"satiety": 58,
+					"stability": 65,
+					"stress": 48,
+					"study_progress": 0,
+					"study_target": 70
+				},
+				"stock": {
+					"apple": 1,
+					"instant_noodles": 2,
+					"milk": 1,
+					"oatmeal": 2,
+					"plain_yogurt": 1,
+					"unsalted_nuts": 1,
+					"whole_wheat_bread": 2
+				}
+			},
+			"before": {
+				"meal_count": 0,
+				"phase": "breakfast",
+				"selected": [
+					"egg"
+				],
+				"state": {
+					"balance": 120,
+					"energy": 52,
+					"mood": 55,
+					"satiety": 58,
+					"stability": 65,
+					"stress": 48,
+					"study_progress": 0,
+					"study_target": 70
+				},
+				"stock": {
+					"apple": 1,
+					"instant_noodles": 2,
+					"milk": 1,
+					"oatmeal": 2,
+					"plain_yogurt": 1,
+					"unsalted_nuts": 1,
+					"whole_wheat_bread": 2
+				}
+			},
+			"checks": [
+				"hover_readonly",
+				"pinned_stable",
+				"close_no_settlement",
+				"escape_no_settlement",
+				"touch_hold_release"
+			],
+			"errors": [],
+			"food_id": "egg",
+			"logical_size": "(1920.0, 1080.0)",
+			"recovery_gui_checks": [
+				"entry_click",
+				"close_click",
+				"escape",
+				"reopen_readonly",
+				"continue_restored"
+			],
+			"requested_size": "(1920, 1080)",
+			"resolution_matched": true,
+			"source_id": "cafeteria",
+			"valid": true
+		},
+		{
+			"actual_size": "(390, 640)",
+			"after": {
+				"meal_count": 0,
+				"phase": "breakfast",
+				"selected": [
+					"egg"
+				],
+				"state": {
+					"balance": 120,
+					"energy": 52,
+					"mood": 55,
+					"satiety": 58,
+					"stability": 65,
+					"stress": 48,
+					"study_progress": 0,
+					"study_target": 70
+				},
+				"stock": {
+					"apple": 1,
+					"instant_noodles": 2,
+					"milk": 1,
+					"oatmeal": 2,
+					"plain_yogurt": 1,
+					"unsalted_nuts": 1,
+					"whole_wheat_bread": 2
+				}
+			},
+			"before": {
+				"meal_count": 0,
+				"phase": "breakfast",
+				"selected": [
+					"egg"
+				],
+				"state": {
+					"balance": 120,
+					"energy": 52,
+					"mood": 55,
+					"satiety": 58,
+					"stability": 65,
+					"stress": 48,
+					"study_progress": 0,
+					"study_target": 70
+				},
+				"stock": {
+					"apple": 1,
+					"instant_noodles": 2,
+					"milk": 1,
+					"oatmeal": 2,
+					"plain_yogurt": 1,
+					"unsalted_nuts": 1,
+					"whole_wheat_bread": 2
+				}
+			},
+			"checks": [
+				"hover_readonly",
+				"pinned_stable",
+				"close_no_settlement",
+				"escape_no_settlement",
+				"touch_hold_release"
+			],
+			"errors": [],
+			"food_id": "egg",
+			"logical_size": "(780.0, 1280.0)",
+			"recovery_gui_checks": [
+				"entry_click",
+				"close_click",
+				"escape",
+				"reopen_readonly",
+				"continue_restored"
+			],
+			"requested_size": "(390, 640)",
+			"resolution_matched": true,
+			"source_id": "cafeteria",
+			"valid": true
+		}
+	],
+	"scope": "Controlled frozen recovery layouts, 130% label fonts, native physical-window input at desktop and 390x640. Not a browser or physical phone.",
+	"valid": true
+}

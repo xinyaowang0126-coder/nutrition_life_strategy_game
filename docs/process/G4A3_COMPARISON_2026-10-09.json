@@ -1,0 +1,10 @@
+{
+  "date": "2026-10-09",
+  "runs": 72,
+  "recovery_records": 444,
+  "errors": [],
+  "differences": [],
+  "baseline_source_sha256": "72edde3b2addd25a0e2476ac6db6e8e2528780136414dff7e7a7fb609aba167a",
+  "current_source_sha256": "d6037e0bbc85c325ecd0301aa50fe2c8509b0f97b1ef17891e5034c342c027f1",
+  "scope": "Same 6 policies x 12 seeds; compare all reported gameplay state, inventory, source counts, recovery rows and endings; not a player or balance study"
+}

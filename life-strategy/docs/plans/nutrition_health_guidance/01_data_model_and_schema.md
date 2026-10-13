@@ -585,6 +585,18 @@ Godot AI 更新至 3.2.5 后，统一验证 `180/180`、19 个套件通过；偏
 
 验收中已修复详情便签复用旧折行高度导致的越界，以及异步显隐竞态。日志位于 `life-strategy/.godot/logs/nut207-post-upgrade-verification.log`，截图位于 `life-strategy/.godot/nut207-visual/`。本项验收完成；四个健康开关仍关闭，两项到期证据仍待复核，新改动尚未提交、推送、导出或发布。下一步为 NUT-208A 状态矩阵盘点。
 
+### 13.5 NUT-208 恢复状态契约 R2（2026-09-04）
+
+NUT-207 与 Godot AI 3.2.5 升级已包含在本地提交 `f4f0efe`。恢复状态盘点、已确认四档规则 R2 与版本契约见 [08 恢复状态迁移](./08_recovery_state_migration.md)，具体字段与 API 见第 5 节。用户已同意刷手机按实际状态判断、最佳结局不增加恢复门槛；A 完成，B 独立规则/记录/纯迁移接口已完成工程及本地验证，C/D 未实施。未加入生产 state 或健康快照，不能从旧 burden 反转推算新恢复。R1 从未实现，因此运行规则版本仍为 `recovery-gameplay-v1`。
+
+判定器严格只接 `energy/stress/action_counts/sleep_id` 四键；旧 burden、quality、食物/profile 等额外字段被拒绝。`new_run()` 返回默认记录；`settle(day, before_sleep, sleep_snapshot, action_counts, settlement_effects=[])` 推导并冻结睡眠后值、日终值和限幅差量，返回 `{valid, errors, recovery_state}`。完整睡眠与日终效果快照用于独立游戏溯源；历史读取验证结构和算术一致性，不重新判定档位。
+
+独立 envelope 为 `{kind: "gameplay_recovery", gameplay_state_version: 2, recovery_state}`，仅存恢复记录，不含余额、库存、阶段或整局进度。迁移器 `encode(record)` 返回 `{valid, errors, data}`，`load_data(envelope)` 返回 `{status, gameplay_state_version: 2, recovery_state, errors}`，没有磁盘读写或续玩接入。只有可识别旧 stats/day_record 才降级为 `legacy_unknown`；null、任意对象与健康档案不能冒充旧玩法记录。gameplay/recovery 版本与健康档案 schema/model 分开，未来/畸形版本拒绝消费，不改写或补造健康历史。四个健康开关维持关闭，插件保留；本轮不提交或发布。
+
+既有 `MealHealthSnapshot.FORBIDDEN_FIELDS` 增加 `recovery_state/gameplay_state_version/sleep_snapshot/next_day_effect`，防止初始空恢复记录通过额外键进入健康历史。该隔离校验不改变正常用餐快照生成或档案 schema，也不切换当前玩法。
+
+B 本地验证：Godot 4.7.2 全量 217/217、22 套件，含恢复规则 14/14、记录 9/9、迁移 14/14；静态发布配置与主场景烟测通过，日志 `.godot/logs/nut208b-project-verification.log`。9 条真实旧日记录降级通过；A 冻结 JSON 及 14 个生产来源哈希保持一致，无新增 UI 截图。下一步 C 接入生产消费者，M2 尚未整体完成。
+
 ## 14. 验收标准
 
 - [x] 23 个卡牌 ID 都有 profile 或明确的缺失白名单（当前 23 项全部为 draft）。

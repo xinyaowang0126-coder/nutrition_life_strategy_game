@@ -54,11 +54,12 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="SlotsTag" type="PanelContainer" parent="Layout/Header" unique_id=690883091]
-custom_minimum_size = Vector2(180, 64)
+custom_minimum_size = Vector2(120, 64)
 layout_mode = 2
 mouse_filter = 2
 
 [node name="Slots" type="Label" parent="Layout/Header/SlotsTag" unique_id=196559027]
+custom_minimum_size = Vector2(0, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
 text = "安排 0/3"
@@ -66,11 +67,15 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ActionRail" type="ScrollContainer" parent="Layout" unique_id=2077422747]
+offset_bottom = 0
+offset_right = 0
+offset_top = 0
+offset_left = 0
 layout_mode = 0
-anchor_left = 0.15
-anchor_top = 0.22
-anchor_right = 0.95
-anchor_bottom = 0.72
+anchor_left = 0.2
+anchor_top = 0.11
+anchor_right = 0.96
+anchor_bottom = 0.58
 horizontal_scroll_mode = 3
 vertical_scroll_mode = 0
 scroll_deadzone = 18
@@ -83,10 +88,14 @@ theme_override_constants/separation = 22
 alignment = 1
 
 [node name="PlannerNote" type="PanelContainer" parent="Layout" unique_id=1698720234]
+offset_bottom = 0
+offset_right = 0
+offset_top = 0
+offset_left = 0
 layout_mode = 0
-anchor_left = 0.45
-anchor_top = 0.68
-anchor_right = 0.86
+anchor_left = 0.44
+anchor_top = 0.6
+anchor_right = 0.84
 anchor_bottom = 0.91
 mouse_filter = 2
 
@@ -125,7 +134,7 @@ theme_override_constants/separation = 12
 alignment = 1
 
 [node name="Slot1" type="PanelContainer" parent="Layout/PlannerNote/PlannerMargin/Planner/UsedSlots" unique_id=1052246815]
-custom_minimum_size = Vector2(150, 120)
+custom_minimum_size = Vector2(120, 110)
 layout_mode = 2
 
 [node name="Text" type="Label" parent="Layout/PlannerNote/PlannerMargin/Planner/UsedSlots/Slot1" unique_id=1347475585]
@@ -144,7 +153,7 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="Slot2" type="PanelContainer" parent="Layout/PlannerNote/PlannerMargin/Planner/UsedSlots" unique_id=1304733921]
-custom_minimum_size = Vector2(150, 120)
+custom_minimum_size = Vector2(120, 110)
 layout_mode = 2
 
 [node name="Text" type="Label" parent="Layout/PlannerNote/PlannerMargin/Planner/UsedSlots/Slot2" unique_id=341579059]
@@ -163,7 +172,7 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="Slot3" type="PanelContainer" parent="Layout/PlannerNote/PlannerMargin/Planner/UsedSlots" unique_id=1760075772]
-custom_minimum_size = Vector2(150, 120)
+custom_minimum_size = Vector2(120, 110)
 layout_mode = 2
 
 [node name="Text" type="Label" parent="Layout/PlannerNote/PlannerMargin/Planner/UsedSlots/Slot3" unique_id=153336923]

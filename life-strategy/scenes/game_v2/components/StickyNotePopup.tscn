@@ -60,6 +60,11 @@ theme_override_font_sizes/font_size = 19
 text = "一碗热饭，适合和蛋白质、蔬菜一起搭配。"
 autowrap_mode = 3
 
+[node name="MetricHeading" type="Label" parent="Margin/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+text = "游戏即时效果"
+
 [node name="MetricGrid" type="GridContainer" parent="Margin/VBox" unique_id=1030568575]
 layout_mode = 2
 theme_override_constants/h_separation = 8
@@ -86,11 +91,6 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.64, 0.34, 0.26, 1)
 text = "压力 0"
 
-[node name="Burden" type="Label" parent="Margin/VBox/MetricGrid" unique_id=891301016]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.45, 0.4, 0.55, 1)
-text = "角色健康 0"
-
 [node name="Study" type="Label" parent="Margin/VBox/MetricGrid" unique_id=2094906508]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.52, 0.38, 0.16, 1)
@@ -112,6 +112,18 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.45, 0.35, 0.31, 1)
 theme_override_font_sizes/font_size = 18
 text = "口味未设置"
+autowrap_mode = 3
+
+[node name="Recovery" type="ScrollContainer" parent="Margin/VBox"]
+visible = false
+custom_minimum_size = Vector2(0, 260)
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="Text" type="Label" parent="Margin/VBox/Recovery"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 18
 autowrap_mode = 3
 
 [node name="Description" type="Label" parent="Margin/VBox" unique_id=90922428]

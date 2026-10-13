@@ -1,6 +1,8 @@
 class_name DailySummaryPopupV2
 extends Control
 
+signal record_book_requested()
+
 signal next_day_requested()
 
 @onready var dim: ColorRect = $Dim
@@ -49,12 +51,21 @@ var _ready_finished := false
 var _motion_tween: Tween
 var _detail_closed_text := "查看三餐详情"
 var _detail_open_text := "收起三餐详情"
+var record_book_button: Button
 
 
 func _ready() -> void:
 	_ready_finished = true
 	next_button.pressed.connect(_on_next_pressed)
 	detail_button.pressed.connect(_toggle_nutrition_detail)
+	record_book_button = Button.new()
+	record_book_button.text = "查看选餐记录"
+	record_book_button.custom_minimum_size.y = 48
+	record_book_button.add_theme_font_size_override("font_size", 20)
+	record_book_button.hide()
+	detail_button.get_parent().add_child(record_book_button)
+	detail_button.get_parent().move_child(record_book_button, detail_button.get_index() + 1)
+	record_book_button.pressed.connect(func() -> void: record_book_requested.emit())
 	resized.connect(_on_popup_resized)
 	if not _summary.is_empty():
 		_apply_summary()
@@ -109,10 +120,11 @@ func _apply_summary() -> void:
 		int(stats.get("study_target", _summary.get("study_target", 70))),
 	]
 	balance_value.text = "余额 ¥%d" % int(stats.get("balance", 0))
-	record_summary_label.text = String(_summary.get(
-		"record_summary",
-		_summary.get("quality", _summary.get("meal_quality", _default_record_summary()))
-	))
+	var record_text: Variant = _summary.get("record_summary")
+	record_summary_label.text = record_text if record_text is String and not record_text.strip_edges().is_empty() else _default_record_summary()
+	var recovery: Dictionary = _summary.get("recovery", {})
+	if not recovery.is_empty():
+		record_summary_label.text += "\n\n%s\n%s\n%s" % [recovery["label"], recovery["summary"], recovery["effect_text"]]
 	advice_label.text = String(_summary.get("advice", _summary.get("summary", _default_advice(stats))))
 	_apply_meal_stamps(_summary.get("meal_stamps", []))
 	var image_path := String(_summary.get("ending_image", ""))
@@ -121,17 +133,19 @@ func _apply_summary() -> void:
 		ending_image.texture = load(image_path) as Texture2D
 	else:
 		ending_image.texture = null
-	var detail: Dictionary = _summary.get("detail", _summary.get("nutrition", {}))
-	var detail_text := String(detail.get("detail_text", ""))
+	var detail_value: Variant = _summary.get("detail")
+	var detail: Dictionary = detail_value if detail_value is Dictionary else {}
+	var detail_text: String = detail.get("detail_text", "") if detail.get("detail_text", "") is String else ""
 	_detail_closed_text = String(_summary.get("detail_button_text", "查看三餐详情"))
 	_detail_open_text = String(_summary.get("detail_button_open_text", "收起三餐详情"))
 	detail_button.visible = not detail_text.is_empty()
 	detail_button.text = _detail_closed_text
 	detail_panel.visible = false
 	detail_label.text = detail_text
-	basis_label.text = String(detail.get("basis", ""))
+	basis_label.text = detail.get("basis", "") if detail.get("basis", "") is String else ""
 	basis_label.visible = not basis_label.text.is_empty()
 	next_button.text = String(_summary.get("button_text", "睡到明天"))
+	record_book_button.visible = bool(_summary.get("record_book_available", false))
 	content_scroll.scroll_vertical = 0
 	detail_scroll.scroll_vertical = 0
 
@@ -303,6 +317,18 @@ func _apply_responsive_profile(target_size: Vector2) -> void:
 
 
 func _reveal_detail() -> void:
+	_scroll_detail_to_end()
+	call_deferred("_settle_detail_scroll")
+
+
+func _settle_detail_scroll() -> void:
+	# Container sorting updates the scroll range after the expansion request.
+	await get_tree().process_frame
+	await get_tree().process_frame
+	_scroll_detail_to_end()
+
+
+func _scroll_detail_to_end() -> void:
 	if visible and detail_panel.visible:
 		content_scroll.ensure_control_visible(detail_panel)
 		var scroll_bar := content_scroll.get_v_scroll_bar()
@@ -323,6 +349,8 @@ func _center_paper() -> void:
 
 
 func _on_next_pressed() -> void:
+	if next_button.disabled:
+		return
 	hide_summary()
 	next_day_requested.emit()
 
@@ -344,7 +372,7 @@ func _reset_visuals() -> void:
 
 
 func _default_record_summary() -> String:
-	return "今天的三餐先记到这里，想看时再打开详情。"
+	return "选餐记录暂时不可用。"
 
 
 func _default_advice(stats: Dictionary) -> String:

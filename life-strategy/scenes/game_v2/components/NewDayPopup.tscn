@@ -194,7 +194,7 @@ stretch_mode = 5
 layout_mode = 2
 theme_override_colors/font_color = Color(0.27, 0.48, 0.31, 1)
 theme_override_font_sizes/font_size = 17
-text = "今日学习状态"
+text = "游戏恢复记录"
 
 [node name="Title" type="Label" parent="PaperHost/Paper/Margin/VBox/BodyScroll/CardsGrid/LearningCard/Margin/VBox"]
 layout_mode = 2
@@ -221,6 +221,11 @@ theme_override_font_sizes/font_size = 17
 text = "每次学习效果不变"
 horizontal_alignment = 1
 autowrap_mode = 3
+
+[node name="RecoveryDetails" type="Button" parent="PaperHost/Paper/Margin/VBox/BodyScroll/CardsGrid/LearningCard/Margin/VBox"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+text = "查看恢复依据"
 
 [node name="EventCard" type="PanelContainer" parent="PaperHost/Paper/Margin/VBox/BodyScroll/CardsGrid"]
 custom_minimum_size = Vector2(0, 390)

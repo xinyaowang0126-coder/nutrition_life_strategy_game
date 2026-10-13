@@ -1,0 +1,203 @@
+{
+  "date": "2026-10-12",
+  "milestone": "G4A7",
+  "session_id": "life-strategy@53a996abc03d386b",
+  "godot_version": "4.7.2-stable",
+  "plugin_version": "4.3.0",
+  "scene": "res://scenes/game_v2/GameRootV2.tscn",
+  "launch": {
+    "autosave": false,
+    "current_run_errors": [],
+    "game_status": {
+      "active": true,
+      "editor_log_cursor": 0,
+      "elapsed_msec": 2828,
+      "helper_expected": true,
+      "helper_live": true,
+      "ready": true,
+      "ready_wait_msec": 3000,
+      "run_started_msec": 4026064,
+      "run_token": 4,
+      "session_active": true,
+      "status": "live"
+    },
+    "helper_live": true,
+    "mode": "custom",
+    "reason": "Game launched and the Godot AI game helper is live.",
+    "recent_errors": [],
+    "recent_errors_may_predate_run": false,
+    "recent_errors_scope": "none",
+    "recent_errors_truncated": false,
+    "retained_errors": [],
+    "scene": "res://scenes/game_v2/GameRootV2.tscn",
+    "session_active": true,
+    "undoable": false,
+    "was_already_running": false
+  },
+  "tests": {
+    "result": {
+      "failed": 0,
+      "failures": [],
+      "passed": 16,
+      "total": 16
+    },
+    "source": "game"
+  },
+  "normal_facts": {
+    "result": {
+      "day": 1,
+      "detail": "选餐记录\n吃了 2 餐｜跳过 1 餐\n早餐｜食堂｜番茄｜¥3\n午餐｜跳过\n晚餐｜宿舍存粮｜原味酸奶｜使用存粮",
+      "detail_center": {
+        "x": 956,
+        "y": 797
+      },
+      "health_loaded": false,
+      "metrics": {
+        "eaten_meals": 2,
+        "expected_meals": 3,
+        "skipped_meals": 1,
+        "unknown_meals": 0,
+        "unplaced_records": 0,
+        "unrecorded_meals": 0
+      },
+      "phase": "summary",
+      "summary_keys": [
+        "metrics",
+        "observation",
+        "action",
+        "detail_text",
+        "basis"
+      ]
+    },
+    "source": "game"
+  },
+  "native_detail_click": {
+    "result": {
+      "detail_in_view": true,
+      "detail_open": true,
+      "footer_in_view": true,
+      "health_loaded": false,
+      "save_error": 0,
+      "scroll": 427,
+      "unchanged": true
+    },
+    "source": "game"
+  },
+  "legacy_alias_fallback": {
+    "result": {
+      "basis_visible": false,
+      "detail_button_visible": false,
+      "detail_text": "",
+      "footer_in_view": true,
+      "health_loaded": false,
+      "record_text": "选餐记录暂时不可用。\n\n今晚恢复 · 状态照常\n收工时的精力、压力和安排让复习收益保持照常。\n明天每次复习收益不变；开场无数值变化",
+      "save_error": 0,
+      "unchanged": true
+    },
+    "source": "game"
+  },
+  "record_mouse_open": {
+    "result": {
+      "eaten": 2,
+      "next_disabled": true,
+      "open": true,
+      "skipped": 1
+    },
+    "source": "game"
+  },
+  "record_escape_close": {
+    "result": {
+      "day": 1,
+      "next_enabled": true,
+      "open": false,
+      "phase": "summary",
+      "summary_visible": true,
+      "unchanged": true
+    },
+    "source": "game"
+  },
+  "logs": {
+    "source": "game",
+    "lines": [
+      {
+        "level": "info",
+        "run_id": "r4026066-4",
+        "source": "game",
+        "text": "[godot_ai game_helper] registered mcp capture (debugger active=true, logger=true)\n"
+      }
+    ],
+    "total_count": 1,
+    "returned_count": 1,
+    "offset": 0,
+    "limit": 12,
+    "has_more": false,
+    "run_id": "r4026066-4",
+    "is_running": true,
+    "dropped_count": 0,
+    "stale_run_id": false,
+    "current_run_id": "r4026066-4",
+    "helper_live": true,
+    "session_active": true,
+    "game_status": {
+      "active": true,
+      "editor_log_cursor": 0,
+      "elapsed_msec": 280199,
+      "helper_expected": true,
+      "helper_live": true,
+      "ready": true,
+      "ready_wait_msec": 20000,
+      "run_started_msec": 4026064,
+      "run_token": 4,
+      "session_active": true,
+      "status": "live"
+    }
+  },
+  "stop": {
+    "readiness_after": "ready",
+    "reason": "Play/stop is a runtime action",
+    "stopped": true,
+    "undoable": false,
+    "was_running": true
+  },
+  "detail_before_fix": {
+    "result": {
+      "detail_rect": {
+        "position": {
+          "x": 618,
+          "y": 808
+        },
+        "size": {
+          "x": 676,
+          "y": 310
+        }
+      },
+      "max": 1151,
+      "page": 724,
+      "save_error": 0,
+      "scroll": 161,
+      "scroll_rect": {
+        "position": {
+          "x": 618,
+          "y": 128
+        },
+        "size": {
+          "x": 684,
+          "y": 724
+        }
+      }
+    },
+    "source": "game"
+  },
+  "screenshots": [
+    "docs/assets/g4a7-2026-10-12/mcp-normal-detail.png",
+    "docs/assets/g4a7-2026-10-12/mcp-legacy-unavailable.png",
+    "docs/assets/g4a7-2026-10-12/mcp-detail-before-fix.png"
+  ],
+  "notes": [
+    "A real detail-button click exposed a stale scroll range: scroll 161 while the final range required 427. The popup now retries after container layout, and final detail/footer bounds passed.",
+    "The legacy-alias check temporarily reconfigured only the popup with a controlled payload. Day, resources, inventory, frozen history and RNG were unchanged; the normal payload was restored.",
+    "An editor_screenshot call had a transport failure. Editor state was inspected, the game remained live, and saved framebuffer PNGs were used for visual inspection. This screenshot-tool failure is not counted as a passed capture.",
+    "Final game logs contain only helper registration. The test game was stopped; no debugger history was cleared."
+  ],
+  "published": false
+}

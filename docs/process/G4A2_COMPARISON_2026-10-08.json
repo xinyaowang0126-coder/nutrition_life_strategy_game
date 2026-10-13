@@ -1,0 +1,11 @@
+{
+  "schema": "g4a2.comparison.v1",
+  "scope": "V2 G4A1-to-G4A2 copy scripted legal choices; all recorded gameplay outcomes, frozen recovery rows, cash and inventory compared. Not human playtesting.",
+  "before_source_sha256": "e12963eaeacd2c17880d41d6d1cab2fbd8d8ec1bdea74f1282b7834755579988",
+  "after_source_sha256": "6d8284ea0ddd696dcee9fb044edc3af9f001637b989d833fc373f7f562ab8aba",
+  "rows": 72,
+  "recorded_days": 444,
+  "gameplay_differences": [],
+  "errors": [],
+  "legacy_fixture_sha256": "3F67E90FBDFBE423853E390BB8AF4B0C0C3BB2F5AE4CEAB4CB5FEBAE6F50F2F5"
+}

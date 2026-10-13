@@ -3,6 +3,8 @@
 [ext_resource type="Theme" uid="uid://dthxodrk6slpq" path="res://scenes/game_v2/V2Theme.tres" id="1_6eslo"]
 [ext_resource type="Script" uid="uid://d1k7dfd3xmhl8" path="res://scripts/ui_v2/stages/CafeteriaMealStage.gd" id="2_jmvog"]
 
+[ext_resource type="PackedScene" path="res://scenes/game_v2/components/SelectedFoodCard.tscn" id="3_selected"]
+
 [node name="CafeteriaMealStage" type="Control" unique_id=1637405280]
 layout_mode = 3
 anchors_preset = 15
@@ -49,26 +51,35 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="FoodRail" type="ScrollContainer" parent="." unique_id=1270422693]
+offset_bottom = 0
+offset_right = 0
+offset_top = 0
+offset_left = 0
 layout_mode = 0
 anchor_left = 0.2
-anchor_top = 0.13
+anchor_top = 0.11
 anchor_right = 0.96
-anchor_bottom = 0.52
+anchor_bottom = 0.58
 horizontal_scroll_mode = 3
 vertical_scroll_mode = 0
 scroll_deadzone = 18
 
 [node name="Cards" type="HBoxContainer" parent="FoodRail" unique_id=95648327]
+size_flags_vertical = 3
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 18
 
 [node name="TrayDropZone" type="PanelContainer" parent="." unique_id=931576263]
+offset_bottom = 0
+offset_right = 0
+offset_top = 0
+offset_left = 0
 layout_mode = 0
 anchor_left = 0.44
-anchor_top = 0.58
+anchor_top = 0.6
 anchor_right = 0.84
-anchor_bottom = 0.89
+anchor_bottom = 0.91
 
 [node name="TrayMargin" type="MarginContainer" parent="TrayDropZone" unique_id=1981040807]
 layout_mode = 2
@@ -111,62 +122,14 @@ layout_mode = 2
 theme_override_constants/separation = 14
 alignment = 1
 
-[node name="Slot1" type="PanelContainer" parent="TrayDropZone/TrayMargin/VBox/SelectedSlots" unique_id=1275618526]
-custom_minimum_size = Vector2(132, 170)
+[node name="Slot1" parent="TrayDropZone/TrayMargin/VBox/SelectedSlots" unique_id=1275618526 instance=ExtResource("3_selected")]
 layout_mode = 2
 
-[node name="Empty" type="Label" parent="TrayDropZone/TrayMargin/VBox/SelectedSlots/Slot1" unique_id=1756255144]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.55, 0.48, 0.38, 0.55)
-theme_override_font_sizes/font_size = 42
-text = "+"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Preview" type="TextureRect" parent="TrayDropZone/TrayMargin/VBox/SelectedSlots/Slot1" unique_id=106507167]
-visible = false
-layout_mode = 2
-mouse_filter = 2
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Slot2" type="PanelContainer" parent="TrayDropZone/TrayMargin/VBox/SelectedSlots" unique_id=627692483]
-custom_minimum_size = Vector2(132, 170)
+[node name="Slot2" parent="TrayDropZone/TrayMargin/VBox/SelectedSlots" unique_id=627692483 instance=ExtResource("3_selected")]
 layout_mode = 2
 
-[node name="Empty" type="Label" parent="TrayDropZone/TrayMargin/VBox/SelectedSlots/Slot2" unique_id=214794772]
+[node name="Slot3" parent="TrayDropZone/TrayMargin/VBox/SelectedSlots" unique_id=1908776836 instance=ExtResource("3_selected")]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.55, 0.48, 0.38, 0.55)
-theme_override_font_sizes/font_size = 42
-text = "+"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Preview" type="TextureRect" parent="TrayDropZone/TrayMargin/VBox/SelectedSlots/Slot2" unique_id=627879509]
-visible = false
-layout_mode = 2
-mouse_filter = 2
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Slot3" type="PanelContainer" parent="TrayDropZone/TrayMargin/VBox/SelectedSlots" unique_id=1908776836]
-custom_minimum_size = Vector2(132, 170)
-layout_mode = 2
-
-[node name="Empty" type="Label" parent="TrayDropZone/TrayMargin/VBox/SelectedSlots/Slot3" unique_id=67452695]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.55, 0.48, 0.38, 0.55)
-theme_override_font_sizes/font_size = 42
-text = "+"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Preview" type="TextureRect" parent="TrayDropZone/TrayMargin/VBox/SelectedSlots/Slot3" unique_id=1506030234]
-visible = false
-layout_mode = 2
-mouse_filter = 2
-expand_mode = 1
-stretch_mode = 5
 
 [node name="Footer" type="HBoxContainer" parent="." unique_id=430922049]
 layout_mode = 0

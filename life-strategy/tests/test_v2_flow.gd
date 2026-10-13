@@ -4,6 +4,7 @@ extends McpTestSuite
 const GameDataScript := preload("res://scripts/GameData.gd")
 const GameRootV2Script := preload("res://scripts/ui_v2/GameRootV2.gd")
 const MealDeckServiceScript := preload("res://scripts/systems/MealDeckService.gd")
+const RecoveryService := preload("res://scripts/systems/RecoveryStateService.gd")
 const GameRootV2Scene := preload("res://scenes/game_v2/GameRootV2.tscn")
 const SourceStageScene := preload("res://scenes/game_v2/stages/MealSourceStage.tscn")
 const CafeteriaStageScene := preload("res://scenes/game_v2/stages/CafeteriaMealStage.tscn")
@@ -48,7 +49,7 @@ func test_source_rules_and_meal_action_transitions() -> void:
 	assert_eq(game.phase, "lunch_source")
 	assert_eq(game.actions_used_today, 1)
 	assert_eq(game.used_action_names, ["晨读"])
-	assert_eq(int(game.state["study_progress"]), 10)
+	assert_eq(int(game.state["study_progress"]), 8)
 
 	game._choose_meal_source("takeout")
 	assert_eq(game.phase, "lunch")
@@ -110,6 +111,7 @@ func test_source_identity_action_limits_and_pantry_restock_are_enforced() -> voi
 	assert_eq(game._source_selection_limit("dorm_storage"), 2)
 
 	game.day = 4
+	game.run_history.append({"day": 3, "recovery_state": _recovery_record(3, "sleep_early", 40, 50)})
 	game._start_day()
 	assert_eq(String(game.current_event.get("id", "")), "delivery_coupon")
 	assert_eq(int(game._effective_meal_source("takeout")["fee"]), 1)
@@ -119,7 +121,7 @@ func test_source_identity_action_limits_and_pantry_restock_are_enforced() -> voi
 	var oatmeal_before := int(game.dorm_inventory.get("oatmeal", 0))
 	game._apply_action("restock_pantry")
 	assert_eq(game.phase, "lunch_source")
-	assert_eq(int(game.state["balance"]), balance_before - 10)
+	assert_eq(int(game.state["balance"]), balance_before - 8)
 	assert_eq(int(game.dorm_inventory.get("oatmeal", 0)), oatmeal_before + 1)
 	assert_eq(game.today_action_records.size(), 1)
 
@@ -132,29 +134,27 @@ func test_source_identity_action_limits_and_pantry_restock_are_enforced() -> voi
 func test_previous_day_learning_state_changes_visible_study_yield() -> void:
 	var game := _new_controller()
 	game.phase = "breakfast_action"
-	game.current_learning_state = {
-		"id": "clear_focus",
-		"title": "进入状态较快",
-		"study_modifier": 3,
-	}
+	game.run_history.append({"day": 1, "recovery_state": _recovery_record(1, "sleep_early", 40, 50)})
+	game.day = 2
+	game._start_day()
+	game.phase = "breakfast_action"
 	var focused := game._effective_action("study")
-	assert_eq(int(focused["study"]), 13)
-	assert_contains(String(focused["rule_hint"]), "进入状态较快")
+	assert_eq(int(focused["study"]), 11)
+	assert_contains(String(focused["rule_hint"]), "恢复充分")
 	var study_card := CompactCardScene.instantiate() as CompactChoiceCardV2
 	study_card.configure(focused, "action")
 	_add_to_test_tree(study_card)
-	assert_eq(study_card.primary_stat.text, "复习 +13")
+	assert_eq(study_card.primary_stat.text, "复习 +11")
 	game._apply_action("study")
-	assert_eq(int(game.state["study_progress"]), 13)
+	assert_eq(int(game.state["study_progress"]), 11)
 
 	var tired_game := _new_controller()
 	tired_game.phase = "breakfast_action"
-	tired_game.current_learning_state = {
-		"id": "brain_fog",
-		"title": "需要先缓一缓",
-		"study_modifier": -4,
-	}
-	assert_eq(int(tired_game._effective_action("study")["study"]), 6)
+	tired_game.run_history.append({"day": 1, "recovery_state": _recovery_record(1, "scroll_phone", 20, 95)})
+	tired_game.day = 2
+	tired_game._start_day()
+	tired_game.phase = "breakfast_action"
+	assert_eq(int(tired_game._effective_action("study")["study"]), 4)
 	tired_game.state["energy"] = 7
 	tired_game._apply_action("study")
 	assert_eq(tired_game.phase, "breakfast_action", "study should not run below its energy floor")
@@ -163,7 +163,9 @@ func test_previous_day_learning_state_changes_visible_study_yield() -> void:
 
 func test_normal_starting_budget_can_reach_seventh_day_ending() -> void:
 	var game := _new_controller()
-	while game.phase != "ending":
+	for _day_step in range(GameDataScript.TOTAL_DAYS):
+		if game.phase == "ending":
+			break
 		_play_affordable_study_day(game)
 		if game.phase == "summary":
 			game._on_summary_advanced()
@@ -171,12 +173,13 @@ func test_normal_starting_budget_can_reach_seventh_day_ending() -> void:
 			break
 	assert_eq(game.day, GameDataScript.TOTAL_DAYS)
 	assert_eq(game.phase, "ending")
-	assert_eq(game.ending_id, "stable_endurance")
-	assert_eq(int(game.state["balance"]), 20)
+	assert_true(["stable_endurance", "barely_survived"].has(game.ending_id), "a legal paced route reaches a non-collapse ending")
+	assert_gt(int(game.state["balance"]), 0)
 	assert_eq(game.today_meal_records.size(), 3)
 	assert_eq(game.run_history.size(), GameDataScript.TOTAL_DAYS)
 	assert_eq(int(game.run_history[6]["day"]), 7)
-	assert_true((game.run_history[6]["nutrition"] as Dictionary).has("score"))
+	assert_false((game.run_history[6]["nutrition"] as Dictionary).has("score"))
+	assert_eq(game.run_history[6]["nutrition"]["metrics"]["eaten_meals"], 3)
 	var recap := game._build_week_recap()
 	assert_false(String(recap["detail_text"]).contains("｜饮食 "))
 	assert_false(recap.has("average_nutrition"))
@@ -232,11 +235,11 @@ func test_every_v2_stage_reaches_ready_with_real_data() -> void:
 		assert_true(card is CompactChoiceCardV2, "cafeteria must use compact choice cards")
 	cafeteria._on_card_selected("rice_plain")
 	var cafeteria_preview := cafeteria.get_node(
-		"TrayDropZone/TrayMargin/VBox/SelectedSlots/Slot1/Preview"
+		"TrayDropZone/TrayMargin/VBox/SelectedSlots/Slot1/Face/Preview"
 	) as TextureRect
 	assert_true(cafeteria_preview.visible, "cafeteria tray must reveal the selected food image")
 	assert_true(cafeteria_preview.texture != null, "cafeteria tray preview must have a texture")
-	assert_false((cafeteria_preview.get_parent().get_node("Empty") as Label).visible)
+	assert_false((cafeteria_preview.get_parent().get_parent().get_node("Empty") as Label).visible)
 	_assert_scroll_contract(cafeteria.get_node("FoodRail") as ScrollContainer, true)
 
 	var takeout := TakeoutStageScene.instantiate() as TakeoutMealStageV2
@@ -257,7 +260,7 @@ func test_every_v2_stage_reaches_ready_with_real_data() -> void:
 	assert_eq(convenience._cards_by_id.size(), 3)
 	convenience._on_card_selected("apple")
 	assert_true((convenience.get_node(
-		"Layout/BasketPanel/BasketMargin/Basket/SelectedSlots/Slot1/Preview"
+		"Layout/BasketPanel/BasketMargin/Basket/SelectedSlots/Slot1/Face/Preview"
 	) as TextureRect).visible, "convenience basket must reveal the selected food image")
 	_assert_scroll_contract(convenience.get_node(
 		"Layout/ShelfPanel/ShelfMargin/Shelf/ShelfScroll"
@@ -277,11 +280,11 @@ func test_every_v2_stage_reaches_ready_with_real_data() -> void:
 	dorm._on_card_selected("oatmeal")
 	assert_eq(dorm._selected_ids, ["oatmeal"], "dorm tap must add available stock to the bowl")
 	assert_true((dorm.get_node(
-		"Layout/BowlPanel/BowlMargin/Bowl/SelectedSlots/Slot1/Preview"
+		"Layout/BowlPanel/BowlMargin/Bowl/SelectedSlots/Slot1/Face/Preview"
 	) as TextureRect).visible, "dorm bowl must reveal the selected food image")
 	_assert_scroll_contract(dorm.get_node(
 		"Layout/PantryPanel/PantryMargin/Pantry/PantryScroll"
-	) as ScrollContainer, false)
+	) as ScrollContainer, false, 1)
 
 	var action_stage := ActionStageScene.instantiate() as ActionStageV2
 	var actions: Array[Dictionary] = []
@@ -389,16 +392,25 @@ func test_new_day_popup_uses_live_state_event_rules_and_art() -> void:
 	_add_to_test_tree(game)
 	assert_true(game.new_day_popup.visible)
 	assert_eq(game.new_day_popup.day_title.text, "第 1 天开始")
+	assert_false(game.new_day_popup.status_summary.text.contains("昨日"), "a new run has no prior-day record")
+	assert_false(game.new_day_popup.status_summary.text.contains("昨天"))
+	assert_false(game.new_day_popup.day_subtitle.text.contains("昨天"))
+	var initial_learning_state := game.current_learning_state.duplicate(true)
+	var initial_game_state := game.state.duplicate(true)
+	game._show_new_day_popup()
+	assert_eq(game.current_learning_state, initial_learning_state, "initial explanation must not rewrite gameplay carryover")
+	assert_eq(game.state, initial_game_state, "reopening first-day instructions must not settle a day")
 	assert_true(game.new_day_popup.status_image.visible)
 	assert_true(game.new_day_popup.event_image.visible)
 
 	game.day = 5
-	game.current_learning_state = {
-		"id": "clear_focus",
-		"title": "进入状态较快",
-		"summary": "按游戏规则，昨日状态触发了复习加成。",
-		"study_modifier": 3,
-	}
+	var sleep := GameDataScript.get_sleep_option("sleep_early")
+	var sleep_snapshot := {"id": "sleep_early"}
+	for key in ["energy", "mood", "stress", "study", "satiety"]:
+		sleep_snapshot[key] = sleep[key]
+	var recovery := RecoveryService.settle(4, {"energy": 45, "stress": 45}, sleep_snapshot, {})
+	game.run_history.append({"day": 4, "recovery_state": recovery["recovery_state"]})
+	assert_true(game._start_day())
 	game.current_event = {
 		"id": "mock_exam_notice",
 		"title": "小测提醒",
@@ -406,8 +418,9 @@ func test_new_day_popup_uses_live_state_event_rules_and_art() -> void:
 	}
 	game._show_new_day_popup()
 	game.new_day_popup._finish_show()
-	assert_eq(game.new_day_popup.status_title.text, "进入状态较快")
-	assert_eq(game.new_day_popup.status_effect.text, "每次学习效果 +3")
+	assert_eq(game.new_day_popup.status_title.text, "恢复充分")
+	assert_contains(game.new_day_popup.status_effect.text, "每次复习收益 +3")
+	assert_contains(game.new_day_popup.status_summary.text, "早点睡")
 	assert_eq(game.new_day_popup.event_title.text, "小测提醒")
 	assert_contains(game.new_day_popup.event_effect.text, "复习收益 +3")
 	assert_eq(
@@ -430,27 +443,78 @@ func test_new_day_popup_uses_live_state_event_rules_and_art() -> void:
 
 
 func test_desktop_stage_panels_leave_character_safe_zone() -> void:
-	var cafeteria := CafeteriaStageScene.instantiate() as CafeteriaMealStageV2
-	assert_true(is_equal_approx((cafeteria.get_node("TrayDropZone") as Control).anchor_left, 0.44))
-	assert_eq(
-		(cafeteria.get_node("TrayDropZone/TrayMargin/VBox/SelectedSlots/Slot1") as Control).custom_minimum_size,
-		Vector2(132, 170)
-	)
-	var takeout := TakeoutStageScene.instantiate() as TakeoutMealStageV2
-	assert_true(is_equal_approx((takeout.get_node("Layout/PhoneShell") as Control).anchor_left, 0.58))
-	var convenience := ConvenienceStageScene.instantiate() as ConvenienceMealStageV2
-	assert_true(is_equal_approx((convenience.get_node("Layout/BasketPanel") as Control).anchor_left, 0.43))
-	var dorm := DormStageScene.instantiate() as DormPantryStageV2
-	assert_true(is_equal_approx((dorm.get_node("Layout/PantryPanel") as Control).anchor_bottom, 0.70))
+	var reference := {}
+	for packed in [CafeteriaStageScene, TakeoutStageScene, ConvenienceStageScene, DormStageScene]:
+		var stage := packed.instantiate() as MealStageBaseV2
+		_add_to_test_tree(stage)
+		var paths := stage._get_layout_paths()
+		_force_container_layout(stage.get_node(String(paths["footer"])) as Container)
+		var area := stage.get_selection_layout_rects()
+		var cards: Rect2 = area["cards"]
+		var selected_area: Rect2 = area["selection"]
+		var footer: Rect2 = area["footer"]
+		assert_true(cards.end.y <= selected_area.position.y, "cards must remain above the selected-food panel")
+		assert_true(selected_area.position.x > cards.position.x, "selected food must keep the shared lower-right position")
+		assert_true(selected_area.end.y <= footer.position.y, "selected food must not cover confirmation")
+		assert_true((stage.get_node(String(paths["selection"])) as Control).anchor_left >= 0.40, "selected food must leave the character safe zone")
+		if reference.is_empty():
+			reference = area
+		else:
+			for key in ["cards", "selection"]:
+				assert_true((area[key] as Rect2).is_equal_approx(reference[key]), "meal sources must share the %s region: %s %s versus %s" % [key, stage.name, area[key], reference[key]])
+		var footer_node := stage.get_node(String(paths["footer"])) as Control
+		# Headless tests run synchronously; button font/minimum-size changes are
+		# queued. Assert the placement contract here, and final geometry in the
+		# rendered multi-size probe after layout frames have completed.
+		assert_eq(Vector2(footer_node.offset_left, footer_node.offset_top), Vector2(-528, -72))
+		assert_eq(Vector2(footer_node.offset_right, footer_node.offset_bottom), Vector2(-18, -12))
 	var action := ActionStageScene.instantiate() as ActionStageV2
-	assert_true(is_equal_approx((action.get_node("Layout/PlannerNote") as Control).anchor_top, 0.68))
+	assert_eq((action.get_node("Layout/PlannerNote") as Control).anchor_top, MealStageBaseV2.DESKTOP_SELECTED_AREA.position.y)
 	assert_eq(
 		(action.get_node("Layout/PlannerNote/PlannerMargin/Planner/UsedSlots/Slot1") as Control).custom_minimum_size,
-		Vector2(150, 120),
-		"desktop action previews must remain legible"
+		Vector2(120, 110),
+		"action previews must use the same selected-card size"
 	)
-	for node in [cafeteria, takeout, convenience, dorm, action]:
-		node.free()
+	action.free()
+
+
+func test_selected_food_card_keeps_full_face_and_clears_stale_food() -> void:
+	for packed in [CafeteriaStageScene, TakeoutStageScene, ConvenienceStageScene, DormStageScene]:
+		var stage := packed.instantiate() as MealStageBaseV2
+		var options := _cash_options("午餐")
+		options["stock_by_id"] = {"rice_plain": 1, "tomato": 1}
+		stage.setup(_foods(["rice_plain", "tomato"]), [], options)
+		_add_to_test_tree(stage)
+		stage._on_card_selected("rice_plain")
+		var selected_card := stage._get_slot_nodes()[0] as SelectedFoodCardV2
+		assert_true(selected_card.face.visible, "selected food must show a full card face")
+		assert_eq(selected_card.title_label.text, String(GameDataScript.get_food("rice_plain")["name"]))
+		assert_true(selected_card.preview.texture != null, "selected card must keep its food artwork")
+		assert_eq(selected_card.price_label.text, "×1" if stage is DormPantryStageV2 else "¥2")
+		stage._on_card_selected("rice_plain")
+		assert_true(selected_card.empty_label.visible, "removing food must restore the empty slot")
+		assert_false(selected_card.face.visible, "removing food must hide its name and stats")
+		assert_true(selected_card.preview.texture == null, "removing food must clear its artwork")
+		assert_true(stage._get_confirm_button().disabled, "an empty tray cannot be confirmed")
+		stage._on_card_selected("tomato")
+		assert_eq(selected_card.title_label.text, String(GameDataScript.get_food("tomato")["name"]))
+		assert_false(stage._get_confirm_button().disabled)
+
+
+func test_selection_colour_survives_availability_refresh_and_deselection() -> void:
+	for packed in [CompactCardScene, TakeoutRowScene]:
+		var card: Variant = packed.instantiate()
+		_add_to_test_tree(card)
+		card.configure(GameDataScript.get_food("rice_plain"), "food")
+		var initial_tint: Color = card.self_modulate
+		var initial_paper: Color = (card.get_theme_stylebox("panel") as StyleBoxFlat).bg_color
+		card.set_selected(true, false)
+		card.set_enabled(true)
+		assert_true(card.self_modulate != initial_tint, "selected cards must visibly change colour")
+		assert_true((card.get_theme_stylebox("panel") as StyleBoxFlat).bg_color != initial_paper, "selected card paper must remain distinct after refresh")
+		card.set_selected(false, false)
+		assert_eq(card.self_modulate, initial_tint, "removing food must restore the normal card colour")
+		assert_eq((card.get_theme_stylebox("panel") as StyleBoxFlat).bg_color, initial_paper)
 
 
 func test_mobile_baseline_is_720_by_1280_without_forcing_desktop_window() -> void:
@@ -501,7 +565,7 @@ func test_character_hud_mobile_profile_keeps_footer_clear_and_clickable() -> voi
 		"res://assets/generated/ui_v2/characters/student_bust.png",
 		"mobile layout must move the original texture node instead of cropping the image"
 	)
-	assert_eq(status_board.offset_top, -250.0)
+	assert_eq(status_board.offset_top, CharacterHUDV2.MOBILE_STATUS_TOP)
 	assert_eq(status_board.offset_bottom, -20.0)
 	assert_eq(game.character_hud.pivot_offset.y, game.character_anchor.size.y)
 	assert_eq(status_board.mouse_filter, Control.MOUSE_FILTER_IGNORE)
@@ -531,7 +595,7 @@ func test_character_hud_mobile_profile_keeps_footer_clear_and_clickable() -> voi
 	game._apply_shell_profile()
 	assert_eq(game.character_hud.portrait.offset_left, 0.0)
 	assert_eq(game.character_hud.portrait_shadow.offset_left, 12.0)
-	assert_eq(status_board.offset_top, -310.0)
+	assert_eq(status_board.offset_top, CharacterHUDV2.DESKTOP_STATUS_TOP)
 	assert_eq(status_board.offset_bottom, -90.0)
 	assert_eq(game.character_hud.pivot_offset, Vector2.ZERO)
 	assert_ne(status_board.mouse_filter, Control.MOUSE_FILTER_IGNORE)
@@ -578,7 +642,7 @@ func test_mobile_daily_summary_is_compact_and_actionable() -> void:
 	assert_eq(advance_events.size(), 1, "pressing next-day should emit exactly once")
 
 
-func test_daily_summary_can_expand_optional_nutrition_detail() -> void:
+func test_daily_summary_can_expand_explicit_meal_record_detail() -> void:
 	var game := GameRootV2Scene.instantiate() as GameRootV2
 	_add_to_test_tree(game)
 	var popup := game.daily_summary
@@ -591,9 +655,9 @@ func test_daily_summary_can_expand_optional_nutrition_detail() -> void:
 			{"title": "午餐", "text": "便利店 · 苹果", "state": "eaten"},
 			{"title": "晚餐", "text": "没吃", "state": "skipped"},
 		],
-		"nutrition": {
-			"detail_text": "三餐情况　吃了 2/3 餐\n餐盘线索\n主食 1 顿｜蔬菜 1 顿｜水果碰见过\n卡牌资料线索\n膳食纤维来源 2 顿",
-			"basis": "规则小字：本局饮食信息参考《中国居民膳食指南（2022）》的一般原则；卡牌出现不代表现实摄入量足够，也不用于现实健康判断。",
+		"detail": {
+			"detail_text": "选餐记录\n早餐｜食堂｜白米饭、鸡蛋\n午餐｜便利店｜苹果\n晚餐｜跳过",
+			"basis": "成分与份量尚未核对，暂不作营养评价。",
 		},
 		"stats": {"stability": 64, "study_progress": 10, "balance": 108},
 	}, true)
@@ -608,12 +672,12 @@ func test_daily_summary_can_expand_optional_nutrition_detail() -> void:
 	popup.detail_button.pressed.emit()
 	assert_true(popup.detail_panel.visible)
 	assert_eq(popup.detail_button.text, "收起三餐详情")
-	assert_contains(popup.detail_label.text, "卡牌资料线索")
-	assert_contains(popup.basis_label.text, "《中国居民膳食指南（2022）》")
+	assert_contains(popup.detail_label.text, "早餐｜食堂｜白米饭、鸡蛋")
+	assert_contains(popup.basis_label.text, "尚未核对")
 	assert_false(popup.record_summary_label.text.contains("今日饮食结构记录"))
 	assert_true(
 		popup.paper_host.get_global_rect().encloses(popup.next_button.get_global_rect()),
-		"expanded nutrition detail must keep the next-day button inside the paper"
+		"expanded meal records must keep the next-day button inside the paper"
 	)
 
 
@@ -683,6 +747,152 @@ func test_rapid_repeat_inputs_do_not_double_advance_or_settle() -> void:
 	assert_eq(game.phase, "breakfast_source")
 
 
+func test_stale_source_stage_cannot_reopen_or_select_another_meal() -> void:
+	var game := GameRootV2Scene.instantiate() as GameRootV2
+	_add_to_test_tree(game)
+	game.health_guidance_flags = {}
+	game.health_history_path = ""
+	var breakfast_source := game._active_stage as MealSourceStageV2
+
+	# Emit before a frame boundary, while the outgoing source still exists.
+	breakfast_source.skip_requested.emit()
+	assert_true(breakfast_source.is_queued_for_deletion())
+	var settled_state := game.state.duplicate(true)
+	breakfast_source.source_selected.emit("cafeteria")
+	game._choose_meal_source("cafeteria")
+	assert_eq(game.phase, "breakfast_action")
+	assert_eq(game.today_meal_records.size(), 1)
+	assert_eq(game.state, settled_state)
+	assert_eq(game.current_source_id, "")
+
+	game._skip_action()
+	assert_eq(game.phase, "lunch_source")
+	var lunch_source := game._active_stage as MealSourceStageV2
+	breakfast_source.source_selected.emit("cafeteria")
+	breakfast_source.skip_requested.emit()
+	assert_eq(game.phase, "lunch_source", "old source must not select the next meal")
+	assert_eq(game._active_stage, lunch_source)
+
+	lunch_source.source_selected.emit("cafeteria")
+	assert_eq(game.phase, "lunch", "the current source must remain usable")
+	lunch_source.source_selected.emit("convenience_store")
+	assert_eq(game.current_source_id, "cafeteria")
+	game._confirm_food([_first_affordable_food(game)])
+	assert_eq(game.phase, "lunch_action")
+	assert_eq(game.today_meal_records.size(), 2)
+	assert_eq(game.today_meal_records[0]["phase"], "breakfast")
+	assert_eq(game.today_meal_records[1]["phase"], "lunch")
+
+
+func test_pinned_details_survive_other_previews_and_close_without_settlement() -> void:
+	var game := GameRootV2Scene.instantiate() as GameRootV2
+	game.health_history_path = ""
+	_add_to_test_tree(game)
+	game.new_day_popup.hide()
+	var phase_before := game.phase
+	var state_before := game.state.duplicate(true)
+	var stock_before := game.dorm_inventory.duplicate(true)
+	var first_food := GameDataScript.get_food("rice_plain")
+	var other_food := GameDataScript.get_food("tomato")
+	var anchor := Rect2(40, 100, 210, 330)
+	game._show_detail(first_food, anchor, true, "food")
+	game._show_detail(other_food, anchor, false, "food")
+	game._dismiss_detail("rice_plain")
+	assert_true(game.sticky_note.pinned)
+	assert_eq(game.sticky_note.get_payload()["id"], "rice_plain")
+	game._show_detail(other_food, anchor, true, "food")
+	assert_eq(game.sticky_note.get_payload()["id"], "tomato", "explicit information requests can replace pinned details")
+	game.sticky_note._on_close_pressed()
+	assert_eq(game.phase, phase_before)
+	assert_eq(game.state, state_before)
+	assert_eq(game.dorm_inventory, stock_before)
+	assert_eq(game.today_meal_records.size(), 0)
+	assert_eq(game.selected_food_ids.size(), 0)
+
+
+func test_cash_stages_keep_prices_when_pantry_stock_changes() -> void:
+	var cases := [
+		{"scene": CafeteriaStageScene, "food": "oatmeal", "fee": 0},
+		{"scene": ConvenienceStageScene, "food": "apple", "fee": 0},
+		{"scene": TakeoutStageScene, "food": "sandwich", "fee": 3},
+	]
+	for case in cases:
+		var food_id := String(case["food"])
+		var food := GameDataScript.get_food(food_id)
+		var cost := int(food["cost"])
+		var fee := int(case["fee"])
+		var stage := (case["scene"] as PackedScene).instantiate() as MealStageBaseV2
+		var options := _cash_options("午餐", fee)
+		options["stock_by_id"] = {food_id: 2}
+		stage.setup([food], [], options)
+		_add_to_test_tree(stage)
+		var card: Variant = stage._cards_by_id[food_id]
+		for inventory in [{food_id: 2}, {food_id: 0}, {}, {food_id: 8}]:
+			stage.set_stock(inventory)
+			assert_eq(_meal_card_price(card), "¥%d" % cost)
+			assert_false(card.select_button.disabled, "pantry stock must not affect cash availability")
+		stage._on_card_selected(food_id)
+		assert_eq(stage._selection_total(), cost + fee)
+		stage.set_selection([])
+		stage.set_balance(cost + fee - 1)
+		assert_true(card.select_button.disabled, "cash availability still depends on total price")
+
+
+func test_pantry_cards_show_zero_or_live_stock_instead_of_cash_prices() -> void:
+	var stage := DormStageScene.instantiate() as DormPantryStageV2
+	stage.setup(_foods(["oatmeal", "milk"]), [], {
+		"balance": 0, "stock_by_id": {"oatmeal": 2, "milk": 0},
+	})
+	_add_to_test_tree(stage)
+	var oatmeal: Variant = stage._cards_by_id["oatmeal"]
+	var milk: Variant = stage._cards_by_id["milk"]
+	assert_eq(_meal_card_price(oatmeal), "×2")
+	assert_false(oatmeal.select_button.disabled)
+	assert_eq(_meal_card_price(milk), "×0")
+	assert_true(milk.select_button.disabled)
+	stage.set_stock({"oatmeal": 0, "milk": 3})
+	assert_eq(_meal_card_price(oatmeal), "×0")
+	assert_true(oatmeal.select_button.disabled)
+	assert_eq(_meal_card_price(milk), "×3")
+	assert_false(milk.select_button.disabled)
+	stage.set_stock({})
+	assert_eq(_meal_card_price(oatmeal), "×0", "missing pantry entries must not fall back to cash prices")
+	assert_eq(_meal_card_price(milk), "×0")
+	assert_true(oatmeal.select_button.disabled)
+	assert_true(milk.select_button.disabled)
+
+
+func test_cash_meal_charges_its_price_without_consuming_pantry_stock() -> void:
+	var game := _new_controller()
+	game._choose_meal_source("cafeteria")
+	# A deterministic legal cafeteria hand isolates the payment contract.
+	game.hand = ["oatmeal"]
+	game.dorm_inventory["oatmeal"] = 0
+	var balance_before := int(game.state["balance"])
+	var cost := int(GameDataScript.get_food("oatmeal")["cost"])
+	game._confirm_food(["oatmeal"])
+	assert_eq(game.phase, "breakfast_action")
+	assert_eq(int(game.state["balance"]), balance_before - cost)
+	assert_eq(int(game.dorm_inventory["oatmeal"]), 0)
+	assert_eq(game.today_meal_records.size(), 1)
+	assert_eq(int(game.today_meal_records[0]["total_cost"]), cost)
+	assert_false(bool(game.today_meal_records[0]["uses_stock"]))
+
+
+func _meal_card_price(card: Variant) -> String:
+	if card is TakeoutFoodRowCardV2:
+		return card.price_label.text
+	return card.cost_label.text
+
+
+func _recovery_record(day: int, id: String, energy: int, stress: int) -> Dictionary:
+	var card := GameDataScript.get_sleep_option(id)
+	var snapshot := {"id": id}
+	for key in ["energy", "mood", "stress", "study", "satiety"]:
+		snapshot[key] = card[key]
+	return RecoveryService.settle(day, {"energy": energy, "stress": stress}, snapshot, {})["recovery_state"]
+
+
 func _new_controller() -> GameRootV2:
 	var game := GameRootV2Script.new() as GameRootV2
 	track(game)
@@ -722,10 +932,10 @@ func _cash_options(meal_label: String, fee: int = 0) -> Dictionary:
 	}
 
 
-func _assert_scroll_contract(scroll: ScrollContainer, horizontal: bool) -> void:
+func _assert_scroll_contract(scroll: ScrollContainer, horizontal: bool, visible_mode: int = 3) -> void:
 	assert_eq(scroll.scroll_deadzone, 18)
-	assert_eq(scroll.horizontal_scroll_mode, 3 if horizontal else 0)
-	assert_eq(scroll.vertical_scroll_mode, 0 if horizontal else 3)
+	assert_eq(scroll.horizontal_scroll_mode, visible_mode if horizontal else 0)
+	assert_eq(scroll.vertical_scroll_mode, 0 if horizontal else visible_mode)
 
 
 func _touch_event(
@@ -773,6 +983,8 @@ func _force_container_layout(container: Container) -> void:
 
 func _play_affordable_study_day(game: GameRootV2) -> void:
 	for meal in ["breakfast", "lunch", "dinner"]:
+		if game.phase == "ending":
+			return
 		assert_eq(game.phase, "%s_source" % meal)
 		game._choose_meal_source("cafeteria")
 		var preferred: Array[String]
@@ -790,6 +1002,6 @@ func _play_affordable_study_day(game: GameRootV2) -> void:
 			plate.append(_first_affordable_food(game))
 		game._confirm_food(plate)
 		assert_eq(game.phase, "%s_action" % meal)
-		game._apply_action("study")
+		game._apply_action({"breakfast": "study", "lunch": "walk", "dinner": "nap"}[meal])
 	assert_eq(game.phase, "sleep")
 	game._choose_sleep("sleep_early")

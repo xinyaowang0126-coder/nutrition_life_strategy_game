@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-11",
+  "tests_passed": 387,
+  "tests_failed": 0,
+  "suites": 35,
+  "ledger_tests": 16,
+  "ledger_failures": 0,
+  "visual_valid": true,
+  "visual_images": 26,
+  "paired_runs": 8,
+  "captured_meals": 162.0,
+  "paired_errors": [],
+  "ledger_boundaries_unchanged": true,
+  "concurrent_balance_changes_retained": true,
+  "web_export": "artifacts/g4a5-2026-10-11-web",
+  "web_pck_mb": 67.81,
+  "published": false,
+  "tool_gates": 25,
+  "final_mcp_tests": 16
+}

@@ -193,6 +193,35 @@ func test_stale_show_and_hide_callbacks_cannot_change_a_new_or_closed_note() -> 
 	assert_true(note.visible, "an older closing animation must not hide the reopened note")
 
 
+func test_transient_previews_do_not_offer_close_or_action_controls() -> void:
+	var note := _note(_food(0))
+	note.setup(_food(0), "food", "", "加入")
+	for mobile in [false, true]:
+		note.show_at(Rect2(40, 100, 210, 330), mobile, false)
+		assert_true(note.visible)
+		assert_false(note.close_button.visible, "a disappearing preview must not promise a close target")
+		assert_true(note.close_button.disabled)
+		assert_false(note.action_button.visible)
+		assert_true(note.action_button.disabled)
+
+
+func test_pinned_details_restore_controls_and_respect_disabled_actions() -> void:
+	var note := _note(_food(0))
+	note.setup(_food(0), "food", "", "加入")
+	note.show_at(Rect2(40, 100, 210, 330), true, true)
+	assert_true(note.close_button.visible)
+	assert_false(note.close_button.disabled)
+	assert_true(note.action_button.visible)
+	assert_false(note.action_button.disabled)
+	note.setup(_food(0), "food", "余额不足", "加入")
+	assert_true(note.close_button.visible)
+	assert_true(note.action_button.visible)
+	assert_true(note.action_button.disabled)
+	note.show_at(Rect2(40, 100, 210, 330), true, false)
+	assert_false(note.close_button.visible)
+	assert_false(note.action_button.visible)
+
+
 func _food(mood_delta: int) -> Dictionary:
 	return {
 		"id": "greens", "name": "青菜", "satiety": 5, "energy": 2,

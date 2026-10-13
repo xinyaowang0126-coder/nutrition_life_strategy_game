@@ -1,0 +1,727 @@
+{
+  "recovery_conditions": {
+    "steady": 16,
+    "strained": 283,
+    "depleted": 49,
+    "rested": 96
+  },
+  "after_source_sha256": "eeaf02a912afeb7fe9edc4b3e8d2b845c41c6525cec2349f5814da148dac3c09",
+  "before_source_sha256": "389a70e373eeb6849b1e283707fc46041fd7abe9ecd8e8a40f87029bb900f8a8",
+  "schema": "nut208c2.comparison.v1",
+  "recorded_days": 444,
+  "ending_counts": {
+    "stable_endurance": 48,
+    "collapsed": 12,
+    "barely_survived": 12
+  },
+  "rows": 72,
+  "changes": [
+    {
+      "policy": "cafeteria_study_early",
+      "changes": {
+        "stability": {
+          "after": 68,
+          "before": 74
+        }
+      },
+      "seed": 0
+    },
+    {
+      "policy": "cafeteria_study_early",
+      "changes": {
+        "stability": {
+          "after": 67,
+          "before": 73
+        }
+      },
+      "seed": 1
+    },
+    {
+      "policy": "cafeteria_study_early",
+      "changes": {
+        "stability": {
+          "after": 69,
+          "before": 75
+        }
+      },
+      "seed": 2
+    },
+    {
+      "policy": "cafeteria_study_early",
+      "changes": {
+        "stability": {
+          "after": 69,
+          "before": 75
+        }
+      },
+      "seed": 3
+    },
+    {
+      "policy": "cafeteria_study_early",
+      "changes": {
+        "stability": {
+          "after": 70,
+          "before": 76
+        }
+      },
+      "seed": 7
+    },
+    {
+      "policy": "cafeteria_study_early",
+      "changes": {
+        "stability": {
+          "after": 68,
+          "before": 74
+        }
+      },
+      "seed": 13
+    },
+    {
+      "policy": "cafeteria_study_early",
+      "changes": {
+        "stability": {
+          "after": 67,
+          "before": 73
+        }
+      },
+      "seed": 42
+    },
+    {
+      "policy": "cafeteria_study_early",
+      "changes": {
+        "stability": {
+          "after": 68,
+          "before": 74
+        }
+      },
+      "seed": 73
+    },
+    {
+      "policy": "cafeteria_study_early",
+      "changes": {
+        "stability": {
+          "after": 68,
+          "before": 74
+        }
+      },
+      "seed": 101
+    },
+    {
+      "policy": "cafeteria_study_early",
+      "changes": {
+        "stability": {
+          "after": 68,
+          "before": 74
+        }
+      },
+      "seed": 211
+    },
+    {
+      "policy": "cafeteria_study_early",
+      "changes": {
+        "stability": {
+          "after": 66,
+          "before": 72
+        }
+      },
+      "seed": 997
+    },
+    {
+      "policy": "cafeteria_study_early",
+      "changes": {
+        "stability": {
+          "after": 69,
+          "before": 75
+        }
+      },
+      "seed": 20260905
+    },
+    {
+      "policy": "cafeteria_paced_early",
+      "changes": {
+        "study_progress": {
+          "after": 91,
+          "before": 85
+        }
+      },
+      "seed": 1
+    },
+    {
+      "policy": "cafeteria_paced_early",
+      "changes": {
+        "study_progress": {
+          "after": 91,
+          "before": 88
+        }
+      },
+      "seed": 2
+    },
+    {
+      "policy": "cafeteria_paced_early",
+      "changes": {
+        "stability": {
+          "after": 89,
+          "before": 88
+        },
+        "study_progress": {
+          "after": 91,
+          "before": 85
+        }
+      },
+      "seed": 3
+    },
+    {
+      "policy": "cafeteria_paced_early",
+      "changes": {
+        "stability": {
+          "after": 89,
+          "before": 88
+        },
+        "study_progress": {
+          "after": 91,
+          "before": 82
+        }
+      },
+      "seed": 7
+    },
+    {
+      "policy": "cafeteria_paced_early",
+      "changes": {
+        "stability": {
+          "after": 89,
+          "before": 88
+        },
+        "study_progress": {
+          "after": 91,
+          "before": 82
+        }
+      },
+      "seed": 13
+    },
+    {
+      "policy": "cafeteria_paced_early",
+      "changes": {
+        "stability": {
+          "after": 89,
+          "before": 88
+        },
+        "study_progress": {
+          "after": 91,
+          "before": 85
+        }
+      },
+      "seed": 42
+    },
+    {
+      "policy": "cafeteria_paced_early",
+      "changes": {
+        "stability": {
+          "after": 89,
+          "before": 88
+        },
+        "study_progress": {
+          "after": 91,
+          "before": 85
+        }
+      },
+      "seed": 101
+    },
+    {
+      "policy": "cafeteria_paced_early",
+      "changes": {
+        "study_progress": {
+          "after": 91,
+          "before": 85
+        }
+      },
+      "seed": 211
+    },
+    {
+      "policy": "cafeteria_paced_early",
+      "changes": {
+        "study_progress": {
+          "after": 91,
+          "before": 85
+        },
+        "stability": {
+          "after": 88,
+          "before": 87
+        },
+        "mood": {
+          "after": 98,
+          "before": 96
+        }
+      },
+      "seed": 997
+    },
+    {
+      "policy": "cafeteria_paced_early",
+      "changes": {
+        "study_progress": {
+          "after": 91,
+          "before": 85
+        }
+      },
+      "seed": 20260905
+    },
+    {
+      "policy": "cafeteria_adaptive_early",
+      "changes": {
+        "stability": {
+          "after": 71,
+          "before": 77
+        }
+      },
+      "seed": 0
+    },
+    {
+      "policy": "cafeteria_adaptive_early",
+      "changes": {
+        "stability": {
+          "after": 70,
+          "before": 76
+        }
+      },
+      "seed": 1
+    },
+    {
+      "policy": "cafeteria_adaptive_early",
+      "changes": {
+        "stability": {
+          "after": 72,
+          "before": 78
+        }
+      },
+      "seed": 2
+    },
+    {
+      "policy": "cafeteria_adaptive_early",
+      "changes": {
+        "stability": {
+          "after": 72,
+          "before": 78
+        }
+      },
+      "seed": 3
+    },
+    {
+      "policy": "cafeteria_adaptive_early",
+      "changes": {
+        "stability": {
+          "after": 73,
+          "before": 79
+        }
+      },
+      "seed": 7
+    },
+    {
+      "policy": "cafeteria_adaptive_early",
+      "changes": {
+        "stability": {
+          "after": 70,
+          "before": 76
+        },
+        "stress": {
+          "after": 53,
+          "before": 55
+        },
+        "mood": {
+          "after": 50,
+          "before": 49
+        }
+      },
+      "seed": 13
+    },
+    {
+      "policy": "cafeteria_adaptive_early",
+      "changes": {
+        "stability": {
+          "after": 70,
+          "before": 76
+        }
+      },
+      "seed": 42
+    },
+    {
+      "policy": "cafeteria_adaptive_early",
+      "changes": {
+        "stability": {
+          "after": 70,
+          "before": 76
+        }
+      },
+      "seed": 73
+    },
+    {
+      "policy": "cafeteria_adaptive_early",
+      "changes": {
+        "stability": {
+          "after": 71,
+          "before": 77
+        }
+      },
+      "seed": 101
+    },
+    {
+      "policy": "cafeteria_adaptive_early",
+      "changes": {
+        "stability": {
+          "after": 71,
+          "before": 77
+        }
+      },
+      "seed": 211
+    },
+    {
+      "policy": "cafeteria_adaptive_early",
+      "changes": {
+        "stability": {
+          "after": 68,
+          "before": 74
+        }
+      },
+      "seed": 997
+    },
+    {
+      "policy": "cafeteria_adaptive_early",
+      "changes": {
+        "stability": {
+          "after": 71,
+          "before": 77
+        },
+        "stress": {
+          "after": 53,
+          "before": 55
+        },
+        "mood": {
+          "after": 63,
+          "before": 62
+        }
+      },
+      "seed": 20260905
+    },
+    {
+      "policy": "pantry_adaptive_early",
+      "changes": {
+        "stability": {
+          "after": 75,
+          "before": 81
+        }
+      },
+      "seed": 0
+    },
+    {
+      "policy": "pantry_adaptive_early",
+      "changes": {
+        "stability": {
+          "after": 75,
+          "before": 81
+        }
+      },
+      "seed": 1
+    },
+    {
+      "policy": "pantry_adaptive_early",
+      "changes": {
+        "stability": {
+          "after": 76,
+          "before": 82
+        }
+      },
+      "seed": 2
+    },
+    {
+      "policy": "pantry_adaptive_early",
+      "changes": {
+        "stability": {
+          "after": 76,
+          "before": 82
+        }
+      },
+      "seed": 3
+    },
+    {
+      "policy": "pantry_adaptive_early",
+      "changes": {
+        "stability": {
+          "after": 75,
+          "before": 81
+        }
+      },
+      "seed": 7
+    },
+    {
+      "policy": "pantry_adaptive_early",
+      "changes": {
+        "stability": {
+          "after": 75,
+          "before": 81
+        }
+      },
+      "seed": 13
+    },
+    {
+      "policy": "pantry_adaptive_early",
+      "changes": {
+        "stability": {
+          "after": 75,
+          "before": 81
+        }
+      },
+      "seed": 42
+    },
+    {
+      "policy": "pantry_adaptive_early",
+      "changes": {
+        "stability": {
+          "after": 74,
+          "before": 80
+        }
+      },
+      "seed": 73
+    },
+    {
+      "policy": "pantry_adaptive_early",
+      "changes": {
+        "stability": {
+          "after": 74,
+          "before": 80
+        }
+      },
+      "seed": 101
+    },
+    {
+      "policy": "pantry_adaptive_early",
+      "changes": {
+        "stability": {
+          "after": 75,
+          "before": 81
+        }
+      },
+      "seed": 211
+    },
+    {
+      "policy": "pantry_adaptive_early",
+      "changes": {
+        "stability": {
+          "after": 75,
+          "before": 81
+        }
+      },
+      "seed": 997
+    },
+    {
+      "policy": "pantry_adaptive_early",
+      "changes": {
+        "stability": {
+          "after": 74,
+          "before": 80
+        }
+      },
+      "seed": 20260905
+    },
+    {
+      "policy": "takeout_adaptive_early",
+      "changes": {
+        "energy": {
+          "after": 93,
+          "before": 92
+        },
+        "stability": {
+          "after": 32,
+          "before": 39
+        },
+        "mood": {
+          "after": 77,
+          "before": 75
+        }
+      },
+      "seed": 0
+    },
+    {
+      "policy": "takeout_adaptive_early",
+      "changes": {
+        "energy": {
+          "after": 93,
+          "before": 92
+        },
+        "stability": {
+          "after": 32,
+          "before": 39
+        },
+        "mood": {
+          "after": 77,
+          "before": 75
+        }
+      },
+      "seed": 1
+    },
+    {
+      "policy": "takeout_adaptive_early",
+      "changes": {
+        "energy": {
+          "after": 93,
+          "before": 92
+        },
+        "stability": {
+          "after": 32,
+          "before": 40
+        },
+        "mood": {
+          "after": 77,
+          "before": 75
+        }
+      },
+      "seed": 2
+    },
+    {
+      "policy": "takeout_adaptive_early",
+      "changes": {
+        "stability": {
+          "after": 31,
+          "before": 40
+        }
+      },
+      "seed": 3
+    },
+    {
+      "policy": "takeout_adaptive_early",
+      "changes": {
+        "energy": {
+          "after": 93,
+          "before": 92
+        },
+        "stability": {
+          "after": 32,
+          "before": 38
+        },
+        "mood": {
+          "after": 77,
+          "before": 75
+        }
+      },
+      "seed": 7
+    },
+    {
+      "policy": "takeout_adaptive_early",
+      "changes": {
+        "energy": {
+          "after": 93,
+          "before": 92
+        },
+        "stability": {
+          "after": 33,
+          "before": 40
+        },
+        "mood": {
+          "after": 81,
+          "before": 79
+        }
+      },
+      "seed": 13
+    },
+    {
+      "policy": "takeout_adaptive_early",
+      "changes": {
+        "energy": {
+          "after": 93,
+          "before": 92
+        },
+        "stability": {
+          "after": 33,
+          "before": 39
+        },
+        "mood": {
+          "after": 81,
+          "before": 79
+        }
+      },
+      "seed": 42
+    },
+    {
+      "policy": "takeout_adaptive_early",
+      "changes": {
+        "energy": {
+          "after": 93,
+          "before": 92
+        },
+        "stability": {
+          "after": 33,
+          "before": 40
+        },
+        "mood": {
+          "after": 81,
+          "before": 79
+        }
+      },
+      "seed": 73
+    },
+    {
+      "policy": "takeout_adaptive_early",
+      "changes": {
+        "energy": {
+          "after": 93,
+          "before": 92
+        },
+        "stability": {
+          "after": 32,
+          "before": 41
+        },
+        "mood": {
+          "after": 77,
+          "before": 75
+        }
+      },
+      "seed": 101
+    },
+    {
+      "policy": "takeout_adaptive_early",
+      "changes": {
+        "energy": {
+          "after": 93,
+          "before": 92
+        },
+        "stability": {
+          "after": 33,
+          "before": 39
+        },
+        "mood": {
+          "after": 81,
+          "before": 79
+        }
+      },
+      "seed": 211
+    },
+    {
+      "policy": "takeout_adaptive_early",
+      "changes": {
+        "energy": {
+          "after": 93,
+          "before": 92
+        },
+        "stability": {
+          "after": 31,
+          "before": 38
+        },
+        "mood": {
+          "after": 77,
+          "before": 75
+        }
+      },
+      "seed": 997
+    },
+    {
+      "policy": "takeout_adaptive_early",
+      "changes": {
+        "stability": {
+          "after": 34,
+          "before": 40
+        }
+      },
+      "seed": 20260905
+    }
+  ],
+  "errors": [],
+  "scope": "72 scripted legal runs; actual C2 effects active, not human playtests or balance acceptance",
+  "changed_runs": 58
+}

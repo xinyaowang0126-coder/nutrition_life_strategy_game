@@ -6,7 +6,7 @@ extends MealStageBaseV2
 @onready var pantry_scroll: ScrollContainer = $Layout/PantryPanel/PantryMargin/Pantry/PantryScroll
 @onready var stock_grid: GridContainer = $Layout/PantryPanel/PantryMargin/Pantry/PantryScroll/StockGrid
 @onready var slots: HBoxContainer = $Layout/BowlPanel/BowlMargin/Bowl/SelectedSlots
-@onready var status_label: Label = $Layout/BowlPanel/BowlMargin/Bowl/BowlReceipt/Status
+@onready var status_label: Label = $Layout/BowlPanel/BowlMargin/Bowl/BowlHeader/BowlReceipt/Status
 @onready var back_button: Button = $Layout/Footer/BackButton
 @onready var skip_button: Button = $Layout/Footer/SkipButton
 @onready var confirm_button: Button = $Layout/Footer/ConfirmButton
@@ -57,3 +57,13 @@ func _card_button_text() -> String:
 func _slot_text(food: Dictionary) -> String:
 	var food_id := String(food.get("id", ""))
 	return "%s\n余 %d" % [String(food.get("name", "已选")), _card_stock(food_id)]
+
+
+func apply_selection_layout(mobile: bool) -> void:
+	super.apply_selection_layout(mobile)
+	if _ready_finished:
+		stock_grid.columns = 2 if mobile else 5
+
+
+func _get_layout_paths() -> Dictionary:
+	return {"header": "Layout/Header", "cards": "Layout/PantryPanel", "selection": "Layout/BowlPanel", "footer": "Layout/Footer", "selection_margin": "Layout/BowlPanel/BowlMargin", "selection_box": "Layout/BowlPanel/BowlMargin/Bowl", "hide": ["Layout/BowlPanel/BowlMargin/Bowl/BowlHint", "Layout/BowlPanel/BowlMargin/Bowl/BowlHeader/BowlReceipt/FreeTag"]}

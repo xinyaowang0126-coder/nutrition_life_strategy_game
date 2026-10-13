@@ -1,0 +1,11 @@
+{
+  "schema": "edu02-edu03.comparison.v1",
+  "scope": "V2 D-to-EDU02/03 copy scripted legal choices; all recorded gameplay outcomes, frozen recovery rows, cash and inventory compared. Not human playtesting.",
+  "before_source_sha256": "ff002aa62e9ed7e9f5572dfdd33c96783eda5787070ac954272253935d03e0a8",
+  "after_source_sha256": "e12963eaeacd2c17880d41d6d1cab2fbd8d8ec1bdea74f1282b7834755579988",
+  "rows": 72,
+  "recorded_days": 444,
+  "gameplay_differences": [],
+  "errors": [],
+  "legacy_fixture_sha256": "3F67E90FBDFBE423853E390BB8AF4B0C0C3BB2F5AE4CEAB4CB5FEBAE6F50F2F5"
+}

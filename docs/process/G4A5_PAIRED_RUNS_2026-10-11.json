@@ -1,0 +1,151 @@
+{
+  "date": "2026-10-11",
+  "errors": [],
+  "rows": [
+    {
+      "captured_meals": 21,
+      "day": 7,
+      "ending": "collapsed",
+      "gameplay_identical": true,
+      "health_catalog_loaded": false,
+      "order": [
+        "cafeteria",
+        "dorm_storage",
+        "convenience_store",
+        "takeout"
+      ],
+      "seed": 0,
+      "source_counts": {
+        "cafeteria": 21
+      }
+    },
+    {
+      "captured_meals": 18,
+      "day": 6,
+      "ending": "collapsed",
+      "gameplay_identical": true,
+      "health_catalog_loaded": false,
+      "order": [
+        "cafeteria",
+        "dorm_storage",
+        "convenience_store",
+        "takeout"
+      ],
+      "seed": 7,
+      "source_counts": {
+        "cafeteria": 18
+      }
+    },
+    {
+      "captured_meals": 18,
+      "day": 6,
+      "ending": "collapsed",
+      "gameplay_identical": true,
+      "health_catalog_loaded": false,
+      "order": [
+        "cafeteria",
+        "dorm_storage",
+        "convenience_store",
+        "takeout"
+      ],
+      "seed": 42,
+      "source_counts": {
+        "cafeteria": 18
+      }
+    },
+    {
+      "captured_meals": 21,
+      "day": 7,
+      "ending": "collapsed",
+      "gameplay_identical": true,
+      "health_catalog_loaded": false,
+      "order": [
+        "cafeteria",
+        "dorm_storage",
+        "convenience_store",
+        "takeout"
+      ],
+      "seed": 73,
+      "source_counts": {
+        "cafeteria": 21
+      }
+    },
+    {
+      "captured_meals": 21,
+      "day": 7,
+      "ending": "study_shortfall",
+      "gameplay_identical": true,
+      "health_catalog_loaded": false,
+      "order": [
+        "takeout",
+        "convenience_store",
+        "dorm_storage",
+        "cafeteria"
+      ],
+      "seed": 0,
+      "source_counts": {
+        "convenience_store": 9,
+        "dorm_storage": 2,
+        "takeout": 10
+      }
+    },
+    {
+      "captured_meals": 21,
+      "day": 7,
+      "ending": "barely_survived",
+      "gameplay_identical": true,
+      "health_catalog_loaded": false,
+      "order": [
+        "takeout",
+        "convenience_store",
+        "dorm_storage",
+        "cafeteria"
+      ],
+      "seed": 7,
+      "source_counts": {
+        "convenience_store": 10,
+        "dorm_storage": 1,
+        "takeout": 10
+      }
+    },
+    {
+      "captured_meals": 21,
+      "day": 7,
+      "ending": "study_shortfall",
+      "gameplay_identical": true,
+      "health_catalog_loaded": false,
+      "order": [
+        "takeout",
+        "convenience_store",
+        "dorm_storage",
+        "cafeteria"
+      ],
+      "seed": 42,
+      "source_counts": {
+        "convenience_store": 9,
+        "dorm_storage": 2,
+        "takeout": 10
+      }
+    },
+    {
+      "captured_meals": 21,
+      "day": 7,
+      "ending": "study_shortfall",
+      "gameplay_identical": true,
+      "health_catalog_loaded": false,
+      "order": [
+        "takeout",
+        "convenience_store",
+        "dorm_storage",
+        "cafeteria"
+      ],
+      "seed": 73,
+      "source_counts": {
+        "convenience_store": 9,
+        "dorm_storage": 2,
+        "takeout": 10
+      }
+    }
+  ],
+  "scope": "8 paired isolated V2 runs, production draft data, all health switches off. Capture only at confirmation; no save writes, player or balance study."
+}

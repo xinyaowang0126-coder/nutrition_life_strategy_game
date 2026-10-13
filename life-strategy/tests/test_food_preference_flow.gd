@@ -25,14 +25,14 @@ func test_default_tastes_preserve_meal_effects_and_source_costs() -> void:
 		GameDataScript.get_food("salad_bowl"), GameDataScript.get_food("sandwich"),
 	]
 	var record: Dictionary = ResolverScript.build_record("lunch", source, foods)
-	assert_eq(record["stat_delta"]["mood"], -2, "default tastes remain -3 + 3; source adds -2")
-	assert_eq(record["stat_delta"]["satiety"], 32)
-	assert_eq(record["stat_delta"]["energy"], 11 + int(source.get("energy", 0)))
-	assert_eq(record["stat_delta"]["diet_burden"], -2 + int(source.get("burden", 0)))
-	assert_eq(record["total_cost"], 43 + int(source.get("fee", 0)))
+	assert_eq(record["stat_delta"]["mood"], -1, "default tastes are -1 + 2; source adds -2")
+	assert_eq(record["stat_delta"]["satiety"], 52)
+	assert_eq(record["stat_delta"]["energy"], 3 + int(source.get("energy", 0)))
+	assert_false(record["stat_delta"].has("diet_burden"))
+	assert_eq(record["total_cost"], 25 + int(source.get("fee", 0)))
 	assert_false(record["comfort"])
-	assert_eq(record["preference_reactions"][0]["mood_delta"], -3)
-	assert_eq(record["preference_reactions"][1]["mood_delta"], 3)
+	assert_eq(record["preference_reactions"][0]["mood_delta"], -1)
+	assert_eq(record["preference_reactions"][1]["mood_delta"], 2)
 
 
 func test_nutrition_tags_and_forged_preview_cannot_set_taste_or_comfort() -> void:
@@ -49,7 +49,8 @@ func test_nutrition_tags_and_forged_preview_cannot_set_taste_or_comfort() -> voi
 	var selected: Dictionary = ResolverScript.build_record("lunch", {}, foods, declared)
 	assert_eq(selected["stat_delta"]["mood"], 7)
 	assert_true(selected["comfort"])
-	assert_eq(selected["quality"], record["quality"])
+	assert_false(selected.has("quality"))
+	assert_false(record.has("quality"))
 
 
 func test_changed_tastes_leave_food_profiles_and_health_snapshots_identical() -> void:
@@ -124,7 +125,7 @@ func test_explicit_empty_profile_remains_unspecified_in_preview_and_gameplay() -
 	assert_eq(game.get_health_snapshots()[0]["status"], "eaten")
 	var skipped: Dictionary = ResolverScript.build_skipped_record("dinner")
 	assert_true(skipped["preference_reactions"].is_empty())
-	assert_eq(skipped["stat_delta"]["mood"], -4, "skipping remains a separate game effect")
+	assert_eq(skipped["stat_delta"]["mood"], -2, "skipping remains a separate game effect")
 
 
 func test_comfort_is_a_declared_preference_not_a_nutrition_classification() -> void:

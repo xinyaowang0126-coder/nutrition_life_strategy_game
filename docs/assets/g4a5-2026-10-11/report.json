@@ -1,0 +1,44 @@
+{
+	"errors": [],
+	"images": [
+		"E:/nutrition_life_strategy_game/docs/assets/g4a5-2026-10-11/1920x1080-100-day1.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a5-2026-10-11/1920x1080-100-unknown.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a5-2026-10-11/1920x1080-100-week.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a5-2026-10-11/1920x1080-100-versions.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a5-2026-10-11/1920x1080-130-day1.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a5-2026-10-11/1920x1080-130-unknown.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a5-2026-10-11/1920x1080-130-week.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a5-2026-10-11/1920x1080-130-versions.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a5-2026-10-11/720x1280-100-day1.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a5-2026-10-11/720x1280-100-unknown.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a5-2026-10-11/720x1280-100-week.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a5-2026-10-11/720x1280-100-versions.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a5-2026-10-11/720x1280-130-day1.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a5-2026-10-11/720x1280-130-unknown.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a5-2026-10-11/720x1280-130-week.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a5-2026-10-11/720x1280-130-versions.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a5-2026-10-11/780x1280-100-day1.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a5-2026-10-11/780x1280-100-unknown.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a5-2026-10-11/780x1280-100-week.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a5-2026-10-11/780x1280-100-versions.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a5-2026-10-11/780x1280-130-day1.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a5-2026-10-11/780x1280-130-unknown.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a5-2026-10-11/780x1280-130-week.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a5-2026-10-11/780x1280-130-versions.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a5-2026-10-11/1920x1080-native-week.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a5-2026-10-11/390x640-native-week.png"
+	],
+	"layouts": 6,
+	"native_windows": [
+		[
+			1920,
+			1080
+		],
+		[
+			390,
+			640
+		]
+	],
+	"scope": "Isolated synthetic records; native input and logical canvases, not physical phone/browser or production approval.",
+	"valid": true
+}

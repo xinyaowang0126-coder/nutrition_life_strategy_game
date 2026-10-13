@@ -1,0 +1,12 @@
+{
+  "date": "2026-10-12",
+  "budget": 150,
+  "runs": 510,
+  "errors": [],
+  "differences": [],
+  "removed_quality_fields": 10260,
+  "unexpected_new_quality_fields": 0,
+  "baseline_sha256": "19B6577DC3C40DEB3F2DF4F57A84900414B93AA323ACB9806F149BAF0F75D885",
+  "baseline_unchanged": true,
+  "scope": "Only quality keys inside baseline day.meals were removed in memory for comparison. Every other row field, including costs, inventory/periods, actions, resource states, recovery conditions, sources and endings, must match. The frozen baseline file was not rewritten."
+}

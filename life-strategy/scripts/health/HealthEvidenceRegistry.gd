@@ -5,6 +5,7 @@ extends RefCounted
 ## professional approval of profiles and player-facing copy.
 
 const DEFAULT_REGISTRY_PATH := "res://data/health/evidence_registry.xml"
+const XmlStructure := preload("res://scripts/health/HealthXmlStructure.gd")
 const ROOT_ELEMENT := "evidence_registry"
 const SUPPORTED_SCHEMA_VERSION := 1
 const EVIDENCE_STATUSES := ["active", "superseded", "needs_review"]
@@ -33,15 +34,20 @@ func load_registry(path: String = DEFAULT_REGISTRY_PATH) -> Dictionary:
 	_reset(path)
 	if not FileAccess.file_exists(path):
 		return _fail(STATUS_MISSING, "Evidence registry is missing: %s" % path, true)
-	if FileAccess.get_file_as_string(path).strip_edges().is_empty():
+	var xml := FileAccess.get_file_as_string(path).strip_edges()
+	if xml.is_empty():
 		return _fail(
 			STATUS_EMPTY_FILE,
 			"Evidence registry contains no XML root: %s" % path,
 			true
 		)
 
+	var buffer := xml.to_utf8_buffer()
+	var structure_error := XmlStructure.validate(buffer)
+	if not structure_error.is_empty():
+		return _fail(STATUS_INVALID_XML, structure_error, true)
 	var parser := XMLParser.new()
-	var open_error := parser.open(path)
+	var open_error := parser.open_buffer(buffer)
 	if open_error != OK:
 		return _fail(
 			STATUS_INVALID_XML,

@@ -96,8 +96,8 @@ func _bind_prop(source_id: String) -> void:
 
 
 func _apply_sources() -> void:
-	title_label.text = "%s怎么解决？" % _meal_label
-	subtitle_label.text = "挑个去处，点小圆标看规则"
+	title_label.text = "%s去哪吃？" % _meal_label
+	subtitle_label.text = "悬停看详情"
 	for source_id in SOURCE_NODE_NAMES:
 		_apply_source(String(source_id))
 
@@ -229,6 +229,8 @@ func _source_disabled_reason(source_id: String) -> String:
 
 
 func _short_disabled_reason(reason: String) -> String:
+	if reason.contains("时段"):
+		return "未营业"
 	if reason.is_empty():
 		return "暂未开放"
 	if reason.length() <= 7:

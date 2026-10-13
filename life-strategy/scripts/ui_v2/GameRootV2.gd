@@ -4,9 +4,12 @@ extends Control
 const GameDataScript := preload("res://scripts/GameData.gd")
 const MealDeckServiceScript := preload("res://scripts/systems/MealDeckService.gd")
 const MealResolverScript := preload("res://scripts/systems/MealResolver.gd")
+const BalanceRules := preload("res://scripts/systems/GameplayBalanceRules.gd")
 const NutritionLedgerScript := preload("res://scripts/systems/NutritionLedger.gd")
 const WeeklyEventServiceScript := preload("res://scripts/systems/WeeklyEventService.gd")
-const DayCarryoverServiceScript := preload("res://scripts/systems/DayCarryoverService.gd")
+const RecoveryStateServiceScript := preload("res://scripts/systems/RecoveryStateService.gd")
+const RecoveryGameplayServiceScript := preload("res://scripts/systems/RecoveryGameplayService.gd")
+const RecoveryPresenterScript := preload("res://scripts/systems/RecoveryPresenter.gd")
 const HealthGuidanceFeatureFlagsScript := preload("res://scripts/health/HealthGuidanceFeatureFlags.gd")
 const HealthDataStoreScript := preload("res://scripts/health/HealthDataStore.gd")
 const HealthDataValidatorScript := preload("res://scripts/health/HealthDataValidator.gd")
@@ -14,6 +17,8 @@ const MealHealthSnapshotScript := preload("res://scripts/health/MealHealthSnapsh
 const MealHealthArchiveScript := preload("res://scripts/health/MealHealthArchive.gd")
 const FoodPreferenceServiceScript := preload("res://scripts/systems/FoodPreferenceService.gd")
 const DEFAULT_HEALTH_HISTORY_PATH := "user://health_guidance/latest_meals.json"
+const MealRecordPresenterScript := preload("res://scripts/systems/MealRecordPresenter.gd")
+const RECORD_BOOK_SCENE := preload("res://scenes/game_v2/components/MealRecordBookPopup.tscn")
 
 const SOURCE_STAGE_SCENE := preload("res://scenes/game_v2/stages/MealSourceStage.tscn")
 const CAFETERIA_STAGE_SCENE := preload("res://scenes/game_v2/stages/CafeteriaMealStage.tscn")
@@ -25,12 +30,14 @@ const SLEEP_STAGE_SCENE := preload("res://scenes/game_v2/stages/SleepStage.tscn"
 
 const MAIN_MENU := "res://scenes/main_menu/MainMenu.tscn"
 const DEFAULT_BACKGROUND := "res://assets/generated/backgrounds/dorm_background.png"
+const SOURCE_MAP := "res://assets/generated/ui_v3/backgrounds/campus_map.png"
+const SOURCE_MAP_MOBILE := "res://assets/generated/ui_v3/backgrounds/campus_map_portrait.png"
 const ACTION_BACKGROUNDS := {
-	"breakfast_action": "res://assets/generated/ui_v2/backgrounds/action_morning_16x9.png",
-	"lunch_action": "res://assets/generated/ui_v2/backgrounds/action_noon_16x9.png",
-	"dinner_action": "res://assets/generated/ui_v2/backgrounds/action_evening_16x9.png",
-	"sleep": "res://assets/generated/ui_v2/backgrounds/action_evening_16x9.png",
-	"summary": "res://assets/generated/ui_v2/backgrounds/action_evening_16x9.png",
+	"breakfast_action": "res://assets/generated/ui_v3/backgrounds/dorm_morning.png",
+	"lunch_action": "res://assets/generated/ui_v3/backgrounds/campus_afternoon.png",
+	"dinner_action": "res://assets/generated/ui_v3/backgrounds/campus_evening.png",
+	"sleep": "res://assets/generated/backgrounds/dorm_background.png",
+	"summary": "res://assets/generated/backgrounds/dorm_background.png",
 }
 const ACTION_BACKGROUNDS_MOBILE := {
 	"breakfast_source": "res://assets/generated/ui_v2/backgrounds/action_morning_9x16.png",
@@ -99,6 +106,7 @@ const PHASE_NAMES := {
 @onready var balance_label: Label = $HUD/HUDRoot/TopSafeArea/TopHUD/BalanceChip/BalanceLabel
 @onready var balance_chip: PanelContainer = $HUD/HUDRoot/TopSafeArea/TopHUD/BalanceChip
 @onready var menu_button: Button = $HUD/HUDRoot/TopSafeArea/TopHUD/MenuButton
+@onready var week_ribbon: HBoxContainer = $HUD/HUDRoot/TopSafeArea/TopHUD/TopSpacer
 @onready var character_anchor: Control = $HUD/HUDRoot/CharacterAnchor
 @onready var character_hud: CharacterHUDV2 = $HUD/HUDRoot/CharacterAnchor/CharacterSlot/CharacterHUD
 @onready var toast_anchor: Control = $HUD/HUDRoot/ToastAnchor
@@ -121,6 +129,7 @@ var drink_water_used := 0
 var used_action_names: Array[String] = []
 var used_action_ids: Array[String] = []
 var today_action_records: Array[Dictionary] = []
+var today_period_records: Array[Dictionary] = []
 var combos_today: Array[String] = []
 var summary_payload: Dictionary = {}
 var health_guidance_flags: Dictionary = {}
@@ -134,9 +143,19 @@ var run_history: Array[Dictionary] = []
 var current_event: Dictionary = {}
 var current_learning_state: Dictionary = {}
 var pending_learning_state: Dictionary = {}
+var pending_recovery_state: Dictionary = RecoveryStateServiceScript.new_run()
+var current_recovery_state: Dictionary = RecoveryStateServiceScript.new_run()
+var _current_recovery_effect: Dictionary = {"study_modifier": 0, "opening_delta": {}}
+var _recovery_display_record: Dictionary = {}
+var _started_day := 0
+var recovery_diagnostics: Array[Dictionary] = []
 var _day_start_state: Dictionary = {}
 var chosen_sleep_id := ""
 var chosen_sleep_name := ""
+var _recovery_before_sleep: Dictionary = {}
+var _recovery_sleep_snapshot: Dictionary = {}
+var _day_settlement_effects: Array[Dictionary] = []
+var _day_settled := false
 
 var _deck_service: RefCounted
 var _active_stage: Control
@@ -145,9 +164,12 @@ var _profile_initialized := false
 var _applying_profile := false
 var _background_path := ""
 var _background_a_is_front := true
+var _background_tween: Tween
 var _health_archive: RefCounted
 var _health_catalog: Dictionary = {}
 var _health_catalog_loaded := false
+var _record_book: MealRecordBookPopupV2
+var _record_input_restore: Dictionary = {}
 
 
 func _ready() -> void:
@@ -155,18 +177,22 @@ func _ready() -> void:
 	health_guidance_flags = HealthGuidanceFeatureFlagsScript.current()
 	HealthGuidanceFeatureFlagsScript.warn_for_invalid(health_guidance_flags)
 	_deck_service = MealDeckServiceScript.new()
-	menu_button.pressed.connect(_request_main_menu)
+	menu_button.pressed.connect(_show_meal_record_book)
 	character_hud.details_requested.connect(_show_detail.bind("state"))
 	character_hud.detail_dismissed.connect(_dismiss_detail)
-	sticky_note.closed.connect(func() -> void: pass)
+	sticky_note.closed.connect(_restore_detail_input)
 	daily_summary.next_day_requested.connect(_on_summary_advanced)
+	daily_summary.record_book_requested.connect(_show_meal_record_book)
 	new_day_popup.continue_requested.connect(_on_new_day_continue)
+	new_day_popup.recovery_details_requested.connect(_show_recovery_detail)
 	get_viewport().size_changed.connect(_apply_responsive_profile)
 	_apply_responsive_profile()
 	start_new_run()
 
 
 func start_new_run() -> void:
+	if _record_book_active():
+		_record_book.close_book()
 	food_preferences = FoodPreferenceServiceScript.default_profile()
 	if _health_archive != null:
 		_health_archive.clear()
@@ -180,8 +206,12 @@ func start_new_run() -> void:
 	ending_id = ""
 	run_history.clear()
 	current_event.clear()
-	current_learning_state = DayCarryoverServiceScript.STEADY.duplicate(true)
-	pending_learning_state = current_learning_state.duplicate(true)
+	pending_recovery_state = RecoveryStateServiceScript.new_run()
+	current_recovery_state = pending_recovery_state.duplicate(true)
+	_current_recovery_effect = pending_recovery_state["next_day_effect"].duplicate(true)
+	_started_day = 0
+	pending_learning_state = RecoveryGameplayServiceScript.learning_state(pending_recovery_state)["learning_state"]
+	recovery_diagnostics.clear()
 	if is_node_ready():
 		daily_summary.hide_summary(false)
 		new_day_popup.hide_popup(false)
@@ -191,10 +221,22 @@ func start_new_run() -> void:
 	_show_new_day_popup()
 
 
-func _start_day() -> void:
+func _start_day() -> bool:
+	if _started_day == day:
+		return true
+	var previous: Variant = pending_recovery_state if day == 1 else null
+	if day > 1 and not run_history.is_empty() and run_history.back().get("day") == day - 1:
+		previous = run_history.back().get("recovery_state")
+	var prepared := RecoveryGameplayServiceScript.prepare_day(previous, day - 1)
+	if not prepared["valid"]:
+		_record_recovery_error("recovery_opening_invalid", prepared["errors"])
+		return false
 	_day_start_state = state.duplicate(true)
-	current_learning_state = pending_learning_state.duplicate(true)
-	_apply_stat_delta(current_learning_state.get("opening_delta", {}))
+	current_recovery_state = prepared["recovery_state"].duplicate(true)
+	_recovery_display_record = current_recovery_state.duplicate(true)
+	_current_recovery_effect = current_recovery_state["next_day_effect"].duplicate(true)
+	current_learning_state = prepared["learning_state"].duplicate(true)
+	_apply_stat_delta(_current_recovery_effect["opening_delta"])
 	current_event = WeeklyEventServiceScript.event_for_day(day)
 	state = WeeklyEventServiceScript.apply_opening_state(day, state)
 	_clamp_stats()
@@ -209,10 +251,17 @@ func _start_day() -> void:
 	used_action_names.clear()
 	used_action_ids.clear()
 	today_action_records.clear()
+	today_period_records.clear()
 	combos_today.clear()
 	summary_payload.clear()
 	chosen_sleep_id = ""
 	chosen_sleep_name = ""
+	_recovery_before_sleep.clear()
+	_recovery_sleep_snapshot.clear()
+	_day_settlement_effects.clear()
+	_day_settled = false
+	_started_day = day
+	return true
 
 
 func _render_phase() -> void:
@@ -222,6 +271,7 @@ func _render_phase() -> void:
 	_update_shell()
 	_update_background()
 	character_hud.update_stats(state, true)
+	character_hud.update_recovery(_recovery_display_record)
 	if phase == "summary":
 		_clear_stage()
 		daily_summary.show_summary(summary_payload, _mobile_mode)
@@ -254,7 +304,10 @@ func _show_source_stage() -> void:
 		source["disabled_reason"] = reason
 		sources.append(source)
 		disabled_reasons[source_id] = reason
-	stage.source_selected.connect(_choose_meal_source)
+	stage.source_selected.connect(func(source_id: String) -> void:
+		if stage == _active_stage:
+			_choose_meal_source(source_id)
+	)
 	stage.skip_requested.connect(_skip_meal)
 	stage.detail_requested.connect(_show_detail.bind("source"))
 	stage.detail_dismissed.connect(_dismiss_detail)
@@ -320,7 +373,7 @@ func _show_action_stage() -> void:
 		"water_count": drink_water_used,
 		"water_max": 2,
 		"used_action_names": used_action_names,
-		"used_action_ids": used_action_ids,
+		"used_action_ids": used_action_ids.filter(func(id: String) -> bool: return id != "drink_water"),
 	})
 
 
@@ -362,6 +415,10 @@ func _install_stage(stage: Control) -> void:
 
 func _clear_stage() -> void:
 	if is_instance_valid(_active_stage):
+		# Retired stages remain alive until frame end; silence every outgoing
+		# command, including skip/back, before another stage can accept input.
+		_active_stage.set_block_signals(true)
+		_active_stage.hide()
 		_active_stage.queue_free()
 	_active_stage = null
 	for child in stage_host.get_children():
@@ -370,6 +427,12 @@ func _clear_stage() -> void:
 
 
 func _choose_meal_source(source_id: String) -> void:
+	if _record_book_active():
+		return
+	# A removed source stage can still emit until queue_free() completes.
+	# Never reopen a settled meal from its action/summary phase.
+	if not _is_source_phase():
+		return
 	var meal := _current_meal_phase()
 	var reason := _source_disabled_reason(source_id, meal)
 	if not reason.is_empty():
@@ -383,6 +446,8 @@ func _choose_meal_source(source_id: String) -> void:
 
 
 func _change_meal_source() -> void:
+	if _record_book_active():
+		return
 	# The outgoing stage is freed at the end of the frame.  Ignore a second
 	# click/tap from that stale stage instead of producing e.g.
 	# `breakfast_source_source`.
@@ -456,6 +521,10 @@ func _source_disabled_reason(source_id: String, meal: String) -> String:
 
 
 func _on_food_toggled(food_id: String) -> void:
+	if _record_book_active():
+		if is_instance_valid(_active_stage) and _active_stage.has_method("set_selection"):
+			_active_stage.call("set_selection", selected_food_ids, false)
+		return
 	if selected_food_ids.has(food_id):
 		selected_food_ids.erase(food_id)
 	elif _can_add_food(food_id):
@@ -492,6 +561,8 @@ func _selected_meal_total(extra_food_id: String = "") -> int:
 
 
 func _confirm_food(food_ids: Array) -> void:
+	if _record_book_active():
+		return
 	if current_source_id.is_empty() or not _is_meal_phase():
 		return
 	var safe_ids: Array[String] = []
@@ -527,6 +598,8 @@ func _confirm_food(food_ids: Array) -> void:
 
 
 func _skip_meal() -> void:
+	if _record_book_active():
+		return
 	# Stage replacement uses queue_free(), so a rapid second tap can still emit
 	# from the old source/meal stage during this frame.  Only the active meal
 	# entry points are allowed to create a skipped record.
@@ -555,6 +628,81 @@ func _apply_meal_record(record: Dictionary) -> void:
 	_check_meal_combos(record)
 	_clamp_stats()
 	_update_stability()
+
+
+func get_meal_guidance_input() -> Dictionary:
+	# Explicit, detached read for G4 adapters/shadow diagnostics. It neither
+	# builds a hand nor loads health data when the feature flags are closed.
+	return {
+		"day": day, "phase": phase, "source_id": current_source_id,
+		"balance": state.get("balance", 0), "hand_ids": hand.duplicate(),
+		"selected_ids": selected_food_ids.duplicate(),
+		"inventory": dorm_inventory.duplicate(true),
+	}
+
+
+func get_meal_record_book() -> Dictionary:
+	return MealRecordPresenterScript.capture(run_history, today_meal_records, day)
+
+
+func _record_book_active() -> bool:
+	return is_instance_valid(_record_book) and _record_book.visible
+
+
+func _show_meal_record_book() -> void:
+	if not is_node_ready() or _record_book_active():
+		return
+	if not is_instance_valid(_record_book):
+		_record_book = RECORD_BOOK_SCENE.instantiate() as MealRecordBookPopupV2
+		daily_summary.get_parent().add_child(_record_book)
+		_record_book.closed.connect(_on_meal_record_book_closed)
+		_record_book.main_menu_requested.connect(func() -> void:
+			_record_book.close_book()
+			_request_main_menu()
+		)
+	var detail_was_visible := sticky_note.visible
+	sticky_note.hide_note(false)
+	if detail_was_visible:
+		_restore_detail_input()
+	_record_input_restore = {
+		"summary_keys": daily_summary.is_processing_unhandled_key_input(),
+		"summary_button": daily_summary.next_button.disabled,
+		"new_day_keys": new_day_popup.is_processing_unhandled_key_input(),
+		"new_day_button": new_day_popup.continue_button.disabled,
+	}
+	daily_summary.set_process_unhandled_key_input(false)
+	daily_summary.next_button.disabled = true
+	new_day_popup.set_process_unhandled_key_input(false)
+	new_day_popup.continue_button.disabled = true
+	var return_text := "回到结局" if phase == "ending" else ("回到小结" if phase == "summary" else "继续安排")
+	_record_book.show_book(get_meal_record_book(), return_text)
+
+
+func _on_meal_record_book_closed() -> void:
+	if _record_input_restore.is_empty():
+		return
+	daily_summary.set_process_unhandled_key_input(_record_input_restore["summary_keys"])
+	daily_summary.next_button.disabled = _record_input_restore["summary_button"]
+	new_day_popup.set_process_unhandled_key_input(_record_input_restore["new_day_keys"])
+	new_day_popup.continue_button.disabled = _record_input_restore["new_day_button"]
+	_record_input_restore.clear()
+	if is_instance_valid(_active_stage) and _active_stage.has_method("set_selection"):
+		_active_stage.call("set_selection", selected_food_ids, false)
+	if daily_summary.visible:
+		daily_summary.next_button.grab_focus()
+	elif new_day_popup.visible:
+		new_day_popup.continue_button.grab_focus()
+	else:
+		menu_button.grab_focus()
+
+
+func _restore_detail_input() -> void:
+	if _record_book_active():
+		return
+	new_day_popup.set_process_unhandled_key_input(true)
+	if new_day_popup.visible:
+		new_day_popup.continue_button.disabled = false
+		new_day_popup.recovery_details_button.grab_focus()
 
 
 func get_food_for_character(food_id: String) -> Dictionary:
@@ -659,24 +807,19 @@ func _autosave_health_history() -> void:
 func _check_meal_combos(record: Dictionary) -> void:
 	if not combos_today.has("meal_group_mix") and MealResolverScript.has_meal_group_combination(record):
 		combos_today.append("meal_group_mix")
-		state["energy"] = int(state["energy"]) + 5
-		state["mood"] = int(state["mood"]) + 3
-		state["diet_burden"] = int(state["diet_burden"]) - 2
-		_post("这餐同时包含谷薯类、蔬菜类和蛋白质食物来源。", "good")
 	if not combos_today.has("comfort_chain") and MealResolverScript.comfort_meal_count(today_meal_records) >= 2:
 		combos_today.append("comfort_chain")
-		state["mood"] = int(state["mood"]) + 4
-		state["diet_burden"] = int(state["diet_burden"]) + 3
-		_post("连续选择了偏好的食物：心情提高，同时触发额外游戏消耗。", "info")
+		state["mood"] = int(state["mood"]) + 2
+		_post("今天已有两餐合口味，心情 +2（游戏）。", "info")
 	if String(record["phase"]) == "dinner" and not combos_today.has("budget_saver"):
 		var all_eaten := today_meal_records.size() >= 3
 		for meal_record in today_meal_records:
-			if bool(meal_record.get("skipped", false)):
+			if bool(meal_record.get("skipped", false)) or int(meal_record.get("stat_delta", {}).get("satiety", 0)) < 20:
 				all_eaten = false
-		if all_eaten and MealResolverScript.total_spend(today_meal_records) <= 12:
+		if all_eaten and MealResolverScript.total_spend(today_meal_records) <= 18:
 			combos_today.append("budget_saver")
-			state["stress"] = int(state["stress"]) - 3
-			_post("三餐一共没花多少，明天的预算宽一点。", "good")
+			state["stress"] = int(state["stress"]) - 2
+			_post("三餐各补充至少 20 饱腹且合计不超过 ¥18，压力 -2（游戏）。", "good")
 
 
 func _advance_from_meal() -> void:
@@ -688,6 +831,8 @@ func _advance_from_meal() -> void:
 
 
 func _apply_action(action_id: String) -> void:
+	if _record_book_active():
+		return
 	if not _is_action_phase():
 		return
 	if not GameDataScript.get_action_ids_for_scene(phase).has(action_id):
@@ -703,7 +848,8 @@ func _apply_action(action_id: String) -> void:
 	actions_used_today += int(action.get("slots", 1))
 	if action_id == "drink_water":
 		drink_water_used += 1
-	used_action_names.append(display_name)
+	if int(action.get("slots", 1)) > 0:
+		used_action_names.append(display_name)
 	used_action_ids.append(action_id)
 	state["balance"] = int(state["balance"]) - int(action.get("cost", 0))
 	var delta := {
@@ -712,7 +858,6 @@ func _apply_action(action_id: String) -> void:
 		"stress": int(action.get("stress", 0)),
 		"study_progress": int(action.get("study", 0)),
 		"satiety": int(action.get("satiety", 0)),
-		"diet_burden": int(action.get("burden", 0)),
 	}
 	_apply_stat_delta(delta)
 	var stock_added := _apply_action_stock(action)
@@ -720,6 +865,7 @@ func _apply_action(action_id: String) -> void:
 		"id": action_id,
 		"name": display_name,
 		"cost": int(action.get("cost", 0)),
+		"slots": int(action.get("slots", 1)),
 		"stat_delta": delta.duplicate(true),
 		"stock_added": stock_added,
 	})
@@ -729,10 +875,15 @@ func _apply_action(action_id: String) -> void:
 		_post(display_name, "info")
 	else:
 		_post("%s：燕麦、牛奶和苹果放进柜子了。" % display_name, "good")
-	_advance_after_action()
+	if int(action.get("slots", 1)) == 0:
+		_render_phase()
+	else:
+		_advance_after_action()
 
 
 func _skip_action() -> void:
+	if _record_book_active():
+		return
 	if not _is_action_phase():
 		return
 	_post("%s没有再排事情。" % String(PHASE_NAMES.get(phase, "餐后")), "info")
@@ -740,6 +891,13 @@ func _skip_action() -> void:
 
 
 func _advance_after_action() -> void:
+	if not _is_action_phase():
+		return
+	var period_delta := BalanceRules.period_delta()
+	today_period_records.append({"phase": phase, "stat_delta": period_delta.duplicate(true)})
+	_apply_stat_delta(period_delta)
+	_clamp_stats()
+	_update_stability()
 	match phase:
 		"breakfast_action": phase = "lunch_source"
 		"lunch_action": phase = "dinner_source"
@@ -785,24 +943,21 @@ func _effective_action(action_id: String) -> Dictionary:
 		action_id,
 		base_action
 	)
+	if int(action.get("slots", 1)) > 0:
+		action["rule_hint"] = String(action.get("rule_hint", "")) + "\n" + BalanceRules.PERIOD_HINT
 	if action_id != "study":
 		return action
-	var carryover_modifier := int(current_learning_state.get("study_modifier", 0))
-	var live_modifier := 0
-	var live_reasons: Array[String] = []
-	if int(state.get("energy", 0)) < 25:
-		live_modifier -= 3
-		live_reasons.append("精力偏低")
-	if int(state.get("stress", 0)) >= 70:
-		live_modifier -= 2
-		live_reasons.append("压力偏高")
+	var carryover_modifier := int(_current_recovery_effect["study_modifier"])
+	var live_penalty := BalanceRules.study_penalty(state)
+	var live_modifier: int = live_penalty["modifier"]
+	var live_reasons: Array[String] = live_penalty["reasons"]
 	var total_modifier := carryover_modifier + live_modifier
 	if total_modifier != 0:
 		action["study"] = maxi(1, int(action.get("study", 0)) + total_modifier)
 	var notes: Array[String] = []
 	var carryover_text := "不变" if carryover_modifier == 0 else _signed_delta(carryover_modifier)
-	notes.append("今日学习状态：%s（每次复习 %s）" % [
-		String(current_learning_state.get("title", "状态平稳")),
+	notes.append("昨夜恢复：%s（每次复习 %s）" % [
+		String(RecoveryPresenterScript.present(_recovery_display_record)["title"]),
 		carryover_text,
 	])
 	var event_modifier := int(action.get("study", 0)) - int(base_action.get("study", 0)) - total_modifier
@@ -842,80 +997,71 @@ func _apply_action_stock(action: Dictionary) -> Dictionary:
 
 
 func _choose_sleep(option_id: String) -> void:
-	if phase != "sleep":
+	if _record_book_active():
+		return
+	if phase != "sleep" or _day_settled:
 		return
 	if not GameDataScript.get_sleep_option_ids_for_scene("sleep").has(option_id):
 		return
 	var option := GameDataScript.get_sleep_option(option_id)
 	chosen_sleep_id = option_id
 	chosen_sleep_name = String(option.get("name", option_id))
+	_recovery_before_sleep = {"energy": state.get("energy"), "stress": state.get("stress")}
+	_recovery_sleep_snapshot = {"id": option_id}
+	for key in ["energy", "mood", "stress", "study", "satiety"]:
+		# Freeze exactly the integer deltas used by this execution, not a later
+		# lookup of the sleep card or its legacy burden field.
+		_recovery_sleep_snapshot[key] = int(option.get(key, 0))
 	_apply_stat_delta({
-		"energy": int(option.get("energy", 0)),
-		"mood": int(option.get("mood", 0)),
-		"stress": int(option.get("stress", 0)),
-		"study_progress": int(option.get("study", 0)),
-		"satiety": int(option.get("satiety", 0)),
-		"diet_burden": int(option.get("burden", 0)),
+		"energy": _recovery_sleep_snapshot["energy"],
+		"mood": _recovery_sleep_snapshot["mood"],
+		"stress": _recovery_sleep_snapshot["stress"],
+		"study_progress": _recovery_sleep_snapshot["study"],
+		"satiety": _recovery_sleep_snapshot["satiety"],
 	})
 	_post("夜里：%s" % chosen_sleep_name, "info")
 	_finish_day()
 
 
 func _finish_day() -> void:
+	if _day_settled:
+		return
+	_day_settled = true
 	var nutrition_summary: Dictionary = NutritionLedgerScript.summarize(today_meal_records)
-	# Compatibility value for the legacy gameplay settlement only. It is not
-	# exposed as health guidance and will be removed with NUT-308.
-	var legacy_nutrition_score := int(nutrition_summary.get(
-		"score",
-		MealResolverScript.day_quality(today_meal_records)
-	))
-	if legacy_nutrition_score >= 66:
-		state["energy"] = int(state["energy"]) + 4
-		state["mood"] = int(state["mood"]) + 4
-		state["diet_burden"] = int(state["diet_burden"]) - 2
-	elif legacy_nutrition_score < 42:
-		state["stress"] = int(state["stress"]) + 5
-		state["diet_burden"] = int(state["diet_burden"]) + 4
 	if int(state["satiety"]) < 20:
-		state["stress"] = int(state["stress"]) + 8
-		state["mood"] = int(state["mood"]) - 5
+		_apply_day_settlement_effect("low_satiety", {"energy": -8, "stress": 8, "mood": -5})
 	if int(state["satiety"]) > 92:
-		state["diet_burden"] = int(state["diet_burden"]) + 4
-		state["energy"] = int(state["energy"]) - 3
+		_apply_day_settlement_effect("high_satiety", {"energy": -3})
 	var remaining_days := maxi(0, GameDataScript.TOTAL_DAYS - day)
-	if remaining_days > 0 and int(state["balance"]) < remaining_days * 8:
-		state["stress"] = int(state["stress"]) + 5
-		state["mood"] = int(state["mood"]) - 2
+	if remaining_days > 0 and int(state["balance"]) < remaining_days * 14:
+		_apply_day_settlement_effect("tight_budget", {"stress": 5, "mood": -2})
 	var study_pace := mini(
 		GameDataScript.STUDY_TARGET,
 		day * GameDataScript.DAILY_STUDY_PACE
 	)
 	if int(state["study_progress"]) < study_pace:
-		state["stress"] = int(state["stress"]) + 3
+		_apply_day_settlement_effect("study_behind", {"stress": 3})
 	else:
-		state["mood"] = int(state["mood"]) + 2
-	state["diet_burden"] = int(state["diet_burden"]) - 3
-	state["satiety"] = int(state["satiety"]) - 6
+		_apply_day_settlement_effect("study_on_pace", {"mood": 2})
 	_clamp_stats()
-	_update_stability()
-	if int(state["stability"]) <= 15:
+	_settle_recovery_record()
+	var stability_valid := _update_stability(pending_recovery_state)
+	var next_learning := RecoveryGameplayServiceScript.learning_state(pending_recovery_state)
+	pending_learning_state = next_learning["learning_state"]
+	if stability_valid and int(state["stability"]) <= 15:
 		low_stability_days += 1
-	else:
+	elif stability_valid:
 		low_stability_days = 0
-	pending_learning_state = DayCarryoverServiceScript.evaluate_day(
-		nutrition_summary,
-		today_action_records,
-		chosen_sleep_id,
-		state
-	)
 	var day_record := _build_day_record(nutrition_summary)
 	run_history.append(day_record)
 	var detail_text := "%s\n\n本局变化\n%s" % [
 		String(nutrition_summary.get("detail_text", "")),
 		_day_change_text(day_record),
 	]
-	nutrition_summary["detail_text"] = detail_text
+	var recovery_view := RecoveryPresenterScript.present(pending_recovery_state, "final" if day >= GameDataScript.TOTAL_DAYS else "settled")
+	var summary_detail := {"detail_text": detail_text + "\n\n恢复依据\n" + String(recovery_view["detail_text"]), "basis": String(nutrition_summary.get("basis", ""))}
 	summary_payload = {
+		"record_book_available": true,
 		"day": day,
 		"title": "第 %d 天，收工" % day,
 		"stats": state.duplicate(true),
@@ -927,20 +1073,71 @@ func _finish_day() -> void:
 			_next_day_preview_text(),
 		],
 		"nutrition": nutrition_summary,
-		"detail_button_text": "查看三餐详情",
-		"detail_button_open_text": "收起三餐详情",
+		"recovery": recovery_view,
+		"detail": summary_detail,
+		"detail_button_text": "查看三餐与恢复依据",
+		"detail_button_open_text": "收起三餐与恢复依据",
 		"button_text": "睡到第 %d 天" % (day + 1),
 	}
-	if low_stability_days >= 2:
+	if not stability_valid or not next_learning["valid"]:
+		phase = "summary"
+		_render_phase()
+		_post("恢复记录暂时不可用，请通过菜单重新开始这一周。", "warning")
+	elif low_stability_days >= 2:
 		_finish_run("collapsed")
 	elif day >= GameDataScript.TOTAL_DAYS:
-		_finish_run(MealResolverScript.select_ending(state))
+		_finish_run(MealResolverScript.select_ending(state, true))
 	else:
 		phase = "summary"
 		_render_phase()
 
 
+func _apply_day_settlement_effect(source_id: String, delta: Dictionary) -> void:
+	_apply_stat_delta(delta)
+	var recorded_delta := {}
+	for key in RecoveryStateServiceScript.DELTA_KEYS:
+		if delta.has(key) and state.has(key):
+			recorded_delta[key] = delta[key]
+	_day_settlement_effects.append({"source_id": source_id, "requested_delta": recorded_delta})
+
+
+func _settle_recovery_record() -> void:
+	var action_counts := {}
+	for action in today_action_records:
+		var action_id: Variant = action.get("id")
+		action_counts[action_id] = int(action_counts.get(action_id, 0)) + 1
+	var result := RecoveryStateServiceScript.settle(
+		day, _recovery_before_sleep, _recovery_sleep_snapshot,
+		action_counts, _day_settlement_effects
+	)
+	if result["valid"] and result["recovery_state"]["end_of_day"] != {"energy": state.get("energy"), "stress": state.get("stress")}:
+		result = {
+			"valid": false, "errors": ["Recovery trace does not match settled gameplay state"],
+			"recovery_state": RecoveryStateServiceScript.unavailable("invalid", "RECOVERY_TRACE_MISMATCH"),
+		}
+	pending_recovery_state = result["recovery_state"].duplicate(true)
+	if not result["valid"]:
+		recovery_diagnostics.append({"day": day, "code": "recovery_settlement_invalid", "errors": result["errors"].duplicate()})
+
+
+func get_pending_recovery_state() -> Dictionary:
+	return pending_recovery_state.duplicate(true)
+
+
+func get_current_recovery_state() -> Dictionary:
+	return current_recovery_state.duplicate(true)
+
+
+func _record_recovery_error(code: String, errors: Array) -> void:
+	for entry in recovery_diagnostics:
+		if entry.get("day") == day and entry.get("code") == code:
+			return
+	recovery_diagnostics.append({"day": day, "code": code, "errors": errors.duplicate(true)})
+
+
 func _on_summary_advanced() -> void:
+	if _record_book_active():
+		return
 	if phase == "ending":
 		start_new_run()
 	elif phase == "summary":
@@ -948,8 +1145,15 @@ func _on_summary_advanced() -> void:
 
 
 func _next_day() -> void:
+	if _record_book_active():
+		return
+	if phase != "summary" or not _day_settled or day >= GameDataScript.TOTAL_DAYS:
+		return
 	day += 1
-	_start_day()
+	if not _start_day():
+		day -= 1
+		_post("恢复记录暂时不可用，请通过菜单重新开始这一周。", "warning")
+		return
 	_render_phase()
 	_show_new_day_popup()
 
@@ -961,21 +1165,24 @@ func _show_new_day_popup() -> void:
 	if display_event.is_empty():
 		display_event = _quiet_day_event()
 	var event_id := String(display_event.get("id", "quiet_day"))
-	var learning_id := String(current_learning_state.get("id", "steady"))
+	var display_learning_state := RecoveryPresenterScript.present(_recovery_display_record)
+	var learning_id := String(RecoveryGameplayServiceScript.learning_state(_recovery_display_record)["learning_state"].get("id", "recovery_unavailable"))
 	new_day_popup.show_day({
 		"day": day,
 		"title": "第 %d 天开始" % day,
 		"subtitle": (
-			"新的一周从今天开始，先看看今天的状态与安排。"
+			"用现有预算安排这一周的三餐、复习和休息，先从早餐开始。"
 			if day == 1
-			else "昨天的游戏内进餐记录、行动与休息参与了今日状态结算；新的事件也会改变可用策略。"
+			else "昨夜的恢复影响今天的复习节奏；今天的事件也会改变可用策略。"
 		),
-		"learning_state": current_learning_state.duplicate(true),
+		"learning_state": display_learning_state,
+		"recovery": display_learning_state,
+		"status_effect": display_learning_state["effect_text"],
 		"event": display_event,
 		"status_image": String(LEARNING_STATE_IMAGES.get(
 			learning_id,
 			LEARNING_STATE_IMAGES["steady"]
-		)),
+		)) if display_learning_state["available"] else "",
 		"event_image": String(EVENT_IMAGES.get(event_id, EVENT_IMAGES["quiet_day"])),
 		"event_effect": String(EVENT_EFFECT_TEXT.get(
 			event_id,
@@ -1011,6 +1218,14 @@ func _on_new_day_continue() -> void:
 	pass
 
 
+func _show_recovery_detail() -> void:
+	var view := RecoveryPresenterScript.present(_recovery_display_record)
+	sticky_note.get_parent().move_to_front()
+	new_day_popup.set_process_unhandled_key_input(false)
+	new_day_popup.continue_button.disabled = true
+	_show_detail({"id": "recovery_details", "name": "恢复依据", "kind": "游戏恢复", "recovery": view}, new_day_popup.paper_host.get_global_rect(), true, "state")
+
+
 func _finish_run(result: String) -> void:
 	ending_id = result
 	phase = "ending"
@@ -1024,7 +1239,7 @@ func _show_ending_summary() -> void:
 		"day": day,
 		"title": String(ending.get("title", "这一周结束了")),
 		"stats": state.duplicate(true),
-		"record_summary": String(ending.get("subtitle", "这一周结束了。")),
+		"record_summary": RecoveryPresenterScript.ending_text(ending_id, run_history),
 		"advice": "目标复习 %d，完成 %d；本周记录了 %d 天，手里还剩 ¥%d。" % [
 			GameDataScript.STUDY_TARGET,
 			int(state["study_progress"]),
@@ -1033,6 +1248,7 @@ func _show_ending_summary() -> void:
 		],
 		"ending_image": String(ending.get("image", "")),
 		"layout": "ending",
+		"record_book_available": true,
 		"detail": recap,
 		"detail_button_text": "查看本周轨迹",
 		"detail_button_open_text": "收起本周轨迹",
@@ -1050,10 +1266,13 @@ func _build_day_record(nutrition_summary: Dictionary) -> Dictionary:
 		"event": current_event.duplicate(true),
 		"learning_state": current_learning_state.duplicate(true),
 		"next_learning_state": pending_learning_state.duplicate(true),
+		"recovery_state": pending_recovery_state.duplicate(true),
 		"start_state": _day_start_state.duplicate(true),
 		"end_state": state.duplicate(true),
 		"meals": today_meal_records.duplicate(true),
 		"actions": today_action_records.duplicate(true),
+		"periods": today_period_records.duplicate(true),
+		"balance_version": BalanceRules.VERSION,
 		"sleep": {"id": chosen_sleep_id, "name": chosen_sleep_name},
 		"spend": MealResolverScript.total_spend(today_meal_records) + action_spend,
 		"combos": combos_today.duplicate(),
@@ -1063,47 +1282,20 @@ func _build_day_record(nutrition_summary: Dictionary) -> Dictionary:
 
 func _build_meal_stamps() -> Array[Dictionary]:
 	var stamps: Array[Dictionary] = []
-	for meal_phase in MEAL_PHASES:
-		var meal_record: Dictionary = {}
-		for candidate in today_meal_records:
-			if String(candidate.get("phase", "")) == meal_phase:
-				meal_record = candidate
-				break
-		var meal_title := String(PHASE_NAMES.get(meal_phase, meal_phase))
-		if meal_record.is_empty():
-			stamps.append({
-				"title": meal_title,
-				"text": "没有记录",
-				"state": "missing",
-			})
-			continue
-		if bool(meal_record.get("skipped", false)):
-			stamps.append({
-				"title": meal_title,
-				"text": "没吃",
-				"state": "skipped",
-			})
-			continue
-
-		var food_names: Array = meal_record.get("food_names", [])
-		var visible_foods: Array[String] = []
-		for raw_food_name in food_names:
-			if visible_foods.size() >= 2:
-				break
-			visible_foods.append(String(raw_food_name))
-		var food_text := "、".join(visible_foods)
-		if food_names.size() > visible_foods.size():
-			food_text += "等"
-		if food_text.is_empty():
-			food_text = "已经吃过"
-		var source_name := String(meal_record.get("source_name", ""))
-		var stamp_text := food_text
-		if not source_name.is_empty():
-			stamp_text = "%s · %s" % [source_name, food_text]
+	var book := get_meal_record_book()
+	if not book.get("valid", false):
+		return stamps
+	for row in book["days"][day - 1]["rows"]:
+		var status: String = row["status"]
+		var text: String = row["text"]
+		if status == "eaten":
+			var names := text.split("、")
+			text = "、".join(names.slice(0, 2)) + ("等" if names.size() > 2 else "")
+			text = "%s · %s" % [row["source"], text]
 		stamps.append({
-			"title": meal_title,
-			"text": stamp_text,
-			"state": "eaten",
+			"title": PHASE_NAMES[row["phase"]],
+			"text": "没有记录" if status == "unrecorded" else text,
+			"state": "missing" if status == "unrecorded" else status,
 		})
 	return stamps
 
@@ -1119,9 +1311,11 @@ func _day_change_text(record: Dictionary) -> String:
 
 
 func _day_strategy_advice(study_pace: int, remaining_days: int) -> String:
+	if int(state.get("satiety", 0)) < 20:
+		return "饱腹偏低，先留出一顿够吃的餐，再排其他事情。"
 	var study_gap := study_pace - int(state.get("study_progress", 0))
 	if study_gap > 0:
-		return "今天的复习计划还差 %d。明天电量高时再补一段也来得及。" % study_gap
+		return "今天离复习计划还差 %d。明天看看精力，再安排下一段。" % study_gap
 	if int(state.get("energy", 0)) <= 25:
 		return "复习进度跟上了，不过电量见底；明天先缓一缓再开书。"
 	if remaining_days > 0 and int(state.get("balance", 0)) < remaining_days * 10:
@@ -1130,50 +1324,53 @@ func _day_strategy_advice(study_pace: int, remaining_days: int) -> String:
 
 
 func _next_day_preview_text() -> String:
+	var recovery_view := RecoveryPresenterScript.present(pending_recovery_state, "settled")
+	if not recovery_view["available"]:
+		return "恢复记录暂时不可用，请通过菜单重新开始这一周。"
 	if day >= GameDataScript.TOTAL_DAYS:
 		return "本周已经走完，看看七天里哪些选择真正留下了余力。"
-	var learning_modifier := int(pending_learning_state.get("study_modifier", 0))
-	var modifier_text := "不变" if learning_modifier == 0 else _signed_delta(learning_modifier)
 	var preview := WeeklyEventServiceScript.next_day_preview(day, GameDataScript.TOTAL_DAYS)
-	return "明天：%s · 每次复习 %s · %s" % [
-		String(pending_learning_state.get("title", "状态平稳")),
-		modifier_text,
-		String(preview.get("title", "照常安排")),
-	]
+	return "明天的事件：" + String(preview.get("title", "照常安排"))
 
 
 func _build_week_recap() -> Dictionary:
 	var lines: Array[String] = ["本周轨迹："]
 	var total_spend := 0
-	var clear_days := 0
-	var strained_days := 0
+	var book := get_meal_record_book()
+	if not book.get("valid", false):
+		return {"detail_text": "本周选餐记录暂时不可用。", "basis": "只整理已确认的游戏内选择。", "played_days": 0}
+	var records_by_day := {}
 	for record in run_history:
-		var nutrition: Dictionary = record.get("nutrition", {})
-		var metrics: Dictionary = nutrition.get("metrics", {})
-		var eaten_meals := int(metrics.get("eaten_meals", 0))
-		var expected_meals := int(metrics.get("expected_meals", 3))
+		var record_day: Variant = record.get("day")
+		if typeof(record_day) != TYPE_INT or record_day < 1 or record_day > day:
+			continue
+		if not records_by_day.has(record_day) or (not records_by_day[record_day].get("meals") is Array and record.get("meals") is Array):
+			records_by_day[record_day] = record
+	var recorded_days: Array = records_by_day.keys()
+	recorded_days.sort()
+	for record_day in recorded_days:
+		var record: Dictionary = records_by_day[record_day]
+		var meal_facts: Dictionary = book["days"][record_day - 1]
+		var meal_count: String = ("%d/3" % meal_facts["eaten"]) if record.get("meals") is Array else "未记"
 		var start: Dictionary = record.get("start_state", {})
 		var finish: Dictionary = record.get("end_state", {})
-		var next_condition: Dictionary = record.get("next_learning_state", {})
+		var recovery_view := RecoveryPresenterScript.present(record.get("recovery_state"), "final" if record_day >= GameDataScript.TOTAL_DAYS else "settled")
 		total_spend += int(record.get("spend", 0))
-		if String(next_condition.get("id", "")) == "clear_focus":
-			clear_days += 1
-		elif ["fatigued", "brain_fog"].has(String(next_condition.get("id", ""))):
-			strained_days += 1
-		lines.append("第 %d 天｜进餐记录 %d/%d｜复习 %s｜花费 ¥%d｜次日 %s" % [
+		lines.append("第 %d 天｜进餐记录 %s｜复习 %s｜花费 ¥%d\n收工后：%s\n%s" % [
 			int(record.get("day", 0)),
-			eaten_meals,
-			expected_meals,
+			meal_count,
 			_signed_delta(int(finish.get("study_progress", 0)) - int(start.get("study_progress", 0))),
 			int(record.get("spend", 0)),
-			String(next_condition.get("title", "状态平稳")),
+			String(recovery_view["title"]),
+			String(recovery_view["summary"]),
 		])
-	var played_days := run_history.size()
-	lines.append("合计｜%d 天花费 ¥%d｜复习加成 %d 次｜状态减益 %d 次" % [
+	var played_days := recorded_days.size()
+	if book.get("valid", false):
+		for note in MealRecordPresenterScript.view(book, day, true)["notes"]:
+			lines.append(String(note))
+	lines.append("合计｜%d 天花费 ¥%d" % [
 		played_days,
 		total_spend,
-		clear_days,
-		strained_days,
 	])
 	return {
 		"detail_text": "\n".join(lines),
@@ -1188,23 +1385,33 @@ func _signed_delta(value: int) -> String:
 
 func _apply_stat_delta(delta: Dictionary) -> void:
 	for key in delta.keys():
+		if key in ["burden", "diet_burden", "character_health"]:
+			continue
 		if state.has(key):
 			state[key] = int(state[key]) + int(delta[key])
 
 
-func _update_stability() -> void:
-	if today_meal_records.is_empty():
-		return
-	state["stability"] = MealResolverScript.calculate_stability(
+func _update_stability(recovery_record: Variant = null) -> bool:
+	if today_meal_records.is_empty() and recovery_record == null:
+		return true
+	var record: Variant = current_recovery_state if recovery_record == null else recovery_record
+	var result := RecoveryGameplayServiceScript.calculate_stability_from_recovery(
 		state,
-		MealResolverScript.day_quality(today_meal_records),
 		day,
-		GameDataScript.TOTAL_DAYS
+		GameDataScript.TOTAL_DAYS,
+		record
 	)
+	if not result["valid"]:
+		_record_recovery_error("recovery_stability_invalid", result["errors"])
+		return false
+	state["stability"] = result["stability"]
+	return true
 
 
 func _clamp_stats() -> void:
-	for key in ["stability", "energy", "mood", "satiety", "stress", "diet_burden", "study_progress"]:
+	for key in ["burden", "diet_burden", "character_health"]:
+		state.erase(key)
+	for key in ["stability", "energy", "mood", "satiety", "stress", "study_progress"]:
 		state[key] = clampi(int(state[key]), 0, 100)
 	state["balance"] = clampi(int(state["balance"]), 0, 999)
 
@@ -1213,9 +1420,15 @@ func _update_shell() -> void:
 	day_label.text = "第 %d 天 / 第 %d 天" % [day, GameDataScript.TOTAL_DAYS]
 	phase_label.text = String(PHASE_NAMES.get(phase, phase))
 	balance_label.text = "¥%d" % int(state.get("balance", 0))
+	if is_instance_valid(week_ribbon):
+		week_ribbon.call("update_day", day, GameDataScript.TOTAL_DAYS)
 
 
 func _show_detail(payload: Dictionary, anchor_rect: Rect2, pinned: bool, mode: String) -> void:
+	if _record_book_active():
+		return
+	if sticky_note.visible and sticky_note.pinned and not pinned:
+		return
 	if mode == "food":
 		payload = FoodPreferenceServiceScript.decorate_food(payload, food_preferences)
 	var reason := String(payload.get("disabled_reason", ""))
@@ -1319,19 +1532,26 @@ func _update_background() -> void:
 		_update_time_grade()
 		return
 	_background_path = target_path
+	if is_instance_valid(_background_tween):
+		_background_tween.kill()
 	var front := background_a if _background_a_is_front else background_b
 	var back := background_b if _background_a_is_front else background_a
 	back.texture = load(target_path) as Texture2D
+	front.modulate.a = 1.0
 	back.modulate.a = 0.0
-	var tween := create_tween().set_parallel(true)
-	tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-	tween.tween_property(front, "modulate:a", 0.0, 0.30)
-	tween.tween_property(back, "modulate:a", 1.0, 0.30)
-	tween.chain().tween_callback(func() -> void: _background_a_is_front = not _background_a_is_front)
+	_background_a_is_front = not _background_a_is_front
+	_background_tween = create_tween().set_parallel(true)
+	_background_tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	_background_tween.tween_property(front, "modulate:a", 0.0, 0.30)
+	_background_tween.tween_property(back, "modulate:a", 1.0, 0.30)
 	_update_time_grade()
 
 
 func _background_path_for_phase() -> String:
+	if _is_source_phase() and ResourceLoader.exists(SOURCE_MAP):
+		if _mobile_mode and ResourceLoader.exists(SOURCE_MAP_MOBILE):
+			return SOURCE_MAP_MOBILE
+		return SOURCE_MAP
 	if _mobile_mode and ACTION_BACKGROUNDS_MOBILE.has(phase):
 		var mobile_path := String(ACTION_BACKGROUNDS_MOBILE[phase])
 		if ResourceLoader.exists(mobile_path):
@@ -1381,6 +1601,23 @@ func _apply_responsive_profile() -> void:
 
 func _apply_shell_profile() -> void:
 	var mobile := _mobile_mode
+	week_ribbon.visible = not mobile
+	for panel in [day_tag, phase_tag, balance_chip]:
+		var frame := StyleBoxFlat.new()
+		frame.bg_color = Color("#e7d5b0f5")
+		frame.border_color = Color("#9b784d")
+		frame.set_border_width_all(2)
+		frame.set_corner_radius_all(10)
+		frame.content_margin_left = 12
+		frame.content_margin_right = 12
+		frame.content_margin_top = 8
+		frame.content_margin_bottom = 8
+		frame.shadow_color = Color(0.12, 0.08, 0.03, 0.20)
+		frame.shadow_size = 5
+		frame.shadow_offset = Vector2(0, 3)
+		if panel == phase_tag:
+			frame.bg_color = Color("#d2d2abf5")
+		panel.add_theme_stylebox_override("panel", frame)
 	if is_instance_valid(new_day_popup):
 		new_day_popup.set_mobile_mode(mobile)
 	top_safe_area.add_theme_constant_override("margin_left", 14 if mobile else 24)
@@ -1431,18 +1668,30 @@ func _apply_shell_profile() -> void:
 
 
 func _apply_stage_profile(stage: Control) -> void:
+	if stage is MealStageBaseV2:
+		(stage as MealStageBaseV2).apply_selection_layout(_mobile_mode)
+		return
+	if stage is MealSourceStageV2:
+		_set_rect(stage.get_node("Footer") as Control, 1, 1, 1, 1, -298 if _mobile_mode else -358, -90 if _mobile_mode else -72, -8 if _mobile_mode else -18, -30 if _mobile_mode else -12)
+		for button_name in ["SkipButton", "MenuHintButton"]:
+			var button := stage.get_node("Footer/" + button_name) as Button
+			var width := (110 if _mobile_mode else 140) if button_name == "SkipButton" else (170 if _mobile_mode else 190)
+			button.custom_minimum_size = Vector2(width, 60)
+			button.add_theme_font_size_override("font_size", 18 if _mobile_mode else 20)
+	if stage is ActionStageV2 or stage is SleepStageV2:
+		var cards := MealStageBaseV2.MOBILE_CARD_AREA if _mobile_mode else MealStageBaseV2.DESKTOP_CARD_AREA
+		var selection := MealStageBaseV2.MOBILE_SELECTED_AREA if _mobile_mode else MealStageBaseV2.DESKTOP_SELECTED_AREA
+		var rail_path := "Layout/ActionRail" if stage is ActionStageV2 else "Layout/SleepRail"
+		var note_path := "Layout/PlannerNote" if stage is ActionStageV2 else "Layout/AlarmNote"
+		_set_rect(stage.get_node(rail_path) as Control, cards.position.x, cards.position.y, cards.end.x, cards.end.y, 0, 0, 0, 0)
+		_set_rect(stage.get_node(note_path) as Control, selection.position.x, selection.position.y, selection.end.x, selection.end.y, 0, 0, 0, 0)
+		if stage is ActionStageV2:
+			_set_rect(stage.get_node("Layout/SkipButton") as Control, 1, 1, 1, 1, -178 if _mobile_mode else -208, -90 if _mobile_mode else -72, -8 if _mobile_mode else -18, -30 if _mobile_mode else -12)
+			(stage.get_node("Layout/SkipButton") as Button).custom_minimum_size.x = 170 if _mobile_mode else 190
 	if not _mobile_mode:
 		return
 	if stage is MealSourceStageV2:
 		_mobile_source_layout(stage)
-	elif stage is CafeteriaMealStageV2:
-		_mobile_cafeteria_layout(stage)
-	elif stage is TakeoutMealStageV2:
-		_mobile_takeout_layout(stage)
-	elif stage is ConvenienceMealStageV2:
-		_mobile_convenience_layout(stage)
-	elif stage is DormPantryStageV2:
-		_mobile_dorm_layout(stage)
 	elif stage is ActionStageV2:
 		_mobile_action_layout(stage)
 	elif stage is SleepStageV2:
@@ -1452,84 +1701,18 @@ func _apply_stage_profile(stage: Control) -> void:
 func _mobile_source_layout(stage: Control) -> void:
 	_set_rect(stage.get_node("PromptTag") as Control, 0.5, 0.0, 0.5, 0.0, -270, 8, 270, 88)
 	var positions := {
-		"CafeteriaProp": Vector2(0.24, 0.24),
-		"TakeoutProp": Vector2(0.75, 0.29),
-		"ConvenienceProp": Vector2(0.28, 0.53),
-		"DormProp": Vector2(0.76, 0.57),
+		"CafeteriaProp": Vector2(0.25, 0.26),
+		"TakeoutProp": Vector2(0.28, 0.52),
+		"ConvenienceProp": Vector2(0.75, 0.33),
+		"DormProp": Vector2(0.76, 0.62),
 	}
 	for prop_name in positions:
 		var prop := stage.get_node("PropLayer/%s" % prop_name) as Control
 		var point: Vector2 = positions[prop_name]
 		_set_rect(prop, point.x, point.y, point.x, point.y, -94, -88, 94, 110)
-	_set_rect(stage.get_node("Footer") as Control, 1, 1, 1, 1, -342, -126, -8, -64)
+		(prop.get_node("Name") as Label).add_theme_font_size_override("font_size", 26)
 
 
-func _mobile_cafeteria_layout(stage: Control) -> void:
-	_set_rect(stage.get_node("Header") as Control, 0.5, 0, 0.5, 0, -286, 8, 286, 72)
-	_set_rect(stage.get_node("FoodRail") as Control, 0.02, 0.10, 0.98, 0.54, 0, 0, 0, 0)
-	_set_rect(stage.get_node("TrayDropZone") as Control, 0.29, 0.55, 0.98, 0.80, 0, 0, 0, 0)
-	stage.get_node("TrayDropZone/TrayMargin/VBox/TrayHeader/TrayHint").visible = false
-	var tray_margin := stage.get_node("TrayDropZone/TrayMargin") as MarginContainer
-	tray_margin.add_theme_constant_override("margin_left", 20)
-	tray_margin.add_theme_constant_override("margin_right", 20)
-	tray_margin.add_theme_constant_override("margin_top", 14)
-	tray_margin.add_theme_constant_override("margin_bottom", 14)
-	var selected_slots := stage.get_node("TrayDropZone/TrayMargin/VBox/SelectedSlots") as HBoxContainer
-	selected_slots.add_theme_constant_override("separation", 12)
-	for slot in stage.get_node("TrayDropZone/TrayMargin/VBox/SelectedSlots").get_children():
-		(slot as Control).custom_minimum_size = Vector2(108, 140)
-	var footer := stage.get_node("Footer") as HBoxContainer
-	footer.add_theme_constant_override("separation", 10)
-	(footer.get_node("BackButton") as Button).custom_minimum_size = Vector2(120, 60)
-	(footer.get_node("SkipButton") as Button).custom_minimum_size = Vector2(110, 60)
-	(footer.get_node("ConfirmButton") as Button).custom_minimum_size = Vector2(170, 60)
-	_set_rect(footer, 1, 1, 1, 1, -420, -130, -8, -70)
-
-
-func _mobile_takeout_layout(stage: Control) -> void:
-	_set_rect(stage.get_node("Layout/Header") as Control, 0.5, 0, 0.5, 0, -294, 6, 294, 70)
-	_set_rect(stage.get_node("Layout/PhoneShell") as Control, 0.65, 0.53, 0.65, 0.53, -240, -405, 240, 300)
-	stage.get_node("Layout/SwipeHint").visible = false
-	var footer := stage.get_node("Layout/Footer") as HBoxContainer
-	(footer.get_node("BackButton") as Button).custom_minimum_size = Vector2(120, 60)
-	(footer.get_node("SkipButton") as Button).custom_minimum_size = Vector2(110, 60)
-	_set_rect(footer, 1, 1, 1, 1, -250, -130, -8, -70)
-
-
-func _mobile_convenience_layout(stage: Control) -> void:
-	_set_rect(stage.get_node("Layout/Header") as Control, 0.5, 0, 0.5, 0, -294, 6, 294, 70)
-	_set_rect(stage.get_node("Layout/ShelfPanel") as Control, 0.02, 0.11, 0.98, 0.54, 0, 0, 0, 0)
-	_set_rect(stage.get_node("Layout/BasketPanel") as Control, 0.25, 0.62, 0.98, 0.84, 0, 0, 0, 0)
-	stage.get_node("Layout/BasketPanel/BasketMargin/Basket/BasketHeader/BasketHint").visible = false
-	var selected_slots := stage.get_node("Layout/BasketPanel/BasketMargin/Basket/SelectedSlots") as HBoxContainer
-	selected_slots.add_theme_constant_override("separation", 8)
-	for slot in stage.get_node("Layout/BasketPanel/BasketMargin/Basket/SelectedSlots").get_children():
-		(slot as Control).custom_minimum_size = Vector2(76, 76)
-	var footer := stage.get_node("Layout/Footer") as HBoxContainer
-	(footer.get_node("BackButton") as Button).custom_minimum_size = Vector2(120, 60)
-	(footer.get_node("SkipButton") as Button).custom_minimum_size = Vector2(110, 60)
-	(footer.get_node("ConfirmButton") as Button).custom_minimum_size = Vector2(170, 60)
-	_set_rect(footer, 1, 1, 1, 1, -420, -130, -8, -70)
-
-
-func _mobile_dorm_layout(stage: Control) -> void:
-	_set_rect(stage.get_node("Layout/Header") as Control, 0.5, 0, 0.5, 0, -294, 6, 294, 70)
-	_set_rect(stage.get_node("Layout/PantryPanel") as Control, 0.02, 0.10, 0.98, 0.48, 0, 0, 0, 0)
-	_set_rect(stage.get_node("Layout/BowlPanel") as Control, 0.25, 0.52, 0.98, 0.78, 0, 0, 0, 0)
-	stage.get_node("Layout/BowlPanel/BowlMargin/Bowl/BowlHint").visible = false
-	stage.get_node("Layout/BowlPanel/BowlMargin/Bowl/BowlReceipt/FreeTag").visible = false
-	var bowl_margin := stage.get_node("Layout/BowlPanel/BowlMargin") as MarginContainer
-	bowl_margin.add_theme_constant_override("margin_left", 16)
-	bowl_margin.add_theme_constant_override("margin_right", 16)
-	bowl_margin.add_theme_constant_override("margin_top", 12)
-	bowl_margin.add_theme_constant_override("margin_bottom", 12)
-	for slot in stage.get_node("Layout/BowlPanel/BowlMargin/Bowl/SelectedSlots").get_children():
-		(slot as Control).custom_minimum_size = Vector2(100, 100)
-	var footer := stage.get_node("Layout/Footer") as HBoxContainer
-	(footer.get_node("BackButton") as Button).custom_minimum_size = Vector2(120, 60)
-	(footer.get_node("SkipButton") as Button).custom_minimum_size = Vector2(110, 60)
-	(footer.get_node("ConfirmButton") as Button).custom_minimum_size = Vector2(150, 60)
-	_set_rect(footer, 1, 1, 1, 1, -400, -130, -8, -70)
 
 
 func _mobile_action_layout(stage: Control) -> void:
@@ -1537,17 +1720,12 @@ func _mobile_action_layout(stage: Control) -> void:
 	stage.get_node("Layout/Header/TimeTag").custom_minimum_size = Vector2(120, 64)
 	stage.get_node("Layout/Header/PromptTag").custom_minimum_size = Vector2(300, 64)
 	stage.get_node("Layout/Header/SlotsTag").custom_minimum_size = Vector2(120, 64)
-	_set_rect(stage.get_node("Layout/ActionRail") as Control, 0.02, 0.13, 0.98, 0.68, 0, 0, 0, 0)
-	_set_rect(stage.get_node("Layout/PlannerNote") as Control, 0.43, 0.65, 0.98, 0.82, 0, 0, 0, 0)
 	for slot in stage.get_node("Layout/PlannerNote/PlannerMargin/Planner/UsedSlots").get_children():
-		(slot as Control).custom_minimum_size = Vector2(90, 90)
-	_set_rect(stage.get_node("Layout/SkipButton") as Control, 1, 1, 1, 1, -178, -120, -8, -60)
+		(slot as Control).custom_minimum_size = Vector2(76, 110)
 
 
 func _mobile_sleep_layout(stage: Control) -> void:
 	_set_rect(stage.get_node("Layout/PromptTag") as Control, 0.5, 0, 0.5, 0, -320, 8, 320, 90)
-	_set_rect(stage.get_node("Layout/SleepRail") as Control, 0.02, 0.15, 0.98, 0.66, 0, 0, 0, 0)
-	_set_rect(stage.get_node("Layout/AlarmNote") as Control, 0.43, 0.72, 0.98, 0.86, 0, 0, 0, 0)
 	(stage.get_node("Layout/AlarmNote/AlarmMargin/Alarm/Clock") as Label).add_theme_font_size_override("font_size", 34)
 
 

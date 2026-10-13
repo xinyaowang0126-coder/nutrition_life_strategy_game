@@ -3,6 +3,8 @@
 [ext_resource type="Theme" uid="uid://dthxodrk6slpq" path="res://scenes/game_v2/V2Theme.tres" id="1_qljx2"]
 [ext_resource type="Script" uid="uid://b2r60gkj1vwkn" path="res://scripts/ui_v2/stages/ConvenienceMealStage.gd" id="2_6mo6p"]
 
+[ext_resource type="PackedScene" path="res://scenes/game_v2/components/SelectedFoodCard.tscn" id="3_selected"]
+
 [node name="ConvenienceMealStage" type="Control" unique_id=1329763672]
 layout_mode = 3
 anchors_preset = 15
@@ -54,18 +56,22 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ShelfPanel" type="PanelContainer" parent="Layout" unique_id=744270624]
+offset_bottom = 0
+offset_right = 0
+offset_top = 0
+offset_left = 0
 layout_mode = 0
 anchor_left = 0.2
-anchor_top = 0.15
-anchor_right = 0.91
-anchor_bottom = 0.63
+anchor_top = 0.11
+anchor_right = 0.96
+anchor_bottom = 0.58
 
 [node name="ShelfMargin" type="MarginContainer" parent="Layout/ShelfPanel" unique_id=1193075844]
 layout_mode = 2
 theme_override_constants/margin_left = 26
-theme_override_constants/margin_top = 20
+theme_override_constants/margin_top = 12
 theme_override_constants/margin_right = 26
-theme_override_constants/margin_bottom = 20
+theme_override_constants/margin_bottom = 12
 
 [node name="Shelf" type="VBoxContainer" parent="Layout/ShelfPanel/ShelfMargin" unique_id=853784134]
 layout_mode = 2
@@ -105,10 +111,14 @@ size_flags_vertical = 3
 theme_override_constants/separation = 18
 
 [node name="BasketPanel" type="PanelContainer" parent="Layout" unique_id=673132258]
+offset_bottom = 0
+offset_right = 0
+offset_top = 0
+offset_left = 0
 layout_mode = 0
-anchor_left = 0.43
-anchor_top = 0.67
-anchor_right = 0.8
+anchor_left = 0.44
+anchor_top = 0.6
+anchor_right = 0.84
 anchor_bottom = 0.91
 
 [node name="BasketMargin" type="MarginContainer" parent="Layout/BasketPanel" unique_id=105124089]
@@ -151,100 +161,20 @@ layout_mode = 2
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="Slot1" type="PanelContainer" parent="Layout/BasketPanel/BasketMargin/Basket/SelectedSlots" unique_id=366300031]
-custom_minimum_size = Vector2(96, 96)
+[node name="Slot1" parent="Layout/BasketPanel/BasketMargin/Basket/SelectedSlots" unique_id=366300031 instance=ExtResource("3_selected")]
 layout_mode = 2
 
-[node name="Empty" type="Label" parent="Layout/BasketPanel/BasketMargin/Basket/SelectedSlots/Slot1" unique_id=1277292786]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.54901963, 0.4745098, 0.4, 0.33333334)
-theme_override_font_sizes/font_size = 30
-text = "+"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Preview" type="TextureRect" parent="Layout/BasketPanel/BasketMargin/Basket/SelectedSlots/Slot1" unique_id=1743837802]
-visible = false
-layout_mode = 2
-mouse_filter = 2
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Slot2" type="PanelContainer" parent="Layout/BasketPanel/BasketMargin/Basket/SelectedSlots" unique_id=1078712782]
-custom_minimum_size = Vector2(96, 96)
+[node name="Slot2" parent="Layout/BasketPanel/BasketMargin/Basket/SelectedSlots" unique_id=1078712782 instance=ExtResource("3_selected")]
 layout_mode = 2
 
-[node name="Empty" type="Label" parent="Layout/BasketPanel/BasketMargin/Basket/SelectedSlots/Slot2" unique_id=123409933]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.54901963, 0.4745098, 0.4, 0.33333334)
-theme_override_font_sizes/font_size = 30
-text = "+"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Preview" type="TextureRect" parent="Layout/BasketPanel/BasketMargin/Basket/SelectedSlots/Slot2" unique_id=1874421387]
-visible = false
-layout_mode = 2
-mouse_filter = 2
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Slot3" type="PanelContainer" parent="Layout/BasketPanel/BasketMargin/Basket/SelectedSlots" unique_id=1873908972]
-custom_minimum_size = Vector2(96, 96)
+[node name="Slot3" parent="Layout/BasketPanel/BasketMargin/Basket/SelectedSlots" unique_id=1873908972 instance=ExtResource("3_selected")]
 layout_mode = 2
 
-[node name="Empty" type="Label" parent="Layout/BasketPanel/BasketMargin/Basket/SelectedSlots/Slot3" unique_id=806139777]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.54901963, 0.4745098, 0.4, 0.33333334)
-theme_override_font_sizes/font_size = 30
-text = "+"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Preview" type="TextureRect" parent="Layout/BasketPanel/BasketMargin/Basket/SelectedSlots/Slot3" unique_id=1024520211]
-visible = false
-layout_mode = 2
-mouse_filter = 2
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Slot4" type="PanelContainer" parent="Layout/BasketPanel/BasketMargin/Basket/SelectedSlots" unique_id=1063574958]
-custom_minimum_size = Vector2(96, 96)
+[node name="Slot4" parent="Layout/BasketPanel/BasketMargin/Basket/SelectedSlots" unique_id=1063574958 instance=ExtResource("3_selected")]
 layout_mode = 2
 
-[node name="Empty" type="Label" parent="Layout/BasketPanel/BasketMargin/Basket/SelectedSlots/Slot4" unique_id=690552431]
+[node name="Slot5" parent="Layout/BasketPanel/BasketMargin/Basket/SelectedSlots" unique_id=1294745697 instance=ExtResource("3_selected")]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.54901963, 0.4745098, 0.4, 0.33333334)
-theme_override_font_sizes/font_size = 30
-text = "+"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Preview" type="TextureRect" parent="Layout/BasketPanel/BasketMargin/Basket/SelectedSlots/Slot4" unique_id=1348150836]
-visible = false
-layout_mode = 2
-mouse_filter = 2
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Slot5" type="PanelContainer" parent="Layout/BasketPanel/BasketMargin/Basket/SelectedSlots" unique_id=1294745697]
-custom_minimum_size = Vector2(96, 96)
-layout_mode = 2
-
-[node name="Empty" type="Label" parent="Layout/BasketPanel/BasketMargin/Basket/SelectedSlots/Slot5" unique_id=1320840588]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.54901963, 0.4745098, 0.4, 0.33333334)
-theme_override_font_sizes/font_size = 30
-text = "+"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Preview" type="TextureRect" parent="Layout/BasketPanel/BasketMargin/Basket/SelectedSlots/Slot5" unique_id=1824414074]
-visible = false
-layout_mode = 2
-mouse_filter = 2
-expand_mode = 1
-stretch_mode = 5
 
 [node name="Footer" type="HBoxContainer" parent="Layout" unique_id=697236496]
 layout_mode = 0

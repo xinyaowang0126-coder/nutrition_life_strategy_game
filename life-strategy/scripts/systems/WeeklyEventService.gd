@@ -81,7 +81,6 @@ const BOUNDED_STATE_KEYS := [
 	"mood",
 	"satiety",
 	"stress",
-	"diet_burden",
 	"study_progress",
 ]
 const ZERO_MINIMUM_KEYS := ["balance", "fee", "cost"]
@@ -144,8 +143,12 @@ static func next_day_preview(current_day: int, total_days: int = 7) -> Dictionar
 
 
 static func _apply_numeric_delta(target: Dictionary, delta: Dictionary, clamp_state: bool = false) -> void:
+	for retired_key in ["burden", "diet_burden", "character_health"]:
+		target.erase(retired_key)
 	for raw_key in delta:
 		var key := String(raw_key)
+		if key in ["burden", "diet_burden", "character_health"]:
+			continue
 		var value := int(target.get(key, 0)) + int(delta[raw_key])
 		if clamp_state and BOUNDED_STATE_KEYS.has(key):
 			value = clampi(value, 0, 100)

@@ -248,6 +248,6 @@ func _play_affordable_study_day(game: GameRootV2) -> void:
 		assert_false(plate.is_empty())
 		game._confirm_food(plate)
 		assert_eq(game.phase, "%s_action" % meal)
-		game._apply_action("study")
+		game._apply_action({"breakfast": "study", "lunch": "walk", "dinner": "nap"}[meal])
 	assert_eq(game.phase, "sleep")
 	game._choose_sleep("sleep_early")

@@ -1,0 +1,14 @@
+{
+  "date": "2026-10-09",
+  "latest_runtime_tests": {
+    "result": {
+      "failed": 0,
+      "failures": [],
+      "passed": 14,
+      "total": 14
+    },
+    "source": "game"
+  },
+  "native_visual_report": "../assets/g4a4-2026-10-09/report.json",
+  "scope": "Latest UI includes bounded layout/scroll rechecks. No physical-phone or browser acceptance."
+}

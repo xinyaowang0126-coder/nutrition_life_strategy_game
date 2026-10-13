@@ -3,6 +3,8 @@
 [ext_resource type="Theme" uid="uid://dthxodrk6slpq" path="res://scenes/game_v2/V2Theme.tres" id="1_2wbfj"]
 [ext_resource type="Script" uid="uid://ief7mksjhs0i" path="res://scripts/ui_v2/stages/TakeoutMealStage.gd" id="2_6xdlj"]
 
+[ext_resource type="PackedScene" path="res://scenes/game_v2/components/SelectedFoodCard.tscn" id="3_selected"]
+
 [node name="TakeoutMealStage" type="Control" unique_id=539177375]
 layout_mode = 3
 anchors_preset = 15
@@ -55,27 +57,28 @@ vertical_alignment = 1
 
 [node name="PhoneShell" type="PanelContainer" parent="Layout" unique_id=1706817611]
 layout_mode = 0
-anchor_left = 0.58
-anchor_top = 0.5
-anchor_right = 0.58
-anchor_bottom = 0.5
-offset_left = -240.0
-offset_top = -330.0
-offset_right = 240.0
-offset_bottom = 350.0
+anchor_left = 0.2
+anchor_top = 0.11
+anchor_right = 0.96
+anchor_bottom = 0.58
+offset_left = 0
+offset_top = 0
+offset_right = 0
+offset_bottom = 0
 
 [node name="PhoneMargin" type="MarginContainer" parent="Layout/PhoneShell" unique_id=1992772540]
 layout_mode = 2
-theme_override_constants/margin_left = 24
-theme_override_constants/margin_top = 18
-theme_override_constants/margin_right = 24
-theme_override_constants/margin_bottom = 22
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 12
 
 [node name="Phone" type="VBoxContainer" parent="Layout/PhoneShell/PhoneMargin" unique_id=633363060]
 layout_mode = 2
 theme_override_constants/separation = 12
 
 [node name="Speaker" type="Label" parent="Layout/PhoneShell/PhoneMargin/Phone" unique_id=2025700254]
+visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "━"
@@ -95,6 +98,7 @@ theme_override_font_sizes/font_size = 28
 text = "附近好吃的"
 
 [node name="StoreMeta" type="Label" parent="Layout/PhoneShell/PhoneMargin/Phone/AppHeader/StoreText" unique_id=475729307]
+visible = false
 layout_mode = 2
 theme_override_colors/font_color = Color(0.42745098, 0.38431373, 0.32941177, 1)
 theme_override_font_sizes/font_size = 16
@@ -111,54 +115,58 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="MenuScroll" type="ScrollContainer" parent="Layout/PhoneShell/PhoneMargin/Phone" unique_id=1974978219]
-custom_minimum_size = Vector2(0, 390)
+custom_minimum_size = Vector2(0, 0)
 layout_mode = 2
 size_flags_vertical = 3
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 3
 scroll_deadzone = 18
 
-[node name="FoodList" type="VBoxContainer" parent="Layout/PhoneShell/PhoneMargin/Phone/MenuScroll" unique_id=453062056]
+[node name="FoodList" type="GridContainer" parent="Layout/PhoneShell/PhoneMargin/Phone/MenuScroll" unique_id=453062056]
+theme_override_constants/v_separation = 12
+theme_override_constants/h_separation = 12
+columns = 2
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 12
 
-[node name="CheckoutBar" type="PanelContainer" parent="Layout/PhoneShell/PhoneMargin/Phone" unique_id=1494083392]
-layout_mode = 2
+[node name="CheckoutBar" type="PanelContainer" parent="Layout" unique_id=1494083392]
+anchor_bottom = 0.91
+anchor_right = 0.84
+anchor_top = 0.6
+anchor_left = 0.44
+layout_mode = 0
 
-[node name="CheckoutMargin" type="MarginContainer" parent="Layout/PhoneShell/PhoneMargin/Phone/CheckoutBar" unique_id=848872229]
+[node name="CheckoutMargin" type="MarginContainer" parent="Layout/CheckoutBar" unique_id=848872229]
 layout_mode = 2
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 10
 
-[node name="Checkout" type="HBoxContainer" parent="Layout/PhoneShell/PhoneMargin/Phone/CheckoutBar/CheckoutMargin" unique_id=199140859]
+[node name="Checkout" type="VBoxContainer" parent="Layout/CheckoutBar/CheckoutMargin" unique_id=199140859]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="OrderText" type="VBoxContainer" parent="Layout/PhoneShell/PhoneMargin/Phone/CheckoutBar/CheckoutMargin/Checkout" unique_id=1854822024]
+[node name="OrderText" type="HBoxContainer" parent="Layout/CheckoutBar/CheckoutMargin/Checkout" unique_id=1854822024]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Bag" type="Label" parent="Layout/PhoneShell/PhoneMargin/Phone/CheckoutBar/CheckoutMargin/Checkout/OrderText" unique_id=1227201429]
+[node name="Bag" type="Label" parent="Layout/CheckoutBar/CheckoutMargin/Checkout/OrderText" unique_id=1227201429]
+horizontal_alignment = 0
+size_flags_horizontal = 3
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "还没选餐"
 
-[node name="Total" type="Label" parent="Layout/PhoneShell/PhoneMargin/Phone/CheckoutBar/CheckoutMargin/Checkout/OrderText" unique_id=90981967]
+[node name="Total" type="Label" parent="Layout/CheckoutBar/CheckoutMargin/Checkout/OrderText" unique_id=90981967]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.7882353, 0.4, 0.15294118, 1)
 theme_override_font_sizes/font_size = 25
 text = "合计 ¥3"
 
-[node name="ConfirmButton" type="Button" parent="Layout/PhoneShell/PhoneMargin/Phone/CheckoutBar/CheckoutMargin/Checkout" unique_id=1735945010]
-custom_minimum_size = Vector2(150, 64)
-layout_mode = 2
-disabled = true
-text = "下单"
-
 [node name="SwipeHint" type="PanelContainer" parent="Layout" unique_id=2091070464]
+visible = false
 layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
@@ -193,6 +201,23 @@ theme_override_font_sizes/font_size = 17
 text = "在手机里滑动挑选\\n点菜名可看小票详情"
 horizontal_alignment = 1
 
+[node name="SelectedSlots" type="HBoxContainer" parent="Layout/CheckoutBar/CheckoutMargin/Checkout"]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="Slot1" parent="Layout/CheckoutBar/CheckoutMargin/Checkout/SelectedSlots" instance=ExtResource("3_selected")]
+layout_mode = 2
+
+[node name="Slot2" parent="Layout/CheckoutBar/CheckoutMargin/Checkout/SelectedSlots" instance=ExtResource("3_selected")]
+layout_mode = 2
+
+[node name="Slot3" parent="Layout/CheckoutBar/CheckoutMargin/Checkout/SelectedSlots" instance=ExtResource("3_selected")]
+layout_mode = 2
+
+[node name="Slot4" parent="Layout/CheckoutBar/CheckoutMargin/Checkout/SelectedSlots" instance=ExtResource("3_selected")]
+layout_mode = 2
+
 [node name="Footer" type="HBoxContainer" parent="Layout" unique_id=1080276363]
 layout_mode = 0
 anchor_left = 1.0
@@ -214,3 +239,9 @@ text = "换个地方"
 custom_minimum_size = Vector2(140, 60)
 layout_mode = 2
 text = "先不吃"
+
+[node name="ConfirmButton" type="Button" parent="Layout/Footer" unique_id=1735945010]
+custom_minimum_size = Vector2(190, 60)
+layout_mode = 2
+disabled = true
+text = "下单"

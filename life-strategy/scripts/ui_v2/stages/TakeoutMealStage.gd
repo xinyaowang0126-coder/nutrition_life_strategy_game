@@ -7,10 +7,10 @@ const TAKEOUT_ROW_CARD_PATH := "res://scenes/game_v2/components/TakeoutFoodRowCa
 @onready var status_label: Label = $Layout/Header/SelectionTag/Status
 @onready var fee_label: Label = $Layout/PhoneShell/PhoneMargin/Phone/AppHeader/FeeChip/Fee
 @onready var menu_scroll: ScrollContainer = $Layout/PhoneShell/PhoneMargin/Phone/MenuScroll
-@onready var food_list: VBoxContainer = $Layout/PhoneShell/PhoneMargin/Phone/MenuScroll/FoodList
-@onready var bag_label: Label = $Layout/PhoneShell/PhoneMargin/Phone/CheckoutBar/CheckoutMargin/Checkout/OrderText/Bag
-@onready var total_label: Label = $Layout/PhoneShell/PhoneMargin/Phone/CheckoutBar/CheckoutMargin/Checkout/OrderText/Total
-@onready var confirm_button: Button = $Layout/PhoneShell/PhoneMargin/Phone/CheckoutBar/CheckoutMargin/Checkout/ConfirmButton
+@onready var food_list: GridContainer = $Layout/PhoneShell/PhoneMargin/Phone/MenuScroll/FoodList
+@onready var bag_label: Label = $Layout/CheckoutBar/CheckoutMargin/Checkout/OrderText/Bag
+@onready var total_label: Label = $Layout/CheckoutBar/CheckoutMargin/Checkout/OrderText/Total
+@onready var confirm_button: Button = $Layout/Footer/ConfirmButton
 @onready var back_button: Button = $Layout/Footer/BackButton
 @onready var skip_button: Button = $Layout/Footer/SkipButton
 
@@ -54,3 +54,18 @@ func _default_max_selected() -> int:
 
 func _card_button_text() -> String:
 	return "加购"
+
+
+func apply_selection_layout(mobile: bool) -> void:
+	super.apply_selection_layout(mobile)
+	if _ready_finished:
+		food_list.columns = 1 if mobile else 2
+		(get_node("Layout/PhoneShell/PhoneMargin/Phone/MenuScroll") as Control).custom_minimum_size.y = 0
+
+
+func _get_slot_nodes() -> Array:
+	return get_node("Layout/CheckoutBar/CheckoutMargin/Checkout/SelectedSlots").get_children()
+
+
+func _get_layout_paths() -> Dictionary:
+	return {"header": "Layout/Header", "cards": "Layout/PhoneShell", "selection": "Layout/CheckoutBar", "footer": "Layout/Footer", "selection_margin": "Layout/CheckoutBar/CheckoutMargin", "selection_box": "Layout/CheckoutBar/CheckoutMargin/Checkout", "hide": ["Layout/SwipeHint", "Layout/PhoneShell/PhoneMargin/Phone/Speaker", "Layout/PhoneShell/PhoneMargin/Phone/AppHeader/StoreText/StoreMeta"]}

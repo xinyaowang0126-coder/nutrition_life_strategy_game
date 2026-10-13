@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ISOLATED ENGINE TESTS ONLY. Review fields below are simulated test
+     metadata; no real profile or professional approval is changed. -->
+<food_health_profiles schema_version="1" model_version="diet-pattern-v2.0" locale="zh-CN" reviewed_at="2026-10-01">
+  <profile food_id="fixture_rice" profile_version="1" display_basis="Isolated rice fixture" portion_status="unknown" portion_band="unknown" basis_type="menu_recipe" composition_status="known" confidence="high" review_status="expert_reviewed" reviewed_by="fixture-only" reviewed_at="2026-10-01" evidence_refs="FIXTURE-RECIPE" caffeine_status="not_applicable" caffeine_band="none" serving_time_relevance="none">
+    <component ingredient_id="shared_rice" name="米饭" food_group="grains_tubers" contribution_band="dominant" basis_type="menu_recipe" confidence="high" />
+    <method id="boiled" />
+  </profile>
+  <profile food_id="fixture_egg" profile_version="1" display_basis="Isolated egg fixture" portion_status="unknown" portion_band="unknown" basis_type="menu_recipe" composition_status="known" confidence="high" review_status="expert_reviewed" reviewed_by="fixture-only" reviewed_at="2026-10-01" evidence_refs="FIXTURE-RECIPE" caffeine_status="not_applicable" caffeine_band="none" serving_time_relevance="none">
+    <component ingredient_id="shared_egg" name="鸡蛋" food_group="eggs" contribution_band="material" basis_type="menu_recipe" confidence="high" />
+    <method id="boiled" />
+  </profile>
+  <profile food_id="fixture_vegetable" profile_version="1" display_basis="Isolated vegetable fixture" portion_status="unknown" portion_band="unknown" basis_type="menu_recipe" composition_status="known" confidence="high" review_status="expert_reviewed" reviewed_by="fixture-only" reviewed_at="2026-10-01" evidence_refs="FIXTURE-RECIPE" caffeine_status="not_applicable" caffeine_band="none" serving_time_relevance="none">
+    <component ingredient_id="shared_tomato" name="番茄" food_group="vegetables" contribution_band="material" basis_type="menu_recipe" confidence="high" />
+    <method id="raw_ready_to_eat" />
+  </profile>
+  <profile food_id="fixture_mixed" profile_version="1" display_basis="Isolated mixed meal fixture" portion_status="unknown" portion_band="unknown" basis_type="menu_recipe" composition_status="known" confidence="high" review_status="expert_reviewed" reviewed_by="fixture-only" reviewed_at="2026-10-01" evidence_refs="FIXTURE-RECIPE" caffeine_status="not_applicable" caffeine_band="none" serving_time_relevance="none">
+    <component ingredient_id="shared_rice" name="米饭" food_group="grains_tubers" contribution_band="dominant" basis_type="menu_recipe" confidence="high" />
+    <component ingredient_id="shared_egg" name="鸡蛋" food_group="eggs" contribution_band="material" basis_type="menu_recipe" confidence="high" />
+    <component ingredient_id="shared_tomato" name="番茄" food_group="vegetables" contribution_band="material" basis_type="menu_recipe" confidence="high" />
+    <component ingredient_id="trace_seasoning" name="调味料" food_group="other" contribution_band="trace" basis_type="menu_recipe" confidence="high" />
+    <method id="mixed" />
+    <factor factor_id="sodium" band="unknown" basis_type="unknown" confidence="unknown" evidence_refs="FIXTURE-RECIPE" />
+  </profile>
+  <profile food_id="fixture_fruit" profile_version="1" display_basis="Isolated fruit fixture" portion_status="unknown" portion_band="unknown" basis_type="menu_recipe" composition_status="known" confidence="high" review_status="expert_reviewed" reviewed_by="fixture-only" reviewed_at="2026-10-01" evidence_refs="FIXTURE-RECIPE" caffeine_status="not_applicable" caffeine_band="none" serving_time_relevance="none">
+    <component ingredient_id="fixture_apple" name="苹果" food_group="fruits" contribution_band="dominant" basis_type="menu_recipe" confidence="high" />
+    <method id="raw_ready_to_eat" />
+  </profile>
+  <profile food_id="fixture_dairy" profile_version="1" display_basis="Isolated dairy fixture" portion_status="unknown" portion_band="unknown" basis_type="package_label" composition_status="known" confidence="high" review_status="expert_reviewed" reviewed_by="fixture-only" reviewed_at="2026-10-01" evidence_refs="FIXTURE-RECIPE" caffeine_status="not_applicable" caffeine_band="none" serving_time_relevance="none">
+    <component ingredient_id="fixture_milk" name="牛奶" food_group="dairy" contribution_band="dominant" basis_type="package_label" confidence="high" />
+    <method id="not_applicable" />
+  </profile>
+  <profile food_id="fixture_small_vegetable" profile_version="1" display_basis="Isolated small vegetable fixture" portion_status="unknown" portion_band="unknown" basis_type="menu_recipe" composition_status="known" confidence="high" review_status="expert_reviewed" reviewed_by="fixture-only" reviewed_at="2026-10-01" evidence_refs="FIXTURE-RECIPE" caffeine_status="not_applicable" caffeine_band="none" serving_time_relevance="none">
+    <component ingredient_id="shared_tomato" name="番茄" food_group="vegetables" contribution_band="small" basis_type="menu_recipe" confidence="high" />
+    <method id="raw_ready_to_eat" />
+  </profile>
+  <profile food_id="fixture_low" profile_version="1" display_basis="Isolated estimated fixture" portion_status="unknown" portion_band="unknown" basis_type="visual_estimate" composition_status="estimated" confidence="low" review_status="expert_reviewed" reviewed_by="fixture-only" reviewed_at="2026-10-01" evidence_refs="FIXTURE-EDUCATION" caffeine_status="not_applicable" caffeine_band="none" serving_time_relevance="none">
+    <component ingredient_id="estimated_vegetable" name="未确认配料" food_group="vegetables" contribution_band="material" basis_type="visual_estimate" confidence="low" />
+    <method id="unknown" />
+  </profile>
+</food_health_profiles>

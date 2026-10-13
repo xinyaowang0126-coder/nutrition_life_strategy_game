@@ -1,23 +1,40 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=8 format=3]
 
 [ext_resource type="Script" path="res://scripts/MainMenu.gd" id="1_menu"]
-[ext_resource type="Texture2D" path="res://assets/generated/backgrounds/dorm_background.png" id="2_bg"]
+[ext_resource type="Texture2D" path="res://assets/generated/ui_v3/backgrounds/dorm_morning.png" id="2_bg"]
+[ext_resource type="Theme" path="res://scenes/game_v2/V2Theme.tres" id="3_theme"]
+[ext_resource type="Texture2D" path="res://assets/generated/ui_v2/characters/student_bust.png" id="4_portrait"]
+[ext_resource type="Script" path="res://scripts/ui_v2/WeekRibbon.gd" id="5_week"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
-bg_color = Color(0.12, 0.16, 0.13, 0.72)
-border_color = Color(0.95, 0.78, 0.45, 0.55)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-content_margin_left = 32.0
-content_margin_top = 28.0
-content_margin_right = 32.0
-content_margin_bottom = 28.0
+[sub_resource type="StyleBoxFlat" id="BookPaper"]
+content_margin_left = 38.0
+content_margin_right = 38.0
+content_margin_top = 38.0
+content_margin_bottom = 38.0
+bg_color = Color(0.89, 0.79, 0.62, 0.96)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.57, 0.40, 0.24, 1)
+corner_radius_top_left = 22
+corner_radius_top_right = 22
+corner_radius_bottom_right = 22
+corner_radius_bottom_left = 22
+shadow_color = Color(0.14, 0.17, 0.12, 0.24)
+shadow_size = 24
+shadow_offset = Vector2(0, 12)
+
+[sub_resource type="StyleBoxFlat" id="PortraitPaper"]
+content_margin_left = 18.0
+content_margin_top = 12.0
+content_margin_right = 18.0
+content_margin_bottom = 12.0
+bg_color = Color(0.72, 0.73, 0.57, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -26,6 +43,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("3_theme")
 script = ExtResource("1_menu")
 
 [node name="Background" type="TextureRect" parent="."]
@@ -33,8 +51,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("2_bg")
 expand_mode = 1
 stretch_mode = 6
@@ -44,68 +61,124 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.06, 0.08, 0.07, 0.45)
+mouse_filter = 2
+color = Color(0.20, 0.24, 0.18, 0.16)
 
 [node name="MenuMargin" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 120
-theme_override_constants/margin_top = 96
-theme_override_constants/margin_right = 120
-theme_override_constants/margin_bottom = 96
 
-[node name="Layout" type="VBoxContainer" parent="MenuMargin"]
+[node name="Center" type="CenterContainer" parent="MenuMargin"]
 layout_mode = 2
+
+[node name="Book" type="PanelContainer" parent="MenuMargin/Center"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("BookPaper")
+
+[node name="BookMargin" type="MarginContainer" parent="MenuMargin/Center/Book"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_right = 12
+
+[node name="Spread" type="HBoxContainer" parent="MenuMargin/Center/Book/BookMargin"]
+layout_mode = 2
+theme_override_constants/separation = 42
+
+[node name="Story" type="VBoxContainer" parent="MenuMargin/Center/Book/BookMargin/Spread"]
+custom_minimum_size = Vector2(650, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 24
 alignment = 1
-theme_override_constants/separation = 26
 
-[node name="Title" type="Label" parent="MenuMargin/Layout"]
+[node name="Eyebrow" type="Label" parent="MenuMargin/Center/Book/BookMargin/Spread/Story"]
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 0.92, 0.76, 1)
-theme_override_font_sizes/font_size = 88
-text = "撑过这一周"
-horizontal_alignment = 1
+theme_override_colors/font_color = Color(0.278, 0.42, 0.341, 1)
+theme_override_font_sizes/font_size = 19
+text = "校园生活策略"
 
-[node name="Subtitle" type="Label" parent="MenuMargin/Layout"]
+[node name="Title" type="Label" parent="MenuMargin/Center/Book/BookMargin/Spread/Story"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.96, 0.89, 0.76, 1)
-theme_override_font_sizes/font_size = 34
-text = "离考试还有七天"
-horizontal_alignment = 1
+theme_override_font_sizes/font_size = 90
+text = "撑过\n这一周"
 
-[node name="IntroPanel" type="PanelContainer" parent="MenuMargin/Layout"]
-custom_minimum_size = Vector2(880, 0)
+[node name="Subtitle" type="Label" parent="MenuMargin/Center/Book/BookMargin/Spread/Story"]
 layout_mode = 2
-size_flags_horizontal = 4
-theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+theme_override_colors/font_color = Color(0.729, 0.412, 0.286, 1)
+theme_override_font_sizes/font_size = 30
+text = "离考试还有七天。"
 
-[node name="IntroText" type="Label" parent="MenuMargin/Layout/IntroPanel"]
+[node name="IntroText" type="Label" parent="MenuMargin/Center/Book/BookMargin/Spread/Story"]
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 0.96, 0.86, 1)
-theme_override_font_sizes/font_size = 24
-text = "吃饭、复习、睡觉。钱和精力，都得算着用。"
-horizontal_alignment = 1
+theme_override_colors/font_color = Color(0.439, 0.427, 0.376, 1)
+theme_override_font_sizes/font_size = 23
+text = "安排三餐、复习与休息。"
 autowrap_mode = 3
 
-[node name="ButtonRow" type="HBoxContainer" parent="MenuMargin/Layout"]
+[node name="ButtonRow" type="HBoxContainer" parent="MenuMargin/Center/Book/BookMargin/Spread/Story"]
 layout_mode = 2
-alignment = 1
-theme_override_constants/separation = 18
+theme_override_constants/separation = 16
 
-[node name="StartButton" type="Button" parent="MenuMargin/Layout/ButtonRow"]
-custom_minimum_size = Vector2(260, 68)
+[node name="StartButton" type="Button" parent="MenuMargin/Center/Book/BookMargin/Spread/Story/ButtonRow"]
+custom_minimum_size = Vector2(280, 76)
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
+theme_type_variation = &"PrimaryButton"
+theme_override_font_sizes/font_size = 26
 text = "开始这一周"
 
-[node name="QuitButton" type="Button" parent="MenuMargin/Layout/ButtonRow"]
-custom_minimum_size = Vector2(180, 68)
+[node name="QuitButton" type="Button" parent="MenuMargin/Center/Book/BookMargin/Spread/Story/ButtonRow"]
+custom_minimum_size = Vector2(128, 76)
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 21
 text = "退出"
+
+[node name="FooterNote" type="Label" parent="MenuMargin/Center/Book/BookMargin/Spread/Story"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0.439, 0.427, 0.376, 1)
+theme_override_font_sizes/font_size = 17
+text = "三餐 · 课间 · 夜晚   每一步，都有新的取舍。"
+autowrap_mode = 3
+
+[node name="Divider" type="VSeparator" parent="MenuMargin/Center/Book/BookMargin/Spread"]
+layout_mode = 2
+
+[node name="RightPage" type="VBoxContainer" parent="MenuMargin/Center/Book/BookMargin/Spread"]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Caption" type="Label" parent="MenuMargin/Center/Book/BookMargin/Spread/RightPage"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0.439, 0.427, 0.376, 1)
+theme_override_font_sizes/font_size = 20
+text = "这一周，慢慢安排。"
+horizontal_alignment = 1
+
+[node name="PortraitFrame" type="PanelContainer" parent="MenuMargin/Center/Book/BookMargin/Spread/RightPage"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("PortraitPaper")
+
+[node name="Portrait" type="TextureRect" parent="MenuMargin/Center/Book/BookMargin/Spread/RightPage/PortraitFrame"]
+custom_minimum_size = Vector2(0, 310)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("4_portrait")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="WeekRibbon" type="HBoxContainer" parent="MenuMargin/Center/Book/BookMargin/Spread/RightPage"]
+layout_mode = 2
+script = ExtResource("5_week")
+
+[node name="Notes" type="Label" parent="MenuMargin/Center/Book/BookMargin/Spread/RightPage"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0.278, 0.42, 0.341, 1)
+theme_override_font_sizes/font_size = 19
+text = "吃饭有选择\n安排有余地\n每一天，都能重新开始"
+horizontal_alignment = 1

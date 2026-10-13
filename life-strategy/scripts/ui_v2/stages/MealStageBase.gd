@@ -9,6 +9,10 @@ signal detail_requested(payload: Dictionary, anchor_rect: Rect2, pinned: bool)
 signal detail_dismissed(item_id: String)
 
 const CARD_SCENE := preload("res://scenes/game_v2/components/CompactChoiceCard.tscn")
+const DESKTOP_CARD_AREA := Rect2(0.20, 0.11, 0.76, 0.47)
+const DESKTOP_SELECTED_AREA := Rect2(0.44, 0.60, 0.40, 0.31)
+const MOBILE_CARD_AREA := Rect2(0.02, 0.10, 0.96, 0.50)
+const MOBILE_SELECTED_AREA := Rect2(0.29, 0.61, 0.69, 0.24)
 
 var _foods: Array[Dictionary] = []
 var _foods_by_id: Dictionary = {}
@@ -23,6 +27,7 @@ var _payment_mode := "cash"
 var _meal_label := "这一顿"
 var _ready_finished := false
 var _has_setup := false
+var _layout_mobile_mode := false
 
 
 func setup(foods: Array, selected_ids: Array = [], options: Dictionary = {}) -> void:
@@ -93,6 +98,7 @@ func _bind_meal_controls(
 
 func _finish_ready() -> void:
 	_ready_finished = true
+	apply_selection_layout(_layout_mobile_mode)
 	if _has_setup:
 		_populate_cards()
 	else:
@@ -160,36 +166,18 @@ func _refresh_card_availability() -> void:
 func _update_slot_labels(animate: bool) -> void:
 	var slots: Array = _get_slot_nodes()
 	for index in range(slots.size()):
-		var slot := slots[index] as PanelContainer
+		var slot := slots[index] as SelectedFoodCardV2
 		if slot == null:
 			continue
-		var label := slot.get_node_or_null("Empty") as Label
-		var preview := slot.get_node_or_null("Preview") as TextureRect
+		slot.visible = index < _max_selected
 		if index < _selected_ids.size():
 			var food_id := _selected_ids[index]
 			var food: Dictionary = _foods_by_id.get(food_id, {})
-			var texture := _food_preview_texture(food)
-			if preview != null:
-				preview.texture = texture
-				preview.visible = texture != null
-			if label != null:
-				label.visible = texture == null
-				label.text = "?"
-				label.add_theme_font_size_override("font_size", 28)
-				label.add_theme_color_override("font_color", Color(0.55, 0.48, 0.40, 0.55))
-			slot.self_modulate = Color(1.0, 0.91, 0.73, 1.0)
+			slot.show_food(food, _food_preview_texture(food), _payment_mode == "stock")
 			if animate:
 				_pulse_slot(slot)
 		else:
-			if preview != null:
-				preview.texture = null
-				preview.visible = false
-			if label != null:
-				label.visible = true
-				label.text = "+"
-				label.add_theme_font_size_override("font_size", 36)
-				label.add_theme_color_override("font_color", Color(0.55, 0.48, 0.40, 0.42))
-			slot.self_modulate = Color.WHITE
+			slot.clear_food()
 
 
 func _food_preview_texture(food: Dictionary) -> Texture2D:
@@ -273,10 +261,14 @@ func _selection_total() -> int:
 
 
 func _card_stock(food_id: String) -> int:
+	# Inventory belongs to pantry payment. Cash sources keep their price even
+	# when the character owns, consumes or replenishes the same food elsewhere.
+	if _payment_mode != "stock":
+		return -1
 	if _stock_by_id.has(food_id):
 		return int(_stock_by_id[food_id])
 	var food: Dictionary = _foods_by_id.get(food_id, {})
-	return int(food.get("stock", -1))
+	return int(food.get("stock", 0))
 
 
 func _selected_names() -> Array[String]:
@@ -314,6 +306,101 @@ func _pulse_slot(slot: Control) -> void:
 	var tween := slot.create_tween()
 	tween.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	tween.tween_property(slot, "scale", Vector2.ONE, 0.18)
+
+
+func apply_selection_layout(mobile: bool) -> void:
+	_layout_mobile_mode = mobile
+	if not _ready_finished:
+		return
+	var paths := _get_layout_paths()
+	if paths.is_empty():
+		return
+	var cards := get_node(String(paths["cards"])) as Control
+	var selected_area := get_node(String(paths["selection"])) as Control
+	_anchor_region(cards, MOBILE_CARD_AREA if mobile else DESKTOP_CARD_AREA)
+	_anchor_region(selected_area, MOBILE_SELECTED_AREA if mobile else DESKTOP_SELECTED_AREA)
+	var header := get_node(String(paths["header"])) as Control
+	header.anchor_left = 0.5
+	header.anchor_right = 0.5
+	header.anchor_top = 0.0
+	header.anchor_bottom = 0.0
+	header.offset_left = -294.0 if mobile else -320.0
+	header.offset_right = 294.0 if mobile else 320.0
+	header.offset_top = 6.0 if mobile else 18.0
+	header.offset_bottom = 70.0 if mobile else 82.0
+	var footer := get_node(String(paths["footer"])) as HBoxContainer
+	footer.anchor_left = 1.0
+	footer.anchor_right = 1.0
+	footer.anchor_top = 1.0
+	footer.anchor_bottom = 1.0
+	footer.offset_left = -428.0 if mobile else -528.0
+	footer.offset_right = -8.0 if mobile else -18.0
+	footer.offset_top = -90.0 if mobile else -72.0
+	footer.offset_bottom = -30.0 if mobile else -12.0
+	footer.add_theme_constant_override("separation", 10)
+	for button_name in ["BackButton", "SkipButton", "ConfirmButton"]:
+		var button := footer.get_node(button_name) as Button
+		var width := 170 if mobile else 190
+		if button_name == "BackButton":
+			width = 120 if mobile else 160
+		elif button_name == "SkipButton":
+			width = 110 if mobile else 140
+		button.custom_minimum_size = Vector2(width, 60)
+		button.add_theme_font_size_override("font_size", 18 if mobile else 20)
+	for path in paths.get("hide", []):
+		(get_node(String(path)) as Control).hide()
+	if paths.has("selection_margin"):
+		var margin := get_node(String(paths["selection_margin"])) as MarginContainer
+		for side in ["margin_left", "margin_right"]:
+			margin.add_theme_constant_override(side, 16)
+		for side in ["margin_top", "margin_bottom"]:
+			margin.add_theme_constant_override(side, 4)
+	if paths.has("selection_box"):
+		var box := get_node(String(paths["selection_box"])) as VBoxContainer
+		box.add_theme_constant_override("separation", 8)
+		var selected_header := box.get_child(0) as Control
+		selected_header.custom_minimum_size.y = 32
+		for child in selected_header.find_children("*", "Label", true, false):
+			if (child as Label).visible:
+				(child as Label).add_theme_font_size_override("font_size", 24)
+	var slots := _get_slot_nodes()
+	for index in range(slots.size()):
+		var slot := slots[index] as SelectedFoodCardV2
+		slot.visible = index < _max_selected
+		var row := slot.get_parent() as HBoxContainer
+		if row != null:
+			var count := mini(slots.size(), _max_selected)
+			var card_width := (124 if count >= 5 else 142) if not mobile else (76 if count >= 4 else 106)
+			# Reserve the panel padding, one header row, and its gap before sizing
+			# full card faces. Short portrait screens have less room than tall ones.
+			var card_height := mini(216, floori(size.y * MOBILE_SELECTED_AREA.size.y - 71.0)) if mobile else 216
+			slot.set_card_size(Vector2(card_width, maxi(128, card_height)), mobile)
+			row.alignment = BoxContainer.ALIGNMENT_BEGIN
+			row.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
+			row.add_theme_constant_override("separation", 10 if mobile else 16)
+
+
+func get_selection_layout_rects() -> Dictionary:
+	var paths := _get_layout_paths()
+	var result := {}
+	for key in ["cards", "selection", "footer"]:
+		result[key] = (get_node(String(paths[key])) as Control).get_global_rect()
+	return result
+
+
+func _anchor_region(control: Control, region: Rect2) -> void:
+	control.anchor_left = region.position.x
+	control.anchor_top = region.position.y
+	control.anchor_right = region.end.x
+	control.anchor_bottom = region.end.y
+	control.offset_left = 0
+	control.offset_top = 0
+	control.offset_right = 0
+	control.offset_bottom = 0
+
+
+func _get_layout_paths() -> Dictionary:
+	return {}
 
 
 func _create_card() -> Variant:

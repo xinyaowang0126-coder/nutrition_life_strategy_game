@@ -1,0 +1,92 @@
+{
+  "date": "2026-10-11",
+  "session_id": "life-strategy@e960a7d06eda5df3",
+  "plugin_version": "4.3.0",
+  "server_version": "4.3.0",
+  "runtime_tests": {
+    "result": {
+      "day2": {
+        "x": 202,
+        "y": 159
+      },
+      "failed": 0,
+      "failures": [],
+      "passed": 16,
+      "total": 16,
+      "unchanged": true,
+      "valid": true,
+      "week": {
+        "x": 934,
+        "y": 159
+      }
+    },
+    "source": "game"
+  },
+  "day_input": {
+    "result": {
+      "counts": {
+        "eaten": 1,
+        "legacy_unknown": 1,
+        "skipped": 1,
+        "unrecorded": 0
+      },
+      "selected_day": 2,
+      "summary": "午饭没吃。",
+      "unchanged": true
+    },
+    "source": "game"
+  },
+  "week_input": {
+    "result": {
+      "capture_error": 0,
+      "diversity_status": "segmented",
+      "segment_count": 2,
+      "summary": "已记下 9 顿，4 顿没吃。",
+      "unchanged": true,
+      "unique_count": null,
+      "weekly": true
+    },
+    "source": "game"
+  },
+  "game_logs": {
+    "source": "game",
+    "lines": [
+      {
+        "level": "info",
+        "run_id": "r134843-1",
+        "source": "game",
+        "text": "[godot_ai game_helper] registered mcp capture (debugger active=true, logger=true)\n"
+      }
+    ],
+    "total_count": 1,
+    "returned_count": 1,
+    "offset": 0,
+    "limit": 10,
+    "has_more": false,
+    "run_id": "r134843-1",
+    "is_running": true,
+    "dropped_count": 0,
+    "stale_run_id": false,
+    "current_run_id": "r134843-1",
+    "helper_live": true,
+    "session_active": true,
+    "game_status": {
+      "active": true,
+      "editor_log_cursor": 0,
+      "elapsed_msec": 51041,
+      "helper_expected": true,
+      "helper_live": true,
+      "ready": true,
+      "ready_wait_msec": 20000,
+      "run_started_msec": 134841,
+      "run_token": 1,
+      "session_active": true,
+      "status": "live"
+    }
+  },
+  "scope": "Final code: runtime suite and actual MCP mouse day/week switching in isolated synthetic record preview; ledger snapshots unchanged. No physical-phone or browser acceptance.",
+  "notes": [
+    "Earlier shared editor was stopped by parallel work; those failed mouse attempts are not counted as passes.",
+    "After balance task finished, a fresh editor session validated final strict ingestion and both day/week clicks."
+  ]
+}

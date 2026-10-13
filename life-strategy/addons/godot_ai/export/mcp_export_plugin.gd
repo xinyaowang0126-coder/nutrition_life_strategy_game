@@ -1,8 +1,7 @@
 @tool
 extends EditorExportPlugin
 
-## Strips the MCP game-helper autoload and editor-plugin configuration from
-## exported builds (#740).
+## Strips the MCP game-helper autoload from exported builds (#740).
 ##
 ## plugin.gd writes `autoload/_mcp_game_helper` into project.godot so the
 ## editor-spawned game process loads the helper. Exports bake project
@@ -19,9 +18,7 @@ extends EditorExportPlugin
 ## script/ci-export-strip-smoke, which exports a real pack and asserts
 ## the autoload is absent inside it. We never call ProjectSettings.save()
 ## while stripped, so project.godot on disk keeps the autoload
-## throughout; only the export snapshot loses it. Clearing editor_plugins/enabled
-## also keeps development plugin paths out of project.binary without unloading
-## the export plugin that is already running.
+## throughout; only the export snapshot loses it.
 ##
 ## Failure containment: if an export aborts so hard that _export_end
 ## never fires, the damage is bounded to the editor's in-memory settings
@@ -34,12 +31,8 @@ extends EditorExportPlugin
 ## plugin.gd preloads this script. The pairing is locked by
 ## test_export_strip.gd's constants-contract test.
 const AUTOLOAD_KEY := "autoload/_mcp_game_helper"
-const EDITOR_PLUGINS_KEY := "editor_plugins/enabled"
 
 var _saved_value: Variant = null
-var _saved_editor_plugins: Variant = null
-var _had_autoload := false
-var _had_editor_plugins := false
 var _stripped := false
 
 
@@ -53,36 +46,24 @@ func _export_begin(_features: PackedStringArray, _is_debug: bool, _path: String,
 	## state — restore semantics stay anchored to the original value.
 	if _stripped:
 		return
-	_had_autoload = ProjectSettings.has_setting(AUTOLOAD_KEY)
-	_had_editor_plugins = ProjectSettings.has_setting(EDITOR_PLUGINS_KEY)
-	if _had_autoload:
-		_saved_value = ProjectSettings.get_setting(AUTOLOAD_KEY)
-	if _had_editor_plugins:
-		_saved_editor_plugins = ProjectSettings.get_setting(EDITOR_PLUGINS_KEY)
-	## Capture both settings independently: the editor plugin can be enabled even
-	## when its helper autoload is absent. Setting a setting to null erases it.
+	if not ProjectSettings.has_setting(AUTOLOAD_KEY):
+		return
+	_saved_value = ProjectSettings.get_setting(AUTOLOAD_KEY)
+	## Setting a project setting to null erases it.
 	ProjectSettings.set_setting(AUTOLOAD_KEY, null)
-	ProjectSettings.set_setting(EDITOR_PLUGINS_KEY, null)
 	_stripped = true
-	print("MCP | export: stripping development-only project settings from the exported pack (restored in the editor after export)")
+	print("MCP | export: stripping %s from the exported pack (restored in the editor after export)" % AUTOLOAD_KEY)
 
 
 func _export_end() -> void:
 	if not _stripped:
 		return
-	ProjectSettings.set_setting(AUTOLOAD_KEY, _saved_value if _had_autoload else null)
-	ProjectSettings.set_setting(
-		EDITOR_PLUGINS_KEY, _saved_editor_plugins if _had_editor_plugins else null
-	)
-	if _had_autoload:
-		## Mirror _ensure_game_helper_autoload()'s registration shape so the
-		## restored entry is indistinguishable from the original: initial
-		## value "" keeps project.godot diff-clean, basic keeps it visible in
-		## the non-advanced settings view.
-		ProjectSettings.set_initial_value(AUTOLOAD_KEY, "")
-		ProjectSettings.set_as_basic(AUTOLOAD_KEY, true)
+	ProjectSettings.set_setting(AUTOLOAD_KEY, _saved_value)
+	## Mirror _ensure_game_helper_autoload()'s registration shape so the
+	## restored entry is indistinguishable from the original: initial
+	## value "" keeps project.godot diff-clean, basic keeps it visible in
+	## the non-advanced settings view.
+	ProjectSettings.set_initial_value(AUTOLOAD_KEY, "")
+	ProjectSettings.set_as_basic(AUTOLOAD_KEY, true)
 	_saved_value = null
-	_saved_editor_plugins = null
-	_had_autoload = false
-	_had_editor_plugins = false
 	_stripped = false

@@ -13,18 +13,16 @@ const STAT_LABELS := {
 	"mood": "心情",
 	"satiety": "饱腹",
 	"stress": "压力",
-	"diet_burden": "角色健康",
 	"study_progress": "复习",
 }
 
 const STARTING_STATS := {
-	"stability": 65,
-	"balance": 120,
-	"energy": 52,
+	"stability": 51,
+	"balance": 150,
+	"energy": 60,
 	"mood": 55,
-	"satiety": 58,
+	"satiety": 40,
 	"stress": 48,
-	"diet_burden": 24,
 	"study_progress": 0,
 	"study_target": STUDY_TARGET,
 }
@@ -33,25 +31,25 @@ const ENDINGS := {
 	"stable_endurance": {
 		"id": "stable_endurance",
 		"title": "稳稳到了周末",
-		"subtitle": "书看完了，饭也没落下。周末早上醒来，你还有力气下楼走走。",
+		"subtitle": "复习目标完成了，也给自己留了些余力。",
 		"image": "res://assets/generated/endings/stable_endurance.png",
 	},
 	"barely_survived": {
 		"id": "barely_survived",
 		"title": "总算到了周末",
-		"subtitle": "有几顿没顾上，也熬了几个夜。交卷以后，你只想先睡一觉。",
+		"subtitle": "这一周走完了。下次换个安排，再试试看。",
 		"image": "res://assets/generated/endings/barely_survived.png",
 	},
 	"collapsed": {
 		"id": "collapsed",
 		"title": "先歇一会儿",
-		"subtitle": "闹钟响了又响，你没有起身。今天先不谈计划，先去吃点东西。",
+		"subtitle": "这次的安排没能撑下去。先停在这里，下次换个节奏。",
 		"image": "res://assets/generated/endings/collapsed.png",
 	},
 	"study_shortfall": {
 		"id": "study_shortfall",
 		"title": "这次没赶上",
-		"subtitle": "日子照常过下来了，只是书没看完。这次的成绩不太理想。",
+		"subtitle": "这一周走完了，复习目标还没完成。",
 		"image": "res://assets/generated/endings/barely_survived.png",
 	},
 }
@@ -63,14 +61,6 @@ static func ensure_loaded() -> void:
 static func get_starting_stats() -> Dictionary:
 	ensure_loaded()
 	return STARTING_STATS.duplicate(true)
-
-
-static func character_health_from_burden(burden: int) -> int:
-	return clampi(100 - burden, 0, 100)
-
-
-static func character_health_delta_from_burden(burden_delta: int) -> int:
-	return -burden_delta
 
 
 static func get_food(id: String) -> Dictionary:

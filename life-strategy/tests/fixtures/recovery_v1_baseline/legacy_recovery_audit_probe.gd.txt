@@ -1,0 +1,426 @@
+extends SceneTree
+
+## NUT-208A legacy_evidence_only: observations of the current production rules.
+## This is not a test suite or an oracle for the replacement recovery rules.
+## No production formula is copied here; controlled inputs call live methods.
+## Run: godot --headless --path life-strategy --script
+## res://tests/legacy_recovery_audit_probe.gd -- --output=res://.godot/nut208a/legacy_baseline.json
+## Controllers never enter the scene tree. Health features are explicitly off,
+## health_history_path is empty, and the probe rejects user:// output paths.
+
+const Data := preload("res://scripts/GameData.gd")
+const Cards := preload("res://scripts/CardDataStore.gd")
+const Resolver := preload("res://scripts/systems/MealResolver.gd")
+const Carryover := preload("res://scripts/systems/DayCarryoverService.gd")
+const Deck := preload("res://scripts/systems/MealDeckService.gd")
+const Ledger := preload("res://scripts/systems/NutritionLedger.gd")
+const DEFAULT_OUTPUT := "res://.godot/nut208a/legacy_baseline.json"
+const SEED := 20260711
+const SOURCE_PATHS := [
+	"res://scripts/GameData.gd", "res://scripts/CardDataStore.gd",
+	"res://scripts/ui_v2/GameRootV2.gd",
+	"res://scripts/systems/MealResolver.gd",
+	"res://scripts/systems/DayCarryoverService.gd",
+	"res://scripts/systems/NutritionLedger.gd",
+	"res://scripts/systems/WeeklyEventService.gd",
+	"res://scripts/systems/MealDeckService.gd",
+	"res://scripts/systems/FoodPreferenceService.gd",
+	"res://data/cards/foods.xml", "res://data/cards/meal_sources.xml",
+	"res://data/cards/actions.xml", "res://data/cards/sleep_options.xml",
+	"res://data/characters/default_food_preferences.xml",
+]
+
+
+class AuditController:
+	extends "res://scripts/ui_v2/GameRootV2.gd"
+
+	var audit_before_finish: Dictionary = {}
+
+	func _finish_day() -> void:
+		# Observe the exact sleep/settlement boundary, then invoke the real method.
+		audit_before_finish = state.duplicate(true)
+		super._finish_day()
+
+
+var _errors: Array[String] = []
+
+
+func _initialize() -> void:
+	call_deferred("_run")
+
+
+func _run() -> void:
+	var output := _output_path()
+	if output.is_empty():
+		quit(1)
+		return
+	Data.ensure_loaded()
+	var hashes := {}
+	for path in SOURCE_PATHS:
+		hashes[path] = FileAccess.get_sha256(path)
+	var report := {
+		"schema": "nut208a.legacy_recovery_evidence.v1",
+		"legacy_evidence_only": true,
+		"not_replacement_rule_expectations": true,
+		"purpose": "Frozen observations for migration review; no clinical meaning or new-rule acceptance criteria.",
+		"engine": Engine.get_version_info()["string"],
+		"seed": SEED,
+		"source_sha256": hashes,
+		"isolation": {"controller_added_to_tree": false, "health_flags": "all_off", "health_history_path": ""},
+		"starting_state": Data.get_starting_stats(),
+		"burden_catalog": _catalog(),
+		"representative_meals": _representative_meals(),
+		"action_observations": _action_observations(),
+		"sleep_observations": _sleep_observations(),
+		"combo_observations": _combo_observations(),
+		"mixed_day": _mixed_day(),
+		"day_end_boundaries": _day_end_boundaries(),
+		"carryover_burden_boundaries": _carryover_boundaries(),
+		"stability_boundaries": _stability_boundaries(),
+		"ending_boundaries": _ending_boundaries(),
+		"clamp_and_hud_conversion": _clamp_observations(),
+		"seven_day_flow": _seven_day_flow(),
+		"early_collapse_flow": _early_collapse_flow(),
+	}
+	report["probe_errors"] = _errors.duplicate()
+	var absolute := ProjectSettings.globalize_path(output)
+	var directory_error := DirAccess.make_dir_recursive_absolute(absolute.get_base_dir())
+	if directory_error != OK:
+		push_error("Cannot create evidence directory: %s" % absolute.get_base_dir())
+		quit(1)
+		return
+	var file := FileAccess.open(absolute, FileAccess.WRITE)
+	if file == null:
+		push_error("Cannot write evidence: %s" % absolute)
+		quit(1)
+		return
+	file.store_string(JSON.stringify(report, "\t", true) + "\n")
+	file.close()
+	print("NUT208A_LEGACY_EVIDENCE=" + JSON.stringify({
+		"legacy_evidence_only": true, "output": absolute, "errors": _errors,
+		"food_count": Cards.food_ids.size(),
+		"seven_day_ending": report["seven_day_flow"]["ending_id"],
+		"days_recorded": report["seven_day_flow"]["days"].size(),
+	}))
+	quit(0 if _errors.is_empty() else 1)
+
+
+func _output_path() -> String:
+	var output := DEFAULT_OUTPUT
+	var args := OS.get_cmdline_user_args()
+	for index in range(args.size()):
+		if args[index].begins_with("--output="):
+			output = args[index].trim_prefix("--output=")
+		elif args[index] == "--output" and index + 1 < args.size():
+			output = args[index + 1]
+	if output.is_empty() or output.begins_with("user://"):
+		push_error("Evidence output must be nonempty and outside user://")
+		return ""
+	return "res://" + output if output.is_relative_path() else output
+
+
+func _new_controller() -> AuditController:
+	var game := AuditController.new()
+	game.health_guidance_flags = {"data": false, "engine": false, "ui": false, "weekly": false}
+	game.health_history_path = ""
+	game._deck_service = Deck.new(SEED)
+	game.start_new_run()
+	return game
+
+
+func _controlled_state() -> Dictionary:
+	var state := Data.get_starting_stats()
+	state.merge({
+		"balance": 120, "energy": 60, "mood": 60, "stress": 40,
+		"satiety": 50, "diet_burden": 50, "study_progress": 70,
+	}, true)
+	return state
+
+
+func _catalog() -> Dictionary:
+	var result := {}
+	for group in [
+		["foods", Cards.food_ids, Callable(Data, "get_food")],
+		["meal_sources", Cards.meal_source_ids, Callable(Data, "get_meal_source")],
+		["actions", Cards.action_ids, Callable(Data, "get_action")],
+		["sleep_options", Cards.sleep_option_ids, Callable(Data, "get_sleep_option")],
+	]:
+		var rows: Array[Dictionary] = []
+		for id in group[1]:
+			var item: Dictionary = group[2].call(id)
+			rows.append({"id": id, "name": item["name"], "burden": int(item.get("burden", 0))})
+		result[group[0]] = rows
+	return result
+
+
+func _meal(phase: String, source_id: String, ids: Array) -> Dictionary:
+	var foods: Array[Dictionary] = []
+	for id in ids:
+		foods.append(Data.get_food(id))
+	return Resolver.build_record(phase, Data.get_meal_source(source_id), foods)
+
+
+func _representative_meals() -> Array[Dictionary]:
+	return [
+		_meal("lunch", "cafeteria", ["rice_plain", "tofu", "greens"]),
+		_meal("lunch", "takeout", ["fried_chicken", "bubble_tea"]),
+		_meal("breakfast", "convenience_store", ["milk", "apple"]),
+		_meal("dinner", "dorm_storage", ["instant_noodles"]),
+		Resolver.build_skipped_record("lunch"),
+	]
+
+
+func _change(before: Dictionary, after: Dictionary) -> Dictionary:
+	var delta := {}
+	for key in before:
+		if after.has(key) and (before[key] is int or before[key] is float):
+			delta[key] = int(after[key]) - int(before[key])
+	return {"before": before.duplicate(true), "after": after.duplicate(true), "observed_delta": delta}
+
+
+func _action_observations() -> Array[Dictionary]:
+	var rows: Array[Dictionary] = []
+	for day in [1, 2, 6]:
+		for action_id in ["drink_water", "walk", "allow_imperfection", "nap"]:
+			var game := _new_controller()
+			game.day = day
+			game.state = _controlled_state()
+			game.phase = "breakfast_action"
+			var before := game.state.duplicate(true)
+			game._apply_action(action_id)
+			var row := _change(before, game.state)
+			row.merge({"day": day, "action_id": action_id, "records": game.today_action_records.duplicate(true)})
+			rows.append(row)
+			game.free()
+	return rows
+
+
+func _sleep_observations() -> Array[Dictionary]:
+	var rows: Array[Dictionary] = []
+	for option_id in Data.get_sleep_option_ids_for_scene("sleep"):
+		var game := _new_controller()
+		game.state = _controlled_state()
+		game._day_start_state = game.state.duplicate(true)
+		# Identical settled-meal fixtures isolate each live sleep choice.
+		for phase in ["breakfast", "lunch", "dinner"]:
+			game.today_meal_records.append(_meal(phase, "cafeteria", ["rice_plain", "egg", "tomato"]))
+		game.phase = "sleep"
+		var before_sleep := game.state.duplicate(true)
+		game._choose_sleep(option_id)
+		rows.append({
+			"controlled_fixture": true,
+			"sleep_option": Data.get_sleep_option(option_id),
+			"before_sleep": before_sleep,
+			"after_sleep_before_finish": game.audit_before_finish.duplicate(true),
+			"final_state": game.state.duplicate(true),
+			"pending_learning_state": game.pending_learning_state.duplicate(true),
+			"meal_records": game.today_meal_records.duplicate(true),
+		})
+		game.free()
+	return rows
+
+
+func _combo_observations() -> Array[Dictionary]:
+	var game := _new_controller()
+	game.state = _controlled_state()
+	var rows: Array[Dictionary] = []
+	for record in [
+		_meal("breakfast", "cafeteria", ["rice_plain", "egg", "tomato"]),
+		_meal("lunch", "takeout", ["bubble_tea"]),
+		_meal("dinner", "dorm_storage", ["instant_noodles"]),
+	]:
+		var before := game.state.duplicate(true)
+		game._apply_meal_record(record)
+		var row := _change(before, game.state)
+		row.merge({"record": record, "combos_after": game.combos_today.duplicate()})
+		rows.append(row)
+	game.free()
+	return rows
+
+
+func _mixed_day() -> Dictionary:
+	var game := _new_controller()
+	game.state = _controlled_state()
+	game._day_start_state = game.state.duplicate(true)
+	var rows: Array[Dictionary] = []
+	var plan := [
+		["breakfast", "dorm_storage", ["instant_noodles"], "drink_water"],
+		["lunch", "takeout", ["fried_chicken", "bubble_tea"], "walk"],
+		["dinner", "cafeteria", ["rice_plain", "tofu", "greens"], "drink_water"],
+	]
+	for choice in plan:
+		var before := game.state.duplicate(true)
+		var record := _meal(choice[0], choice[1], choice[2])
+		game._apply_meal_record(record)
+		var after_meal := game.state.duplicate(true)
+		game.phase = "%s_action" % choice[0]
+		game._apply_action(choice[3])
+		rows.append({
+			"meal": record, "meal_change": _change(before, after_meal),
+			"action_id": choice[3], "action_change": _change(after_meal, game.state),
+		})
+	var before_sleep := game.state.duplicate(true)
+	game._choose_sleep("sleep_early")
+	var result := {
+		"controlled_fixture": true, "steps": rows,
+		"sleep_change": _change(before_sleep, game.audit_before_finish),
+		"day_end_change": _change(game.audit_before_finish, game.state),
+		"nutrition_after_actions_and_sleep": Ledger.summarize(game.today_meal_records),
+		"meal_records_after_actions_and_sleep": game.today_meal_records.duplicate(true),
+		"combos": game.combos_today.duplicate(),
+		"next_day_state": game.pending_learning_state.duplicate(true),
+	}
+	game.free()
+	return result
+
+
+func _day_end_boundaries() -> Array[Dictionary]:
+	var rows: Array[Dictionary] = []
+	for score in [41, 42, 65, 66]:
+		for satiety in [92, 93]:
+			var game := _new_controller()
+			game.state = _controlled_state()
+			game.state["satiety"] = satiety
+			for phase in ["breakfast", "lunch", "dinner"]:
+				var record := _meal(phase, "cafeteria", ["rice_plain"])
+				# Synthetic legacy-quality input isolates the production day-end branch.
+				# This number is never an expected value for replacement rules.
+				record["quality"] = score
+				game.today_meal_records.append(record)
+			var before := game.state.duplicate(true)
+			game._finish_day()
+			var row := _change(before, game.state)
+			row.merge({"synthetic_quality_input": score, "satiety_input": satiety})
+			rows.append(row)
+			game.free()
+	return rows
+
+
+func _carryover_boundaries() -> Dictionary:
+	var records: Array[Dictionary] = []
+	for phase in ["breakfast", "lunch", "dinner"]:
+		records.append(_meal(phase, "cafeteria", ["rice_plain", "egg", "tomato"]))
+	var summary := Ledger.summarize(records)
+	var base := _controlled_state()
+	var rows: Array[Dictionary] = []
+	for burden in [55, 56, 67, 68, 81, 82]:
+		var state := base.duplicate(true)
+		state["diet_burden"] = burden
+		rows.append({"burden": burden, "result": Carryover.evaluate_day(summary, [], "sleep_early", state)})
+	return {"summary": summary, "base_state": base, "actions": [], "sleep_id": "sleep_early", "rows": rows}
+
+
+func _stability_boundaries() -> Dictionary:
+	var base := _controlled_state()
+	var rows: Array[Dictionary] = []
+	for dimension in [
+		["diet_burden", [0, 24, 50, 60, 61, 100]],
+		["energy", [15, 16]], ["mood", [15, 16]],
+		["satiety", [11, 12]], ["stress", [88, 89]],
+		["balance", [35, 36, 59, 60]],
+	]:
+		for value in dimension[1]:
+			var state := base.duplicate(true)
+			state[dimension[0]] = value
+			rows.append({
+				"key": dimension[0], "value": value,
+				"stability": Resolver.calculate_stability(state, 70, 1, 7),
+			})
+	return {"base_state": base, "avg_quality": 70, "day": 1, "total_days": 7, "rows": rows}
+
+
+func _ending_boundaries() -> Array[Dictionary]:
+	var rows: Array[Dictionary] = []
+	for stability in [15, 16, 24, 25, 59, 60]:
+		for study in [49, 50, 69, 70]:
+			for burden in [60, 61]:
+				var state := _controlled_state()
+				state.merge({"stability": stability, "study_progress": study, "diet_burden": burden}, true)
+				rows.append({
+					"stability": stability, "study_progress": study, "burden": burden,
+					"ending_id": Resolver.select_ending(state),
+				})
+	return rows
+
+
+func _clamp_observations() -> Array[Dictionary]:
+	var rows: Array[Dictionary] = []
+	var game := _new_controller()
+	for burden in [-1, 0, 1, 99, 100, 101]:
+		game.state["diet_burden"] = burden
+		game._clamp_stats()
+		rows.append({
+			"input_burden": burden, "clamped_burden": game.state["diet_burden"],
+			"character_health_display": Data.character_health_from_burden(burden),
+			"delta_display_for_same_input": Data.character_health_delta_from_burden(burden),
+		})
+	game.free()
+	return rows
+
+
+func _seven_day_flow() -> Dictionary:
+	var game := _new_controller()
+	var days: Array[Dictionary] = []
+	while game.phase != "ending" and game.day <= Data.TOTAL_DAYS:
+		var opening := game.state.duplicate(true)
+		for meal in ["breakfast", "lunch", "dinner"]:
+			game._choose_meal_source("cafeteria")
+			var preferred := ["rice_plain", "egg", "tomato", "mixed_grain_rice"] if meal == "breakfast" else ["rice_plain", "tofu", "greens", "tomato", "mixed_grain_rice"]
+			var plate: Array[String] = []
+			var running_cost := int(game._effective_meal_source("cafeteria").get("fee", 0))
+			for food_id in preferred:
+				var cost := int(Data.get_food(food_id)["cost"])
+				if game.hand.has(food_id) and running_cost + cost <= int(game.state["balance"]):
+					plate.append(food_id)
+					running_cost += cost
+				if plate.size() >= 2:
+					break
+			game._confirm_food(plate)
+			if game.phase != "%s_action" % meal:
+				_errors.append("Seven-day meal did not advance: day %d %s" % [game.day, meal])
+				break
+			game._apply_action("study")
+		if game.phase != "sleep":
+			_errors.append("Seven-day route did not reach sleep: day %d %s" % [game.day, game.phase])
+			break
+		var before_sleep := game.state.duplicate(true)
+		game._choose_sleep("sleep_early")
+		days.append({
+			"day": game.day, "opening_state": opening,
+			"day_record": game.run_history.back().duplicate(true),
+			"sleep_change": _change(before_sleep, game.audit_before_finish),
+			"day_end_change": _change(game.audit_before_finish, game.state),
+		})
+		if game.phase == "summary":
+			game._on_summary_advanced()
+	var result := {
+		"route": "Seeded live source selection and affordable two-card cafeteria meals; three study actions and sleep_early daily; default character preferences.",
+		"seed": SEED, "days": days, "ending_id": game.ending_id,
+		"phase": game.phase, "final_state": game.state.duplicate(true),
+	}
+	game.free()
+	return result
+
+
+func _early_collapse_flow() -> Dictionary:
+	var game := _new_controller()
+	var transitions: Array[Dictionary] = []
+	for step in range(60):
+		if game.phase == "ending":
+			break
+		var before := {"day": game.day, "phase": game.phase}
+		match game.phase:
+			"breakfast_source", "lunch_source", "dinner_source": game._skip_meal()
+			"breakfast_action", "lunch_action", "dinner_action": game._skip_action()
+			"sleep": game._choose_sleep("night_study")
+			"summary": game._on_summary_advanced()
+			_: break
+		transitions.append({"from": before, "to": {"day": game.day, "phase": game.phase}})
+	var result := {
+		"route": "Skip every meal and action; night_study at sleep.",
+		"transitions": transitions, "days": game.run_history.duplicate(true),
+		"ending_id": game.ending_id, "final_state": game.state.duplicate(true),
+		"low_stability_days": game.low_stability_days,
+	}
+	game.free()
+	return result

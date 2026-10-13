@@ -1,0 +1,157 @@
+{
+  "engine": "4.7.2",
+  "plugin": "4.3.0",
+  "session_id": "life-strategy@c20c919acb0f3453",
+  "source": "Godot MCP runtime",
+  "coffee": {
+    "actual_hand": [
+      "plain_yogurt",
+      "apple",
+      "milk",
+      "coffee",
+      "sandwich"
+    ],
+    "before": {
+      "phase": "breakfast",
+      "state": {
+        "balance": 120,
+        "energy": 52,
+        "mood": 55,
+        "satiety": 58,
+        "stability": 65,
+        "stress": 48,
+        "study_progress": 0,
+        "study_target": 70
+      },
+      "stock": {
+        "apple": 1,
+        "instant_noodles": 2,
+        "milk": 1,
+        "oatmeal": 2,
+        "plain_yogurt": 1,
+        "unsalted_nuts": 1,
+        "whole_wheat_bread": 2
+      }
+    },
+    "description": "扣好杯盖，带回桌边。",
+    "detail_heading": "游戏即时效果",
+    "effects": [
+      "精力 +14",
+      "压力 +3"
+    ],
+    "note_id": "coffee"
+  },
+  "coffee_after_close": {
+    "after": {
+      "phase": "breakfast",
+      "state": {
+        "balance": 120,
+        "energy": 52,
+        "mood": 55,
+        "satiety": 58,
+        "stability": 65,
+        "stress": 48,
+        "study_progress": 0,
+        "study_target": 70
+      },
+      "stock": {
+        "apple": 1,
+        "instant_noodles": 2,
+        "milk": 1,
+        "oatmeal": 2,
+        "plain_yogurt": 1,
+        "unsalted_nuts": 1,
+        "whole_wheat_bread": 2
+      }
+    },
+    "note_pinned": false,
+    "note_visible": false
+  },
+  "coffee_close_readonly": true,
+  "summary": {
+    "basis": "这里只记录本周选过的食物。成分与份量尚未核对，暂不作营养评价。",
+    "day": 1,
+    "detail": "选餐记录\n吃了 2 餐｜跳过 1 餐\n早餐｜便利店｜咖啡、原味坚果\n午餐｜食堂｜白米饭、清蒸鱼\n晚餐｜跳过\n\n本局变化\n今日变化：余力 +1｜复习 +10｜余额 -34\n\n恢复依据\n第 1 天收工后 · 恢复充分\n\n判断依据：选择早点睡，收工时精力充足、压力较低\n\n晚间安排：早点睡\n\n精力 79 → 105 → 100；压力 57 → 48 → 48\n依次为睡前、晚间安排后、收工时。\n\n晚间安排实际效果：精力 +26、心情 +3、压力 -9、饱腹 -12\n\n其他日终效果（按执行顺序）：\n复习进度跟上：心情 +2\n日终饱腹消耗：饱腹 -6\n\n数值保持在0–100，这次调整：精力 -5\n\n明天每次复习收益 +3；开场精力 +3、心情 +1、压力 -2。当天事件、精力和压力也会影响实际复习收益；数值到顶或到底时，只记实际变化。\n\n昨夜恢复在每天收工后记录一次，白天保持这条记录。判断会一起看精力、压力、当天行动和晚间安排。\n恢复会影响第二天的开场与复习收益。这些是游戏规则，不用于判断真实健康；休息也不会改掉已经记下的饮食选择。",
+    "inventory": {
+      "apple": 1,
+      "instant_noodles": 2,
+      "milk": 1,
+      "oatmeal": 2,
+      "plain_yogurt": 1,
+      "unsalted_nuts": 1,
+      "whole_wheat_bread": 2
+    },
+    "observation": "今天吃了 2 餐，跳过了 1 餐。",
+    "phase": "summary",
+    "state": {
+      "balance": 86,
+      "energy": 100,
+      "mood": 72,
+      "satiety": 61,
+      "stability": 66,
+      "stress": 48,
+      "study_progress": 10,
+      "study_target": 70
+    }
+  },
+  "detail_after_click": {
+    "day": 1,
+    "detail_has_unreviewed_claims": false,
+    "detail_open": true,
+    "inventory": {
+      "apple": 1,
+      "instant_noodles": 2,
+      "milk": 1,
+      "oatmeal": 2,
+      "plain_yogurt": 1,
+      "unsalted_nuts": 1,
+      "whole_wheat_bread": 2
+    },
+    "phase": "summary",
+    "state": {
+      "balance": 86,
+      "energy": 100,
+      "mood": 72,
+      "satiety": 61,
+      "stability": 66,
+      "stress": 48,
+      "study_progress": 10,
+      "study_target": 70
+    }
+  },
+  "summary_detail_readonly": true,
+  "detail_button_inside_scroll": true,
+  "detail_button_click": {
+    "x": 956,
+    "y": 797
+  },
+  "game_errors": [],
+  "editor_errors": [],
+  "editor_warnings": [
+    {
+      "function": "GDScript::reload",
+      "level": "warn",
+      "line": 338,
+      "path": "res://scripts/health/HealthDataStore.gd",
+      "source": "editor",
+      "text": "GDScript::reload: Values of the ternary operator are not mutually compatible."
+    },
+    {
+      "function": "GDScript::reload",
+      "level": "warn",
+      "line": 342,
+      "path": "res://scripts/health/HealthDataStore.gd",
+      "source": "editor",
+      "text": "GDScript::reload: Values of the ternary operator are not mutually compatible."
+    },
+    {
+      "function": "GDScript::reload",
+      "level": "warn",
+      "line": 219,
+      "path": "res://scripts/ui_v2/GameRootV2.gd",
+      "source": "editor",
+      "text": "GDScript::reload: Values of the ternary operator are not mutually compatible."
+    }
+  ],
+  "scope": "Actual hand contained coffee; readonly detail preview via game_eval, MCP Escape close. Real first-day commands with two meals and one skip; scrolled detail button into view before MCP mouse click. Separate native-window probe covers mobile input. An earlier offscreen-coordinate click advanced the test game; corrected by restarting the isolated run and checking the scroll clip."
+}

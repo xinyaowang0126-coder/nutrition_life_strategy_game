@@ -142,10 +142,7 @@ func _tooltip_text(payload: Dictionary, mode: String, disabled_reason: String, s
 			_delta(int(payload.get("satiety", 0))),
 			_delta(int(payload.get("energy", 0))),
 		])
-		lines.append("压力 %s　角色健康 %s" % [
-			_delta(int(payload.get("stress", 0))),
-			_delta(GameDataScript.character_health_delta_from_burden(int(payload.get("burden", 0)))),
-		])
+		lines.append("压力 %s" % _delta(int(payload.get("stress", 0))))
 		if stock >= 0:
 			lines.append("宿舍还剩 %d 份" % stock)
 		lines.append("角色口味（游戏效果）")
@@ -157,10 +154,6 @@ func _tooltip_text(payload: Dictionary, mode: String, disabled_reason: String, s
 			_delta(int(payload.get("stress", 0))),
 			_delta(int(payload.get("study", 0))),
 		])
-		if payload.has("burden"):
-			lines.append("角色健康 %s" % _delta(
-				GameDataScript.character_health_delta_from_burden(int(payload.get("burden", 0)))
-			))
 	else:
 		lines.append("可看到 %d 种选择" % int(payload.get("hand_size", 0)))
 	lines.append(String(payload.get("desc", "")))

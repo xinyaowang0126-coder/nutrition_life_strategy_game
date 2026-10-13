@@ -1,0 +1,44 @@
+{
+	"errors": [],
+	"images": [
+		"E:/nutrition_life_strategy_game/docs/assets/g4a2-2026-10-08/1920x1080-100-menu.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a2-2026-10-08/1920x1080-100-ingredients.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a2-2026-10-08/1920x1080-100-diary.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a2-2026-10-08/1920x1080-100-unknown.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a2-2026-10-08/1920x1080-130-menu.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a2-2026-10-08/1920x1080-130-ingredients.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a2-2026-10-08/1920x1080-130-diary.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a2-2026-10-08/1920x1080-130-unknown.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a2-2026-10-08/720x1280-100-menu.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a2-2026-10-08/720x1280-100-ingredients.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a2-2026-10-08/720x1280-100-diary.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a2-2026-10-08/720x1280-100-unknown.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a2-2026-10-08/720x1280-130-menu.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a2-2026-10-08/720x1280-130-ingredients.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a2-2026-10-08/720x1280-130-diary.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a2-2026-10-08/720x1280-130-unknown.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a2-2026-10-08/780x1280-100-menu.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a2-2026-10-08/780x1280-100-ingredients.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a2-2026-10-08/780x1280-100-diary.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a2-2026-10-08/780x1280-100-unknown.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a2-2026-10-08/780x1280-130-menu.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a2-2026-10-08/780x1280-130-ingredients.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a2-2026-10-08/780x1280-130-diary.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a2-2026-10-08/780x1280-130-unknown.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a2-2026-10-08/1920x1080-native-diary.png",
+		"E:/nutrition_life_strategy_game/docs/assets/g4a2-2026-10-08/390x640-native-diary.png"
+	],
+	"layouts": 6,
+	"native_windows": [
+		[
+			1920,
+			1080
+		],
+		[
+			390,
+			640
+		]
+	],
+	"scope": "Isolated development menu with simulated reviews; Label/Button fonts enlarged in test. Native GUI input, not browser or physical phone.",
+	"valid": true
+}

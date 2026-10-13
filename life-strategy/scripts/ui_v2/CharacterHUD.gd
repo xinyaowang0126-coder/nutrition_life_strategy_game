@@ -5,12 +5,14 @@ signal details_requested(payload: Dictionary, anchor_rect: Rect2, pinned: bool)
 signal detail_dismissed(source_id: String)
 
 const GameDataScript := preload("res://scripts/GameData.gd")
+const RecoveryPresenterScript := preload("res://scripts/systems/RecoveryPresenter.gd")
 const DETAIL_SOURCE_ID := "character_status"
-const DESKTOP_STATUS_TOP := -310.0
+const HUD_FONT := preload("res://scenes/game_v2/components/CharacterHUDFont.tres")
+const DESKTOP_STATUS_TOP := -280.0
 const DESKTOP_STATUS_BOTTOM := -90.0
 const DESKTOP_STATUS_LEFT := 300.0
 const DESKTOP_STATUS_RIGHT := 780.0
-const MOBILE_STATUS_TOP := -250.0
+const MOBILE_STATUS_TOP := -210.0
 const MOBILE_STATUS_BOTTOM := -20.0
 const MOBILE_STATUS_LEFT := 226.0
 const MOBILE_STATUS_RIGHT := 706.0
@@ -29,15 +31,17 @@ const MOBILE_SHADOW_RECT := Rect2(-80.0, -620.0, 430.0, 650.0)
 @onready var stability_icon: Label = $StatusBoard/Margin/VBox/StabilityRow/StabilityIcon
 @onready var stability_label: Label = $StatusBoard/Margin/VBox/StabilityRow/StabilityLabel
 @onready var stability_value: Label = $StatusBoard/Margin/VBox/StabilityRow/StabilityValue
-@onready var energy_value: Label = $StatusBoard/Margin/VBox/StatGrid/EnergyChip/Value
-@onready var mood_value: Label = $StatusBoard/Margin/VBox/StatGrid/MoodChip/Value
-@onready var satiety_value: Label = $StatusBoard/Margin/VBox/StatGrid/SatietyChip/Value
-@onready var stress_value: Label = $StatusBoard/Margin/VBox/StatGrid/StressChip/Value
-@onready var burden_value: Label = $StatusBoard/Margin/VBox/StatGrid/BurdenChip/Value
-@onready var study_value: Label = $StatusBoard/Margin/VBox/StatGrid/StudyChip/Value
+@onready var energy_value: Label = $StatusBoard/Margin/VBox/StatGrid/EnergyChip/Line/Value
+@onready var mood_value: Label = $StatusBoard/Margin/VBox/StatGrid/MoodChip/Line/Value
+@onready var satiety_value: Label = $StatusBoard/Margin/VBox/StatGrid/SatietyChip/Line/Value
+@onready var stress_value: Label = $StatusBoard/Margin/VBox/StatGrid/StressChip/Line/Value
+@onready var recovery_value: Label = $StatusBoard/Margin/VBox/StabilityRow/RecoveryChip/Value
+@onready var study_value: Label = $StatusBoard/Margin/VBox/StudyRow/Value
+@onready var study_track: HudStudyProgressStripV2 = $StatusBoard/Margin/VBox/StudyRow/Track
 @onready var details_button: Button = $DetailsButton
 
 var _stats: Dictionary = {}
+var _recovery_record: Dictionary = {}
 var _portrait_texture: Texture2D
 var _ready_finished := false
 var _hover_tween: Tween
@@ -48,6 +52,8 @@ var _status_mouse_filters: Array[int] = []
 
 func _ready() -> void:
 	_ready_finished = true
+	for label in status_board.find_children("*", "Label", true, false):
+		(label as Label).add_theme_font_override("font", HUD_FONT)
 	_cache_status_mouse_filters()
 	details_button.pressed.connect(_request_pinned_details)
 	details_button.focus_entered.connect(_request_preview_details)
@@ -55,6 +61,7 @@ func _ready() -> void:
 	status_board.mouse_entered.connect(_on_status_hover_started)
 	status_board.mouse_exited.connect(_on_status_hover_ended)
 	status_board.resized.connect(_update_board_pivot)
+	($StatusBoard/Margin/VBox/StabilityRow as Control).resized.connect(_align_details_button)
 	_update_board_pivot()
 	if _portrait_texture != null:
 		portrait.texture = _portrait_texture
@@ -71,6 +78,9 @@ func apply_responsive_profile(mobile: bool) -> void:
 	status_board.offset_bottom = MOBILE_STATUS_BOTTOM if mobile else DESKTOP_STATUS_BOTTOM
 	details_button.offset_left = MOBILE_DETAILS_LEFT if mobile else DESKTOP_DETAILS_LEFT
 	details_button.offset_right = MOBILE_DETAILS_RIGHT if mobile else DESKTOP_DETAILS_RIGHT
+	details_button.offset_top = status_board.offset_top + 12.0
+	details_button.offset_bottom = details_button.offset_top + 48.0
+	call_deferred("_align_details_button")
 	_set_status_mouse_passthrough(mobile)
 	if mobile:
 		if is_instance_valid(_hover_tween):
@@ -95,6 +105,19 @@ func update_stats(stats: Dictionary, animate: bool = true) -> void:
 	if not _ready_finished:
 		return
 	_apply_stats(animate, previous)
+
+
+func update_recovery(record: Dictionary) -> void:
+	_recovery_record = record.duplicate(true)
+	if _ready_finished:
+		_apply_recovery()
+
+
+func _apply_recovery() -> void:
+	var view := RecoveryPresenterScript.present(_recovery_record)
+	var title := String(view["title"])
+	recovery_value.text = "起步" if title == "起步状态" else title
+	recovery_value.tooltip_text = ("昨夜恢复 · " if title != "起步状态" else "") + String(view["summary"])
 
 
 func set_portrait(value: Variant) -> void:
@@ -125,19 +148,18 @@ func _apply_stats(animate: bool, previous: Dictionary = {}) -> void:
 		"mood": mood_value,
 		"satiety": satiety_value,
 		"stress": stress_value,
-		"diet_burden": burden_value,
 		"study_progress": study_value,
 	}
 	var prefixes := {
 		"stability": "",
-		"energy": "精力 ",
-		"mood": "心情 ",
-		"satiety": "饱腹 ",
-		"stress": "压力 ",
-		"diet_burden": "角色健康 ",
+		"energy": "",
+		"mood": "",
+		"satiety": "",
+		"stress": "",
 		"study_progress": "复习 ",
 	}
 	var changed_labels: Array[Label] = []
+	_apply_recovery()
 	for key: String in labels:
 		var label := labels[key] as Label
 		var value := _stat_value(key)
@@ -151,6 +173,7 @@ func _apply_stats(animate: bool, previous: Dictionary = {}) -> void:
 			label.text = "%s%d" % [String(prefixes[key]), value]
 		if animate and _stat_value_from(previous, key) != value:
 			changed_labels.append(label)
+	study_track.set_progress(_stat_value("study_progress"), int(_stats.get("study_target", 70)))
 	_apply_status_colors(labels)
 	if not changed_labels.is_empty():
 		_animate_changed_values(changed_labels)
@@ -164,12 +187,16 @@ func _apply_status_colors(labels: Dictionary) -> void:
 		var tone := _status_tone(key, value)
 		var label := labels[key] as Label
 		label.add_theme_color_override("font_color", tone.darkened(0.18))
-		var chip := label.get_parent() as PanelContainer
+		var chip := label.get_parent().get_parent() as PanelContainer
 		if chip != null:
-			chip.add_theme_stylebox_override("panel", _status_chip_style(tone))
+			var style := _status_chip_style(tone)
+			if key != "stress":
+				style.border_color = Color(0.67, 0.51, 0.31, 0.35)
+				style.border_width_right = 1
+			chip.add_theme_stylebox_override("panel", style)
 	var stability_tone := _status_tone("stability", _stat_value("stability"))
 	stability_icon.add_theme_color_override("font_color", stability_tone)
-	stability_label.add_theme_color_override("font_color", stability_tone.darkened(0.22))
+	stability_label.add_theme_color_override("font_color", Color("#493723"))
 	stability_value.add_theme_color_override("font_color", stability_tone.darkened(0.22))
 	status_board.add_theme_stylebox_override("panel", _status_board_style(stability_tone))
 
@@ -196,30 +223,23 @@ func _status_tone(key: String, value: int) -> Color:
 	return Color("#4d9062")
 
 
-func _status_chip_style(tone: Color) -> StyleBoxFlat:
+func _status_chip_style(_tone: Color) -> StyleBoxFlat:
 	var style := StyleBoxFlat.new()
-	style.bg_color = Color(tone.r, tone.g, tone.b, 0.18)
-	style.border_color = Color(tone.r, tone.g, tone.b, 0.78)
-	style.set_border_width_all(2)
-	style.set_corner_radius_all(12)
-	style.content_margin_left = 8
-	style.content_margin_right = 8
-	style.content_margin_top = 6
-	style.content_margin_bottom = 6
+	style.bg_color = Color.TRANSPARENT
+	style.set_content_margin_all(2)
 	return style
 
 
-func _status_board_style(tone: Color) -> StyleBoxFlat:
-	var inherited := status_board.get_theme_stylebox("panel")
-	var style: StyleBoxFlat
-	if inherited is StyleBoxFlat:
-		style = (inherited as StyleBoxFlat).duplicate() as StyleBoxFlat
-	else:
-		style = StyleBoxFlat.new()
-		style.bg_color = Color("#fff4dfea")
-		style.set_corner_radius_all(16)
-	style.border_color = Color(tone.r, tone.g, tone.b, 0.90)
+func _status_board_style(_tone: Color) -> StyleBoxFlat:
+	var style := StyleBoxFlat.new()
+	style.bg_color = Color("#f4e6c8fa")
+	style.border_color = Color("#9b7745")
 	style.set_border_width_all(3)
+	style.set_corner_radius_all(16)
+	style.set_content_margin_all(7)
+	style.shadow_color = Color(0.16, 0.10, 0.04, 0.24)
+	style.shadow_size = 5
+	style.shadow_offset = Vector2(0, 4)
 	return style
 
 
@@ -242,14 +262,14 @@ func _make_detail_payload() -> Dictionary:
 		"name": "此刻状态",
 		"kind": "状态",
 		"rule_hint": _state_hint(),
-		"desc": "角色健康是用于玩法结算的综合游戏属性，数值越高越好；它不是对玩家真实健康的评价，也不参与饮食结构判断。",
+		"desc": "这些数值描述角色当前的游戏状态，不是对玩家真实健康的评价。",
 		"stability": _stat_value("stability"),
 		"energy": _stat_value("energy"),
 		"mood": _stat_value("mood"),
 		"satiety": _stat_value("satiety"),
 		"stress": _stat_value("stress"),
-		"character_health": _stat_value("diet_burden"),
 		"study": _stat_value("study_progress"),
+		"recovery": RecoveryPresenterScript.present(_recovery_record),
 	}
 
 
@@ -272,14 +292,10 @@ func _stat_value(key: String) -> int:
 
 func _stat_value_from(source: Dictionary, key: String) -> int:
 	var value := int(source[key]) if source.has(key) else _alias_value(source, key)
-	if key == "diet_burden":
-		return GameDataScript.character_health_from_burden(value)
 	return value
 
 
 func _alias_value(source: Dictionary, key: String) -> int:
-	if key == "diet_burden":
-		return int(source.get("burden", 0))
 	if key == "study_progress":
 		return int(source.get("study", 0))
 	return int(source.get(key, 0))
@@ -317,6 +333,16 @@ func _animate_board(target_scale: Vector2) -> void:
 
 func _update_board_pivot() -> void:
 	status_board.pivot_offset = status_board.size * 0.5
+	_align_details_button()
+
+
+func _align_details_button() -> void:
+	if not is_node_ready():
+		return
+	var header := $StatusBoard/Margin/VBox/StabilityRow as Control
+	var center := get_global_transform().affine_inverse() * header.get_global_rect().get_center()
+	details_button.offset_top = center.y - size.y - 24.0
+	details_button.offset_bottom = details_button.offset_top + 48.0
 
 
 func _cache_status_mouse_filters() -> void:
@@ -328,6 +354,9 @@ func _cache_status_mouse_filters() -> void:
 		var control := node as Control
 		if control == null:
 			continue
+		# Every child is a passive readout. Route desktop hover to the card face
+		# instead of letting its cells interrupt the shared status preview.
+		control.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		_status_controls.append(control)
 		_status_mouse_filters.append(control.mouse_filter)
 

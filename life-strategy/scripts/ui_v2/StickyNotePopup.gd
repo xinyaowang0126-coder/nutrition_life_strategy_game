@@ -15,7 +15,9 @@ const GameDataScript := preload("res://scripts/GameData.gd")
 @onready var energy_metric: Label = $Margin/VBox/MetricGrid/Energy
 @onready var mood_metric: Label = $Margin/VBox/MetricGrid/Mood
 @onready var stress_metric: Label = $Margin/VBox/MetricGrid/Stress
-@onready var burden_metric: Label = $Margin/VBox/MetricGrid/Burden
+@onready var metric_heading: Label = $Margin/VBox/MetricHeading
+@onready var recovery_section: ScrollContainer = $Margin/VBox/Recovery
+@onready var recovery_text: Label = $Margin/VBox/Recovery/Text
 @onready var study_metric: Label = $Margin/VBox/MetricGrid/Study
 @onready var preference_section: VBoxContainer = $Margin/VBox/FoodPreference
 @onready var preference_reaction: Label = $Margin/VBox/FoodPreference/Reaction
@@ -43,6 +45,7 @@ func _ready() -> void:
 	resized.connect(_update_pivot)
 	if not _payload.is_empty():
 		_apply_payload()
+	_sync_interaction_controls()
 	_update_pivot()
 
 
@@ -82,6 +85,8 @@ func show_at(anchor_rect: Rect2, mobile: bool = false, is_pinned: bool = false) 
 	_anchor_rect = anchor_rect
 	_mobile_mode = mobile
 	pinned = is_pinned
+	if _ready_finished:
+		_sync_interaction_controls()
 	visible = true
 	move_to_front()
 	_queue_show_layout()
@@ -134,8 +139,7 @@ func _apply_payload() -> void:
 	disabled_reason_label.text = _disabled_reason
 	disabled_reason_label.visible = not _disabled_reason.is_empty()
 	action_button.text = _action_text
-	action_button.visible = not _action_text.is_empty()
-	action_button.disabled = not _disabled_reason.is_empty()
+	_sync_interaction_controls()
 	_set_metric(satiety_metric, "饱腹", "satiety")
 	_set_metric(energy_metric, "精力", "energy")
 	if _mode == "food":
@@ -143,9 +147,26 @@ func _apply_payload() -> void:
 	else:
 		_set_metric(mood_metric, "心情", "mood")
 	_set_metric(stress_metric, "压力", "stress")
-	_set_character_health_metric()
 	_set_metric(study_metric, "复习", "study", "study_progress")
+	metric_heading.text = "当前游戏数值" if _mode == "state" else "游戏即时效果"
+	metric_heading.visible = satiety_metric.visible or energy_metric.visible or mood_metric.visible or stress_metric.visible or study_metric.visible
+	var recovery: Dictionary = _payload.get("recovery", {})
+	recovery_text.text = String(recovery.get("detail_text", ""))
+	recovery_section.visible = not recovery_text.text.is_empty()
+	recovery_section.scroll_vertical = 0
+	if _mode == "sleep":
+		description_label.text += "\n今晚的恢复，收工后再看精力、压力和今天的安排。"
+		description_label.visible = true
 	_apply_food_preference()
+
+
+func _sync_interaction_controls() -> void:
+	# Hover/focus/hold previews disappear when their source loses focus.
+	# Interactive controls belong only to explicitly opened, stable details.
+	close_button.visible = pinned
+	close_button.disabled = not pinned
+	action_button.visible = pinned and not _action_text.is_empty()
+	action_button.disabled = not pinned or not _disabled_reason.is_empty()
 
 
 func _apply_food_preference() -> void:
@@ -174,21 +195,7 @@ func _set_metric(label: Label, caption: String, key: String, alias: String = "")
 	if not has_value:
 		return
 	var value := int(_payload.get(key, _payload.get(alias, 0)))
-	label.text = "%s %s" % [caption, _delta(value)]
-
-
-func _set_character_health_metric() -> void:
-	if _payload.has("character_health"):
-		burden_metric.visible = true
-		burden_metric.text = "角色健康 %d" % int(_payload["character_health"])
-		return
-	var has_burden := _payload.has("burden") or _payload.has("diet_burden")
-	burden_metric.visible = has_burden
-	if not has_burden:
-		return
-	var burden_delta := int(_payload.get("burden", _payload.get("diet_burden", 0)))
-	var health_delta := GameDataScript.character_health_delta_from_burden(burden_delta)
-	burden_metric.text = "角色健康 %s" % _delta(health_delta)
+	label.text = "%s %s" % [caption, str(value) if _mode == "state" else _delta(value)]
 
 
 func _kind_text() -> String:
@@ -219,7 +226,7 @@ func _rule_text() -> String:
 		"source":
 			return "这里能看到 %d 种选择。" % int(_payload.get("hand_size", 0))
 		"action":
-			return "会占用 %d 个安排位。" % maxi(1, int(_payload.get("slots", 1)))
+			return "额外操作，不占安排位。" if int(_payload.get("slots", 1)) == 0 else "会占用 %d 个安排位。" % int(_payload.get("slots", 1))
 		"sleep":
 			return "今晚就按这个节奏收尾。"
 		_:
@@ -243,7 +250,8 @@ func _finish_show(revision: int) -> void:
 		return
 	var viewport_rect := get_viewport().get_visible_rect()
 	var safe_margin := 24.0
-	var target_width := get_combined_minimum_size().x
+	custom_minimum_size.x = minf(430.0, maxf(280.0, viewport_rect.size.x - safe_margin * 2.0))
+	var target_width := custom_minimum_size.x
 	if _mobile_mode:
 		target_width = maxf(320.0, viewport_rect.size.x - safe_margin * 2.0)
 	# Wrapped labels may initially report the height of a nearly zero-width
@@ -267,6 +275,10 @@ func _finish_show_layout(revision: int, target_width: float) -> void:
 	var viewport_rect := get_viewport().get_visible_rect()
 	var safe_margin := 24.0
 	_refresh_wrapped_text(self)
+	if recovery_section.visible:
+		var other_height := get_combined_minimum_size().y - recovery_section.get_combined_minimum_size().y
+		recovery_section.custom_minimum_size.y = clampf(viewport_rect.size.y - safe_margin * 2.0 - other_height, 80.0, 260.0)
+		_refresh_wrapped_text(self)
 	size = Vector2(target_width, get_combined_minimum_size().y)
 	var target_position: Vector2
 	if _mobile_mode:
@@ -340,8 +352,10 @@ func _update_pivot() -> void:
 	pivot_offset = size * 0.5
 
 
-func _unhandled_key_input(event: InputEvent) -> void:
-	if visible and pinned and event.is_action_pressed("ui_cancel"):
+func _input(event: InputEvent) -> void:
+	# Handle the detail layer's close before a focused underlying control can
+	# consume Escape. Only an explicitly opened, visible note owns this key.
+	if visible and pinned and event.is_action_pressed("ui_cancel") and not event.is_echo():
 		get_viewport().set_input_as_handled()
 		_on_close_pressed()
 

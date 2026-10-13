@@ -39,3 +39,7 @@ func _update_scene_summary() -> void:
 
 func _card_button_text() -> String:
 	return "放进餐盘"
+
+
+func _get_layout_paths() -> Dictionary:
+	return {"header": "Header", "cards": "FoodRail", "selection": "TrayDropZone", "footer": "Footer", "selection_margin": "TrayDropZone/TrayMargin", "selection_box": "TrayDropZone/TrayMargin/VBox", "hide": ["TrayDropZone/TrayMargin/VBox/TrayHeader/TrayHint"]}

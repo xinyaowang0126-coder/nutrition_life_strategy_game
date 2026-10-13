@@ -1,0 +1,8 @@
+{
+  "date": "2026-10-12",
+  "budget": 150,
+  "runs": 510,
+  "errors": [],
+  "differences": [],
+  "scope": "All rows compared with the balance v2 report: 17 policies x 30 seeds; record popup closed. Normal UI and unknown/legacy cases are checked separately."
+}
