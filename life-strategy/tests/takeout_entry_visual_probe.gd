@@ -35,7 +35,7 @@ func _run() -> void:
 		var initial_balance := int(game.state["balance"])
 		_check(target.disabled, prefix + " breakfast ordering must be unavailable")
 		_check((card.get_node("ClosedSticker") as Label).text == "早餐未开放", prefix + " unavailable reason is unclear")
-		_check((card.get_node("Availability") as Label).text == "午餐、晚餐开放", prefix + " availability differs from configured periods")
+		_check((card.get_node("Availability") as Label).text.replace("\n", "") == "午餐、晚餐开放", prefix + " availability differs from configured periods")
 		_check_regions(game, stage, card, prefix)
 		await _save(prefix + "-breakfast")
 		await _click(game, target.get_global_rect().get_center())
@@ -57,7 +57,7 @@ func _run() -> void:
 		_check_regions(game, stage, card, prefix)
 		await _save(prefix + "-lunch")
 		# Click the label-side area, not the phone, to verify the whole entry works.
-		var click_point := target.get_global_rect().position + target.size * Vector2(0.68, 0.76)
+		var click_point := (card.get_node("Name") as Control).get_global_rect().get_center()
 		await _click(game, click_point)
 		_check(game.phase == "lunch" and game.current_source_id == "takeout", prefix + " whole-card selection failed")
 		_check(int(game.state["balance"]) == initial_balance, prefix + " opening ordering charged before confirmation")

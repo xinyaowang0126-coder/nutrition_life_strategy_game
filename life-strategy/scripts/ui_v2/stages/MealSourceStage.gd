@@ -98,7 +98,7 @@ func _bind_prop(source_id: String) -> void:
 
 func _apply_sources() -> void:
 	title_label.text = "%s去哪吃？" % _meal_label
-	subtitle_label.text = "轻点选择，点 ? 看详情" if _mobile_mode else "悬停看详情"
+	subtitle_label.text = "轻点选择，可查看详情" if _mobile_mode else "悬停看详情"
 	for source_id in SOURCE_NODE_NAMES:
 		_apply_source(String(source_id))
 
@@ -138,6 +138,8 @@ func _apply_source(source_id: String) -> void:
 	var availability := prop.get_node_or_null("Availability") as Label
 	if availability != null:
 		availability.text = _opening_periods_text(source)
+		if _mobile_mode and availability.text.ends_with("开放"):
+			availability.text = availability.text.trim_suffix("开放") + "\n开放"
 	var closed_sticker := prop.get_node_or_null("ClosedSticker") as Label
 	if closed_sticker != null:
 		closed_sticker.visible = source_id == "takeout" or not enabled
@@ -151,41 +153,61 @@ func _apply_source(source_id: String) -> void:
 
 func apply_entry_profile(mobile: bool) -> void:
 	_mobile_mode = mobile
-	subtitle_label.text = "轻点选择，点 ? 看详情" if mobile else "悬停看详情"
+	subtitle_label.text = "轻点选择，可查看详情" if mobile else "悬停看详情"
 	var prop := _prop_for("takeout")
 	if prop == null:
 		return
 	var phone := prop.get_node("PhoneIcon") as Control
-	phone.offset_left = 10.0 if mobile else 4.0
-	phone.offset_top = 22.0 if mobile else 0.0
-	phone.offset_right = 104.0 if mobile else 132.0
-	phone.offset_bottom = 184.0 if mobile else 180.0
+	phone.offset_left = 32.0 if mobile else 4.0
+	phone.offset_top = 54.0 if mobile else 0.0
+	phone.offset_right = 132.0
+	phone.offset_bottom = 174.0 if mobile else 180.0
 	var name_label := prop.get_node("Name") as Label
-	name_label.offset_left = 110.0 if mobile else 132.0
-	name_label.offset_top = 14.0 if mobile else 18.0
-	name_label.offset_right = -106.0 if mobile else -70.0
-	name_label.offset_bottom = 54.0 if mobile else 58.0
+	name_label.offset_left = 12.0 if mobile else 132.0
+	name_label.offset_top = 10.0 if mobile else 18.0
+	name_label.offset_right = -12.0 if mobile else -70.0
+	name_label.offset_bottom = 50.0 if mobile else 58.0
+	name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER if mobile else HORIZONTAL_ALIGNMENT_LEFT
 	name_label.add_theme_font_size_override("font_size", 30 if mobile else 32)
 	var availability := prop.get_node("Availability") as Label
-	availability.offset_left = 110.0 if mobile else 132.0
-	availability.offset_top = 104.0 if mobile else 66.0
+	availability.offset_left = 12.0 if mobile else 132.0
+	availability.offset_top = 178.0 if mobile else 66.0
 	availability.offset_right = -12.0 if mobile else -16.0
-	availability.offset_bottom = 138.0 if mobile else 98.0
-	availability.add_theme_font_size_override("font_size", 26 if mobile else 24)
+	availability.offset_bottom = 250.0 if mobile else 98.0
+	availability.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER if mobile else HORIZONTAL_ALIGNMENT_LEFT
+	availability.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART if mobile else TextServer.AUTOWRAP_OFF
+	availability.add_theme_font_size_override("font_size", 24)
 	var status := prop.get_node("ClosedSticker") as Label
-	status.offset_left = 110.0 if mobile else 132.0
-	status.offset_top = 150.0 if mobile else 116.0
+	status.offset_left = 12.0 if mobile else 132.0
+	status.offset_top = 254.0 if mobile else 116.0
 	status.offset_right = -12.0 if mobile else -20.0
-	status.offset_bottom = 194.0 if mobile else 160.0
-	status.add_theme_font_size_override("font_size", 24 if mobile else 22)
+	status.offset_bottom = 292.0 if mobile else 160.0
+	status.add_theme_font_size_override("font_size", 20 if mobile else 22)
 	var info := prop.get_node("Info") as Button
 	var target := 90.0 if mobile else 50.0
 	info.custom_minimum_size = Vector2(target, target)
-	info.offset_left = -100.0 if mobile else -62.0
-	info.offset_top = 8.0 if mobile else 12.0
+	info.anchor_left = 0.0 if mobile else 1.0
+	info.offset_left = 12.0 if mobile else -62.0
+	info.offset_top = 296.0 if mobile else 12.0
 	info.offset_right = -10.0 if mobile else -12.0
 	info.offset_bottom = info.offset_top + target
-	info.add_theme_font_size_override("font_size", 28 if mobile else 22)
+	info.add_theme_font_size_override("font_size", 20 if mobile else 22)
+	info.text = "详情" if mobile else "?"
+	info.flat = mobile
+	for style_name in ["normal", "hover", "pressed", "disabled"]:
+		if mobile:
+			info.add_theme_stylebox_override(style_name, StyleBoxEmpty.new())
+		else:
+			info.remove_theme_stylebox_override(style_name)
+	if mobile:
+		info.add_theme_color_override("font_color", Color(0.29, 0.22, 0.14))
+		info.add_theme_color_override("font_hover_color", Color(0.22, 0.16, 0.1))
+		info.add_theme_color_override("font_pressed_color", Color(0.22, 0.16, 0.1))
+	else:
+		for color_name in ["font_color", "font_hover_color", "font_pressed_color"]:
+			info.remove_theme_color_override(color_name)
+	if _has_setup:
+		_apply_source("takeout")
 
 
 func _opening_periods_text(source: Dictionary) -> String:

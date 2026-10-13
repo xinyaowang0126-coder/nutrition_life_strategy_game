@@ -1,0 +1,58 @@
+{
+	"cases": [
+		{
+			"balance": 150,
+			"mobile": false,
+			"physical_size": [
+				1912,
+				946
+			]
+		},
+		{
+			"balance": 150,
+			"mobile": false,
+			"physical_size": [
+				1920,
+				1080
+			]
+		},
+		{
+			"balance": 150,
+			"mobile": false,
+			"physical_size": [
+				1366,
+				768
+			]
+		},
+		{
+			"balance": 150,
+			"mobile": true,
+			"physical_size": [
+				720,
+				1280
+			]
+		},
+		{
+			"balance": 150,
+			"mobile": true,
+			"physical_size": [
+				390,
+				844
+			]
+		},
+		{
+			"balance": 150,
+			"mobile": true,
+			"physical_size": [
+				390,
+				640
+			]
+		}
+	],
+	"errors": [
+		"720x1280 card covers another source: convenience_store",
+		"720x1280 card covers another source: convenience_store"
+	],
+	"note": "Native rendered windows and pointer input; not physical phone hardware.",
+	"valid": false
+}

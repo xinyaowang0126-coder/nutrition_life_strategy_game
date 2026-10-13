@@ -1704,7 +1704,7 @@ func _mobile_source_layout(stage: Control) -> void:
 	var positions := {
 		"CafeteriaProp": Vector2(0.25, 0.22),
 		"ConvenienceProp": Vector2(0.75, 0.33),
-		"DormProp": Vector2(0.76, 0.62),
+		"DormProp": Vector2(0.79, 0.62),
 	}
 	for prop_name in positions:
 		var prop := stage.get_node("PropLayer/%s" % prop_name) as Control
@@ -1712,7 +1712,8 @@ func _mobile_source_layout(stage: Control) -> void:
 		_set_rect(prop, point.x, point.y, point.x, point.y, -94, -88, 94, 110)
 		(prop.get_node("Name") as Label).add_theme_font_size_override("font_size", 26)
 	var takeout := stage.get_node("PropLayer/TakeoutProp") as Control
-	_set_rect(takeout, 0.25, 0.49, 0.25, 0.49, -154, -106, 154, 106)
+	# Keep the personal phone beside the student and above the action row.
+	_set_rect(takeout, 0.5, 1.0, 0.5, 1.0, -122, -512, 42, -118)
 
 
 
