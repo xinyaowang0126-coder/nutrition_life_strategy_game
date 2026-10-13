@@ -27,6 +27,7 @@ var _ready_finished := false
 var _has_setup := false
 var _prop_tweens: Dictionary = {}
 var _prop_base_positions: Dictionary = {}
+var _mobile_mode := false
 
 
 func setup(sources: Array, meal_label: String = "这一顿", disabled_reasons: Dictionary = {}) -> void:
@@ -74,7 +75,7 @@ func _bind_prop(source_id: String) -> void:
 	var prop := _prop_for(source_id)
 	if prop == null:
 		return
-	var button := prop.get_node_or_null("Button") as TextureButton
+	var button := prop.get_node_or_null("Button") as BaseButton
 	var info := prop.get_node_or_null("Info") as Button
 	if button != null:
 		button.tooltip_text = ""
@@ -97,7 +98,7 @@ func _bind_prop(source_id: String) -> void:
 
 func _apply_sources() -> void:
 	title_label.text = "%s去哪吃？" % _meal_label
-	subtitle_label.text = "悬停看详情"
+	subtitle_label.text = "轻点选择，点 ? 看详情" if _mobile_mode else "悬停看详情"
 	for source_id in SOURCE_NODE_NAMES:
 		_apply_source(String(source_id))
 
@@ -113,15 +114,15 @@ func _apply_source(source_id: String) -> void:
 	var source: Dictionary = _sources_by_id[source_id]
 	var reason := _source_disabled_reason(source_id)
 	var enabled := bool(source.get("enabled", true)) and reason.is_empty()
-	var button := prop.get_node_or_null("Button") as TextureButton
+	var button := prop.get_node_or_null("Button") as BaseButton
 	var name_label := prop.get_node_or_null("Name") as Label
 	if button != null:
 		button.disabled = not enabled
-		button.modulate = Color.WHITE if enabled else Color(0.56, 0.55, 0.51, 0.78)
+		button.modulate = Color.WHITE if enabled or source_id == "takeout" else Color(0.56, 0.55, 0.51, 0.78)
 		var image_path := String(source.get("image", ""))
-		if not image_path.is_empty() and ResourceLoader.exists(image_path):
+		if button is TextureButton and not image_path.is_empty() and ResourceLoader.exists(image_path):
 			var texture := load(image_path) as Texture2D
-			button.texture_normal = texture
+			(button as TextureButton).texture_normal = texture
 			for shadow_name in ["ShadowSoft", "Shadow"]:
 				var shadow := prop.get_node_or_null(shadow_name) as TextureRect
 				if shadow != null:
@@ -130,11 +131,73 @@ func _apply_source(source_id: String) -> void:
 					shadow.modulate.a = idle_alpha if enabled else 0.08
 	if name_label != null:
 		name_label.text = String(source.get("name", source_id))
-		name_label.modulate = Color.WHITE if enabled else Color(0.60, 0.57, 0.51, 1.0)
+		name_label.modulate = Color.WHITE if enabled or source_id == "takeout" else Color(0.60, 0.57, 0.51, 1.0)
+	var phone := prop.get_node_or_null("PhoneIcon") as TextureRect
+	if phone != null:
+		phone.modulate = Color.WHITE if enabled else Color(0.88, 0.85, 0.78, 1.0)
+	var availability := prop.get_node_or_null("Availability") as Label
+	if availability != null:
+		availability.text = _opening_periods_text(source)
 	var closed_sticker := prop.get_node_or_null("ClosedSticker") as Label
 	if closed_sticker != null:
-		closed_sticker.visible = not enabled
-		closed_sticker.text = _short_disabled_reason(reason)
+		closed_sticker.visible = source_id == "takeout" or not enabled
+		if source_id == "takeout" and enabled:
+			closed_sticker.text = "点此选餐"
+		elif source_id == "takeout" and reason.contains("时段"):
+			closed_sticker.text = "%s未开放" % _meal_label
+		else:
+			closed_sticker.text = _short_disabled_reason(reason)
+
+
+func apply_entry_profile(mobile: bool) -> void:
+	_mobile_mode = mobile
+	subtitle_label.text = "轻点选择，点 ? 看详情" if mobile else "悬停看详情"
+	var prop := _prop_for("takeout")
+	if prop == null:
+		return
+	var phone := prop.get_node("PhoneIcon") as Control
+	phone.offset_left = 10.0 if mobile else 4.0
+	phone.offset_top = 22.0 if mobile else 0.0
+	phone.offset_right = 104.0 if mobile else 132.0
+	phone.offset_bottom = 184.0 if mobile else 180.0
+	var name_label := prop.get_node("Name") as Label
+	name_label.offset_left = 110.0 if mobile else 132.0
+	name_label.offset_top = 14.0 if mobile else 18.0
+	name_label.offset_right = -106.0 if mobile else -70.0
+	name_label.offset_bottom = 54.0 if mobile else 58.0
+	name_label.add_theme_font_size_override("font_size", 30 if mobile else 32)
+	var availability := prop.get_node("Availability") as Label
+	availability.offset_left = 110.0 if mobile else 132.0
+	availability.offset_top = 104.0 if mobile else 66.0
+	availability.offset_right = -12.0 if mobile else -16.0
+	availability.offset_bottom = 138.0 if mobile else 98.0
+	availability.add_theme_font_size_override("font_size", 26 if mobile else 24)
+	var status := prop.get_node("ClosedSticker") as Label
+	status.offset_left = 110.0 if mobile else 132.0
+	status.offset_top = 150.0 if mobile else 116.0
+	status.offset_right = -12.0 if mobile else -20.0
+	status.offset_bottom = 194.0 if mobile else 160.0
+	status.add_theme_font_size_override("font_size", 24 if mobile else 22)
+	var info := prop.get_node("Info") as Button
+	var target := 90.0 if mobile else 50.0
+	info.custom_minimum_size = Vector2(target, target)
+	info.offset_left = -100.0 if mobile else -62.0
+	info.offset_top = 8.0 if mobile else 12.0
+	info.offset_right = -10.0 if mobile else -12.0
+	info.offset_bottom = info.offset_top + target
+	info.add_theme_font_size_override("font_size", 28 if mobile else 22)
+
+
+func _opening_periods_text(source: Dictionary) -> String:
+	var names := {"breakfast": "早餐", "lunch": "午餐", "dinner": "晚餐"}
+	var scenes: Array = source.get("scenes", [])
+	if scenes.has("any"):
+		return "各餐开放"
+	var periods: Array[String] = []
+	for key in names:
+		if scenes.has(key):
+			periods.append(names[key])
+	return "、".join(periods) + "开放" if not periods.is_empty() else "查看开放规则"
 
 
 func _choose_source(source_id: String) -> void:

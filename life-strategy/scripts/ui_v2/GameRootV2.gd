@@ -1672,6 +1672,7 @@ func _apply_stage_profile(stage: Control) -> void:
 		(stage as MealStageBaseV2).apply_selection_layout(_mobile_mode)
 		return
 	if stage is MealSourceStageV2:
+		(stage as MealSourceStageV2).apply_entry_profile(_mobile_mode)
 		_set_rect(stage.get_node("Footer") as Control, 1, 1, 1, 1, -298 if _mobile_mode else -358, -90 if _mobile_mode else -72, -8 if _mobile_mode else -18, -30 if _mobile_mode else -12)
 		for button_name in ["SkipButton", "MenuHintButton"]:
 			var button := stage.get_node("Footer/" + button_name) as Button
@@ -1701,8 +1702,7 @@ func _apply_stage_profile(stage: Control) -> void:
 func _mobile_source_layout(stage: Control) -> void:
 	_set_rect(stage.get_node("PromptTag") as Control, 0.5, 0.0, 0.5, 0.0, -270, 8, 270, 88)
 	var positions := {
-		"CafeteriaProp": Vector2(0.25, 0.26),
-		"TakeoutProp": Vector2(0.28, 0.52),
+		"CafeteriaProp": Vector2(0.25, 0.22),
 		"ConvenienceProp": Vector2(0.75, 0.33),
 		"DormProp": Vector2(0.76, 0.62),
 	}
@@ -1711,6 +1711,8 @@ func _mobile_source_layout(stage: Control) -> void:
 		var point: Vector2 = positions[prop_name]
 		_set_rect(prop, point.x, point.y, point.x, point.y, -94, -88, 94, 110)
 		(prop.get_node("Name") as Label).add_theme_font_size_override("font_size", 26)
+	var takeout := stage.get_node("PropLayer/TakeoutProp") as Control
+	_set_rect(takeout, 0.25, 0.49, 0.25, 0.49, -154, -106, 154, 106)
 
 
 

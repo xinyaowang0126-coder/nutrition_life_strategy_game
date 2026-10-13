@@ -1,0 +1,15 @@
+{
+  "asset": "life-strategy/assets/generated/ui_v3/props/takeout_phone_compact.png",
+  "tool_mode": "built-in Image Gen",
+  "transparent_background": true,
+  "selected_design": "docs/assets/takeout-entry-2026-10-13/selected-design.png",
+  "generated_source": "C:/Users/xywan/.codex/generated_images/01a134b3-aded-76d2-9cef-e4b1e53c634a/exec-d1a005db-e310-493f-be77-839239ec2623.png",
+  "edit_target": "C:/Users/xywan/.codex/generated_images/01a134b3-aded-76d2-9cef-e4b1e53c634a/exec-d8468b6e-f0ca-4d91-9531-c5f361e9f105.png",
+  "generated_pixels": [1024, 1536],
+  "final_pixels": [512, 768],
+  "postprocess": "Lanczos downsample, RGBA alpha preserved",
+  "alpha_range": [0, 255],
+  "transparent_corners": true,
+  "transparent_pixel_percent": 43.44,
+  "final_prompt": "Precise-object-edit of this one smartphone asset. Preserve the watercolor smartphone exactly: warm ochre frame, dark brown outline, cream screen, orange top bar, six tidy illustrated meal tiles, gentle tilt, no readable text. CHANGE ONLY the excessively wide diffuse halo/shadow around the phone: remove that halo completely and use a barely visible shadow at most 4 pixels from the device edge. The outside of the device MUST have real zero-alpha transparency; no gradient, dark backdrop, painted shadow field, or checkerboard. Tightly framed portrait 2:3 canvas with 20 px safe completely transparent margins on all sides at a 512 x 768 target final size. Device alone. Keep every device edge fully within frame. Do not add a bag, labels, badges, marks, icons, hands or surrounding card. Genuine transparent background with clean alpha edges."
+}

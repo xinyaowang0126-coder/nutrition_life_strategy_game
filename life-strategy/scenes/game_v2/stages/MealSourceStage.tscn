@@ -3,7 +3,7 @@
 [ext_resource type="Theme" uid="uid://dthxodrk6slpq" path="res://scenes/game_v2/V2Theme.tres" id="1_mol5y"]
 [ext_resource type="Script" uid="uid://cltwv45hpj2lv" path="res://scripts/ui_v2/stages/MealSourceStage.gd" id="2_xn4im"]
 [ext_resource type="Texture2D" uid="uid://ca0ehjxyymklg" path="res://assets/generated/ui_v2/props/cafeteria_window_alpha.png" id="3_xn4im"]
-[ext_resource type="Texture2D" uid="uid://c7ok2rq404585" path="res://assets/generated/ui_v2/props/takeout_phone_alpha.png" id="4_w7stn"]
+[ext_resource type="Texture2D" path="res://assets/generated/ui_v3/props/takeout_phone_compact.png" id="4_w7stn"]
 [ext_resource type="Texture2D" uid="uid://cm5deawtdrsir" path="res://assets/generated/ui_v2/props/convenience_shelf_alpha.png" id="5_ftemt"]
 [ext_resource type="Texture2D" uid="uid://bmburgrrpync6" path="res://assets/generated/ui_v2/props/dorm_pantry_alpha.png" id="6_gtk66"]
 
@@ -23,6 +23,49 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_takeout_card"]
+bg_color = Color(0.96862745, 0.92156863, 0.83137256, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.60, 0.47, 0.30, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_color = Color(0.12, 0.08, 0.03, 0.24)
+shadow_size = 5
+shadow_offset = Vector2(0, 5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_takeout_name"]
+bg_color = Color(0.96862745, 0.92156863, 0.83137256, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_takeout_status"]
+content_margin_left = 12.0
+content_margin_top = 3.0
+content_margin_right = 12.0
+content_margin_bottom = 3.0
+bg_color = Color(0.86, 0.78, 0.61, 0.65)
+corner_radius_top_left = 9
+corner_radius_top_right = 9
+corner_radius_bottom_right = 9
+corner_radius_bottom_left = 9
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_takeout_button"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_takeout_focus"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.39, 0.48, 0.30, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
 [sub_resource type="Animation" id="Animation_xn4im"]
 length = 4.8
 loop_mode = 2
@@ -40,7 +83,7 @@ tracks/0/keys = {
 }
 tracks/1/type = "value"
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/path = NodePath("PropLayer/TakeoutProp:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
@@ -125,9 +168,9 @@ anchor_bottom = 1.0
 z_index = 10
 anchors_preset = 0
 anchor_left = 0.32
-anchor_top = 0.3
+anchor_top = 0.24
 anchor_right = 0.32
-anchor_bottom = 0.3
+anchor_bottom = 0.24
 offset_left = -120.0
 offset_top = -105.0
 offset_right = 120.0
@@ -204,97 +247,100 @@ text = "?"
 [node name="TakeoutProp" type="Control" parent="PropLayer" unique_id=1802239815]
 z_index = 10
 anchors_preset = 0
-anchor_left = 0.64
-anchor_top = 0.53
-anchor_right = 0.64
-anchor_bottom = 0.53
-offset_left = -120.0
-offset_top = -105.0
-offset_right = 120.0
-offset_bottom = 155.0
-pivot_offset = Vector2(120, 130)
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 292.0
+offset_top = -456.0
+offset_right = 692.0
+offset_bottom = -276.0
+pivot_offset = Vector2(200, 90)
 
-[node name="ShadowSoft" type="TextureRect" parent="PropLayer/TakeoutProp" unique_id=1074442848]
-modulate = Color(1, 1, 1, 0.25)
-self_modulate = Color(0.07058824, 0.047058824, 0.03137255, 1)
-z_index = -2
+[node name="Paper" type="Panel" parent="PropLayer/TakeoutProp"]
 layout_mode = 0
 anchor_right = 1.0
-anchor_bottom = 0.82
-offset_left = 18.0
-offset_top = 20.0
-offset_right = 18.0
-offset_bottom = 20.0
-scale = Vector2(1.04, 1.04)
+anchor_bottom = 1.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_takeout_card")
+
+[node name="Button" type="Button" parent="PropLayer/TakeoutProp" unique_id=1207024663]
+z_index = 1
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_takeout_button")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_takeout_button")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_takeout_button")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_takeout_button")
+theme_override_styles/focus = SubResource("StyleBoxFlat_takeout_focus")
+flat = true
+
+[node name="PhoneIcon" type="TextureRect" parent="PropLayer/TakeoutProp"]
+z_index = 2
+texture_filter = 4
+layout_mode = 0
+offset_left = 4.0
+offset_right = 132.0
+offset_bottom = 180.0
 mouse_filter = 2
 texture = ExtResource("4_w7stn")
 expand_mode = 1
-stretch_mode = 5
-
-[node name="Shadow" type="TextureRect" parent="PropLayer/TakeoutProp" unique_id=655600348]
-modulate = Color(1, 1, 1, 0.34)
-self_modulate = Color(0.07058824, 0.047058824, 0.03137255, 1)
-z_index = -1
-layout_mode = 0
-anchor_right = 1.0
-anchor_bottom = 0.82
-offset_left = 10.0
-offset_top = 12.0
-offset_right = 10.0
-offset_bottom = 12.0
-mouse_filter = 2
-texture = ExtResource("4_w7stn")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Button" type="TextureButton" parent="PropLayer/TakeoutProp" unique_id=1207024663]
-layout_mode = 0
-anchor_right = 1.0
-anchor_bottom = 0.82
-tooltip_text = "点外卖"
-texture_normal = ExtResource("4_w7stn")
-ignore_texture_size = true
 stretch_mode = 5
 
 [node name="Name" type="Label" parent="PropLayer/TakeoutProp" unique_id=690880905]
+z_index = 2
 layout_mode = 0
-anchor_top = 0.82
 anchor_right = 1.0
-anchor_bottom = 1.0
-offset_bottom = 18.0
+offset_left = 132.0
+offset_top = 18.0
+offset_right = -70.0
+offset_bottom = 58.0
+mouse_filter = 2
 theme_override_colors/font_color = Color(0.22, 0.16, 0.1, 1)
-theme_override_font_sizes/font_size = 27
-theme_override_styles/normal = SubResource("StyleBoxFlat_source_name")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_takeout_name")
 text = "外卖"
-horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Availability" type="Label" parent="PropLayer/TakeoutProp"]
+z_index = 2
+layout_mode = 0
+anchor_right = 1.0
+offset_left = 132.0
+offset_top = 66.0
+offset_right = -16.0
+offset_bottom = 98.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.29, 0.22, 0.14, 1)
+theme_override_font_sizes/font_size = 24
+text = "午餐、晚餐开放"
 vertical_alignment = 1
 
 [node name="ClosedSticker" type="Label" parent="PropLayer/TakeoutProp" unique_id=1816149514]
+z_index = 2
 layout_mode = 0
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -78.0
-offset_top = -18.0
-offset_right = 78.0
-offset_bottom = 18.0
-theme_override_colors/font_color = Color(0.22, 0.16, 0.1, 1)
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = SubResource("StyleBoxFlat_source_name")
-text = "午餐开放"
+anchor_right = 1.0
+offset_left = 132.0
+offset_top = 116.0
+offset_right = -20.0
+offset_bottom = 160.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.29, 0.22, 0.14, 1)
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = SubResource("StyleBoxFlat_takeout_status")
+text = "早餐未开放"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Info" type="Button" parent="PropLayer/TakeoutProp" unique_id=2078999538]
+z_index = 4
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 0
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -54.0
-offset_top = 4.0
-offset_right = -4.0
-offset_bottom = 54.0
+offset_left = -62.0
+offset_top = 12.0
+offset_right = -12.0
+offset_bottom = 62.0
 theme_override_font_sizes/font_size = 22
 text = "?"
 
