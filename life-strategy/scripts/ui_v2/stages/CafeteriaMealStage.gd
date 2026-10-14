@@ -32,9 +32,9 @@ func _get_confirm_button() -> Button:
 func _update_scene_summary() -> void:
 	if not is_node_ready():
 		return
-	title_label.text = "%s · 食堂窗口" % _meal_label
+	title_label.text = "%s · %s" % [_meal_label, String(_options.get("location_name", "食堂窗口"))]
 	status_label.text = "已选 %d/%d" % [_selected_ids.size(), _max_selected]
-	receipt_label.text = "合计 ¥%d" % _selection_total()
+	receipt_label.text = "取用现有食材／熟食" if String(_options.get("payment_mode", "cash")) == "stock" else "合计 ¥%d" % _selection_total()
 
 
 func _card_button_text() -> String:

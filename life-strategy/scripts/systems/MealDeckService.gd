@@ -15,6 +15,16 @@ func set_seed(seed_value: int = -1) -> void:
 		_rng.seed = seed_value
 
 
+func capture_state() -> Dictionary:
+	# Decimal strings preserve the full 64-bit values across JSON and browsers.
+	return {"seed": str(_rng.seed), "state": str(_rng.state)}
+
+
+func restore_state(saved: Dictionary) -> void:
+	_rng.seed = int(saved["seed"])
+	_rng.state = int(saved["state"])
+
+
 func build_hand(
 	candidate_ids: Array[String],
 	hand_size: int,

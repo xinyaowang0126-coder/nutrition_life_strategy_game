@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<characters schema_version="1">
+  <character id="campus_student" version="1" name="学生" preferences="res://data/characters/default_food_preferences.xml" portrait="res://assets/generated/ui_v2/characters/student_bust.png" />
+  <character id="zhou_huilan_66" version="1" name="周慧兰 · 66岁" age="66" preferences="res://data/characters/zhou_food_preferences.xml" portrait="res://assets/generated/stories/zhou_huilan.png" />
+</characters>

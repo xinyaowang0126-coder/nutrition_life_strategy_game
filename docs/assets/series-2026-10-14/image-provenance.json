@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-14",
+  "generator": "Built-in image_gen",
+  "assets": [
+    {
+      "path": "life-strategy/assets/generated/stories/zhou_huilan.png",
+      "prompt": "Use case: stylized-concept. Create one production game character cutout, transparent background. The reference image is STYLE ONLY, not an edit target. Match its warm hand-painted storybook anime illustration, softly textured pigments, delicate ink, natural amber edge lighting. New subject: Zhou Huilan, a dignified lively Chinese woman age 66, short dark hair with visible silver streaks, natural mature face and gentle smile, soft olive knitted cardigan over cream blouse, dark comfortable trousers. Standing upright, visible head to mid-thigh, hands holding a slim community choir sheet-music folder with NO readable text. Same centered composition and silhouette size as reference, fully visible hands and head, no props outside folder, no backdrop, no drop shadow, no frame, no logo, no writing. She must unmistakably look 66 rather than a young woman, without frailty stereotype. This will replace the character art in the new story only.",
+      "transparent_background": true,
+      "reference": "life-strategy/assets/generated/ui_v2/characters/student_bust.png"
+    },
+    {
+      "path": "life-strategy/assets/generated/stories/zhou_home.png",
+      "prompt": "Use case: stylized-concept. Create a wide landscape background for a Chinese everyday-life nutrition strategy game, no people, no words, no UI. Cozy modest apartment dining room and kitchen belonging to a 66-year-old retired woman. Warm textured storybook hand-painted gouache and ink style, muted cream, moss green and amber, realistic familiar Chinese home. Kitchen cabinetry, clean small refrigerator with unlettered notes at back left, simple wooden dining table with a small empty bowl and cup at right, window and balcony greenery. A choir music folder lying on a shelf. Plenty of unobstructed central floor and wall space for the game cards, quiet gentle morning sunlight, no extravagant food feast, no generic school or dormitory furniture, no text, no logos. Production background, landscape 16:9.",
+      "transparent_background": false
+    },
+    {
+      "path": "life-strategy/assets/generated/stories/choir_stage.png",
+      "prompt": "Use case: stylized-concept. One wide landscape game background for a Chinese community choir performance in a nutrition life strategy game. Warm hand-painted storybook gouache, softly textured paper pigment, delicate ink, muted amber, moss green and cream matching a cozy Chinese apartment scene. A modest local community center auditorium stage with warm amber spotlights, soft olive stage curtain, simple piano at back right, a few orderly chairs for choir behind and a wooden music stand. No people, no signs, no readable text, no logo, no UI. Clear open central space and left foreground to overlay a character and interface cards. Dignified everyday community gathering, not a lavish concert arena. Wide 16:9 landscape, polished production illustration.",
+      "transparent_background": false
+    }
+  ],
+  "note": "Original generated PNGs were copied without image editing. Portrait has RGBA alpha range 0–254."
+}

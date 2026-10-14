@@ -1,0 +1,130 @@
+{
+  "date": "2026-10-14",
+  "scope": "Local full game saves, native file and input verification, and Node IndexedDB transaction model. Real browser WebGL and persistence not accepted.",
+  "tests": {
+    "passed": 461,
+    "failed": 0,
+    "total": 461,
+    "suite_count": 41
+  },
+  "save_tests": [
+    {
+      "assertion_count": 732,
+      "duration_ms": 8885,
+      "message": "",
+      "passed": true,
+      "suite": "game_saves",
+      "test": "test_every_phase_roundtrips_across_real_seven_day_runs"
+    },
+    {
+      "assertion_count": 17,
+      "duration_ms": 179,
+      "message": "",
+      "passed": true,
+      "suite": "game_saves",
+      "test": "test_file_slots_backup_import_and_story_isolation"
+    },
+    {
+      "assertion_count": 8,
+      "duration_ms": 352,
+      "message": "",
+      "passed": true,
+      "suite": "game_saves",
+      "test": "test_fresh_scene_continues_without_new_day_resources_or_inventory"
+    },
+    {
+      "assertion_count": 22,
+      "duration_ms": 17,
+      "message": "",
+      "passed": true,
+      "suite": "game_saves",
+      "test": "test_full_random_state_is_exact_and_future_menus_do_not_reroll"
+    },
+    {
+      "assertion_count": 9,
+      "duration_ms": 7,
+      "message": "",
+      "passed": true,
+      "suite": "game_saves",
+      "test": "test_invalid_save_is_transactional_and_cannot_switch_story_or_open_health_flags"
+    },
+    {
+      "assertion_count": 15,
+      "duration_ms": 48,
+      "message": "",
+      "passed": true,
+      "suite": "game_saves",
+      "test": "test_invitation_is_still_a_plan_after_reading_and_completed_stays_completed"
+    },
+    {
+      "assertion_count": 6,
+      "duration_ms": 238,
+      "message": "",
+      "passed": true,
+      "suite": "game_saves",
+      "test": "test_save_dialog_blocks_day_and_summary_keys_and_restores_them"
+    },
+    {
+      "assertion_count": 18,
+      "duration_ms": 60,
+      "message": "",
+      "passed": true,
+      "suite": "game_saves",
+      "test": "test_start_and_selected_menu_roundtrip_both_stories"
+    },
+    {
+      "assertion_count": 21,
+      "duration_ms": 84,
+      "message": "",
+      "passed": true,
+      "suite": "game_saves",
+      "test": "test_unsafe_unknown_and_frozen_recipe_survive_without_spending_twice"
+    }
+  ],
+  "native_profiles": {
+    "desktop-final": {
+      "errors": [],
+      "phase": "breakfast_action",
+      "scope": "Native input with memory backend: auto ack, manual slot, read, menu continue, restart cancel. File persistence is tested separately; not browser acceptance.",
+      "window": "(1280, 720)",
+      "screenshots": 9
+    },
+    "mobile-guard-final": {
+      "errors": [],
+      "phase": "breakfast_action",
+      "scope": "Native input with memory backend: auto ack, manual slot, read, menu continue, restart cancel. File persistence is tested separately; not browser acceptance.",
+      "window": "(390, 640)",
+      "screenshots": 9
+    }
+  },
+  "file_process_restart": [
+    {
+      "errors": [],
+      "mode": "write",
+      "scope": "Two separate native engine processes, real file backend. Not browser IndexedDB."
+    },
+    {
+      "errors": [],
+      "mode": "read",
+      "scope": "Two separate native engine processes, real file backend. Not browser IndexedDB."
+    }
+  ],
+  "node_transaction_model": {
+    "ok": true,
+    "scope": "Node unit transaction model: completion ack, cold realm reload, backup, quota abort, write ordering, story isolation, file picker and download. Not real browser IndexedDB/WebGL.",
+    "checks": 12
+  },
+  "campus_comparison": {
+    "identical_to_series_baseline": true,
+    "runs": 510,
+    "errors": []
+  },
+  "packed_resources": {
+    "errors": [],
+    "food_textures": 16,
+    "scope": "Exported PCK only: both stories, all food textures, cooking, frozen reheat, restart and campus switch. Not browser WebGL."
+  },
+  "web_pck_mib": 77.32,
+  "browser_acceptance": "pending: previous automated tab binding denied by in-app safety policy; no alternate-route bypass",
+  "published": false
+}

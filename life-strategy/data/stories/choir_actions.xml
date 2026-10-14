@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='utf-8'?>
+<actions>
+  <action id="rehearse" name="自己练歌" cost="0" slots="1" min_energy="10" energy="-10" mood="1" stress="3" study="8" satiety="-2" scenes="breakfast_action,lunch_action,dinner_action" image="res://assets/generated/stories/zhou_huilan.png" rule_hint="每天第一段排练+8，第二段+4，最多两段；精力、压力及昨夜恢复影响收益">
+    <desc>把不熟的那几句再唱一遍。</desc>
+  </action>
+  <action id="group_rehearsal" name="去集体排练" cost="0" slots="1" min_energy="12" energy="-12" mood="4" stress="2" study="12" satiety="-2" scenes="lunch_action" image="res://assets/generated/stories/zhou_huilan.png" rule_hint="周三、周五午饭后开放，每天一次">
+    <desc>合唱谱放进包里，老陈在门口等。</desc>
+  </action>
+  <action id="perform" name="去参加汇演" cost="0" slots="1" min_energy="25" energy="-10" mood="8" stress="-8" study="0" satiety="-2" scenes="dinner_action" image="res://assets/generated/stories/zhou_huilan.png" rule_hint="第7天晚饭后开放；排练达到70且至少有25精力，完成后记录实际参演">
+    <desc>终于轮到我们这首歌了。</desc>
+  </action>
+  <action id="nap" name="歇一会儿" cost="0" slots="1" energy="14" mood="1" stress="-4" study="0" satiety="0" scenes="breakfast_action,lunch_action,dinner_action" image="res://assets/generated/actions/nap.png">
+    <desc>闹钟调二十分钟。</desc>
+  </action>
+  <action id="walk" name="附近走走" cost="0" slots="1" min_energy="2" energy="-2" mood="4" stress="-10" study="0" satiety="-2" scenes="breakfast_action,lunch_action,dinner_action" image="res://assets/generated/actions/walk.png">
+    <desc>绕社区走一圈。</desc>
+  </action>
+  <action id="allow_imperfection" name="留点空" cost="0" slots="1" energy="4" mood="6" stress="-12" study="0" satiety="0" scenes="breakfast_action,lunch_action,dinner_action" image="res://assets/generated/actions/allow_imperfection.png">
+    <desc>今天不把行程塞满。</desc>
+  </action>
+  <action id="drink_water" name="喝水" cost="0" slots="0" energy="0" mood="0" stress="-1" study="0" satiety="0" scenes="breakfast_action,lunch_action,dinner_action" image="res://assets/generated/actions/drink_water.png" rule_hint="每天最多两次，不占安排、不抵消饮食记录">
+    <desc>把杯子放到手边。</desc>
+  </action>
+  <action id="shop_ingredients" name="买小份食材" cost="12" slots="1" min_energy="4" energy="-4" mood="0" stress="0" study="0" satiety="0" scenes="breakfast_action,lunch_action,dinner_action" image="res://assets/generated/actions/convenience_store.png" once_per_day="true" rule_hint="¥12买米、蛋、豆腐、青菜、番茄、小米各两份；每天一次">
+    <desc>照着清单买，后面几餐不用跑。</desc>
+  </action>
+  <action id="call_friend" name="约老陈一起吃饭" cost="0" slots="0" energy="0" mood="0" stress="0" study="0" satiety="0" scenes="lunch_action" image="res://assets/generated/actions/allow_imperfection.png" rule_hint="第4至6天午饭后可以约当日晚饭；计划不扣钱、不占整段安排，实际同桌才记完成">
+    <desc>先问问老陈今晚有没有空。</desc>
+  </action>
+  <action id="shop_condiments" name="补少量调味料" cost="4" slots="1" min_energy="2" energy="-2" mood="0" stress="0" study="0" satiety="0" once_per_day="true" scenes="breakfast_action,lunch_action,dinner_action" image="res://assets/generated/actions/convenience_store.png" rule_hint="¥4补盐20克、酱油60毫升、白糖20克；这是一组游戏采购规格，不是每日用量">
+    <desc>买够厨房用的，先看清瓶身标签。</desc>
+  </action>
+</actions>

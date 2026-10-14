@@ -115,7 +115,8 @@ func _apply_summary() -> void:
 	var day := int(_summary.get("day", 1))
 	day_title.text = String(_summary.get("title", "第 %d 天，收工" % day))
 	stability_value.text = "余力 %d" % int(stats.get("stability", 0))
-	study_value.text = "复习 %d/%d" % [
+	study_value.text = "%s %d/%d" % [
+		String(stats.get("goal_label", "复习")),
 		int(stats.get("study_progress", stats.get("study", 0))),
 		int(stats.get("study_target", _summary.get("study_target", 70))),
 	]

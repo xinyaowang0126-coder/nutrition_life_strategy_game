@@ -28,6 +28,17 @@ const DORM_STAGE_SCENE := preload("res://scenes/game_v2/stages/DormPantryStage.t
 const ACTION_STAGE_SCENE := preload("res://scenes/game_v2/stages/ActionStage.tscn")
 const SLEEP_STAGE_SCENE := preload("res://scenes/game_v2/stages/SleepStage.tscn")
 
+const StoryCatalogScript := preload("res://scripts/stories/StoryCatalog.gd")
+const StorySessionScript := preload("res://scripts/stories/StorySession.gd")
+const KitchenScript := preload("res://scripts/stories/KitchenStock.gd")
+const StoryEducationScript := preload("res://scripts/stories/StoryEducation.gd")
+const StoryDialogScript := preload("res://scripts/stories/StoryDialog.gd")
+const MealFactsScript := preload("res://scripts/stories/HouseholdMealFacts.gd")
+const SharedMealScript := preload("res://scripts/stories/SharedMealPlan.gd")
+const SaveCodecScript := preload("res://scripts/stories/GameSaveCodec.gd")
+const SaveStoreScript := preload("res://scripts/stories/GameSaveStore.gd")
+const HOUSEHOLD_SOURCE_SCENE := preload("res://scenes/stories/HouseholdSourceStage.tscn")
+
 const MAIN_MENU := "res://scenes/main_menu/MainMenu.tscn"
 const DEFAULT_BACKGROUND := "res://assets/generated/backgrounds/dorm_background.png"
 const SOURCE_MAP := "res://assets/generated/ui_v3/backgrounds/campus_map.png"
@@ -115,6 +126,15 @@ const PHASE_NAMES := {
 @onready var daily_summary: DailySummaryPopupV2 = $HUD/HUDRoot/ModalLayer/DailySummary
 @onready var new_day_popup: NewDayPopupV2 = $HUD/HUDRoot/ModalLayer/NewDayPopup
 
+var story_id := "campus_exam"
+var story: Dictionary = {}
+var kitchen := KitchenScript.new()
+var shared_meal := SharedMealScript.new()
+var performed := false
+var _story_dialog: StoryDialog
+var _story_choice_handler: Callable
+var _lesson_seen: Dictionary = {}
+
 var state: Dictionary = {}
 var day := 1
 var phase := "breakfast_source"
@@ -170,14 +190,24 @@ var _health_catalog: Dictionary = {}
 var _health_catalog_loaded := false
 var _record_book: MealRecordBookPopupV2
 var _record_input_restore: Dictionary = {}
+var _story_input_restore: Dictionary = {}
+var _new_day_pending := false
+var _save_store: RefCounted
+var _autosave_queued := false
+var _autosave_busy := false
+var _save_generation := 0
+var _save_status: Label
+var save_diagnostics: Array[Dictionary] = []
 
 
 func _ready() -> void:
+	story_id = StorySessionScript.take_request()
+	story = StoryCatalogScript.get_story(story_id)
 	GameDataScript.ensure_loaded()
 	health_guidance_flags = HealthGuidanceFeatureFlagsScript.current()
 	HealthGuidanceFeatureFlagsScript.warn_for_invalid(health_guidance_flags)
 	_deck_service = MealDeckServiceScript.new()
-	menu_button.pressed.connect(_show_meal_record_book)
+	menu_button.pressed.connect(_show_game_menu)
 	character_hud.details_requested.connect(_show_detail.bind("state"))
 	character_hud.detail_dismissed.connect(_dismiss_detail)
 	sticky_note.closed.connect(_restore_detail_input)
@@ -187,22 +217,56 @@ func _ready() -> void:
 	new_day_popup.recovery_details_requested.connect(_show_recovery_detail)
 	get_viewport().size_changed.connect(_apply_responsive_profile)
 	_apply_responsive_profile()
-	start_new_run()
+	_save_store = SaveStoreScript.new()
+	_save_status = Label.new()
+	_save_status.name = "SaveStatus"
+	_save_status.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_save_status.add_theme_font_size_override("font_size", 22)
+	_save_status.add_theme_color_override("font_color", Color("#f1dfbd"))
+	_save_status.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_LEFT)
+	_save_status.offset_left = 18
+	_save_status.offset_top = -36
+	_save_status.offset_right = 220
+	_save_status.offset_bottom = -6
+	$HUD/HUDRoot.add_child(_save_status)
+	var saved := StorySessionScript.take_saved()
+	if saved.is_empty():
+		start_new_run()
+	else:
+		var restored := restore_game_save(saved)
+		if not restored["ok"]:
+			_show_story_dialog("进度未能读取", restored["message"], [{"id": "menu", "text": "回到故事选择"}], func(_id: String) -> void: _go_main_menu())
 
 
 func start_new_run() -> void:
+	_save_generation += 1
+	_new_day_pending = false
 	if _record_book_active():
 		_record_book.close_book()
-	food_preferences = FoodPreferenceServiceScript.default_profile()
+	var requested_story := StoryCatalogScript.get_story(story_id)
+	if requested_story.is_empty():
+		story_id = String(story.get("id", "campus_exam"))
+		return
+	story = requested_story
+	food_preferences = FoodPreferenceServiceScript.load_profile(String(story["preferences"]))
+	performed = false
+	_lesson_seen.clear()
+	kitchen.reset()
+	shared_meal.reset()
+	if is_instance_valid(_story_dialog):
+		_story_dialog.hide()
+	_story_choice_handler = Callable()
+	if is_node_ready():
+		character_hud.set_portrait(String(story["portrait"]))
 	if _health_archive != null:
 		_health_archive.clear()
 	_health_catalog.clear()
 	_health_catalog_loaded = false
 	health_history_diagnostics.clear()
-	state = GameDataScript.get_starting_stats()
+	state = StoryCatalogScript.initial_stats(story)
 	day = 1
 	low_stability_days = 0
-	dorm_inventory = GameDataScript.get_initial_dorm_inventory()
+	dorm_inventory = {} if _household() else GameDataScript.get_initial_dorm_inventory()
 	ending_id = ""
 	run_history.clear()
 	current_event.clear()
@@ -212,6 +276,8 @@ func start_new_run() -> void:
 	_started_day = 0
 	pending_learning_state = RecoveryGameplayServiceScript.learning_state(pending_recovery_state)["learning_state"]
 	recovery_diagnostics.clear()
+	if _household():
+		_update_stability(current_recovery_state)
 	if is_node_ready():
 		daily_summary.hide_summary(false)
 		new_day_popup.hide_popup(false)
@@ -237,8 +303,11 @@ func _start_day() -> bool:
 	_current_recovery_effect = current_recovery_state["next_day_effect"].duplicate(true)
 	current_learning_state = prepared["learning_state"].duplicate(true)
 	_apply_stat_delta(_current_recovery_effect["opening_delta"])
-	current_event = WeeklyEventServiceScript.event_for_day(day)
-	state = WeeklyEventServiceScript.apply_opening_state(day, state)
+	current_event = _story_event(day)
+	if not _household():
+		state = WeeklyEventServiceScript.apply_opening_state(day, state)
+	else:
+		kitchen.refresh(day)
 	_clamp_stats()
 	phase = "breakfast_source"
 	hand.clear()
@@ -268,13 +337,17 @@ func _render_phase() -> void:
 	if not is_node_ready() or state.is_empty():
 		return
 	sticky_note.hide_note(false)
+	# Source and food cards need this space; confirmed-meal feedback appears
+	# when the player reaches the following action phase.
+	toast_anchor.visible = not (_household() and (_is_source_phase() or _is_meal_phase()))
 	_update_shell()
 	_update_background()
-	character_hud.update_stats(state, true)
+	character_hud.update_stats(_hud_stats(), true)
 	character_hud.update_recovery(_recovery_display_record)
+	_queue_autosave()
 	if phase == "summary":
 		_clear_stage()
-		daily_summary.show_summary(summary_payload, _mobile_mode)
+		daily_summary.show_summary(_story_view(summary_payload), _mobile_mode)
 		return
 	if phase == "ending":
 		_clear_stage()
@@ -292,12 +365,16 @@ func _render_phase() -> void:
 
 
 func _show_source_stage() -> void:
-	var stage := SOURCE_STAGE_SCENE.instantiate() as MealSourceStageV2
+	var stage: Control = HOUSEHOLD_SOURCE_SCENE.instantiate() if _household() else SOURCE_STAGE_SCENE.instantiate()
+	if _household():
+		stage.kitchen_requested.connect(_show_kitchen)
+		stage.education_requested.connect(_show_education)
+		stage.recipe_requested.connect(_show_recipe_records)
 	_install_stage(stage)
 	var sources: Array[Dictionary] = []
 	var disabled_reasons := {}
 	var meal := _current_meal_phase()
-	for source_id in GameDataScript.get_meal_source_ids():
+	for source_id in _story_source_ids():
 		var source := _effective_meal_source(source_id)
 		var reason := _source_disabled_reason(source_id, meal)
 		source["enabled"] = reason.is_empty()
@@ -311,18 +388,23 @@ func _show_source_stage() -> void:
 	stage.skip_requested.connect(_skip_meal)
 	stage.detail_requested.connect(_show_detail.bind("source"))
 	stage.detail_dismissed.connect(_dismiss_detail)
-	stage.setup(sources, String(PHASE_NAMES[meal]), disabled_reasons)
+	if _household():
+		stage.setup(sources, String(PHASE_NAMES[meal]), disabled_reasons, shared_meal.summary() if shared_meal.plan.get("status") == "planned" else "")
+	else:
+		stage.setup(sources, String(PHASE_NAMES[meal]), disabled_reasons)
 
 
 func _show_meal_stage() -> void:
 	var scene: PackedScene
-	match current_source_id:
+	match String(_effective_meal_source(current_source_id).get("stage_kind", current_source_id)):
 		"takeout":
 			scene = TAKEOUT_STAGE_SCENE
 		"convenience_store":
 			scene = CONVENIENCE_STAGE_SCENE
 		"dorm_storage":
 			scene = DORM_STAGE_SCENE
+		"cook", "fridge", "purchase":
+			scene = CAFETERIA_STAGE_SCENE
 		_:
 			scene = CAFETERIA_STAGE_SCENE
 	var stage := scene.instantiate() as MealStageBaseV2
@@ -337,7 +419,8 @@ func _show_meal_stage() -> void:
 		"balance": int(state.get("balance", 0)),
 		"payment_mode": String(source.get("payment_mode", "cash")),
 		"meal_label": String(PHASE_NAMES[phase]),
-		"stock_by_id": dorm_inventory,
+		"location_name": String(source.get("name", "食堂窗口")) if _household() else "食堂窗口",
+		"stock_by_id": _visible_stock(),
 	}
 	stage.food_toggled.connect(_on_food_toggled)
 	stage.confirm_requested.connect(_confirm_food)
@@ -352,7 +435,7 @@ func _show_action_stage() -> void:
 	var stage := ACTION_STAGE_SCENE.instantiate() as ActionStageV2
 	_install_stage(stage)
 	var actions: Array[Dictionary] = []
-	for action_id in GameDataScript.get_action_ids_for_scene(phase):
+	for action_id in _story_action_ids(phase):
 		var action := _effective_action(action_id)
 		var display_key := "name_%s" % phase
 		if action.has(display_key):
@@ -382,8 +465,8 @@ func _show_sleep_stage() -> void:
 	_install_stage(stage)
 	var options_list: Array[Dictionary] = []
 	for option_id in GameDataScript.get_sleep_option_ids_for_scene("sleep"):
-		options_list.append(GameDataScript.get_sleep_option(option_id))
-	var tomorrow_preview := WeeklyEventServiceScript.next_day_preview(day, GameDataScript.TOTAL_DAYS)
+		options_list.append(_story_sleep(option_id))
+	var tomorrow_preview := _story_preview(day)
 	var tomorrow_text := "周末就要到了"
 	if not tomorrow_preview.is_empty():
 		tomorrow_text = "%s · %s" % [
@@ -467,16 +550,16 @@ func _hand_for_source(source_id: String, meal: String) -> Array[String]:
 		var valid_cached: Array[String] = []
 		for value in cached:
 			var food_id := String(value)
-			if source_id != "dorm_storage" or int(dorm_inventory.get(food_id, 0)) > 0:
+			if String(_effective_meal_source(source_id).get("payment_mode", "cash")) != "stock" or _stock_count(food_id, source_id) > 0:
 				valid_cached.append(food_id)
 		return valid_cached
 	var source := _effective_meal_source(source_id)
-	var candidates := GameDataScript.get_food_ids_for_context(source_id, meal)
+	var candidates := _story_food_ids(source_id, meal)
 	var uses_stock := String(source.get("payment_mode", "cash")) == "stock"
 	var built: Array[String] = _deck_service.build_hand(
 		candidates,
 		int(source.get("hand_size", 4)),
-		dorm_inventory,
+		_visible_stock(source_id),
 		uses_stock
 	)
 	if not uses_stock:
@@ -487,12 +570,12 @@ func _hand_for_source(source_id: String, meal: String) -> Array[String]:
 
 func _ensure_affordable_in_source_hand(built: Array[String], candidates: Array[String], fee: int) -> void:
 	for food_id in built:
-		if int(GameDataScript.get_food(food_id)["cost"]) + fee <= int(state["balance"]):
+		if int(_story_food(food_id)["cost"]) + fee <= int(state["balance"]):
 			return
 	var cheapest_id := ""
 	var cheapest_cost := 100000
 	for food_id in candidates:
-		var cost := int(GameDataScript.get_food(food_id)["cost"])
+		var cost := int(_story_food(food_id)["cost"])
 		if cost < cheapest_cost and cost + fee <= int(state["balance"]):
 			cheapest_cost = cost
 			cheapest_id = food_id
@@ -504,18 +587,18 @@ func _ensure_affordable_in_source_hand(built: Array[String], candidates: Array[S
 
 
 func _source_disabled_reason(source_id: String, meal: String) -> String:
-	if not GameDataScript.is_meal_source_available(source_id, meal):
+	if not _story_source_available(source_id, meal):
 		return "这个时段还没营业。"
 	var source := _effective_meal_source(source_id)
-	var candidates := GameDataScript.get_food_ids_for_context(source_id, meal)
+	var candidates := _story_food_ids(source_id, meal)
 	if String(source.get("payment_mode", "cash")) == "stock":
 		for food_id in candidates:
-			if int(dorm_inventory.get(food_id, 0)) > 0:
+			if _stock_count(food_id, source_id) > 0:
 				return ""
 		return "柜子已经空了。"
 	var fee := int(source.get("fee", 0))
 	for food_id in candidates:
-		if int(GameDataScript.get_food(food_id)["cost"]) + fee <= int(state["balance"]):
+		if int(_story_food(food_id)["cost"]) + fee <= int(state["balance"]):
 			return ""
 	return "余额不够在这里买一份。"
 
@@ -541,7 +624,9 @@ func _can_add_food(food_id: String) -> bool:
 	if selected_food_ids.size() >= _source_selection_limit(current_source_id):
 		return false
 	if _source_uses_stock():
-		return int(dorm_inventory.get(food_id, 0)) > 0
+		if _household() and current_source_id == "home_kitchen":
+			return kitchen.can_cook(selected_food_ids + [food_id], _story_food_catalog(), _served_portions())
+		return _stock_count(food_id, current_source_id) > 0
 	return _selected_meal_total(food_id) <= int(state["balance"])
 
 
@@ -556,7 +641,7 @@ func _selected_meal_total(extra_food_id: String = "") -> int:
 	var source := _effective_meal_source(current_source_id)
 	var total := int(source.get("fee", 0))
 	for food_id in ids:
-		total += int(GameDataScript.get_food(food_id).get("cost", 0))
+		total += int(_story_food(food_id).get("cost", 0))
 	return total
 
 
@@ -575,9 +660,15 @@ func _confirm_food(food_ids: Array) -> void:
 	if safe_ids.is_empty():
 		return
 	selected_food_ids = safe_ids
+	if _household():
+		if current_source_id == "home_kitchen" and is_node_ready():
+			_show_cooking_choice(safe_ids)
+		else:
+			confirm_household_food(safe_ids)
+		return
 	var foods: Array[Dictionary] = []
 	for food_id in safe_ids:
-		foods.append(GameDataScript.get_food(food_id))
+		foods.append(_story_food(food_id))
 	var source := _effective_meal_source(current_source_id)
 	var record := MealResolverScript.build_record(phase, source, foods, food_preferences)
 	if int(record["total_cost"]) > int(state["balance"]):
@@ -619,7 +710,7 @@ func _skip_meal() -> void:
 func _apply_meal_record(record: Dictionary) -> void:
 	state["balance"] = int(state["balance"]) - int(record["total_cost"])
 	_apply_stat_delta(record["stat_delta"])
-	if bool(record["uses_stock"]):
+	if bool(record["uses_stock"]) and not _household():
 		for food_id in record["food_ids"]:
 			var key := String(food_id)
 			dorm_inventory[key] = maxi(0, int(dorm_inventory.get(key, 0)) - 1)
@@ -646,7 +737,7 @@ func get_meal_record_book() -> Dictionary:
 
 
 func _record_book_active() -> bool:
-	return is_instance_valid(_record_book) and _record_book.visible
+	return (is_instance_valid(_record_book) and _record_book.visible) or (is_instance_valid(_story_dialog) and _story_dialog.visible)
 
 
 func _show_meal_record_book() -> void:
@@ -706,7 +797,7 @@ func _restore_detail_input() -> void:
 
 
 func get_food_for_character(food_id: String) -> Dictionary:
-	return FoodPreferenceServiceScript.decorate_food(GameDataScript.get_food(food_id), food_preferences)
+	return FoodPreferenceServiceScript.decorate_food(_story_food(food_id), food_preferences)
 
 
 func set_food_preferences(profile: Dictionary) -> void:
@@ -743,7 +834,7 @@ func load_health_history(path: String) -> Dictionary:
 
 
 func _health_data_enabled() -> bool:
-	return HealthGuidanceFeatureFlagsScript.is_enabled(health_guidance_flags, "data")
+	return not _household() and HealthGuidanceFeatureFlagsScript.is_enabled(health_guidance_flags, "data")
 
 
 func _ensure_health_archive() -> void:
@@ -835,7 +926,7 @@ func _apply_action(action_id: String) -> void:
 		return
 	if not _is_action_phase():
 		return
-	if not GameDataScript.get_action_ids_for_scene(phase).has(action_id):
+	if not _story_action_ids(phase).has(action_id):
 		return
 	var action := _effective_action(action_id)
 	if not _can_use_action(action):
@@ -843,9 +934,14 @@ func _apply_action(action_id: String) -> void:
 		if not reason.is_empty():
 			_post(reason, "warning")
 		return
+	if action_id == "call_friend":
+		_show_shared_meal_invitation()
+		return
 	var display_key := "name_%s" % phase
 	var display_name := String(action.get(display_key, action.get("name", action_id)))
 	actions_used_today += int(action.get("slots", 1))
+	if action_id == "perform":
+		performed = true
 	if action_id == "drink_water":
 		drink_water_used += 1
 	if int(action.get("slots", 1)) > 0:
@@ -861,6 +957,15 @@ func _apply_action(action_id: String) -> void:
 	}
 	_apply_stat_delta(delta)
 	var stock_added := _apply_action_stock(action)
+	if action_id == "shop_ingredients":
+		for ingredient in ["rice_plain", "egg", "tofu", "greens", "tomato", "millet"]:
+			kitchen.ingredients[ingredient] = int(kitchen.ingredients.get(ingredient, 0)) + 2
+			stock_added[ingredient] = 2
+	if action_id == "shop_condiments":
+		for key in {"salt_g": 20, "soy_ml": 60, "sugar_g": 20}:
+			var amount: int = {"salt_g": 20, "soy_ml": 60, "sugar_g": 20}[key]
+			kitchen.condiments[key] += amount
+			stock_added[key] = amount
 	today_action_records.append({
 		"id": action_id,
 		"name": display_name,
@@ -874,7 +979,7 @@ func _apply_action(action_id: String) -> void:
 	if stock_added.is_empty():
 		_post(display_name, "info")
 	else:
-		_post("%s：燕麦、牛奶和苹果放进柜子了。" % display_name, "good")
+		_post(("小份食材已放好。" if _household() else "%s：燕麦、牛奶和苹果放进柜子了。" % display_name), "good")
 	if int(action.get("slots", 1)) == 0:
 		_render_phase()
 	else:
@@ -906,6 +1011,8 @@ func _advance_after_action() -> void:
 
 
 func _can_use_action(action: Dictionary) -> bool:
+	if _household() and not _household_action_reason(action).is_empty():
+		return false
 	if not _is_action_phase():
 		return false
 	if actions_used_today + int(action.get("slots", 1)) > MAX_DAILY_ACTIONS:
@@ -922,6 +1029,8 @@ func _can_use_action(action: Dictionary) -> bool:
 
 
 func _action_disabled_reason(action: Dictionary) -> String:
+	if _household() and not _household_action_reason(action).is_empty():
+		return _household_action_reason(action)
 	if String(action.get("id", "")) == "drink_water" and drink_water_used >= 2:
 		return "今天已经接过两杯水。"
 	if _action_is_once_per_day(action) and used_action_ids.has(String(action.get("id", ""))):
@@ -937,7 +1046,9 @@ func _action_disabled_reason(action: Dictionary) -> String:
 
 
 func _effective_action(action_id: String) -> Dictionary:
-	var base_action := GameDataScript.get_action(action_id)
+	if _household():
+		return _household_action(action_id)
+	var base_action := _story_action(action_id)
 	var action := WeeklyEventServiceScript.apply_action(
 		day,
 		action_id,
@@ -989,7 +1100,7 @@ func _apply_action_stock(action: Dictionary) -> Dictionary:
 			continue
 		var food_id := String(parts[0])
 		var amount := int(parts[1]) if parts.size() > 1 else 1
-		if amount <= 0 or GameDataScript.get_food(food_id).is_empty():
+		if amount <= 0 or _story_food(food_id).is_empty():
 			continue
 		dorm_inventory[food_id] = int(dorm_inventory.get(food_id, 0)) + amount
 		added[food_id] = amount
@@ -1003,7 +1114,7 @@ func _choose_sleep(option_id: String) -> void:
 		return
 	if not GameDataScript.get_sleep_option_ids_for_scene("sleep").has(option_id):
 		return
-	var option := GameDataScript.get_sleep_option(option_id)
+	var option := _story_sleep(option_id)
 	chosen_sleep_id = option_id
 	chosen_sleep_name = String(option.get("name", option_id))
 	_recovery_before_sleep = {"energy": state.get("energy"), "stress": state.get("stress")}
@@ -1032,14 +1143,14 @@ func _finish_day() -> void:
 		_apply_day_settlement_effect("low_satiety", {"energy": -8, "stress": 8, "mood": -5})
 	if int(state["satiety"]) > 92:
 		_apply_day_settlement_effect("high_satiety", {"energy": -3})
-	var remaining_days := maxi(0, GameDataScript.TOTAL_DAYS - day)
+	var remaining_days := maxi(0, _total_days() - day)
 	if remaining_days > 0 and int(state["balance"]) < remaining_days * 14:
 		_apply_day_settlement_effect("tight_budget", {"stress": 5, "mood": -2})
 	var study_pace := mini(
-		GameDataScript.STUDY_TARGET,
-		day * GameDataScript.DAILY_STUDY_PACE
+		_goal_target(),
+		day * 10
 	)
-	if int(state["study_progress"]) < study_pace:
+	if int(state[_goal_key()]) < study_pace:
 		_apply_day_settlement_effect("study_behind", {"stress": 3})
 	else:
 		_apply_day_settlement_effect("study_on_pace", {"mood": 2})
@@ -1053,13 +1164,22 @@ func _finish_day() -> void:
 	elif stability_valid:
 		low_stability_days = 0
 	var day_record := _build_day_record(nutrition_summary)
+	if _household():
+		shared_meal.finish_day(day)
+		day_record["story_context"] = story_identity()
+		day_record["kitchen_history"] = kitchen.history.filter(func(item: Dictionary) -> bool: return int(item.get("day", -1)) == day).duplicate(true)
+		day_record["performed"] = performed
+		day_record["recipe_summary"] = MealFactsScript.summarize(today_meal_records)
+		day_record["shared_meal_history"] = shared_meal.history.filter(func(item: Dictionary) -> bool: return item.get("day") == day).duplicate(true)
 	run_history.append(day_record)
 	var detail_text := "%s\n\n本局变化\n%s" % [
 		String(nutrition_summary.get("detail_text", "")),
 		_day_change_text(day_record),
 	]
-	var recovery_view := RecoveryPresenterScript.present(pending_recovery_state, "final" if day >= GameDataScript.TOTAL_DAYS else "settled")
+	var recovery_view := RecoveryPresenterScript.present(pending_recovery_state, "final" if day >= _total_days() else "settled")
 	var summary_detail := {"detail_text": detail_text + "\n\n恢复依据\n" + String(recovery_view["detail_text"]), "basis": String(nutrition_summary.get("basis", ""))}
+	if _household():
+		summary_detail["detail_text"] += "\n\n配方与共同进餐\n" + String(day_record["recipe_summary"]["text"]) + "\n" + shared_meal.summary()
 	summary_payload = {
 		"record_book_available": true,
 		"day": day,
@@ -1085,8 +1205,8 @@ func _finish_day() -> void:
 		_post("恢复记录暂时不可用，请通过菜单重新开始这一周。", "warning")
 	elif low_stability_days >= 2:
 		_finish_run("collapsed")
-	elif day >= GameDataScript.TOTAL_DAYS:
-		_finish_run(MealResolverScript.select_ending(state, true))
+	elif day >= _total_days():
+		_finish_run(_select_story_ending())
 	else:
 		phase = "summary"
 		_render_phase()
@@ -1105,6 +1225,10 @@ func _settle_recovery_record() -> void:
 	var action_counts := {}
 	for action in today_action_records:
 		var action_id: Variant = action.get("id")
+		if _household():
+			if action_id == "call_friend":
+				continue
+			action_id = {"rehearse": "study", "group_rehearsal": "study", "perform": "allow_imperfection", "shop_ingredients": "allow_imperfection", "shop_condiments": "allow_imperfection"}.get(action_id, action_id)
 		action_counts[action_id] = int(action_counts.get(action_id, 0)) + 1
 	var result := RecoveryStateServiceScript.settle(
 		day, _recovery_before_sleep, _recovery_sleep_snapshot,
@@ -1147,7 +1271,7 @@ func _on_summary_advanced() -> void:
 func _next_day() -> void:
 	if _record_book_active():
 		return
-	if phase != "summary" or not _day_settled or day >= GameDataScript.TOTAL_DAYS:
+	if phase != "summary" or not _day_settled or day >= _total_days():
 		return
 	day += 1
 	if not _start_day():
@@ -1161,13 +1285,14 @@ func _next_day() -> void:
 func _show_new_day_popup() -> void:
 	if not is_node_ready():
 		return
+	_new_day_pending = true
 	var display_event := current_event.duplicate(true)
 	if display_event.is_empty():
 		display_event = _quiet_day_event()
 	var event_id := String(display_event.get("id", "quiet_day"))
 	var display_learning_state := RecoveryPresenterScript.present(_recovery_display_record)
 	var learning_id := String(RecoveryGameplayServiceScript.learning_state(_recovery_display_record)["learning_state"].get("id", "recovery_unavailable"))
-	new_day_popup.show_day({
+	new_day_popup.show_day(_story_view({
 		"day": day,
 		"title": "第 %d 天开始" % day,
 		"subtitle": (
@@ -1179,17 +1304,17 @@ func _show_new_day_popup() -> void:
 		"recovery": display_learning_state,
 		"status_effect": display_learning_state["effect_text"],
 		"event": display_event,
-		"status_image": String(LEARNING_STATE_IMAGES.get(
+		"status_image": String(story["portrait"]) if _household() else String(LEARNING_STATE_IMAGES.get(
 			learning_id,
 			LEARNING_STATE_IMAGES["steady"]
 		)) if display_learning_state["available"] else "",
-		"event_image": String(EVENT_IMAGES.get(event_id, EVENT_IMAGES["quiet_day"])),
-		"event_effect": String(EVENT_EFFECT_TEXT.get(
+		"event_image": String(story["background"]) if _household() else String(EVENT_IMAGES.get(event_id, EVENT_IMAGES["quiet_day"])),
+		"event_effect": String(display_event.get("effect_text", "")) if _household() else String(EVENT_EFFECT_TEXT.get(
 			event_id,
 			EVENT_EFFECT_TEXT["quiet_day"]
 		)),
 		"button_text": "进入第 %d 天" % day,
-	}, _mobile_mode)
+	}), _mobile_mode)
 
 
 func _quiet_day_event() -> Dictionary:
@@ -1199,7 +1324,7 @@ func _quiet_day_event() -> Dictionary:
 			"title": "新的一周开始了",
 			"summary": "今天没有额外限制，先按自己的节奏安排三餐与学习。",
 		}
-	if day >= GameDataScript.TOTAL_DAYS:
+	if day >= _total_days():
 		return {
 			"id": "quiet_day",
 			"title": "周末就在眼前",
@@ -1213,9 +1338,12 @@ func _quiet_day_event() -> Dictionary:
 
 
 func _on_new_day_continue() -> void:
+	_new_day_pending = false
+	_queue_autosave()
 	# The popup owns its closing animation; the playable stage is already
 	# rendered underneath so continuing never incurs another scene rebuild.
-	pass
+	if _household() and day == 1 and kitchen.batches[0]["quantity"] > 0:
+		_show_kitchen()
 
 
 func _show_recovery_detail() -> void:
@@ -1233,7 +1361,7 @@ func _finish_run(result: String) -> void:
 
 
 func _show_ending_summary() -> void:
-	var ending := GameDataScript.get_ending(ending_id)
+	var ending := _story_ending(ending_id)
 	var recap := _build_week_recap()
 	var ending_summary := {
 		"day": day,
@@ -1241,8 +1369,8 @@ func _show_ending_summary() -> void:
 		"stats": state.duplicate(true),
 		"record_summary": RecoveryPresenterScript.ending_text(ending_id, run_history),
 		"advice": "目标复习 %d，完成 %d；本周记录了 %d 天，手里还剩 ¥%d。" % [
-			GameDataScript.STUDY_TARGET,
-			int(state["study_progress"]),
+			_goal_target(),
+			int(state[_goal_key()]),
 			int(recap.get("played_days", 0)),
 			int(state["balance"]),
 		],
@@ -1254,7 +1382,11 @@ func _show_ending_summary() -> void:
 		"detail_button_open_text": "收起本周轨迹",
 		"button_text": "再来一周",
 	}
-	daily_summary.show_summary(ending_summary, _mobile_mode)
+	if _household():
+		ending_summary["record_summary"] = "已完成社区合唱汇演。" if performed else "本局没有完成参演；排练与演前安排都保留在记录里。"
+		ending_summary["advice"] = "排练 %d/%d｜实际参演：%s｜余额 ¥%d" % [int(state.get("goal_progress", 0)), _goal_target(), "已完成" if performed else "未完成", int(state.get("balance", 0))]
+		ending_summary["detail"]["detail_text"] += "\n\n" + shared_meal.summary() + "\n" + _recipe_history_text()
+	daily_summary.show_summary(_story_view(ending_summary), _mobile_mode)
 
 
 func _build_day_record(nutrition_summary: Dictionary) -> Dictionary:
@@ -1305,7 +1437,7 @@ func _day_change_text(record: Dictionary) -> String:
 	var finish: Dictionary = record.get("end_state", {})
 	return "今日变化：余力 %s｜复习 %s｜余额 %s" % [
 		_signed_delta(int(finish.get("stability", 0)) - int(start.get("stability", 0))),
-		_signed_delta(int(finish.get("study_progress", 0)) - int(start.get("study_progress", 0))),
+		_signed_delta(int(finish.get(_goal_key(), 0)) - int(start.get(_goal_key(), 0))),
 		_signed_delta(int(finish.get("balance", 0)) - int(start.get("balance", 0))),
 	]
 
@@ -1313,7 +1445,7 @@ func _day_change_text(record: Dictionary) -> String:
 func _day_strategy_advice(study_pace: int, remaining_days: int) -> String:
 	if int(state.get("satiety", 0)) < 20:
 		return "饱腹偏低，先留出一顿够吃的餐，再排其他事情。"
-	var study_gap := study_pace - int(state.get("study_progress", 0))
+	var study_gap := study_pace - int(state.get(_goal_key(), 0))
 	if study_gap > 0:
 		return "今天离复习计划还差 %d。明天看看精力，再安排下一段。" % study_gap
 	if int(state.get("energy", 0)) <= 25:
@@ -1327,9 +1459,9 @@ func _next_day_preview_text() -> String:
 	var recovery_view := RecoveryPresenterScript.present(pending_recovery_state, "settled")
 	if not recovery_view["available"]:
 		return "恢复记录暂时不可用，请通过菜单重新开始这一周。"
-	if day >= GameDataScript.TOTAL_DAYS:
+	if day >= _total_days():
 		return "本周已经走完，看看七天里哪些选择真正留下了余力。"
-	var preview := WeeklyEventServiceScript.next_day_preview(day, GameDataScript.TOTAL_DAYS)
+	var preview := _story_preview(day)
 	return "明天的事件：" + String(preview.get("title", "照常安排"))
 
 
@@ -1354,12 +1486,12 @@ func _build_week_recap() -> Dictionary:
 		var meal_count: String = ("%d/3" % meal_facts["eaten"]) if record.get("meals") is Array else "未记"
 		var start: Dictionary = record.get("start_state", {})
 		var finish: Dictionary = record.get("end_state", {})
-		var recovery_view := RecoveryPresenterScript.present(record.get("recovery_state"), "final" if record_day >= GameDataScript.TOTAL_DAYS else "settled")
+		var recovery_view := RecoveryPresenterScript.present(record.get("recovery_state"), "final" if record_day >= _total_days() else "settled")
 		total_spend += int(record.get("spend", 0))
 		lines.append("第 %d 天｜进餐记录 %s｜复习 %s｜花费 ¥%d\n收工后：%s\n%s" % [
 			int(record.get("day", 0)),
 			meal_count,
-			_signed_delta(int(finish.get("study_progress", 0)) - int(start.get("study_progress", 0))),
+			_signed_delta(int(finish.get(_goal_key(), 0)) - int(start.get(_goal_key(), 0))),
 			int(record.get("spend", 0)),
 			String(recovery_view["title"]),
 			String(recovery_view["summary"]),
@@ -1384,11 +1516,12 @@ func _signed_delta(value: int) -> String:
 
 
 func _apply_stat_delta(delta: Dictionary) -> void:
-	for key in delta.keys():
+	for raw_key in delta.keys():
+		var key: String = _goal_key() if raw_key == "study_progress" else String(raw_key)
 		if key in ["burden", "diet_burden", "character_health"]:
 			continue
 		if state.has(key):
-			state[key] = int(state[key]) + int(delta[key])
+			state[key] = int(state[key]) + int(delta[raw_key])
 
 
 func _update_stability(recovery_record: Variant = null) -> bool:
@@ -1396,9 +1529,9 @@ func _update_stability(recovery_record: Variant = null) -> bool:
 		return true
 	var record: Variant = current_recovery_state if recovery_record == null else recovery_record
 	var result := RecoveryGameplayServiceScript.calculate_stability_from_recovery(
-		state,
+		StoryCatalogScript.resource_projection(state, story),
 		day,
-		GameDataScript.TOTAL_DAYS,
+		_total_days(),
 		record
 	)
 	if not result["valid"]:
@@ -1411,17 +1544,17 @@ func _update_stability(recovery_record: Variant = null) -> bool:
 func _clamp_stats() -> void:
 	for key in ["burden", "diet_burden", "character_health"]:
 		state.erase(key)
-	for key in ["stability", "energy", "mood", "satiety", "stress", "study_progress"]:
+	for key in ["stability", "energy", "mood", "satiety", "stress", _goal_key()]:
 		state[key] = clampi(int(state[key]), 0, 100)
 	state["balance"] = clampi(int(state["balance"]), 0, 999)
 
 
 func _update_shell() -> void:
-	day_label.text = "第 %d 天 / 第 %d 天" % [day, GameDataScript.TOTAL_DAYS]
+	day_label.text = "第 %d 天 / 第 %d 天" % [day, _total_days()]
 	phase_label.text = String(PHASE_NAMES.get(phase, phase))
 	balance_label.text = "¥%d" % int(state.get("balance", 0))
 	if is_instance_valid(week_ribbon):
-		week_ribbon.call("update_day", day, GameDataScript.TOTAL_DAYS)
+		week_ribbon.call("update_day", day, _total_days())
 
 
 func _show_detail(payload: Dictionary, anchor_rect: Rect2, pinned: bool, mode: String) -> void:
@@ -1434,7 +1567,8 @@ func _show_detail(payload: Dictionary, anchor_rect: Rect2, pinned: bool, mode: S
 	var reason := String(payload.get("disabled_reason", ""))
 	var stock := -1
 	if mode == "food" and _source_uses_stock():
-		stock = int(dorm_inventory.get(String(payload.get("id", "")), 0))
+		stock = _stock_count(String(payload.get("id", "")), current_source_id)
+	payload = _story_view(payload)
 	sticky_note.present(payload, mode, anchor_rect, pinned, reason, "", _mobile_mode, stock)
 
 
@@ -1469,6 +1603,8 @@ func _source_uses_stock() -> bool:
 
 
 func _effective_meal_source(source_id: String) -> Dictionary:
+	if _household():
+		return StoryCatalogScript.content(story, "sources").get(source_id, {})
 	return WeeklyEventServiceScript.apply_meal_source(
 		day,
 		source_id,
@@ -1506,20 +1642,7 @@ func _phase_prompt() -> String:
 
 
 func _request_main_menu() -> void:
-	if day == 1 and today_meal_records.is_empty():
-		_go_main_menu()
-		return
-	var dialog := ConfirmationDialog.new()
-	dialog.dialog_text = "回到主菜单？\n这一周的进度不会保留。"
-	dialog.ok_button_text = "回主菜单"
-	dialog.cancel_button_text = "继续"
-	dialog.confirmed.connect(func() -> void:
-		_go_main_menu()
-		dialog.queue_free()
-	)
-	dialog.canceled.connect(dialog.queue_free)
-	add_child(dialog)
-	dialog.popup_centered(Vector2i(460, 220))
+	_save_to_slot("auto", true)
 
 
 func _go_main_menu() -> void:
@@ -1548,6 +1671,8 @@ func _update_background() -> void:
 
 
 func _background_path_for_phase() -> String:
+	if _household():
+		return "res://assets/generated/stories/choir_stage.png" if performed else String(story["background"])
 	if _is_source_phase() and ResourceLoader.exists(SOURCE_MAP):
 		if _mobile_mode and ResourceLoader.exists(SOURCE_MAP_MOBILE):
 			return SOURCE_MAP_MOBILE
@@ -1751,3 +1876,671 @@ func _set_rect(
 	control.offset_top = rect_top
 	control.offset_right = rect_right
 	control.offset_bottom = rect_bottom
+
+
+func _household() -> bool:
+	return story.get("mechanics", "campus") == "household"
+
+
+func _goal_key() -> String:
+	return "goal_progress" if _household() else "study_progress"
+
+
+func _goal_target() -> int:
+	return int(story.get("goal_target", GameDataScript.STUDY_TARGET))
+
+
+func _total_days() -> int:
+	return int(story.get("days", 7))
+
+
+func story_identity() -> Dictionary:
+	return {"story_id": story_id, "story_version": story.get("version", 1), "character_id": story.get("character_id", "campus_student"), "character_version": story.get("character_version", 1)}
+
+
+func _story_clock() -> int:
+	return day * 24 + int({"breakfast": 8, "lunch": 13, "dinner": 18}.get(_current_meal_phase(), 18))
+
+
+func _story_food_catalog() -> Dictionary:
+	return StoryCatalogScript.content(story, "foods")
+
+
+func _story_food(id: String) -> Dictionary:
+	return _story_food_catalog().get(id, {}).duplicate(true) if _household() else GameDataScript.get_food(id)
+
+
+func _story_source_ids() -> Array[String]:
+	if not _household():
+		return GameDataScript.get_meal_source_ids()
+	var result: Array[String] = []
+	for id in StoryCatalogScript.content(story, "sources"):
+		result.append(String(id))
+	return result
+
+
+func _story_source_available(id: String, meal: String) -> bool:
+	if not _household():
+		return GameDataScript.is_meal_source_available(id, meal)
+	var source: Dictionary = StoryCatalogScript.content(story, "sources").get(id, {})
+	return not source.is_empty() and source.get("scenes", []).has(meal)
+
+
+func _story_food_ids(source: String, meal: String) -> Array[String]:
+	if not _household():
+		return GameDataScript.get_food_ids_for_context(source, meal)
+	var result: Array[String] = []
+	for food in _story_food_catalog().values():
+		if food.get("sources", []).has(source) and food.get("scenes", []).has(meal):
+			result.append(String(food["id"]))
+	return result
+
+
+func _story_action_ids(action_phase: String) -> Array[String]:
+	if not _household():
+		return GameDataScript.get_action_ids_for_scene(action_phase)
+	var result: Array[String] = []
+	for action in StoryCatalogScript.content(story, "actions").values():
+		if action.get("scenes", []).has(action_phase):
+			result.append(String(action["id"]))
+	return result
+
+
+func _story_action(id: String) -> Dictionary:
+	return StoryCatalogScript.content(story, "actions").get(id, {}).duplicate(true) if _household() else GameDataScript.get_action(id)
+
+
+func _story_sleep(id: String) -> Dictionary:
+	var option := GameDataScript.get_sleep_option(id)
+	if _household():
+		option["goal_label"] = "排练"
+		if id == "night_study":
+			option["name"] = "再看一遍歌谱"
+			option["desc"] = "把没记牢的词再过一遍。"
+		option = _story_view(option)
+	return option
+
+
+func _story_event(event_day: int) -> Dictionary:
+	if not _household():
+		return WeeklyEventServiceScript.event_for_day(event_day)
+	var lesson := StoryEducationScript.lesson(event_day)
+	return {"id": "choir_day_%d" % event_day, "day": event_day, "title": lesson.get("title", "照常安排"), "summary": lesson.get("line", ""), "preview": lesson.get("line", ""), "effect_text": "周三、周五午后集体排练；周日晚饭后汇演。"}
+
+
+func _story_preview(current_day: int) -> Dictionary:
+	if not _household():
+		return WeeklyEventServiceScript.next_day_preview(current_day, _total_days())
+	return {} if current_day >= _total_days() else _story_event(current_day + 1)
+
+
+func _hud_stats() -> Dictionary:
+	var result := StoryCatalogScript.resource_projection(state, story)
+	if _household():
+		result["goal_label"] = "排练"
+	return result
+
+
+func _story_view(value: Variant) -> Variant:
+	if not _household():
+		return value
+	if value is String:
+		return String(value).replace("复习", "排练").replace("学习", "练歌").replace("宿舍", "家里").replace("开书", "练歌")
+	if value is Dictionary:
+		var result := {}
+		for key in value:
+			result[key] = _story_view(value[key])
+		if result.has("goal_progress"):
+			result["study_progress"] = result["goal_progress"]
+			result["study_target"] = _goal_target()
+		result["goal_label"] = "排练"
+		return result
+	if value is Array:
+		var result: Array = []
+		for item in value:
+			result.append(_story_view(item))
+		return result
+	return value
+
+
+func _stock_count(food_id: String, source_id: String) -> int:
+	if not _household():
+		return int(dorm_inventory.get(food_id, 0))
+	if source_id == "home_kitchen":
+		var required := kitchen.needs([food_id], _story_food_catalog())
+		var count := 999
+		for id in required:
+			count = mini(count, int(int(kitchen.ingredients.get(id, 0)) / int(required[id])))
+		return int(count / _served_portions())
+	if source_id == "home_fridge":
+		return kitchen.available(food_id, day, _story_clock())
+	return 0
+
+
+func _visible_stock(source_id: String = "") -> Dictionary:
+	if not _household():
+		return dorm_inventory.duplicate(true)
+	var result := {}
+	for food_id in _story_food_catalog():
+		result[food_id] = _stock_count(String(food_id), source_id if not source_id.is_empty() else current_source_id)
+	return result
+
+
+func _household_action_reason(action: Dictionary) -> String:
+	var id := String(action.get("id", ""))
+	if id == "call_friend":
+		if day not in [4, 5, 6] or phase != "lunch_action":
+			return "第4至6天午饭后可以约当日晚饭。"
+		if not shared_meal.plan.is_empty():
+			return "晚饭已经约好，或本周已经一起吃过饭。"
+		if used_action_ids.has(id):
+			return "今天已经打过电话了。"
+	if id == "shop_condiments" and used_action_ids.has(id):
+		return "今天已经补过一次调味料。"
+	if id == "rehearse" and used_action_ids.count(id) >= 2:
+		return "今天已经自己练过两段。"
+	if id == "group_rehearsal":
+		if day not in [3, 5] or phase != "lunch_action":
+			return "周三、周五午饭后有集体排练。"
+		if used_action_ids.has(id):
+			return "今天的集体排练已经参加过了。"
+	if id == "perform":
+		if day != 7 or phase != "dinner_action":
+			return "周日晚饭后才轮到我们上台。"
+		if performed:
+			return "汇演已经完成。"
+		if int(state.get("goal_progress", 0)) < _goal_target():
+			return "排练还未达到%d。" % _goal_target()
+	return ""
+
+
+func _household_action(id: String) -> Dictionary:
+	var action := _story_action(id)
+	action["goal_label"] = "排练"
+	if id == "rehearse":
+		action["study"] = 4 if used_action_ids.count(id) == 1 else 8
+	if id in ["rehearse", "group_rehearsal"]:
+		var penalty: Dictionary = BalanceRules.study_penalty(state)
+		action["study"] = maxi(1, int(action["study"]) + int(_current_recovery_effect.get("study_modifier", 0)) + int(penalty["modifier"]))
+		action["rule_hint"] = String(action.get("rule_hint", "")) + "\n本次排练收益已计入昨夜恢复与当前状态。"
+	if int(action.get("slots", 1)) > 0:
+		action["rule_hint"] = String(action.get("rule_hint", "")) + "\n" + BalanceRules.PERIOD_HINT
+	return action
+
+
+func _select_story_ending() -> String:
+	if not _household():
+		return MealResolverScript.select_ending(state, true)
+	if int(state.get("stability", 0)) <= 15:
+		return "collapsed"
+	return "stable_endurance" if performed else "study_shortfall"
+
+
+func _story_ending(id: String) -> Dictionary:
+	var ending := GameDataScript.get_ending(id)
+	if _household():
+		ending["image"] = String(story["background"])
+		ending["title"] = "把歌唱完了" if performed else ("先歇一会儿" if id == "collapsed" else "这次没赶上舞台")
+		ending["subtitle"] = "这周的排练和生活都留在记录里。"
+	return ending
+
+
+func _show_story_dialog(title: String, body: String, choices: Array, handler: Callable) -> void:
+	if not is_node_ready():
+		return
+	if not is_instance_valid(_story_dialog):
+		_story_dialog = StoryDialogScript.new()
+		_story_dialog.name = "StoryDialog"
+		$HUD/HUDRoot/ModalLayer.add_child(_story_dialog)
+		_story_dialog.visibility_changed.connect(func() -> void:
+			if not _story_dialog.visible: _restore_story_dialog_input()
+		)
+		_story_dialog.chosen.connect(func(choice: String) -> void:
+			var callback := _story_choice_handler
+			_story_choice_handler = Callable()
+			if callback.is_valid():
+				callback.call(choice)
+		)
+	_story_choice_handler = handler
+	if _story_input_restore.is_empty():
+		_story_input_restore = {"summary_keys": daily_summary.is_processing_unhandled_key_input(), "summary_button": daily_summary.next_button.disabled, "new_day_keys": new_day_popup.is_processing_unhandled_key_input(), "new_day_button": new_day_popup.continue_button.disabled}
+	new_day_popup.set_process_unhandled_key_input(false)
+	new_day_popup.continue_button.disabled = true
+	daily_summary.set_process_unhandled_key_input(false)
+	daily_summary.next_button.disabled = true
+	_story_dialog.present(title, body, choices)
+
+
+func _restore_story_dialog_input() -> void:
+	if _story_input_restore.is_empty(): return
+	daily_summary.set_process_unhandled_key_input(_story_input_restore["summary_keys"])
+	daily_summary.next_button.disabled = _story_input_restore["summary_button"]
+	new_day_popup.set_process_unhandled_key_input(_story_input_restore["new_day_keys"])
+	new_day_popup.continue_button.disabled = _story_input_restore["new_day_button"]
+	_story_input_restore.clear()
+
+
+func _show_education() -> void:
+	var lesson := StoryEducationScript.lesson(day)
+	_lesson_seen[day] = true
+	var exercise := StoryEducationScript.exercise(day)
+	if not exercise.is_empty():
+		var choices: Array = exercise["choices"].duplicate(true)
+		choices.append({"id": "skip", "text": "直接查看依据"})
+		_show_story_dialog(String(lesson["title"]), "教学情境，标签为给定数据：\n\n" + String(exercise["question"]) + "\n\n查看或作答不会改变预算、精力和目标进度。", choices, func(choice: String) -> void:
+			var feedback := "" if choice == "skip" else ("这次判断正确。\n" if choice == exercise["correct"] else "再看看份量和记录口径。\n")
+			_show_story_dialog(String(lesson["title"]), feedback + String(exercise["explanation"]) + "\n\n" + String(lesson["body"]), [{"id": "close", "text": "回到这一餐"}], func(_id: String) -> void: pass)
+		)
+		return
+	_show_story_dialog(String(lesson["title"]), String(lesson["body"]), [{"id": "close", "text": "回到这一餐"}], func(_choice: String) -> void: pass)
+
+
+func _show_kitchen() -> void:
+	kitchen.refresh(day, _story_clock())
+	var lines: Array[String] = ["现有食材（游戏份数）："]
+	var labels := {"rice_plain": "米", "egg": "蛋", "tofu": "豆腐", "greens": "青菜", "tomato": "番茄", "oatmeal": "燕麦", "millet": "小米", "milk": "未开封奶", "apple": "苹果", "fish": "鱼"}
+	for id in kitchen.ingredients:
+		lines.append("%s：%d" % [labels.get(id, id), kitchen.ingredients[id]])
+	lines.append("\n厨房调味库存：盐%d克、酱油%d毫升、白糖%d克。" % [kitchen.condiments["salt_g"], kitchen.condiments["soy_ml"], kitchen.condiments["sugar_g"]])
+	lines.append("\n熟食批次：")
+	var choices: Array = []
+	for batch in kitchen.batches:
+		if int(batch.get("quantity", 0)) <= 0:
+			continue
+		var food := _story_food(String(batch["food_id"]))
+		var status := String(batch["status"])
+		lines.append("%s · %s\n%s" % [food.get("name", "熟食"), {"needs_reheat": "食用前需彻底再热", "discard_required": "应丢弃", "history_unknown": "保存史不清"}.get(status, status), batch.get("note", "保存情况未记录。")])
+		if batch.has("recipe_facts"):
+			lines.append(MealFactsScript.describe(batch["recipe_facts"]))
+		if status != "needs_reheat":
+			choices.append({"id": String(batch["id"]), "text": "处理掉：" + String(food.get("name", "熟食"))})
+	choices = choices.slice(0, 3)
+	choices.append({"id": "close", "text": "回到这一餐"})
+	_show_story_dialog("厨房与保存记录", "\n".join(lines) + "\n\n保存不当的熟食有健康风险。再烧开不能保证消除危害，闻着正常也不证明安全。", choices, func(choice: String) -> void:
+		if choice != "close":
+			kitchen.discard(choice, day)
+			_queue_autosave()
+			_show_kitchen()
+		else:
+			source_hands.clear()
+			_render_phase()
+	)
+
+
+func _show_cooking_choice(ids: Array[String], storage: String = "eat_now", selected_plan: Dictionary = {}) -> void:
+	var foods := _story_food_catalog()
+	var plan := MealFactsScript.defaults(ids, foods) if selected_plan.is_empty() else selected_plan.duplicate(true)
+	var expected := "%d:%s:%s" % [day, phase, current_source_id]
+	var portions := _served_portions() + (0 if storage == "eat_now" else 1)
+	var facts := MealFactsScript.freeze(ids, foods, plan)
+	var storage_names := {"eat_now": "只做当餐", "fridge": "另备一份，分装冷藏", "counter": "另备一份，留在灶台"}
+	var body := "当餐做%d人份%s。%s\n\n%s\n\n" % [_served_portions(), "，和老陈一起吃；只记录自己的食用份量" if _served_portions() == 2 else "", storage_names[storage], MealFactsScript.describe(facts)]
+	var needed := kitchen.needs(ids, foods)
+	body += "所需食材（游戏份数）："
+	for key in needed:
+		body += "%s×%d " % [_ingredient_name(String(key)), int(needed[key]) * portions]
+	body += "\n给定酱油标签：每100毫升钠7000毫克；调味平均分配到本关对应菜肴。"
+	if storage == "fridge":
+		body += "\n留存份上桌前分装，1小时内放入4℃冰箱。"
+	elif storage == "counter":
+		body += "\n到下一餐会在室温经过5小时，届时应丢弃。"
+	if not kitchen.can_prepare(ids, foods, portions, plan):
+		body += "\n\n当前食材或调味料不够，可以改用量或回去换菜。"
+	var choices: Array = [{"id": "confirm", "text": "按这张配方做饭", "enabled": kitchen.can_prepare(ids, foods, portions, plan)}]
+	if MealFactsScript.supports(ids, foods, "seasonable"):
+		choices.append({"id": "seasoning", "text": "调味：%s · 调整" % MealFactsScript.SEASONINGS[plan["seasoning"]]["name"]})
+	if MealFactsScript.supports(ids, foods, "sweetenable"):
+		choices.append({"id": "sugar", "text": "额外白糖：%d克 · 调整" % int(plan["added_sugar_g"])})
+	choices.append({"id": "storage", "text": "%s · 调整" % storage_names[storage]})
+	choices.append({"id": "cancel", "text": "继续选菜"})
+	_show_story_dialog("这顿饭怎么做？", body, choices, func(choice: String) -> void:
+		if expected != "%d:%s:%s" % [day, phase, current_source_id]:
+			return
+		if choice == "confirm":
+			confirm_household_food(ids, storage, plan)
+		elif choice == "seasoning":
+			plan["seasoning"] = MealFactsScript.SEASONING_ORDER[(MealFactsScript.SEASONING_ORDER.find(plan["seasoning"]) + 1) % 3]
+			_show_cooking_choice(ids, storage, plan)
+		elif choice == "sugar":
+			plan["added_sugar_g"] = MealFactsScript.SUGAR_ORDER[(MealFactsScript.SUGAR_ORDER.find(plan["added_sugar_g"]) + 1) % 3]
+			_show_cooking_choice(ids, storage, plan)
+		elif choice == "storage":
+			var order := ["eat_now", "fridge", "counter"]
+			_show_cooking_choice(ids, order[(order.find(storage) + 1) % 3], plan)
+	)
+
+
+func confirm_household_food(ids: Array, storage: String = "eat_now", plan: Dictionary = {}) -> bool:
+	if not _household() or _record_book_active() or not _is_meal_phase() or ids.is_empty():
+		return false
+	if not _story_source_available(current_source_id, phase):
+		return false
+	var unique := {}
+	var foods: Array[Dictionary] = []
+	for id in ids:
+		if not hand.has(id) or unique.has(id) or foods.size() >= _source_selection_limit(current_source_id):
+			return false
+		unique[id] = true
+		foods.append(_story_food(String(id)))
+	var source := _effective_meal_source(current_source_id)
+	var record := MealResolverScript.build_record(phase, source, foods, food_preferences)
+	if int(record["total_cost"]) > int(state["balance"]):
+		return false
+	var transaction := {"ok": true}
+	if current_source_id == "home_kitchen":
+		transaction = kitchen.cook(ids, _story_food_catalog(), day, storage, _story_clock(), plan, _served_portions())
+	elif current_source_id == "home_fridge":
+		transaction = kitchen.consume(ids, day, _story_clock())
+	if not transaction.get("ok", false):
+		_post("食材或合规熟食不够，先换一份。", "warning")
+		return false
+	record["story_context"] = story_identity()
+	record["kitchen_transaction"] = transaction.get("record", {}).duplicate(true)
+	record["goal_label"] = "排练"
+	if current_source_id == "home_kitchen":
+		record["recipe_facts"] = transaction["record"]["recipe_facts"].duplicate(true)
+	elif current_source_id == "home_fridge":
+		var frozen_facts := MealFactsScript.from_batches(transaction["record"]["batches"])
+		if not frozen_facts.is_empty():
+			record["recipe_facts"] = frozen_facts
+	var shared_completed := shared_meal.complete(day, record)
+	_apply_meal_record(record)
+	_post("和老陈一起吃了晚饭：%s" % "、".join(record["food_names"]) if shared_completed else "%s：%s" % [PHASE_NAMES[phase], "、".join(record["food_names"])], "meal")
+	selected_food_ids.clear()
+	hand.clear()
+	current_source_id = ""
+	_advance_from_meal()
+	return true
+
+
+func _served_portions() -> int:
+	return 2 if shared_meal.matches(day, phase, current_source_id) and current_source_id == "home_kitchen" else 1
+
+
+func _ingredient_name(id: String) -> String:
+	return String({"rice_plain": "米", "egg": "蛋", "tofu": "豆腐", "greens": "青菜", "tomato": "番茄", "oatmeal": "燕麦", "millet": "小米", "apple": "苹果", "fish": "鱼"}.get(id, id))
+
+
+func plan_shared_meal(venue: String) -> bool:
+	if not _household() or _record_book_active() or phase != "lunch_action" or used_action_ids.has("call_friend"):
+		return false
+	if not shared_meal.invite(day, venue):
+		return false
+	used_action_ids.append("call_friend")
+	today_action_records.append({"id": "call_friend", "name": "约老陈一起吃晚饭", "cost": 0, "slots": 0, "stat_delta": {}, "stock_added": {}, "plan": shared_meal.plan.duplicate(true)})
+	_post("晚饭约好了，别忘了准备。", "info")
+	_render_phase()
+	return true
+
+
+func _show_shared_meal_invitation() -> void:
+	var expected_day := day
+	var expected_phase := phase
+	_show_story_dialog("老陈，晚上一起吃？", "先问问他有没有空，再定个地点。\n\n社区食堂各付自己的饭钱；来家里就要按两个人准备食材，但只记录自己的一份。约好还不算完成，实际同桌才写进这一周。", [{"id": "community", "text": "在社区食堂见，各付各的"}, {"id": "home", "text": "请老陈来家里，做两人份"}, {"id": "cancel", "text": "这次先不约"}], func(choice: String) -> void:
+		if choice != "cancel" and day == expected_day and phase == expected_phase:
+			plan_shared_meal(choice)
+	)
+
+
+func _recipe_history_text() -> String:
+	var lines: Array[String] = []
+	for day_record in run_history:
+		if day_record.has("recipe_summary"):
+			lines.append("第%d天：%s" % [int(day_record["day"]), String(day_record["recipe_summary"]["text"])])
+	for meal in today_meal_records:
+		if meal.has("recipe_facts"):
+			lines.append("%s：%s\n%s" % [PHASE_NAMES.get(meal.get("phase"), "这一餐"), "、".join(meal.get("food_names", [])), MealFactsScript.describe(meal["recipe_facts"])])
+	return "\n\n".join(lines) if not lines.is_empty() else "还没有已确认的配方记录。"
+
+
+func _show_recipe_records() -> void:
+	_show_story_dialog("本局配方与进餐记录", _recipe_history_text() + "\n\n" + shared_meal.summary() + "\n\n配方数值是本关给定规格，未经测定的食材本底保持未知。", [{"id": "close", "text": "回到这一餐"}], func(_choice: String) -> void: pass)
+
+
+func capture_game_save() -> Dictionary:
+	return SaveCodecScript.capture(self)
+
+
+func restore_game_save(envelope: Dictionary) -> Dictionary:
+	var checked := SaveCodecScript.validate(SaveCodecScript.normalize(envelope))
+	if not checked["ok"]:
+		return checked
+	var saved: Dictionary = checked["save"]
+	var p: Dictionary = saved["payload"]
+	var archive := MealHealthArchiveScript.new()
+	var archive_result := archive.load_data(p["health_archive"])
+	if not archive_result["ok"]:
+		return SaveCodecScript.failure("invalid_archive", "冻结档案无法读取。")
+	_save_generation += 1
+	if is_node_ready():
+		if is_instance_valid(_record_book):
+			_record_book.close_book()
+		_record_input_restore.clear()
+		if is_instance_valid(_story_dialog):
+			_story_dialog.hide()
+		_story_choice_handler = Callable()
+		sticky_note.hide_note(false)
+		daily_summary.hide_summary(false)
+		new_day_popup.hide_popup(false)
+	story_id = saved["story_id"]
+	story = StoryCatalogScript.get_story(story_id)
+	for key in SaveCodecScript.FIELD_TYPES:
+		if get(key) is Array:
+			get(key).assign(p[key])
+		else:
+			set(key, p[key].duplicate(true) if p[key] is Dictionary else p[key])
+	_lesson_seen.clear()
+	for key in p["_lesson_seen"]:
+		_lesson_seen[int(key)] = p["_lesson_seen"][key]
+	kitchen.ingredients = p["kitchen"]["ingredients"].duplicate(true)
+	kitchen.condiments = p["kitchen"]["condiments"].duplicate(true)
+	kitchen.batches.assign(p["kitchen"]["batches"])
+	kitchen.history.assign(p["kitchen"]["history"])
+	kitchen._serial = p["kitchen"]["serial"]
+	shared_meal.plan = p["shared_meal"]["plan"].duplicate(true)
+	shared_meal.history.assign(p["shared_meal"]["history"])
+	_deck_service = MealDeckServiceScript.new(0)
+	_deck_service.restore_state(p["deck"])
+	_new_day_pending = p["new_day_pending"]
+	_health_archive = archive
+	_health_catalog.clear()
+	_health_catalog_loaded = false
+	health_history_diagnostics.clear()
+	if is_node_ready():
+		character_hud.set_portrait(String(story["portrait"]))
+		_render_phase()
+		if _new_day_pending:
+			_show_new_day_popup()
+	return {"ok": true}
+
+
+func _queue_autosave() -> void:
+	if not is_node_ready() or _save_store == null:
+		return
+	_autosave_queued = true
+	if not _autosave_busy:
+		call_deferred("_flush_autosave")
+
+
+func _flush_autosave() -> void:
+	if _autosave_busy or not _autosave_queued or _save_store == null:
+		return
+	_autosave_busy = true
+	while _autosave_queued:
+		_autosave_queued = false
+		var generation := _save_generation
+		var snapshot := capture_game_save()
+		if is_instance_valid(_save_status):
+			_save_status.text = "正在保存…"
+		var result: Dictionary = await _save_store.write_save(snapshot)
+		if generation == _save_generation:
+			_set_save_result(result)
+	_autosave_busy = false
+
+
+func _set_save_result(result: Dictionary) -> void:
+	if is_instance_valid(_save_status):
+		_save_status.text = "已保存" if result.get("ok", false) else "尚未保存 · 可导出备份"
+	if not result.get("ok", false):
+		save_diagnostics.append(result.duplicate(true))
+
+
+func _show_game_menu() -> void:
+	if _record_book_active():
+		return
+	var body := "查看这一周的记录，也可以保存或读取进度。"
+	if is_instance_valid(_save_status):
+		body += "\n\n" + _save_status.text
+	_show_story_dialog("这一周", body, [{"id": "records", "text": "查看餐次记录"}, {"id": "save", "text": "手动保存进度"}, {"id": "load", "text": "读取已有进度"}, {"id": "export", "text": "导出存档文件"}, {"id": "import", "text": "导入存档文件"}, {"id": "menu", "text": "保存并返回故事选择"}, {"id": "close", "text": "继续安排"}], func(choice: String) -> void:
+		match choice:
+			"records": _show_meal_record_book()
+			"save": _show_save_slots(false)
+			"load": _show_save_slots(true)
+			"export": _export_progress()
+			"import": _import_progress()
+			"menu": _save_to_slot("auto", true)
+	)
+
+
+func _show_save_slots(reading: bool) -> void:
+	var choices: Array = []
+	var body := "选择要继续的进度。读取会替换当前这一周。" if reading else "选择一个位置，保留现在这一周的安排。"
+	for slot in SaveStoreScript.SLOTS:
+		if not reading and slot == "auto":
+			continue
+		var result: Dictionary = _save_store.read_save(story_id, slot)
+		var label: String = "自动存档" if slot == "auto" else "存档 " + slot.trim_prefix("manual_")
+		if result["ok"]:
+			body += "\n\n" + label + "\n" + SaveCodecScript.summary(result["save"]) + ("\n来自上一份有效备份" if result.get("backup", false) else "")
+		elif result.get("error") != "empty_slot":
+			body += "\n\n" + label + "：" + String(result.get("message", "无法读取"))
+		choices.append({"id": slot, "text": label + (" · 已有进度" if result["ok"] else (" · 暂不可读取" if _save_store.slot_has_data(story_id, slot) else " · 空位置")), "enabled": result["ok"] if reading else true})
+	choices.append({"id": "back", "text": "返回菜单"})
+	_show_story_dialog("读取进度" if reading else "保存进度", body, choices, func(slot: String) -> void:
+		if slot == "back":
+			_show_game_menu()
+		elif reading:
+			var result: Dictionary = _save_store.read_save(story_id, slot)
+			if result["ok"]:
+				var snapshot: Dictionary = result["save"].duplicate(true)
+				_show_story_dialog("继续这份进度？", SaveCodecScript.summary(snapshot) + "\n\n将从这里继续安排这一周。", [{"id": "read", "text": "读取这份进度"}, {"id": "back", "text": "返回存档列表"}], func(choice: String) -> void:
+					if choice == "read":
+						_set_save_result(restore_game_save(snapshot))
+					else:
+						_show_save_slots(true)
+				)
+		else:
+			var existing: Dictionary = _save_store.read_save(story_id, slot)
+			if existing["ok"] or _save_store.slot_has_data(story_id, slot):
+				var old_summary := SaveCodecScript.summary(existing["save"]) if existing["ok"] else "这个位置有暂时无法读取的存档。"
+				_show_story_dialog("替换这份存档？", old_summary + "\n\n这个位置将保存现在的进度。", [{"id": "save", "text": "替换这份存档"}, {"id": "back", "text": "返回存档列表"}], func(choice: String) -> void:
+					if choice == "save": _save_to_slot(slot)
+					else: _show_save_slots(false)
+				)
+			else:
+				_save_to_slot(slot)
+	)
+
+
+func _save_to_slot(slot: String, return_to_menu: bool = false) -> void:
+	var snapshot := capture_game_save()
+	_show_story_dialog("正在保存进度", "请稍候。", [], func(_choice: String) -> void: pass)
+	var result: Dictionary = await _save_store.write_save(snapshot, slot)
+	_set_save_result(result)
+	if result["ok"]:
+		if return_to_menu:
+			_go_main_menu()
+		else:
+			_show_story_dialog("进度已保存", SaveCodecScript.summary(result["save"]), [{"id": "close", "text": "继续安排"}], func(_choice: String) -> void: pass)
+	else:
+		_show_story_dialog("尚未保存", String(result.get("message", "可重试或导出备份。")), [{"id": "retry", "text": "重新保存"}, {"id": "export", "text": "导出备份"}, {"id": "close", "text": "继续安排"}], func(choice: String) -> void:
+			if choice == "retry":
+				_save_store.retry()
+				_save_to_slot(slot, return_to_menu)
+			elif choice == "export": _export_progress()
+		)
+
+
+func _export_progress() -> void:
+	var snapshot := capture_game_save()
+	var encoded := SaveCodecScript.encode(snapshot)
+	if not encoded["ok"]:
+		_show_save_error(encoded)
+		return
+	if OS.has_feature("web"):
+		var result: Dictionary = _save_store.export_web(snapshot)
+		if not result["ok"]: _show_save_error({"message": "文件下载未能启动。"})
+		else: _show_story_dialog("存档已交给浏览器下载", "保存好这份文件，可用于备份或在另一台设备继续。", [{"id": "close", "text": "继续安排"}], func(_choice: String) -> void: pass)
+	else:
+		var picker := FileDialog.new()
+		picker.file_mode = FileDialog.FILE_MODE_SAVE_FILE
+		picker.access = FileDialog.ACCESS_FILESYSTEM
+		picker.filters = PackedStringArray(["*.json ; 游戏存档"])
+		picker.current_file = "nutrition-life-" + story_id + ".json"
+		picker.file_selected.connect(func(path: String) -> void:
+			var file := FileAccess.open(path, FileAccess.WRITE)
+			if file == null: _show_save_error({"message": "文件无法写入。"})
+			else:
+				file.store_string(encoded["text"])
+				file.close()
+			picker.queue_free()
+		)
+		picker.canceled.connect(picker.queue_free)
+		add_child(picker)
+		picker.popup_centered(Vector2i(680, 480))
+
+
+func _import_progress() -> void:
+	if OS.has_feature("web"):
+		var result: Dictionary = await _save_store.pick_web_file()
+		if result.get("ok", false): _preview_import(String(result["text"]))
+		elif result.get("error") != "cancelled": _show_save_error({"message": "文件未能读取。可以重新选择。"})
+	else:
+		var picker := FileDialog.new()
+		picker.file_mode = FileDialog.FILE_MODE_OPEN_FILE
+		picker.access = FileDialog.ACCESS_FILESYSTEM
+		picker.filters = PackedStringArray(["*.json ; 游戏存档"])
+		picker.file_selected.connect(func(path: String) -> void:
+			var file := FileAccess.open(path, FileAccess.READ)
+			if file == null or file.get_length() > SaveCodecScript.MAX_BYTES: _show_save_error({"message": "文件无法读取或过大。"})
+			else: _preview_import(file.get_as_text())
+			picker.queue_free()
+		)
+		picker.canceled.connect(picker.queue_free)
+		add_child(picker)
+		picker.popup_centered(Vector2i(680, 480))
+
+
+func _preview_import(text: String) -> void:
+	var result := SaveCodecScript.decode(text)
+	if not result["ok"]:
+		_show_save_error(result)
+		return
+	var snapshot: Dictionary = result["save"]
+	var choices: Array = []
+	for slot in ["manual_1", "manual_2", "manual_3"]:
+		choices.append({"id": slot, "text": "导入到存档 " + slot.trim_prefix("manual_")})
+	choices.append({"id": "cancel", "text": "取消导入"})
+	_show_story_dialog("导入这份进度？", SaveCodecScript.summary(snapshot) + "\n\n选择目标位置，确认后可从这份进度继续。", choices, func(slot: String) -> void:
+		if slot == "cancel": return
+		var existing: Dictionary = _save_store.read_save(snapshot["story_id"], slot)
+		if existing["ok"] or _save_store.slot_has_data(snapshot["story_id"], slot):
+			var old_summary := SaveCodecScript.summary(existing["save"]) if existing["ok"] else "这个位置有暂时无法读取的存档。"
+			_show_story_dialog("替换这个位置？", old_summary + "\n\n将被导入的进度替换。", [{"id": "import", "text": "替换并继续"}, {"id": "cancel", "text": "取消导入"}], func(choice: String) -> void:
+				if choice == "import": _finish_import(snapshot, slot)
+			)
+		else: _finish_import(snapshot, slot)
+	)
+
+
+func _finish_import(snapshot: Dictionary, slot: String) -> void:
+	_show_story_dialog("正在导入进度", "请稍候。", [], func(_choice: String) -> void: pass)
+	var result: Dictionary = await _save_store.write_save(snapshot, slot)
+	if not result["ok"]:
+		_show_save_error(result)
+		return
+	_set_save_result(restore_game_save(snapshot))
+
+
+func _show_save_error(result: Dictionary) -> void:
+	_show_story_dialog("进度未能处理", String(result.get("message", "可以稍后重试。")), [{"id": "close", "text": "继续安排"}], func(_choice: String) -> void: pass)

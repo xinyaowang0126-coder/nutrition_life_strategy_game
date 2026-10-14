@@ -1,0 +1,35 @@
+{
+  "date": "2026-10-14",
+  "generator": "Built-in image_gen",
+  "reference": "life-strategy/assets/generated/cards/tofu.png (style only)",
+  "assets": [
+    {
+      "id": "millet_porridge",
+      "prompt": "Use case: stylized-concept. A single production food illustration for an existing warm storybook nutrition game. Reference image is STYLE ONLY: match its textured hand-painted gouache, gentle ink outlines, warm muted palette and slightly overhead tabletop perspective. Subject: a small familiar Chinese ceramic bowl of golden yellow millet porridge, softly cooked creamy texture, no toppings. Centered large food bowl with complete rim, natural soft highlights. Square composition, transparent background. NO card frame, NO badge, NO text, NO numbers, NO UI, NO watermark, NO people. Preserve accurate recognizable ingredients and cooked appearance. Output one isolated food asset, not a sheet.",
+      "transparent_background": true,
+      "path": "life-strategy/assets/generated/stories/foods/millet_porridge.png",
+      "original": "C:/Users/xywan/.codex/generated_images/01a1359f-171c-7e92-9add-ca674283b341/exec-5dcb9c9d-65a3-42f3-981d-ee96eee51d3c.png"
+    },
+    {
+      "id": "steamed_egg",
+      "prompt": "Use case: stylized-concept. A single production food illustration for an existing warm storybook nutrition game. Reference image is STYLE ONLY: match its textured hand-painted gouache, gentle ink outlines, warm muted palette and slightly overhead tabletop perspective. Subject: a shallow ceramic bowl of smooth thoroughly cooked Chinese steamed egg custard, a few tiny scallion rings, spoon resting beside bowl. Centered large food bowl with complete rim, natural soft highlights. Square composition, transparent background. NO card frame, NO badge, NO text, NO numbers, NO UI, NO watermark, NO people. Preserve accurate recognizable ingredients and cooked appearance. Output one isolated food asset, not a sheet.",
+      "transparent_background": true,
+      "path": "life-strategy/assets/generated/stories/foods/steamed_egg.png",
+      "original": "C:/Users/xywan/.codex/generated_images/01a1359f-171c-7e92-9add-ca674283b341/exec-8238ec72-ca25-42c4-84ef-696cf4490845.png"
+    },
+    {
+      "id": "soft_tofu_greens",
+      "prompt": "Use case: stylized-concept. A single production food illustration for an existing warm storybook nutrition game. Reference image is STYLE ONLY: match its textured hand-painted gouache, gentle ink outlines, warm muted palette and slightly overhead tabletop perspective. Subject: a small bowl of gently stewed soft tofu cubes and chopped green leafy vegetables, visible tofu and vegetables, tender cooked texture. Centered large food bowl with complete rim, natural soft highlights. Square composition, transparent background. NO card frame, NO badge, NO text, NO numbers, NO UI, NO watermark, NO people. Preserve accurate recognizable ingredients and cooked appearance. Output one isolated food asset, not a sheet.",
+      "transparent_background": true,
+      "path": "life-strategy/assets/generated/stories/foods/soft_tofu_greens.png",
+      "original": "C:/Users/xywan/.codex/generated_images/01a1359f-171c-7e92-9add-ca674283b341/exec-b46b3cbb-9ade-4d0c-8e63-6f46a88a0c22.png"
+    },
+    {
+      "id": "soft_apple",
+      "prompt": "Use case: stylized-concept. A single production food illustration for an existing warm storybook nutrition game. Reference image is STYLE ONLY: match its textured hand-painted gouache, gentle ink outlines, warm muted palette and slightly overhead tabletop perspective. Subject: a small bowl of peeled apple cut into soft cooked pieces, subtle steam, no syrup, no sugar decoration. Centered large food bowl with complete rim, natural soft highlights. Square composition, transparent background. NO card frame, NO badge, NO text, NO numbers, NO UI, NO watermark, NO people. Preserve accurate recognizable ingredients and cooked appearance. Output one isolated food asset, not a sheet.",
+      "transparent_background": true,
+      "path": "life-strategy/assets/generated/stories/foods/soft_apple.png",
+      "original": "C:/Users/xywan/.codex/generated_images/01a1359f-171c-7e92-9add-ca674283b341/exec-d81ad416-14e5-4f8e-8971-f809ec91a9ee.png"
+    }
+  ]
+}

@@ -11,6 +11,21 @@ func suite_name() -> String:
 	return "food_preference_ui"
 
 
+func test_transient_preview_passes_clicks_and_pinned_detail_restores_controls() -> void:
+	var note := _note(_food(0))
+	note.show_at(Rect2(200, 200, 180, 280), false, false)
+	assert_eq(note.mouse_filter, Control.MOUSE_FILTER_IGNORE)
+	for control in note.find_children("*", "Control", true, false):
+		assert_eq(control.mouse_filter, Control.MOUSE_FILTER_IGNORE)
+	note.show_at(Rect2(200, 200, 180, 280), false, true)
+	assert_eq(note.mouse_filter, Control.MOUSE_FILTER_STOP)
+	assert_eq(note.close_button.mouse_filter, Control.MOUSE_FILTER_STOP)
+	assert_false(note.close_button.disabled)
+	note.show_at(Rect2(200, 200, 180, 280), false, false)
+	assert_eq(note.mouse_filter, Control.MOUSE_FILTER_IGNORE)
+	assert_eq(note.recovery_section.mouse_filter, Control.MOUSE_FILTER_IGNORE)
+
+
 func test_negative_food_reaction_is_separate_and_explicitly_character_taste() -> void:
 	var food := _food(-2)
 	food["mood"] = 999

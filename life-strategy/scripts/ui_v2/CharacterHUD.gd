@@ -156,7 +156,7 @@ func _apply_stats(animate: bool, previous: Dictionary = {}) -> void:
 		"mood": "",
 		"satiety": "",
 		"stress": "",
-		"study_progress": "复习 ",
+		"study_progress": String(_stats.get("goal_label", "复习")) + " ",
 	}
 	var changed_labels: Array[Label] = []
 	_apply_recovery()

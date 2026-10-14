@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='utf-8'?>
+<foods>
+  <food id="rice_plain" name="白米饭" kind="谷薯类" cost="2" satiety="20" energy="2" image="res://assets/generated/cards/rice_plain.png" scenes="breakfast,lunch,dinner" sources="home_kitchen,community_canteen,local_market,home_fridge" food_groups="grains_tubers" nutrient_tags="carbohydrate_source" tags="staple,cheap,plain" ingredients="rice_plain:1" seasonable="false" sweetenable="false" method="煮饭">
+    <desc>小碗盛一份，剩下的先别急着装。</desc>
+  </food>
+  <food id="oatmeal" name="燕麦" kind="主食" cost="3" satiety="22" energy="2" image="res://assets/generated/cards/oatmeal.png" scenes="breakfast,lunch,dinner" sources="home_kitchen,community_canteen,local_market,home_fridge" food_groups="grains_tubers" nutrient_tags="carbohydrate_source,whole_grain,dietary_fiber_source" tags="staple,whole_grain,fiber,cheap" ingredients="oatmeal:1" seasonable="false" sweetenable="true" method="冲煮">
+    <desc>黏糊糊一碗，吃到碗底还是热的。</desc>
+  </food>
+  <food id="egg" name="鸡蛋" kind="蛋类" cost="2" satiety="8" energy="1" image="res://assets/generated/cards/egg.png" scenes="breakfast,lunch,dinner" sources="home_kitchen,community_canteen,local_market,home_fridge" food_groups="eggs" nutrient_tags="high_quality_protein_source" tags="protein,cheap" ingredients="egg:1" seasonable="false" sweetenable="false" method="煮熟">
+    <desc>先放到餐盘边上。</desc>
+  </food>
+  <food id="tofu" name="豆腐" kind="大豆及制品" cost="3" satiety="10" energy="1" image="res://assets/generated/cards/tofu.png" scenes="breakfast,lunch,dinner" sources="home_kitchen,community_canteen,local_market,home_fridge" food_groups="soy_products" nutrient_tags="high_quality_protein_source" tags="protein,soy,legume,cheap" ingredients="tofu:1" seasonable="true" sweetenable="false" method="煮熟">
+    <desc>筷子夹轻点，会碎。</desc>
+  </food>
+  <food id="greens" name="青菜" kind="蔬菜类" cost="3" satiety="6" energy="0" image="res://assets/generated/cards/greens.png" scenes="breakfast,lunch,dinner" sources="home_kitchen,community_canteen,local_market,home_fridge" food_groups="vegetables" nutrient_tags="dietary_fiber_source" tags="vegetable,fiber,plain" ingredients="greens:1" seasonable="true" sweetenable="false" method="炒熟">
+    <desc>刚出锅，菜叶还亮着。</desc>
+  </food>
+  <food id="tomato" name="番茄" kind="蔬菜类" cost="3" satiety="5" energy="0" image="res://assets/generated/cards/tomato.png" scenes="breakfast,lunch,dinner" sources="home_kitchen,community_canteen,local_market,home_fridge" food_groups="vegetables" nutrient_tags="dietary_fiber_source" tags="vegetable,fiber" ingredients="tomato:1" seasonable="false" sweetenable="false" method="现做">
+    <desc>有点酸，配米饭正好。</desc>
+  </food>
+  <food id="apple" name="苹果" kind="水果类" cost="3" satiety="6" energy="0" image="res://assets/generated/cards/apple.png" scenes="breakfast,lunch,dinner" sources="community_canteen,local_market,home_fridge" food_groups="fruits" nutrient_tags="dietary_fiber_source" tags="fruit,fiber" ingredients="apple:1" seasonable="false" sweetenable="false" method="按原做法">
+    <desc>洗一洗，连皮啃。</desc>
+  </food>
+  <food id="banana" name="香蕉" kind="水果类" cost="3" satiety="10" energy="1" image="res://assets/generated/cards/banana.png" scenes="breakfast,lunch,dinner" sources="community_canteen,local_market" food_groups="fruits" nutrient_tags="dietary_fiber_source" tags="fruit,energy" ingredients="banana:1" seasonable="false" sweetenable="false" method="按原做法">
+    <desc>不用洗，赶时间最省事。</desc>
+  </food>
+  <food id="milk" name="未开封常温纯牛奶" kind="奶及奶制品" cost="4" satiety="8" energy="1" image="res://assets/generated/cards/milk.png" scenes="breakfast,lunch,dinner" sources="community_canteen,local_market,home_fridge" food_groups="dairy" nutrient_tags="high_quality_protein_source,calcium_source" tags="protein,dairy,drink" ingredients="milk:1" seasonable="false" sweetenable="false" method="按原做法">
+    <desc>按包装说明贮存，开封后当餐喝。</desc>
+  </food>
+  <food id="tomato_egg_stir_fry" name="西红柿炒鸡蛋" kind="复合菜品" cost="6" satiety="14" energy="1" image="res://assets/generated/cards/tomato_egg_stir_fry.png" scenes="breakfast,lunch,dinner" sources="home_kitchen,community_canteen,local_market,home_fridge" food_groups="vegetables,eggs" nutrient_tags="dietary_fiber_source,high_quality_protein_source" tags="vegetable,protein,home_style" ingredients="tomato:1,egg:1" seasonable="true" sweetenable="false" method="炒熟">
+    <desc>番茄和鸡蛋炒在一起，配饭正好。</desc>
+  </food>
+  <food id="steamed_fish" name="清蒸鱼" kind="水产类" cost="12" satiety="18" energy="2" image="res://assets/generated/cards/steamed_fish.png" scenes="breakfast,lunch,dinner" sources="home_kitchen,community_canteen,local_market,home_fridge" food_groups="fish_seafood" nutrient_tags="high_quality_protein_source,unsaturated_fatty_acid_source" tags="protein,fish,steamed" ingredients="fish:1" seasonable="true" sweetenable="false" method="清蒸">
+    <desc>鱼肉蒸得刚熟，葱丝和姜片还带着热气。</desc>
+  </food>
+  <food id="plain_yogurt" name="原味酸奶" kind="奶及奶制品" cost="5" satiety="8" energy="1" image="res://assets/generated/cards/plain_yogurt.png" scenes="breakfast,lunch,dinner" sources="community_canteen,local_market" food_groups="dairy" nutrient_tags="high_quality_protein_source,calcium_source" tags="protein,dairy,drink" ingredients="plain_yogurt:1" seasonable="false" sweetenable="false" method="按原做法">
+    <desc>撕开杯盖就能吃，原味里带一点甜。</desc>
+  </food>
+  <food id="millet_porridge" name="小米粥" kind="谷薯类" cost="3" satiety="20" energy="2" image="res://assets/generated/stories/foods/millet_porridge.png" scenes="breakfast,lunch,dinner" sources="home_kitchen,community_canteen,home_fridge" food_groups="grains_tubers" ingredients="millet:1" method="煮粥" texture="柔软" seasonable="false" sweetenable="true">
+    <desc>小米煮开后再慢慢熬。</desc>
+  </food>
+  <food id="steamed_egg" name="蒸蛋" kind="蛋类" cost="3" satiety="8" energy="1" image="res://assets/generated/stories/foods/steamed_egg.png" scenes="breakfast,lunch,dinner" sources="home_kitchen,community_canteen,home_fridge" food_groups="eggs" ingredients="egg:1" method="清蒸" texture="细软" seasonable="false" sweetenable="false">
+    <desc>蛋液加水打匀，蒸到凝固熟透。</desc>
+  </food>
+  <food id="soft_tofu_greens" name="时蔬炖豆腐" kind="家常菜" cost="6" satiety="16" energy="1" image="res://assets/generated/stories/foods/soft_tofu_greens.png" scenes="breakfast,lunch,dinner" sources="home_kitchen,community_canteen,home_fridge" food_groups="soy_products,vegetables" ingredients="tofu:1,greens:1" method="炖煮" texture="细软" seasonable="true" sweetenable="false">
+    <desc>豆腐和青菜一起煮软。</desc>
+  </food>
+  <food id="soft_apple" name="煮软苹果" kind="水果" cost="3" satiety="6" energy="0" image="res://assets/generated/stories/foods/soft_apple.png" scenes="breakfast,lunch,dinner" sources="home_kitchen,community_canteen,home_fridge" food_groups="fruits" ingredients="apple:1" method="切小后煮软" texture="细软" seasonable="false" sweetenable="true">
+    <desc>切小块再煮软，想不想加糖另选。</desc>
+  </food>
+</foods>

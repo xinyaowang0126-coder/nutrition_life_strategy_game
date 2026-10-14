@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='utf-8'?>
+<food_preferences schema_version="1" id="zhou_huilan_66" version="1" name="周慧兰">
+  <reaction food_id="rice_plain" mood_delta="0" comfort="false" />
+  <reaction food_id="oatmeal" mood_delta="1" comfort="false" />
+  <reaction food_id="egg" mood_delta="1" comfort="false" />
+  <reaction food_id="tofu" mood_delta="1" comfort="false" />
+  <reaction food_id="greens" mood_delta="0" comfort="false" />
+  <reaction food_id="tomato" mood_delta="0" comfort="false" />
+  <reaction food_id="apple" mood_delta="0" comfort="false" />
+  <reaction food_id="banana" mood_delta="0" comfort="false" />
+  <reaction food_id="milk" mood_delta="1" comfort="false" />
+  <reaction food_id="coffee" mood_delta="0" comfort="false" />
+  <reaction food_id="bubble_tea" mood_delta="0" comfort="false" />
+  <reaction food_id="instant_noodles" mood_delta="0" comfort="false" />
+  <reaction food_id="fried_chicken" mood_delta="0" comfort="false" />
+  <reaction food_id="salad_bowl" mood_delta="0" comfort="false" />
+  <reaction food_id="sandwich" mood_delta="0" comfort="false" />
+  <reaction food_id="mixed_grain_rice" mood_delta="0" comfort="false" />
+  <reaction food_id="tomato_egg_stir_fry" mood_delta="3" comfort="true" />
+  <reaction food_id="celery_pork_stir_fry" mood_delta="0" comfort="false" />
+  <reaction food_id="steamed_fish" mood_delta="3" comfort="true" />
+  <reaction food_id="plain_yogurt" mood_delta="0" comfort="false" />
+  <reaction food_id="whole_wheat_bread" mood_delta="0" comfort="false" />
+  <reaction food_id="unsalted_nuts" mood_delta="0" comfort="false" />
+  <reaction food_id="chicken_vegetable_rice" mood_delta="0" comfort="false" />
+  <reaction food_id="millet_porridge" mood_delta="1" comfort="false" />
+  <reaction food_id="steamed_egg" mood_delta="1" comfort="false" />
+  <reaction food_id="soft_tofu_greens" mood_delta="1" comfort="false" />
+  <reaction food_id="soft_apple" mood_delta="1" comfort="false" />
+</food_preferences>

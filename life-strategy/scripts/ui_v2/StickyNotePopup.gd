@@ -36,6 +36,7 @@ var _mobile_mode := false
 var _ready_finished := false
 var _motion_tween: Tween
 var _show_revision := 0
+var _pointer_filters: Dictionary = {}
 
 
 func _ready() -> void:
@@ -147,7 +148,7 @@ func _apply_payload() -> void:
 	else:
 		_set_metric(mood_metric, "心情", "mood")
 	_set_metric(stress_metric, "压力", "stress")
-	_set_metric(study_metric, "复习", "study", "study_progress")
+	_set_metric(study_metric, String(_payload.get("goal_label", "复习")), "study", "study_progress")
 	metric_heading.text = "当前游戏数值" if _mode == "state" else "游戏即时效果"
 	metric_heading.visible = satiety_metric.visible or energy_metric.visible or mood_metric.visible or stress_metric.visible or study_metric.visible
 	var recovery: Dictionary = _payload.get("recovery", {})
@@ -163,6 +164,13 @@ func _apply_payload() -> void:
 func _sync_interaction_controls() -> void:
 	# Hover/focus/hold previews disappear when their source loses focus.
 	# Interactive controls belong only to explicitly opened, stable details.
+	var controls: Array = find_children("*", "Control", true, false)
+	controls.push_front(self)
+	for node in controls:
+		var control := node as Control
+		if not _pointer_filters.has(control):
+			_pointer_filters[control] = control.mouse_filter
+		control.mouse_filter = int(_pointer_filters[control]) if pinned else Control.MOUSE_FILTER_IGNORE
 	close_button.visible = pinned
 	close_button.disabled = not pinned
 	action_button.visible = pinned and not _action_text.is_empty()

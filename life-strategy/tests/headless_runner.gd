@@ -11,6 +11,7 @@ func _initialize() -> void:
 
 
 func _run() -> void:
+	preload("res://scripts/stories/GameSaveStore.gd").memory_for_tests = true
 	var suites: Array = []
 	var load_errors: Array[String] = []
 	var requested_suite := ""

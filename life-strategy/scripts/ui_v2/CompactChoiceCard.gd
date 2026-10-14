@@ -174,21 +174,21 @@ func _apply_quick_stats() -> void:
 		"source":
 			_set_quick_stat(primary_stat, "可看 ", int(_payload.get("hand_size", 0)), false)
 		"action":
-			if String(_payload.get("id", "")) == "study":
+			if String(_payload.get("id", "")) in ["study", "rehearse", "group_rehearsal"]:
 				primary_stat.add_theme_color_override("font_color", Color("#4d739f"))
-				_set_quick_stat(primary_stat, "复习 ", int(_payload.get("study", 0)))
+				_set_quick_stat(primary_stat, String(_payload.get("goal_label", "复习")) + " ", int(_payload.get("study", 0)))
 			else:
 				_apply_strongest_stat([
 					["精力 ", int(_payload.get("energy", 0)), Color("#387f4a")],
 					["压力 ", int(_payload.get("stress", 0)), Color("#b45c64")],
-					["复习 ", int(_payload.get("study", 0)), Color("#4d739f")],
+					[String(_payload.get("goal_label", "复习")) + " ", int(_payload.get("study", 0)), Color("#4d739f")],
 					["心情 ", int(_payload.get("mood", 0)), Color("#b06f32")],
 				])
 		"sleep":
 			_apply_strongest_stat([
 				["精力 ", int(_payload.get("energy", 0)), Color("#387f4a")],
 				["压力 ", int(_payload.get("stress", 0)), Color("#b45c64")],
-				["复习 ", int(_payload.get("study", 0)), Color("#4d739f")],
+				[String(_payload.get("goal_label", "复习")) + " ", int(_payload.get("study", 0)), Color("#4d739f")],
 				["心情 ", int(_payload.get("mood", 0)), Color("#b06f32")],
 			])
 		_:
