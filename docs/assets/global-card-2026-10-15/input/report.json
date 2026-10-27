@@ -1,0 +1,158 @@
+{
+	"cases": [
+		{
+			"source": "cafeteria",
+			"story": "campus_exam",
+			"window": "(640, 960)"
+		},
+		{
+			"source": "takeout",
+			"story": "campus_exam",
+			"window": "(640, 960)"
+		},
+		{
+			"source": "convenience_store",
+			"story": "campus_exam",
+			"window": "(640, 960)"
+		},
+		{
+			"source": "dorm_storage",
+			"story": "campus_exam",
+			"window": "(640, 960)"
+		},
+		{
+			"card_rect": "[P: (614.58, 261.1), S: (210.0, 337.0)]",
+			"card_scale": "(1.0, 1.0)",
+			"scroll_horizontal": 574,
+			"scroll_rect": "[P: (28.58, 190.1), S: (795.84, 480.5)]",
+			"source": "breakfast_action",
+			"story": "campus_exam",
+			"window": "(640, 960)"
+		},
+		{
+			"card_rect": "[P: (556.58, 261.1), S: (210.0, 337.0)]",
+			"card_scale": "(1.0, 1.0)",
+			"scroll_horizontal": 0,
+			"scroll_rect": "[P: (28.58, 190.1), S: (795.84, 480.5)]",
+			"source": "sleep",
+			"story": "campus_exam",
+			"window": "(640, 960)"
+		},
+		{
+			"source": "home_kitchen",
+			"story": "choir_week",
+			"window": "(640, 960)"
+		},
+		{
+			"source": "community_canteen",
+			"story": "choir_week",
+			"window": "(640, 960)"
+		},
+		{
+			"source": "local_market",
+			"story": "choir_week",
+			"window": "(640, 960)"
+		},
+		{
+			"source": "home_fridge",
+			"story": "choir_week",
+			"window": "(640, 960)"
+		},
+		{
+			"card_rect": "[P: (614.58, 261.1), S: (210.0, 337.0)]",
+			"card_scale": "(1.0, 1.0)",
+			"scroll_horizontal": 806,
+			"scroll_rect": "[P: (28.58, 190.1), S: (795.84, 480.5)]",
+			"source": "breakfast_action",
+			"story": "choir_week",
+			"window": "(640, 960)"
+		},
+		{
+			"card_rect": "[P: (556.58, 261.1), S: (210.0, 337.0)]",
+			"card_scale": "(1.0, 1.0)",
+			"scroll_horizontal": 0,
+			"scroll_rect": "[P: (28.58, 190.1), S: (795.84, 480.5)]",
+			"source": "sleep",
+			"story": "choir_week",
+			"window": "(640, 960)"
+		},
+		{
+			"source": "cafeteria",
+			"story": "campus_exam",
+			"window": "(1280, 720)"
+		},
+		{
+			"source": "takeout",
+			"story": "campus_exam",
+			"window": "(1280, 720)"
+		},
+		{
+			"source": "convenience_store",
+			"story": "campus_exam",
+			"window": "(1280, 720)"
+		},
+		{
+			"source": "dorm_storage",
+			"story": "campus_exam",
+			"window": "(1280, 720)"
+		},
+		{
+			"card_rect": "[P: (1583.8, 254.26), S: (210.0, 337.0)]",
+			"card_scale": "(1.0, 1.0)",
+			"scroll_horizontal": 0,
+			"scroll_rect": "[P: (400.8, 196.26), S: (1416.64, 454.02)]",
+			"source": "breakfast_action",
+			"story": "campus_exam",
+			"window": "(1280, 720)"
+		},
+		{
+			"card_rect": "[P: (1239.8, 254.26), S: (210.0, 337.0)]",
+			"card_scale": "(1.0, 1.0)",
+			"scroll_horizontal": 0,
+			"scroll_rect": "[P: (400.8, 196.26), S: (1416.64, 454.02)]",
+			"source": "sleep",
+			"story": "campus_exam",
+			"window": "(1280, 720)"
+		},
+		{
+			"source": "home_kitchen",
+			"story": "choir_week",
+			"window": "(1280, 720)"
+		},
+		{
+			"source": "community_canteen",
+			"story": "choir_week",
+			"window": "(1280, 720)"
+		},
+		{
+			"source": "local_market",
+			"story": "choir_week",
+			"window": "(1280, 720)"
+		},
+		{
+			"source": "home_fridge",
+			"story": "choir_week",
+			"window": "(1280, 720)"
+		},
+		{
+			"card_rect": "[P: (1607.8, 254.26), S: (210.0, 337.0)]",
+			"card_scale": "(1.0, 1.0)",
+			"scroll_horizontal": 185,
+			"scroll_rect": "[P: (400.8, 196.26), S: (1416.64, 454.02)]",
+			"source": "breakfast_action",
+			"story": "choir_week",
+			"window": "(1280, 720)"
+		},
+		{
+			"card_rect": "[P: (1239.8, 254.26), S: (210.0, 337.0)]",
+			"card_scale": "(1.0, 1.0)",
+			"scroll_horizontal": 0,
+			"scroll_rect": "[P: (400.8, 196.26), S: (1416.64, 454.02)]",
+			"source": "sleep",
+			"story": "choir_week",
+			"window": "(1280, 720)"
+		}
+	],
+	"errors": [],
+	"scope": "Both stories, all eight sources, action and sleep cards, portrait and desktop. Actual native mouse on selected-card artwork, keyboard Enter and ScreenTouch; far-card focus scrolling. Declared source/day fixtures; no meals confirmed. In-memory saves only."
+}

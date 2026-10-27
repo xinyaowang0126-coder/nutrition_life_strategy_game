@@ -28,6 +28,7 @@ func _ready() -> void:
 	add_child(_margin)
 	var scroll := ScrollContainer.new()
 	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	scroll.follow_focus = true
 	_margin.add_child(scroll)
 	var stack := VBoxContainer.new()
 	stack.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -35,7 +36,8 @@ func _ready() -> void:
 	scroll.add_child(stack)
 	var title := Label.new()
 	title.text = "好好吃饭"
-	title.add_theme_font_size_override("font_size", 76)
+	title.add_theme_font_size_override("font_size", 66)
+	title.add_theme_font_override("font", HouseholdUI.TITLE_FONT)
 	title.add_theme_color_override("font_color", Color("#f1dfbd"))
 	stack.add_child(title)
 	var subtitle := Label.new()
@@ -59,13 +61,15 @@ func _ready() -> void:
 	import_button.name = "ImportSave"
 	import_button.custom_minimum_size.y = 60
 	import_button.pressed.connect(_import_file)
-	stack.add_child(import_button)
+	HouseholdUI.style_button(import_button)
 	stack.add_child(_grid)
+	stack.add_child(import_button)
 	_rebuild_story_cards()
 	if not OS.has_feature("web"):
 		var quit := Button.new()
 		quit.text = "退出"
 		quit.custom_minimum_size.y = 52
+		HouseholdUI.style_button(quit)
 		quit.pressed.connect(func() -> void: get_tree().quit())
 		stack.add_child(quit)
 	_dialog = Dialog.new()
@@ -85,64 +89,54 @@ func _add_story(story: Dictionary) -> void:
 	var paper := PanelContainer.new()
 	paper.name = String(story["id"])
 	paper.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	paper.add_theme_stylebox_override("panel", Dialog.paper())
+	paper.add_theme_stylebox_override("panel", HouseholdUI.paper(HouseholdUI.PAPER, 24))
 	_grid.add_child(paper)
-	var stack := VBoxContainer.new()
-	stack.add_theme_constant_override("separation", 12)
-	paper.add_child(stack)
-	var portrait := TextureRect.new()
-	portrait.custom_minimum_size.y = 230
-	portrait.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 24)
+	paper.add_child(row)
+	var portrait := HouseholdUI.image(load(String(story["portrait"])) as Texture2D, 300)
+	portrait.name = "Portrait"
+	portrait.custom_minimum_size.x = 170
 	portrait.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	if ResourceLoader.exists(String(story["portrait"])):
-		portrait.texture = load(String(story["portrait"]))
-	stack.add_child(portrait)
-	for text_value in [String(story["character_name"]), String(story["title"]) + " · " + String(story["subtitle"]), String(story["goal"]), String(story["conditions"])]:
-		var label := Label.new()
-		label.text = text_value
-		label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-		label.add_theme_font_size_override("font_size", 23)
-		stack.add_child(label)
-	var button := Button.new()
-	button.name = "ChooseStory"
+	row.add_child(portrait)
+	var stack := VBoxContainer.new()
+	stack.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	stack.add_theme_constant_override("separation", 12)
+	row.add_child(stack)
+	stack.add_child(HouseholdUI.label(String(story["character_name"]) + "  /  " + String(story["subtitle"]), 23, HouseholdUI.GREEN))
+	stack.add_child(HouseholdUI.label(String(story["title"]), 39, HouseholdUI.INK, true))
+	stack.add_child(HouseholdUI.label(String(story["goal"]).replace("，", "，\n"), 24))
+	stack.add_child(HouseholdUI.label(String(story["conditions"]), 20, HouseholdUI.MUTED))
 	var saved: Dictionary = _save_store.read_save(String(story["id"]))
-	button.text = "继续这一周" if saved["ok"] else "进入这段生活"
+	if saved["ok"]:
+		stack.add_child(HouseholdUI.label(SaveCodec.summary(saved["save"]) + ("\n可从上一份有效备份继续" if saved.get("backup", false) else ""), 20, HouseholdUI.MUTED))
+	elif saved.get("error") not in ["empty_slot", "storage_unavailable"]:
+		stack.add_child(HouseholdUI.label(String(saved.get("message", "这份进度暂时无法读取。")), 20, HouseholdUI.DANGER))
+	var button := HouseholdUI.button("继续这一周" if saved["ok"] else "进入这段生活", "ChooseStory", true)
 	button.disabled = _save_store.status() in ["loading", "opening"]
-	button.custom_minimum_size.y = 60
-	button.add_theme_font_size_override("font_size", 24)
 	button.pressed.connect(func() -> void:
 		if saved["ok"]: _continue_saved(saved["save"])
 		else: _intro(story)
 	)
 	stack.add_child(button)
+	var tools := HBoxContainer.new()
+	tools.add_theme_constant_override("separation", 10)
+	stack.add_child(tools)
+	var slots := HouseholdUI.button("其他存档", "OtherSaves")
+	slots.add_theme_font_size_override("font_size", 20)
+	slots.custom_minimum_size.y = 46
+	slots.pressed.connect(func() -> void: _show_slots(String(story["id"])))
+	tools.add_child(slots)
 	if saved["ok"]:
-		var progress := Label.new()
-		progress.text = SaveCodec.summary(saved["save"]) + ("\n可从上一份有效备份继续" if saved.get("backup", false) else "")
-		progress.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-		progress.add_theme_font_size_override("font_size", 22)
-		stack.add_child(progress)
-		var restart := Button.new()
-		restart.name = "RestartStory"
-		restart.text = "重新开始这一周"
-		restart.custom_minimum_size.y = 55
+		var restart := HouseholdUI.button("重新开始", "RestartStory")
+		restart.add_theme_font_size_override("font_size", 20)
+		restart.custom_minimum_size.y = 46
 		restart.pressed.connect(func() -> void:
 			_present("开始新的一周？", SaveCodec.summary(saved["save"]) + "\n\n自动进度将被新的这一周替换，手动存档保留。", [{"id": "restart", "text": "开始新的一周"}, {"id": "cancel", "text": "保留现在的进度"}], func(choice: String) -> void:
 				if choice == "restart": _intro(story)
 			)
 		)
-		stack.add_child(restart)
-	elif saved.get("error") not in ["empty_slot", "storage_unavailable"]:
-		var issue := Label.new()
-		issue.text = String(saved.get("message", "这份进度暂时无法读取。"))
-		issue.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-		stack.add_child(issue)
-	var slots := Button.new()
-	slots.name = "OtherSaves"
-	slots.text = "读取其他存档"
-	slots.custom_minimum_size.y = 55
-	slots.pressed.connect(func() -> void: _show_slots(String(story["id"])))
-	stack.add_child(slots)
-
+		tools.add_child(restart)
 
 
 func _start_week(id: String = Catalog.DEFAULT_ID) -> void:

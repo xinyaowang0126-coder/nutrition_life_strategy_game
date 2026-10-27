@@ -77,6 +77,20 @@ func _bind_prop(source_id: String) -> void:
 		return
 	var button := prop.get_node_or_null("Button") as BaseButton
 	var info := prop.get_node_or_null("Info") as Button
+	var name_label := prop.get_node_or_null("Name") as Label
+	if name_label != null:
+		var target := Button.new()
+		target.name = "NameTarget"
+		target.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		target.flat = true
+		target.focus_mode = Control.FOCUS_NONE
+		target.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+		for style in ["normal", "hover", "pressed", "disabled", "focus"]:
+			target.add_theme_stylebox_override(style, StyleBoxEmpty.new())
+		name_label.add_child(target)
+		target.pressed.connect(_choose_source.bind(source_id))
+		target.mouse_entered.connect(_show_source_detail.bind(source_id, false))
+		target.mouse_exited.connect(_dismiss_source_detail.bind(source_id))
 	if button != null:
 		button.tooltip_text = ""
 		button.pressed.connect(_choose_source.bind(source_id))
@@ -132,6 +146,9 @@ func _apply_source(source_id: String) -> void:
 	if name_label != null:
 		name_label.text = String(source.get("name", source_id))
 		name_label.modulate = Color.WHITE if enabled or source_id == "takeout" else Color(0.60, 0.57, 0.51, 1.0)
+		var name_target := name_label.get_node_or_null("NameTarget") as Button
+		if name_target != null:
+			name_target.disabled = not enabled
 	var phone := prop.get_node_or_null("PhoneIcon") as TextureRect
 	if phone != null:
 		phone.modulate = Color.WHITE if enabled else Color(0.88, 0.85, 0.78, 1.0)

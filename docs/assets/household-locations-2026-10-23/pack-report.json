@@ -1,0 +1,60 @@
+{
+  "bytes": 133389920,
+  "MiB": 127.21,
+  "sha256": "11c9b987d111f83b0edd831c51fae539721587b01013c75fa98fce007ea1c5e3",
+  "directory_entries": 430,
+  "runtime": {
+    "errors": [],
+    "scope": "Matching desktop Godot runtime loads all nine new textures, market navigation, breakfast menu, kitchen and fridge workspaces from the exported Web PCK. This does not substitute for browser execution.",
+    "textures": [
+      {
+        "height": 941,
+        "path": "res://assets/generated/stories/locations/zhou-kitchen-v1.png",
+        "width": 1672
+      },
+      {
+        "height": 1672,
+        "path": "res://assets/generated/stories/locations/zhou-kitchen-portrait-v1.png",
+        "width": 941
+      },
+      {
+        "height": 941,
+        "path": "res://assets/generated/stories/locations/zhou-open-fridge-v1.png",
+        "width": 1672
+      },
+      {
+        "height": 941,
+        "path": "res://assets/generated/stories/locations/zhou-market-wide-v1.png",
+        "width": 1672
+      },
+      {
+        "height": 1672,
+        "path": "res://assets/generated/stories/locations/zhou-market-portrait-v1.png",
+        "width": 941
+      },
+      {
+        "height": 941,
+        "path": "res://assets/generated/stories/locations/zhou-breakfast-shop-v1.png",
+        "width": 1672
+      },
+      {
+        "height": 941,
+        "path": "res://assets/generated/stories/locations/zhou-homestyle-diner-v1.png",
+        "width": 1672
+      },
+      {
+        "height": 941,
+        "path": "res://assets/generated/stories/locations/zhou-fruit-stall-v1.png",
+        "width": 1672
+      },
+      {
+        "height": 1254,
+        "path": "res://assets/generated/stories/locations/steamed-bun-v1.png",
+        "width": 1254
+      }
+    ]
+  },
+  "candidate": "E:\\nutrition_life_strategy_game\\artifacts\\household-locations-2026-10-23-web",
+  "browser_url": "http://127.0.0.1:8881/",
+  "editor_diagnostics": "Export retains pre-existing editor-settings save diagnostics; production pack header audit and matching-runtime checks pass."
+}

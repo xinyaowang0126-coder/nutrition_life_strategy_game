@@ -1,0 +1,7 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+ERROR: Can't create shader cache folder, no shader caching will happen: user://
+   at: RasterizerGLES3 (drivers/gles3/rasterizer_gles3.cpp:345)
+OpenGL API 3.3.0 NVIDIA 616.92 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 3060 Laptop GPU
+
+[godot_ai game_helper] registered mcp capture (debugger active=false, logger=true)
+HOUSEHOLD_HOVER_RESULT={"errors":[],"mobile":true,"scope":"Independent native window; actual mouse and keyboard check home/food/shop previews, dismissal, pictures and names, pinned closed-shop details, return navigation and lunch opening hours. Raw ScreenTouch taps the breakfast picture on mobile. In-memory saves, first-day intro and lunch are declared fixtures, no purchases or day progression.","window":"(390, 640)"}

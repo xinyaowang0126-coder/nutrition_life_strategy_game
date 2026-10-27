@@ -1,0 +1,602 @@
+{
+	"capture_revisions": [
+		{
+			"file": "11-leftovers-reference.png",
+			"previous_capture_errors": [
+				"Control unavailable: education"
+			],
+			"reason": "First automated notebook navigation missed the education button. Recaptured the existing lesson UI after normal advancement to day 6."
+		}
+	],
+	"captures": [
+		{
+			"day": 1.0,
+			"description": "查看隔夜菜制作时间、常温放置时长和保存提醒",
+			"file": "00-existing-leftovers-history.png",
+			"height": 1080.0,
+			"phase": "breakfast_source",
+			"route": "planned_refrigeration_and_reheat",
+			"story": "choir_week",
+			"width": 1920.0
+		},
+		{
+			"day": 1.0,
+			"description": "只做当餐：按这一餐人数准备，不额外生成熟食",
+			"file": "01-cook-only-this-meal.png",
+			"height": 1080.0,
+			"phase": "breakfast",
+			"route": "planned_refrigeration_and_reheat",
+			"story": "choir_week",
+			"width": 1920.0
+		},
+		{
+			"day": 1.0,
+			"description": "另备1份冷藏：新增食材、分装冷藏要求及下一餐的精力收益",
+			"file": "02-cook-save-one-cold.png",
+			"height": 1080.0,
+			"phase": "breakfast",
+			"route": "planned_refrigeration_and_reheat",
+			"story": "choir_week",
+			"width": 1920.0
+		},
+		{
+			"day": 1.0,
+			"description": "留在灶台：标明至下一餐经过5小时及应丢弃的后果",
+			"file": "03-cook-counter-warning.png",
+			"height": 1080.0,
+			"phase": "breakfast",
+			"route": "planned_refrigeration_and_reheat",
+			"story": "choir_week",
+			"width": 1920.0
+		},
+		{
+			"day": 1.0,
+			"description": "剩米饭与菜进入待再热库存，保留分装、温度与原配方记录",
+			"file": "04-cold-leftovers-history.png",
+			"height": 1080.0,
+			"phase": "lunch_source",
+			"route": "planned_refrigeration_and_reheat",
+			"story": "choir_week",
+			"width": 1920.0
+		},
+		{
+			"day": 1.0,
+			"description": "下一餐选择有保存记录的剩饭菜，并执行再热并开饭",
+			"file": "05-reheat-and-eat.png",
+			"height": 1080.0,
+			"phase": "lunch",
+			"route": "planned_refrigeration_and_reheat",
+			"story": "choir_week",
+			"width": 1920.0
+		},
+		{
+			"day": 1.0,
+			"description": "再热食用后对应份量从库存扣除，不再重复供食",
+			"file": "06-used-portions-leave-stock.png",
+			"height": 1080.0,
+			"phase": "lunch_action",
+			"route": "planned_refrigeration_and_reheat",
+			"story": "choir_week",
+			"width": 1920.0
+		},
+		{
+			"day": 4.0,
+			"description": "按人数规划：当餐2人份加冷藏1份，本次共做3份",
+			"file": "09-two-people-plus-one-saved.png",
+			"height": 1080.0,
+			"phase": "dinner",
+			"route": "planned_refrigeration_and_reheat",
+			"story": "choir_week",
+			"width": 1920.0
+		},
+		{
+			"day": 1.0,
+			"description": "实际选灶台留存后，午餐时米饭与菜因保存不当被标为应丢弃",
+			"file": "07-counter-leftovers-need-discard.png",
+			"height": 1080.0,
+			"phase": "lunch_source",
+			"route": "counter_storage_and_discard",
+			"story": "choir_week",
+			"width": 1920.0
+		},
+		{
+			"day": 1.0,
+			"description": "执行丢弃后清除不合规熟食，待处理数量归零",
+			"file": "08-discard-completed.png",
+			"height": 1080.0,
+			"phase": "lunch_source",
+			"route": "counter_storage_and_discard",
+			"story": "choir_week",
+			"width": 1920.0
+		},
+		{
+			"day": 5.0,
+			"description": "第1天留存至第5天的熟食显示冷藏超过3天，应丢弃",
+			"file": "10-cold-storage-time-limit.png",
+			"height": 1080.0,
+			"phase": "breakfast_source",
+			"route": "cold_storage_time_limit",
+			"story": "choir_week",
+			"width": 1920.0
+		},
+		{
+			"day": 6,
+			"description": "小份备餐科普：分装、冷藏、按份再热、储存时限与超时丢弃",
+			"file": "11-leftovers-reference.png",
+			"height": 1080,
+			"phase": "breakfast_source",
+			"route": "leftovers_lesson_reference",
+			"story": "choir_week",
+			"width": 1920
+		}
+	],
+	"errors": [],
+	"observations": [
+		{
+			"reheat_record": {
+				"action": "reheat_and_eat",
+				"batches": [
+					{
+						"clean_container": true,
+						"cooled_after_minutes": 60.0,
+						"danger_minutes": 60.0,
+						"day": 1.0,
+						"food_id": "rice_plain",
+						"fridge_max_c": 4.0,
+						"id": "batch_1",
+						"known_history": true,
+						"made_hour": 32.0,
+						"note": "上桌前用清洁浅盒分装，1小时内放入4℃冰箱，连续冷藏。",
+						"quantity": 0.0,
+						"recipe_facts": {
+							"ingredient_sodium_status": "unknown",
+							"other_added_sugars_status": "unknown",
+							"personal_portions": 1.0,
+							"recipes": [
+								{
+									"food_id": "rice_plain",
+									"ingredients": "rice_plain:1",
+									"method": "煮饭",
+									"name": "白米饭",
+									"recipe_version": 1.0,
+									"seasonable": false,
+									"sweetenable": false,
+									"texture": "按原做法"
+								}
+							],
+							"salt_g": 0.0,
+							"scope": "declared_game_recipe",
+							"sodium_from_added_seasonings_mg": 0.0,
+							"soy_label_id": "teaching-soy-7000-v1",
+							"soy_ml": 0.0,
+							"total_sugars_status": "unknown",
+							"version": "household-recipe-facts-v1",
+							"white_sugar_added_g": 0.0
+						},
+						"reheat_count": 1.0,
+						"reheat_note": "取当餐份量，彻底再热至中心温度至少75℃；再热一次。",
+						"reheated": true,
+						"rule_version": "leftovers-cfs-v1",
+						"served_day": 1.0,
+						"status": "consumed",
+						"storage": "fridge",
+						"stored_hour": 33.0
+					},
+					{
+						"clean_container": true,
+						"cooled_after_minutes": 60.0,
+						"danger_minutes": 60.0,
+						"day": 1.0,
+						"food_id": "soft_tofu_greens",
+						"fridge_max_c": 4.0,
+						"id": "batch_2",
+						"known_history": true,
+						"made_hour": 32.0,
+						"note": "上桌前用清洁浅盒分装，1小时内放入4℃冰箱，连续冷藏。",
+						"quantity": 0.0,
+						"recipe_facts": {
+							"ingredient_sodium_status": "unknown",
+							"other_added_sugars_status": "unknown",
+							"personal_portions": 1.0,
+							"recipes": [
+								{
+									"food_id": "soft_tofu_greens",
+									"ingredients": "tofu:1,greens:1",
+									"method": "炖煮",
+									"name": "时蔬炖豆腐",
+									"recipe_version": 1.0,
+									"seasonable": true,
+									"sweetenable": false,
+									"texture": "细软"
+								}
+							],
+							"salt_g": 1.0,
+							"scope": "declared_game_recipe",
+							"sodium_from_added_seasonings_mg": 750.0,
+							"soy_label_id": "teaching-soy-7000-v1",
+							"soy_ml": 5.0,
+							"total_sugars_status": "unknown",
+							"version": "household-recipe-facts-v1",
+							"white_sugar_added_g": 0.0
+						},
+						"reheat_count": 1.0,
+						"reheat_note": "取当餐份量，彻底再热至中心温度至少75℃；再热一次。",
+						"reheated": true,
+						"rule_version": "leftovers-cfs-v1",
+						"served_day": 1.0,
+						"status": "consumed",
+						"storage": "fridge",
+						"stored_hour": 33.0
+					}
+				],
+				"day": 1.0
+			},
+			"route": "planned_refrigeration_and_reheat"
+		},
+		{
+			"kitchen_history": [
+				{
+					"action": "discard",
+					"batch": {
+						"danger_minutes": 720.0,
+						"day": 0.0,
+						"food_id": "greens",
+						"id": "before_week_greens",
+						"known_history": true,
+						"note": "昨晚20:00做；今早08:00仍在灶台，常温12小时，未冷藏。",
+						"quantity": 1.0,
+						"reheat_count": 0.0,
+						"reheated": false,
+						"status": "discard_required",
+						"storage": "counter"
+					},
+					"day": 1.0
+				},
+				{
+					"action": "cook",
+					"condiments_used": {
+						"salt_g": 2.0,
+						"soy_ml": 10.0,
+						"sugar_g": 0.0
+					},
+					"day": 1.0,
+					"ingredients_used": {
+						"greens": 2.0,
+						"rice_plain": 2.0,
+						"tofu": 2.0
+					},
+					"prepared": [
+						{
+							"clean_container": true,
+							"cooled_after_minutes": 60.0,
+							"danger_minutes": 300.0,
+							"day": 1.0,
+							"food_id": "rice_plain",
+							"fridge_max_c": 4.0,
+							"id": "batch_1",
+							"known_history": true,
+							"made_hour": 32.0,
+							"note": "计划留在灶台至下一餐；关卡经过5小时，未保持安全温度。",
+							"quantity": 1.0,
+							"recipe_facts": {
+								"ingredient_sodium_status": "unknown",
+								"other_added_sugars_status": "unknown",
+								"personal_portions": 1.0,
+								"recipes": [
+									{
+										"food_id": "rice_plain",
+										"ingredients": "rice_plain:1",
+										"method": "煮饭",
+										"name": "白米饭",
+										"recipe_version": 1.0,
+										"seasonable": false,
+										"sweetenable": false,
+										"texture": "按原做法"
+									}
+								],
+								"salt_g": 0.0,
+								"scope": "declared_game_recipe",
+								"sodium_from_added_seasonings_mg": 0.0,
+								"soy_label_id": "teaching-soy-7000-v1",
+								"soy_ml": 0.0,
+								"total_sugars_status": "unknown",
+								"version": "household-recipe-facts-v1",
+								"white_sugar_added_g": 0.0
+							},
+							"reheat_count": 0.0,
+							"reheated": false,
+							"rule_version": "leftovers-cfs-v1",
+							"status": "discard_required",
+							"storage": "counter",
+							"stored_hour": 33.0
+						},
+						{
+							"clean_container": true,
+							"cooled_after_minutes": 60.0,
+							"danger_minutes": 300.0,
+							"day": 1.0,
+							"food_id": "soft_tofu_greens",
+							"fridge_max_c": 4.0,
+							"id": "batch_2",
+							"known_history": true,
+							"made_hour": 32.0,
+							"note": "计划留在灶台至下一餐；关卡经过5小时，未保持安全温度。",
+							"quantity": 1.0,
+							"recipe_facts": {
+								"ingredient_sodium_status": "unknown",
+								"other_added_sugars_status": "unknown",
+								"personal_portions": 1.0,
+								"recipes": [
+									{
+										"food_id": "soft_tofu_greens",
+										"ingredients": "tofu:1,greens:1",
+										"method": "炖煮",
+										"name": "时蔬炖豆腐",
+										"recipe_version": 1.0,
+										"seasonable": true,
+										"sweetenable": false,
+										"texture": "细软"
+									}
+								],
+								"salt_g": 1.0,
+								"scope": "declared_game_recipe",
+								"sodium_from_added_seasonings_mg": 750.0,
+								"soy_label_id": "teaching-soy-7000-v1",
+								"soy_ml": 5.0,
+								"total_sugars_status": "unknown",
+								"version": "household-recipe-facts-v1",
+								"white_sugar_added_g": 0.0
+							},
+							"reheat_count": 0.0,
+							"reheated": false,
+							"rule_version": "leftovers-cfs-v1",
+							"status": "discard_required",
+							"storage": "counter",
+							"stored_hour": 33.0
+						}
+					],
+					"recipe_facts": {
+						"ingredient_sodium_status": "unknown",
+						"other_added_sugars_status": "unknown",
+						"personal_portions": 1.0,
+						"recipes": [
+							{
+								"food_id": "rice_plain",
+								"ingredients": "rice_plain:1",
+								"method": "煮饭",
+								"name": "白米饭",
+								"recipe_version": 1.0,
+								"seasonable": false,
+								"sweetenable": false,
+								"texture": "按原做法"
+							},
+							{
+								"food_id": "soft_tofu_greens",
+								"ingredients": "tofu:1,greens:1",
+								"method": "炖煮",
+								"name": "时蔬炖豆腐",
+								"recipe_version": 1.0,
+								"seasonable": true,
+								"sweetenable": false,
+								"texture": "细软"
+							}
+						],
+						"salt_g": 1.0,
+						"scope": "declared_game_recipe",
+						"sodium_from_added_seasonings_mg": 750.0,
+						"soy_label_id": "teaching-soy-7000-v1",
+						"soy_ml": 5.0,
+						"total_sugars_status": "unknown",
+						"version": "household-recipe-facts-v1",
+						"white_sugar_added_g": 0.0
+					},
+					"served_portions": 1.0
+				},
+				{
+					"action": "discard",
+					"batch": {
+						"clean_container": true,
+						"cooled_after_minutes": 60.0,
+						"danger_minutes": 300.0,
+						"day": 1.0,
+						"food_id": "rice_plain",
+						"fridge_max_c": 4.0,
+						"id": "batch_1",
+						"known_history": true,
+						"made_hour": 32.0,
+						"note": "计划留在灶台至下一餐；关卡经过5小时，未保持安全温度。",
+						"quantity": 1.0,
+						"recipe_facts": {
+							"ingredient_sodium_status": "unknown",
+							"other_added_sugars_status": "unknown",
+							"personal_portions": 1.0,
+							"recipes": [
+								{
+									"food_id": "rice_plain",
+									"ingredients": "rice_plain:1",
+									"method": "煮饭",
+									"name": "白米饭",
+									"recipe_version": 1.0,
+									"seasonable": false,
+									"sweetenable": false,
+									"texture": "按原做法"
+								}
+							],
+							"salt_g": 0.0,
+							"scope": "declared_game_recipe",
+							"sodium_from_added_seasonings_mg": 0.0,
+							"soy_label_id": "teaching-soy-7000-v1",
+							"soy_ml": 0.0,
+							"total_sugars_status": "unknown",
+							"version": "household-recipe-facts-v1",
+							"white_sugar_added_g": 0.0
+						},
+						"reheat_count": 0.0,
+						"reheated": false,
+						"rule_version": "leftovers-cfs-v1",
+						"status": "discard_required",
+						"storage": "counter",
+						"stored_hour": 33.0
+					},
+					"day": 1.0
+				},
+				{
+					"action": "discard",
+					"batch": {
+						"clean_container": true,
+						"cooled_after_minutes": 60.0,
+						"danger_minutes": 300.0,
+						"day": 1.0,
+						"food_id": "soft_tofu_greens",
+						"fridge_max_c": 4.0,
+						"id": "batch_2",
+						"known_history": true,
+						"made_hour": 32.0,
+						"note": "计划留在灶台至下一餐；关卡经过5小时，未保持安全温度。",
+						"quantity": 1.0,
+						"recipe_facts": {
+							"ingredient_sodium_status": "unknown",
+							"other_added_sugars_status": "unknown",
+							"personal_portions": 1.0,
+							"recipes": [
+								{
+									"food_id": "soft_tofu_greens",
+									"ingredients": "tofu:1,greens:1",
+									"method": "炖煮",
+									"name": "时蔬炖豆腐",
+									"recipe_version": 1.0,
+									"seasonable": true,
+									"sweetenable": false,
+									"texture": "细软"
+								}
+							],
+							"salt_g": 1.0,
+							"scope": "declared_game_recipe",
+							"sodium_from_added_seasonings_mg": 750.0,
+							"soy_label_id": "teaching-soy-7000-v1",
+							"soy_ml": 5.0,
+							"total_sugars_status": "unknown",
+							"version": "household-recipe-facts-v1",
+							"white_sugar_added_g": 0.0
+						},
+						"reheat_count": 0.0,
+						"reheated": false,
+						"rule_version": "leftovers-cfs-v1",
+						"status": "discard_required",
+						"storage": "counter",
+						"stored_hour": 33.0
+					},
+					"day": 1.0
+				}
+			],
+			"route": "counter_storage_and_discard"
+		},
+		{
+			"batches": [
+				{
+					"danger_minutes": 720.0,
+					"day": 0.0,
+					"food_id": "greens",
+					"id": "before_week_greens",
+					"known_history": true,
+					"note": "昨晚20:00做；今早08:00仍在灶台，常温12小时，未冷藏。",
+					"quantity": 0.0,
+					"reheat_count": 0.0,
+					"reheated": false,
+					"status": "discarded",
+					"storage": "counter"
+				},
+				{
+					"clean_container": true,
+					"cooled_after_minutes": 60.0,
+					"danger_minutes": 60.0,
+					"day": 1.0,
+					"food_id": "rice_plain",
+					"fridge_max_c": 4.0,
+					"id": "batch_1",
+					"known_history": true,
+					"made_hour": 32.0,
+					"note": "冷藏已超过3天，应丢弃。",
+					"quantity": 1.0,
+					"recipe_facts": {
+						"ingredient_sodium_status": "unknown",
+						"other_added_sugars_status": "unknown",
+						"personal_portions": 1.0,
+						"recipes": [
+							{
+								"food_id": "rice_plain",
+								"ingredients": "rice_plain:1",
+								"method": "煮饭",
+								"name": "白米饭",
+								"recipe_version": 1.0,
+								"seasonable": false,
+								"sweetenable": false,
+								"texture": "按原做法"
+							}
+						],
+						"salt_g": 0.0,
+						"scope": "declared_game_recipe",
+						"sodium_from_added_seasonings_mg": 0.0,
+						"soy_label_id": "teaching-soy-7000-v1",
+						"soy_ml": 0.0,
+						"total_sugars_status": "unknown",
+						"version": "household-recipe-facts-v1",
+						"white_sugar_added_g": 0.0
+					},
+					"reheat_count": 0.0,
+					"reheated": false,
+					"rule_version": "leftovers-cfs-v1",
+					"status": "discard_required",
+					"storage": "fridge",
+					"stored_hour": 33.0
+				},
+				{
+					"clean_container": true,
+					"cooled_after_minutes": 60.0,
+					"danger_minutes": 60.0,
+					"day": 1.0,
+					"food_id": "soft_tofu_greens",
+					"fridge_max_c": 4.0,
+					"id": "batch_2",
+					"known_history": true,
+					"made_hour": 32.0,
+					"note": "冷藏已超过3天，应丢弃。",
+					"quantity": 1.0,
+					"recipe_facts": {
+						"ingredient_sodium_status": "unknown",
+						"other_added_sugars_status": "unknown",
+						"personal_portions": 1.0,
+						"recipes": [
+							{
+								"food_id": "soft_tofu_greens",
+								"ingredients": "tofu:1,greens:1",
+								"method": "炖煮",
+								"name": "时蔬炖豆腐",
+								"recipe_version": 1.0,
+								"seasonable": true,
+								"sweetenable": false,
+								"texture": "细软"
+							}
+						],
+						"salt_g": 1.0,
+						"scope": "declared_game_recipe",
+						"sodium_from_added_seasonings_mg": 750.0,
+						"soy_label_id": "teaching-soy-7000-v1",
+						"soy_ml": 5.0,
+						"total_sugars_status": "unknown",
+						"version": "household-recipe-facts-v1",
+						"white_sugar_added_g": 0.0
+					},
+					"reheat_count": 0.0,
+					"reheated": false,
+					"rule_version": "leftovers-cfs-v1",
+					"status": "discard_required",
+					"storage": "fridge",
+					"stored_hour": 33.0
+				}
+			],
+			"route": "cold_storage_time_limit"
+		}
+	],
+	"scope": "Independent in-memory gameplay routes for refrigeration/reheat, counter storage/discard, expiration, and the day-6 reference. Full native 1920x1080 frames, no cropping or overlays. Normal phase/day advancement and existing game UI; no player saves read or modified."
+}

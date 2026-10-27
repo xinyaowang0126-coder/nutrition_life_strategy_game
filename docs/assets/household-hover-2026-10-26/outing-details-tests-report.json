@@ -1,0 +1,301 @@
+{
+  "duration_ms": 14774,
+  "failed": 0,
+  "passed": 36,
+  "results": [
+    {
+      "assertion_count": 62,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_bundled_body_font_covers_the_new_game_controls_without_system_fonts"
+    },
+    {
+      "assertion_count": 9,
+      "duration_ms": 399,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_closed_shop_hover_and_explicit_details_preserve_opening_rules"
+    },
+    {
+      "assertion_count": 8,
+      "duration_ms": 158,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_continuing_first_day_opens_sources_without_a_kitchen_panel"
+    },
+    {
+      "assertion_count": 13,
+      "duration_ms": 908,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_cooking_and_stock_workspaces_show_their_own_locations_and_restore"
+    },
+    {
+      "assertion_count": 16,
+      "duration_ms": 796,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_cooking_preview_counts_two_people_plus_saved_portion_without_spending"
+    },
+    {
+      "assertion_count": 17,
+      "duration_ms": 409,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_cooking_shortage_names_exact_missing_food_and_condiment_amounts"
+    },
+    {
+      "assertion_count": 9,
+      "duration_ms": 388,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_diner_scene_only_follows_an_available_market_choice"
+    },
+    {
+      "assertion_count": 4,
+      "duration_ms": 201,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_escape_cancels_confirmation_once_and_ignores_old_buttons"
+    },
+    {
+      "assertion_count": 7,
+      "duration_ms": 462,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_food_hover_and_keyboard_preview_include_current_unavailable_reason"
+    },
+    {
+      "assertion_count": 5,
+      "duration_ms": 282,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_fruit_stall_has_its_own_scene_at_every_meal"
+    },
+    {
+      "assertion_count": 4,
+      "duration_ms": 159,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_group_rehearsal_note_follows_the_day_and_current_action_reason"
+    },
+    {
+      "assertion_count": 144,
+      "duration_ms": 484,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_home_choices_and_market_hotspots_fit_without_scrolling"
+    },
+    {
+      "assertion_count": 36,
+      "duration_ms": 334,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_home_entries_draw_graphics_inside_their_click_targets"
+    },
+    {
+      "assertion_count": 28,
+      "duration_ms": 196,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_home_hover_previews_show_rules_without_spending_or_pinning"
+    },
+    {
+      "assertion_count": 13,
+      "duration_ms": 357,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_household_night_returns_home_and_only_the_ending_uses_the_stage"
+    },
+    {
+      "assertion_count": 8,
+      "duration_ms": 526,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_insufficient_preview_disables_commit_and_cancel_preserves_hand"
+    },
+    {
+      "assertion_count": 9,
+      "duration_ms": 542,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_keyboard_return_from_cooking_keeps_selection_and_inventory"
+    },
+    {
+      "assertion_count": 5,
+      "duration_ms": 530,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_leaving_the_market_does_not_reopen_it_for_the_next_meal_or_day"
+    },
+    {
+      "assertion_count": 20,
+      "duration_ms": 313,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_outing_scene_spends_nothing_and_returns_via_the_market"
+    },
+    {
+      "assertion_count": 5,
+      "duration_ms": 161,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_pending_dialog_blocks_cancel_and_focus_skips_disabled_slots"
+    },
+    {
+      "assertion_count": 8,
+      "duration_ms": 148,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_performance_note_shows_both_shortfalls_and_uses_actual_availability"
+    },
+    {
+      "assertion_count": 4,
+      "duration_ms": 424,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_pinned_food_details_restore_the_info_button_without_selecting_food"
+    },
+    {
+      "assertion_count": 30,
+      "duration_ms": 10,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_raw_ingredient_atlas_has_every_recipe_ingredient_with_valid_bounds"
+    },
+    {
+      "assertion_count": 5,
+      "duration_ms": 458,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_removing_last_selected_food_disables_confirmation"
+    },
+    {
+      "assertion_count": 7,
+      "duration_ms": 466,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_removing_selected_food_is_idempotent_and_keeps_stock_and_money"
+    },
+    {
+      "assertion_count": 18,
+      "duration_ms": 837,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_shortage_and_commit_summary_stay_outside_the_recipe_scroll"
+    },
+    {
+      "assertion_count": 11,
+      "duration_ms": 563,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_source_navigation_only_opens_cooking_preview_after_selecting_recipes"
+    },
+    {
+      "assertion_count": 9,
+      "duration_ms": 243,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_source_rules_and_tools_are_available_through_explicit_popups"
+    },
+    {
+      "assertion_count": 6,
+      "duration_ms": 158,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_source_stage_does_not_capture_keys_from_the_new_day_popup"
+    },
+    {
+      "assertion_count": 9,
+      "duration_ms": 278,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_stock_cards_do_not_allow_unknown_or_unsafe_batches_to_be_eaten"
+    },
+    {
+      "assertion_count": 34,
+      "duration_ms": 384,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_stock_tabs_and_batch_details_are_read_only_and_keep_controls_visible"
+    },
+    {
+      "assertion_count": 23,
+      "duration_ms": 464,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_story_actions_have_distinct_scenes_and_keep_shared_zero_slot_verbs"
+    },
+    {
+      "assertion_count": 126,
+      "duration_ms": 1037,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_story_schedule_note_and_night_copy_fit_mobile_and_desktop"
+    },
+    {
+      "assertion_count": 72,
+      "duration_ms": 637,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_three_selected_foods_keep_remove_actions_and_footer_in_bounds"
+    },
+    {
+      "assertion_count": 6,
+      "duration_ms": 265,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_unavailable_food_details_update_after_selection_is_removed"
+    },
+    {
+      "assertion_count": 21,
+      "duration_ms": 795,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_worktops_keep_footer_and_hud_visible_at_mobile_and_desktop_sizes"
+    }
+  ],
+  "skipped": 0,
+  "suite_count": 1,
+  "suites_run": [
+    "household_ui"
+  ],
+  "total": 36
+}

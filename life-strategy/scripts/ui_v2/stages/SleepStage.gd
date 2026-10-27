@@ -13,6 +13,7 @@ const CARD_SCENE := preload("res://scenes/game_v2/components/CompactChoiceCard.t
 @onready var choices_container: HBoxContainer = $Layout/SleepRail/Choices
 @onready var tomorrow_label: Label = $Layout/AlarmNote/AlarmMargin/Alarm/AlarmText/Tomorrow
 @onready var hint_label: Label = $Layout/AlarmNote/AlarmMargin/Alarm/AlarmText/Hint
+@onready var clock_label: Label = $Layout/AlarmNote/AlarmMargin/Alarm/Clock
 
 var _items: Array[Dictionary] = []
 var _options: Dictionary = {}
@@ -35,9 +36,25 @@ func setup(items: Array, options: Dictionary = {}) -> void:
 
 
 func _ready() -> void:
+	sleep_scroll.follow_focus = true
+	# The previous clock character depended on an installed fallback font.
+	# Canvas lines keep the same symbol readable in the exported Web build.
+	clock_label.text = ""
+	clock_label.custom_minimum_size = Vector2(44, 44)
+	clock_label.draw.connect(_draw_clock)
+	clock_label.resized.connect(clock_label.queue_redraw)
 	_ready_finished = true
 	if _has_setup:
 		_apply_setup()
+
+
+func _draw_clock() -> void:
+	var center := clock_label.size * 0.5
+	var radius := minf(clock_label.size.x, clock_label.size.y) * 0.4
+	var ink := clock_label.get_theme_color("font_color")
+	clock_label.draw_arc(center, radius, 0, TAU, 48, ink, 2.4, true)
+	clock_label.draw_line(center, center + Vector2(0, -radius * 0.65), ink, 2.4, true)
+	clock_label.draw_line(center, center + Vector2(radius * 0.55, radius * 0.25), ink, 2.4, true)
 
 
 func _apply_setup() -> void:

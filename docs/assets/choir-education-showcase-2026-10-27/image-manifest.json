@@ -1,0 +1,92 @@
+[
+  {
+    "file": "00-home-context.png",
+    "width": 1920,
+    "height": 1080,
+    "sha256": "224efd57e234ac83d305274b7f1406ebac0a224e07a5440b87129e65024730ae"
+  },
+  {
+    "file": "01-food-safety.png",
+    "width": 1920,
+    "height": 1080,
+    "sha256": "5ee3889d0cce42ff083e7a58a412059a95fa36a24b898fed7ccd4869c99562a4"
+  },
+  {
+    "file": "02-soft-food-and-variety.png",
+    "width": 1920,
+    "height": 1080,
+    "sha256": "a1a010a168fab25b07450b7e24357ca57cd12a0288a49f9330ade8159c2c566d"
+  },
+  {
+    "file": "02a-adapted-cooking-methods.png",
+    "width": 1920,
+    "height": 1080,
+    "sha256": "76f5c8b2d8f8db6f39083c9b75360499b17f5823f752d6ddd1aa2a1584010213"
+  },
+  {
+    "file": "03a-seasoning-usual.png",
+    "width": 1920,
+    "height": 1080,
+    "sha256": "43a33a327665c6e9f0bb911ce08fe08b6847dc586ccbe6c0c3d85e86db4089df"
+  },
+  {
+    "file": "03b-seasoning-reduced.png",
+    "width": 1920,
+    "height": 1080,
+    "sha256": "c728889e10438c5e36fc3d36d1638bfdfbec1f1dabc386e8d8b8be8c13e28203"
+  },
+  {
+    "file": "04-cold-meal-prep.png",
+    "width": 1920,
+    "height": 1080,
+    "sha256": "f85185200d34b29a6362ab6b19580ba18b1c1d5d9c07fdb53e0ff26739f3485e"
+  },
+  {
+    "file": "04b-cold-storage-history.png",
+    "width": 1920,
+    "height": 1080,
+    "sha256": "fc952d25621ff2c2b26c5d708fd479ef69ce4926070490324057c4d18ee15b1b"
+  },
+  {
+    "file": "05-sodium-label-exercise.png",
+    "width": 1920,
+    "height": 1080,
+    "sha256": "b31eb4ff966c9e2e16cd19629575c5acd13e74ac7da0f0fae1113e780be9f961"
+  },
+  {
+    "file": "05b-sodium-label-feedback.png",
+    "width": 1920,
+    "height": 1080,
+    "sha256": "0824d712172461905bf2d8bf130790ae4b612f9038b249f3fc58891dd706a274"
+  },
+  {
+    "file": "06-sugar-label-exercise.png",
+    "width": 1920,
+    "height": 1080,
+    "sha256": "674d7a9e8ef0228f3300cc48cdac5bb45518528b882845a524993763748905fb"
+  },
+  {
+    "file": "06b-sugar-label-feedback.png",
+    "width": 1920,
+    "height": 1080,
+    "sha256": "032bc19d6814df68d7304a5ccae4f43552de5323c7cf6d054099c1b1c2796cd4"
+  },
+  {
+    "file": "07a-shared-meal-invitation.png",
+    "width": 1920,
+    "height": 1080,
+    "sha256": "f1e16066fb119250732cc90f9853ec5e996fa06ca218ecf48f37ae2d133b8402"
+  },
+  {
+    "file": "07b-two-person-cooking.png",
+    "width": 1920,
+    "height": 1080,
+    "sha256": "257d1735e450b837e9adc13e64122cea271ec386a266dce547ad50a1948bf05e"
+  },
+  {
+    "file": "08-recipe-and-shared-meal-records.png",
+    "width": 1920,
+    "height": 1080,
+    "sha256": "c0d76025d9d9ce15e1a517b001b2ebcb95d376d8d8c717c0b8b4596bc5b61897"
+  }
+]

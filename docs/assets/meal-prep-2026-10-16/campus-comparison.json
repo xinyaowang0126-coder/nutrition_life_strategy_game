@@ -1,0 +1,11 @@
+{
+  "runs": 510,
+  "policies": 17,
+  "seeds": 30,
+  "full_reports_equal": true,
+  "changed_rows": [],
+  "before_errors": [],
+  "after_errors": [],
+  "canonical_rows_sha256": "89e0b9d7e99c3e3599bd39b3da9c4cf6529d86156368f8204cc987cff2fb808d",
+  "scope": "Campus real legal command policies before/after the choir preparation change. Scripted comparison, not a player study."
+}

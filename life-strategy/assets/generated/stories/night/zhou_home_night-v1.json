@@ -1,0 +1,10 @@
+{
+  "tool": "built-in image_gen",
+  "date": "2026-10-21",
+  "role": "lighting-weather edit; preserve the original home and daytime PNG",
+  "reference": "E:\\nutrition_life_strategy_game\\life-strategy\\assets\\generated\\stories\\zhou_home.png",
+  "source": "C:\\Users\\xywan\\.codex\\generated_images\\01a15e2f-c328-79a0-aabe-1f797285f94d\\exec-74f92d76-2b33-495d-bc61-c2e3c697de74.png",
+  "saved_path": "E:\\nutrition_life_strategy_game\\life-strategy\\assets\\generated\\stories\\night\\zhou_home_night-v1.png",
+  "resource": "res://assets/generated/stories/night/zhou_home_night-v1.png",
+  "prompt": "Use case: lighting-weather, identity-preserve environment edit. Asset type: night background for the existing Chinese life-strategy game. Edit the supplied original home painting ONLY to change the time of day to night, about 21:30 after a community choir concert. Preserve exactly the same room, camera, wide 16:9 framing, composition, furniture positions, stove, fridge, green cabinets, plants, hanging paintings, bookcase, music folder, dining table, crockery, wood floor, open doorway and balcony window. This must still be unmistakably the SAME HOME, not a bedroom, theater or different room. Replace bright daytime light outside both openings with deep muted navy night sky, barely visible distant apartment buildings and a few small warm window lights. Remove all direct sunlight patches, sun beams and sun-shaped leaf shadows from wall, tabletop and floor. Indoors use soft warm household electric lighting from existing off-camera lights, enough warm amber ambient light to keep the important furniture visible, subtle cool blue near windows. Keep the original watercolor/gouache and colored-pencil paper texture, cozy subdued palette, no photorealism. No people, no new props, no large visible moon, no stars indoors, no text, no icons, no UI, no frame or watermark. No invented changes to wall art or furniture. One complete full-bleed wide background with the same aspect ratio as the reference. Create as a new version; preserve the original daytime image."
+}

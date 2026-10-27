@@ -8,6 +8,58 @@ func suite_name() -> String:
 	return "daily_summary_layout"
 
 
+func test_rapid_next_requests_emit_once_until_a_new_summary_is_shown() -> void:
+	var popup := _popup_in_viewport(Vector2i(1920, 1080))
+	var events: Array[String] = []
+	popup.next_day_requested.connect(func() -> void: events.append("next"))
+	popup.show_summary({"day": 1})
+	popup.next_button.pressed.emit()
+	popup.next_button.pressed.emit()
+	assert_eq(events, ["next"])
+	popup.hide_summary(false)
+	popup.next_button.pressed.emit()
+	assert_eq(events, ["next"])
+	popup.show_summary({"day": 2})
+	popup.next_button.pressed.emit()
+	assert_eq(events, ["next", "next"])
+
+
+func test_escape_collapses_details_without_advancing_the_day() -> void:
+	var popup := _popup_in_viewport(Vector2i(720, 1280))
+	var events: Array[String] = []
+	popup.next_day_requested.connect(func() -> void: events.append("next"))
+	_show_long_summary(popup, true)
+	var escape := InputEventKey.new()
+	escape.keycode = KEY_ESCAPE
+	escape.pressed = true
+	popup._input(escape)
+	assert_false(popup.detail_panel.visible)
+	assert_true(popup.visible)
+	assert_eq(popup.get_viewport().gui_get_focus_owner(), popup.detail_button)
+	popup._input(escape)
+	assert_true(events.is_empty())
+	assert_false(popup.next_button.disabled)
+
+
+func test_enter_activates_focused_detail_or_record_entry_without_advancing() -> void:
+	var popup := _popup_in_viewport(Vector2i(720, 1280))
+	var events: Array[String] = []
+	popup.next_day_requested.connect(func() -> void: events.append("next"))
+	popup.record_book_requested.connect(func() -> void: events.append("records"))
+	popup.show_summary({"day": 1, "record_book_available": true, "detail": {"detail_text": "早餐、午餐、晚餐的实际选择。"}}, true)
+	popup.detail_button.grab_focus()
+	var enter := InputEventKey.new()
+	enter.keycode = KEY_ENTER
+	enter.pressed = true
+	popup._input(enter)
+	assert_true(popup.detail_panel.visible)
+	assert_true(events.is_empty())
+	popup.record_book_button.grab_focus()
+	popup._input(enter)
+	assert_eq(events, ["records"])
+	assert_false(popup.next_button.disabled)
+
+
 func test_expanded_detail_scrolls_without_covering_desktop_footer() -> void:
 	var popup := _popup_in_viewport(Vector2i(1920, 1080))
 	_show_long_summary(popup, false)

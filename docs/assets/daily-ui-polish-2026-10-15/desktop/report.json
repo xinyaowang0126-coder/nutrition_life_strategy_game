@@ -1,0 +1,23 @@
+{
+	"day": 2,
+	"diagnostics": [
+		{
+			"disabled": false,
+			"focus": "/root/GameRootV2/HUD/HUDRoot/ModalLayer/NewDayPopup/PaperHost/Paper/Margin/VBox/ContinueButton",
+			"keys": true,
+			"step": "new_day"
+		},
+		{
+			"disabled": false,
+			"focus": "/root/GameRootV2/WorldStage/StageSafeArea/StageHost/@Control@103/WorktopPaper/@VBoxContainer@104/Footer/close",
+			"keys": false,
+			"locked": false,
+			"pending": false,
+			"step": "after_continue",
+			"story": "choir_week"
+		}
+	],
+	"errors": [],
+	"scope": "Actual native menu/start and popup key events; declared three skipped meals/actions and early-sleep fixture prepares the summary. In-memory saves only.",
+	"window": "(1280, 720)"
+}

@@ -11,8 +11,8 @@ signal detail_dismissed(item_id: String)
 const CARD_SCENE := preload("res://scenes/game_v2/components/CompactChoiceCard.tscn")
 const DESKTOP_CARD_AREA := Rect2(0.20, 0.11, 0.76, 0.47)
 const DESKTOP_SELECTED_AREA := Rect2(0.44, 0.60, 0.40, 0.31)
-const MOBILE_CARD_AREA := Rect2(0.02, 0.10, 0.96, 0.50)
-const MOBILE_SELECTED_AREA := Rect2(0.29, 0.61, 0.69, 0.24)
+const MOBILE_CARD_AREA := Rect2(0.02, 0.10, 0.96, 0.44)
+const MOBILE_SELECTED_AREA := Rect2(0.29, 0.56, 0.69, 0.30)
 
 var _foods: Array[Dictionary] = []
 var _foods_by_id: Dictionary = {}
@@ -28,6 +28,9 @@ var _meal_label := "这一顿"
 var _ready_finished := false
 var _has_setup := false
 var _layout_mobile_mode := false
+var _cost_preview_label: Label
+var _last_cost_preview: Dictionary = {}
+var _cost_layout_revision := 0
 
 
 func setup(foods: Array, selected_ids: Array = [], options: Dictionary = {}) -> void:
@@ -72,6 +75,7 @@ func set_balance(value: int) -> void:
 	if _ready_finished:
 		_refresh_card_availability()
 		_update_scene_summary()
+		_update_cost_preview()
 
 
 func set_stock(stock_by_id: Dictionary) -> void:
@@ -83,6 +87,7 @@ func set_stock(stock_by_id: Dictionary) -> void:
 				card.set_stock(_card_stock(String(food_id)))
 		_refresh_card_availability()
 		_update_scene_summary()
+		_update_cost_preview()
 
 
 func _bind_meal_controls(
@@ -91,13 +96,39 @@ func _bind_meal_controls(
 	confirm_button: Button,
 	_scroll: ScrollContainer
 ) -> void:
+	_scroll.follow_focus = true
 	back_button.pressed.connect(_emit_back)
 	skip_button.pressed.connect(_emit_skip)
 	confirm_button.pressed.connect(_emit_confirm)
+	for slot: SelectedFoodCardV2 in _get_slot_nodes():
+		slot.remove_requested.connect(_remove_from_slot.bind(slot))
+
+
+func _remove_from_slot(food_id: String, slot: SelectedFoodCardV2) -> void:
+	if not is_visible_in_tree() or is_queued_for_deletion() or not slot.is_visible_in_tree() or slot.item_id != food_id: return
+	var index := _selected_ids.find(food_id)
+	if index < 0: return
+	var next_id := _selected_ids[(index + 1) % _selected_ids.size()] if _selected_ids.size() > 1 else ""
+	var restore_focus := slot.remove_button.has_focus()
+	_on_card_selected(food_id)
+	if restore_focus: call_deferred("_restore_slot_focus", next_id, food_id)
+
+
+func _restore_slot_focus(next_id: String, removed_id: String) -> void:
+	if not is_visible_in_tree() or is_queued_for_deletion(): return
+	var owner := get_viewport().gui_get_focus_owner()
+	if owner != null and not is_ancestor_of(owner): return
+	for slot: SelectedFoodCardV2 in _get_slot_nodes():
+		if not next_id.is_empty() and slot.item_id == next_id:
+			slot.remove_button.grab_focus()
+			return
+	var card := _cards_by_id.get(removed_id) as Control
+	if is_instance_valid(card): card.grab_focus()
 
 
 func _finish_ready() -> void:
 	_ready_finished = true
+	_create_cost_preview()
 	apply_selection_layout(_layout_mobile_mode)
 	if _has_setup:
 		_populate_cards()
@@ -147,9 +178,61 @@ func _apply_selection(animate: bool) -> void:
 	_refresh_card_availability()
 	_update_slot_labels(animate)
 	_update_scene_summary()
+	_update_cost_preview()
 	var confirm := _get_confirm_button()
 	if confirm != null:
 		confirm.disabled = _selected_ids.is_empty()
+
+
+func _create_cost_preview() -> void:
+	var paths := _get_layout_paths()
+	if not paths.has("selection_box"): return
+	var box := get_node(String(paths["selection_box"])) as VBoxContainer
+	_cost_preview_label = HouseholdUI.label("", 18, HouseholdUI.MUTED)
+	_cost_preview_label.name = "DecisionCosts"
+	_cost_preview_label.hide()
+	box.add_child(_cost_preview_label)
+	box.move_child(_cost_preview_label, 1)
+	_cost_preview_label.minimum_size_changed.connect(_queue_cost_layout)
+	_cost_preview_label.resized.connect(_queue_cost_layout)
+
+
+func _get_cost_preview_label() -> Label:
+	return _cost_preview_label
+
+
+func _cost_preview_text(preview: Dictionary) -> String:
+	return String(preview.get("text", ""))
+
+
+func _update_cost_preview() -> void:
+	var label := _get_cost_preview_label()
+	if label == null: return
+	var builder: Callable = _options.get("cost_preview_builder", Callable())
+	if not builder.is_valid(): return
+	_last_cost_preview = builder.call(_selected_ids)
+	label.text = _cost_preview_text(_last_cost_preview)
+	label.tooltip_text = String(_last_cost_preview.get("detail", ""))
+	label.visible = not label.text.is_empty()
+	_queue_cost_layout()
+
+
+func get_cost_preview() -> Dictionary:
+	return _last_cost_preview.duplicate(true)
+
+
+func _queue_cost_layout() -> void:
+	if _cost_preview_label == null or not is_inside_tree(): return
+	_cost_layout_revision += 1
+	_fit_cost_layout.call_deferred(_cost_layout_revision)
+
+
+func _fit_cost_layout(revision: int) -> void:
+	for frame in range(3):
+		if not is_inside_tree() or not visible or is_queued_for_deletion(): return
+		await get_tree().process_frame
+	if revision == _cost_layout_revision and is_inside_tree() and visible and not is_queued_for_deletion():
+		apply_selection_layout(_layout_mobile_mode)
 
 
 func _refresh_card_availability() -> void:
@@ -373,7 +456,9 @@ func apply_selection_layout(mobile: bool) -> void:
 			var card_width := (124 if count >= 5 else 142) if not mobile else (76 if count >= 4 else 106)
 			# Reserve the panel padding, one header row, and its gap before sizing
 			# full card faces. Short portrait screens have less room than tall ones.
-			var card_height := mini(216, floori(size.y * MOBILE_SELECTED_AREA.size.y - 71.0)) if mobile else 216
+			var preview_height := _cost_preview_label.get_combined_minimum_size().y + 8.0 if _cost_preview_label != null and _cost_preview_label.visible else 0.0
+			var area_height := size.y * (MOBILE_SELECTED_AREA.size.y if mobile else DESKTOP_SELECTED_AREA.size.y)
+			var card_height := mini(216, floori(area_height - 71.0 - preview_height))
 			slot.set_card_size(Vector2(card_width, maxi(128, card_height)), mobile)
 			row.alignment = BoxContainer.ALIGNMENT_BEGIN
 			row.size_flags_vertical = Control.SIZE_SHRINK_BEGIN

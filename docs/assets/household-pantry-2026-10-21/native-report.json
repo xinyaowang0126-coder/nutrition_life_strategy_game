@@ -1,0 +1,23 @@
+{
+  "1280x720": {
+    "errors": [],
+    "meals": 2,
+    "phase": "lunch_action",
+    "scope": "Independent native window, actual viewport mouse and keyboard events. First-day cooking, safe cold storage and next-meal reheat; explicit temporary shortage fixture restored before cooking. No browser or real-device claim.",
+    "window": "(1280, 720)"
+  },
+  "640x960": {
+    "errors": [],
+    "meals": 2,
+    "phase": "lunch_action",
+    "scope": "Independent native window, actual viewport mouse and keyboard events. First-day cooking, safe cold storage and next-meal reheat; explicit temporary shortage fixture restored before cooking. No browser or real-device claim.",
+    "window": "(640, 960)"
+  },
+  "390x640": {
+    "errors": [],
+    "meals": 2,
+    "phase": "lunch_action",
+    "scope": "Independent native window, actual viewport mouse and keyboard events. First-day cooking, safe cold storage and next-meal reheat; explicit temporary shortage fixture restored before cooking. No browser or real-device claim.",
+    "window": "(390, 640)"
+  }
+}

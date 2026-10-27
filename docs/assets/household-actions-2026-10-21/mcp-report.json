@@ -1,0 +1,80 @@
+{
+  "setup": "Memory save backend; explicit day-7 dinner fixture at progress 62/70 and energy 24, then 70/70 and energy 40. Actual viewport mouse input activates the performance card.",
+  "shortfall": {
+    "note": "今晚汇演 · 还差排练8、精力1",
+    "enabled": false,
+    "performed": false,
+    "phase": "dinner_action",
+    "records": 0
+  },
+  "ready": {
+    "note": "准备好了 · 选择“去参加汇演”上台。",
+    "enabled": true,
+    "performed": false,
+    "phase": "dinner_action"
+  },
+  "actual_performance": {
+    "result": {
+      "action_records": [
+        {
+          "cost": 0,
+          "id": "perform",
+          "name": "去参加汇演",
+          "slots": 1,
+          "stat_delta": {
+            "energy": -10,
+            "mood": 8,
+            "satiety": -2,
+            "stress": -8,
+            "study_progress": 0
+          },
+          "stock_added": {}
+        }
+      ],
+      "background": "res://assets/generated/stories/zhou_home.png",
+      "energy": 22,
+      "night_note": "这一周唱完了，今晚回家歇一歇。",
+      "performed": true,
+      "phase": "sleep",
+      "prompt": "回到家，今晚怎么收尾？",
+      "saved": 0
+    },
+    "source": "game"
+  },
+  "logs": {
+    "source": "game",
+    "lines": [
+      {
+        "level": "info",
+        "run_id": "r10336326-8",
+        "source": "game",
+        "text": "[godot_ai game_helper] registered mcp capture (debugger active=true, logger=true)\n"
+      }
+    ],
+    "total_count": 1,
+    "returned_count": 1,
+    "offset": 0,
+    "limit": 25,
+    "has_more": false,
+    "run_id": "r10336326-8",
+    "is_running": true,
+    "dropped_count": 0,
+    "stale_run_id": false,
+    "current_run_id": "r10336326-8",
+    "helper_live": true,
+    "session_active": true,
+    "game_status": {
+      "active": true,
+      "editor_log_cursor": 0,
+      "elapsed_msec": 183102,
+      "helper_expected": true,
+      "helper_live": true,
+      "ready": true,
+      "ready_wait_msec": 20000,
+      "run_started_msec": 10336323,
+      "run_token": 8,
+      "session_active": true,
+      "status": "live"
+    }
+  }
+}

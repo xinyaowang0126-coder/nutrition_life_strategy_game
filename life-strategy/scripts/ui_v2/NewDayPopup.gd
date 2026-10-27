@@ -35,6 +35,7 @@ var _continue_locked := false
 
 func _ready() -> void:
 	_ready_finished = true
+	body_scroll.follow_focus = true
 	continue_button.pressed.connect(_on_continue_pressed)
 	recovery_details_button.pressed.connect(func() -> void: recovery_details_requested.emit())
 	resized.connect(_apply_layout)
@@ -173,7 +174,7 @@ func _finish_show() -> void:
 	_motion_tween.tween_property(dim, "modulate:a", 1.0, 0.18)
 	_motion_tween.tween_property(paper_host, "modulate:a", 1.0, 0.18)
 	_motion_tween.tween_property(paper_host, "scale", Vector2.ONE, 0.22)
-	continue_button.grab_focus()
+	if not continue_button.disabled: continue_button.grab_focus()
 
 
 func _apply_layout() -> void:
@@ -208,7 +209,7 @@ func _sort_container_tree(container: Container) -> void:
 
 
 func _on_continue_pressed() -> void:
-	if continue_button.disabled:
+	if not is_visible_in_tree() or continue_button.disabled:
 		return
 	if _continue_locked:
 		return
@@ -233,5 +234,13 @@ func _reset_visuals() -> void:
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	if visible and event.is_action_pressed("ui_accept") and not event.is_echo():
+		var owner := get_viewport().gui_get_focus_owner()
+		if owner != null and owner != continue_button: return
 		get_viewport().set_input_as_handled()
 		_on_continue_pressed()
+
+
+func _input(event: InputEvent) -> void:
+	if not is_visible_in_tree() or not is_processing_unhandled_key_input() or continue_button.disabled: return
+	if event.is_action_pressed("ui_cancel", true) or HouseholdUI.handle_modal_key(self, event, true):
+		get_viewport().set_input_as_handled()

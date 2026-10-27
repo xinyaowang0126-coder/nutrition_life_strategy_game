@@ -1,0 +1,545 @@
+{
+  "scope": "Two legal scripted routes across ten seeds, not human player success rates. Fresh twice and batch+reheat share pantry costs. Absolute energy may saturate or differ with other actions; the 35 saved points are preparation effort.",
+  "rows": [
+    {
+      "balance": 173,
+      "condiments": {
+        "salt_g": 32,
+        "soy_ml": 20,
+        "sugar_g": 40
+      },
+      "effort": 105,
+      "ending": "stable_endurance",
+      "energy": 96,
+      "goal": 82,
+      "ingredients": {
+        "apple": 1,
+        "egg": 1,
+        "fish": 0,
+        "greens": 3,
+        "milk": 3,
+        "millet": 2,
+        "oatmeal": 0,
+        "rice_plain": 0,
+        "tofu": 1,
+        "tomato": 4
+      },
+      "performed": true,
+      "policy": "fresh",
+      "seed": 0
+    },
+    {
+      "balance": 176,
+      "condiments": {
+        "salt_g": 32,
+        "soy_ml": 20,
+        "sugar_g": 40
+      },
+      "effort": 70,
+      "ending": "stable_endurance",
+      "energy": 97,
+      "goal": 82,
+      "ingredients": {
+        "apple": 1,
+        "egg": 1,
+        "fish": 0,
+        "greens": 3,
+        "milk": 3,
+        "millet": 2,
+        "oatmeal": 0,
+        "rice_plain": 0,
+        "tofu": 1,
+        "tomato": 4
+      },
+      "performed": true,
+      "policy": "batch",
+      "seed": 0
+    },
+    {
+      "balance": 172,
+      "condiments": {
+        "salt_g": 32,
+        "soy_ml": 20,
+        "sugar_g": 40
+      },
+      "effort": 105,
+      "ending": "stable_endurance",
+      "energy": 96,
+      "goal": 82,
+      "ingredients": {
+        "apple": 1,
+        "egg": 1,
+        "fish": 0,
+        "greens": 3,
+        "milk": 3,
+        "millet": 2,
+        "oatmeal": 0,
+        "rice_plain": 0,
+        "tofu": 1,
+        "tomato": 4
+      },
+      "performed": true,
+      "policy": "fresh",
+      "seed": 1
+    },
+    {
+      "balance": 173,
+      "condiments": {
+        "salt_g": 32,
+        "soy_ml": 20,
+        "sugar_g": 40
+      },
+      "effort": 70,
+      "ending": "stable_endurance",
+      "energy": 96,
+      "goal": 82,
+      "ingredients": {
+        "apple": 1,
+        "egg": 1,
+        "fish": 0,
+        "greens": 3,
+        "milk": 3,
+        "millet": 2,
+        "oatmeal": 0,
+        "rice_plain": 0,
+        "tofu": 1,
+        "tomato": 4
+      },
+      "performed": true,
+      "policy": "batch",
+      "seed": 1
+    },
+    {
+      "balance": 175,
+      "condiments": {
+        "salt_g": 32,
+        "soy_ml": 20,
+        "sugar_g": 40
+      },
+      "effort": 105,
+      "ending": "stable_endurance",
+      "energy": 96,
+      "goal": 82,
+      "ingredients": {
+        "apple": 1,
+        "egg": 1,
+        "fish": 0,
+        "greens": 3,
+        "milk": 3,
+        "millet": 2,
+        "oatmeal": 0,
+        "rice_plain": 0,
+        "tofu": 1,
+        "tomato": 4
+      },
+      "performed": true,
+      "policy": "fresh",
+      "seed": 2
+    },
+    {
+      "balance": 173,
+      "condiments": {
+        "salt_g": 32,
+        "soy_ml": 20,
+        "sugar_g": 40
+      },
+      "effort": 70,
+      "ending": "stable_endurance",
+      "energy": 97,
+      "goal": 82,
+      "ingredients": {
+        "apple": 1,
+        "egg": 1,
+        "fish": 0,
+        "greens": 3,
+        "milk": 3,
+        "millet": 2,
+        "oatmeal": 0,
+        "rice_plain": 0,
+        "tofu": 1,
+        "tomato": 4
+      },
+      "performed": true,
+      "policy": "batch",
+      "seed": 2
+    },
+    {
+      "balance": 169,
+      "condiments": {
+        "salt_g": 32,
+        "soy_ml": 20,
+        "sugar_g": 40
+      },
+      "effort": 105,
+      "ending": "stable_endurance",
+      "energy": 97,
+      "goal": 82,
+      "ingredients": {
+        "apple": 1,
+        "egg": 1,
+        "fish": 0,
+        "greens": 3,
+        "milk": 3,
+        "millet": 2,
+        "oatmeal": 0,
+        "rice_plain": 0,
+        "tofu": 1,
+        "tomato": 4
+      },
+      "performed": true,
+      "policy": "fresh",
+      "seed": 3
+    },
+    {
+      "balance": 168,
+      "condiments": {
+        "salt_g": 32,
+        "soy_ml": 20,
+        "sugar_g": 40
+      },
+      "effort": 70,
+      "ending": "stable_endurance",
+      "energy": 96,
+      "goal": 82,
+      "ingredients": {
+        "apple": 1,
+        "egg": 1,
+        "fish": 0,
+        "greens": 3,
+        "milk": 3,
+        "millet": 2,
+        "oatmeal": 0,
+        "rice_plain": 0,
+        "tofu": 1,
+        "tomato": 4
+      },
+      "performed": true,
+      "policy": "batch",
+      "seed": 3
+    },
+    {
+      "balance": 165,
+      "condiments": {
+        "salt_g": 32,
+        "soy_ml": 20,
+        "sugar_g": 40
+      },
+      "effort": 105,
+      "ending": "stable_endurance",
+      "energy": 95,
+      "goal": 82,
+      "ingredients": {
+        "apple": 1,
+        "egg": 1,
+        "fish": 0,
+        "greens": 3,
+        "milk": 3,
+        "millet": 2,
+        "oatmeal": 0,
+        "rice_plain": 0,
+        "tofu": 1,
+        "tomato": 4
+      },
+      "performed": true,
+      "policy": "fresh",
+      "seed": 7
+    },
+    {
+      "balance": 170,
+      "condiments": {
+        "salt_g": 32,
+        "soy_ml": 20,
+        "sugar_g": 40
+      },
+      "effort": 70,
+      "ending": "stable_endurance",
+      "energy": 95,
+      "goal": 82,
+      "ingredients": {
+        "apple": 1,
+        "egg": 1,
+        "fish": 0,
+        "greens": 3,
+        "milk": 3,
+        "millet": 2,
+        "oatmeal": 0,
+        "rice_plain": 0,
+        "tofu": 1,
+        "tomato": 4
+      },
+      "performed": true,
+      "policy": "batch",
+      "seed": 7
+    },
+    {
+      "balance": 173,
+      "condiments": {
+        "salt_g": 32,
+        "soy_ml": 20,
+        "sugar_g": 40
+      },
+      "effort": 105,
+      "ending": "stable_endurance",
+      "energy": 97,
+      "goal": 82,
+      "ingredients": {
+        "apple": 1,
+        "egg": 1,
+        "fish": 0,
+        "greens": 3,
+        "milk": 3,
+        "millet": 2,
+        "oatmeal": 0,
+        "rice_plain": 0,
+        "tofu": 1,
+        "tomato": 4
+      },
+      "performed": true,
+      "policy": "fresh",
+      "seed": 13
+    },
+    {
+      "balance": 174,
+      "condiments": {
+        "salt_g": 32,
+        "soy_ml": 20,
+        "sugar_g": 40
+      },
+      "effort": 70,
+      "ending": "stable_endurance",
+      "energy": 95,
+      "goal": 82,
+      "ingredients": {
+        "apple": 1,
+        "egg": 1,
+        "fish": 0,
+        "greens": 3,
+        "milk": 3,
+        "millet": 2,
+        "oatmeal": 0,
+        "rice_plain": 0,
+        "tofu": 1,
+        "tomato": 4
+      },
+      "performed": true,
+      "policy": "batch",
+      "seed": 13
+    },
+    {
+      "balance": 166,
+      "condiments": {
+        "salt_g": 32,
+        "soy_ml": 20,
+        "sugar_g": 40
+      },
+      "effort": 105,
+      "ending": "stable_endurance",
+      "energy": 97,
+      "goal": 82,
+      "ingredients": {
+        "apple": 1,
+        "egg": 1,
+        "fish": 0,
+        "greens": 3,
+        "milk": 3,
+        "millet": 2,
+        "oatmeal": 0,
+        "rice_plain": 0,
+        "tofu": 1,
+        "tomato": 4
+      },
+      "performed": true,
+      "policy": "fresh",
+      "seed": 42
+    },
+    {
+      "balance": 172,
+      "condiments": {
+        "salt_g": 32,
+        "soy_ml": 20,
+        "sugar_g": 40
+      },
+      "effort": 70,
+      "ending": "stable_endurance",
+      "energy": 97,
+      "goal": 82,
+      "ingredients": {
+        "apple": 1,
+        "egg": 1,
+        "fish": 0,
+        "greens": 3,
+        "milk": 3,
+        "millet": 2,
+        "oatmeal": 0,
+        "rice_plain": 0,
+        "tofu": 1,
+        "tomato": 4
+      },
+      "performed": true,
+      "policy": "batch",
+      "seed": 42
+    },
+    {
+      "balance": 170,
+      "condiments": {
+        "salt_g": 32,
+        "soy_ml": 20,
+        "sugar_g": 40
+      },
+      "effort": 105,
+      "ending": "stable_endurance",
+      "energy": 97,
+      "goal": 82,
+      "ingredients": {
+        "apple": 1,
+        "egg": 1,
+        "fish": 0,
+        "greens": 3,
+        "milk": 3,
+        "millet": 2,
+        "oatmeal": 0,
+        "rice_plain": 0,
+        "tofu": 1,
+        "tomato": 4
+      },
+      "performed": true,
+      "policy": "fresh",
+      "seed": 73
+    },
+    {
+      "balance": 174,
+      "condiments": {
+        "salt_g": 32,
+        "soy_ml": 20,
+        "sugar_g": 40
+      },
+      "effort": 70,
+      "ending": "stable_endurance",
+      "energy": 97,
+      "goal": 82,
+      "ingredients": {
+        "apple": 1,
+        "egg": 1,
+        "fish": 0,
+        "greens": 3,
+        "milk": 3,
+        "millet": 2,
+        "oatmeal": 0,
+        "rice_plain": 0,
+        "tofu": 1,
+        "tomato": 4
+      },
+      "performed": true,
+      "policy": "batch",
+      "seed": 73
+    },
+    {
+      "balance": 172,
+      "condiments": {
+        "salt_g": 32,
+        "soy_ml": 20,
+        "sugar_g": 40
+      },
+      "effort": 105,
+      "ending": "stable_endurance",
+      "energy": 96,
+      "goal": 82,
+      "ingredients": {
+        "apple": 1,
+        "egg": 1,
+        "fish": 0,
+        "greens": 3,
+        "milk": 3,
+        "millet": 2,
+        "oatmeal": 0,
+        "rice_plain": 0,
+        "tofu": 1,
+        "tomato": 4
+      },
+      "performed": true,
+      "policy": "fresh",
+      "seed": 101
+    },
+    {
+      "balance": 170,
+      "condiments": {
+        "salt_g": 32,
+        "soy_ml": 20,
+        "sugar_g": 40
+      },
+      "effort": 70,
+      "ending": "stable_endurance",
+      "energy": 97,
+      "goal": 82,
+      "ingredients": {
+        "apple": 1,
+        "egg": 1,
+        "fish": 0,
+        "greens": 3,
+        "milk": 3,
+        "millet": 2,
+        "oatmeal": 0,
+        "rice_plain": 0,
+        "tofu": 1,
+        "tomato": 4
+      },
+      "performed": true,
+      "policy": "batch",
+      "seed": 101
+    },
+    {
+      "balance": 176,
+      "condiments": {
+        "salt_g": 32,
+        "soy_ml": 20,
+        "sugar_g": 40
+      },
+      "effort": 105,
+      "ending": "stable_endurance",
+      "energy": 97,
+      "goal": 82,
+      "ingredients": {
+        "apple": 1,
+        "egg": 1,
+        "fish": 0,
+        "greens": 3,
+        "milk": 3,
+        "millet": 2,
+        "oatmeal": 0,
+        "rice_plain": 0,
+        "tofu": 1,
+        "tomato": 4
+      },
+      "performed": true,
+      "policy": "fresh",
+      "seed": 211
+    },
+    {
+      "balance": 176,
+      "condiments": {
+        "salt_g": 32,
+        "soy_ml": 20,
+        "sugar_g": 40
+      },
+      "effort": 70,
+      "ending": "stable_endurance",
+      "energy": 97,
+      "goal": 82,
+      "ingredients": {
+        "apple": 1,
+        "egg": 1,
+        "fish": 0,
+        "greens": 3,
+        "milk": 3,
+        "millet": 2,
+        "oatmeal": 0,
+        "rice_plain": 0,
+        "tofu": 1,
+        "tomato": 4
+      },
+      "performed": true,
+      "policy": "batch",
+      "seed": 211
+    }
+  ]
+}

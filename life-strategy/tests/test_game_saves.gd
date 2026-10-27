@@ -43,6 +43,26 @@ func test_start_and_selected_menu_roundtrip_both_stories() -> void:
 		assert_eq(game.selected_food_ids, ["rice_plain"])
 
 
+func test_outlet_changes_keep_legacy_ids_and_frozen_meal_names_readable() -> void:
+	var game := _game()
+	game._choose_meal_source("local_market")
+	# A menu already open in an older build is retained until that meal ends.
+	game.hand = ["milk", "steamed_fish"]
+	game.selected_food_ids = ["milk"]
+	_roundtrip(game)
+	assert_eq(game.hand, ["milk", "steamed_fish"])
+	assert_eq(game.selected_food_ids, ["milk"])
+	game._confirm_food(["milk"])
+	game.today_meal_records[0]["source_name"] = "小超市"
+	_roundtrip(game)
+	assert_eq(game.today_meal_records[0]["source_name"], "小超市")
+	game.phase = "lunch_action"
+	game.day = 4
+	assert_true(game.plan_shared_meal("community"))
+	assert_contains(game.shared_meal.summary(), "家常小馆")
+	assert_true(game.shared_meal.matches(4, "dinner", "community_canteen"))
+
+
 func test_full_random_state_is_exact_and_future_menus_do_not_reroll() -> void:
 	var game := _game("campus_exam", 211)
 	game._choose_meal_source("cafeteria")
@@ -181,9 +201,35 @@ func test_save_dialog_blocks_day_and_summary_keys_and_restores_them() -> void:
 	assert_true(game.daily_summary.next_button.disabled)
 	assert_false(game.new_day_popup.is_processing_unhandled_key_input())
 	assert_true(game.new_day_popup.continue_button.disabled)
-	game._story_dialog._buttons.get_node("close").pressed.emit()
+	game._workspace.close_button.pressed.emit()
 	assert_false(game.new_day_popup.continue_button.disabled)
 	assert_false(game.daily_summary.next_button.disabled)
+
+
+func test_pending_save_dialog_does_not_take_focus_after_scene_exit() -> void:
+	for detached in [false, true]:
+		var viewport := SubViewport.new()
+		viewport.size = Vector2i(1280, 720)
+		track(viewport)
+		(Engine.get_main_loop() as SceneTree).root.add_child(viewport)
+		var scene := Control.new()
+		track(scene)
+		viewport.add_child(scene)
+		var dialog := StoryDialog.new()
+		scene.add_child(dialog)
+		dialog.present("正在保存进度", "请稍候。", [])
+		if detached:
+			viewport.remove_child(scene)
+		else:
+			scene.hide()
+		var next_button := Button.new()
+		viewport.add_child(next_button)
+		next_button.grab_focus()
+		assert_true(dialog.visible)
+		assert_false(dialog.is_visible_in_tree())
+		# The save may finish and leave the scene before this deferred call.
+		dialog._focus_first()
+		assert_eq(viewport.gui_get_focus_owner(), next_button)
 
 
 func test_every_phase_roundtrips_across_real_seven_day_runs() -> void:
@@ -192,10 +238,10 @@ func test_every_phase_roundtrips_across_real_seven_day_runs() -> void:
 		for run_day in range(1, 8):
 			for meal in ["breakfast", "lunch", "dinner"]:
 				_roundtrip(game)
-				game._choose_meal_source("local_market" if id == "choir_week" and meal == "breakfast" else ("community_canteen" if id == "choir_week" else "cafeteria"))
+				game._choose_meal_source("breakfast_shop" if id == "choir_week" and meal == "breakfast" else ("community_canteen" if id == "choir_week" else "cafeteria"))
 				_roundtrip(game)
 				var plate: Array[String] = []
-				for food_id in ["rice_plain", "oatmeal", "egg", "tofu", "millet_porridge", "steamed_egg", "tomato_egg_stir_fry", "soft_tofu_greens", "greens", "tomato", "milk", "plain_yogurt", "apple", "banana", "steamed_fish"]:
+				for food_id in ["steamed_bun", "rice_plain", "oatmeal", "egg", "tofu", "millet_porridge", "steamed_egg", "tomato_egg_stir_fry", "soft_tofu_greens", "greens", "tomato", "milk", "plain_yogurt", "apple", "banana", "steamed_fish"]:
 					if not game.hand.has(food_id): continue
 					game.selected_food_ids = plate.duplicate()
 					if game._can_add_food(food_id): plate.append(food_id)

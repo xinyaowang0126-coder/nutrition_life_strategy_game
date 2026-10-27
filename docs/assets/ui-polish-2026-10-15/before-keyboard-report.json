@@ -1,0 +1,15 @@
+{
+	"errors": [
+		"Escape must return from cooking preview",
+		"Closing preview must restore the preparation button focus",
+		"Escape must close the week menu",
+		"Closing menu must restore the menu button focus",
+		"Tab escaped the save confirmation",
+		"Tab escaped the save confirmation",
+		"Escape must choose the explicit cancel action exactly once",
+		"Busy dialog must not close or activate background controls",
+		"Initial focus must skip disabled slots"
+	],
+	"scope": "Native rendered game with InputEventKey Tab, Shift+Tab, Enter and Escape; in-memory saves only.",
+	"window": "(640, 960)"
+}

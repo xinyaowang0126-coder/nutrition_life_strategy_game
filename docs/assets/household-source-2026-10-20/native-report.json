@@ -1,0 +1,44 @@
+[
+  {
+    "cases": [
+      {
+        "actual_window": "(1280, 720)",
+        "canvas": "(1920.0, 1080.0)",
+        "meals": 1,
+        "mobile": false,
+        "phase": "lunch_action",
+        "resolution": "(1280, 720)"
+      }
+    ],
+    "errors": [],
+    "scope": "Three native window sizes; viewport mouse/nameplate events, keyboard Enter/Escape, source hours, previews and resource invariants. Student references and lunch state are explicit fixtures, not completed days."
+  },
+  {
+    "cases": [
+      {
+        "actual_window": "(640, 960)",
+        "canvas": "(853.0, 1280.0)",
+        "meals": 1,
+        "mobile": true,
+        "phase": "lunch_action",
+        "resolution": "(640, 960)"
+      }
+    ],
+    "errors": [],
+    "scope": "Three native window sizes; viewport mouse/nameplate events, keyboard Enter/Escape, source hours, previews and resource invariants. Student references and lunch state are explicit fixtures, not completed days."
+  },
+  {
+    "cases": [
+      {
+        "actual_window": "(390, 640)",
+        "canvas": "(780.0, 1280.0)",
+        "meals": 1,
+        "mobile": true,
+        "phase": "lunch_action",
+        "resolution": "(390, 640)"
+      }
+    ],
+    "errors": [],
+    "scope": "Three native window sizes; viewport mouse/nameplate events, keyboard Enter/Escape, source hours, previews and resource invariants. Student references and lunch state are explicit fixtures, not completed days."
+  }
+]

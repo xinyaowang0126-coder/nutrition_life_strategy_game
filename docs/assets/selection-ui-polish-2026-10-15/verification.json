@@ -1,0 +1,74 @@
+{
+  "date": "2026-10-15",
+  "full_suite": {
+    "passed": 481,
+    "failed": 0,
+    "total": 481,
+    "suite_count": 42,
+    "duration_ms": 44440
+  },
+  "final_household_ui_suite": {
+    "passed": 15,
+    "failed": 0,
+    "total": 15,
+    "duration_ms": 9272
+  },
+  "native_mobile": {
+    "errors": [],
+    "resized_to": "(1280, 720)",
+    "scope": "Declared market hand with eight real market foods and three selected items; real native mouse and key input for details and removal, plus live window resizing. No purchase or stock consumption.",
+    "window": "(390, 844)"
+  },
+  "native_desktop": {
+    "errors": [],
+    "resized_to": "(390, 844)",
+    "scope": "Declared market hand with eight real market foods and three selected items; real native mouse and key input for details and removal, plus live window resizing. No purchase or stock consumption.",
+    "window": "(1280, 720)"
+  },
+  "native_touch": {
+    "errors": [],
+    "scope": "Native InputEventScreenTouch, ScreenDrag and keyboard events; browser touch handling remains separate.",
+    "selected": [
+      "soft_tofu_greens"
+    ],
+    "window": "(640, 960)"
+  },
+  "web_export": {
+    "path": "artifacts/selection-ui-polish-2026-10-15-web",
+    "bytes": 82974176,
+    "sha256": "75c3e4faa6dfacfe11e6378d097222d81dba521585ffccf548fe59bc1b9f8f98",
+    "resource_audit": "passed",
+    "main_scene": "passed"
+  },
+  "browser": {
+    "date": "2026-10-15",
+    "url": "http://127.0.0.1:8771/index.html",
+    "viewport": {
+      "devicePixelRatio": 1,
+      "height": 884,
+      "width": 708
+    },
+    "scope": "Actual in-app browser mouse and Enter/Escape input against the exported game canvas; screenshots and console only, no hidden game state inspection.",
+    "passed": [
+      "Three selected foods show explicit remove buttons in a two-column grid",
+      "Oats details show the current full-selection reason",
+      "Mouse removal changes the selection from three foods to rice plus tomato",
+      "Enter removes focused rice and retains focus on tomato removal",
+      "Removing the last food disables confirmation and returns focus to the tomato card",
+      "Enter on that card re-adds tomato",
+      "Reopened oats details no longer show the old full-selection reason",
+      "Day 1 breakfast, balance 210, and the visible character values stay unchanged; no preparation confirmation was clicked"
+    ],
+    "console": [],
+    "notTested": [
+      "Real phone hardware touch and screen readers",
+      "A full seven-day browser run",
+      "File import/export or refresh recovery in this iteration",
+      "Narrow milk-card case in the browser; covered by native 390x844 rendering"
+    ],
+    "result": "passed",
+    "publication": "Local candidate only"
+  },
+  "environment_note": "Restricted Windows runs retain the baseline certificate-store startup error; script, resource and export checks pass.",
+  "publication": "Local candidate only. No commit, push or Play changes."
+}

@@ -2,6 +2,7 @@ class_name CompactChoiceCardV2
 extends PanelContainer
 
 const TOUCH_TAP_SLOP := 18.0
+const DecisionPreview := preload("res://scripts/ui_v2/DecisionCostPreview.gd")
 
 signal selected(item_id: String)
 signal detail_requested(payload: Dictionary, anchor_rect: Rect2, pinned: bool)
@@ -36,10 +37,16 @@ var _long_press_triggered := false
 var _touch_index := -1
 var _touch_start_position := Vector2.ZERO
 var _motion_tween: Tween
+var choice_cost_label: Label
 
 
 func _ready() -> void:
 	_ready_finished = true
+	choice_cost_label = HouseholdUI.label("", 15, HouseholdUI.MUTED)
+	choice_cost_label.name = "DecisionCosts"
+	choice_cost_label.hide()
+	$Margin/VBox.add_child(choice_cost_label)
+	$Margin/VBox.move_child(choice_cost_label, select_button.get_index())
 	focus_mode = Control.FOCUS_ALL
 	_make_surface_clickable()
 	select_button.pressed.connect(_emit_selected)
@@ -50,8 +57,8 @@ func _ready() -> void:
 	select_button.focus_exited.connect(_dismiss_detail)
 	# Keyboard focus on a child button must also identify the whole card.
 	for button in [info_button, select_button]:
-		button.focus_entered.connect(_apply_frame_style)
-		button.focus_exited.connect(_apply_frame_style)
+		button.focus_entered.connect(_on_child_focus_changed)
+		button.focus_exited.connect(_on_child_focus_changed)
 	long_press_timer.timeout.connect(_on_long_press_timeout)
 	mouse_entered.connect(_on_hover_started)
 	mouse_exited.connect(_on_hover_ended)
@@ -134,6 +141,9 @@ func _apply_payload() -> void:
 	art.texture = _load_card_art(image_path)
 	art.visible = art.texture != null
 	_apply_quick_stats()
+	choice_cost_label.visible = _mode in ["action", "sleep"]
+	choice_cost_label.text = DecisionPreview.choice(_payload, _mode) if choice_cost_label.visible else ""
+	choice_cost_label.tooltip_text = "行动耗力与时段结束消耗分开列出，卡牌收益另计；确认安排后才结算。"
 	select_button.disabled = not _enabled
 	info_button.disabled = false
 	_update_button_text()
@@ -319,6 +329,10 @@ func _apply_frame_style() -> void:
 
 
 func _target_scale() -> Vector2:
+	# Keyboard focus already has a full-card border. Keep its geometry inside
+	# the rail; scaling after follow_focus has scrolled can clip an end card.
+	if has_focus() or info_button.has_focus() or select_button.has_focus():
+		return Vector2.ONE
 	if _hovered and _enabled:
 		return Vector2(1.045, 1.045)
 	if _selected and _enabled:
@@ -373,11 +387,15 @@ func _on_hover_ended() -> void:
 
 
 func _on_focus_entered() -> void:
-	if _should_ignore_pointer_preview():
-		return
-	request_detail(false)
+	if not _should_ignore_pointer_preview():
+		request_detail(false)
 	_apply_frame_style()
-	_animate_scale(Vector2(1.035, 1.035))
+	_animate_scale(_target_scale())
+
+
+func _on_child_focus_changed() -> void:
+	_apply_frame_style()
+	_animate_scale(_target_scale())
 
 
 func _on_focus_exited() -> void:

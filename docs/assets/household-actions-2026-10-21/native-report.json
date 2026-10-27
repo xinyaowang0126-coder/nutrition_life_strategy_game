@@ -1,0 +1,17 @@
+{
+  "640x960": {
+    "errors": [],
+    "scope": "Independent native window. Paired declared action/night/day-7 fixtures for both stories. Optional actual native mouse/key interactions verify drinking, rehearsing, invitation, performance and a separate first-day-to-next-day route; not a complete week or real device.",
+    "window": "(640, 960)"
+  },
+  "390x640": {
+    "errors": [],
+    "scope": "Independent native window. Paired declared action/night/day-7 fixtures for both stories. Optional actual native mouse/key interactions verify drinking, rehearsing, invitation, performance and a separate first-day-to-next-day route; not a complete week or real device.",
+    "window": "(390, 640)"
+  },
+  "1280x720": {
+    "errors": [],
+    "scope": "Independent native window. Paired declared action/night/day-7 fixtures for both stories. Optional actual native mouse/key interactions verify drinking, rehearsing, invitation, performance and a separate first-day-to-next-day route; not a complete week or real device.",
+    "window": "(1280, 720)"
+  }
+}

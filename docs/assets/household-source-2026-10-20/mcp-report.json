@@ -1,0 +1,66 @@
+{
+  "session": "life-strategy@f77a6c81fa038c45",
+  "baseline": {
+    "result": {
+      "balance": 210,
+      "pantry": {
+        "apple": 3,
+        "egg": 5,
+        "fish": 2,
+        "greens": 5,
+        "milk": 3,
+        "millet": 4,
+        "oatmeal": 4,
+        "rice_plain": 8,
+        "tofu": 5,
+        "tomato": 4
+      },
+      "phase": "breakfast_source",
+      "pinned": true,
+      "records": 0,
+      "source": ""
+    },
+    "source": "game"
+  },
+  "returned": {
+    "result": {
+      "balance": 210,
+      "pantry": {
+        "apple": 3,
+        "egg": 5,
+        "fish": 2,
+        "greens": 5,
+        "milk": 3,
+        "millet": 4,
+        "oatmeal": 4,
+        "rice_plain": 8,
+        "tofu": 5,
+        "tomato": 4
+      },
+      "phase": "breakfast_source",
+      "records": 0,
+      "saved": 0,
+      "workspace": false
+    },
+    "source": "game"
+  },
+  "resized": {
+    "result": {
+      "canvas": {
+        "x": 1920,
+        "y": 1080
+      },
+      "mobile": false,
+      "phase": "breakfast_source",
+      "saved": 0,
+      "window": {
+        "x": 1280,
+        "y": 720
+      },
+      "workspace": false
+    },
+    "source": "game"
+  },
+  "scope": "Actual Godot MCP Enter, mouse source/details/food/prepare/back and Escape events in an isolated in-memory story. Opening and cancelling did not consume pantry, money or a meal.",
+  "resize_note": "Embedded game remained 1280x720; resize attempt is not portrait validation. Portrait evidence comes from independent native processes."
+}

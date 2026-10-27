@@ -1,0 +1,29 @@
+{
+  "date": "2026-10-15",
+  "url": "http://127.0.0.1:8771/index.html",
+  "viewport": {
+    "devicePixelRatio": 1,
+    "height": 884,
+    "width": 708
+  },
+  "scope": "Actual in-app browser mouse and Enter/Escape input against the exported game canvas; screenshots and console only, no hidden game state inspection.",
+  "passed": [
+    "Three selected foods show explicit remove buttons in a two-column grid",
+    "Oats details show the current full-selection reason",
+    "Mouse removal changes the selection from three foods to rice plus tomato",
+    "Enter removes focused rice and retains focus on tomato removal",
+    "Removing the last food disables confirmation and returns focus to the tomato card",
+    "Enter on that card re-adds tomato",
+    "Reopened oats details no longer show the old full-selection reason",
+    "Day 1 breakfast, balance 210, and the visible character values stay unchanged; no preparation confirmation was clicked"
+  ],
+  "console": [],
+  "notTested": [
+    "Real phone hardware touch and screen readers",
+    "A full seven-day browser run",
+    "File import/export or refresh recovery in this iteration",
+    "Narrow milk-card case in the browser; covered by native 390x844 rendering"
+  ],
+  "result": "passed",
+  "publication": "Local candidate only"
+}

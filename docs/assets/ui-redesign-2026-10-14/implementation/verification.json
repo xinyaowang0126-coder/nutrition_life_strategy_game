@@ -1,0 +1,92 @@
+{
+  "date": "2026-10-15",
+  "full_suite": {
+    "total": 467,
+    "passed": 467,
+    "failed": 0,
+    "suite_count": 42,
+    "duration_ms": 39963
+  },
+  "final_ui_suite": {
+    "total": 6,
+    "passed": 6,
+    "failed": 0,
+    "suite_count": 1,
+    "duration_ms": 4455
+  },
+  "native_scope": "Godot engine-rendered screenshots and in-engine mouse/touch/key events; not browser acceptance",
+  "native_mobile_flow": {
+    "errors": [],
+    "phase": "dinner_action",
+    "scope": "Native rendered game, actual mouse clicks and scroll-container navigation; declared day-4 branch fixture.",
+    "window": "(640, 960)"
+  },
+  "native_desktop_flow": {
+    "errors": [],
+    "phase": "dinner_action",
+    "scope": "Native rendered game, actual mouse clicks and scroll-container navigation; declared day-4 branch fixture.",
+    "window": "(1280, 720)"
+  },
+  "native_touch": {
+    "errors": [],
+    "scope": "Native InputEventScreenTouch, ScreenDrag and keyboard events; browser touch handling remains separate.",
+    "selected": [
+      "rice_plain",
+      "soft_tofu_greens"
+    ],
+    "window": "(640, 960)"
+  },
+  "web_export": {
+    "path": "artifacts\\ui-redesign-2026-10-15-web",
+    "pck_bytes": 82953696,
+    "pck_sha256": "f689cf5031e36ceb503bb418ca14ffebb5a986bd330168e311a996298478a4a0",
+    "release_resource_audit": "passed",
+    "last_build_log": ".cache/ui-redesign-2026-10-14/export-hover.log"
+  },
+  "browser_qa": {
+    "date": "2026-10-15",
+    "url": "http://127.0.0.1:8768/index.html",
+    "scope": "Actual in-app browser UI clicks, wheel scrolling, responsive viewport switching, refresh and manual save/load; no hidden game runtime inspection.",
+    "viewports": [
+      {
+        "width": 640,
+        "height": 960,
+        "devicePixelRatio": 1
+      },
+      {
+        "width": 1280,
+        "height": 720,
+        "devicePixelRatio": 1
+      }
+    ],
+    "passed": [
+      "Rendering of existing shell, portrait, raw ingredient atlas and bundled Chinese fonts",
+      "Unsafe leftover batch discarded without settling breakfast",
+      "Rice plus soft tofu greens cooking preview",
+      "Counter and fridge options update quantities while inventory stays at rice 8, tofu 5 and greens 5",
+      "Back to selection preserves both chosen foods",
+      "Responsive layout switches preserve the active cooking plan",
+      "Confirm cooking advances once to breakfast_action",
+      "Manual slot 1 saves with visible acknowledgement",
+      "Browser refresh exposes the saved breakfast-after progress",
+      "Continue after refresh preserves energy 59, mood 56, satiety 76, stress 35, stability 60, goal 0 and budget 210",
+      "Only one breakfast recipe record after refresh",
+      "Stock after refresh is rice 6, tofu 3, greens 3, salt 38g and soy 50mL; two refrigerated dishes remain",
+      "Manual slot 1 can be loaded after advancing to lunch and restores breakfast_action plus original stats",
+      "Selected and hovered toggle text remains readable after the style fix"
+    ],
+    "consoleErrors": [],
+    "consoleWarnings": [],
+    "viewportOverrideReset": true,
+    "notTested": [
+      "Real phone hardware touch",
+      "Screen reader semantics for the Godot canvas",
+      "Browser import/export file picker",
+      "A complete seven-day browser run"
+    ],
+    "publication": "Local preview only; production Play, commit and push unchanged",
+    "result": "passed"
+  },
+  "publication": "No commit, push or production Play bundle changes in this redesign.",
+  "design_qa_result": "passed"
+}

@@ -1,0 +1,138 @@
+{
+  "session_id": "life-strategy@666e80d2126764b4",
+  "baseline": {
+    "result": {
+      "background": "res://assets/generated/stories/home_source/zhou-home-source-wide-v1.png",
+      "go_out": {
+        "x": 1139.19995117188,
+        "y": 428.436370849609
+      },
+      "pending": false,
+      "phase": "breakfast_source",
+      "records": 0,
+      "state": {
+        "balance": 210,
+        "energy": 60,
+        "goal_progress": 0,
+        "goal_target": 70,
+        "mood": 55,
+        "satiety": 40,
+        "stability": 53,
+        "stress": 35
+      },
+      "stock": {
+        "apple": 3,
+        "egg": 5,
+        "fish": 2,
+        "greens": 5,
+        "milk": 3,
+        "millet": 4,
+        "oatmeal": 4,
+        "rice_plain": 8,
+        "tofu": 5,
+        "tomato": 4
+      },
+      "workspace": false
+    },
+    "source": "game"
+  },
+  "cancelled": {
+    "result": {
+      "background": "res://assets/generated/stories/home_source/zhou-home-source-wide-v1.png",
+      "phase": "breakfast_source",
+      "popup": false,
+      "source": "",
+      "state": {
+        "balance": 210,
+        "energy": 60,
+        "goal_progress": 0,
+        "goal_target": 70,
+        "mood": 55,
+        "satiety": 40,
+        "stability": 53,
+        "stress": 35
+      },
+      "stock": {
+        "apple": 3,
+        "egg": 5,
+        "fish": 2,
+        "greens": 5,
+        "milk": 3,
+        "millet": 4,
+        "oatmeal": 4,
+        "rice_plain": 8,
+        "tofu": 5,
+        "tomato": 4
+      }
+    },
+    "source": "game"
+  },
+  "market": {
+    "result": {
+      "back": {
+        "x": 628.400024414063,
+        "y": 607.760009765625
+      },
+      "background": "res://assets/generated/stories/home_source/convenience_background_day-v1.png",
+      "phase": "breakfast",
+      "source": "local_market",
+      "state": {
+        "balance": 210,
+        "energy": 60,
+        "goal_progress": 0,
+        "goal_target": 70,
+        "mood": 55,
+        "satiety": 40,
+        "stability": 53,
+        "stress": 35
+      },
+      "stock": {
+        "apple": 3,
+        "egg": 5,
+        "fish": 2,
+        "greens": 5,
+        "milk": 3,
+        "millet": 4,
+        "oatmeal": 4,
+        "rice_plain": 8,
+        "tofu": 5,
+        "tomato": 4
+      },
+      "workspace": false
+    },
+    "source": "game"
+  },
+  "returned": {
+    "result": {
+      "background": "res://assets/generated/stories/home_source/zhou-home-source-wide-v1.png",
+      "phase": "breakfast_source",
+      "records": 0,
+      "source": "",
+      "state": {
+        "balance": 210,
+        "energy": 60,
+        "goal_progress": 0,
+        "goal_target": 70,
+        "mood": 55,
+        "satiety": 40,
+        "stability": 53,
+        "stress": 35
+      },
+      "stock": {
+        "apple": 3,
+        "egg": 5,
+        "fish": 2,
+        "greens": 5,
+        "milk": 3,
+        "millet": 4,
+        "oatmeal": 4,
+        "rice_plain": 8,
+        "tofu": 5,
+        "tomato": 4
+      },
+      "workspace": false
+    },
+    "source": "game"
+  },
+  "scope": "Godot MCP Enter and real runtime mouse/Escape events. Inspecting outings did not leave home; cancellation stayed home; selecting the market showed its daytime interior; Back returned home. State, pantry and meal count remained unchanged in this in-memory preview run."
+}

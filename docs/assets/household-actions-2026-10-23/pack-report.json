@@ -1,0 +1,61 @@
+{
+  "date": "2026-10-23",
+  "audit": {
+    "path": "E:\\nutrition_life_strategy_game\\.cache\\household-action-web\\index.pck",
+    "bytes": 115506960,
+    "entries": 408,
+    "project_settings_header": "ECFG",
+    "shader": [
+      "scripts/stories/PropTint.gdshader"
+    ],
+    "assets": [
+      "assets/generated/stories/actions/zhou_call_friend-v1.png.import",
+      "assets/generated/stories/actions/zhou_group_rehearsal-v1.png.import",
+      "assets/generated/stories/actions/zhou_perform-v1.png.import",
+      "assets/generated/stories/actions/zhou_rehearse-v1.png.import",
+      "assets/generated/stories/night/zhou_home_night-v1.png.import"
+    ]
+  },
+  "runtime": {
+    "errors": [],
+    "game_script": true,
+    "phase": "breakfast_source",
+    "scope": "Matching Godot desktop runtime loading textures and initializing the choir game from the exported Web PCK; not browser execution.",
+    "story": "choir_week",
+    "textures": [
+      {
+        "height": 1254,
+        "path": "res://assets/generated/stories/actions/zhou_rehearse-v1.png",
+        "width": 1254
+      },
+      {
+        "height": 1254,
+        "path": "res://assets/generated/stories/actions/zhou_group_rehearsal-v1.png",
+        "width": 1254
+      },
+      {
+        "height": 1254,
+        "path": "res://assets/generated/stories/actions/zhou_perform-v1.png",
+        "width": 1254
+      },
+      {
+        "height": 1254,
+        "path": "res://assets/generated/stories/actions/zhou_call_friend-v1.png",
+        "width": 1254
+      },
+      {
+        "height": 941,
+        "path": "res://assets/generated/stories/night/zhou_home_night-v1.png",
+        "width": 1672
+      }
+    ]
+  },
+  "runtime_error_lines": 0,
+  "gate_checks": 30,
+  "scope": "Exported Web PCK resource audit and matching desktop-engine boot. Actual browser evidence is recorded separately.",
+  "candidate": {
+    "directory": "E:\\nutrition_life_strategy_game\\artifacts\\household-actions-2026-10-23-web",
+    "pck_sha256": "d4cf4b30445f0cd637c947aadc708cbe50d9ad204806d5cbcc8105c9103d68ea",
+    "matches_verified_pack": true
+  }
+}

@@ -63,6 +63,16 @@ func apply_selection_layout(mobile: bool) -> void:
 	super.apply_selection_layout(mobile)
 	if _ready_finished:
 		stock_grid.columns = 2 if mobile else 5
+		# The inventory shelf has a heading and an inner margin above its
+		# scroll area. Keep that chrome compact so a whole food card still fits
+		# on short portrait screens alongside the new decision-cost row.
+		var margin := get_node("Layout/PantryPanel/PantryMargin") as MarginContainer
+		for side in ["margin_left", "margin_right"]:
+			margin.add_theme_constant_override(side, 14 if mobile else 22)
+		for side in ["margin_top", "margin_bottom"]:
+			margin.add_theme_constant_override(side, 8 if mobile else 18)
+		(get_node("Layout/PantryPanel/PantryMargin/Pantry") as VBoxContainer).add_theme_constant_override("separation", 8 if mobile else 12)
+		(get_node("Layout/PantryPanel/PantryMargin/Pantry/CabinetHeader/CabinetTitle") as Label).add_theme_font_size_override("font_size", 24 if mobile else 28)
 
 
 func _get_layout_paths() -> Dictionary:

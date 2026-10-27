@@ -1,0 +1,58 @@
+{
+  "date": "2026-10-23",
+  "url": "http://127.0.0.1:8881/",
+  "input": "Actual in-app-browser mouse input, visual Canvas inspection; no injected game state",
+  "testedViewports": [
+    {
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "width": 390,
+      "height": 640
+    },
+    {
+      "width": 640,
+      "height": 960
+    }
+  ],
+  "choirRoute": [
+    "Breakfast: soft tofu with greens and rice; one extra portion refrigerated",
+    "Morning: rehearse",
+    "Lunch: reheat the two saved dishes",
+    "Afternoon: rest",
+    "Dinner: community canteen oatmeal and steamed egg, 6 yuan",
+    "Evening: rest; early sleep",
+    "Daily summary: three meals recorded, rehearsal 8/70, balance 204",
+    "Advance to day 2; reload; continue the choir story"
+  ],
+  "restored": {
+    "day": 2,
+    "phase": "before breakfast",
+    "balance": 204,
+    "rehearsal": 8,
+    "energy": 78,
+    "mood": 65,
+    "satiety": 62,
+    "stress": 27
+  },
+  "clockVerification": "After rebuilding, vector clock visibly renders on the shared student night screen at desktop and narrow sizes",
+  "campusScope": "Skipped meal/action flow only to reach night for shared-control verification; not a normal meal strategy or a full week",
+  "crossStoryIsolation": "Student day 1 before sleep, rehearsal 0/70 and balance 150; choir day 2 before breakfast, rehearsal 8/70 and balance 204",
+  "consoleWarningsAndErrors": [],
+  "screenshots": [
+    "01-narrow-cold-plan.jpg",
+    "02-narrow-action.jpg",
+    "03-narrow-reheated-action.jpg",
+    "04-night-before-icon-fix.jpg",
+    "05-day-one-summary.jpg",
+    "06-day-two-before-reload.jpg",
+    "07-reload-continue-entry.jpg",
+    "08-day-two-restored.jpg",
+    "09-desktop-clock-fixed.jpg",
+    "10-narrow-clock-fixed.jpg",
+    "11-independent-story-progress.jpg",
+    "12-day-two-final.jpg"
+  ],
+  "limitation": "No complete seven-day browser playthrough, real-phone touch or file import/export verification"
+}

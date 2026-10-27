@@ -1,0 +1,107 @@
+{
+  "tool": "built-in image_gen",
+  "date": "2026-10-23",
+  "reference": "res://assets/generated/stories/zhou_home.png",
+  "assets": [
+    {
+      "file": "zhou-kitchen-v1.png",
+      "prompt": "Use case: illustration-story. Asset type: independent environment background for a Chinese daily-life strategy game about 66-year-old Aunt Zhou. The input image is STYLE and MATERIALS reference only: warm hand-painted gouache/watercolor, delicate realistic linework, soft paper grain, muted sage green wood and honey-colored wood, natural light, a lived-in ordinary Chinese neighborhood. Make a NEW location view, not a living room overview. No characters, text, lettering, signage text, logos, UI, borders or watermark. Landscape 16:9 composition. The game displays a paper menu across the RIGHT 60% and a character in the BOTTOM LEFT: keep the main recognizable setting details in the UPPER LEFT 40%, from 15% to 60% of image height, large and readable. Right side should remain a believable but simpler continuation of the setting, never a blank rectangle. Primary request: close view inside Aunt Zhou's small home kitchen. In the upper-left foreground show a large wooden cutting board with a kitchen knife laid safely flat and cut tomato and leafy vegetables, beside a sage-green tiled gas stovetop with a black iron wok and a lidded cooking pot. Board, stove, wok, and pot must all be clearly recognizable and prominent. The countertop spans the view, with hanging ladle and spatula, a window and a few small condiment jars. Camera looks gently down at the work surface; no dining table, no living room, no open fridge. A practical kitchen, not a luxury showroom.",
+      "source": "C:\\Users\\xywan\\.codex\\generated_images\\01a15e2f-c328-79a0-aabe-1f797285f94d\\exec-3bbef398-3c4a-4d75-bbcb-1de1dc7e2124.png",
+      "dimensions": [
+        1672,
+        941
+      ],
+      "sha256": "fdc5dc171b4c091053f64f4097691312c40f5507f3c9ab1cd485d6a9f2a654dc",
+      "project_path": "res://assets/generated/stories/locations/zhou-kitchen-v1.png"
+    },
+    {
+      "file": "zhou-open-fridge-v1.png",
+      "prompt": "Use case: illustration-story. Asset type: independent environment background for a Chinese daily-life strategy game about 66-year-old Aunt Zhou. The input image is STYLE and MATERIALS reference only: warm hand-painted gouache/watercolor, delicate realistic linework, soft paper grain, muted sage green wood and honey-colored wood, natural light, a lived-in ordinary Chinese neighborhood. Make a NEW location view, not a living room overview. No characters, text, lettering, signage text, logos, UI, borders or watermark. Landscape 16:9 composition. The game displays a paper menu across the RIGHT 60% and a character in the BOTTOM LEFT: keep the main recognizable setting details in the UPPER LEFT 40%, from 15% to 60% of image height, large and readable. Right side should remain a believable but simpler continuation of the setting, never a blank rectangle. Primary request: close view of a fully OPEN household refrigerator, filling most of the LEFT 42% of the image. Its cool-lit shelves, open door, crisper drawers and stored ingredients are unmistakable and visible, viewed slightly from above. Top shelves have a few neatly CLOSED transparent food containers with cooked food, lower shelves eggs and uncut vegetables, bottom drawers greens and tomatoes; door has sealed milk cartons without branding or text. Door swung right with its inside shelves in view. Adjacent simple sage-green kitchen cabinets and a clean kitchen wall continue softly on the right. This is an open fridge inventory scene, not a closed fridge or a living room.",
+      "source": "C:\\Users\\xywan\\.codex\\generated_images\\01a15e2f-c328-79a0-aabe-1f797285f94d\\exec-63d06e4b-fab5-4003-bdf9-f847d6b85519.png",
+      "dimensions": [
+        1672,
+        941
+      ],
+      "sha256": "12d9a3776dd1665f62ba0331b55c3f3debb3379a304b2182b4fa6159d8928310",
+      "project_path": "res://assets/generated/stories/locations/zhou-open-fridge-v1.png"
+    },
+    {
+      "file": "zhou-market-wide-v1.png",
+      "prompt": "Use case: illustration-story. Asset type: full-screen marketplace selection background for Aunt Zhou's Chinese daily-life game. Use the reference image ONLY for the same warm, carefully hand-painted gouache/watercolor storybook realism and muted sage, cream, wood palette. Create a NEW ordinary Chinese neighborhood MARKET LANE in a wide 16:9 view. Three distinct inviting shopfronts are arranged LEFT to RIGHT across the upper two thirds: a breakfast shop on the LEFT with bamboo steamers, porridge pots and a small service window under a faded rust-orange awning; a small home-style restaurant at CENTER with a stove, steaming food and two wooden dining tables under a sage awning; a fruit stall on the RIGHT with crates of apples, bananas and citrus under a cream striped canopy. Each storefront must be distinct, have no written signs, and be clearly recognizable from their objects. Quiet paved lane foreground with space for UI and a small character at bottom left; trees, bicycles and apartment buildings recede behind. Friendly ordinary daily life, soft natural daylight. No people, text, lettering, logos, UI, decorative borders, or watermark. Not a campus, not a canteen, no supermarket aisles.",
+      "source": "C:\\Users\\xywan\\.codex\\generated_images\\01a15e2f-c328-79a0-aabe-1f797285f94d\\exec-01735f92-8e8b-4540-8e01-09bdb4f2443b.png",
+      "dimensions": [
+        1672,
+        941
+      ],
+      "sha256": "cb6579042d32549edfee7808b9cc31efe98d823b308e26a3846af446532327c9",
+      "project_path": "res://assets/generated/stories/locations/zhou-market-wide-v1.png"
+    },
+    {
+      "file": "zhou-market-portrait-v1.png",
+      "prompt": "Use case: illustration-story. Asset type: portrait 9:16 full-screen marketplace background for the same Aunt Zhou daily-life game. Reference image is style only: warm detailed hand-painted gouache/watercolor Chinese neighborhood. A vertical view down a narrow outdoor MARKET LANE. In the UPPER TWO THIRDS of image clearly show three small neighboring shopfronts: LEFT upper a breakfast window with bamboo steamers and porridge pot under rust-orange awning; CENTER further down a home-style small restaurant under sage awning with two dining tables; RIGHT foreground a fruit stall under cream canopy with apples, bananas and citrus in crates. Compose all three recognizable shops entirely between 13% and 59% of image height; bottom third is quiet paving for character/status overlays. Realistic cozy ordinary Chinese residential street, warm natural light, soft paper grain. No people, no text, letters, numbers, readable signs, logos, UI, border or watermark. Not a campus or community canteen.",
+      "source": "C:\\Users\\xywan\\.codex\\generated_images\\01a15e2f-c328-79a0-aabe-1f797285f94d\\exec-deaab04a-6ab8-4b67-8fba-ae464dda3e97.png",
+      "dimensions": [
+        941,
+        1672
+      ],
+      "sha256": "f2e6609f56436cf38cf5441ed3d99ca2b7977f953d2b73910acdf6dcba94dd3d",
+      "project_path": "res://assets/generated/stories/locations/zhou-market-portrait-v1.png"
+    },
+    {
+      "file": "zhou-breakfast-shop-v1.png",
+      "prompt": "Use case: illustration-story. Asset type: independent eating-location background in Aunt Zhou's Chinese daily-life strategy game. Input image is STYLE reference only; new environment view in same warm hand-painted gouache/watercolor realism, fine linework, soft paper grain, muted sage-green, cream, honey wood palette. Landscape 16:9. Main recognizable shop objects must be large in the LEFT 40%, between 15% and 60% of image height, since a paper menu covers the right 60% and a character covers bottom left. The right side continues the scene in a quieter believable way. No people, text, letters, numbers, branding, readable signs, UI, decorative frame or watermark. Primary request: a close view of an ordinary neighborhood BREAKFAST SHOP service counter. On the upper-left counter stand open round bamboo steamers containing several plump white steamed buns, a large stainless porridge pot with a ladle, a smaller pot of boiled eggs, and a ceramic bowl of yellow millet porridge. Rust-orange cloth awning above, simple tiled counter, small wooden stools and a narrow opening to the warm kitchen in the back. Modest, freshly open, welcoming everyday morning light. Clearly a tiny breakfast shop, not a cafeteria, supermarket or restaurant with many identical tray counters.",
+      "source": "C:\\Users\\xywan\\.codex\\generated_images\\01a15e2f-c328-79a0-aabe-1f797285f94d\\exec-c32d5c79-5512-4086-8f30-05beadadb2c7.png",
+      "dimensions": [
+        1672,
+        941
+      ],
+      "sha256": "8f1984e61c5aa1af781713d4db2f34dbff10b4d0d4409a60c385458d0c66c4f2",
+      "project_path": "res://assets/generated/stories/locations/zhou-breakfast-shop-v1.png"
+    },
+    {
+      "file": "zhou-homestyle-diner-v1.png",
+      "prompt": "Use case: illustration-story. Asset type: independent eating-location background in Aunt Zhou's Chinese daily-life strategy game. Input image is STYLE reference only; new environment view in same warm hand-painted gouache/watercolor realism, fine linework, soft paper grain, muted sage-green, cream, honey wood palette. Landscape 16:9. Main recognizable shop objects must be large in the LEFT 40%, between 15% and 60% of image height, since a paper menu covers the right 60% and a character covers bottom left. The right side continues the scene in a quieter believable way. No people, text, letters, numbers, branding, readable signs, UI, decorative frame or watermark. Primary request: inside an ordinary small FAMILY-STYLE CHINESE RESTAURANT beside a residential market. Prominent upper-left table set with a small bowl of rice, a plate of tomato scrambled eggs and a plate of greens; just behind it an open cooking hatch, steaming iron wok and stainless stockpot. A few simple wooden tables, sage-green lower wall and cream tiles, bamboo basket and warm light. A tiny mom-and-pop shop with freshly made dishes, not a community canteen or institutional cafeteria. Keep food and hatch recognizable above character area; more quiet tables and simple wall continue right.",
+      "source": "C:\\Users\\xywan\\.codex\\generated_images\\01a15e2f-c328-79a0-aabe-1f797285f94d\\exec-2e3e64b2-9302-4b69-833f-6a4f9c97fde1.png",
+      "dimensions": [
+        1672,
+        941
+      ],
+      "sha256": "16e641e2ee75b6a5c5f21837594b4cd744b087886883d251b31e3dd5723bc4f9",
+      "project_path": "res://assets/generated/stories/locations/zhou-homestyle-diner-v1.png"
+    },
+    {
+      "file": "zhou-fruit-stall-v1.png",
+      "prompt": "Use case: illustration-story. Asset type: independent eating-location background in Aunt Zhou's Chinese daily-life strategy game. Input image is STYLE reference only; new environment view in same warm hand-painted gouache/watercolor realism, fine linework, soft paper grain, muted sage-green, cream, honey wood palette. Landscape 16:9. Main recognizable shop objects must be large in the LEFT 40%, between 15% and 60% of image height, since a paper menu covers the right 60% and a character covers bottom left. The right side continues the scene in a quieter believable way. No people, text, letters, numbers, branding, readable signs, UI, decorative frame or watermark. Primary request: close view of a neighborhood FRUIT STALL in a small outdoor market. Large wood crates of red and pale green apples and a rack of yellow bananas prominently fill the UPPER LEFT foreground; a bowl-style mechanical produce scale and a plain paper shopping bag on a waist-high wooden stand. Cream striped fabric canopy above, crates of citrus receding, soft glimpses of nearby market shopfront on right. A modest everyday fruit seller, no supermarket aisles, no fridge, no meat or cooked dishes. Warm natural light, ripe recognizable fruit.",
+      "source": "C:\\Users\\xywan\\.codex\\generated_images\\01a15e2f-c328-79a0-aabe-1f797285f94d\\exec-b20ce24a-4c71-4bd0-bbf0-d4e562a18abf.png",
+      "dimensions": [
+        1672,
+        941
+      ],
+      "sha256": "2081a2288bb733d59a6d940870109485bbd3db01ffe3b390dd7f5a9fd33b34de",
+      "project_path": "res://assets/generated/stories/locations/zhou-fruit-stall-v1.png"
+    },
+    {
+      "file": "steamed-bun-v1.png",
+      "prompt": "Use case: illustration-story. Asset type: isolated food-card illustration with a genuinely transparent background, square canvas. Reference image is style and ceramic texture reference ONLY. Paint ONE plump white Chinese steamed wheat bun (mantou, smooth round unfilled bread), with a small torn-open piece beside it showing soft white crumb, sitting on a small blue-and-white ceramic plate. Same warm detailed hand-painted watercolor/gouache food illustration as reference. Three-quarter slightly elevated view, centered, the whole plate and bun visible, fills 80% canvas, delicate warm light, soft subtle shadow under plate only. No other foods, no scene or table background, no cutlery, no text, borders, labels, watermarks, or people.",
+      "transparent": true,
+      "source": "C:\\Users\\xywan\\.codex\\generated_images\\01a15e2f-c328-79a0-aabe-1f797285f94d\\exec-a3e4348c-edd9-46a0-bdc0-d56061321eab.png",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "sha256": "1f98454091c10afda9d2b502af5a41788da0f84e27f164bbdd0a7586e946934c",
+      "project_path": "res://assets/generated/stories/locations/steamed-bun-v1.png"
+    },
+    {
+      "file": "zhou-kitchen-portrait-v1.png",
+      "prompt": "Use case: illustration-story. Asset type: PORTRAIT 9:16 background illustration specifically composed behind a mobile game menu. Reference image is only for the same warm hand-painted gouache/watercolor Aunt Zhou home style: muted sage-green cupboards, cream tiles, warm wood, soft realistic paper texture. Create a NEW kitchen working view with a VERY NARROW VERTICAL STRIP OF ACTIVITY ON THE LEFT 30% OF THE IMAGE. IMPORTANT functional composition: a small black wok sitting on a clearly visible lit gas stovetop must be completely within the LEFT 28% at 18%-30% of image height; a small lidded cooking pot behind it at 14%-22% height. Directly below it at 34%-47% height, a wooden cutting board with a safely laid-flat knife, sliced tomato and greens must also be within the LEFT 28%. A single continuous little kitchen work counter, viewed obliquely from slightly above. Keep the wok, gas hob, pot and board large enough to identify and entirely ABOVE 50% image height so a character will not hide them. The RIGHT 70% of the image is quieter pale tiled wall and continuous sage-green kitchen cabinets with very little detail, because an opaque paper menu overlays this region. Bottom half quiet cabinet doors and wood floor. Do NOT put the cooking objects in the center or right, do NOT put oversized hanging ladles on the left instead of a stove. No people, text, letters, numbers, signs, logos, UI, frame or watermark.",
+      "source": "C:\\Users\\xywan\\.codex\\generated_images\\01a15e2f-c328-79a0-aabe-1f797285f94d\\exec-0883f034-d876-472a-b034-572dd7afd2ff.png",
+      "dimensions": [
+        941,
+        1672
+      ],
+      "sha256": "aea804141fa74d7360416811d4c6b9382c2814df0710ee481ea47ecb8f6383e7",
+      "project_path": "res://assets/generated/stories/locations/zhou-kitchen-portrait-v1.png"
+    }
+  ]
+}

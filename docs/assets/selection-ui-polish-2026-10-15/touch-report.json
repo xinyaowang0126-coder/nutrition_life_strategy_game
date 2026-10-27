@@ -1,0 +1,8 @@
+{
+	"errors": [],
+	"scope": "Native InputEventScreenTouch, ScreenDrag and keyboard events; browser touch handling remains separate.",
+	"selected": [
+		"soft_tofu_greens"
+	],
+	"window": "(640, 960)"
+}

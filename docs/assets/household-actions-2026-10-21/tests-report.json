@@ -1,0 +1,4201 @@
+{
+  "duration_ms": 87868,
+  "failed": 0,
+  "passed": 518,
+  "results": [
+    {
+      "assertion_count": 3,
+      "duration_ms": 64,
+      "message": "",
+      "passed": true,
+      "suite": "daily_summary_layout",
+      "test": "test_desktop_meal_summary_keeps_details_entry_above_the_fold"
+    },
+    {
+      "assertion_count": 4,
+      "duration_ms": 25,
+      "message": "",
+      "passed": true,
+      "suite": "daily_summary_layout",
+      "test": "test_enter_activates_focused_detail_or_record_entry_without_advancing"
+    },
+    {
+      "assertion_count": 5,
+      "duration_ms": 33,
+      "message": "",
+      "passed": true,
+      "suite": "daily_summary_layout",
+      "test": "test_escape_collapses_details_without_advancing_the_day"
+    },
+    {
+      "assertion_count": 10,
+      "duration_ms": 30,
+      "message": "",
+      "passed": true,
+      "suite": "daily_summary_layout",
+      "test": "test_expanded_detail_scrolls_without_covering_desktop_footer"
+    },
+    {
+      "assertion_count": 12,
+      "duration_ms": 81,
+      "message": "",
+      "passed": true,
+      "suite": "daily_summary_layout",
+      "test": "test_legacy_payload_without_record_detail_keeps_footer_accessible"
+    },
+    {
+      "assertion_count": 8,
+      "duration_ms": 27,
+      "message": "",
+      "passed": true,
+      "suite": "daily_summary_layout",
+      "test": "test_narrow_mobile_profile_stays_bounded_and_stacks_stats"
+    },
+    {
+      "assertion_count": 3,
+      "duration_ms": 21,
+      "message": "",
+      "passed": true,
+      "suite": "daily_summary_layout",
+      "test": "test_rapid_next_requests_emit_once_until_a_new_summary_is_shown"
+    },
+    {
+      "assertion_count": 4,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "day_carryover",
+      "test": "test_depleted_record_has_the_frozen_severe_effect"
+    },
+    {
+      "assertion_count": 9,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "day_carryover",
+      "test": "test_diet_metrics_are_not_an_accepted_carryover_record"
+    },
+    {
+      "assertion_count": 5,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "day_carryover",
+      "test": "test_early_sleep_record_supplies_the_frozen_study_bonus"
+    },
+    {
+      "assertion_count": 4,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "day_carryover",
+      "test": "test_late_study_record_preserves_the_frozen_penalty"
+    },
+    {
+      "assertion_count": 4,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "day_carryover",
+      "test": "test_phone_record_can_be_neutral_without_a_food_gate"
+    },
+    {
+      "assertion_count": 56,
+      "duration_ms": 1132,
+      "message": "",
+      "passed": true,
+      "suite": "decision_preview",
+      "test": "test_action_cards_expose_direct_effort_slots_and_period_costs_without_activation"
+    },
+    {
+      "assertion_count": 107,
+      "duration_ms": 3789,
+      "message": "",
+      "passed": true,
+      "suite": "decision_preview",
+      "test": "test_all_eight_source_previews_match_real_payment_and_inventory_use"
+    },
+    {
+      "assertion_count": 24,
+      "duration_ms": 485,
+      "message": "",
+      "passed": true,
+      "suite": "decision_preview",
+      "test": "test_choir_night_art_is_distinct_while_campus_keeps_its_existing_art_and_values"
+    },
+    {
+      "assertion_count": 9,
+      "duration_ms": 346,
+      "message": "",
+      "passed": true,
+      "suite": "decision_preview",
+      "test": "test_removing_all_cards_clears_old_costs_and_invalid_previews_are_read_only"
+    },
+    {
+      "assertion_count": 7,
+      "duration_ms": 1181,
+      "message": "",
+      "passed": true,
+      "suite": "decision_preview",
+      "test": "test_saved_food_preview_does_not_claim_another_raw_material_charge"
+    },
+    {
+      "assertion_count": 7,
+      "duration_ms": 1021,
+      "message": "",
+      "passed": true,
+      "suite": "decision_preview",
+      "test": "test_shared_meal_preview_counts_current_two_portions_before_recipe_choices"
+    },
+    {
+      "assertion_count": 16,
+      "duration_ms": 369,
+      "message": "",
+      "passed": true,
+      "suite": "decision_preview",
+      "test": "test_source_name_target_matches_artwork_enabled_state_and_does_not_duplicate_focus"
+    },
+    {
+      "assertion_count": 21,
+      "duration_ms": 859,
+      "message": "",
+      "passed": true,
+      "suite": "decision_preview",
+      "test": "test_takeout_preview_tracks_each_days_real_fee_without_spending"
+    },
+    {
+      "assertion_count": 5,
+      "duration_ms": 2,
+      "message": "",
+      "passed": true,
+      "suite": "export_strip",
+      "test": "test_absent_settings_and_repeated_callbacks_preserve_original_absence"
+    },
+    {
+      "assertion_count": 5,
+      "duration_ms": 2,
+      "message": "",
+      "passed": true,
+      "suite": "export_strip",
+      "test": "test_autoload_is_restored_without_creating_editor_plugins"
+    },
+    {
+      "assertion_count": 5,
+      "duration_ms": 3,
+      "message": "",
+      "passed": true,
+      "suite": "export_strip",
+      "test": "test_both_development_settings_are_stripped_and_restored_exactly"
+    },
+    {
+      "assertion_count": 5,
+      "duration_ms": 2,
+      "message": "",
+      "passed": true,
+      "suite": "export_strip",
+      "test": "test_editor_plugins_are_stripped_without_a_helper_autoload"
+    },
+    {
+      "assertion_count": 5,
+      "duration_ms": 2,
+      "message": "",
+      "passed": true,
+      "suite": "export_strip",
+      "test": "test_end_before_begin_does_not_change_settings"
+    },
+    {
+      "assertion_count": 6,
+      "duration_ms": 3,
+      "message": "",
+      "passed": true,
+      "suite": "export_strip",
+      "test": "test_next_export_takes_a_fresh_snapshot_and_preserves_an_empty_array"
+    },
+    {
+      "assertion_count": 17,
+      "duration_ms": 3,
+      "message": "",
+      "passed": true,
+      "suite": "export_strip",
+      "test": "test_project_guard_and_signed_mcp_callbacks_restore_in_either_order"
+    },
+    {
+      "assertion_count": 5,
+      "duration_ms": 2,
+      "message": "",
+      "passed": true,
+      "suite": "export_strip",
+      "test": "test_repeated_begin_does_not_overwrite_the_original_snapshot"
+    },
+    {
+      "assertion_count": 8,
+      "duration_ms": 47,
+      "message": "",
+      "passed": true,
+      "suite": "food_preference_flow",
+      "test": "test_changed_tastes_leave_food_profiles_and_health_snapshots_identical"
+    },
+    {
+      "assertion_count": 8,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "food_preference_flow",
+      "test": "test_comfort_is_a_declared_preference_not_a_nutrition_classification"
+    },
+    {
+      "assertion_count": 8,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "food_preference_flow",
+      "test": "test_default_tastes_preserve_meal_effects_and_source_costs"
+    },
+    {
+      "assertion_count": 9,
+      "duration_ms": 25,
+      "message": "",
+      "passed": true,
+      "suite": "food_preference_flow",
+      "test": "test_explicit_empty_profile_remains_unspecified_in_preview_and_gameplay"
+    },
+    {
+      "assertion_count": 7,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "food_preference_flow",
+      "test": "test_nutrition_tags_and_forged_preview_cannot_set_taste_or_comfort"
+    },
+    {
+      "assertion_count": 8,
+      "duration_ms": 32,
+      "message": "",
+      "passed": true,
+      "suite": "food_preference_flow",
+      "test": "test_taste_changes_do_not_rewrite_confirmed_records_and_restart_resets_tastes"
+    },
+    {
+      "assertion_count": 13,
+      "duration_ms": 53,
+      "message": "",
+      "passed": true,
+      "suite": "food_preference_flow",
+      "test": "test_v2_card_preview_and_confirm_use_the_same_current_character"
+    },
+    {
+      "assertion_count": 6,
+      "duration_ms": 15,
+      "message": "",
+      "passed": true,
+      "suite": "food_preference_ui",
+      "test": "test_detail_signals_preserve_the_decorated_preference_without_shared_mutation"
+    },
+    {
+      "assertion_count": 5,
+      "duration_ms": 37,
+      "message": "",
+      "passed": true,
+      "suite": "food_preference_ui",
+      "test": "test_favorite_copy_comes_only_from_the_supplied_character_preference"
+    },
+    {
+      "assertion_count": 5,
+      "duration_ms": 45,
+      "message": "",
+      "passed": true,
+      "suite": "food_preference_ui",
+      "test": "test_known_neutral_taste_is_distinct_from_an_unspecified_preference"
+    },
+    {
+      "assertion_count": 14,
+      "duration_ms": 79,
+      "message": "",
+      "passed": true,
+      "suite": "food_preference_ui",
+      "test": "test_missing_and_unspecified_preferences_do_not_fall_back_to_raw_mood"
+    },
+    {
+      "assertion_count": 11,
+      "duration_ms": 37,
+      "message": "",
+      "passed": true,
+      "suite": "food_preference_ui",
+      "test": "test_negative_food_reaction_is_separate_and_explicitly_character_taste"
+    },
+    {
+      "assertion_count": 30,
+      "duration_ms": 112,
+      "message": "",
+      "passed": true,
+      "suite": "food_preference_ui",
+      "test": "test_note_remeasures_content_after_the_wrap_width_changes"
+    },
+    {
+      "assertion_count": 9,
+      "duration_ms": 19,
+      "message": "",
+      "passed": true,
+      "suite": "food_preference_ui",
+      "test": "test_pinned_details_restore_controls_and_respect_disabled_actions"
+    },
+    {
+      "assertion_count": 6,
+      "duration_ms": 33,
+      "message": "",
+      "passed": true,
+      "suite": "food_preference_ui",
+      "test": "test_preference_labels_fit_the_existing_card_widths"
+    },
+    {
+      "assertion_count": 22,
+      "duration_ms": 53,
+      "message": "",
+      "passed": true,
+      "suite": "food_preference_ui",
+      "test": "test_reused_components_keep_action_sleep_and_source_mood_unchanged"
+    },
+    {
+      "assertion_count": 6,
+      "duration_ms": 17,
+      "message": "",
+      "passed": true,
+      "suite": "food_preference_ui",
+      "test": "test_stale_show_and_hide_callbacks_cannot_change_a_new_or_closed_note"
+    },
+    {
+      "assertion_count": 36,
+      "duration_ms": 18,
+      "message": "",
+      "passed": true,
+      "suite": "food_preference_ui",
+      "test": "test_transient_preview_passes_clicks_and_pinned_detail_restores_controls"
+    },
+    {
+      "assertion_count": 10,
+      "duration_ms": 18,
+      "message": "",
+      "passed": true,
+      "suite": "food_preference_ui",
+      "test": "test_transient_previews_do_not_offer_close_or_action_controls"
+    },
+    {
+      "assertion_count": 143,
+      "duration_ms": 6,
+      "message": "",
+      "passed": true,
+      "suite": "food_preferences",
+      "test": "test_default_character_preserves_all_23_mood_values_and_explicit_comfort"
+    },
+    {
+      "assertion_count": 98,
+      "duration_ms": 5,
+      "message": "",
+      "passed": true,
+      "suite": "food_preferences",
+      "test": "test_food_catalog_has_no_character_mood_or_preference_tags"
+    },
+    {
+      "assertion_count": 23,
+      "duration_ms": 5,
+      "message": "",
+      "passed": true,
+      "suite": "food_preferences",
+      "test": "test_missing_and_invalid_preferences_never_use_old_food_mood_or_tags"
+    },
+    {
+      "assertion_count": 25,
+      "duration_ms": 124,
+      "message": "",
+      "passed": true,
+      "suite": "food_preferences",
+      "test": "test_profile_loader_rejects_missing_malformed_duplicate_and_future_data"
+    },
+    {
+      "assertion_count": 4,
+      "duration_ms": 27,
+      "message": "",
+      "passed": true,
+      "suite": "food_preferences",
+      "test": "test_profile_loader_returns_independent_data_each_time"
+    },
+    {
+      "assertion_count": 9,
+      "duration_ms": 4,
+      "message": "",
+      "passed": true,
+      "suite": "food_preferences",
+      "test": "test_profiles_reactions_and_decorated_food_are_independent_copies"
+    },
+    {
+      "assertion_count": 8,
+      "duration_ms": 4,
+      "message": "",
+      "passed": true,
+      "suite": "food_preferences",
+      "test": "test_same_food_changes_with_character_preferences_only"
+    },
+    {
+      "assertion_count": 7,
+      "duration_ms": 9,
+      "message": "",
+      "passed": true,
+      "suite": "g4_fact_summary",
+      "test": "test_archived_legacy_nutrition_summary_is_not_an_ending_copy_source"
+    },
+    {
+      "assertion_count": 5,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "g4_fact_summary",
+      "test": "test_conflicting_meal_facts_are_unknown_in_both_summary_and_book"
+    },
+    {
+      "assertion_count": 12,
+      "duration_ms": 9,
+      "message": "",
+      "passed": true,
+      "suite": "g4_fact_summary",
+      "test": "test_current_recovery_api_preserves_existing_balance_formula"
+    },
+    {
+      "assertion_count": 4,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "g4_fact_summary",
+      "test": "test_details_use_frozen_names_sources_and_cash_or_stock_facts"
+    },
+    {
+      "assertion_count": 4,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "g4_fact_summary",
+      "test": "test_duplicate_fact_delivery_is_one_meal_even_with_different_legacy_scores"
+    },
+    {
+      "assertion_count": 5,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "g4_fact_summary",
+      "test": "test_ending_counts_ignore_duplicates_and_keep_incomplete_meals_unknown"
+    },
+    {
+      "assertion_count": 18,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "g4_fact_summary",
+      "test": "test_legacy_scores_and_tags_cannot_change_any_daily_output"
+    },
+    {
+      "assertion_count": 14,
+      "duration_ms": 20,
+      "message": "",
+      "passed": true,
+      "suite": "g4_fact_summary",
+      "test": "test_malformed_explicit_popup_fields_return_to_unavailable_text"
+    },
+    {
+      "assertion_count": 17,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "g4_fact_summary",
+      "test": "test_malformed_lists_and_skipped_values_keep_unknown_counts"
+    },
+    {
+      "assertion_count": 6,
+      "duration_ms": 3,
+      "message": "",
+      "passed": true,
+      "suite": "g4_fact_summary",
+      "test": "test_meal_stamps_share_unknown_conflicts_and_frozen_history_with_the_book"
+    },
+    {
+      "assertion_count": 5,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "g4_fact_summary",
+      "test": "test_missing_skipped_marker_does_not_become_an_eaten_or_skipped_meal"
+    },
+    {
+      "assertion_count": 16,
+      "duration_ms": 20,
+      "message": "",
+      "passed": true,
+      "suite": "g4_fact_summary",
+      "test": "test_popup_ignores_legacy_quality_and_nutrition_fallback_fields"
+    },
+    {
+      "assertion_count": 4,
+      "duration_ms": 22,
+      "message": "",
+      "passed": true,
+      "suite": "g4_fact_summary",
+      "test": "test_popup_shows_explicit_facts_without_using_legacy_payload_aliases"
+    },
+    {
+      "assertion_count": 4,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "g4_fact_summary",
+      "test": "test_records_without_meal_phases_remain_visible_as_unplaced"
+    },
+    {
+      "assertion_count": 4,
+      "duration_ms": 6,
+      "message": "",
+      "passed": true,
+      "suite": "g4_fact_summary",
+      "test": "test_v1_settlement_and_text_are_independent_of_legacy_meal_scores"
+    },
+    {
+      "assertion_count": 16,
+      "duration_ms": 14,
+      "message": "",
+      "passed": true,
+      "suite": "g4_fact_summary",
+      "test": "test_v2_settlement_is_independent_of_legacy_meal_score_fields"
+    },
+    {
+      "assertion_count": 491,
+      "duration_ms": 13,
+      "message": "",
+      "passed": true,
+      "suite": "g4_ledger",
+      "test": "test_all_skipped_empty_and_clear_views_are_factual_without_scores"
+    },
+    {
+      "assertion_count": 13,
+      "duration_ms": 21,
+      "message": "",
+      "passed": true,
+      "suite": "g4_ledger",
+      "test": "test_composite_and_single_ingredient_count_once_per_meal_and_period"
+    },
+    {
+      "assertion_count": 8,
+      "duration_ms": 20,
+      "message": "",
+      "passed": true,
+      "suite": "g4_ledger",
+      "test": "test_conflicting_identity_within_a_model_is_excluded_from_aggregate_count"
+    },
+    {
+      "assertion_count": 8,
+      "duration_ms": 24,
+      "message": "",
+      "passed": true,
+      "suite": "g4_ledger",
+      "test": "test_duplicate_invalid_and_future_records_fail_transactionally"
+    },
+    {
+      "assertion_count": 12,
+      "duration_ms": 36,
+      "message": "",
+      "passed": true,
+      "suite": "g4_ledger",
+      "test": "test_factors_stay_frozen_and_gameplay_or_invalid_context_cannot_enter_the_ledger"
+    },
+    {
+      "assertion_count": 6,
+      "duration_ms": 29,
+      "message": "",
+      "passed": true,
+      "suite": "g4_ledger",
+      "test": "test_order_independence_and_json_integer_days_are_supported"
+    },
+    {
+      "assertion_count": 16,
+      "duration_ms": 467,
+      "message": "",
+      "passed": true,
+      "suite": "g4_ledger",
+      "test": "test_preview_confirmation_freezes_ledger_once_and_navigation_is_read_only"
+    },
+    {
+      "assertion_count": 10,
+      "duration_ms": 52,
+      "message": "",
+      "passed": true,
+      "suite": "g4_ledger",
+      "test": "test_production_drafts_and_pending_copy_never_expose_ingredient_counts"
+    },
+    {
+      "assertion_count": 10,
+      "duration_ms": 111,
+      "message": "",
+      "passed": true,
+      "suite": "g4_ledger",
+      "test": "test_repeated_meals_across_days_do_not_create_new_ingredient_identities"
+    },
+    {
+      "assertion_count": 5,
+      "duration_ms": 19,
+      "message": "",
+      "passed": true,
+      "suite": "g4_ledger",
+      "test": "test_roles_remain_separate_for_each_meal_without_cross_meal_compensation"
+    },
+    {
+      "assertion_count": 3,
+      "duration_ms": 13,
+      "message": "",
+      "passed": true,
+      "suite": "g4_ledger",
+      "test": "test_snapshot_catalog_config_and_copy_changes_cannot_rewrite_frozen_history"
+    },
+    {
+      "assertion_count": 6,
+      "duration_ms": 18,
+      "message": "",
+      "passed": true,
+      "suite": "g4_ledger",
+      "test": "test_unavailable_missing_and_low_confidence_do_not_become_known_zero"
+    },
+    {
+      "assertion_count": 5,
+      "duration_ms": 16,
+      "message": "",
+      "passed": true,
+      "suite": "g4_ledger",
+      "test": "test_unknown_portions_keep_supported_composition_and_have_a_separate_list"
+    },
+    {
+      "assertion_count": 8,
+      "duration_ms": 19,
+      "message": "",
+      "passed": true,
+      "suite": "g4_ledger",
+      "test": "test_unknown_unsupported_model_is_preserved_and_never_summed_across_versions"
+    },
+    {
+      "assertion_count": 5,
+      "duration_ms": 10,
+      "message": "",
+      "passed": true,
+      "suite": "g4_ledger",
+      "test": "test_unrecorded_skipped_and_legacy_are_distinct_and_unknown_is_not_zero"
+    },
+    {
+      "assertion_count": 6,
+      "duration_ms": 23,
+      "message": "",
+      "passed": true,
+      "suite": "g4_ledger",
+      "test": "test_week_cutoff_and_unplaced_legacy_do_not_invent_or_consume_meal_slots"
+    },
+    {
+      "assertion_count": 5,
+      "duration_ms": 20,
+      "message": "",
+      "passed": true,
+      "suite": "g4_meal",
+      "test": "test_approved_evidence_missing_or_superseded_references_do_not_get_substituted"
+    },
+    {
+      "assertion_count": 3,
+      "duration_ms": 9,
+      "message": "",
+      "passed": true,
+      "suite": "g4_meal",
+      "test": "test_boundary_templates_cannot_be_relabelled_to_bypass_nutrition_approval"
+    },
+    {
+      "assertion_count": 7,
+      "duration_ms": 25,
+      "message": "",
+      "passed": true,
+      "suite": "g4_meal",
+      "test": "test_composer_only_uses_reviewed_copy_with_explicit_player_capability"
+    },
+    {
+      "assertion_count": 4,
+      "duration_ms": 23,
+      "message": "",
+      "passed": true,
+      "suite": "g4_meal",
+      "test": "test_composite_and_single_cards_share_ingredient_identities"
+    },
+    {
+      "assertion_count": 6,
+      "duration_ms": 21,
+      "message": "",
+      "passed": true,
+      "suite": "g4_meal",
+      "test": "test_config_draft_future_version_and_bad_mapping_are_blocked"
+    },
+    {
+      "assertion_count": 3,
+      "duration_ms": 16,
+      "message": "",
+      "passed": true,
+      "suite": "g4_meal",
+      "test": "test_copy_file_parser_rejects_duplicate_ids_and_unsupported_schema"
+    },
+    {
+      "assertion_count": 8,
+      "duration_ms": 50,
+      "message": "",
+      "passed": true,
+      "suite": "g4_meal",
+      "test": "test_copy_variables_versions_and_catalog_claimed_validity_cannot_bypass_checks"
+    },
+    {
+      "assertion_count": 9,
+      "duration_ms": 30,
+      "message": "",
+      "passed": true,
+      "suite": "g4_meal",
+      "test": "test_draft_profile_and_missing_reviewer_cannot_become_positive_records"
+    },
+    {
+      "assertion_count": 5,
+      "duration_ms": 23,
+      "message": "",
+      "passed": true,
+      "suite": "g4_meal",
+      "test": "test_expired_invalid_date_or_wrong_capability_blocks_composition"
+    },
+    {
+      "assertion_count": 2,
+      "duration_ms": 20,
+      "message": "",
+      "passed": true,
+      "suite": "g4_meal",
+      "test": "test_frozen_model_and_profile_inputs_do_not_reload_current_data"
+    },
+    {
+      "assertion_count": 6,
+      "duration_ms": 10,
+      "message": "",
+      "passed": true,
+      "suite": "g4_meal",
+      "test": "test_fruit_dairy_and_beverages_do_not_fill_core_roles_or_hydration"
+    },
+    {
+      "assertion_count": 6,
+      "duration_ms": 52,
+      "message": "",
+      "passed": true,
+      "suite": "g4_meal",
+      "test": "test_future_or_missing_copy_review_metadata_and_expiry_cannot_authorize_text"
+    },
+    {
+      "assertion_count": 169,
+      "duration_ms": 98,
+      "message": "",
+      "passed": true,
+      "suite": "g4_meal",
+      "test": "test_gameplay_or_score_inputs_are_rejected_and_no_factor_threshold_is_invented"
+    },
+    {
+      "assertion_count": 28,
+      "duration_ms": 33,
+      "message": "",
+      "passed": true,
+      "suite": "g4_meal",
+      "test": "test_isolated_fixtures_are_valid_and_production_stays_unapproved"
+    },
+    {
+      "assertion_count": 251,
+      "duration_ms": 13,
+      "message": "",
+      "passed": true,
+      "suite": "g4_meal",
+      "test": "test_known_roles_do_not_claim_portion_adequacy"
+    },
+    {
+      "assertion_count": 7,
+      "duration_ms": 28,
+      "message": "",
+      "passed": true,
+      "suite": "g4_meal",
+      "test": "test_missing_and_low_confidence_keep_known_clues_and_unknown_absences"
+    },
+    {
+      "assertion_count": 4,
+      "duration_ms": 27,
+      "message": "",
+      "passed": true,
+      "suite": "g4_meal",
+      "test": "test_order_independence_and_input_output_deep_copy"
+    },
+    {
+      "assertion_count": 2,
+      "duration_ms": 35,
+      "message": "",
+      "passed": true,
+      "suite": "g4_meal",
+      "test": "test_parsed_copy_errors_cannot_be_hidden_by_changing_the_valid_flag"
+    },
+    {
+      "assertion_count": 6,
+      "duration_ms": 30,
+      "message": "",
+      "passed": true,
+      "suite": "g4_meal",
+      "test": "test_partial_and_unknown_composer_paths_do_not_guess_missing_roles"
+    },
+    {
+      "assertion_count": 4,
+      "duration_ms": 37,
+      "message": "",
+      "passed": true,
+      "suite": "g4_meal",
+      "test": "test_production_draft_profiles_and_defaults_never_emit_affirmative_copy"
+    },
+    {
+      "assertion_count": 4,
+      "duration_ms": 18,
+      "message": "",
+      "passed": true,
+      "suite": "g4_meal",
+      "test": "test_reliable_trace_in_another_dish_cannot_erase_material_composition"
+    },
+    {
+      "assertion_count": 5,
+      "duration_ms": 32,
+      "message": "",
+      "passed": true,
+      "suite": "g4_meal",
+      "test": "test_skipped_legacy_unavailable_and_future_snapshots_have_distinct_states"
+    },
+    {
+      "assertion_count": 4,
+      "duration_ms": 43,
+      "message": "",
+      "passed": true,
+      "suite": "g4_meal",
+      "test": "test_trace_small_and_material_are_distinct_and_known_addition_is_monotonic"
+    },
+    {
+      "assertion_count": 4,
+      "duration_ms": 192,
+      "message": "",
+      "passed": true,
+      "suite": "g4_preview",
+      "test": "test_actual_source_opening_payment_mode_and_limit_are_checked"
+    },
+    {
+      "assertion_count": 9,
+      "duration_ms": 244,
+      "message": "",
+      "passed": true,
+      "suite": "g4_preview",
+      "test": "test_affordable_add_is_preferred_but_budget_can_use_swap_with_free_slot"
+    },
+    {
+      "assertion_count": 5,
+      "duration_ms": 22,
+      "message": "",
+      "passed": true,
+      "suite": "g4_preview",
+      "test": "test_composition_panel_reopen_is_readonly_and_has_no_acceptance_gate"
+    },
+    {
+      "assertion_count": 7,
+      "duration_ms": 26,
+      "message": "",
+      "passed": true,
+      "suite": "g4_preview",
+      "test": "test_diary_counts_ingredients_once_per_meal_and_reports_only_real_phases"
+    },
+    {
+      "assertion_count": 14,
+      "duration_ms": 364,
+      "message": "",
+      "passed": true,
+      "suite": "g4_preview",
+      "test": "test_optional_add_and_swap_are_affordable_and_current"
+    },
+    {
+      "assertion_count": 5,
+      "duration_ms": 20,
+      "message": "",
+      "passed": true,
+      "suite": "g4_preview",
+      "test": "test_preview_changes_neither_balance_nor_records_until_confirmed"
+    },
+    {
+      "assertion_count": 7,
+      "duration_ms": 273,
+      "message": "",
+      "passed": true,
+      "suite": "g4_preview",
+      "test": "test_preview_scene_is_separate_from_normal_game_and_renders_journal"
+    },
+    {
+      "assertion_count": 8,
+      "duration_ms": 16,
+      "message": "",
+      "passed": true,
+      "suite": "g4_preview",
+      "test": "test_record_capture_is_frozen_and_separates_prices_from_health_snapshot"
+    },
+    {
+      "assertion_count": 5,
+      "duration_ms": 229,
+      "message": "",
+      "passed": true,
+      "suite": "g4_preview",
+      "test": "test_stale_wrong_day_or_malformed_candidate_is_not_suggested"
+    },
+    {
+      "assertion_count": 6,
+      "duration_ms": 172,
+      "message": "",
+      "passed": true,
+      "suite": "g4_preview",
+      "test": "test_suggestions_respect_budget_fee_stock_and_source_availability"
+    },
+    {
+      "assertion_count": 7,
+      "duration_ms": 26,
+      "message": "",
+      "passed": true,
+      "suite": "g4_preview",
+      "test": "test_unknown_and_unapproved_copy_never_exposes_raw_ingredient_names"
+    },
+    {
+      "assertion_count": 5,
+      "duration_ms": 111,
+      "message": "",
+      "passed": true,
+      "suite": "g4_preview",
+      "test": "test_unknown_role_gives_no_instruction_and_complete_selection_is_not_scored"
+    },
+    {
+      "assertion_count": 3,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "g4_record_entry",
+      "test": "test_conflicting_duplicates_and_unknown_payment_never_choose_a_convenient_price"
+    },
+    {
+      "assertion_count": 9,
+      "duration_ms": 534,
+      "message": "",
+      "passed": true,
+      "suite": "g4_record_entry",
+      "test": "test_ending_entry_and_restart_clear_records_without_health_switch_changes"
+    },
+    {
+      "assertion_count": 5,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "g4_record_entry",
+      "test": "test_frozen_names_source_and_cash_stock_are_not_live_card_lookups"
+    },
+    {
+      "assertion_count": 37,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "g4_record_entry",
+      "test": "test_legacy_quality_and_health_payload_cannot_affect_record_facts"
+    },
+    {
+      "assertion_count": 8,
+      "duration_ms": 718,
+      "message": "",
+      "passed": true,
+      "suite": "g4_record_entry",
+      "test": "test_menu_entry_and_close_do_not_confirm_charge_or_change_selection"
+    },
+    {
+      "assertion_count": 9,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "g4_record_entry",
+      "test": "test_old_incomplete_malformed_and_contradictory_records_are_unknown"
+    },
+    {
+      "assertion_count": 8,
+      "duration_ms": 250,
+      "message": "",
+      "passed": true,
+      "suite": "g4_record_entry",
+      "test": "test_recovery_detail_to_book_restores_new_day_continue_and_late_signals_are_blocked"
+    },
+    {
+      "assertion_count": 5,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "g4_record_entry",
+      "test": "test_settled_day_is_not_counted_again_from_today"
+    },
+    {
+      "assertion_count": 11,
+      "duration_ms": 1187,
+      "message": "",
+      "passed": true,
+      "suite": "g4_record_entry",
+      "test": "test_summary_late_signal_and_enter_cannot_hide_or_advance_under_record_book"
+    },
+    {
+      "assertion_count": 6,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "g4_record_entry",
+      "test": "test_unfinished_run_keeps_future_and_unrecorded_slots_separate"
+    },
+    {
+      "assertion_count": 5,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "g4_record_entry",
+      "test": "test_unplaced_legacy_is_not_silently_lost_or_assigned_a_meal"
+    },
+    {
+      "assertion_count": 5,
+      "duration_ms": 6,
+      "message": "",
+      "passed": true,
+      "suite": "g4_record_entry",
+      "test": "test_views_and_reading_real_game_are_detached_and_do_not_load_health_data"
+    },
+    {
+      "assertion_count": 265,
+      "duration_ms": 15,
+      "message": "",
+      "passed": true,
+      "suite": "g4_score_retirement",
+      "test": "test_all_real_source_phase_candidates_build_without_a_diet_score"
+    },
+    {
+      "assertion_count": 5,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "g4_score_retirement",
+      "test": "test_archived_scores_are_preserved_but_do_not_change_fact_or_health_reads"
+    },
+    {
+      "assertion_count": 16,
+      "duration_ms": 3,
+      "message": "",
+      "passed": true,
+      "suite": "g4_score_retirement",
+      "test": "test_current_recovery_path_and_legacy_shim_share_valid_results"
+    },
+    {
+      "assertion_count": 12,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "g4_score_retirement",
+      "test": "test_food_score_injection_never_enters_new_record_or_mutates_inputs"
+    },
+    {
+      "assertion_count": 7,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "g4_score_retirement",
+      "test": "test_new_records_keep_cash_fee_stock_and_frozen_names"
+    },
+    {
+      "assertion_count": 7,
+      "duration_ms": 1315,
+      "message": "",
+      "passed": true,
+      "suite": "g4_score_retirement",
+      "test": "test_normal_confirm_skip_and_settlement_never_produce_new_quality_fields"
+    },
+    {
+      "assertion_count": 240,
+      "duration_ms": 2,
+      "message": "",
+      "passed": true,
+      "suite": "g4_score_retirement",
+      "test": "test_resource_calculator_matches_legacy_positional_calls_and_ignores_extra_scores"
+    },
+    {
+      "assertion_count": 6,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "g4_score_retirement",
+      "test": "test_retired_diet_score_methods_are_unavailable_on_the_production_resolver"
+    },
+    {
+      "assertion_count": 12,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "g4_score_retirement",
+      "test": "test_skip_preserves_exact_resource_cost_and_explicit_fact_without_quality"
+    },
+    {
+      "assertion_count": 4,
+      "duration_ms": 32,
+      "message": "",
+      "passed": true,
+      "suite": "g4_sources",
+      "test": "test_cash_sources_ignore_pantry_stock_for_the_same_food"
+    },
+    {
+      "assertion_count": 12,
+      "duration_ms": 14,
+      "message": "",
+      "passed": true,
+      "suite": "g4_sources",
+      "test": "test_closed_source_wrong_pool_or_phase_and_duplicate_ids_are_rejected"
+    },
+    {
+      "assertion_count": 7,
+      "duration_ms": 170,
+      "message": "",
+      "passed": true,
+      "suite": "g4_sources",
+      "test": "test_context_is_detached_from_the_controller_catalog_and_rng"
+    },
+    {
+      "assertion_count": 11,
+      "duration_ms": 51,
+      "message": "",
+      "passed": true,
+      "suite": "g4_sources",
+      "test": "test_coupon_and_rainy_day_fees_are_read_at_the_actual_day"
+    },
+    {
+      "assertion_count": 8,
+      "duration_ms": 28,
+      "message": "",
+      "passed": true,
+      "suite": "g4_sources",
+      "test": "test_data_on_snapshot_is_authoritative_and_day_rejects_mismatched_records"
+    },
+    {
+      "assertion_count": 9,
+      "duration_ms": 32,
+      "message": "",
+      "passed": true,
+      "suite": "g4_sources",
+      "test": "test_frozen_day_view_uses_confirmation_data_and_keeps_missing_meals_absent"
+    },
+    {
+      "assertion_count": 9,
+      "duration_ms": 547,
+      "message": "",
+      "passed": true,
+      "suite": "g4_sources",
+      "test": "test_old_proposal_is_rejected_after_any_material_live_input_changes"
+    },
+    {
+      "assertion_count": 11,
+      "duration_ms": 99,
+      "message": "",
+      "passed": true,
+      "suite": "g4_sources",
+      "test": "test_optional_suggestion_resolves_without_paying_and_confirm_matches_quote"
+    },
+    {
+      "assertion_count": 11,
+      "duration_ms": 19,
+      "message": "",
+      "passed": true,
+      "suite": "g4_sources",
+      "test": "test_pantry_uses_only_present_stock_and_never_charges_card_prices"
+    },
+    {
+      "assertion_count": 31,
+      "duration_ms": 74,
+      "message": "",
+      "passed": true,
+      "suite": "g4_sources",
+      "test": "test_production_drafts_and_closed_flags_do_not_allow_guidance"
+    },
+    {
+      "assertion_count": 50,
+      "duration_ms": 432,
+      "message": "",
+      "passed": true,
+      "suite": "g4_sources",
+      "test": "test_real_source_prices_and_limits_match_the_game_resolver"
+    },
+    {
+      "assertion_count": 5,
+      "duration_ms": 129,
+      "message": "",
+      "passed": true,
+      "suite": "g4_sources",
+      "test": "test_saturated_source_swaps_within_its_limit_without_losing_known_roles"
+    },
+    {
+      "assertion_count": 13,
+      "duration_ms": 19,
+      "message": "",
+      "passed": true,
+      "suite": "g4_sources",
+      "test": "test_source_selection_limits_and_integer_boundaries_are_enforced"
+    },
+    {
+      "assertion_count": 7,
+      "duration_ms": 169,
+      "message": "",
+      "passed": true,
+      "suite": "g4_sources",
+      "test": "test_suggestion_cost_includes_event_fee_once_and_rejects_insufficient_balance"
+    },
+    {
+      "assertion_count": 2,
+      "duration_ms": 134,
+      "message": "",
+      "passed": true,
+      "suite": "g4_suggestions",
+      "test": "test_a_recent_unknown_record_never_proves_a_persistent_pattern"
+    },
+    {
+      "assertion_count": 9,
+      "duration_ms": 84,
+      "message": "",
+      "passed": true,
+      "suite": "g4_suggestions",
+      "test": "test_cooldown_without_confirmed_pattern_returns_a_plan_with_no_executable_card"
+    },
+    {
+      "assertion_count": 6,
+      "duration_ms": 344,
+      "message": "",
+      "passed": true,
+      "suite": "g4_suggestions",
+      "test": "test_dismissal_changes_the_offer_without_spending_or_changing_the_selection"
+    },
+    {
+      "assertion_count": 8,
+      "duration_ms": 300,
+      "message": "",
+      "passed": true,
+      "suite": "g4_suggestions",
+      "test": "test_equal_price_taste_tiebreak_is_explicit_and_does_not_change_composition"
+    },
+    {
+      "assertion_count": 26,
+      "duration_ms": 354,
+      "message": "",
+      "passed": true,
+      "suite": "g4_suggestions",
+      "test": "test_future_invalid_or_duplicate_memory_cannot_bypass_the_filter"
+    },
+    {
+      "assertion_count": 10,
+      "duration_ms": 143,
+      "message": "",
+      "passed": true,
+      "suite": "g4_suggestions",
+      "test": "test_missing_unavailable_vegetable_does_not_hide_a_real_pantry_staple_option"
+    },
+    {
+      "assertion_count": 6,
+      "duration_ms": 160,
+      "message": "",
+      "passed": true,
+      "suite": "g4_suggestions",
+      "test": "test_no_current_option_plan_is_structured_and_stops_at_the_end_of_the_week"
+    },
+    {
+      "assertion_count": 14,
+      "duration_ms": 998,
+      "message": "",
+      "passed": true,
+      "suite": "g4_suggestions",
+      "test": "test_preview_alternative_and_dismissal_are_optional_and_do_not_pay"
+    },
+    {
+      "assertion_count": 15,
+      "duration_ms": 310,
+      "message": "",
+      "passed": true,
+      "suite": "g4_suggestions",
+      "test": "test_primary_and_distinct_alternative_are_both_executable_and_keep_current_food"
+    },
+    {
+      "assertion_count": 2,
+      "duration_ms": 86,
+      "message": "",
+      "passed": true,
+      "suite": "g4_suggestions",
+      "test": "test_ranking_is_independent_of_option_order_and_outputs_are_detached"
+    },
+    {
+      "assertion_count": 4,
+      "duration_ms": 57,
+      "message": "",
+      "passed": true,
+      "suite": "g4_suggestions",
+      "test": "test_receipts_are_copied_deduplicated_and_do_not_extend_a_meal_archive"
+    },
+    {
+      "assertion_count": 4,
+      "duration_ms": 139,
+      "message": "",
+      "passed": true,
+      "suite": "g4_suggestions",
+      "test": "test_recent_repeated_instruction_uses_an_available_alternative_first"
+    },
+    {
+      "assertion_count": 5,
+      "duration_ms": 317,
+      "message": "",
+      "passed": true,
+      "suite": "g4_suggestions",
+      "test": "test_repeat_is_allowed_only_after_two_confirmed_supported_meals_and_no_other_option"
+    },
+    {
+      "assertion_count": 4,
+      "duration_ms": 137,
+      "message": "",
+      "passed": true,
+      "suite": "g4_suggestions",
+      "test": "test_shown_receipt_does_not_rotate_the_same_selection_on_every_refresh"
+    },
+    {
+      "assertion_count": 732,
+      "duration_ms": 8680,
+      "message": "",
+      "passed": true,
+      "suite": "game_saves",
+      "test": "test_every_phase_roundtrips_across_real_seven_day_runs"
+    },
+    {
+      "assertion_count": 17,
+      "duration_ms": 177,
+      "message": "",
+      "passed": true,
+      "suite": "game_saves",
+      "test": "test_file_slots_backup_import_and_story_isolation"
+    },
+    {
+      "assertion_count": 8,
+      "duration_ms": 441,
+      "message": "",
+      "passed": true,
+      "suite": "game_saves",
+      "test": "test_fresh_scene_continues_without_new_day_resources_or_inventory"
+    },
+    {
+      "assertion_count": 22,
+      "duration_ms": 14,
+      "message": "",
+      "passed": true,
+      "suite": "game_saves",
+      "test": "test_full_random_state_is_exact_and_future_menus_do_not_reroll"
+    },
+    {
+      "assertion_count": 9,
+      "duration_ms": 5,
+      "message": "",
+      "passed": true,
+      "suite": "game_saves",
+      "test": "test_invalid_save_is_transactional_and_cannot_switch_story_or_open_health_flags"
+    },
+    {
+      "assertion_count": 15,
+      "duration_ms": 42,
+      "message": "",
+      "passed": true,
+      "suite": "game_saves",
+      "test": "test_invitation_is_still_a_plan_after_reading_and_completed_stays_completed"
+    },
+    {
+      "assertion_count": 6,
+      "duration_ms": 344,
+      "message": "",
+      "passed": true,
+      "suite": "game_saves",
+      "test": "test_save_dialog_blocks_day_and_summary_keys_and_restores_them"
+    },
+    {
+      "assertion_count": 18,
+      "duration_ms": 44,
+      "message": "",
+      "passed": true,
+      "suite": "game_saves",
+      "test": "test_start_and_selected_menu_roundtrip_both_stories"
+    },
+    {
+      "assertion_count": 21,
+      "duration_ms": 79,
+      "message": "",
+      "passed": true,
+      "suite": "game_saves",
+      "test": "test_unsafe_unknown_and_frozen_recipe_survive_without_spending_twice"
+    },
+    {
+      "assertion_count": 7,
+      "duration_ms": 7,
+      "message": "",
+      "passed": true,
+      "suite": "gameplay_balance",
+      "test": "test_auxiliary_water_and_three_main_actions_form_a_valid_frozen_day"
+    },
+    {
+      "assertion_count": 4,
+      "duration_ms": 15,
+      "message": "",
+      "passed": true,
+      "suite": "gameplay_balance",
+      "test": "test_diet_quality_and_plate_composition_cannot_grant_resource_bonuses"
+    },
+    {
+      "assertion_count": 4,
+      "duration_ms": 7,
+      "message": "",
+      "passed": true,
+      "suite": "gameplay_balance",
+      "test": "test_final_night_study_can_finish_a_gap_with_a_visible_recovery_cost"
+    },
+    {
+      "assertion_count": 2,
+      "duration_ms": 5,
+      "message": "",
+      "passed": true,
+      "suite": "gameplay_balance",
+      "test": "test_initial_reserve_matches_the_game_formula_without_a_first_meal_drop"
+    },
+    {
+      "assertion_count": 7,
+      "duration_ms": 12,
+      "message": "",
+      "passed": true,
+      "suite": "gameplay_balance",
+      "test": "test_insufficient_food_has_a_recorded_cost_and_price_bonus_requires_a_meal"
+    },
+    {
+      "assertion_count": 5,
+      "duration_ms": 4,
+      "message": "",
+      "passed": true,
+      "suite": "gameplay_balance",
+      "test": "test_leave_time_has_a_time_cost_without_erasing_learned_progress"
+    },
+    {
+      "assertion_count": 7,
+      "duration_ms": 565,
+      "message": "",
+      "passed": true,
+      "suite": "gameplay_balance",
+      "test": "test_rendered_water_button_keeps_the_planner_free_and_updates_its_limit"
+    },
+    {
+      "assertion_count": 7,
+      "duration_ms": 3,
+      "message": "",
+      "passed": true,
+      "suite": "gameplay_balance",
+      "test": "test_skipping_still_passes_one_period_and_stale_advance_cannot_repeat_it"
+    },
+    {
+      "assertion_count": 4,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "gameplay_balance",
+      "test": "test_study_hunger_penalty_has_an_exact_boundary_and_combines_with_fatigue"
+    },
+    {
+      "assertion_count": 3,
+      "duration_ms": 3,
+      "message": "",
+      "passed": true,
+      "suite": "gameplay_balance",
+      "test": "test_v1_and_v2_apply_the_same_period_and_auxiliary_water_rules"
+    },
+    {
+      "assertion_count": 12,
+      "duration_ms": 3,
+      "message": "",
+      "passed": true,
+      "suite": "gameplay_balance",
+      "test": "test_water_is_limited_auxiliary_input_without_food_or_time_gain"
+    },
+    {
+      "assertion_count": 5,
+      "duration_ms": 15,
+      "message": "",
+      "passed": true,
+      "suite": "health_archive",
+      "test": "test_append_get_and_save_data_do_not_share_mutable_arrays_or_profiles"
+    },
+    {
+      "assertion_count": 6,
+      "duration_ms": 11,
+      "message": "",
+      "passed": true,
+      "suite": "health_archive",
+      "test": "test_current_archive_json_round_trip_preserves_original_profile_versions"
+    },
+    {
+      "assertion_count": 7,
+      "duration_ms": 8,
+      "message": "",
+      "passed": true,
+      "suite": "health_archive",
+      "test": "test_direct_snapshot_arrays_keep_current_data_and_reject_future_schemas"
+    },
+    {
+      "assertion_count": 6,
+      "duration_ms": 16,
+      "message": "",
+      "passed": true,
+      "suite": "health_archive",
+      "test": "test_failed_record_validation_cannot_partially_replace_archive"
+    },
+    {
+      "assertion_count": 11,
+      "duration_ms": 27,
+      "message": "",
+      "passed": true,
+      "suite": "health_archive",
+      "test": "test_file_round_trip_and_replacement_leave_no_temporary_files"
+    },
+    {
+      "assertion_count": 9,
+      "duration_ms": 8,
+      "message": "",
+      "passed": true,
+      "suite": "health_archive",
+      "test": "test_future_archive_and_snapshot_versions_fail_closed"
+    },
+    {
+      "assertion_count": 8,
+      "duration_ms": 5,
+      "message": "",
+      "passed": true,
+      "suite": "health_archive",
+      "test": "test_legacy_day_uses_record_then_envelope_and_never_invents_missing_day"
+    },
+    {
+      "assertion_count": 4,
+      "duration_ms": 7,
+      "message": "",
+      "passed": true,
+      "suite": "health_archive",
+      "test": "test_legacy_existing_snapshot_is_kept_without_rebuilding_from_record"
+    },
+    {
+      "assertion_count": 12,
+      "duration_ms": 3,
+      "message": "",
+      "passed": true,
+      "suite": "health_archive",
+      "test": "test_legacy_quality_tags_and_current_food_id_never_infer_health"
+    },
+    {
+      "assertion_count": 8,
+      "duration_ms": 13,
+      "message": "",
+      "passed": true,
+      "suite": "health_archive",
+      "test": "test_missing_and_bad_json_files_do_not_clear_loaded_archive"
+    },
+    {
+      "assertion_count": 6,
+      "duration_ms": 12,
+      "message": "",
+      "passed": true,
+      "suite": "health_archive",
+      "test": "test_non_json_snapshot_values_are_rejected_before_storage"
+    },
+    {
+      "assertion_count": 11,
+      "duration_ms": 21,
+      "message": "",
+      "passed": true,
+      "suite": "health_archive",
+      "test": "test_write_failures_report_errors_and_keep_previous_file_and_memory"
+    },
+    {
+      "assertion_count": 38,
+      "duration_ms": 9,
+      "message": "",
+      "passed": true,
+      "suite": "health_archive",
+      "test": "test_wrong_shapes_and_fractional_versions_preserve_archive"
+    },
+    {
+      "assertion_count": 9,
+      "duration_ms": 3,
+      "message": "",
+      "passed": true,
+      "suite": "health_data_store",
+      "test": "test_empty_and_missing_files_have_distinct_degraded_states"
+    },
+    {
+      "assertion_count": 7,
+      "duration_ms": 2,
+      "message": "",
+      "passed": true,
+      "suite": "health_data_store",
+      "test": "test_future_schema_fails_closed_instead_of_partially_loading"
+    },
+    {
+      "assertion_count": 7,
+      "duration_ms": 2,
+      "message": "",
+      "passed": true,
+      "suite": "health_data_store",
+      "test": "test_legacy_schema_fails_closed_instead_of_guessing_profiles"
+    },
+    {
+      "assertion_count": 2,
+      "duration_ms": 3,
+      "message": "",
+      "passed": true,
+      "suite": "health_data_store",
+      "test": "test_public_results_are_deep_copies"
+    },
+    {
+      "assertion_count": 31,
+      "duration_ms": 2,
+      "message": "",
+      "passed": true,
+      "suite": "health_data_store",
+      "test": "test_supported_catalog_loads_root_profile_components_and_factors"
+    },
+    {
+      "assertion_count": 7,
+      "duration_ms": 3,
+      "message": "",
+      "passed": true,
+      "suite": "health_data_store",
+      "test": "test_supported_empty_catalog_is_available_without_invented_profiles"
+    },
+    {
+      "assertion_count": 3,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "health_data_validator",
+      "test": "test_composite_food_requires_components_or_explicit_unknown"
+    },
+    {
+      "assertion_count": 5,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "health_data_validator",
+      "test": "test_duplicate_and_unknown_food_ids_are_blocking_and_located"
+    },
+    {
+      "assertion_count": 9,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "health_data_validator",
+      "test": "test_expert_review_requires_evidence_date_and_reviewer"
+    },
+    {
+      "assertion_count": 5,
+      "duration_ms": 2,
+      "message": "",
+      "passed": true,
+      "suite": "health_data_validator",
+      "test": "test_future_schema_is_a_blocking_catalog_error"
+    },
+    {
+      "assertion_count": 10,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "health_data_validator",
+      "test": "test_invalid_enums_negative_amounts_and_missing_units_are_blocking"
+    },
+    {
+      "assertion_count": 4,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "health_data_validator",
+      "test": "test_known_composition_requires_components_without_composite_context"
+    },
+    {
+      "assertion_count": 3,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "health_data_validator",
+      "test": "test_known_same_unit_components_must_sum_to_the_portion"
+    },
+    {
+      "assertion_count": 3,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "health_data_validator",
+      "test": "test_malformed_container_fields_report_errors_without_crashing"
+    },
+    {
+      "assertion_count": 3,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "health_data_validator",
+      "test": "test_missing_required_root_fields_are_blocking_and_located"
+    },
+    {
+      "assertion_count": 3,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "health_data_validator",
+      "test": "test_none_and_high_factor_bands_require_evidence"
+    },
+    {
+      "assertion_count": 4,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "health_data_validator",
+      "test": "test_not_applicable_caffeine_requires_none_states_and_no_dose"
+    },
+    {
+      "assertion_count": 4,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "health_data_validator",
+      "test": "test_not_applicable_is_a_valid_cooking_method_for_packaged_foods"
+    },
+    {
+      "assertion_count": 8,
+      "duration_ms": 2,
+      "message": "",
+      "passed": true,
+      "suite": "health_data_validator",
+      "test": "test_present_factor_band_is_reserved_for_a_matching_deep_fried_method"
+    },
+    {
+      "assertion_count": 3,
+      "duration_ms": 2,
+      "message": "",
+      "passed": true,
+      "suite": "health_data_validator",
+      "test": "test_shared_ingredient_ids_must_keep_one_food_group"
+    },
+    {
+      "assertion_count": 16,
+      "duration_ms": 4,
+      "message": "",
+      "passed": true,
+      "suite": "health_data_validator",
+      "test": "test_supported_fixture_has_no_blocking_errors_and_precise_warnings"
+    },
+    {
+      "assertion_count": 6,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "health_data_validator",
+      "test": "test_warning_matrix_covers_unknown_composition_caffeine_product_and_evidence"
+    },
+    {
+      "assertion_count": 5,
+      "duration_ms": 4,
+      "message": "",
+      "passed": true,
+      "suite": "health_evidence_registry",
+      "test": "test_due_date_is_inclusive_and_next_review_is_reported"
+    },
+    {
+      "assertion_count": 7,
+      "duration_ms": 2,
+      "message": "",
+      "passed": true,
+      "suite": "health_evidence_registry",
+      "test": "test_future_schema_fails_closed_without_partial_records"
+    },
+    {
+      "assertion_count": 5,
+      "duration_ms": 2,
+      "message": "",
+      "passed": true,
+      "suite": "health_evidence_registry",
+      "test": "test_invalid_as_of_date_fails_safely"
+    },
+    {
+      "assertion_count": 45,
+      "duration_ms": 12,
+      "message": "",
+      "passed": true,
+      "suite": "health_evidence_registry",
+      "test": "test_nut_204d_game_spec_supports_simulated_labels_but_not_release_claims"
+    },
+    {
+      "assertion_count": 7,
+      "duration_ms": 3,
+      "message": "",
+      "passed": true,
+      "suite": "health_evidence_registry",
+      "test": "test_production_registry_audit_reports_review_due_at_without_overdue_sources"
+    },
+    {
+      "assertion_count": 36,
+      "duration_ms": 5,
+      "message": "",
+      "passed": true,
+      "suite": "health_evidence_registry",
+      "test": "test_production_registry_loads_official_sources_and_explicit_boundaries"
+    },
+    {
+      "assertion_count": 3,
+      "duration_ms": 5,
+      "message": "",
+      "passed": true,
+      "suite": "health_evidence_registry",
+      "test": "test_public_records_and_reports_are_deep_copies"
+    },
+    {
+      "assertion_count": 6,
+      "duration_ms": 4,
+      "message": "",
+      "passed": true,
+      "suite": "health_evidence_registry",
+      "test": "test_reference_check_detects_missing_due_and_needs_review_records"
+    },
+    {
+      "assertion_count": 8,
+      "duration_ms": 5,
+      "message": "",
+      "passed": true,
+      "suite": "health_evidence_registry",
+      "test": "test_reference_check_requires_positive_capability_support"
+    },
+    {
+      "assertion_count": 4,
+      "duration_ms": 3,
+      "message": "",
+      "passed": true,
+      "suite": "health_evidence_registry",
+      "test": "test_same_capability_cannot_be_supported_and_denied_by_one_record"
+    },
+    {
+      "assertion_count": 5,
+      "duration_ms": 4,
+      "message": "",
+      "passed": true,
+      "suite": "health_evidence_registry",
+      "test": "test_superseded_reference_reports_full_replacement_chain_and_current_id"
+    },
+    {
+      "assertion_count": 4,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "health_guidance_m1",
+      "test": "test_carryover_copy_is_explicitly_gameplay_not_medical"
+    },
+    {
+      "assertion_count": 5,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "health_guidance_m1",
+      "test": "test_health_guidance_v2_flags_default_to_off"
+    },
+    {
+      "assertion_count": 6,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "health_guidance_m1",
+      "test": "test_health_guidance_v2_flags_downgrade_invalid_dependencies"
+    },
+    {
+      "assertion_count": 4,
+      "duration_ms": 4,
+      "message": "",
+      "passed": true,
+      "suite": "health_guidance_m1",
+      "test": "test_legacy_baseline_fixtures_are_explicitly_audit_only"
+    },
+    {
+      "assertion_count": 4,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "health_guidance_m1",
+      "test": "test_legacy_scores_no_longer_produce_a_daily_health_tier"
+    },
+    {
+      "assertion_count": 9,
+      "duration_ms": 27,
+      "message": "",
+      "passed": true,
+      "suite": "health_guidance_m1",
+      "test": "test_retired_health_numeric_widgets_ignore_legacy_values"
+    },
+    {
+      "assertion_count": 7,
+      "duration_ms": 11,
+      "message": "",
+      "passed": true,
+      "suite": "health_guidance_m1",
+      "test": "test_risky_legacy_copy_is_absent_from_current_player_scripts"
+    },
+    {
+      "assertion_count": 31,
+      "duration_ms": 17,
+      "message": "",
+      "passed": true,
+      "suite": "health_profile_migration",
+      "test": "test_nut_204a_evidence_ids_exist_but_pending_records_block_release_use"
+    },
+    {
+      "assertion_count": 66,
+      "duration_ms": 8,
+      "message": "",
+      "passed": true,
+      "suite": "health_profile_migration",
+      "test": "test_nut_204a_profiles_keep_portions_recipes_and_cooking_explicitly_limited"
+    },
+    {
+      "assertion_count": 44,
+      "duration_ms": 9,
+      "message": "",
+      "passed": true,
+      "suite": "health_profile_migration",
+      "test": "test_nut_204a_records_only_supported_group_identity_without_amount_claims"
+    },
+    {
+      "assertion_count": 52,
+      "duration_ms": 7,
+      "message": "",
+      "passed": true,
+      "suite": "health_profile_migration",
+      "test": "test_nut_204b_components_keep_amounts_and_small_dairy_semantics"
+    },
+    {
+      "assertion_count": 44,
+      "duration_ms": 8,
+      "message": "",
+      "passed": true,
+      "suite": "health_profile_migration",
+      "test": "test_nut_204b_factor_inputs_and_caffeine_facts_do_not_invent_timing_guidance"
+    },
+    {
+      "assertion_count": 15,
+      "duration_ms": 23,
+      "message": "",
+      "passed": true,
+      "suite": "health_profile_migration",
+      "test": "test_nut_204b_game_spec_is_traceable_but_does_not_approve_health_guidance"
+    },
+    {
+      "assertion_count": 33,
+      "duration_ms": 9,
+      "message": "",
+      "passed": true,
+      "suite": "health_profile_migration",
+      "test": "test_nut_204b_uses_canonical_game_recipes_and_simulated_label_values"
+    },
+    {
+      "assertion_count": 238,
+      "duration_ms": 9,
+      "message": "",
+      "passed": true,
+      "suite": "health_profile_migration",
+      "test": "test_nut_204c_components_match_the_frozen_game_spec"
+    },
+    {
+      "assertion_count": 38,
+      "duration_ms": 33,
+      "message": "",
+      "passed": true,
+      "suite": "health_profile_migration",
+      "test": "test_nut_204c_game_spec_is_usable_provenance_but_not_health_approval"
+    },
+    {
+      "assertion_count": 58,
+      "duration_ms": 10,
+      "message": "",
+      "passed": true,
+      "suite": "health_profile_migration",
+      "test": "test_nut_204c_methods_are_facts_while_unclassified_factors_stay_unknown"
+    },
+    {
+      "assertion_count": 20,
+      "duration_ms": 9,
+      "message": "",
+      "passed": true,
+      "suite": "health_profile_migration",
+      "test": "test_nut_204c_shared_ingredient_ids_support_future_dedup_without_false_groups"
+    },
+    {
+      "assertion_count": 126,
+      "duration_ms": 11,
+      "message": "",
+      "passed": true,
+      "suite": "health_profile_migration",
+      "test": "test_nut_204c_uses_complete_canonical_recipes_with_exact_portions"
+    },
+    {
+      "assertion_count": 36,
+      "duration_ms": 13,
+      "message": "",
+      "passed": true,
+      "suite": "health_profile_migration",
+      "test": "test_nut_204d_components_match_the_frozen_product_spec_and_shared_ids"
+    },
+    {
+      "assertion_count": 39,
+      "duration_ms": 35,
+      "message": "",
+      "passed": true,
+      "suite": "health_profile_migration",
+      "test": "test_nut_204d_game_spec_supports_product_facts_but_not_health_approval"
+    },
+    {
+      "assertion_count": 6,
+      "duration_ms": 7,
+      "message": "",
+      "passed": true,
+      "suite": "health_profile_migration",
+      "test": "test_nut_204d_keeps_unparsed_allergen_and_food_safety_states_empty"
+    },
+    {
+      "assertion_count": 28,
+      "duration_ms": 9,
+      "message": "",
+      "passed": true,
+      "suite": "health_profile_migration",
+      "test": "test_nut_204d_raw_factor_facts_do_not_invent_health_bands"
+    },
+    {
+      "assertion_count": 54,
+      "duration_ms": 9,
+      "message": "",
+      "passed": true,
+      "suite": "health_profile_migration",
+      "test": "test_nut_204d_uses_fixed_simulated_package_labels_and_portions"
+    },
+    {
+      "assertion_count": 5,
+      "duration_ms": 15,
+      "message": "",
+      "passed": true,
+      "suite": "health_profile_migration",
+      "test": "test_nut_205_catalog_has_zero_blocking_validation_errors"
+    },
+    {
+      "assertion_count": 40,
+      "duration_ms": 9,
+      "message": "",
+      "passed": true,
+      "suite": "health_profile_migration",
+      "test": "test_nut_205_categories_do_not_invent_ingredients_or_vegetable_contributions"
+    },
+    {
+      "assertion_count": 32,
+      "duration_ms": 19,
+      "message": "",
+      "passed": true,
+      "suite": "health_profile_migration",
+      "test": "test_nut_205_coverage_does_not_clear_pending_or_overdue_evidence"
+    },
+    {
+      "assertion_count": 51,
+      "duration_ms": 9,
+      "message": "",
+      "passed": true,
+      "suite": "health_profile_migration",
+      "test": "test_nut_205_every_food_card_has_exactly_one_health_profile"
+    },
+    {
+      "assertion_count": 86,
+      "duration_ms": 11,
+      "message": "",
+      "passed": true,
+      "suite": "health_profile_migration",
+      "test": "test_nut_205_unknown_portions_and_factors_never_inherit_legacy_claims"
+    },
+    {
+      "assertion_count": 7,
+      "duration_ms": 40,
+      "message": "",
+      "passed": true,
+      "suite": "health_snapshot_flow",
+      "test": "test_auto_save_failure_is_diagnostic_and_does_not_undo_the_meal"
+    },
+    {
+      "assertion_count": 265,
+      "duration_ms": 470,
+      "message": "",
+      "passed": true,
+      "suite": "health_snapshot_flow",
+      "test": "test_data_on_preserves_the_seven_day_gameplay_and_captures_twenty_one_meals"
+    },
+    {
+      "assertion_count": 12,
+      "duration_ms": 9,
+      "message": "",
+      "passed": true,
+      "suite": "health_snapshot_flow",
+      "test": "test_disabled_data_keeps_records_and_disk_untouched"
+    },
+    {
+      "assertion_count": 31,
+      "duration_ms": 28,
+      "message": "",
+      "passed": true,
+      "suite": "health_snapshot_flow",
+      "test": "test_missing_and_invalid_profiles_degrade_without_blocking_the_meal"
+    },
+    {
+      "assertion_count": 13,
+      "duration_ms": 37,
+      "message": "",
+      "passed": true,
+      "suite": "health_snapshot_flow",
+      "test": "test_only_successful_confirmations_and_skips_capture_once"
+    },
+    {
+      "assertion_count": 22,
+      "duration_ms": 96,
+      "message": "",
+      "passed": true,
+      "suite": "health_snapshot_flow",
+      "test": "test_snapshots_survive_day_changes_and_restart_clears_the_archive"
+    },
+    {
+      "assertion_count": 18,
+      "duration_ms": 147,
+      "message": "",
+      "passed": true,
+      "suite": "health_snapshot_flow",
+      "test": "test_successful_meals_auto_save_and_explicit_load_does_not_restore_game_state"
+    },
+    {
+      "assertion_count": 26,
+      "duration_ms": 49,
+      "message": "",
+      "passed": true,
+      "suite": "health_xml_structure",
+      "test": "test_a_second_root_cannot_append_records_to_a_valid_catalog"
+    },
+    {
+      "assertion_count": 26,
+      "duration_ms": 30,
+      "message": "",
+      "passed": true,
+      "suite": "health_xml_structure",
+      "test": "test_mismatched_root_and_nested_closings_fail_closed"
+    },
+    {
+      "assertion_count": 26,
+      "duration_ms": 46,
+      "message": "",
+      "passed": true,
+      "suite": "health_xml_structure",
+      "test": "test_non_whitespace_text_outside_root_fails_closed"
+    },
+    {
+      "assertion_count": 26,
+      "duration_ms": 29,
+      "message": "",
+      "passed": true,
+      "suite": "health_xml_structure",
+      "test": "test_unclosed_roots_fail_closed_with_and_without_trailing_whitespace"
+    },
+    {
+      "assertion_count": 10,
+      "duration_ms": 20,
+      "message": "",
+      "passed": true,
+      "suite": "health_xml_structure",
+      "test": "test_valid_nested_self_closing_and_commented_documents_remain_supported"
+    },
+    {
+      "assertion_count": 9,
+      "duration_ms": 9,
+      "message": "",
+      "passed": true,
+      "suite": "household_content",
+      "test": "test_condiment_purchase_charges_once_and_preserves_recipe_history"
+    },
+    {
+      "assertion_count": 9,
+      "duration_ms": 7,
+      "message": "",
+      "passed": true,
+      "suite": "household_content",
+      "test": "test_condiment_shortage_and_invalid_plan_do_not_partially_spend"
+    },
+    {
+      "assertion_count": 30,
+      "duration_ms": 115,
+      "message": "",
+      "passed": true,
+      "suite": "household_content",
+      "test": "test_full_week_with_soft_recipe_restock_shared_dinner_and_real_performance"
+    },
+    {
+      "assertion_count": 11,
+      "duration_ms": 3,
+      "message": "",
+      "passed": true,
+      "suite": "household_content",
+      "test": "test_given_recipe_sodium_and_white_sugar_keep_unknown_scope"
+    },
+    {
+      "assertion_count": 13,
+      "duration_ms": 8,
+      "message": "",
+      "passed": true,
+      "suite": "household_content",
+      "test": "test_invitation_does_not_spend_and_home_dinner_charges_two_people"
+    },
+    {
+      "assertion_count": 8,
+      "duration_ms": 5,
+      "message": "",
+      "passed": true,
+      "suite": "household_content",
+      "test": "test_missed_invitation_remains_missed_and_restart_clears_plans_and_condiments"
+    },
+    {
+      "assertion_count": 13,
+      "duration_ms": 1317,
+      "message": "",
+      "passed": true,
+      "suite": "household_content",
+      "test": "test_preview_toggle_cancel_and_stale_confirm_cannot_spend"
+    },
+    {
+      "assertion_count": 8,
+      "duration_ms": 14,
+      "message": "",
+      "passed": true,
+      "suite": "household_content",
+      "test": "test_recipe_quantity_changes_do_not_claim_health_or_change_goal_resources"
+    },
+    {
+      "assertion_count": 12,
+      "duration_ms": 11,
+      "message": "",
+      "passed": true,
+      "suite": "household_content",
+      "test": "test_saved_recipe_is_frozen_and_unknown_items_are_not_zero"
+    },
+    {
+      "assertion_count": 8,
+      "duration_ms": 794,
+      "message": "",
+      "passed": true,
+      "suite": "household_content",
+      "test": "test_shared_meal_dialog_cancel_and_double_tap_keep_plan_truthful"
+    },
+    {
+      "assertion_count": 12,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "household_content",
+      "test": "test_shared_meal_requires_food_correct_time_venue_and_only_completes_once"
+    },
+    {
+      "assertion_count": 19,
+      "duration_ms": 9,
+      "message": "",
+      "passed": true,
+      "suite": "household_content",
+      "test": "test_soft_recipes_share_real_pantry_ingredients_and_have_own_art"
+    },
+    {
+      "assertion_count": 14,
+      "duration_ms": 4,
+      "message": "",
+      "passed": true,
+      "suite": "household_content",
+      "test": "test_two_people_plus_one_saved_portion_charge_three_sets_but_record_one"
+    },
+    {
+      "assertion_count": 62,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_bundled_body_font_covers_the_new_game_controls_without_system_fonts"
+    },
+    {
+      "assertion_count": 8,
+      "duration_ms": 833,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_canteen_scene_only_follows_an_available_outing_choice"
+    },
+    {
+      "assertion_count": 8,
+      "duration_ms": 318,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_continuing_first_day_opens_sources_without_a_kitchen_panel"
+    },
+    {
+      "assertion_count": 16,
+      "duration_ms": 1426,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_cooking_preview_counts_two_people_plus_saved_portion_without_spending"
+    },
+    {
+      "assertion_count": 17,
+      "duration_ms": 873,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_cooking_shortage_names_exact_missing_food_and_condiment_amounts"
+    },
+    {
+      "assertion_count": 4,
+      "duration_ms": 328,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_escape_cancels_confirmation_once_and_ignores_old_buttons"
+    },
+    {
+      "assertion_count": 4,
+      "duration_ms": 321,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_group_rehearsal_note_follows_the_day_and_current_action_reason"
+    },
+    {
+      "assertion_count": 69,
+      "duration_ms": 835,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_home_choices_and_outing_popup_fit_without_scrolling"
+    },
+    {
+      "assertion_count": 36,
+      "duration_ms": 711,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_home_entries_draw_graphics_inside_their_click_targets"
+    },
+    {
+      "assertion_count": 13,
+      "duration_ms": 681,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_household_night_returns_home_and_only_the_ending_uses_the_stage"
+    },
+    {
+      "assertion_count": 8,
+      "duration_ms": 938,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_insufficient_preview_disables_commit_and_cancel_preserves_hand"
+    },
+    {
+      "assertion_count": 9,
+      "duration_ms": 935,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_keyboard_return_from_cooking_keeps_selection_and_inventory"
+    },
+    {
+      "assertion_count": 5,
+      "duration_ms": 582,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_market_background_matches_the_meal_time_and_returns_home"
+    },
+    {
+      "assertion_count": 17,
+      "duration_ms": 668,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_outing_preview_stays_home_until_a_destination_is_selected"
+    },
+    {
+      "assertion_count": 5,
+      "duration_ms": 335,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_pending_dialog_blocks_cancel_and_focus_skips_disabled_slots"
+    },
+    {
+      "assertion_count": 8,
+      "duration_ms": 325,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_performance_note_shows_both_shortfalls_and_uses_actual_availability"
+    },
+    {
+      "assertion_count": 4,
+      "duration_ms": 700,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_pinned_food_details_restore_the_info_button_without_selecting_food"
+    },
+    {
+      "assertion_count": 30,
+      "duration_ms": 21,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_raw_ingredient_atlas_has_every_recipe_ingredient_with_valid_bounds"
+    },
+    {
+      "assertion_count": 5,
+      "duration_ms": 786,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_removing_last_selected_food_disables_confirmation"
+    },
+    {
+      "assertion_count": 7,
+      "duration_ms": 831,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_removing_selected_food_is_idempotent_and_keeps_stock_and_money"
+    },
+    {
+      "assertion_count": 18,
+      "duration_ms": 1726,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_shortage_and_commit_summary_stay_outside_the_recipe_scroll"
+    },
+    {
+      "assertion_count": 11,
+      "duration_ms": 1128,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_source_navigation_only_opens_cooking_preview_after_selecting_recipes"
+    },
+    {
+      "assertion_count": 9,
+      "duration_ms": 406,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_source_rules_and_tools_are_available_through_explicit_popups"
+    },
+    {
+      "assertion_count": 6,
+      "duration_ms": 330,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_source_stage_does_not_capture_keys_from_the_new_day_popup"
+    },
+    {
+      "assertion_count": 9,
+      "duration_ms": 559,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_stock_cards_do_not_allow_unknown_or_unsafe_batches_to_be_eaten"
+    },
+    {
+      "assertion_count": 34,
+      "duration_ms": 771,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_stock_tabs_and_batch_details_are_read_only_and_keep_controls_visible"
+    },
+    {
+      "assertion_count": 23,
+      "duration_ms": 949,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_story_actions_have_distinct_scenes_and_keep_shared_zero_slot_verbs"
+    },
+    {
+      "assertion_count": 126,
+      "duration_ms": 2096,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_story_schedule_note_and_night_copy_fit_mobile_and_desktop"
+    },
+    {
+      "assertion_count": 72,
+      "duration_ms": 1646,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_three_selected_foods_keep_remove_actions_and_footer_in_bounds"
+    },
+    {
+      "assertion_count": 6,
+      "duration_ms": 579,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_unavailable_food_details_update_after_selection_is_removed"
+    },
+    {
+      "assertion_count": 21,
+      "duration_ms": 1849,
+      "message": "",
+      "passed": true,
+      "suite": "household_ui",
+      "test": "test_worktops_keep_footer_and_hud_visible_at_mobile_and_desktop_sizes"
+    },
+    {
+      "assertion_count": 13,
+      "duration_ms": 28,
+      "message": "",
+      "passed": true,
+      "suite": "meal_health_snapshot",
+      "test": "test_fixed_product_preserves_version_portion_evidence_and_draft_independently"
+    },
+    {
+      "assertion_count": 3,
+      "duration_ms": 49,
+      "message": "",
+      "passed": true,
+      "suite": "meal_health_snapshot",
+      "test": "test_gameplay_changes_cannot_change_captured_health_inputs"
+    },
+    {
+      "assertion_count": 8,
+      "duration_ms": 56,
+      "message": "",
+      "passed": true,
+      "suite": "meal_health_snapshot",
+      "test": "test_known_empty_composition_is_rejected_during_capture_and_history_validation"
+    },
+    {
+      "assertion_count": 12,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "meal_health_snapshot",
+      "test": "test_legacy_records_preserve_only_recorded_facts_and_unknown_dates"
+    },
+    {
+      "assertion_count": 11,
+      "duration_ms": 48,
+      "message": "",
+      "passed": true,
+      "suite": "meal_health_snapshot",
+      "test": "test_missing_or_invalid_profiles_keep_eaten_fact_and_explicit_data_gaps"
+    },
+    {
+      "assertion_count": 4,
+      "duration_ms": 34,
+      "message": "",
+      "passed": true,
+      "suite": "meal_health_snapshot",
+      "test": "test_shared_ingredients_keep_food_provenance_without_early_deduplication"
+    },
+    {
+      "assertion_count": 8,
+      "duration_ms": 10,
+      "message": "",
+      "passed": true,
+      "suite": "meal_health_snapshot",
+      "test": "test_skipped_snapshot_never_copies_foods_source_or_legacy_score"
+    },
+    {
+      "assertion_count": 6,
+      "duration_ms": 6,
+      "message": "",
+      "passed": true,
+      "suite": "meal_health_snapshot",
+      "test": "test_snapshot_does_not_change_after_catalog_or_record_changes"
+    },
+    {
+      "assertion_count": 6,
+      "duration_ms": 12,
+      "message": "",
+      "passed": true,
+      "suite": "meal_health_snapshot",
+      "test": "test_unavailable_and_future_catalogs_never_turn_an_eaten_meal_into_a_skip"
+    },
+    {
+      "assertion_count": 16,
+      "duration_ms": 40,
+      "message": "",
+      "passed": true,
+      "suite": "meal_health_snapshot",
+      "test": "test_validation_rejects_future_schema_bad_numbers_and_forged_derived_data"
+    },
+    {
+      "assertion_count": 5,
+      "duration_ms": 1099,
+      "message": "",
+      "passed": true,
+      "suite": "meal_prep",
+      "test": "test_final_dinner_does_not_promise_an_unavailable_future_meal_saving"
+    },
+    {
+      "assertion_count": 9,
+      "duration_ms": 39,
+      "message": "",
+      "passed": true,
+      "suite": "meal_prep",
+      "test": "test_five_saved_energy_can_keep_a_rehearsal_option_available"
+    },
+    {
+      "assertion_count": 1090,
+      "duration_ms": 4276,
+      "message": "",
+      "passed": true,
+      "suite": "meal_prep",
+      "test": "test_fresh_and_batch_week_routes_remain_legal_across_seeds"
+    },
+    {
+      "assertion_count": 7,
+      "duration_ms": 16,
+      "message": "",
+      "passed": true,
+      "suite": "meal_prep",
+      "test": "test_preparing_a_portion_does_not_credit_a_bonus_before_it_is_used"
+    },
+    {
+      "assertion_count": 112,
+      "duration_ms": 1390,
+      "message": "",
+      "passed": true,
+      "suite": "meal_prep",
+      "test": "test_preview_shows_one_extra_portion_and_costs_from_the_real_sources"
+    },
+    {
+      "assertion_count": 20,
+      "duration_ms": 30,
+      "message": "",
+      "passed": true,
+      "suite": "meal_prep",
+      "test": "test_two_meals_save_five_energy_with_equal_food_and_condiment_costs"
+    },
+    {
+      "assertion_count": 16,
+      "duration_ms": 2,
+      "message": "",
+      "passed": true,
+      "suite": "meal_systems",
+      "test": "test_daily_ledger_reports_only_confirmed_meal_facts"
+    },
+    {
+      "assertion_count": 4,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "meal_systems",
+      "test": "test_dorm_hand_respects_inventory"
+    },
+    {
+      "assertion_count": 9,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "meal_systems",
+      "test": "test_ending_boundary_matrix_has_no_unclassified_gap"
+    },
+    {
+      "assertion_count": 2,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "meal_systems",
+      "test": "test_final_day_stability_does_not_reserve_phantom_budget"
+    },
+    {
+      "assertion_count": 6,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "meal_systems",
+      "test": "test_food_groups_do_not_substitute_for_each_other"
+    },
+    {
+      "assertion_count": 6,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "meal_systems",
+      "test": "test_legacy_tags_are_frozen_metadata_without_a_score_or_resource_bonus"
+    },
+    {
+      "assertion_count": 1,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "meal_systems",
+      "test": "test_low_study_has_its_own_ending"
+    },
+    {
+      "assertion_count": 2,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "meal_systems",
+      "test": "test_meal_group_combination_is_same_meal_only"
+    },
+    {
+      "assertion_count": 3,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "meal_systems",
+      "test": "test_meal_record_charges_source_fee_once"
+    },
+    {
+      "assertion_count": 5,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "meal_systems",
+      "test": "test_meal_record_includes_source_stat_effects"
+    },
+    {
+      "assertion_count": 6,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "meal_systems",
+      "test": "test_new_meal_records_have_no_legacy_nutrition_score"
+    },
+    {
+      "assertion_count": 2,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "meal_systems",
+      "test": "test_seeded_hands_are_repeatable_and_unique"
+    },
+    {
+      "assertion_count": 12,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "meal_systems",
+      "test": "test_skipped_records_do_not_receive_a_default_diet_score"
+    },
+    {
+      "assertion_count": 29,
+      "duration_ms": 7,
+      "message": "",
+      "passed": true,
+      "suite": "mvp_content",
+      "test": "test_action_assets_and_rules"
+    },
+    {
+      "assertion_count": 4,
+      "duration_ms": 5,
+      "message": "",
+      "passed": true,
+      "suite": "mvp_content",
+      "test": "test_endings_have_images"
+    },
+    {
+      "assertion_count": 139,
+      "duration_ms": 17,
+      "message": "",
+      "passed": true,
+      "suite": "mvp_content",
+      "test": "test_food_assets_and_costs"
+    },
+    {
+      "assertion_count": 52,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "mvp_content",
+      "test": "test_food_satiety_is_rebalanced"
+    },
+    {
+      "assertion_count": 1,
+      "duration_ms": 2,
+      "message": "",
+      "passed": true,
+      "suite": "mvp_content",
+      "test": "test_game_scene_instantiates"
+    },
+    {
+      "assertion_count": 30,
+      "duration_ms": 7,
+      "message": "",
+      "passed": true,
+      "suite": "mvp_content",
+      "test": "test_meal_sources_and_pools"
+    },
+    {
+      "assertion_count": 1,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "mvp_content",
+      "test": "test_metrics_guide_asset_exists"
+    },
+    {
+      "assertion_count": 16,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "mvp_content",
+      "test": "test_new_foods_match_realistic_meal_sources"
+    },
+    {
+      "assertion_count": 4,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "mvp_content",
+      "test": "test_sleep_early_is_sleep_only"
+    },
+    {
+      "assertion_count": 4,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "mvp_content",
+      "test": "test_xml_card_data_exists"
+    },
+    {
+      "assertion_count": 2,
+      "duration_ms": 17,
+      "message": "",
+      "passed": true,
+      "suite": "new_day_popup",
+      "test": "test_continue_emits_once_and_public_payload_is_a_copy"
+    },
+    {
+      "assertion_count": 11,
+      "duration_ms": 16,
+      "message": "",
+      "passed": true,
+      "suite": "new_day_popup",
+      "test": "test_desktop_layout_uses_two_cards_and_missing_images_are_safe"
+    },
+    {
+      "assertion_count": 4,
+      "duration_ms": 15,
+      "message": "",
+      "passed": true,
+      "suite": "new_day_popup",
+      "test": "test_enter_on_recovery_details_does_not_begin_the_day"
+    },
+    {
+      "assertion_count": 2,
+      "duration_ms": 15,
+      "message": "",
+      "passed": true,
+      "suite": "new_day_popup",
+      "test": "test_hidden_day_popup_does_not_accept_a_late_continue_signal"
+    },
+    {
+      "assertion_count": 10,
+      "duration_ms": 21,
+      "message": "",
+      "passed": true,
+      "suite": "new_day_popup",
+      "test": "test_mobile_layout_stacks_scrollable_cards_above_fixed_button"
+    },
+    {
+      "assertion_count": 11,
+      "duration_ms": 195,
+      "message": "",
+      "passed": true,
+      "suite": "player_copy",
+      "test": "test_card_details_keep_one_effect_heading_without_repeated_disclaimers"
+    },
+    {
+      "assertion_count": 4,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "player_copy",
+      "test": "test_ending_does_not_describe_skips_as_a_subset_of_eaten_meals"
+    },
+    {
+      "assertion_count": 6,
+      "duration_ms": 3,
+      "message": "",
+      "passed": true,
+      "suite": "player_copy",
+      "test": "test_nonconsecutive_preferred_meals_and_final_day_budget_have_factual_copy"
+    },
+    {
+      "assertion_count": 6,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "player_copy",
+      "test": "test_partial_empty_and_all_skipped_records_are_reported_literally"
+    },
+    {
+      "assertion_count": 2,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "player_copy",
+      "test": "test_unrecorded_food_names_are_not_guessed_from_ids_or_tags"
+    },
+    {
+      "assertion_count": 7,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "player_copy",
+      "test": "test_unreviewed_legacy_tags_do_not_generate_nutrition_claims"
+    },
+    {
+      "assertion_count": 6,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "player_copy",
+      "test": "test_unreviewed_or_ambiguous_food_labels_and_bodily_claims_are_removed"
+    },
+    {
+      "assertion_count": 16,
+      "duration_ms": 817,
+      "message": "",
+      "passed": true,
+      "suite": "readability",
+      "test": "test_mobile_pantry_first_row_keeps_names_and_stats_visible"
+    },
+    {
+      "assertion_count": 123,
+      "duration_ms": 2357,
+      "message": "",
+      "passed": true,
+      "suite": "readability",
+      "test": "test_sleep_previews_wrap_and_stay_inside_their_note"
+    },
+    {
+      "assertion_count": 16,
+      "duration_ms": 315,
+      "message": "",
+      "passed": true,
+      "suite": "readability",
+      "test": "test_source_name_plates_keep_readable_contrast_when_disabled"
+    },
+    {
+      "assertion_count": 9,
+      "duration_ms": 7,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_flow",
+      "test": "test_c2_consumes_recovery_without_legacy_burden_and_serializes_only_the_record"
+    },
+    {
+      "assertion_count": 5,
+      "duration_ms": 8,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_flow",
+      "test": "test_counts_include_only_executed_actions_and_exclude_night_study"
+    },
+    {
+      "assertion_count": 5,
+      "duration_ms": 9,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_flow",
+      "test": "test_duplicate_sleep_or_finish_does_not_settle_any_effect_twice"
+    },
+    {
+      "assertion_count": 19,
+      "duration_ms": 61,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_flow",
+      "test": "test_health_flags_and_frozen_snapshots_are_independent_of_recovery"
+    },
+    {
+      "assertion_count": 13,
+      "duration_ms": 8,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_flow",
+      "test": "test_late_clamp_and_non_sleep_effects_keep_their_provenance"
+    },
+    {
+      "assertion_count": 15,
+      "duration_ms": 11,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_flow",
+      "test": "test_missing_sleep_and_trace_drift_fail_closed_without_neutral_fallback"
+    },
+    {
+      "assertion_count": 6,
+      "duration_ms": 11,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_flow",
+      "test": "test_negative_energy_and_high_stress_are_clamped_only_at_day_end"
+    },
+    {
+      "assertion_count": 7,
+      "duration_ms": 3,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_flow",
+      "test": "test_new_run_has_explicit_neutral_record_and_no_sleep_history"
+    },
+    {
+      "assertion_count": 6,
+      "duration_ms": 8,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_flow",
+      "test": "test_rainy_day_actions_use_their_executed_effects_before_sleep"
+    },
+    {
+      "assertion_count": 21,
+      "duration_ms": 19,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_flow",
+      "test": "test_rebalanced_sleep_choices_keep_frozen_r2_records_and_separate_legacy_quality"
+    },
+    {
+      "assertion_count": 12,
+      "duration_ms": 11,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_flow",
+      "test": "test_records_are_deep_copies_and_reset_between_days_and_runs"
+    },
+    {
+      "assertion_count": 4,
+      "duration_ms": 3,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_flow",
+      "test": "test_rejected_sleep_leaves_the_default_and_day_untouched"
+    },
+    {
+      "assertion_count": 39,
+      "duration_ms": 19,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_flow",
+      "test": "test_three_live_sleep_choices_freeze_actual_trace_and_r2_result"
+    },
+    {
+      "assertion_count": 3,
+      "duration_ms": 7,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_flow",
+      "test": "test_three_studies_cannot_be_hidden_by_early_sleep"
+    },
+    {
+      "assertion_count": 16,
+      "duration_ms": 22,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_gameplay",
+      "test": "test_all_four_endings_are_reached_through_real_sleep_and_day_settlement"
+    },
+    {
+      "assertion_count": 7,
+      "duration_ms": 4,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_gameplay",
+      "test": "test_day_opening_applies_recovery_then_event_then_one_clamp"
+    },
+    {
+      "assertion_count": 5,
+      "duration_ms": 6,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_gameplay",
+      "test": "test_daytime_uses_previous_recovery_and_day_end_uses_new_recovery"
+    },
+    {
+      "assertion_count": 5,
+      "duration_ms": 4,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_gameplay",
+      "test": "test_invalid_day_settlement_cannot_trigger_an_ending_or_neutral_next_day"
+    },
+    {
+      "assertion_count": 15,
+      "duration_ms": 4,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_gameplay",
+      "test": "test_invalid_gameplay_numbers_do_not_produce_a_stability_score"
+    },
+    {
+      "assertion_count": 25,
+      "duration_ms": 27,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_gameplay",
+      "test": "test_missing_wrong_day_future_and_corrupt_records_block_advancement"
+    },
+    {
+      "assertion_count": 4,
+      "duration_ms": 6,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_gameplay",
+      "test": "test_new_day_end_recovery_prevents_a_stale_low_stability_collapse"
+    },
+    {
+      "assertion_count": 6,
+      "duration_ms": 7,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_gameplay",
+      "test": "test_next_day_uses_the_frozen_journal_not_mutable_pending_or_display"
+    },
+    {
+      "assertion_count": 26,
+      "duration_ms": 3,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_gameplay",
+      "test": "test_prepare_consumes_frozen_effect_and_binds_the_correct_day"
+    },
+    {
+      "assertion_count": 57,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_gameplay",
+      "test": "test_r2_ending_boundaries_ignore_recovery_and_old_burden_gates"
+    },
+    {
+      "assertion_count": 2,
+      "duration_ms": 269,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_gameplay",
+      "test": "test_reopening_real_new_day_popup_does_not_reapply_opening_effects"
+    },
+    {
+      "assertion_count": 6,
+      "duration_ms": 9,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_gameplay",
+      "test": "test_restart_resets_the_applied_day_and_current_frozen_effect"
+    },
+    {
+      "assertion_count": 5,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_gameplay",
+      "test": "test_stability_keeps_rounding_clamping_penalties_and_final_day_budget"
+    },
+    {
+      "assertion_count": 44,
+      "duration_ms": 5,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_gameplay",
+      "test": "test_stability_uses_four_r2_contributions_and_ignores_legacy_burden"
+    },
+    {
+      "assertion_count": 4,
+      "duration_ms": 3,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_gameplay",
+      "test": "test_start_day_retry_does_not_reset_actions_or_apply_any_opening_twice"
+    },
+    {
+      "assertion_count": 48,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_gameplay",
+      "test": "test_unavailable_corrupt_and_future_records_have_no_consumable_effect"
+    },
+    {
+      "assertion_count": 2,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_presentation",
+      "test": "test_early_sleep_does_not_override_severe_end_state"
+    },
+    {
+      "assertion_count": 8,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_presentation",
+      "test": "test_ending_narrative_counts_only_executed_meals_and_sleep"
+    },
+    {
+      "assertion_count": 3,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_presentation",
+      "test": "test_final_day_has_no_promise_of_unused_opening_effects"
+    },
+    {
+      "assertion_count": 33,
+      "duration_ms": 2,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_presentation",
+      "test": "test_four_conditions_have_factual_reasons_and_frozen_effects"
+    },
+    {
+      "assertion_count": 5,
+      "duration_ms": 288,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_presentation",
+      "test": "test_hud_and_new_day_use_consumed_record_not_mutable_display_aliases"
+    },
+    {
+      "assertion_count": 11,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_presentation",
+      "test": "test_legacy_invalid_and_future_records_never_show_neutral_effects"
+    },
+    {
+      "assertion_count": 5,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_presentation",
+      "test": "test_new_run_has_no_fictional_prior_sleep_or_recovery_bonus"
+    },
+    {
+      "assertion_count": 2,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_presentation",
+      "test": "test_phone_is_a_fact_without_a_guaranteed_penalty"
+    },
+    {
+      "assertion_count": 3,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_presentation",
+      "test": "test_presentation_does_not_evaluate_or_mutate_frozen_history"
+    },
+    {
+      "assertion_count": 12,
+      "duration_ms": 161,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_presentation",
+      "test": "test_reopening_recovery_details_cannot_reapply_effects_or_change_inventory"
+    },
+    {
+      "assertion_count": 3,
+      "duration_ms": 192,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_presentation",
+      "test": "test_sleep_details_do_not_predict_a_condition_before_settlement"
+    },
+    {
+      "assertion_count": 4,
+      "duration_ms": 13,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_presentation",
+      "test": "test_state_detail_shows_absolute_values_and_card_effects_show_deltas"
+    },
+    {
+      "assertion_count": 4,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_presentation",
+      "test": "test_trace_separates_sleep_other_effects_and_clamp"
+    },
+    {
+      "assertion_count": 2,
+      "duration_ms": 166,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_presentation",
+      "test": "test_week_recap_reads_recovery_records_instead_of_legacy_aliases"
+    },
+    {
+      "assertion_count": 115,
+      "duration_ms": 6,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_retirement",
+      "test": "test_all_card_catalogues_and_starting_state_have_no_retired_fields"
+    },
+    {
+      "assertion_count": 8,
+      "duration_ms": 5,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_retirement",
+      "test": "test_both_controllers_reject_retired_deltas_and_sanitize_old_state"
+    },
+    {
+      "assertion_count": 322,
+      "duration_ms": 98,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_retirement",
+      "test": "test_both_versions_reach_seven_days_with_valid_clean_recovery_history"
+    },
+    {
+      "assertion_count": 4,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_retirement",
+      "test": "test_event_updates_cannot_write_or_retain_old_state_fields"
+    },
+    {
+      "assertion_count": 5,
+      "duration_ms": 183,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_retirement",
+      "test": "test_legacy_scene_runs_without_retired_numeric_bars"
+    },
+    {
+      "assertion_count": 7,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_retirement",
+      "test": "test_meal_and_skip_deltas_ignore_retired_food_and_source_properties"
+    },
+    {
+      "assertion_count": 7,
+      "duration_ms": 3,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_retirement",
+      "test": "test_v1_consumes_frozen_recovery_and_event_once_with_study_yield"
+    },
+    {
+      "assertion_count": 4,
+      "duration_ms": 2,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_retirement",
+      "test": "test_v1_invalid_recovery_blocks_advancement_without_a_fallback"
+    },
+    {
+      "assertion_count": 5,
+      "duration_ms": 2,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_retirement",
+      "test": "test_v1_sleep_and_day_end_are_idempotent_and_freeze_independent_records"
+    },
+    {
+      "assertion_count": 9,
+      "duration_ms": 2,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_retirement",
+      "test": "test_v1_successful_actions_stock_and_limits_are_recorded"
+    },
+    {
+      "assertion_count": 6,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_retirement",
+      "test": "test_xml_parser_discards_injected_retired_attributes"
+    },
+    {
+      "assertion_count": 18,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_rules",
+      "test": "test_compound_severe_rules_have_independent_boundaries"
+    },
+    {
+      "assertion_count": 13,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_rules",
+      "test": "test_declared_inputs_match_current_action_and_sleep_catalogs"
+    },
+    {
+      "assertion_count": 13,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_rules",
+      "test": "test_each_condition_freezes_expected_next_day_effect"
+    },
+    {
+      "assertion_count": 36,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_rules",
+      "test": "test_early_sleep_requires_both_ready_thresholds_and_no_overwork"
+    },
+    {
+      "assertion_count": 84,
+      "duration_ms": 2,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_rules",
+      "test": "test_energy_and_stress_thresholds_at_nearby_integers"
+    },
+    {
+      "assertion_count": 4,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_rules",
+      "test": "test_evaluation_is_deterministic_and_results_have_no_shared_mutable_data"
+    },
+    {
+      "assertion_count": 114,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_rules",
+      "test": "test_invalid_actions_limits_or_unperformed_metadata_never_coerce"
+    },
+    {
+      "assertion_count": 161,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_rules",
+      "test": "test_invalid_numeric_values_are_rejected_without_coercion"
+    },
+    {
+      "assertion_count": 103,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_rules",
+      "test": "test_missing_unknown_and_wrong_input_containers_are_invalid"
+    },
+    {
+      "assertion_count": 143,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_rules",
+      "test": "test_nutrition_old_health_and_other_stats_are_outside_the_api"
+    },
+    {
+      "assertion_count": 20,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_rules",
+      "test": "test_phone_is_explanation_only_and_uses_actual_end_state"
+    },
+    {
+      "assertion_count": 34,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_rules",
+      "test": "test_reason_facts_are_complete_but_winning_rules_have_one_priority"
+    },
+    {
+      "assertion_count": 16,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_rules",
+      "test": "test_sleep_ids_remain_distinct_without_reapplying_sleep_deltas"
+    },
+    {
+      "assertion_count": 18,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_rules",
+      "test": "test_valid_sparse_actions_and_json_integer_numbers_are_normalized_copies"
+    },
+    {
+      "assertion_count": 105,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_state",
+      "test": "test_invalid_trace_input_never_becomes_normal_recovery"
+    },
+    {
+      "assertion_count": 8,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_state",
+      "test": "test_json_roundtrip_preserves_frozen_noncurrent_sleep_values"
+    },
+    {
+      "assertion_count": 10,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_state",
+      "test": "test_legacy_unknown_carries_no_effect_and_invalid_status_is_unusable"
+    },
+    {
+      "assertion_count": 9,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_state",
+      "test": "test_new_run_is_neutral_explicit_and_independent"
+    },
+    {
+      "assertion_count": 6,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_state",
+      "test": "test_phone_uses_actual_state_and_early_sleep_cannot_override_severe_state"
+    },
+    {
+      "assertion_count": 6,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_state",
+      "test": "test_records_freeze_inputs_effects_and_outputs_without_shared_references"
+    },
+    {
+      "assertion_count": 15,
+      "duration_ms": 45,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_state",
+      "test": "test_recovery_records_do_not_leak_into_health_snapshots"
+    },
+    {
+      "assertion_count": 7,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_state",
+      "test": "test_sleep_effects_and_late_clamp_have_separate_provenance"
+    },
+    {
+      "assertion_count": 26,
+      "duration_ms": 5,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_state",
+      "test": "test_trace_mismatches_and_invalid_outcome_are_rejected"
+    },
+    {
+      "assertion_count": 330,
+      "duration_ms": 2,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_state_migration",
+      "test": "test_empty_unknown_and_health_archive_inputs_are_not_legacy_gameplay"
+    },
+    {
+      "assertion_count": 21,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_state_migration",
+      "test": "test_encode_refuses_invalid_and_unsupported_records_instead_of_faking_state"
+    },
+    {
+      "assertion_count": 36,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_state_migration",
+      "test": "test_explicit_v1_and_legacy_unknown_can_round_trip_without_defaulting"
+    },
+    {
+      "assertion_count": 132,
+      "duration_ms": 23,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_state_migration",
+      "test": "test_frozen_seven_day_and_early_collapse_records_remain_unknown"
+    },
+    {
+      "assertion_count": 193,
+      "duration_ms": 2,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_state_migration",
+      "test": "test_future_recovery_versions_fail_closed_and_are_not_rewritten"
+    },
+    {
+      "assertion_count": 24,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_state_migration",
+      "test": "test_legacy_mixed_values_never_infer_recovery_or_next_day_effects"
+    },
+    {
+      "assertion_count": 7,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_state_migration",
+      "test": "test_loaded_and_encoded_records_do_not_share_nested_state"
+    },
+    {
+      "assertion_count": 84,
+      "duration_ms": 2,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_state_migration",
+      "test": "test_malformed_record_discards_all_result_and_effect_fields"
+    },
+    {
+      "assertion_count": 15,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_state_migration",
+      "test": "test_mixed_legacy_history_stays_independent_from_health_information"
+    },
+    {
+      "assertion_count": 70,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_state_migration",
+      "test": "test_new_fields_without_current_version_never_fall_back_to_legacy"
+    },
+    {
+      "assertion_count": 13,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_state_migration",
+      "test": "test_new_run_round_trip_is_a_recovery_only_envelope"
+    },
+    {
+      "assertion_count": 9,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_state_migration",
+      "test": "test_settled_json_round_trip_keeps_actual_sleep_and_trace"
+    },
+    {
+      "assertion_count": 210,
+      "duration_ms": 2,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_state_migration",
+      "test": "test_v2_requires_exact_envelope_and_whole_record"
+    },
+    {
+      "assertion_count": 173,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "recovery_state_migration",
+      "test": "test_versions_are_validated_before_legacy_fallback"
+    },
+    {
+      "assertion_count": 88,
+      "duration_ms": 2122,
+      "message": "",
+      "passed": true,
+      "suite": "shared_card_flow",
+      "test": "test_all_eight_sources_use_removable_selected_cards_without_spending"
+    },
+    {
+      "assertion_count": 18,
+      "duration_ms": 2040,
+      "message": "",
+      "passed": true,
+      "suite": "shared_card_flow",
+      "test": "test_both_stories_hide_and_clear_old_toasts_during_summary_and_ending"
+    },
+    {
+      "assertion_count": 27,
+      "duration_ms": 1220,
+      "message": "",
+      "passed": true,
+      "suite": "shared_card_flow",
+      "test": "test_both_stories_keep_action_and_sleep_cards_with_focus_scrolling"
+    },
+    {
+      "assertion_count": 6,
+      "duration_ms": 1901,
+      "message": "",
+      "passed": true,
+      "suite": "shared_card_flow",
+      "test": "test_current_summary_errors_remain_visible_after_old_feedback_is_cleared"
+    },
+    {
+      "assertion_count": 4,
+      "duration_ms": 366,
+      "message": "",
+      "passed": true,
+      "suite": "shared_card_flow",
+      "test": "test_persistent_campus_slot_does_not_remove_the_next_food_twice"
+    },
+    {
+      "assertion_count": 3,
+      "duration_ms": 914,
+      "message": "",
+      "passed": true,
+      "suite": "shared_card_flow",
+      "test": "test_recipe_and_stock_cards_use_badges_without_inventing_cash_prices"
+    },
+    {
+      "assertion_count": 4,
+      "duration_ms": 363,
+      "message": "",
+      "passed": true,
+      "suite": "shared_card_flow",
+      "test": "test_record_overlay_rejects_a_late_removal_without_changing_selection"
+    },
+    {
+      "assertion_count": 12,
+      "duration_ms": 5,
+      "message": "",
+      "passed": true,
+      "suite": "story_series",
+      "test": "test_character_goal_and_sources_are_separate"
+    },
+    {
+      "assertion_count": 520,
+      "duration_ms": 845,
+      "message": "",
+      "passed": true,
+      "suite": "story_series",
+      "test": "test_household_has_a_legal_seven_day_route_across_seeds"
+    },
+    {
+      "assertion_count": 12,
+      "duration_ms": 3,
+      "message": "",
+      "passed": true,
+      "suite": "story_series",
+      "test": "test_leftover_rules_and_unknown_are_not_safe"
+    },
+    {
+      "assertion_count": 9,
+      "duration_ms": 6,
+      "message": "",
+      "passed": true,
+      "suite": "story_series",
+      "test": "test_recipe_transaction_and_duplicate_confirmation"
+    },
+    {
+      "assertion_count": 8,
+      "duration_ms": 3,
+      "message": "",
+      "passed": true,
+      "suite": "story_series",
+      "test": "test_rehearsal_limits_and_actual_performance_requirement"
+    },
+    {
+      "assertion_count": 6,
+      "duration_ms": 7,
+      "message": "",
+      "passed": true,
+      "suite": "story_series",
+      "test": "test_reheated_batch_consumes_once_and_does_not_reset_history"
+    },
+    {
+      "assertion_count": 10,
+      "duration_ms": 9,
+      "message": "",
+      "passed": true,
+      "suite": "story_series",
+      "test": "test_restart_and_switch_clear_household_state"
+    },
+    {
+      "assertion_count": 5,
+      "duration_ms": 2,
+      "message": "",
+      "passed": true,
+      "suite": "story_series",
+      "test": "test_room_temperature_preparation_stays_unavailable"
+    },
+    {
+      "assertion_count": 8,
+      "duration_ms": 338,
+      "message": "",
+      "passed": true,
+      "suite": "story_series",
+      "test": "test_scene_uses_older_portrait_goal_and_modal_input_guard"
+    },
+    {
+      "assertion_count": 4,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "story_series",
+      "test": "test_science_exercises_keep_sugar_scope_explicit"
+    },
+    {
+      "assertion_count": 4,
+      "duration_ms": 6,
+      "message": "",
+      "passed": true,
+      "suite": "story_series",
+      "test": "test_shared_ingredient_shortage_is_atomic"
+    },
+    {
+      "assertion_count": 4,
+      "duration_ms": 3,
+      "message": "",
+      "passed": true,
+      "suite": "story_series",
+      "test": "test_storage_expiry_uses_elapsed_hours_inside_same_calendar_day"
+    },
+    {
+      "assertion_count": 7,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "story_series",
+      "test": "test_story_catalog_and_request_isolation"
+    },
+    {
+      "assertion_count": 6,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "v2_flow",
+      "test": "test_cash_meal_charges_its_price_without_consuming_pantry_stock"
+    },
+    {
+      "assertion_count": 30,
+      "duration_ms": 119,
+      "message": "",
+      "passed": true,
+      "suite": "v2_flow",
+      "test": "test_cash_stages_keep_prices_when_pantry_stock_changes"
+    },
+    {
+      "assertion_count": 50,
+      "duration_ms": 155,
+      "message": "",
+      "passed": true,
+      "suite": "v2_flow",
+      "test": "test_character_hud_mobile_profile_keeps_footer_clear_and_clickable"
+    },
+    {
+      "assertion_count": 12,
+      "duration_ms": 161,
+      "message": "",
+      "passed": true,
+      "suite": "v2_flow",
+      "test": "test_daily_summary_can_expand_explicit_meal_record_detail"
+    },
+    {
+      "assertion_count": 32,
+      "duration_ms": 98,
+      "message": "",
+      "passed": true,
+      "suite": "v2_flow",
+      "test": "test_desktop_stage_panels_leave_character_safe_zone"
+    },
+    {
+      "assertion_count": 21,
+      "duration_ms": 4,
+      "message": "",
+      "passed": true,
+      "suite": "v2_flow",
+      "test": "test_dorm_stock_is_consumed_and_persists_next_day"
+    },
+    {
+      "assertion_count": 7,
+      "duration_ms": 156,
+      "message": "",
+      "passed": true,
+      "suite": "v2_flow",
+      "test": "test_ending_summary_shows_art_and_week_recap"
+    },
+    {
+      "assertion_count": 46,
+      "duration_ms": 520,
+      "message": "",
+      "passed": true,
+      "suite": "v2_flow",
+      "test": "test_every_v2_stage_reaches_ready_with_real_data"
+    },
+    {
+      "assertion_count": 3,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "v2_flow",
+      "test": "test_forged_or_empty_meal_confirmation_cannot_advance"
+    },
+    {
+      "assertion_count": 3,
+      "duration_ms": 2,
+      "message": "",
+      "passed": true,
+      "suite": "v2_flow",
+      "test": "test_mobile_baseline_is_720_by_1280_without_forcing_desktop_window"
+    },
+    {
+      "assertion_count": 8,
+      "duration_ms": 151,
+      "message": "",
+      "passed": true,
+      "suite": "v2_flow",
+      "test": "test_mobile_daily_summary_is_compact_and_actionable"
+    },
+    {
+      "assertion_count": 20,
+      "duration_ms": 292,
+      "message": "",
+      "passed": true,
+      "suite": "v2_flow",
+      "test": "test_new_day_popup_uses_live_state_event_rules_and_art"
+    },
+    {
+      "assertion_count": 60,
+      "duration_ms": 54,
+      "message": "",
+      "passed": true,
+      "suite": "v2_flow",
+      "test": "test_normal_starting_budget_can_reach_seventh_day_ending"
+    },
+    {
+      "assertion_count": 12,
+      "duration_ms": 46,
+      "message": "",
+      "passed": true,
+      "suite": "v2_flow",
+      "test": "test_pantry_cards_show_zero_or_live_stock_instead_of_cash_prices"
+    },
+    {
+      "assertion_count": 8,
+      "duration_ms": 157,
+      "message": "",
+      "passed": true,
+      "suite": "v2_flow",
+      "test": "test_pinned_details_survive_other_previews_and_close_without_settlement"
+    },
+    {
+      "assertion_count": 7,
+      "duration_ms": 24,
+      "message": "",
+      "passed": true,
+      "suite": "v2_flow",
+      "test": "test_previous_day_learning_state_changes_visible_study_yield"
+    },
+    {
+      "assertion_count": 14,
+      "duration_ms": 4,
+      "message": "",
+      "passed": true,
+      "suite": "v2_flow",
+      "test": "test_rapid_repeat_inputs_do_not_double_advance_or_settle"
+    },
+    {
+      "assertion_count": 40,
+      "duration_ms": 169,
+      "message": "",
+      "passed": true,
+      "suite": "v2_flow",
+      "test": "test_selected_food_card_keeps_full_face_and_clears_stale_food"
+    },
+    {
+      "assertion_count": 8,
+      "duration_ms": 11,
+      "message": "",
+      "passed": true,
+      "suite": "v2_flow",
+      "test": "test_selection_colour_survives_availability_refresh_and_deselection"
+    },
+    {
+      "assertion_count": 3,
+      "duration_ms": 9,
+      "message": "",
+      "passed": true,
+      "suite": "v2_flow",
+      "test": "test_skipping_everything_can_trigger_early_collapse"
+    },
+    {
+      "assertion_count": 12,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "v2_flow",
+      "test": "test_source_identity_action_limits_and_pantry_restock_are_enforced"
+    },
+    {
+      "assertion_count": 22,
+      "duration_ms": 2,
+      "message": "",
+      "passed": true,
+      "suite": "v2_flow",
+      "test": "test_source_rules_and_meal_action_transitions"
+    },
+    {
+      "assertion_count": 14,
+      "duration_ms": 637,
+      "message": "",
+      "passed": true,
+      "suite": "v2_flow",
+      "test": "test_stale_source_stage_cannot_reopen_or_select_another_meal"
+    },
+    {
+      "assertion_count": 11,
+      "duration_ms": 19,
+      "message": "",
+      "passed": true,
+      "suite": "v2_flow",
+      "test": "test_touch_contract_tap_swipe_and_long_press"
+    },
+    {
+      "assertion_count": 10,
+      "duration_ms": 191,
+      "message": "",
+      "passed": true,
+      "suite": "v2_flow",
+      "test": "test_v2_root_scene_starts_at_breakfast_source"
+    },
+    {
+      "assertion_count": 6,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "v2_flow",
+      "test": "test_v2_theme_bundles_chinese_font_for_web"
+    },
+    {
+      "assertion_count": 11,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "weekly_events",
+      "test": "test_action_modifiers_create_predictable_tradeoffs"
+    },
+    {
+      "assertion_count": 7,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "weekly_events",
+      "test": "test_meal_source_modifiers_are_targeted_and_pure"
+    },
+    {
+      "assertion_count": 11,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "weekly_events",
+      "test": "test_next_day_preview_reports_events_and_quiet_days"
+    },
+    {
+      "assertion_count": 6,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "weekly_events",
+      "test": "test_opening_state_is_applied_without_mutating_or_overflowing_input"
+    },
+    {
+      "assertion_count": 14,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "weekly_events",
+      "test": "test_schedule_is_deterministic_and_covers_days_two_through_six"
+    }
+  ],
+  "skipped": 0,
+  "suite_count": 45,
+  "suites_run": [
+    "daily_summary_layout",
+    "day_carryover",
+    "decision_preview",
+    "export_strip",
+    "food_preference_flow",
+    "food_preference_ui",
+    "food_preferences",
+    "g4_fact_summary",
+    "g4_ledger",
+    "g4_meal",
+    "g4_preview",
+    "g4_record_entry",
+    "g4_score_retirement",
+    "g4_sources",
+    "g4_suggestions",
+    "game_saves",
+    "gameplay_balance",
+    "health_archive",
+    "health_data_store",
+    "health_data_validator",
+    "health_evidence_registry",
+    "health_guidance_m1",
+    "health_profile_migration",
+    "health_snapshot_flow",
+    "health_xml_structure",
+    "household_content",
+    "household_ui",
+    "meal_health_snapshot",
+    "meal_prep",
+    "meal_systems",
+    "mvp_content",
+    "new_day_popup",
+    "player_copy",
+    "readability",
+    "recovery_flow",
+    "recovery_gameplay",
+    "recovery_presentation",
+    "recovery_retirement",
+    "recovery_rules",
+    "recovery_state",
+    "recovery_state_migration",
+    "shared_card_flow",
+    "story_series",
+    "v2_flow",
+    "weekly_events"
+  ],
+  "total": 518
+}

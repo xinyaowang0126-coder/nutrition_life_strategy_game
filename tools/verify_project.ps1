@@ -166,6 +166,8 @@ function Assert-ReleaseConfiguration {
         'scripts/health/*.gd',
         'scripts/ui_v2/*.gd',
         'scripts/ui_v2/stages/*.gd',
+        'scripts/stories/*.gdshader',
+        'assets/generated/stories/props/regions.json',
         'data/characters/*.xml',
         'data/health/*.xml',
         'addons/godot_ai/**',
@@ -208,6 +210,10 @@ function Assert-CleanWebPack {
 
     if (-not (Test-Path -LiteralPath $PackPath -PathType Leaf)) {
         throw "Web export did not produce a PCK: $PackPath"
+    }
+    # Pages serves the checked-in export, so the pack must fit regular Git.
+    if ((Get-Item -LiteralPath $PackPath).Length -gt 100MB) {
+        throw "Web PCK exceeds GitHub's 100 MiB file limit. Reduce texture import size before publishing."
     }
     $packBytes = [IO.File]::ReadAllBytes($PackPath)
     $packText = [Text.Encoding]::ASCII.GetString($packBytes)
@@ -265,6 +271,33 @@ function Assert-CleanWebPack {
         "assets/generated/ui_v2/day_popup/states/clear_focus",
         "assets/generated/ui_v2/day_popup/events/mock_exam_notice",
         "assets/generated/ui_v2/day_popup/events/rainy_day"
+        "scripts/stories/CookingPlanStage"
+        "scripts/stories/HouseholdWorktop"
+        "scripts/stories/KitchenStockStage"
+        "scripts/stories/HouseholdMarketStage"
+        "scripts/stories/HouseholdLocations"
+        "scripts/stories/PropTint"
+        "scenes/stories/HouseholdMealStage"
+        "assets/generated/stories/ingredients/ingredient_atlas"
+        "assets/generated/stories/ingredients/ingredient_regions.json"
+        "assets/generated/stories/props/regions.json"
+        "assets/generated/stories/actions/zhou_rehearse-v1"
+        "assets/generated/stories/actions/zhou_group_rehearsal-v1"
+        "assets/generated/stories/actions/zhou_perform-v1"
+        "assets/generated/stories/actions/zhou_call_friend-v1"
+        "assets/generated/stories/night/zhou_home_night-v1"
+        "assets/generated/stories/locations/zhou-kitchen-v1"
+        "assets/generated/stories/locations/zhou-kitchen-portrait-v1"
+        "assets/generated/stories/locations/zhou-open-fridge-v1"
+        "assets/generated/stories/locations/zhou-market-wide-v1"
+        "assets/generated/stories/locations/zhou-market-portrait-v1"
+        "assets/generated/stories/locations/zhou-breakfast-shop-v1"
+        "assets/generated/stories/locations/zhou-homestyle-diner-v1"
+        "assets/generated/stories/locations/zhou-fruit-stall-v1"
+        "assets/generated/stories/locations/steamed-bun-v1"
+        "assets/fonts/HouseholdBody"
+        "assets/fonts/HouseholdSansSC-Medium"
+        "assets/fonts/HouseholdSans-OFL.txt"
     )) {
         if ($directoryText.IndexOf($requiredPath, [StringComparison]::OrdinalIgnoreCase) -lt 0) {
             throw "Web PCK is missing required production content: $requiredPath"
@@ -329,6 +362,14 @@ function Get-WebPackPaths {
             $entryFlags = $reader.ReadUInt32()
             if ($entryFlags -ne 0 -or ([decimal]$fileBase + $offset + $size) -gt $stream.Length) {
                 throw "Web PCK contains an unsupported or out-of-bounds file entry: $path"
+            }
+            if ($path -match '(^|/)project\.binary$') {
+                if ($size -lt 4) { throw "Web PCK contains truncated project settings: $path" }
+                $directoryPosition = $stream.Position
+                $stream.Position = [long]([decimal]$fileBase + $offset)
+                $settingsMagic = [Text.Encoding]::ASCII.GetString($reader.ReadBytes(4))
+                $stream.Position = $directoryPosition
+                if ($settingsMagic -ne "ECFG") { throw "Web PCK contains invalid project settings header: $path" }
             }
             $paths.Add($path)
         }

@@ -8,6 +8,44 @@ func suite_name() -> String:
 	return "new_day_popup"
 
 
+func test_hidden_day_popup_does_not_accept_a_late_continue_signal() -> void:
+	var popup = NewDayPopupScene.instantiate()
+	_add_to_test_tree(popup)
+	var events: Array[String] = []
+	popup.continue_requested.connect(func() -> void: events.append("continue"))
+	popup.show_day({"day": 1})
+	popup.hide_popup(false)
+	popup.continue_button.pressed.emit()
+	assert_true(events.is_empty())
+	popup.show_day({"day": 2})
+	popup.continue_button.pressed.emit()
+	popup.continue_button.pressed.emit()
+	assert_eq(events, ["continue"])
+
+
+func test_enter_on_recovery_details_does_not_begin_the_day() -> void:
+	var popup = NewDayPopupScene.instantiate()
+	_add_to_test_tree(popup)
+	var events: Array[String] = []
+	popup.continue_requested.connect(func() -> void: events.append("continue"))
+	popup.recovery_details_requested.connect(func() -> void: events.append("recovery"))
+	popup.show_day({"day": 2, "recovery": {}})
+	popup.recovery_details_button.grab_focus()
+	var enter := InputEventKey.new()
+	enter.keycode = KEY_ENTER
+	enter.pressed = true
+	popup._input(enter)
+	assert_eq(events, ["recovery"])
+	assert_false(popup._continue_locked)
+	enter.echo = true
+	popup._input(enter)
+	assert_eq(events, ["recovery"])
+	enter.echo = false
+	popup.continue_button.grab_focus()
+	popup._input(enter)
+	assert_eq(events, ["recovery", "continue"])
+
+
 func test_desktop_layout_uses_two_cards_and_missing_images_are_safe() -> void:
 	var popup = NewDayPopupScene.instantiate()
 	_add_to_test_tree(popup)

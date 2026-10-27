@@ -24,7 +24,7 @@ func test_mobile_pantry_first_row_keeps_names_and_stats_visible() -> void:
 		for index in range(mini(2, cards.size())):
 			var card := cards[index] as CompactChoiceCardV2
 			assert_true(visible_area.encloses(card.title_label.get_global_rect()), "first-row food names must be visible without scrolling")
-			assert_true(visible_area.encloses(card.primary_stat.get_global_rect()), "first-row quick stats must not be clipped")
+			assert_true(visible_area.encloses(card.primary_stat.get_global_rect()), "first-row quick stats %s must fit shelf %s at %s" % [card.primary_stat.get_global_rect(), visible_area, logical_size])
 		assert_true(game.get_viewport().get_visible_rect().encloses(stage.confirm_button.get_global_rect()))
 		var bowl := stage.get_node("Layout/BowlPanel") as Control
 		assert_true(bowl.get_global_rect().end.y <= stage.confirm_button.get_global_rect().position.y, "bowl %s min %s must not cover confirmation %s at %s" % [bowl.get_global_rect(), bowl.get_combined_minimum_size(), stage.confirm_button.get_global_rect(), logical_size])

@@ -1,0 +1,44 @@
+{
+  "date": "2026-10-15",
+  "url": "http://127.0.0.1:8768/index.html",
+  "scope": "Actual in-app browser UI clicks, wheel scrolling, responsive viewport switching, refresh and manual save/load; no hidden game runtime inspection.",
+  "viewports": [
+    {
+      "width": 640,
+      "height": 960,
+      "devicePixelRatio": 1
+    },
+    {
+      "width": 1280,
+      "height": 720,
+      "devicePixelRatio": 1
+    }
+  ],
+  "passed": [
+    "Rendering of existing shell, portrait, raw ingredient atlas and bundled Chinese fonts",
+    "Unsafe leftover batch discarded without settling breakfast",
+    "Rice plus soft tofu greens cooking preview",
+    "Counter and fridge options update quantities while inventory stays at rice 8, tofu 5 and greens 5",
+    "Back to selection preserves both chosen foods",
+    "Responsive layout switches preserve the active cooking plan",
+    "Confirm cooking advances once to breakfast_action",
+    "Manual slot 1 saves with visible acknowledgement",
+    "Browser refresh exposes the saved breakfast-after progress",
+    "Continue after refresh preserves energy 59, mood 56, satiety 76, stress 35, stability 60, goal 0 and budget 210",
+    "Only one breakfast recipe record after refresh",
+    "Stock after refresh is rice 6, tofu 3, greens 3, salt 38g and soy 50mL; two refrigerated dishes remain",
+    "Manual slot 1 can be loaded after advancing to lunch and restores breakfast_action plus original stats",
+    "Selected and hovered toggle text remains readable after the style fix"
+  ],
+  "consoleErrors": [],
+  "consoleWarnings": [],
+  "viewportOverrideReset": true,
+  "notTested": [
+    "Real phone hardware touch",
+    "Screen reader semantics for the Godot canvas",
+    "Browser import/export file picker",
+    "A complete seven-day browser run"
+  ],
+  "publication": "Local preview only; production Play, commit and push unchanged",
+  "result": "passed"
+}

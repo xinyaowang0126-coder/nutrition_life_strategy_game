@@ -1,0 +1,95 @@
+{
+  "date": "2026-10-15",
+  "full_suite": {
+    "passed": 477,
+    "failed": 0,
+    "total": 477,
+    "suite_count": 42,
+    "duration_ms": 36689
+  },
+  "keyboard_mobile": {
+    "day": 2,
+    "diagnostics": [
+      {
+        "disabled": false,
+        "focus": "/root/GameRootV2/HUD/HUDRoot/ModalLayer/NewDayPopup/PaperHost/Paper/Margin/VBox/ContinueButton",
+        "keys": true,
+        "step": "new_day"
+      },
+      {
+        "disabled": false,
+        "focus": "/root/GameRootV2/WorldStage/StageSafeArea/StageHost/@Control@103/WorktopPaper/@VBoxContainer@104/Footer/close",
+        "keys": false,
+        "locked": false,
+        "pending": false,
+        "step": "after_continue",
+        "story": "choir_week"
+      }
+    ],
+    "errors": [],
+    "scope": "Actual native menu/start and popup key events; declared three skipped meals/actions and early-sleep fixture prepares the summary. In-memory saves only.",
+    "window": "(640, 960)"
+  },
+  "keyboard_desktop": {
+    "day": 2,
+    "diagnostics": [
+      {
+        "disabled": false,
+        "focus": "/root/GameRootV2/HUD/HUDRoot/ModalLayer/NewDayPopup/PaperHost/Paper/Margin/VBox/ContinueButton",
+        "keys": true,
+        "step": "new_day"
+      },
+      {
+        "disabled": false,
+        "focus": "/root/GameRootV2/WorldStage/StageSafeArea/StageHost/@Control@103/WorktopPaper/@VBoxContainer@104/Footer/close",
+        "keys": false,
+        "locked": false,
+        "pending": false,
+        "step": "after_continue",
+        "story": "choir_week"
+      }
+    ],
+    "errors": [],
+    "scope": "Actual native menu/start and popup key events; declared three skipped meals/actions and early-sleep fixture prepares the summary. In-memory saves only.",
+    "window": "(1280, 720)"
+  },
+  "worktop_regression": {
+    "errors": [],
+    "scope": "Native rendered game with InputEventKey Tab, Shift+Tab, Enter and Escape; in-memory saves only.",
+    "window": "(640, 960)"
+  },
+  "web_export": {
+    "path": "artifacts/daily-ui-polish-2026-10-15-web",
+    "bytes": 82972352,
+    "sha256": "5f4b9ebc31171569a4cdc5b1b08a6a6e36b206a89baa7930dea98983ed2aacae",
+    "main_scene": "passed",
+    "resource_audit": "passed"
+  },
+  "browser": {
+    "date": "2026-10-15",
+    "url": "http://127.0.0.1:8770/index.html",
+    "viewport": {
+      "devicePixelRatio": 1,
+      "height": 884,
+      "width": 708
+    },
+    "scope": "Actual in-app browser mouse and Enter/Escape input against the exported canvas; screenshots and console only.",
+    "passed": [
+      "Enter on the story introduction starts the choir story",
+      "Enter on the new-day Continue button opens the initial kitchen reminder instead of selecting a covered meal source",
+      "Escape closes the reminder and leaves day 1 breakfast and balance 210",
+      "Focus returns to the menu; Enter opens the week menu while the ordinary source page is present"
+    ],
+    "console": [],
+    "notTested": [
+      "Daily summary and recovery detail browser navigation in this pass; covered by native key probes",
+      "Full seven-day keyboard-only browser route",
+      "Real phone hardware touch or screen readers",
+      "File picker and refresh save recovery in this iteration"
+    ],
+    "result": "passed",
+    "publication": "Local candidate only; earlier preview kept separately"
+  },
+  "environment_note": "Restricted Windows runs retain the baseline certificate-store startup error; script, resource and export checks pass.",
+  "publication": "Local candidate only. No commit, push or Play changes."
+}

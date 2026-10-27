@@ -1,0 +1,69 @@
+[
+  {
+    "window": "640x960",
+    "screen": "08-campus-action",
+    "pixel_equal": false,
+    "difference_bounds": [
+      0,
+      518,
+      191,
+      960
+    ],
+    "note": "Full frames. The night clock deliberately changed from a font glyph to vector lines; character breathing can also differ between frames."
+  },
+  {
+    "window": "640x960",
+    "screen": "09-campus-night",
+    "pixel_equal": false,
+    "difference_bounds": [
+      0,
+      495,
+      586,
+      960
+    ],
+    "note": "Full frames. The night clock deliberately changed from a font glyph to vector lines; character breathing can also differ between frames."
+  },
+  {
+    "window": "390x640",
+    "screen": "08-campus-action",
+    "pixel_equal": true,
+    "difference_bounds": null,
+    "note": "Full frames. The night clock deliberately changed from a font glyph to vector lines; character breathing can also differ between frames."
+  },
+  {
+    "window": "390x640",
+    "screen": "09-campus-night",
+    "pixel_equal": false,
+    "difference_bounds": [
+      134,
+      330,
+      359,
+      398
+    ],
+    "note": "Full frames. The night clock deliberately changed from a font glyph to vector lines; character breathing can also differ between frames."
+  },
+  {
+    "window": "1280x720",
+    "screen": "08-campus-action",
+    "pixel_equal": false,
+    "difference_bounds": [
+      33,
+      326,
+      207,
+      720
+    ],
+    "note": "Full frames. The night clock deliberately changed from a font glyph to vector lines; character breathing can also differ between frames."
+  },
+  {
+    "window": "1280x720",
+    "screen": "09-campus-night",
+    "pixel_equal": false,
+    "difference_bounds": [
+      33,
+      324,
+      949,
+      720
+    ],
+    "note": "Full frames. The night clock deliberately changed from a font glyph to vector lines; character breathing can also differ between frames."
+  }
+]

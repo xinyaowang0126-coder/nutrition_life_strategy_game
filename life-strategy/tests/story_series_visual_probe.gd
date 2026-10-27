@@ -38,10 +38,12 @@ func _run() -> void:
 	await save("03-new-day")
 	await click(game.new_day_popup.continue_button)
 	await settle()
-	check(is_instance_valid(game._story_dialog) and game._story_dialog.visible, "Initial unsafe-leftover decision did not appear")
+	check(not is_instance_valid(game._workspace), "Entering the day must leave the destination scene clear")
+	await source_tool(game, "kitchen")
+	check(is_instance_valid(game._workspace) and game._workspace.visible, "Explicit stock entry did not open")
 	await save("04-leftovers")
-	await click(game._story_dialog._buttons.get_node("before_week_greens"))
-	await click(game._story_dialog._buttons.get_node("close"))
+	await click(game._workspace.find_child("before_week_greens", true, false))
+	await click(game._workspace.close_button)
 	await settle()
 	check(game.kitchen.batches[0]["quantity"] == 0, "Unsafe leftovers not discarded once")
 	await save("05-sources")
@@ -54,11 +56,11 @@ func _run() -> void:
 	await save("06-cooking-menu")
 	await click(game._active_stage._get_confirm_button())
 	await settle()
-	check(game._story_dialog.visible, "Cooking decision did not appear")
+	check(game._workspace.visible, "Cooking decision did not appear")
 	check(game.today_meal_records.size() == 0, "Preview paid or consumed a meal")
 	await save("07-storage-choice")
-	await click(game._story_dialog._buttons.get_node("storage"))
-	await click(game._story_dialog._buttons.get_node("confirm"))
+	await workspace_click(game, game._workspace.option_buttons["storage:fridge"])
+	await click(game._workspace.confirm_button)
 	await settle()
 	check(game.phase == "breakfast_action", "Cooking did not settle the meal")
 	check(game.kitchen.ingredients["egg"] == 3, "Cooking extra portion charged wrong ingredients")
@@ -90,6 +92,11 @@ func settle() -> void:
 	RenderingServer.force_draw()
 
 
+func source_tool(game: GameRootV2, id: String) -> void:
+	await click(game._active_stage.find_child("Notebook", true, false))
+	await click(game._story_dialog._buttons.get_node(id))
+
+
 func save(name: String) -> void:
 	RenderingServer.force_draw()
 	check(root.get_texture().get_image().save_png(output.path_join(name + ".png")) == OK, "Screenshot failed")
@@ -117,3 +124,9 @@ func click(control: Control) -> void:
 func check(condition: bool, text: String) -> void:
 	if not condition:
 		errors.append(text)
+
+
+func workspace_click(game: GameRootV2, control: Control) -> void:
+	game._workspace.scroll.ensure_control_visible(control)
+	await settle()
+	await click(control)

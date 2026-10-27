@@ -1,0 +1,141 @@
+{
+	"captures": [
+		{
+			"day": 1.0,
+			"description": "周阿姨在家安排三餐、练歌与休息",
+			"file": "00-home-context.png",
+			"height": 1080.0,
+			"phase": "breakfast_source",
+			"story": "choir_week",
+			"width": 1920.0
+		},
+		{
+			"day": 1.0,
+			"description": "检查保存史，再决定怎样处理隔夜菜",
+			"file": "01-food-safety.png",
+			"height": 1080.0,
+			"phase": "breakfast_source",
+			"story": "choir_week",
+			"width": 1920.0
+		},
+		{
+			"day": 1.0,
+			"description": "把切小、煮软等制作方法落实到可选餐食",
+			"file": "02-soft-food-and-variety.png",
+			"height": 1080.0,
+			"phase": "breakfast",
+			"story": "choir_week",
+			"width": 1920.0
+		},
+		{
+			"day": 1.0,
+			"description": "原口味：本关每人份追加调味钠1500毫克",
+			"file": "03a-seasoning-usual.png",
+			"height": 1080.0,
+			"phase": "breakfast",
+			"story": "choir_week",
+			"width": 1920.0
+		},
+		{
+			"day": 1.0,
+			"description": "少放一点：本关每人份追加调味钠750毫克",
+			"file": "03b-seasoning-reduced.png",
+			"height": 1080.0,
+			"phase": "breakfast",
+			"story": "choir_week",
+			"width": 1920.0
+		},
+		{
+			"day": 1,
+			"description": "两道菜的备餐预览，完整显示追加用量、精力比较和冷藏再热说明",
+			"file": "04-cold-meal-prep.png",
+			"height": 1080,
+			"phase": "breakfast",
+			"story": "choir_week",
+			"width": 1920
+		},
+		{
+			"day": 1.0,
+			"description": "熟食保留冷藏条件和原配方记录",
+			"file": "04b-cold-storage-history.png",
+			"height": 1080.0,
+			"phase": "lunch_source",
+			"story": "choir_week",
+			"width": 1920.0
+		},
+		{
+			"day": 3.0,
+			"description": "把每100毫升标签换算到实际使用量",
+			"file": "05-sodium-label-exercise.png",
+			"height": 1080.0,
+			"phase": "breakfast_source",
+			"story": "choir_week",
+			"width": 1920.0
+		},
+		{
+			"day": 3.0,
+			"description": "答题后解释计算过程与数据适用范围",
+			"file": "05b-sodium-label-feedback.png",
+			"height": 1080.0,
+			"phase": "breakfast_source",
+			"story": "choir_week",
+			"width": 1920.0
+		},
+		{
+			"day": 4.0,
+			"description": "区分整瓶总糖与尚未明确的添加糖",
+			"file": "06-sugar-label-exercise.png",
+			"height": 1080.0,
+			"phase": "breakfast_source",
+			"story": "choir_week",
+			"width": 1920.0
+		},
+		{
+			"day": 4.0,
+			"description": "解释已知总糖与未知添加糖的区别",
+			"file": "06b-sugar-label-feedback.png",
+			"height": 1080.0,
+			"phase": "breakfast_source",
+			"story": "choir_week",
+			"width": 1920.0
+		},
+		{
+			"day": 4.0,
+			"description": "从联系朋友开始，约定一次共同进餐",
+			"file": "07a-shared-meal-invitation.png",
+			"height": 1080.0,
+			"phase": "lunch_action",
+			"story": "choir_week",
+			"width": 1920.0
+		},
+		{
+			"day": 4.0,
+			"description": "共同进餐会实际改变备餐人数和食材用量",
+			"file": "07b-two-person-cooking.png",
+			"height": 1080.0,
+			"phase": "dinner",
+			"story": "choir_week",
+			"width": 1920.0
+		},
+		{
+			"day": 4.0,
+			"description": "只记录已确认的餐食和真正发生的共同进餐",
+			"file": "08-recipe-and-shared-meal-records.png",
+			"height": 1080.0,
+			"phase": "dinner_action",
+			"story": "choir_week",
+			"width": 1920.0
+		},
+		{
+			"day": 1,
+			"description": "煮软苹果卡牌明确展示食材及切小后煮软的制作方法",
+			"file": "02a-adapted-cooking-methods.png",
+			"height": 1080,
+			"phase": "breakfast",
+			"story": "choir_week",
+			"width": 1920
+		}
+	],
+	"errors": [],
+	"scope": "Current game implementation; full native framebuffer, no cropping or compositing. Independent in-memory showcase run. Normal gameplay advancement to days 3 and 4; no existing player saves used or changed."
+}

@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-15",
+  "url": "http://127.0.0.1:8770/index.html",
+  "viewport": {
+    "devicePixelRatio": 1,
+    "height": 884,
+    "width": 708
+  },
+  "scope": "Actual in-app browser mouse and Enter/Escape input against the exported canvas; screenshots and console only.",
+  "passed": [
+    "Enter on the story introduction starts the choir story",
+    "Enter on the new-day Continue button opens the initial kitchen reminder instead of selecting a covered meal source",
+    "Escape closes the reminder and leaves day 1 breakfast and balance 210",
+    "Focus returns to the menu; Enter opens the week menu while the ordinary source page is present"
+  ],
+  "console": [],
+  "notTested": [
+    "Daily summary and recovery detail browser navigation in this pass; covered by native key probes",
+    "Full seven-day keyboard-only browser route",
+    "Real phone hardware touch or screen readers",
+    "File picker and refresh save recovery in this iteration"
+  ],
+  "result": "passed",
+  "publication": "Local candidate only; earlier preview kept separately"
+}

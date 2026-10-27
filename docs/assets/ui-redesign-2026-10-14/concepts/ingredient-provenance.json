@@ -1,0 +1,122 @@
+{
+  "asset_type": "transparent watercolor ingredient atlas",
+  "builtin_tool": "image_gen.imagegen",
+  "reference_style_path": "E:/nutrition_life_strategy_game/docs/assets/ui-redesign-2026-10-14/concepts/integrated-cooking.png",
+  "reference_use": "Viewed for style; described in the original generation prompt. The repair tool referenced the original generated atlas.",
+  "generated_original_path": "C:/Users/xywan/.codex/generated_images/01a139a3-2490-79b2-a78c-77fe149d8556/exec-43a0c6c0-e8a9-48ab-90b4-5f7778d01216.png",
+  "selected_repair_original_path": "C:/Users/xywan/.codex/generated_images/01a139a3-2490-79b2-a78c-77fe149d8556/exec-84009d67-1905-43c8-9e18-dfeafe6ae427.png",
+  "copied_path": "E:/nutrition_life_strategy_game/life-strategy/assets/generated/stories/ingredients/ingredient_atlas.png",
+  "copied_sha256": "7014232E11FE97FD0100D5AD996EE5439D005F4C6F4B868D85513CF7D3DCBA9D",
+  "actual_dimensions": [
+    1536,
+    1024
+  ],
+  "mode": "RGBA",
+  "alpha_extrema": [
+    0,
+    254
+  ],
+  "fully_transparent_pixels": 1021416,
+  "total_pixels": 1572864,
+  "target_grid": {
+    "columns": 5,
+    "rows": 2
+  },
+  "grid_order": [
+    [
+      "rice_plain",
+      "egg",
+      "tofu",
+      "greens",
+      "tomato"
+    ],
+    [
+      "oatmeal",
+      "millet",
+      "milk",
+      "apple",
+      "fish"
+    ]
+  ],
+  "regions_path": "E:/nutrition_life_strategy_game/life-strategy/assets/generated/stories/ingredients/ingredient_regions.json",
+  "regions_format": "Integer [x,y,width,height] rectangles; use these instead of equal-cell cutting.",
+  "actual_regions": {
+    "rice_plain": [
+      8,
+      145,
+      329,
+      355
+    ],
+    "egg": [
+      337,
+      213,
+      287,
+      245
+    ],
+    "tofu": [
+      624,
+      213,
+      303,
+      245
+    ],
+    "greens": [
+      927,
+      104,
+      329,
+      397
+    ],
+    "tomato": [
+      1256,
+      171,
+      266,
+      290
+    ],
+    "oatmeal": [
+      22,
+      620,
+      311,
+      268
+    ],
+    "millet": [
+      333,
+      620,
+      312,
+      268
+    ],
+    "milk": [
+      666,
+      536,
+      213,
+      370
+    ],
+    "apple": [
+      906,
+      586,
+      268,
+      300
+    ],
+    "fish": [
+      1174,
+      660,
+      354,
+      195
+    ]
+  },
+  "generation_prompt": "Use case: illustration-story\nAsset type: one transparent PNG ingredient atlas for an existing hand-painted Chinese nutrition education game.\nPrimary request: a landscape 1536 x 1024 atlas containing EXACTLY TEN separate ingredient illustrations in a STRICT regular 5-column by 2-row equal-cell grid. No visible grid lines. All artwork must be contained in its own equal rectangular cell, centered with generous fully transparent padding. No objects may overlap or cross cell boundaries.\nGrid geometry: cells occupy exact fifths of the image width and exact halves of the image height. Cell centers are at 10%, 30%, 50%, 70%, 90% of width, and 25%, 75% of height. Put each illustration at its specified center, within a 70%-width by 65%-height safe area of that cell. Keep the grid evenly aligned, with ample empty transparency around every object.\nTop row from left to right, in this exact order:\n1. An open rustic burlap sack containing uncooked WHITE RICE grains, with a few loose uncooked grains next to the bag.\n2. Exactly TWO whole chicken EGGS, one cream-white and one warm brown.\n3. One rectangular block of soft pale TOFU, resting in a shallow plain ceramic bowl.\n4. One small fresh bunch of Chinese leafy GREENS, with visible light green stems.\n5. One ripe red TOMATO with a small green stem.\nBottom row from left to right, in this exact order:\n6. A shallow plain ceramic bowl of dry rolled OAT FLAKES.\n7. A shallow plain ceramic bowl of small golden raw MILLET grains; distinctly tiny round yellow grains.\n8. One sealed white MILK carton, unbranded, with a subtle pale blue panel and no writing.\n9. One red APPLE with a short brown stem and a single small green leaf.\n10. One whole fresh FISH seen from the side, silver-grey with softly blue-green shading, horizontally oriented.\nStyle/medium: graceful Chinese home cooking storybook watercolor and gouache illustrations, finely hand-drawn soft brown contour lines, warm natural food colors, softly textured painted surfaces, the same cozy ingredient-art language as a warm ivory recipe notebook. A little depth and gentle painterly shading, not photorealistic and not flat vector symbols.\nColor palette: warm cream, subdued ochre, natural leaf green, muted terracotta/red, soft brown outlines; retain natural pale rice/tofu colors and silver-blue fish.\nBackground: genuinely TRANSPARENT alpha background everywhere outside the ten objects; do not paint a paper sheet, a checkerboard, a backdrop, a plate-like frame, a tile, a shadow rectangle, or a grid.\nConstraints: exactly five evenly spaced columns and two evenly spaced rows; ten objects total; no labels, letters, digits, stamps, logos, watermark, UI panels, borders, cards, human hands, utensils, people, cooked meals, decorative herbs, duplicate food groups, or any extra object. Preserve generous clear space at the outer image edges and between cells.",
+  "repair_prompt": "Edit the provided transparent ingredient atlas to fix ONLY the sprite layout and clean transparent padding, while preserving the exact ten ingredient identities, natural colors, hand-painted watercolor/gouache drawing style, and top-to-bottom left-to-right order. Produce exactly 1536 x 1024 pixels with genuine transparent alpha.\nCRITICAL: strict equal 5 columns x 2 rows. Each cell width is 307.2 px and height is 512 px. The ten sprite center coordinates must be:\ntop row: (154,256), (461,256), (768,256), (1075,256), (1382,256);\nbottom row: (154,768), (461,768), (768,768), (1075,768), (1382,768).\nResize EVERY entire ingredient drawing so it fits inside a centered safe box no wider than 215 px and no taller than 330 px inside its assigned cell. Each sprite needs at least 45 px fully transparent left and right margin within its cell, and at least 90 px fully transparent space above and below it. In particular, the whole fish including nose, tail, fins and any shadow must fit entirely in the bottom-right cell, and must NOT enter the neighboring apple cell. Loose rice grains and complete oat/millet bowls must remain entirely inside their own safe boxes. Keep the two eggs together as one sprite in the top-row second cell.\nTop row order: open burlap sack of raw white rice; two whole eggs; one tofu block in shallow ceramic bowl; one bunch of fresh leafy greens; one red tomato.\nBottom row order: bowl of dry oat flakes; bowl of tiny yellow millet grains; sealed unbranded milk carton; red apple; one whole silver-blue fish facing left.\nBackground must be actual alpha=0 transparency everywhere between and around the sprites. Remove all diffuse colored glows, large hazy shadows, backdrops, gradients, paper textures, background paint, checkerboards and dark fields. Preserve only ingredient artwork and very small tightly contained contact shading. Do not draw grid lines, frames, labels, numbers, text, icons, extra ingredients, utensils, hands or people. Keep all original ingredient artwork style and details otherwise unchanged.",
+  "inspection": {
+    "viewed_selected_output": true,
+    "ten_ingredient_identities_correct": true,
+    "top_bottom_order_correct": true,
+    "transparent_background_confirmed": true,
+    "equal_cell_safe_margin_passed": false,
+    "allowed_fallback": "Parent approved actual individual region mapping after one layout repair.",
+    "limitations": [
+      "The generator retained large sprites despite the requested equal-cell safe padding. Several illustrations cross ideal equal-cell boundaries, so regular 5x2 slicing would truncate them.",
+      "The supplied regions contain all clearly visible food artwork and keep adjacent food artwork outside. Very faint low-alpha paint haze bridges the egg/tofu and oat/millet gaps; integer rectangle boundaries trim a small amount of this haze rather than include a neighboring food.",
+      "Some isolated alpha specks away from the actual ingredients are deliberately excluded from the regions. These are barely visible generation artifacts, not food details.",
+      "No raster cropping, recoloring, alpha cleanup, resizing, or other image editing was performed after generation. The copied PNG is byte-for-byte identical to the selected generated file.",
+      "The atlas has a maximum alpha of 254 rather than 255; its painted ingredients are effectively opaque."
+    ]
+  }
+}

@@ -32,13 +32,15 @@ function Expect-Rejected {
 }
 
 function New-TestPack {
-    param([int]$Version, [string[]]$Paths, [string]$Payload = "", [switch]$EmptyProjectSettings)
+    param([int]$Version, [string[]]$Paths, [string]$Payload = "", [switch]$EmptyProjectSettings, [switch]$BadProjectSettings)
     $stream = New-Object IO.MemoryStream
     $writer = New-Object IO.BinaryWriter($stream)
     $writer.Write([uint32]0x43504447)
     $writer.Write([uint32]$Version)
     foreach ($value in @(4, 7, 2, 2)) { $writer.Write([uint32]$value) }
-    $writer.Write([uint64]0)
+    $dataStart = $(if ($Version -ge 3) { 108 } else { 100 })
+    foreach ($path in $Paths) { $dataStart += 40 + [Text.Encoding]::UTF8.GetByteCount($path) }
+    $writer.Write([uint64]$dataStart)
     if ($Version -ge 3) { $writer.Write([uint64]104) }
     $writer.Write((New-Object byte[] 64))
     $writer.Write([uint32]$Paths.Count)
@@ -47,10 +49,11 @@ function New-TestPack {
         $writer.Write([uint32]$bytes.Length)
         $writer.Write($bytes)
         $writer.Write([uint64]0)
-        $writer.Write([uint64]$(if ($path -match '(^|/)project\.binary$' -and -not $EmptyProjectSettings) { 1 } else { 0 }))
+        $writer.Write([uint64]$(if ($path -match '(^|/)project\.binary$' -and -not $EmptyProjectSettings) { 4 } else { 0 }))
         $writer.Write((New-Object byte[] 16))
         $writer.Write([uint32]0)
     }
+    $writer.Write([Text.Encoding]::ASCII.GetBytes($(if ($BadProjectSettings) { "BAD!" } else { "ECFG" })))
     $writer.Write([Text.Encoding]::UTF8.GetBytes($Payload))
     $writer.Flush()
     $result = $stream.ToArray()
@@ -88,7 +91,21 @@ $requiredPaths = @(
     "scripts/ui_v2/NewDayPopup.gd", "scripts/ui_v2/stages/MealStageBase.gd",
     "data/cards/foods.xml", "data/health/food_health_profiles.xml", "data/health/evidence_registry.xml",
     "assets/generated/cards/sample.png", "assets/generated/ui_v2/day_popup/states/clear_focus.png",
-    "assets/generated/ui_v2/day_popup/events/mock_exam_notice.png", "assets/generated/ui_v2/day_popup/events/rainy_day.png"
+    "assets/generated/ui_v2/day_popup/events/mock_exam_notice.png", "assets/generated/ui_v2/day_popup/events/rainy_day.png",
+    "scripts/stories/CookingPlanStage.gd", "scripts/stories/HouseholdWorktop.gd", "scripts/stories/KitchenStockStage.gd",
+    "scripts/stories/HouseholdMarketStage.gd", "scripts/stories/HouseholdLocations.gd",
+    "scripts/stories/PropTint.gdshader", "scenes/stories/HouseholdMealStage.tscn",
+    "assets/generated/stories/props/regions.json",
+    "assets/generated/stories/ingredients/ingredient_atlas.png", "assets/generated/stories/ingredients/ingredient_regions.json",
+    "assets/fonts/HouseholdBody.tres", "assets/fonts/HouseholdSansSC-Medium.ttf", "assets/fonts/HouseholdSans-OFL.txt",
+    "assets/generated/stories/actions/zhou_rehearse-v1.png", "assets/generated/stories/actions/zhou_group_rehearsal-v1.png",
+    "assets/generated/stories/actions/zhou_perform-v1.png", "assets/generated/stories/actions/zhou_call_friend-v1.png",
+    "assets/generated/stories/night/zhou_home_night-v1.png",
+    "assets/generated/stories/locations/zhou-kitchen-v1.png", "assets/generated/stories/locations/zhou-open-fridge-v1.png",
+    "assets/generated/stories/locations/zhou-kitchen-portrait-v1.png",
+    "assets/generated/stories/locations/zhou-market-wide-v1.png", "assets/generated/stories/locations/zhou-market-portrait-v1.png",
+    "assets/generated/stories/locations/zhou-breakfast-shop-v1.png", "assets/generated/stories/locations/zhou-homestyle-diner-v1.png",
+    "assets/generated/stories/locations/zhou-fruit-stall-v1.png", "assets/generated/stories/locations/steamed-bun-v1.png"
 )
 foreach ($version in @(2, 3, 4)) {
     $bytes = New-TestPack -Version $version -Paths $requiredPaths
@@ -102,6 +119,11 @@ $testDirectory = Join-Path (Split-Path -Parent $PSScriptRoot) ("artifacts\verifi
 $null = New-Item -ItemType Directory -Path $testDirectory
 $packPath = Join-Path $testDirectory "fixture.pck"
 try {
+    $oversizedPack = [IO.File]::Create($packPath)
+    try { $oversizedPack.SetLength(100MB + 1) }
+    finally { $oversizedPack.Dispose() }
+    Expect-Rejected "Oversized PCK cannot be pushed to GitHub" { Assert-CleanWebPack -PackPath $packPath } '*100 MiB file limit*'
+
     [IO.File]::WriteAllBytes($packPath, (New-TestPack -Version 4 -Paths $requiredPaths))
     Assert-CleanWebPack -PackPath $packPath
     $script:checks++
@@ -111,6 +133,14 @@ try {
     Expect-Rejected "Project settings must be packaged" { Assert-CleanWebPack -PackPath $packPath } '*missing required production content: project.binary*'
     [IO.File]::WriteAllBytes($packPath, (New-TestPack -Version 4 -Paths $requiredPaths -EmptyProjectSettings))
     Expect-Rejected "Export failure cannot leave empty project settings" { Assert-CleanWebPack -PackPath $packPath } '*empty project settings*'
+    [IO.File]::WriteAllBytes($packPath, (New-TestPack -Version 4 -Paths $requiredPaths -BadProjectSettings))
+    Expect-Rejected "Nonempty corrupted project settings cannot pass" { Assert-CleanWebPack -PackPath $packPath } '*invalid project settings header*'
+    foreach ($asset in @('scripts/stories/PropTint.gdshader', 'assets/generated/stories/props/regions.json', 'assets/generated/stories/actions/zhou_perform-v1.png', 'assets/generated/stories/night/zhou_home_night-v1.png') + @($requiredPaths | Where-Object { $_ -like 'assets/generated/stories/locations/*' -or $_ -like 'scripts/stories/HouseholdMarketStage*' -or $_ -like 'scripts/stories/HouseholdLocations*' })) {
+        $missingAsset = @($requiredPaths | Where-Object { $_ -ne $asset })
+        [IO.File]::WriteAllBytes($packPath, (New-TestPack -Version 4 -Paths $missingAsset -Payload ("res://" + $asset)))
+        $assetPrefix = $asset -replace '\.[^./]+$', ''
+        Expect-Rejected ("Household runtime asset must be packaged: " + $asset) { Assert-CleanWebPack -PackPath $packPath } ("*missing required production content: " + $assetPrefix + "*")
+    }
     $missingBalance = $requiredPaths | Where-Object { $_ -ne "scripts/systems/GameplayBalanceRules.gd" }
     [IO.File]::WriteAllBytes($packPath, (New-TestPack -Version 4 -Paths $missingBalance))
     Expect-Rejected "Balance runtime must be packaged" { Assert-CleanWebPack -PackPath $packPath } '*missing required production content: scripts/systems/GameplayBalanceRules*'

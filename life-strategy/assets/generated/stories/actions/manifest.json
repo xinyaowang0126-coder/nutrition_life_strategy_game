@@ -1,0 +1,36 @@
+{
+  "tool": "built-in image_gen",
+  "date": "2026-10-21",
+  "reference_role": "Character identity and painting style; original portrait remains unchanged.",
+  "reference": "res://assets/generated/stories/zhou_huilan.png",
+  "assets": [
+    {
+      "id": "rehearse",
+      "prompt": "Input image role: identity and painting-style reference only; create a new separate action scene, do not change the reference asset. Use case: illustration-story. Asset type: existing cozy Chinese life strategy game's single action card artwork. 以输入人物参考为唯一周阿姨身份：66岁中国女性，灰黑色短卷发、柔和圆脸和自然细纹，米白衬衫配橄榄绿针织开衫，棕色长裤。保持人物年龄、发型、面容、衣着和现有手绘水彩/细腻彩铅风格。画幅1:1方形，温暖米色与灰绿配色，笔触与纸张纹理自然。人物和关键动作占中央约75%画面；画面四边留少量安全余量，缩成150像素卡图仍能辨认。单幅完整叙事插画，浅暖色真实场景背景，不透明。不画卡牌边框、不画按钮、数字、中文、英文、任何文字、徽章、图标、水印。不要把人物年轻化，不要校园宿舍、学生、医院、夸张养老符号。Scene: 周阿姨独自在原有温暖家中靠窗站着练歌，手上打开深色合唱谱夹，平视看谱轻轻唱，口形自然，桌上有一杯水。强调她正在练习这一行为，画面只包含她一人。",
+      "source": "C:\\Users\\xywan\\.codex\\generated_images\\01a15e2f-c328-79a0-aabe-1f797285f94d\\exec-6d335c70-d3ca-41ce-a7c0-577e7645449b.png",
+      "saved_path": "E:\\nutrition_life_strategy_game\\life-strategy\\assets\\generated\\stories\\actions\\zhou_rehearse-v1.png",
+      "resource": "res://assets/generated/stories/actions/zhou_rehearse-v1.png"
+    },
+    {
+      "id": "group_rehearsal",
+      "prompt": "Input image role: identity and painting-style reference only; create a new separate action scene, do not change the reference asset. Use case: illustration-story. Asset type: existing cozy Chinese life strategy game's single action card artwork. 以输入人物参考为唯一周阿姨身份：66岁中国女性，灰黑色短卷发、柔和圆脸和自然细纹，米白衬衫配橄榄绿针织开衫，棕色长裤。保持人物年龄、发型、面容、衣着和现有手绘水彩/细腻彩铅风格。画幅1:1方形，温暖米色与灰绿配色，笔触与纸张纹理自然。人物和关键动作占中央约75%画面；画面四边留少量安全余量，缩成150像素卡图仍能辨认。单幅完整叙事插画，浅暖色真实场景背景，不透明。不画卡牌边框、不画按钮、数字、中文、英文、任何文字、徽章、图标、水印。不要把人物年轻化，不要校园宿舍、学生、医院、夸张养老符号。Scene: 周阿姨在干净明亮的小型社区活动室与另外两位同龄中国邻居并肩集体排练合唱，三人各自拿打开的歌谱夹，周阿姨位于中间且清晰可辨，旁边两位穿不同的淡色日常衣服，背景几把木椅与直立钢琴模糊点到为止。三人都在唱歌，没有舞台聚光灯，没有观众。",
+      "source": "C:\\Users\\xywan\\.codex\\generated_images\\01a15e2f-c328-79a0-aabe-1f797285f94d\\exec-4bf7f5c5-0cce-434e-9d8a-d1b3c7a571c6.png",
+      "saved_path": "E:\\nutrition_life_strategy_game\\life-strategy\\assets\\generated\\stories\\actions\\zhou_group_rehearsal-v1.png",
+      "resource": "res://assets/generated/stories/actions/zhou_group_rehearsal-v1.png"
+    },
+    {
+      "id": "perform",
+      "prompt": "Input image role: identity and painting-style reference only; create a new separate action scene, do not change the reference asset. Use case: illustration-story. Asset type: existing cozy Chinese life strategy game's single action card artwork. 以输入人物参考为唯一周阿姨身份：66岁中国女性，灰黑色短卷发、柔和圆脸和自然细纹，米白衬衫配橄榄绿针织开衫，棕色长裤。保持人物年龄、发型、面容、衣着和现有手绘水彩/细腻彩铅风格。画幅1:1方形，温暖米色与灰绿配色，笔触与纸张纹理自然。人物和关键动作占中央约75%画面；画面四边留少量安全余量，缩成150像素卡图仍能辨认。单幅完整叙事插画，浅暖色真实场景背景，不透明。不画卡牌边框、不画按钮、数字、中文、英文、任何文字、徽章、图标、水印。不要把人物年轻化，不要校园宿舍、学生、医院、夸张养老符号。Scene: 周阿姨在小型社区礼堂舞台上自信唱歌，打开的深色合唱谱夹置于身前，旁边两位同龄合唱团成员稍后一些，暖色舞台灯与朴素酒红色幕布，人物脸和手清晰，表达真正上台参加汇演的时刻。不要夸张流行歌星姿势或颁奖元素。",
+      "source": "C:\\Users\\xywan\\.codex\\generated_images\\01a15e2f-c328-79a0-aabe-1f797285f94d\\exec-567b3e0e-73ff-45a7-8a91-60893cceaeec.png",
+      "saved_path": "E:\\nutrition_life_strategy_game\\life-strategy\\assets\\generated\\stories\\actions\\zhou_perform-v1.png",
+      "resource": "res://assets/generated/stories/actions/zhou_perform-v1.png"
+    },
+    {
+      "id": "call_friend",
+      "prompt": "Input image role: identity and painting-style reference only; create a new separate action scene, do not change the reference asset. Use case: illustration-story. Asset type: existing cozy Chinese life strategy game's single action card artwork. 以输入人物参考为唯一周阿姨身份：66岁中国女性，灰黑色短卷发、柔和圆脸和自然细纹，米白衬衫配橄榄绿针织开衫，棕色长裤。保持人物年龄、发型、面容、衣着和现有手绘水彩/细腻彩铅风格。画幅1:1方形，温暖米色与灰绿配色，笔触与纸张纹理自然。人物和关键动作占中央约75%画面；画面四边留少量安全余量，缩成150像素卡图仍能辨认。单幅完整叙事插画，浅暖色真实场景背景，不透明。不画卡牌边框、不画按钮、数字、中文、英文、任何文字、徽章、图标、水印。不要把人物年轻化，不要校园宿舍、学生、医院、夸张养老符号。Scene: 周阿姨在原有家中餐桌旁打电话邀请同龄朋友老陈晚上一起吃饭，右手把智能手机放在耳边，左手轻扶桌上摊开的日历本，表情自然有笑意，桌上有两只空碗作为轻微情境线索。仅周阿姨出镜，不使用分屏、气泡、文字或虚拟头像。",
+      "source": "C:\\Users\\xywan\\.codex\\generated_images\\01a15e2f-c328-79a0-aabe-1f797285f94d\\exec-8a207f59-c5e7-4359-81f8-bac2f57f1e9e.png",
+      "saved_path": "E:\\nutrition_life_strategy_game\\life-strategy\\assets\\generated\\stories\\actions\\zhou_call_friend-v1.png",
+      "resource": "res://assets/generated/stories/actions/zhou_call_friend-v1.png"
+    }
+  ]
+}

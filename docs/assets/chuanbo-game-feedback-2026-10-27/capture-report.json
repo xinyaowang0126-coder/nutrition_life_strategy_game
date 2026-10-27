@@ -1,0 +1,46 @@
+{
+	"captures": [
+		{
+			"day": 1,
+			"description": "在周阿姨的家中安排一日三餐与生活",
+			"file": "00-daily-life-context.png",
+			"height": 1080,
+			"phase": "breakfast_source",
+			"route": "life_goal_and_daily_feedback",
+			"story": "choir_week",
+			"width": 1920
+		},
+		{
+			"day": 1,
+			"description": "早餐后的生活安排：饮食、精力与本周排练目标同时呈现",
+			"file": "01-life-and-rehearsal.png",
+			"height": 1080,
+			"phase": "breakfast_action",
+			"route": "life_goal_and_daily_feedback",
+			"story": "choir_week",
+			"width": 1920
+		},
+		{
+			"day": 1,
+			"description": "每日小结回顾已完成的三餐、状态与恢复记录",
+			"file": "02-daily-summary.png",
+			"height": 1080,
+			"phase": "summary",
+			"route": "life_goal_and_daily_feedback",
+			"story": "choir_week",
+			"width": 1920
+		},
+		{
+			"day": 2,
+			"description": "第2天继续查看第1天预备并冷藏的熟食，保存记录延续到下一天",
+			"file": "03-next-day-cold-stock.png",
+			"height": 1080,
+			"phase": "breakfast_source",
+			"route": "life_goal_and_daily_feedback",
+			"story": "choir_week",
+			"width": 1920
+		}
+	],
+	"errors": [],
+	"scope": "Independent in-memory run. Existing game choices and normal phase/day advancement. Full native frames, no crop or overlays; player saves untouched."
+}

@@ -1,0 +1,35 @@
+{
+  "url": "http://127.0.0.1:8774/index.html",
+  "viewport": {
+    "canvas": {
+      "height": 956,
+      "width": 760,
+      "x": 0,
+      "y": 0
+    },
+    "dpr": 1.25,
+    "height": 956,
+    "width": 760
+  },
+  "errors_warnings": [],
+  "method": "Fresh local origin, actual visible canvas clicks and keyboard through CUA; only DOM viewport read through evaluate.",
+  "plate": [
+    "millet_porridge",
+    "greens"
+  ],
+  "observations": [
+    "Source cards show cooking effort 6 and stock/reheat effort 1",
+    "Initial recipe stock: millet 4, greens 5",
+    "Cold extra portion preview needs millet 2, greens 2; lists the extra millet 1, greens 1, salt 1g and soy sauce 5ml",
+    "Preview states two-meal effort 6+1=7 versus separate cooking 12, saving 5",
+    "After bulk cooking: day 1 breakfast_action, cash 210, energy 56, satiety 66, mood 56, stress 35",
+    "After skipping the morning action: lunch_source, energy 48, satiety 46",
+    "Fridge shows one eligible saved millet portion and one eligible saved greens portion, both prepared day 1",
+    "After selecting and reheating both: lunch_action, cash 210, energy 49, satiety 72, mood 57, stress 37"
+  ],
+  "limits": [
+    "This browser pass covers two actual meals only, not seven days",
+    "Raw material conservation and remaining single-use portions are additionally verified by native and data tests",
+    "No actual phone hardware, file picker, screen reader or educational effectiveness claims"
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "completed": "2026-10-16",
+  "url": "http://127.0.0.1:8773/index.html",
+  "viewport": {
+    "canvas": {
+      "height": 720,
+      "width": 1280,
+      "x": 0,
+      "y": 0
+    },
+    "dpr": 1.25,
+    "height": 720,
+    "width": 1280
+  },
+  "errors": [],
+  "warnings": [],
+  "method": "Visible in-app browser canvas input through documented CUA APIs; fresh origin with separate saves. No engine state inspection or browser state mutation through evaluate.",
+  "checks": [
+    "Campus: new-day Enter reaches sources",
+    "Campus: select rice and tomato; click selected rice artwork removes it once; Enter removes the remaining tomato",
+    "Campus: empty selection disables confirmation, Enter on restored food-card focus re-adds it; cash remains 150 and breakfast unconfirmed",
+    "Campus: return through menu saves progress and series entry offers campus continue independently",
+    "Choir: new-day Enter opens the initial kitchen inventory decision, return reaches sources",
+    "Choir: choose home kitchen; select soft apple and steamed fish as illustrated cards",
+    "Choir: selected-card artwork removes apple once, Enter removes remaining fish; empty selection disables cooking preview",
+    "Choir: Enter re-adds fish, apple can be added again; cooking preview shows fish 2 and apple 3 still available",
+    "Choir: Escape returns from cooking preview with both cards selected, day 1 breakfast and cash 210 retained",
+    "Console errors and warnings empty"
+  ],
+  "remaining_findings": [
+    {
+      "priority": "P2",
+      "surface": "Campus source map",
+      "observation": "Clicking the Food Hall nameplate did not enter; clicking its illustration did. Make the visible source nameplate part of the same activation target in a later shared entry pass."
+    },
+    {
+      "priority": "P3",
+      "surface": "Choir sleep cards",
+      "observation": "Native comparison shows some student-themed generic sleep artwork reused despite choir-specific wording."
+    }
+  ],
+  "scope_limits": [
+    "No meal was confirmed in this browser pass",
+    "Action and sleep focus, summary, records and endings were covered by native probes and headless suites, not full browser playthroughs",
+    "No real phone hardware, screen reader, file picker import/export, browser full seven-day run or professional nutrition review"
+  ]
+}

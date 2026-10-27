@@ -1,0 +1,6 @@
+{
+	"errors": [],
+	"mobile": false,
+	"scope": "Independent native window; actual mouse and keyboard check home/food/shop previews, dismissal, pictures and names, pinned closed-shop details, return navigation and lunch opening hours. Raw ScreenTouch taps the breakfast picture on mobile. In-memory saves, first-day intro and lunch are declared fixtures, no purchases or day progression.",
+	"window": "(1280, 720)"
+}

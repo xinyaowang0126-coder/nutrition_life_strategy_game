@@ -1,0 +1,29 @@
+{
+  "created": "2026-10-16",
+  "generator": "Built-in image_gen.imagegen; one call per asset, identity-preserving edits",
+  "transparent_background": false,
+  "purpose": "Zhou Huilan-specific night choice artwork; original student assets remain unchanged.",
+  "assets": [
+    {
+      "file": "zhou_sleep_early-v1.png",
+      "consumer": "choir_week / sleep_early",
+      "generated_output": "exec-70c617e3-2ef2-43ff-b937-821b172f488f.png",
+      "references": ["assets/generated/ui_v2/card_art/sleep/night_study_art.png", "assets/generated/stories/zhou_huilan.png", "assets/generated/stories/zhou_home.png"],
+      "prompt": "Use case: identity-preserve, illustration-story. Edit Image 1 (the existing square painted game art) into an EARLY BEDTIME scene for the same game. Image 2 is the character identity reference, Zhou Huilan, a 66-year-old Chinese woman with short softly wavy grey-streaked hair, kind eyes, realistic fine age lines; preserve her recognizable face and age. Image 3 is the home and palette reference. Replace the student and study desk with Zhou in plain cream nightwear beside her bed, calmly reaching to switch off a small warm bedside lamp. A closed choir music folder rests on the bedside table, blue evening through the window, modest lived-in Chinese apartment. Match the original hand-painted watercolor/gouache, paper grain, muted amber and dark blue, gentle narrative lighting. Simple centered close scene, face, hand and lamp large enough for a tiny card. One square 1024x1024, full-bleed illustration. NO card border, NO UI, NO words, NO labels, NO icons, NO watermark, no new people. Not a photo or vector. Save as a distinct game asset, preserve source images."
+    },
+    {
+      "file": "zhou_review_score-v1.png",
+      "consumer": "choir_week / night_study",
+      "generated_output": "exec-b2db6cfe-c7c6-4b01-b247-74932beea22f.png",
+      "references": ["assets/generated/ui_v2/card_art/sleep/night_study_art.png", "assets/generated/stories/zhou_huilan.png", "assets/generated/stories/zhou_home.png"],
+      "prompt": "Use case: identity-preserve, illustration-story. Edit Image 1 (the square painterly student night-study art) to become Zhou Huilan reviewing her CHOIR SCORE at home at night. Image 2 is her identity: 66-year-old Chinese woman, short softly wavy grey-streaked hair, kind eyes and fine wrinkles, olive knitted cardigan and cream collared blouse. Preserve her recognizable face and mature age, do not turn her into a young student. Image 3 is home/material/palette reference. She sits at a wooden home table under a warm lamp, looking down at one open music-score folder with simple staff marks and no readable text; no mathematics, textbooks or student dorm objects. Dark blue window and a modest houseplant behind. Keep Image 1's close composition, hand-painted gouache/watercolor paper texture and subdued golden-brown/blue palette. One square 1024x1024 full-bleed game illustration, clear silhouette and large face/hands/folder suitable for a small card. NO baked card frame, NO UI, NO words, NO logos, NO watermark, no extra people."
+    },
+    {
+      "file": "zhou_scroll_phone-v1.png",
+      "consumer": "choir_week / scroll_phone",
+      "generated_output": "exec-4bee2593-c8a6-48b8-90ae-aea43adb4888.png",
+      "references": ["assets/generated/ui_v2/card_art/sleep/scroll_phone_art.png", "assets/generated/stories/zhou_huilan.png", "assets/generated/stories/zhou_home.png"],
+      "prompt": "Use case: identity-preserve, illustration-story. Edit Image 1 (the square painterly bedside smartphone art) for Zhou Huilan, preserving the recognizable 66-year-old Chinese woman's face and age from Image 2: short softly wavy grey-streaked hair, gentle expression, fine age lines, no student bun or hoodie. Image 3 is her home style and palette. Show her propped against a pillow in plain cream nightwear, face in three-quarter view visible, calmly looking at a smartphone held naturally in her hands; a small soft warm bedside lamp and deep blue night window. Simple centered composition readable as a tiny card, neutral everyday mood, not a warning poster. Match the existing watercolor/gouache paper grain, muted warm brown and navy illustration. One square 1024x1024 full-bleed illustration. Screen has only a subtle abstract glow, no readable text, apps or logos. NO UI, NO card border, NO labels, NO health symbols, NO watermark, no other people."
+    }
+  ]
+}

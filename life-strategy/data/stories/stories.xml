@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
 <stories schema_version="1">
   <story id="campus_exam" version="1" character_id="campus_student" title="撑过这一周" subtitle="考试周" goal_label="复习" goal_target="70" days="7" mechanics="campus" background="res://assets/generated/ui_v3/backgrounds/dorm_morning.png" goal="七天内完成复习准备，给自己留些余力。" conditions="预算 ¥150 · 校园四种用餐来源" learning="组成与搭配、餐次规律、预算规划与资料判断" />
-  <story id="choir_week" version="1" character_id="zhou_huilan_66" title="自己的舞台" subtitle="汇演周" goal_label="排练" goal_target="70" days="7" mechanics="household" background="res://assets/generated/stories/zhou_home.png" foods="res://data/stories/choir_foods.xml" actions="res://data/stories/choir_actions.xml" sources="res://data/stories/choir_sources.xml" goal="周日晚上参加社区合唱汇演，唱完自己喜欢的歌。" conditions="预算 ¥210 · 家里做饭、社区食堂、小超市与冰箱" learning="老年营养、盐与钠、糖与标签、适口制作和剩菜食安" />
+  <story id="choir_week" version="1" character_id="zhou_huilan_66" title="自己的舞台" subtitle="汇演周" goal_label="排练" goal_target="70" days="7" mechanics="household" background="res://assets/generated/stories/zhou_home.png" foods="res://data/stories/choir_foods.xml" actions="res://data/stories/choir_actions.xml" sources="res://data/stories/choir_sources.xml" goal="周日晚上参加社区合唱汇演，唱完自己喜欢的歌。" conditions="预算 ¥210 · 家里做饭、冰箱存粮，或去集市挑一餐" learning="老年营养、盐与钠、糖与标签、适口制作和剩菜食安" />
 </stories>

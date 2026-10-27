@@ -56,6 +56,7 @@ func _ready() -> void:
 	scroll = ScrollContainer.new()
 	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	scroll.follow_focus = true
 	box.add_child(scroll)
 	body = VBoxContainer.new()
 	body.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -143,6 +144,15 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 		close_book()
 	elif event.is_action_pressed("ui_accept"):
+		get_viewport().set_input_as_handled()
+
+
+func _input(event: InputEvent) -> void:
+	if not is_visible_in_tree(): return
+	if event.is_action_pressed("ui_cancel", true):
+		get_viewport().set_input_as_handled()
+		if not event.is_echo(): close_book()
+	elif HouseholdUI.handle_modal_key(self, event, true):
 		get_viewport().set_input_as_handled()
 
 

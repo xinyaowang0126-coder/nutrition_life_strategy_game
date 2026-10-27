@@ -1,0 +1,42 @@
+{
+  "date": "2026-10-23",
+  "url": "http://127.0.0.1:8881/",
+  "tested_viewports": [
+    "1280x720",
+    "390x640"
+  ],
+  "observed_progress": {
+    "day": 2,
+    "phase": "breakfast_source",
+    "balance": 204,
+    "rehearsal": "8/70",
+    "energy": 78,
+    "mood": 65,
+    "satiety": 62,
+    "stress": 27
+  },
+  "checks": [
+    "Reloaded rebuilt page and continued existing Zhou save",
+    "Home -> kitchen -> home -> fridge -> home -> market",
+    "Breakfast shop has its own scene and breakfast menu; diner disabled at breakfast",
+    "Fruit stall shows only apples and bananas",
+    "Shop back returns to market; market back returns home",
+    "Phone kitchen shows stove, wok and board beside menu",
+    "Inventory shows open fridge and restores kitchen on return",
+    "No purchase, cooking, discard or phase advance; displayed values unchanged"
+  ],
+  "scope": "Actual browser coordinate clicks and responsive resize. Diner lunch and confirmed purchasing are covered by native fixture probes, not this browser session. No physical touch or full-day run claimed.",
+  "logs": [],
+  "viewport_override": "reset",
+  "screenshots": [
+    "01-desktop-kitchen.jpg",
+    "02-desktop-fridge.jpg",
+    "03-desktop-market.jpg",
+    "04-desktop-breakfast-shop.jpg",
+    "05-desktop-fruit-stall.jpg",
+    "06-narrow-market.jpg",
+    "07-narrow-kitchen.jpg",
+    "08-narrow-open-stock.jpg",
+    "09-final-market.jpg"
+  ]
+}

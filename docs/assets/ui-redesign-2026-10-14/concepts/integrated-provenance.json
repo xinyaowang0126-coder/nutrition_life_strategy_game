@@ -1,0 +1,18 @@
+{
+  "date": "2026-10-14",
+  "generator": "Built-in image_gen",
+  "user_direction": "第2套的原料展示，第1套的色彩；作为现有游戏组成部分。",
+  "reference_paths": [
+    "docs/assets/ui-redesign-2026-10-14/audit/08b-selected-meal-clear.png",
+    "docs/assets/ui-redesign-2026-10-14/concepts/scene-kitchen.png",
+    "docs/assets/ui-redesign-2026-10-14/concepts/recipe-journal.png"
+  ],
+  "source_path": "C:/Users/xywan/.codex/generated_images/01a1359f-171c-7e92-9add-ca674283b341/exec-04f0471a-8a88-4759-ae6b-1c3f03d245d4.png",
+  "copied_path": "docs/assets/ui-redesign-2026-10-14/concepts/integrated-cooking.png",
+  "dimensions": [
+    1024,
+    1536
+  ],
+  "prompt": "Exact generation prompt retained in this chat's image_gen tool invocation; session store unavailable.",
+  "implementation_notes": "Keep existing frame, portrait, state and backend; reduce cooked-dish imagery to emphasize ingredients; use darker terracotta text for contrast; counter storage warning clarified against existing game rules."
+}

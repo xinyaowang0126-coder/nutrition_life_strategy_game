@@ -1,0 +1,20 @@
+[
+  {
+    "errors": [],
+    "mobile": false,
+    "scope": "Independent native window; viewport mouse and keyboard exercise home, kitchen, cooking preview, fridge inventory, market, every outlet and return. Lunch is a declared phase fixture; one diner purchase is confirmed. Campus source is a declared fixture. No full-day run claimed.",
+    "window": "(1280, 720)"
+  },
+  {
+    "errors": [],
+    "mobile": true,
+    "scope": "Independent native window; viewport mouse and keyboard exercise home, kitchen, cooking preview, fridge inventory, market, every outlet and return. Lunch is a declared phase fixture; one diner purchase is confirmed. Campus source is a declared fixture. No full-day run claimed.",
+    "window": "(640, 960)"
+  },
+  {
+    "errors": [],
+    "mobile": true,
+    "scope": "Independent native window; viewport mouse and keyboard exercise home, kitchen, cooking preview, fridge inventory, market, every outlet and return. Lunch is a declared phase fixture; one diner purchase is confirmed. Campus source is a declared fixture. No full-day run claimed.",
+    "window": "(390, 640)"
+  }
+]

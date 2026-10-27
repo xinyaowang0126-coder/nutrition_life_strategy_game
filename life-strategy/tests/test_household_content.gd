@@ -30,6 +30,7 @@ func _scene() -> GameRootV2:
 	track(game)
 	(Engine.get_main_loop() as SceneTree).root.add_child(game)
 	game.new_day_popup.hide_popup(false)
+	game._new_day_pending = false
 	return game
 
 
@@ -44,6 +45,42 @@ func test_soft_recipes_share_real_pantry_ingredients_and_have_own_art() -> void:
 	assert_eq(game.kitchen.needs(["steamed_egg", "tomato_egg_stir_fry"], foods), {"egg": 2, "tomato": 1})
 	assert_eq(game.kitchen.needs(["soft_tofu_greens"], foods), {"tofu": 1, "greens": 1})
 	assert_false(Catalog.content(Catalog.get_story("campus_exam"), "foods").has("soft_apple"))
+
+
+func test_market_outlets_have_matching_hours_menus_and_distinct_art() -> void:
+	var game := _new_game()
+	var sources := Catalog.content(game.story, "sources")
+	assert_eq(sources["breakfast_shop"]["name"], "早餐店")
+	assert_eq(sources["community_canteen"]["name"], "家常小馆")
+	assert_eq(sources["local_market"]["name"], "水果摊")
+	assert_true(game._story_source_available("breakfast_shop", "breakfast"))
+	assert_false(game._story_source_available("breakfast_shop", "lunch"))
+	assert_false(game._story_source_available("breakfast_shop", "dinner"))
+	var breakfast := game._story_food_ids("breakfast_shop", "breakfast")
+	assert_eq(breakfast.size(), 5)
+	for id in ["steamed_bun", "millet_porridge", "egg", "steamed_egg", "milk"]: assert_true(breakfast.has(id))
+	for id in ["steamed_fish", "tomato_egg_stir_fry", "rice_plain"]: assert_false(breakfast.has(id))
+	var fruit := game._story_food_ids("local_market", "lunch")
+	assert_eq(fruit.size(), 2)
+	assert_true(fruit.has("apple") and fruit.has("banana"))
+	var images: Array[String] = []
+	for source in sources.values():
+		assert_false(String(source["name"]).contains("食堂"))
+		var path := String(source["image"])
+		assert_true(ResourceLoader.exists(path))
+		assert_false(images.has(path))
+		images.append(path)
+
+
+func test_old_menu_caches_are_filtered_when_reentering_a_changed_outlet() -> void:
+	var game := _new_game()
+	game.source_hands["breakfast:local_market"] = ["milk", "steamed_fish", "apple", "banana"]
+	var hand := game._hand_for_source("local_market", "breakfast")
+	assert_eq(hand, ["apple", "banana"])
+	game.source_hands["breakfast:local_market"] = ["milk", "steamed_fish"]
+	hand = game._hand_for_source("local_market", "breakfast")
+	assert_eq(hand.size(), 2)
+	assert_true(hand.has("apple") and hand.has("banana"))
 
 
 func test_given_recipe_sodium_and_white_sugar_keep_unknown_scope() -> void:
@@ -210,19 +247,23 @@ func test_preview_toggle_cancel_and_stale_confirm_cannot_spend() -> void:
 	var before := game.kitchen.ingredients.duplicate(true)
 	var condiments := game.kitchen.condiments.duplicate(true)
 	game._confirm_food(["tofu", "millet_porridge"])
-	var old_confirm: Button = game._story_dialog._buttons.get_node("confirm")
-	game._story_dialog._buttons.get_node("sugar").pressed.emit()
-	old_confirm.pressed.emit()
-	assert_true(game._story_dialog.visible)
+	var page := game._workspace as CookingPlanStage
+	var old_confirm: Button = page.confirm_button
+	page.option_buttons["sugar:4"].pressed.emit()
+	assert_true(page.visible)
 	assert_true(game.today_meal_records.is_empty())
 	assert_eq(game.kitchen.ingredients, before)
 	assert_eq(game.kitchen.condiments, condiments)
-	game._story_dialog._buttons.get_node("cancel").pressed.emit()
-	assert_false(game._story_dialog.visible)
+	page.close_button.pressed.emit()
+	old_confirm.pressed.emit()
+	assert_false(is_instance_valid(game._workspace))
+	assert_true(game.today_meal_records.is_empty())
 	assert_eq(game.phase, "breakfast")
 	game._confirm_food(["tofu", "millet_porridge"])
-	game._story_dialog._buttons.get_node("sugar").pressed.emit()
-	game._story_dialog._buttons.get_node("confirm").pressed.emit()
+	page = game._workspace as CookingPlanStage
+	page.option_buttons["sugar:4"].pressed.emit()
+	page.confirm_button.pressed.emit()
+	page.confirm_button.pressed.emit()
 	assert_eq(game.phase, "breakfast_action")
 	assert_true(game.toast_anchor.visible)
 	assert_eq(game.today_meal_records[0]["recipe_facts"]["white_sugar_added_g"], 4)
@@ -234,13 +275,13 @@ func test_shared_meal_dialog_cancel_and_double_tap_keep_plan_truthful() -> void:
 	game.day = 4
 	game.phase = "lunch_action"
 	game._apply_action("call_friend")
-	assert_true(game._story_dialog.visible)
+	assert_true(game._workspace.visible)
 	assert_false(game.plan_shared_meal("home"))
-	game._story_dialog._buttons.get_node("cancel").pressed.emit()
+	game._workspace.close_button.pressed.emit()
 	assert_true(game.shared_meal.plan.is_empty())
 	assert_true(game.today_action_records.is_empty())
 	game._apply_action("call_friend")
-	var invite: Button = game._story_dialog._buttons.get_node("home")
+	var invite: Button = game._workspace.find_child("home", true, false)
 	invite.pressed.emit()
 	invite.pressed.emit()
 	assert_eq(game.shared_meal.history.size(), 1)

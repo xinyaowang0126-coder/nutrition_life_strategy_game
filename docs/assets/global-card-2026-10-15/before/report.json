@@ -1,0 +1,378 @@
+{
+	"errors": [],
+	"pages": [
+		{
+			"file": "640x960-series-01-stories.png",
+			"group": "640x960-series",
+			"id": "01-stories",
+			"label": "系列入口"
+		},
+		{
+			"file": "640x960-campus_exam-02-new-day.png",
+			"group": "640x960-campus_exam",
+			"id": "02-new-day",
+			"label": "人物开局与新日"
+		},
+		{
+			"file": "640x960-campus_exam-03-sources.png",
+			"group": "640x960-campus_exam",
+			"id": "03-sources",
+			"label": "来源选择"
+		},
+		{
+			"file": "640x960-campus_exam-04-food-cafeteria.png",
+			"group": "640x960-campus_exam",
+			"id": "04-food-cafeteria",
+			"label": "餐食手牌与已选区 · cafeteria"
+		},
+		{
+			"file": "640x960-campus_exam-04-food-takeout.png",
+			"group": "640x960-campus_exam",
+			"id": "04-food-takeout",
+			"label": "餐食手牌与已选区 · takeout"
+		},
+		{
+			"file": "640x960-campus_exam-04-food-convenience_store.png",
+			"group": "640x960-campus_exam",
+			"id": "04-food-convenience_store",
+			"label": "餐食手牌与已选区 · convenience_store"
+		},
+		{
+			"file": "640x960-campus_exam-04-food-dorm_storage.png",
+			"group": "640x960-campus_exam",
+			"id": "04-food-dorm_storage",
+			"label": "餐食手牌与已选区 · dorm_storage"
+		},
+		{
+			"file": "640x960-campus_exam-05-action.png",
+			"group": "640x960-campus_exam",
+			"id": "05-action",
+			"label": "餐后行动卡"
+		},
+		{
+			"file": "640x960-campus_exam-06-sleep.png",
+			"group": "640x960-campus_exam",
+			"id": "06-sleep",
+			"label": "夜间安排卡"
+		},
+		{
+			"file": "640x960-campus_exam-11-summary.png",
+			"group": "640x960-campus_exam",
+			"id": "11-summary",
+			"label": "日结与反馈"
+		},
+		{
+			"file": "640x960-campus_exam-12-records.png",
+			"group": "640x960-campus_exam",
+			"id": "12-records",
+			"label": "餐次记录"
+		},
+		{
+			"file": "640x960-campus_exam-13-progress.png",
+			"group": "640x960-campus_exam",
+			"id": "13-progress",
+			"label": "菜单与进度"
+		},
+		{
+			"file": "640x960-campus_exam-14-save-slots.png",
+			"group": "640x960-campus_exam",
+			"id": "14-save-slots",
+			"label": "存档槽位"
+		},
+		{
+			"file": "640x960-campus_exam-15-ending.png",
+			"group": "640x960-campus_exam",
+			"id": "15-ending",
+			"label": "人物结局"
+		},
+		{
+			"file": "640x960-choir_week-02-new-day.png",
+			"group": "640x960-choir_week",
+			"id": "02-new-day",
+			"label": "人物开局与新日"
+		},
+		{
+			"file": "640x960-choir_week-03-sources.png",
+			"group": "640x960-choir_week",
+			"id": "03-sources",
+			"label": "来源选择"
+		},
+		{
+			"file": "640x960-choir_week-04-food-home_kitchen.png",
+			"group": "640x960-choir_week",
+			"id": "04-food-home_kitchen",
+			"label": "餐食手牌与已选区 · home_kitchen"
+		},
+		{
+			"file": "640x960-choir_week-04-food-community_canteen.png",
+			"group": "640x960-choir_week",
+			"id": "04-food-community_canteen",
+			"label": "餐食手牌与已选区 · community_canteen"
+		},
+		{
+			"file": "640x960-choir_week-04-food-local_market.png",
+			"group": "640x960-choir_week",
+			"id": "04-food-local_market",
+			"label": "餐食手牌与已选区 · local_market"
+		},
+		{
+			"file": "640x960-choir_week-04-food-home_fridge.png",
+			"group": "640x960-choir_week",
+			"id": "04-food-home_fridge",
+			"label": "餐食手牌与已选区 · home_fridge"
+		},
+		{
+			"file": "640x960-choir_week-05-action.png",
+			"group": "640x960-choir_week",
+			"id": "05-action",
+			"label": "餐后行动卡"
+		},
+		{
+			"file": "640x960-choir_week-06-sleep.png",
+			"group": "640x960-choir_week",
+			"id": "06-sleep",
+			"label": "夜间安排卡"
+		},
+		{
+			"file": "640x960-choir_week-07-cooking.png",
+			"group": "640x960-choir_week",
+			"id": "07-cooking",
+			"label": "配方工作台"
+		},
+		{
+			"file": "640x960-choir_week-08-stock.png",
+			"group": "640x960-choir_week",
+			"id": "08-stock",
+			"label": "食材与熟食批次"
+		},
+		{
+			"file": "640x960-choir_week-09-shared-meal.png",
+			"group": "640x960-choir_week",
+			"id": "09-shared-meal",
+			"label": "共同进餐"
+		},
+		{
+			"file": "640x960-choir_week-10-lesson.png",
+			"group": "640x960-choir_week",
+			"id": "10-lesson",
+			"label": "科普情境练习"
+		},
+		{
+			"file": "640x960-choir_week-11-summary.png",
+			"group": "640x960-choir_week",
+			"id": "11-summary",
+			"label": "日结与反馈"
+		},
+		{
+			"file": "640x960-choir_week-12-records.png",
+			"group": "640x960-choir_week",
+			"id": "12-records",
+			"label": "餐次记录"
+		},
+		{
+			"file": "640x960-choir_week-13-progress.png",
+			"group": "640x960-choir_week",
+			"id": "13-progress",
+			"label": "菜单与进度"
+		},
+		{
+			"file": "640x960-choir_week-14-save-slots.png",
+			"group": "640x960-choir_week",
+			"id": "14-save-slots",
+			"label": "存档槽位"
+		},
+		{
+			"file": "640x960-choir_week-15-ending.png",
+			"group": "640x960-choir_week",
+			"id": "15-ending",
+			"label": "人物结局"
+		},
+		{
+			"file": "1280x720-series-01-stories.png",
+			"group": "1280x720-series",
+			"id": "01-stories",
+			"label": "系列入口"
+		},
+		{
+			"file": "1280x720-campus_exam-02-new-day.png",
+			"group": "1280x720-campus_exam",
+			"id": "02-new-day",
+			"label": "人物开局与新日"
+		},
+		{
+			"file": "1280x720-campus_exam-03-sources.png",
+			"group": "1280x720-campus_exam",
+			"id": "03-sources",
+			"label": "来源选择"
+		},
+		{
+			"file": "1280x720-campus_exam-04-food-cafeteria.png",
+			"group": "1280x720-campus_exam",
+			"id": "04-food-cafeteria",
+			"label": "餐食手牌与已选区 · cafeteria"
+		},
+		{
+			"file": "1280x720-campus_exam-04-food-takeout.png",
+			"group": "1280x720-campus_exam",
+			"id": "04-food-takeout",
+			"label": "餐食手牌与已选区 · takeout"
+		},
+		{
+			"file": "1280x720-campus_exam-04-food-convenience_store.png",
+			"group": "1280x720-campus_exam",
+			"id": "04-food-convenience_store",
+			"label": "餐食手牌与已选区 · convenience_store"
+		},
+		{
+			"file": "1280x720-campus_exam-04-food-dorm_storage.png",
+			"group": "1280x720-campus_exam",
+			"id": "04-food-dorm_storage",
+			"label": "餐食手牌与已选区 · dorm_storage"
+		},
+		{
+			"file": "1280x720-campus_exam-05-action.png",
+			"group": "1280x720-campus_exam",
+			"id": "05-action",
+			"label": "餐后行动卡"
+		},
+		{
+			"file": "1280x720-campus_exam-06-sleep.png",
+			"group": "1280x720-campus_exam",
+			"id": "06-sleep",
+			"label": "夜间安排卡"
+		},
+		{
+			"file": "1280x720-campus_exam-11-summary.png",
+			"group": "1280x720-campus_exam",
+			"id": "11-summary",
+			"label": "日结与反馈"
+		},
+		{
+			"file": "1280x720-campus_exam-12-records.png",
+			"group": "1280x720-campus_exam",
+			"id": "12-records",
+			"label": "餐次记录"
+		},
+		{
+			"file": "1280x720-campus_exam-13-progress.png",
+			"group": "1280x720-campus_exam",
+			"id": "13-progress",
+			"label": "菜单与进度"
+		},
+		{
+			"file": "1280x720-campus_exam-14-save-slots.png",
+			"group": "1280x720-campus_exam",
+			"id": "14-save-slots",
+			"label": "存档槽位"
+		},
+		{
+			"file": "1280x720-campus_exam-15-ending.png",
+			"group": "1280x720-campus_exam",
+			"id": "15-ending",
+			"label": "人物结局"
+		},
+		{
+			"file": "1280x720-choir_week-02-new-day.png",
+			"group": "1280x720-choir_week",
+			"id": "02-new-day",
+			"label": "人物开局与新日"
+		},
+		{
+			"file": "1280x720-choir_week-03-sources.png",
+			"group": "1280x720-choir_week",
+			"id": "03-sources",
+			"label": "来源选择"
+		},
+		{
+			"file": "1280x720-choir_week-04-food-home_kitchen.png",
+			"group": "1280x720-choir_week",
+			"id": "04-food-home_kitchen",
+			"label": "餐食手牌与已选区 · home_kitchen"
+		},
+		{
+			"file": "1280x720-choir_week-04-food-community_canteen.png",
+			"group": "1280x720-choir_week",
+			"id": "04-food-community_canteen",
+			"label": "餐食手牌与已选区 · community_canteen"
+		},
+		{
+			"file": "1280x720-choir_week-04-food-local_market.png",
+			"group": "1280x720-choir_week",
+			"id": "04-food-local_market",
+			"label": "餐食手牌与已选区 · local_market"
+		},
+		{
+			"file": "1280x720-choir_week-04-food-home_fridge.png",
+			"group": "1280x720-choir_week",
+			"id": "04-food-home_fridge",
+			"label": "餐食手牌与已选区 · home_fridge"
+		},
+		{
+			"file": "1280x720-choir_week-05-action.png",
+			"group": "1280x720-choir_week",
+			"id": "05-action",
+			"label": "餐后行动卡"
+		},
+		{
+			"file": "1280x720-choir_week-06-sleep.png",
+			"group": "1280x720-choir_week",
+			"id": "06-sleep",
+			"label": "夜间安排卡"
+		},
+		{
+			"file": "1280x720-choir_week-07-cooking.png",
+			"group": "1280x720-choir_week",
+			"id": "07-cooking",
+			"label": "配方工作台"
+		},
+		{
+			"file": "1280x720-choir_week-08-stock.png",
+			"group": "1280x720-choir_week",
+			"id": "08-stock",
+			"label": "食材与熟食批次"
+		},
+		{
+			"file": "1280x720-choir_week-09-shared-meal.png",
+			"group": "1280x720-choir_week",
+			"id": "09-shared-meal",
+			"label": "共同进餐"
+		},
+		{
+			"file": "1280x720-choir_week-10-lesson.png",
+			"group": "1280x720-choir_week",
+			"id": "10-lesson",
+			"label": "科普情境练习"
+		},
+		{
+			"file": "1280x720-choir_week-11-summary.png",
+			"group": "1280x720-choir_week",
+			"id": "11-summary",
+			"label": "日结与反馈"
+		},
+		{
+			"file": "1280x720-choir_week-12-records.png",
+			"group": "1280x720-choir_week",
+			"id": "12-records",
+			"label": "餐次记录"
+		},
+		{
+			"file": "1280x720-choir_week-13-progress.png",
+			"group": "1280x720-choir_week",
+			"id": "13-progress",
+			"label": "菜单与进度"
+		},
+		{
+			"file": "1280x720-choir_week-14-save-slots.png",
+			"group": "1280x720-choir_week",
+			"id": "14-save-slots",
+			"label": "存档槽位"
+		},
+		{
+			"file": "1280x720-choir_week-15-ending.png",
+			"group": "1280x720-choir_week",
+			"id": "15-ending",
+			"label": "人物结局"
+		}
+	],
+	"scope": "Fresh native captures of both stories at portrait and desktop sizes. Declared menu/state/day-completion/ending fixtures, not a complete seven-day playthrough. In-memory saves only."
+}

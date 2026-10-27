@@ -23,6 +23,7 @@ var _cards_by_id: Dictionary = {}
 var _options: Dictionary = {}
 var _ready_finished := false
 var _has_setup := false
+var story_note: Label
 
 
 func setup(items: Array, options: Dictionary = {}) -> void:
@@ -49,6 +50,13 @@ func set_usage(used: int, maximum: int, used_names: Array = [], water_count: int
 
 
 func _ready() -> void:
+	action_scroll.follow_focus = true
+	story_note = HouseholdUI.label("", 19, HouseholdUI.GREEN)
+	story_note.name = "StoryNote"
+	var planner := used_slots.get_parent()
+	planner.add_child(story_note)
+	planner.move_child(story_note, used_slots.get_index())
+	story_note.hide()
 	skip_button.pressed.connect(func() -> void: skip_requested.emit())
 	skip_button.tooltip_text = BalanceRules.PERIOD_HINT
 	_ready_finished = true
@@ -70,7 +78,8 @@ func _apply_setup() -> void:
 			continue
 		actions_container.add_child(card)
 		_cards_by_id[action_id] = card
-		card.configure(payload, "action", false, enabled, -1, reason, "接水" if int(payload.get("slots", 1)) == 0 else "安排")
+		var verb := "接水" if action_id == "drink_water" else ("约饭" if action_id == "call_friend" else "安排")
+		card.configure(payload, "action", false, enabled, -1, reason, verb)
 		card.selected.connect(_on_action_pressed)
 		card.detail_requested.connect(_forward_detail)
 		card.detail_dismissed.connect(_forward_detail_dismissed)
@@ -84,6 +93,8 @@ func _update_header() -> void:
 	prompt_label.text = String(_options.get("prompt", "接下来做点什么？"))
 	slots_label.text = "安排 %d/%d" % [used, maximum]
 	water_count_label.text = "水杯 %d/%d" % [int(_options.get("water_count", 0)), int(_options.get("water_max", 2))]
+	story_note.text = String(_options.get("story_note", ""))
+	story_note.visible = not story_note.text.is_empty()
 	var names: Array = _options.get("used_action_names", []) as Array
 	var ids: Array = _options.get("used_action_ids", []) as Array
 	var slot_nodes := used_slots.get_children()

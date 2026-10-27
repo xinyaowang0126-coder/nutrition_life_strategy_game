@@ -37,6 +37,7 @@ var _ready_finished := false
 var _motion_tween: Tween
 var _show_revision := 0
 var _pointer_filters: Dictionary = {}
+var _return_focus: WeakRef
 
 
 func _ready() -> void:
@@ -83,6 +84,9 @@ func present(
 
 
 func show_at(anchor_rect: Rect2, mobile: bool = false, is_pinned: bool = false) -> void:
+	if is_pinned:
+		var owner := get_viewport().gui_get_focus_owner()
+		if owner != null and not is_ancestor_of(owner): _return_focus = weakref(owner)
 	_anchor_rect = anchor_rect
 	_mobile_mode = mobile
 	pinned = is_pinned
@@ -314,6 +318,7 @@ func _finish_show_layout(revision: int, target_width: float) -> void:
 	global_position = target_position
 	_update_pivot()
 	_play_open_animation()
+	if pinned: close_button.grab_focus()
 
 
 func _refresh_wrapped_text(node: Node) -> void:
@@ -339,9 +344,14 @@ func _play_open_animation() -> void:
 
 
 func _on_close_pressed() -> void:
+	var return_focus := _return_focus
+	_return_focus = null
 	pinned = false
 	hide_note()
 	closed.emit()
+	var owner := return_focus.get_ref() as Control if return_focus != null else null
+	if is_instance_valid(owner) and owner.is_visible_in_tree() and not owner.is_queued_for_deletion() and (not owner is BaseButton or not (owner as BaseButton).disabled):
+		owner.grab_focus()
 
 
 func _on_action_pressed() -> void:
@@ -366,6 +376,8 @@ func _input(event: InputEvent) -> void:
 	if visible and pinned and event.is_action_pressed("ui_cancel") and not event.is_echo():
 		get_viewport().set_input_as_handled()
 		_on_close_pressed()
+	elif visible and pinned and HouseholdUI.handle_modal_key(self, event, true):
+		get_viewport().set_input_as_handled()
 
 
 func _delta(value: int) -> String:

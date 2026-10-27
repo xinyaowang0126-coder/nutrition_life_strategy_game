@@ -200,9 +200,9 @@ func test_household_has_a_legal_seven_day_route_across_seeds() -> void:
 		for run_day in range(1, 8):
 			for meal in ["breakfast", "lunch", "dinner"]:
 				assert_eq(game.phase, meal + "_source")
-				game._choose_meal_source("local_market" if meal == "breakfast" else "community_canteen")
+				game._choose_meal_source("breakfast_shop" if meal == "breakfast" else "community_canteen")
 				var plate: Array[String] = []
-				for id in ["rice_plain", "oatmeal", "egg", "tofu", "tomato_egg_stir_fry", "steamed_fish", "whole_wheat_bread", "milk", "plain_yogurt", "greens", "tomato", "banana", "apple"]:
+				for id in ["steamed_bun", "millet_porridge", "rice_plain", "oatmeal", "egg", "tofu", "tomato_egg_stir_fry", "steamed_fish", "whole_wheat_bread", "milk", "plain_yogurt", "greens", "tomato", "banana", "apple"]:
 					if game.hand.has(id):
 						game.selected_food_ids = plate.duplicate()
 						if game._can_add_food(id):
@@ -244,6 +244,6 @@ func test_scene_uses_older_portrait_goal_and_modal_input_guard() -> void:
 	game._skip_meal()
 	assert_eq(game.phase, "breakfast_source")
 	assert_eq(game.state, before)
-	game._story_dialog.hide()
+	game._close_workspace(false)
 	game._show_education()
 	assert_eq(game.state, before)

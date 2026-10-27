@@ -1,0 +1,5 @@
+{
+  "equal_except_image": true,
+  "actions": 10,
+  "reference": "Git HEAD; this XML had no user changes at the start of this round"
+}

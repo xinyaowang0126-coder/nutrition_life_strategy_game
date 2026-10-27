@@ -1,0 +1,74 @@
+[
+  {
+    "file": "00-existing-leftovers-history.png",
+    "width": 1920,
+    "height": 1080,
+    "sha256": "5ee3889d0cce42ff083e7a58a412059a95fa36a24b898fed7ccd4869c99562a4"
+  },
+  {
+    "file": "01-cook-only-this-meal.png",
+    "width": 1920,
+    "height": 1080,
+    "sha256": "0118be02e9882400c93fe543dddc1890706bede94630603287a337575664016b"
+  },
+  {
+    "file": "02-cook-save-one-cold.png",
+    "width": 1920,
+    "height": 1080,
+    "sha256": "28fbc607b92b448de86ab2189a34f5855473252ca786872622be4727c63c73c6"
+  },
+  {
+    "file": "03-cook-counter-warning.png",
+    "width": 1920,
+    "height": 1080,
+    "sha256": "b73e57f912c0bd049c0923c6829e8b566213fcd4ea3276405750850a6d03e066"
+  },
+  {
+    "file": "04-cold-leftovers-history.png",
+    "width": 1920,
+    "height": 1080,
+    "sha256": "04f251f93e1504b0aba548d2b99c57aeb8cda3c683a67cc8185cc037bd8d1e6a"
+  },
+  {
+    "file": "05-reheat-and-eat.png",
+    "width": 1920,
+    "height": 1080,
+    "sha256": "ede6479321161d439d7a25f74dace577439826be065b732abe4c80101e0b35a2"
+  },
+  {
+    "file": "06-used-portions-leave-stock.png",
+    "width": 1920,
+    "height": 1080,
+    "sha256": "3612c6b22a7c975475e23e0bdcf363fcfdf88ab1b69de86e7e6148df7829f7fe"
+  },
+  {
+    "file": "07-counter-leftovers-need-discard.png",
+    "width": 1920,
+    "height": 1080,
+    "sha256": "504250ba944e26413f5eaf6a9cc541bbd1b4ed907d0bc8c04631fd8f07bcb087"
+  },
+  {
+    "file": "08-discard-completed.png",
+    "width": 1920,
+    "height": 1080,
+    "sha256": "8e0f5c61a26ffd64ba4645d8a57ed30a261af1e5921d74ebace9efe9a0e2a1f0"
+  },
+  {
+    "file": "09-two-people-plus-one-saved.png",
+    "width": 1920,
+    "height": 1080,
+    "sha256": "73549898180996e6600d7b7354febee5c7afd0a687d866e21f9354f1534bd1a9"
+  },
+  {
+    "file": "10-cold-storage-time-limit.png",
+    "width": 1920,
+    "height": 1080,
+    "sha256": "5316ff95885663b6194c44c1c32eabdd4c74205770b5bcd0cd785da0493d90f4"
+  },
+  {
+    "file": "11-leftovers-reference.png",
+    "width": 1920,
+    "height": 1080,
+    "sha256": "2c5f1e5769b9306827a92172fcafc9a49165a5ecd137c4269115cce5e783f417"
+  }
+]

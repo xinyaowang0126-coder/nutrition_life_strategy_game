@@ -1,0 +1,30 @@
+{
+  "generator": "built-in image_gen",
+  "created": "2026-10-21",
+  "assets": [
+    {
+      "path": "cooking-wok-v1.png",
+      "prompt": "Use case: background-extraction. Edit the provided Chinese home illustration into ONE isolated clickable game prop: the black iron wok from this kitchen, with a wooden spatula, a little gentle white steam, and a small wooden chopping board carrying a few leafy greens and two eggs beside it. Preserve the warm detailed hand-painted watercolor/colored-pencil medium and the exact cozy brown, muted sage and warm cream palette of this home. View: slight three-quarter front view, a compact low broad composition, all object edges visible, centered and large. It is a foreground illustrated cooking object for a native game button, not a whole scene. Fully transparent background. No stove cabinet, no room, no floor, no table extending past the small board, no frame, no text or label, no UI, no people, no watermark. Crisp attractive silhouette readable at 120 pixels.",
+      "reference": "res://assets/generated/stories/home_source/zhou-home-source-portrait-v1.png",
+      "workspace_path": "E:/nutrition_life_strategy_game/life-strategy/assets/generated/stories/props/cooking-wok-v1.png"
+    },
+    {
+      "path": "pantry-fridge-v1.png",
+      "prompt": "Use case: background-extraction. Extract this home's same tall cream two-door refrigerator into a standalone isolated game prop, preserving its simple slightly vintage proportions, warm cream finish, little green leaf magnet, original gentle front-three-quarter perspective and warm hand-painted watercolor/colored-pencil style. Keep the upper freezer door closed. Show the lower fridge door only modestly ajar toward the RIGHT, revealing three neatly stored glass food containers, leafy vegetables, milk and eggs. Door opening should remain compact, without a huge wide wing, so the refrigerator's full silhouette is tall and narrow. No plants or pots on top, no cabinet, no room, no walls or floor. Complete fridge and all door edges visible, large centered subject, true transparent background. No writing, no text, no UI, no frame, no people, no watermark. A beautiful tactile graphic for clicking stored food in this exact home.",
+      "reference": "res://assets/generated/stories/home_source/zhou-home-source-portrait-v1.png",
+      "workspace_path": "E:/nutrition_life_strategy_game/life-strategy/assets/generated/stories/props/pantry-fridge-v1.png"
+    },
+    {
+      "path": "outing-tote-v1.png",
+      "prompt": "Use case: background-extraction. Extract ONLY the natural cream canvas shopping tote and its attached simple house keys from this home's dining table into one isolated clickable game prop. Preserve the muted green botanical print, sage fabric handles, warm canvas texture and exact cozy hand-painted watercolor/colored-pencil style of the reference. Slight three-quarter front view, whole bag including both handles and keys visible, no table or chair or room, compact natural silhouette, large centered subject. True transparent background. No surrounding props, no person, no text, no label, no UI frame, no watermark. It should feel like the actual bag in this home and read clearly as an outing graphic at 120 pixels.",
+      "reference": "res://assets/generated/stories/home_source/zhou-home-source-portrait-v1.png",
+      "workspace_path": "E:/nutrition_life_strategy_game/life-strategy/assets/generated/stories/props/outing-tote-v1.png"
+    },
+    {
+      "path": "notebook-pencil-v1.png",
+      "prompt": "Use case: illustration-story. Asset type: transparent small game prop. A single small warm-brown clothbound personal notebook, slightly open to two blank cream pages, with a wooden pencil resting diagonally across it, one muted sage ribbon bookmark. Detailed warm watercolor and colored-pencil illustration, tactile paper and cloth, gentle golden light, delicate brown outlines, realistic everyday proportions, cozy Chinese daily-life game aesthetic. Three-quarter overhead view suitable for a little book lying on a table, complete silhouette visible, large centered subject on a true transparent background. No writing, no symbols, no text, no label, no UI frame, no surrounding scene, no hands or people, no watermark.",
+      "workspace_path": "E:/nutrition_life_strategy_game/life-strategy/assets/generated/stories/props/notebook-pencil-v1.png"
+    }
+  ],
+  "purpose": "Separate transparent picture layers are the clickable cooking, stored-food, outing and notebook graphics. Room/background and story flow remain unchanged."
+}

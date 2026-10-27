@@ -49,6 +49,7 @@ var _summary: Dictionary = {}
 var _mobile_mode := false
 var _ready_finished := false
 var _motion_tween: Tween
+var _next_locked := false
 var _detail_closed_text := "查看三餐详情"
 var _detail_open_text := "收起三餐详情"
 var record_book_button: Button
@@ -56,6 +57,7 @@ var record_book_button: Button
 
 func _ready() -> void:
 	_ready_finished = true
+	content_scroll.follow_focus = true
 	next_button.pressed.connect(_on_next_pressed)
 	detail_button.pressed.connect(_toggle_nutrition_detail)
 	record_book_button = Button.new()
@@ -79,6 +81,9 @@ func configure(summary: Dictionary, mobile: bool = false) -> void:
 
 
 func show_summary(summary: Dictionary, mobile: bool = false) -> void:
+	if is_instance_valid(_motion_tween): _motion_tween.kill()
+	_next_locked = false
+	if _ready_finished: next_button.disabled = false
 	detail_panel.visible = false
 	configure(summary, mobile)
 	visible = true
@@ -218,7 +223,7 @@ func _finish_show() -> void:
 		stamp.scale = Vector2(0.94, 0.94) if meal_trail.visible else Vector2.ONE
 		if meal_trail.visible:
 			_motion_tween.tween_property(stamp, "scale", Vector2.ONE, 0.24)
-	next_button.grab_focus()
+	if not next_button.disabled: next_button.grab_focus()
 
 
 func _toggle_nutrition_detail() -> void:
@@ -350,8 +355,10 @@ func _center_paper() -> void:
 
 
 func _on_next_pressed() -> void:
-	if next_button.disabled:
+	if not is_visible_in_tree() or next_button.disabled or _next_locked:
 		return
+	_next_locked = true
+	next_button.disabled = true
 	hide_summary()
 	next_day_requested.emit()
 
@@ -388,5 +395,18 @@ func _default_advice(stats: Dictionary) -> String:
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	if visible and event.is_action_pressed("ui_accept") and not event.is_echo():
+		var owner := get_viewport().gui_get_focus_owner()
+		if owner != null and owner != next_button: return
 		get_viewport().set_input_as_handled()
 		_on_next_pressed()
+
+
+func _input(event: InputEvent) -> void:
+	if not is_visible_in_tree() or not is_processing_unhandled_key_input() or next_button.disabled: return
+	if event.is_action_pressed("ui_cancel", true):
+		get_viewport().set_input_as_handled()
+		if not event.is_echo() and detail_panel.visible:
+			_toggle_nutrition_detail()
+			detail_button.grab_focus()
+	elif HouseholdUI.handle_modal_key(self, event, true):
+		get_viewport().set_input_as_handled()

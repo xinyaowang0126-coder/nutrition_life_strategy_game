@@ -45,7 +45,8 @@ func _update_scene_summary() -> void:
 	status_label.text = "购物袋 %d/%d" % [_selected_ids.size(), _max_selected]
 	fee_label.text = "配送 ¥%d" % _source_fee
 	bag_label.text = "购物袋 %d/%d" % [_selected_ids.size(), _max_selected]
-	total_label.text = "合计 ¥%d" % _selection_total()
+	# Delivery is an order cost, not a charge for an empty shopping bag.
+	total_label.text = "合计 ¥%d" % (0 if _selected_ids.is_empty() else _selection_total())
 
 
 func _default_max_selected() -> int:

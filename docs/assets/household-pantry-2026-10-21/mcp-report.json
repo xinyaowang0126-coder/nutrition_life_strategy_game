@@ -1,0 +1,161 @@
+{
+  "setup": "Memory save backend. Declared initial breakfast selection and temporary shortage fixture restored before stock inspection.",
+  "storage_click": {
+    "result": {
+      "condiment_use": "本次调味用量\n盐：用2克／库存40克\n酱油：用10毫升／库存60毫升",
+      "ingredients_needed": {
+        "greens": 2,
+        "rice_plain": 2,
+        "tofu": 2
+      },
+      "storage": "fridge",
+      "summary": "当餐1份＋冷藏1份 · 制作耗6精力"
+    },
+    "source": "game"
+  },
+  "tab_click": {
+    "result": {
+      "cooked_visible": false,
+      "raw_visible": true,
+      "saved": 0,
+      "tab": "ingredients",
+      "tab_pinned": true
+    },
+    "source": "game"
+  },
+  "final": {
+    "result": {
+      "batches_unchanged": true,
+      "condiments_unchanged": true,
+      "details_expanded": true,
+      "ingredients_unchanged": true,
+      "meals": 0,
+      "selection": [
+        "rice_plain",
+        "soft_tofu_greens"
+      ],
+      "state": {
+        "balance": 210,
+        "energy": 60,
+        "goal_progress": 0,
+        "goal_target": 70,
+        "mood": 55,
+        "satiety": 40,
+        "stability": 53,
+        "stress": 35
+      }
+    },
+    "source": "game"
+  },
+  "final_disclosure_run": {
+    "default_collapsed": true,
+    "observation": {
+      "result": {
+        "condiments": {
+          "salt_g": 40,
+          "soy_ml": 60,
+          "sugar_g": 40
+        },
+        "expanded": true,
+        "ingredients": {
+          "apple": 3,
+          "egg": 5,
+          "fish": 2,
+          "greens": 5,
+          "milk": 3,
+          "millet": 4,
+          "oatmeal": 4,
+          "rice_plain": 8,
+          "tofu": 5,
+          "tomato": 4
+        },
+        "label": "收起调味记录",
+        "meals": 0,
+        "state": {
+          "balance": 210,
+          "energy": 60,
+          "goal_progress": 0,
+          "goal_target": 70,
+          "mood": 55,
+          "satiety": 40,
+          "stability": 53,
+          "stress": 35
+        },
+        "use": "本次调味用量\n盐：用1克／库存40克\n酱油：用5毫升／库存60毫升"
+      },
+      "source": "game"
+    },
+    "logs": {
+      "source": "game",
+      "lines": [
+        {
+          "level": "info",
+          "run_id": "r9220442-7",
+          "source": "game",
+          "text": "[godot_ai game_helper] registered mcp capture (debugger active=true, logger=true)\n"
+        }
+      ],
+      "total_count": 1,
+      "returned_count": 1,
+      "offset": 0,
+      "limit": 20,
+      "has_more": false,
+      "run_id": "r9220442-7",
+      "is_running": true,
+      "dropped_count": 0,
+      "stale_run_id": false,
+      "current_run_id": "r9220442-7",
+      "helper_live": true,
+      "session_active": true,
+      "game_status": {
+        "active": true,
+        "editor_log_cursor": 0,
+        "elapsed_msec": 87092,
+        "helper_expected": true,
+        "helper_live": true,
+        "ready": true,
+        "ready_wait_msec": 20000,
+        "run_started_msec": 9220440,
+        "run_token": 7,
+        "session_active": true,
+        "status": "live"
+      }
+    }
+  },
+  "logs": {
+    "source": "game",
+    "lines": [
+      {
+        "level": "info",
+        "run_id": "r8746817-6",
+        "source": "game",
+        "text": "[godot_ai game_helper] registered mcp capture (debugger active=true, logger=true)\n"
+      }
+    ],
+    "total_count": 1,
+    "returned_count": 1,
+    "offset": 0,
+    "limit": 30,
+    "has_more": false,
+    "run_id": "r8746817-6",
+    "is_running": true,
+    "dropped_count": 0,
+    "stale_run_id": false,
+    "current_run_id": "r8746817-6",
+    "helper_live": true,
+    "session_active": true,
+    "game_status": {
+      "active": true,
+      "editor_log_cursor": 0,
+      "elapsed_msec": 240269,
+      "helper_expected": true,
+      "helper_live": true,
+      "ready": true,
+      "ready_wait_msec": 20000,
+      "run_started_msec": 8746815,
+      "run_token": 6,
+      "session_active": true,
+      "status": "live"
+    }
+  }
+}

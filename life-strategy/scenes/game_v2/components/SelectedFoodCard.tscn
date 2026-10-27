@@ -6,7 +6,7 @@
 custom_minimum_size = Vector2(124, 216)
 size_flags_horizontal = 0
 size_flags_vertical = 0
-mouse_filter = 2
+mouse_filter = 1
 script = ExtResource("1_card")
 
 [node name="Empty" type="Label" parent="."]
@@ -24,13 +24,25 @@ layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 4
 
-[node name="Price" type="Label" parent="Face"]
+[node name="Header" type="HBoxContainer" parent="Face"]
 layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 4
+
+[node name="Price" type="Label" parent="Face/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
 mouse_filter = 2
 theme_override_colors/font_color = Color(0.82, 0.43, 0.16, 1)
 theme_override_font_sizes/font_size = 14
 text = "¥2"
 horizontal_alignment = 2
+
+[node name="RemoveButton" type="Button" parent="Face/Header"]
+custom_minimum_size = Vector2(36, 32)
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "移出"
 
 [node name="Preview" type="TextureRect" parent="Face"]
 layout_mode = 2

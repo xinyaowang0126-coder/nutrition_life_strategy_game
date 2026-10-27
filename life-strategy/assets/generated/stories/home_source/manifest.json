@@ -1,0 +1,22 @@
+{
+  "generator": "built-in image_gen",
+  "created": "2026-10-21",
+  "assets": [
+    {
+      "path": "zhou-home-source-wide-v1.png",
+      "reference": "res://assets/generated/stories/zhou_home.png",
+      "prompt": "Use case: precise-object-edit. Edit target: the provided existing Chinese auntie's apartment illustration. Preserve this same modest real home and the same warm hand-painted watercolor style, muted sage-green cabinets, cream refrigerator, wood floor, plants, botanical wall pictures, original sunny window and dining table. Keep a landscape 16:9 view, everyday human eye-level interior perspective, not overhead, not a miniature map, not a cutaway dollhouse. Keep the cooking stove with its dark wok clearly visible at the LEFT counter, the full cream refrigerator beside it at center-left. Add only a small natural canvas shopping tote and a simple set of house keys clearly visible together on the original dining table at the RIGHT, so the tote can be used as a game hotspot for deciding to go out. Preserve spacious quiet wall/floor areas between the kitchen and dining table. Leave the bottom-left of the scene uncluttered because an existing character portrait and status HUD will overlay it. Keep all of the stove, refrigerator and shopping tote readable in a single real room. No people, no new outdoor structures, no outdoor cooking, no extra refrigerator outside, no written text, no labels, no game UI, no decorative borders, no watermark. The output is the same cozy home, with only the shopping tote/keys addition and restrained framing adjustments."
+    },
+    {
+      "path": "zhou-home-source-portrait-v1.png",
+      "reference": "res://assets/generated/stories/zhou_home.png",
+      "prompt": "Use case: precise-object-edit. Edit target: the provided existing Chinese auntie's apartment illustration. Create an alternate portrait 2:3 camera framing of THIS SAME modest real apartment interior for a mobile game, preserving its warm hand-painted watercolor medium, sage-green kitchen cabinets, cream refrigerator, golden wood, botanical pictures, plants and sunlit dining table. Human eye-level interior camera, NOT an overhead neighborhood map or cutaway miniature. Reframe so THREE physical things remain clearly visible on a phone: the stove/dark wok and a little green kitchen counter in the UPPER-LEFT around 25% x, 28% y; the matching full cream refrigerator on the BACK WALL slightly RIGHT of center around 64% x, 33% y; and a small canvas shopping tote with house keys on the dining table at the MIDDLE-RIGHT around 79% x, 61% y. The room must feel architecturally coherent, the kitchen, fridge and dining table belonging to one real home rather than separate floating scenes. Leave lower-left 30% of width below the halfway line and the bottom 18% uncluttered for an existing character portrait and status HUD. Keep uppermost 12% relatively calm for an existing HUD/title. No people, no outdoor structures, no outdoor kitchen, no outdoor fridge, no writing, no labels, no UI, no border, no watermark. This is a lived-in home in which a person is deciding whether to cook, use stored food, or take a bag and go out."
+    },
+    {
+      "path": "convenience_background_day-v1.png",
+      "reference": "res://assets/generated/backgrounds/convenience_background.png",
+      "prompt": "Use case: lighting-weather. Edit target: the provided cozy illustrated neighborhood grocery interior. Change only the time of day to daytime for breakfast and lunch. Replace the dark blue night sky and stars visible through the left-side windows with a softly lit daytime Chinese residential neighborhood outside, pale sky, gentle morning daylight. Adjust the interior illumination to warm natural daylight from the windows, with soft consistent shadows. Preserve the exact same grocery shelves, food packages, refrigerator cases, baskets, wood fixtures, door and window positions, warm watercolor/colored-pencil style, perspective and wide 16:9 composition. Keep the shop empty of people. No added text, no signs with lettering, no UI, no border, no watermark. This is the same shop in the daytime, not a new place."
+    }
+  ],
+  "purpose": "Home is the decision hub. Physical stove, fridge and shopping bag are scene affordances. Daytime store is shown only after choosing a daytime outing."
+}

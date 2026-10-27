@@ -1,0 +1,26 @@
+{
+  "generator": "built-in image_gen",
+  "created": "2026-10-26",
+  "purpose": "Transparent silhouette-clickable market props using the same HouseholdPropButton and HouseholdPropArt as the home entries. No framed location photos.",
+  "references": [
+    "res://assets/generated/stories/props/cooking-wok-v1.png",
+    "res://assets/generated/stories/locations/zhou-market-wide-v1.png"
+  ],
+  "assets": [
+    {
+      "path": "breakfast-steamer-v1.png",
+      "prompt": "Use case: illustration-story. Asset type: a single transparent PNG foreground game prop used as an irregular silhouette-clickable picture button in an existing Chinese daily-life game. Reference image 1 is ONLY a style reference: match its warm detailed watercolor and colored-pencil illustration, delicate brown outlines, natural warm wood and bamboo textures, cream and muted sage palette, realistic everyday proportions, golden afternoon light. Reference image 2 is the existing market scene: match this setting. One compact connected composition, full silhouette visible with generous transparent margin, centered large, slight three-quarter front/above view. True alpha transparency around the objects; no backdrop, no rectangle, no scene, no card, no frame, no label, no text, no symbols, no UI, no people, no watermark. Crisp silhouette readable at 150px. Subject: ONE round bamboo steamer basket full of three fluffy white steamed buns, its woven lid leaning to the left, a small blue-and-white porcelain bowl of golden millet congee and a single boiled egg beside it. A little delicate rising steam. The basket and breakfast dishes form one close compact prop. No table, no counter, no stove, no tray or mat surrounding the composition.",
+      "sha256": "11f836dc8ae4ee7971f54c9518e66b60faf2dc8f01c651b5beaeb6d8aba2ca06"
+    },
+    {
+      "path": "homestyle-meal-v1.png",
+      "prompt": "Use case: illustration-story. Asset type: a single transparent PNG foreground game prop used as an irregular silhouette-clickable picture button in an existing Chinese daily-life game. Reference image 1 is ONLY a style reference: match its warm detailed watercolor and colored-pencil illustration, delicate brown outlines, natural warm wood and bamboo textures, cream and muted sage palette, realistic everyday proportions, golden afternoon light. Reference image 2 is the existing market scene: match this setting. One compact connected composition, full silhouette visible with generous transparent margin, centered large, slight three-quarter front/above view. True alpha transparency around the objects; no backdrop, no rectangle, no scene, no card, no frame, no label, no text, no symbols, no UI, no people, no watermark. Crisp silhouette readable at 150px. Subject: ONE small round warm-brown wooden serving tray with a blue-and-white porcelain bowl of white rice, one shallow plate of homestyle stir-fried leafy greens and soft tofu, a little saucer of tomato and egg, and simple wooden chopsticks. A little delicate rising steam. It should unmistakably communicate a comforting small Chinese homestyle diner meal. Compact low wide composition, no table, no counter, no surrounding furniture.",
+      "sha256": "22f3e9ba64fcfd8c79d7a18cf29f44cd6dbf0367cfd9f7da95463c5dc005a6f3"
+    },
+    {
+      "path": "fruit-baskets-v1.png",
+      "prompt": "Use case: illustration-story. Asset type: a single transparent PNG foreground game prop used as an irregular silhouette-clickable picture button in an existing Chinese daily-life game. Reference image 1 is ONLY a style reference: match its warm detailed watercolor and colored-pencil illustration, delicate brown outlines, natural warm wood and bamboo textures, cream and muted sage palette, realistic everyday proportions, golden afternoon light. Reference image 2 is the existing market scene: match this setting. One compact connected composition, full silhouette visible with generous transparent margin, centered large, slight three-quarter front/above view. True alpha transparency around the objects; no backdrop, no rectangle, no scene, no card, no frame, no label, no text, no symbols, no UI, no people, no watermark. Crisp silhouette readable at 150px. Subject: ONE compact connected grouping of two small everyday woven bamboo fruit baskets, a larger basket of rosy red apples and a smaller basket of curved ripe yellow bananas, one natural green leaf tucked beside the apples. Natural fruit proportions, inviting but quiet colors. No oranges or extra types of fruit. No table, no counter, no shelves, no shop, no ground, no backdrop.",
+      "sha256": "12c1279f1feb90eed4e141470374aa22ddb54a7cad09b87eb0dac18df0865b49"
+    }
+  ]
+}

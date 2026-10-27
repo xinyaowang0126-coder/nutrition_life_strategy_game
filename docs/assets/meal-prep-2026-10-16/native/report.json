@@ -1,0 +1,18 @@
+{
+	"cases": [
+		{
+			"first_two_meal_energy": 51,
+			"last_dinner_is_fixture": true,
+			"raw_materials_charged_once": true,
+			"window": "(640, 960)"
+		},
+		{
+			"first_two_meal_energy": 51,
+			"last_dinner_is_fixture": true,
+			"raw_materials_charged_once": true,
+			"window": "(1280, 720)"
+		}
+	],
+	"errors": [],
+	"scope": "Two native window sizes. Declared first-breakfast plate; storage and confirmation use actual mouse events, next-meal stored cards are selected and reheated through native UI. Day-7 dinner is an explicit fixture. In-memory saves only; not a full seven-day UI playthrough."
+}
