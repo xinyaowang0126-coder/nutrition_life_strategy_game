@@ -1,6 +1,6 @@
 # 最新双篇Web试玩发布
 
-日期：2026-10-27。用户要求提交整个项目、推送GitHub并确保线上试玩可行。发布目标为现有仓库的`main`分支；GitHub Pages直接使用该分支根目录，根页面跳转`Play/`。
+日期：2026-10-27。用户要求提交整个项目、推送GitHub并确保线上试玩可行。发布目标为现有仓库的`main`分支；GitHub Actions审计并只发布试玩文件、根跳转页和版本指纹，根页面跳转`Play/`。
 
 ## 发布内容
 
@@ -17,6 +17,8 @@
 
 压缩设置说明：[Godot官方图片导入文档](https://docs.godotengine.org/en/stable/tutorials/assets_pipeline/importing_images.html)。单文件限制：[GitHub官方说明](https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-large-files-on-github)。
 
+完整提交约1.5 GiB，超过[Pages站点大小限制](https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits)。新增`pages.yml`使用稀疏检出，仅打包约127 MiB的Web依赖；CI复用项目配置／关键素材／插件隔离审计，并生成带部署提交及逐文件SHA-256的`release.json`。源码和项目材料完整保留在仓库，公开试玩路径保持不变。
+
 ## 提交前验证
 
 - 完整源码回归527/527、45套件、0失败／0跳过，主场景启动通过；[摘要](../assets/github-release-2026-10-27/verification.json)。
@@ -28,7 +30,7 @@
 
 ## 推送后核验方法
 
-1. 确认远端`main`等于本地提交，Pages构建的`commit`为该提交且状态`built`。
+1. 确认远端`main`等于本地提交，Actions部署任务的`head_sha`为该提交、状态`completed`且结论`success`，线上`release.json`也包含同一提交。
 2. 从正式Pages地址下载`Play/index.pck`，与文件清单逐字节SHA-256核对；检查HTML、JS、WASM与音频工作脚本均可访问。
 3. 用真实浏览器进入两个故事，实际选择并确认一餐，检查最新厨房／集市场景；刷新后从“继续”恢复，确认阶段、余额与记录没有重复结算，查看控制台错误。
 

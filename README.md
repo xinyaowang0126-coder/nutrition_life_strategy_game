@@ -40,7 +40,7 @@ https://xinyaowang0126-coder.github.io/nutrition_life_strategy_game/Play/
 
 根目录 `index.html` 会自动跳转到 `Play/`。
 
-GitHub Pages 直接发布 `main` 分支根目录，真正运行的是仓库内的 `Play/` Web 导出包。只推送 `life-strategy/` 源码不会改变线上游戏；发布前需要重新导出并提交 `Play/`：
+GitHub Actions从`main`分支发布试玩：`.github/workflows/pages.yml`审计`Play/`，仅上传试玩文件、根跳转页与`release.json`版本指纹。整个仓库含约1.5 GiB的源码、截图和汇报材料，不能直接作为Pages站点上传。只推送`life-strategy/`源码不会改变线上游戏；发布前需要重新导出并提交`Play/`：
 
 ```powershell
 .\tools\verify_project.ps1 -ExportWeb -ExportOutput .\Play
