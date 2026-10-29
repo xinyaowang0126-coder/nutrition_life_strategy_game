@@ -1,0 +1,31 @@
+{
+  "cases": [
+    {
+      "case": "intro",
+      "meals": 0,
+      "phase": "breakfast_source",
+      "shared_history": 0
+    },
+    {
+      "case": "guide",
+      "meals": 0,
+      "phase": "breakfast",
+      "shared_history": 0
+    },
+    {
+      "case": "invitation-reply",
+      "meals": 2,
+      "phase": "lunch_action",
+      "shared_history": 1
+    },
+    {
+      "case": "shared-dinner",
+      "meals": 3,
+      "phase": "dinner_action",
+      "shared_history": 2
+    }
+  ],
+  "errors": [],
+  "scope": "Four actual native day-5 routes from valid prior-day command saves: home/community shared dinner, cancelled invitation/own dinner, changed venue/missed invitation. Intro, recipe guide, actual meals/replies and summary use mouse/key input. Separate restore-only processes verify pending dialogue and draft recovery. Not a seven-day browser run or real phone.",
+  "window": "(390, 640)"
+}

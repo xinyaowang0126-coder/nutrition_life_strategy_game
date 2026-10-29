@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-29",
+  "browser": "Codex in-app browser",
+  "origin": "http://127.0.0.1:8768/index.html",
+  "viewports": [[1280,720],[390,640]],
+  "observations": [
+    "Real engine/PCK byte progress was visible at 45%, 28%, 38% and 35%; final thicker bar was captured at 38% desktop and 35% mobile.",
+    "Loading overlay was removed after the engine started and the illustrated title was rendered.",
+    "Title autoplay visibly reached student meal, Aunt Zhou songbook, student night and campus scenes during inspection.",
+    "Start opened character selection; selecting Aunt Zhou changed poster emphasis, room background and story details.",
+    "Brand icon had no opaque square in the loading and character-selection pages.",
+    "Mobile title and character selection fit the viewport with primary action visible.",
+    "Existing Aunt Zhou save displayed continue; actual continue restored day 1 sleep phase and rehearsal 8/70.",
+    "After reload, the title still showed the prior-save continue entry.",
+    "Final exported story-info dialog showed only Return to character selection; no start-over action was present, and Escape returned to the existing save entry.",
+    "Warning/error console log query was empty for the inspected page.",
+    "Temporary viewport override was reset; preview tab was marked as a deliverable."
+  ],
+  "scope": "Actual browser observations and canvas screenshots through cua_repl. Not physical-phone acceptance, multi-browser coverage, complete seven-day play, or storage failure/recovery validation."
+}

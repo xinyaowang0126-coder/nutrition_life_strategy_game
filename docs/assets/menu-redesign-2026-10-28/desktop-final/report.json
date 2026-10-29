@@ -1,0 +1,24 @@
+{
+	"cases": [
+		{
+			"case": "two-person flow",
+			"page": "characters",
+			"story": "choir_week"
+		},
+		{
+			"case": "ten-person layout fixture",
+			"count": 10,
+			"fixture_only": true,
+			"scroll": 2354,
+			"selected": "layout_character_9"
+		},
+		{
+			"case": "start selected story",
+			"day": 1,
+			"story": "choir_week"
+		}
+	],
+	"errors": [],
+	"scope": "Native mouse/keyboard title, person strips, story details, empty slots, Back/Esc, focus, ten-person layout-only fixture, then actual selected-story launch. Fixture people reuse existing art and are not production characters. Not physical-phone or browser refresh verification.",
+	"window": "(1280, 720)"
+}

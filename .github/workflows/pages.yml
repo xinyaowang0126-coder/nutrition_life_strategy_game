@@ -60,13 +60,30 @@ jobs:
         env:
           RELEASE_COMMIT: ${{ github.sha }}
         run: |
-          import hashlib, json, os, pathlib, shutil
+          import hashlib, json, os, pathlib, re, shutil
           output = pathlib.Path('_site')
           required = (
               'index.html', 'index.js', 'index.wasm', 'index.pck',
               'index.audio.worklet.js', 'index.audio.position.worklet.js',
               'index.png', 'index.icon.png', 'index.apple-touch-icon.png',
           )
+          html = pathlib.Path('Play/index.html').read_text(encoding='utf-8')
+          playlist = re.search(
+              r'/\* LIFE_SCENES_BEGIN \*/\s*const LIFE_SCENES\s*=\s*(\[.*?\]);\s*/\* LIFE_SCENES_END \*/',
+              html, re.S,
+          )
+          if playlist is None:
+              raise SystemExit('Playable loading-page scene playlist is missing')
+          scenes = json.loads(playlist.group(1))
+          if not isinstance(scenes, list) or not scenes:
+              raise SystemExit('Playable loading-page scene playlist is empty')
+          backgrounds = []
+          for scene in scenes:
+              name = scene.get('web_file', '') if isinstance(scene, dict) else ''
+              if not isinstance(name, str) or re.fullmatch(r'life-[a-z0-9-]+\.jpg', name) is None:
+                  raise SystemExit(f'Invalid loading-page background: {name!r}')
+              backgrounds.append(name)
+          required += tuple(dict.fromkeys(backgrounds))
           for name in required:
               path = pathlib.Path('Play', name)
               if not path.is_file() or path.is_symlink() or path.stat().st_size == 0:

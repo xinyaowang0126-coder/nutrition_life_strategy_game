@@ -1,0 +1,181 @@
+{
+  "cases": [
+    {
+      "case": "performed",
+      "outcome": {
+        "energy": 89,
+        "kind": "performed",
+        "progress": 93,
+        "reason": "实际选择参加汇演，完成后记入行动记录。",
+        "slots": 2,
+        "trigger": "perform"
+      },
+      "phase": "ending",
+      "review": {
+        "counts": {
+          "attempted_contexts": 3,
+          "counter_items": 0,
+          "days": 7,
+          "first_after_help": 1,
+          "first_correct": 1,
+          "first_wrong": 1,
+          "meals": 21,
+          "opening_discarded": 1,
+          "performances": 1,
+          "plans": 1,
+          "plans_used": 1,
+          "prepared_items": 4,
+          "rehearsals": 8,
+          "reheated_items": 2,
+          "retries": 2,
+          "shared": 1,
+          "skipped": 0
+        },
+        "highlights": [
+          {
+            "text": "实际记录7天，确认进餐21餐，跳过0餐。组成、份量和全天安排需要分开看。",
+            "title": "这一周的饭"
+          },
+          {
+            "text": "已实际丢弃开局前保存不当的熟食。",
+            "title": "开局那份隔夜菜"
+          },
+          {
+            "text": "3个情境有作答；首次独立正确1、首次独立错误1、帮助后首次1，重试2次。重试不覆盖首次记录，答对不等于已经学会。",
+            "title": "选餐与标签练习"
+          },
+          {
+            "text": "实际记录和老陈同桌1餐，邀约本身不计为已经一起吃。",
+            "title": "同桌的约定"
+          },
+          {
+            "text": "实际另留冷藏4样熟食，取用并再热2样；1个下一餐计划中，1个记录到熟食取用，其余按实际安排保留。",
+            "title": "备餐的后续"
+          }
+        ],
+        "next_step": "下次换一个菜单或标签，再核对实际份量和仍未知的项目。",
+        "outcome_text": "实际参加了社区合唱汇演。",
+        "version": 1
+      }
+    },
+    {
+      "case": "unready",
+      "outcome": {
+        "energy": 89,
+        "kind": "unready",
+        "progress": 0,
+        "reason": "离开晚饭后时段前：排练0/70。",
+        "slots": 2,
+        "trigger": "skip"
+      },
+      "phase": "ending",
+      "review": {
+        "counts": {
+          "attempted_contexts": 3,
+          "counter_items": 0,
+          "days": 7,
+          "first_after_help": 1,
+          "first_correct": 1,
+          "first_wrong": 1,
+          "meals": 21,
+          "opening_discarded": 1,
+          "performances": 0,
+          "plans": 1,
+          "plans_used": 1,
+          "prepared_items": 2,
+          "rehearsals": 0,
+          "reheated_items": 2,
+          "retries": 2,
+          "shared": 1,
+          "skipped": 0
+        },
+        "highlights": [
+          {
+            "text": "实际记录7天，确认进餐21餐，跳过0餐。组成、份量和全天安排需要分开看。",
+            "title": "这一周的饭"
+          },
+          {
+            "text": "已实际丢弃开局前保存不当的熟食。",
+            "title": "开局那份隔夜菜"
+          },
+          {
+            "text": "3个情境有作答；首次独立正确1、首次独立错误1、帮助后首次1，重试2次。重试不覆盖首次记录，答对不等于已经学会。",
+            "title": "选餐与标签练习"
+          },
+          {
+            "text": "实际记录和老陈同桌1餐，邀约本身不计为已经一起吃。",
+            "title": "同桌的约定"
+          },
+          {
+            "text": "实际另留冷藏2样熟食，取用并再热2样；1个下一餐计划中，1个记录到熟食取用，其余按实际安排保留。",
+            "title": "备餐的后续"
+          }
+        ],
+        "next_step": "下次换一个菜单或标签，再核对实际份量和仍未知的项目。",
+        "outcome_text": "离开晚饭后时段前：排练0/70。",
+        "version": 1
+      }
+    },
+    {
+      "case": "other_choice",
+      "outcome": {
+        "energy": 89,
+        "kind": "other_choice",
+        "progress": 93,
+        "reason": "离开晚饭后时段前，参演条件已满足；这次选择了其他安排。",
+        "slots": 2,
+        "trigger": "nap"
+      },
+      "phase": "ending",
+      "review": {
+        "counts": {
+          "attempted_contexts": 3,
+          "counter_items": 0,
+          "days": 7,
+          "first_after_help": 1,
+          "first_correct": 1,
+          "first_wrong": 1,
+          "meals": 21,
+          "opening_discarded": 1,
+          "performances": 0,
+          "plans": 1,
+          "plans_used": 1,
+          "prepared_items": 2,
+          "rehearsals": 8,
+          "reheated_items": 2,
+          "retries": 2,
+          "shared": 1,
+          "skipped": 0
+        },
+        "highlights": [
+          {
+            "text": "实际记录7天，确认进餐21餐，跳过0餐。组成、份量和全天安排需要分开看。",
+            "title": "这一周的饭"
+          },
+          {
+            "text": "已实际丢弃开局前保存不当的熟食。",
+            "title": "开局那份隔夜菜"
+          },
+          {
+            "text": "3个情境有作答；首次独立正确1、首次独立错误1、帮助后首次1，重试2次。重试不覆盖首次记录，答对不等于已经学会。",
+            "title": "选餐与标签练习"
+          },
+          {
+            "text": "实际记录和老陈同桌1餐，邀约本身不计为已经一起吃。",
+            "title": "同桌的约定"
+          },
+          {
+            "text": "实际另留冷藏2样熟食，取用并再热2样；1个下一餐计划中，1个记录到熟食取用，其余按实际安排保留。",
+            "title": "备餐的后续"
+          }
+        ],
+        "next_step": "下次换一个菜单或标签，再核对实际份量和仍未知的项目。",
+        "outcome_text": "离开晚饭后时段前，参演条件已满足；这次选择了其他安排。",
+        "version": 1
+      }
+    }
+  ],
+  "errors": [],
+  "scope": "Three native mouse/key day-7 routes from valid command-generated prior days: real performance, insufficient rehearsal, ready but choosing another arrangement. Prior days include scripted disposal, practice, shared meal and cold preparation, not human learning or a continuous seven-day UI run. Five separate-process JSON restores; no browser or physical-phone claim.",
+  "window": "(390, 640)"
+}

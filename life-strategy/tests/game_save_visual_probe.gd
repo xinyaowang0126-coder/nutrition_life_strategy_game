@@ -14,6 +14,7 @@ func _run() -> void:
 	current_scene = game
 	await settle()
 	await click(game.new_day_popup.continue_button)
+	await finish_household_opening(game)
 	await source_tool(game, "kitchen")
 	await click(game._workspace.find_child("before_week_greens", true, false))
 	await click(game._workspace.close_button)
@@ -52,15 +53,14 @@ func _run() -> void:
 	await workspace_click(game, game._workspace.find_child("menu", true, false))
 	await settle()
 	var menu := current_scene
-	var card: Control = menu._grid.get_node("choir_week")
-	var scroll: ScrollContainer = menu._margin.get_child(0)
-	scroll.ensure_control_visible(card)
+	await click(menu._title_start)
+	await click(menu._strips["zhou_huilan_66"])
 	await settle()
 	await save("07-continue-story")
-	await click(card.find_child("RestartStory", true, false))
+	await click(menu._restart)
 	await save("08-restart-confirmation")
 	await click(menu._dialog._buttons.get_node("cancel"))
-	await click(card.find_child("ChooseStory", true, false))
+	await click(menu._main_start)
 	await settle()
 	game = current_scene as GameRootV2
 	check(game.phase == "breakfast_action", "Fresh scene replayed opening")

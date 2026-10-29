@@ -26,6 +26,7 @@ func _run() -> void:
 		return
 	await save("03-new-day")
 	await click(game.new_day_popup.continue_button)
+	await finish_household_opening(game)
 	check(not is_instance_valid(game._workspace), "Kitchen must not open automatically before a destination is chosen")
 	await source_tool(game, "kitchen")
 	await save("04-unsafe-leftovers")

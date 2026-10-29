@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>$GODOT_PROJECT_NAME</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;background:#f5ecd9;color:#4b3628;font-family:system-ui,"Microsoft YaHei",sans-serif;overflow:hidden}
+#canvas{display:block;width:100%;height:100%;outline:none;touch-action:none}
+#loading{position:fixed;inset:0;overflow:hidden;background:#eee1c9;z-index:5}
+.scene{position:absolute;max-width:none;transition:opacity .8s ease;opacity:0}.scene.front{opacity:1}
+.wash{position:absolute;inset:0;background:linear-gradient(90deg,rgba(245,236,217,.96),rgba(245,236,217,.85) 38%,rgba(245,236,217,.12) 65%,transparent)}
+.loader-copy{position:absolute;left:8%;top:50%;transform:translateY(-35%);width:min(480px,42vw)}
+.brand{width:64px;height:64px;border-radius:14px;box-shadow:none}
+h1{font-size:clamp(38px,5vw,72px);letter-spacing:.04em;margin:14px 0 16px;font-weight:800}
+#status{font-size:18px;line-height:1.6;margin:0 0 18px}
+progress{display:block;appearance:none;width:100%;height:14px;accent-color:#a95132;background:#d6bd98;border:1px solid #b49370;border-radius:8px;overflow:hidden}
+progress::-webkit-progress-bar{background:#d6bd98}progress::-webkit-progress-value{background:#a95132;border-radius:7px}progress::-moz-progress-bar{background:#a95132;border-radius:7px}
+.scene-controls{position:absolute;left:8%;right:8%;bottom:max(5%,env(safe-area-inset-bottom));display:flex;align-items:center;gap:12px;font-size:14px}
+#caption{margin-right:auto;padding:0;line-height:1.5;font-size:12px;opacity:.75}
+button{font:inherit;min-height:44px;padding:10px 16px;border:1px solid #bda482;border-radius:9px;background:#f5ecd9f0;color:#4b3628;cursor:pointer}
+button:focus-visible{outline:3px solid #52664d;outline-offset:3px}button:hover{background:#eed5b6}#pause{background:transparent;border-color:transparent;font-size:12px;padding:8px;color:#6f5e4b}#pause:hover{text-decoration:underline}
+#failure{display:none;line-height:1.6;background:#f5ecd9ed;padding:16px;border:1px solid #a95132;border-radius:10px;margin-top:16px}#failure button{margin-top:10px}
+@media(max-aspect-ratio:4/5){.wash{background:linear-gradient(180deg,transparent 22%,rgba(245,236,217,.3) 42%,rgba(245,236,217,.96) 66%,#f5ecd9)}.loader-copy{left:7%;right:7%;top:auto;bottom:20%;transform:none;width:auto}h1{font-size:42px}.brand{width:52px;height:52px}#status{font-size:16px}.scene-controls{left:7%;right:7%;flex-wrap:wrap;gap:8px}#caption{width:100%;margin:0;padding:4px 0;background:none;font-size:13px}.scene-controls button{flex:1}}
+@media(prefers-reduced-motion:reduce){.scene{transition:none}}
+</style>
+$GODOT_HEAD_INCLUDE
+</head>
+<body>
+<canvas id="canvas" tabindex="0">浏览器暂不支持此试玩画布。</canvas>
+<section id="loading" aria-label="正在载入好好吃饭">
+ <img class="scene" id="scene-a" alt=""><img class="scene" id="scene-b" alt=""><div class="wash"></div>
+ <div class="loader-copy"><img class="brand" src="$GODOT_SPLASH" alt="好好吃饭图标"><h1>好好吃饭</h1><p id="status" role="status" aria-live="polite">正在准备这一周的生活…</p><progress id="progress" aria-label="游戏资源加载进度"></progress><div id="failure" role="alert"></div></div>
+ <div class="scene-controls"><span id="caption"></span><button id="pause" type="button" aria-pressed="false">暂停轮换</button></div>
+</section>
+<noscript>请启用JavaScript后打开试玩。</noscript>
+<script>
+/* LIFE_SCENES_BEGIN */
+const LIFE_SCENES = [{"id":"student-meal","title":"学生 · 午后的一餐","web_file":"life-student-meal.jpg","mobile_focus_x":0.73},{"id":"zhou-songbook","title":"周阿姨 · 翻一翻歌谱","web_file":"life-zhou-songbook.jpg","mobile_focus_x":0.74},{"id":"student-campus","title":"学生 · 校园路上","web_file":"life-student-campus.jpg","mobile_focus_x":0.67},{"id":"zhou-market","title":"周阿姨 · 逛一逛集市","web_file":"life-zhou-market.jpg","mobile_focus_x":0.68},{"id":"student-night","title":"学生 · 夜间的书桌","web_file":"life-student-night.jpg","mobile_focus_x":0.74},{"id":"zhou-balcony","title":"周阿姨 · 阳台的晨光","web_file":"life-zhou-balcony.jpg","mobile_focus_x":0.72}];
+/* LIFE_SCENES_END */
+const lifeLayers=[document.getElementById('scene-a'),document.getElementById('scene-b')];
+let lifeIndex=0,lifeFront=0,lifePaused=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function placeLifeImage(img,scene){if(!img.naturalWidth)return;const w=innerWidth,h=innerHeight,s=Math.max(w/img.naturalWidth,h/img.naturalHeight),sw=img.naturalWidth*s,sh=img.naturalHeight*s,mobile=h>w*1.18,fx=mobile?scene.mobile_focus_x:.5;Object.assign(img.style,{width:sw+'px',height:sh+'px',left:Math.max(w-sw,Math.min(0,w*.5-sw*fx))+'px',top:Math.max(h-sh,Math.min(0,h*.5-sh*.5))+'px'})}
+function showLifeScene(index){if(!LIFE_SCENES.length)return;lifeIndex=(index+LIFE_SCENES.length)%LIFE_SCENES.length;const scene=LIFE_SCENES[lifeIndex],old=lifeLayers[lifeFront];lifeFront=1-lifeFront;const img=lifeLayers[lifeFront];img.classList.remove('front');img.onload=()=>{placeLifeImage(img,scene);img.classList.add('front');old.classList.remove('front')};img.src=scene.web_file;document.getElementById('caption').textContent=scene.title+' · '+(lifeIndex+1)+' / '+LIFE_SCENES.length}
+function setLifePaused(value){lifePaused=value;const b=document.getElementById('pause');b.textContent=value?'继续轮换':'暂停轮换';b.setAttribute('aria-pressed',String(value))}
+document.getElementById('pause').onclick=()=>setLifePaused(!lifePaused);
+addEventListener('resize',()=>lifeLayers.forEach(img=>{const scene=LIFE_SCENES.find(s=>img.src.endsWith(s.web_file));if(scene)placeLifeImage(img,scene)}));
+setLifePaused(lifePaused);showLifeScene(0);const lifeTimer=setInterval(()=>{if(!lifePaused&&!document.hidden)showLifeScene(lifeIndex+1)},10000);
+</script>
+<script src="$GODOT_URL"></script>
+<script>
+const GODOT_CONFIG=$GODOT_CONFIG;
+const GODOT_THREADS_ENABLED=$GODOT_THREADS_ENABLED;
+const engine=new Engine(GODOT_CONFIG);
+const statusText=document.getElementById('status'),progress=document.getElementById('progress');
+function loadingFailure(error){console.error(error);statusText.textContent='这一周暂时没能载入。';const notice=document.getElementById('failure');notice.style.display='block';notice.textContent='请检查网络连接后重试；已有存档不会因此删除。';const retry=document.createElement('button');retry.textContent='重新载入';retry.onclick=()=>location.reload();notice.appendChild(retry)}
+const missing=Engine.getMissingFeatures({threads:GODOT_THREADS_ENABLED});
+if(missing.length){loadingFailure(new Error('Required browser features unavailable: '+missing.join(', ')))}
+else{engine.startGame({onProgress(current,total){if(current>0&&total>0){progress.max=total;progress.value=current;statusText.textContent='正在载入生活场景与游戏资源… '+Math.floor(current/total*100)+'%'}else{progress.removeAttribute('value');progress.removeAttribute('max');statusText.textContent='正在准备这一周的生活…'}}}).then(()=>{clearInterval(lifeTimer);document.getElementById('loading').remove();document.getElementById('canvas').focus()},loadingFailure)}
+</script>
+</body></html>

@@ -9,6 +9,11 @@ const Recovery := preload("res://scripts/systems/RecoveryStateService.gd")
 const Archive := preload("res://scripts/health/MealHealthArchive.gd")
 const Preferences := preload("res://scripts/systems/FoodPreferenceService.gd")
 const Facts := preload("res://scripts/stories/HouseholdMealFacts.gd")
+const HouseholdLearning := preload("res://scripts/stories/HouseholdLearningFlow.gd")
+const MealLearning := preload("res://scripts/stories/HouseholdMealLearning.gd")
+const DayFive := preload("res://scripts/stories/HouseholdDayFive.gd")
+const Preparation := preload("res://scripts/stories/HouseholdPreparation.gd")
+const Finale := preload("res://scripts/stories/HouseholdFinale.gd")
 const VERSION := 1
 const KIND := "nutrition_life_game_save"
 const MAX_BYTES := 4194304
@@ -30,6 +35,11 @@ const FIELD_TYPES := {
 	"_recovery_before_sleep": TYPE_DICTIONARY, "_recovery_sleep_snapshot": TYPE_DICTIONARY,
 	"_day_settlement_effects": TYPE_ARRAY, "_day_settled": TYPE_BOOL,
 	"performed": TYPE_BOOL, "_lesson_seen": TYPE_DICTIONARY,
+	"household_learning": TYPE_DICTIONARY,
+	"household_lessons": TYPE_DICTIONARY,
+	"household_day_five": TYPE_DICTIONARY,
+	"household_preparation": TYPE_DICTIONARY,
+	"household_finale": TYPE_DICTIONARY,
 }
 
 
@@ -89,6 +99,28 @@ static func validate(envelope: Variant) -> Dictionary:
 	var p: Variant = envelope.get("payload")
 	if not p is Dictionary:
 		return failure("invalid_payload", "存档缺少游戏进度。")
+	# This additive field preserves v1 saves. Missing progress means the old
+	# build did not record the scene; never invent a choice or replay it.
+	if not p.has("household_learning"):
+		envelope = envelope.duplicate(true)
+		p = envelope["payload"]
+		p["household_learning"] = HouseholdLearning.legacy_state() if story["mechanics"] == "household" else {}
+	if not p.has("household_lessons"):
+		envelope = envelope.duplicate(true)
+		p = envelope["payload"]
+		p["household_lessons"] = MealLearning.initial_state() if story["mechanics"] == "household" else {}
+	if not p.has("household_day_five"):
+		envelope = envelope.duplicate(true)
+		p = envelope["payload"]
+		p["household_day_five"] = DayFive.initial_state(true) if story["mechanics"] == "household" else {}
+	if not p.has("household_preparation"):
+		envelope = envelope.duplicate(true)
+		p = envelope["payload"]
+		p["household_preparation"] = Preparation.initial_state(true) if story["mechanics"] == "household" else {}
+	if not p.has("household_finale"):
+		envelope = envelope.duplicate(true)
+		p = envelope["payload"]
+		p["household_finale"] = Finale.initial_state(true) if story["mechanics"] == "household" else {}
 	for key in FIELD_TYPES:
 		if typeof(p.get(key)) != FIELD_TYPES[key]:
 			return failure("invalid_field", "存档字段不完整：" + key)
@@ -102,6 +134,8 @@ static func validate(envelope: Variant) -> Dictionary:
 	if not integer_between(p["day"], 1, 7) or not PHASES.has(p["phase"]) or p["_started_day"] != p["day"]:
 		return failure("invalid_phase", "存档的日期或阶段不一致。")
 	var elder: bool = story["mechanics"] == "household"
+	if not HouseholdLearning.valid(p["household_learning"], elder):
+		return failure("invalid_household_learning", "存档的生活情节进度无效。")
 	var foods: Dictionary = Catalog.content(story, "foods") if elder else Cards.foods
 	var sources: Dictionary = Catalog.content(story, "sources") if elder else Cards.meal_sources
 	var actions: Dictionary = Catalog.content(story, "actions") if elder else Cards.actions
@@ -130,7 +164,7 @@ static func validate(envelope: Variant) -> Dictionary:
 			return failure("invalid_list", "存档的安排记录无效。")
 	if not integer_between(p["actions_used_today"], 0, 3) or not integer_between(p["drink_water_used"], 0, 2) or not integer_between(p["low_stability_days"], 0, 7):
 		return failure("invalid_limits", "存档的行动次数无效。")
-	if not meal_records_valid(p["today_meal_records"], foods, sources) or p["today_action_records"].size() > 16 or p["today_period_records"].size() > 3:
+	if not meal_records_valid(p["today_meal_records"], foods, sources, p["day"]) or p["today_action_records"].size() > 16 or p["today_period_records"].size() > 3:
 		return failure("invalid_records", "存档的当日记录无效。")
 	for row in p["today_action_records"]:
 		if not row is Dictionary or not actions.has(row.get("id")) or not row.get("stat_delta") is Dictionary or not row.get("stock_added") is Dictionary:
@@ -139,7 +173,7 @@ static func validate(envelope: Variant) -> Dictionary:
 		return failure("invalid_history", "存档的周记录与日结不一致。")
 	for i in range(p["run_history"].size()):
 		var row: Variant = p["run_history"][i]
-		if not row is Dictionary or row.get("day") != i + 1 or not meal_records_valid(row.get("meals"), foods, sources) or not row.get("actions") is Array or not Recovery.validate(row.get("recovery_state"))["valid"]:
+		if not row is Dictionary or row.get("day") != i + 1 or not meal_records_valid(row.get("meals"), foods, sources, i + 1) or not row.get("actions") is Array or not Recovery.validate(row.get("recovery_state"))["valid"]:
 			return failure("invalid_history", "存档的周记录不完整。")
 	for key in ["pending_recovery_state", "current_recovery_state", "_recovery_display_record"]:
 		if not Recovery.validate(p[key])["valid"]:
@@ -156,6 +190,24 @@ static func validate(envelope: Variant) -> Dictionary:
 		return failure("invalid_random_state", "存档的菜单随机状态无效。")
 	if not kitchen_valid(p.get("kitchen"), foods, elder) or not shared_valid(p.get("shared_meal"), p["day"], elder):
 		return failure("invalid_household", "存档的厨房或共同进餐记录无效。")
+	if elder and not HouseholdLearning.matches_save(p["household_learning"], p["kitchen"], p["day"], p["phase"]):
+		return failure("invalid_household_learning", "生活情节与实际处置记录不一致。")
+	if not MealLearning.valid_state(p["household_lessons"], elder, p["day"], p["phase"], p["current_source_id"], p["selected_food_ids"], foods, sources) or (not p["household_lessons"].get("active", {}).is_empty() and p["new_day_pending"]):
+		return failure("invalid_household_lessons", "练习记录或返回位置不完整。")
+	if not DayFive.valid_state(p["household_day_five"], elder, p, foods):
+		return failure("invalid_household_day_five", "今天的做法、回应或返回位置不一致。")
+	if not Preparation.valid(p["household_preparation"], elder, p, foods):
+		return failure("invalid_household_preparation", "备餐计划、取用记录或返回位置不一致。")
+	if not Finale.valid(p["household_finale"], elder, p, foods, actions, int(story["goal_target"])):
+		return failure("invalid_household_finale", "演前安排、实际参演或本周回顾不一致。")
+	var finale_open: bool = not p["household_finale"].get("active", {}).is_empty() or p["household_finale"].get("pending", false) or p["household_finale"].get("intro") == "details"
+	if finale_open and (not p["household_lessons"].get("active", {}).is_empty() or not p["household_day_five"].get("active", {}).is_empty() or p["household_day_five"].get("pending", "") != "" or p["household_day_five"].get("intro") == "details" or not p["household_preparation"].get("active", {}).is_empty() or p["household_preparation"].get("pending", "") != "" or p["household_preparation"].get("intro") == "details"):
+		return failure("invalid_household_finale", "同时存在两份未关闭的安排。")
+	var preparation_open: bool = not p["household_preparation"].get("active", {}).is_empty() or p["household_preparation"].get("pending", "") != "" or p["household_preparation"].get("intro") == "details"
+	if preparation_open and (not p["household_lessons"].get("active", {}).is_empty() or not p["household_day_five"].get("active", {}).is_empty() or p["household_day_five"].get("pending", "") != "" or p["household_day_five"].get("intro") == "details"):
+		return failure("invalid_household_preparation", "同时存在两份未关闭的安排。")
+	if not p["household_lessons"].get("active", {}).is_empty() and (not p["household_day_five"].get("active", {}).is_empty() or p["household_day_five"].get("pending", "") != "" or p["household_day_five"].get("intro") == "details"):
+		return failure("invalid_household_day_five", "同时存在两份未关闭的安排。")
 	var archive := Archive.new()
 	if not archive.load_data(p.get("health_archive"))["ok"]:
 		return failure("invalid_archive", "存档的冻结资料无效。")
@@ -174,7 +226,7 @@ static func state_valid(state: Dictionary, story: Dictionary) -> bool:
 	return state.get("goal_target", state.get("study_target")) == story["goal_target"]
 
 
-static func meal_records_valid(rows: Variant, foods: Dictionary, sources: Dictionary) -> bool:
+static func meal_records_valid(rows: Variant, foods: Dictionary, sources: Dictionary, day: int = 0) -> bool:
 	if not rows is Array or rows.size() > 3:
 		return false
 	var phases := {}
@@ -190,6 +242,10 @@ static func meal_records_valid(rows: Variant, foods: Dictionary, sources: Dictio
 			return false
 		if row.has("recipe_facts") and (not row["recipe_facts"] is Dictionary or not Facts.valid(row["recipe_facts"])):
 			return false
+		if row.has("learning_facts"):
+			var c: Variant = row["learning_facts"]
+			if not MealLearning.valid_context(c, foods, sources) or c["scope"] != "confirmed" or c["food_ids"] != row["food_ids"] or c["food_names"] != row["food_names"] or c["meal"] != row["phase"] or c["source"] != row["source_id"] or c["recipe_facts"] != row.get("recipe_facts", {}): return false
+		if row.has("day_five_experience") and not DayFive.valid_experience(row["day_five_experience"], row, day): return false
 	return true
 
 

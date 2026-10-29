@@ -27,6 +27,7 @@ func _run() -> void:
 		check(game._mobile_mode == (resolution.y > resolution.x * 1.18), prefix + "wrong responsive profile")
 		game.new_day_popup.continue_button.grab_focus()
 		await key(KEY_ENTER)
+		await finish_household_opening(game)
 		check(game.phase == "breakfast_source" and not is_instance_valid(game._workspace), prefix + "day entry opened a worktop")
 		check(not game._new_day_pending, prefix + "new day did not continue")
 		if game._new_day_pending: break

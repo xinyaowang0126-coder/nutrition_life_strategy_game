@@ -1,220 +1,64 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
-		<title>好好吃饭</title>
-		<style>
-html, body, #canvas {
-	margin: 0;
-	padding: 0;
-	border: 0;
-}
-
-body {
-	color: white;
-	background-color: black;
-	overflow: hidden;
-	touch-action: none;
-}
-
-#canvas {
-	display: block;
-}
-
-#canvas:focus {
-	outline: none;
-}
-
-#status, #status-splash, #status-progress {
-	position: absolute;
-	left: 0;
-	right: 0;
-}
-
-#status, #status-splash {
-	top: 0;
-	bottom: 0;
-}
-
-#status {
-	background-color: #242424;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	visibility: hidden;
-}
-
-#status-splash {
-	max-height: 100%;
-	max-width: 100%;
-	margin: auto;
-}
-
-#status-splash.show-image--false {
-	display: none;
-}
-
-#status-splash.fullsize--true {
-	height: 100%;
-	width: 100%;
-	object-fit: contain;
-}
-
-#status-splash.use-filter--false {
-	image-rendering: pixelated;
-}
-
-#status-progress, #status-notice {
-	display: none;
-}
-
-#status-progress {
-	bottom: 10%;
-	width: 50%;
-	margin: 0 auto;
-}
-
-#status-notice {
-	background-color: #5b3943;
-	border-radius: 0.5rem;
-	border: 1px solid #9b3943;
-	color: #e0e0e0;
-	font-family: 'Noto Sans', 'Droid Sans', Arial, sans-serif;
-	line-height: 1.3;
-	margin: 0 2rem;
-	overflow: hidden;
-	padding: 1rem;
-	text-align: center;
-	z-index: 1;
-}
-		</style>
-		<link id="-gd-engine-icon" rel="icon" type="image/png" href="index.icon.png" />
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>好好吃饭</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;background:#f5ecd9;color:#4b3628;font-family:system-ui,"Microsoft YaHei",sans-serif;overflow:hidden}
+#canvas{display:block;width:100%;height:100%;outline:none;touch-action:none}
+#loading{position:fixed;inset:0;overflow:hidden;background:#eee1c9;z-index:5}
+.scene{position:absolute;max-width:none;transition:opacity .8s ease;opacity:0}.scene.front{opacity:1}
+.wash{position:absolute;inset:0;background:linear-gradient(90deg,rgba(245,236,217,.96),rgba(245,236,217,.85) 38%,rgba(245,236,217,.12) 65%,transparent)}
+.loader-copy{position:absolute;left:8%;top:50%;transform:translateY(-35%);width:min(480px,42vw)}
+.brand{width:64px;height:64px;border-radius:14px;box-shadow:none}
+h1{font-size:clamp(38px,5vw,72px);letter-spacing:.04em;margin:14px 0 16px;font-weight:800}
+#status{font-size:18px;line-height:1.6;margin:0 0 18px}
+progress{display:block;appearance:none;width:100%;height:14px;accent-color:#a95132;background:#d6bd98;border:1px solid #b49370;border-radius:8px;overflow:hidden}
+progress::-webkit-progress-bar{background:#d6bd98}progress::-webkit-progress-value{background:#a95132;border-radius:7px}progress::-moz-progress-bar{background:#a95132;border-radius:7px}
+.scene-controls{position:absolute;left:8%;right:8%;bottom:max(5%,env(safe-area-inset-bottom));display:flex;align-items:center;gap:12px;font-size:14px}
+#caption{margin-right:auto;padding:0;line-height:1.5;font-size:12px;opacity:.75}
+button{font:inherit;min-height:44px;padding:10px 16px;border:1px solid #bda482;border-radius:9px;background:#f5ecd9f0;color:#4b3628;cursor:pointer}
+button:focus-visible{outline:3px solid #52664d;outline-offset:3px}button:hover{background:#eed5b6}#pause{background:transparent;border-color:transparent;font-size:12px;padding:8px;color:#6f5e4b}#pause:hover{text-decoration:underline}
+#failure{display:none;line-height:1.6;background:#f5ecd9ed;padding:16px;border:1px solid #a95132;border-radius:10px;margin-top:16px}#failure button{margin-top:10px}
+@media(max-aspect-ratio:4/5){.wash{background:linear-gradient(180deg,transparent 22%,rgba(245,236,217,.3) 42%,rgba(245,236,217,.96) 66%,#f5ecd9)}.loader-copy{left:7%;right:7%;top:auto;bottom:20%;transform:none;width:auto}h1{font-size:42px}.brand{width:52px;height:52px}#status{font-size:16px}.scene-controls{left:7%;right:7%;flex-wrap:wrap;gap:8px}#caption{width:100%;margin:0;padding:4px 0;background:none;font-size:13px}.scene-controls button{flex:1}}
+@media(prefers-reduced-motion:reduce){.scene{transition:none}}
+</style>
+<link id="-gd-engine-icon" rel="icon" type="image/png" href="index.icon.png" />
 <link rel="apple-touch-icon" href="index.apple-touch-icon.png"/>
 
-	</head>
-	<body>
-		<canvas id="canvas">
-			Your browser does not support the canvas tag.
-		</canvas>
-
-		<noscript>
-			Your browser does not support JavaScript.
-		</noscript>
-
-		<div id="status">
-			<img id="status-splash" class="show-image--true fullsize--true use-filter--true" src="index.png" alt="">
-			<progress id="status-progress"></progress>
-			<div id="status-notice"></div>
-		</div>
-
-		<script src="index.js"></script>
-		<script>
-const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":false,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":93119024,"index.wasm":39514754},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
-const GODOT_THREADS_ENABLED = false;
-const engine = new Engine(GODOT_CONFIG);
-
-(function () {
-	const statusOverlay = document.getElementById('status');
-	const statusProgress = document.getElementById('status-progress');
-	const statusNotice = document.getElementById('status-notice');
-
-	let initializing = true;
-	let statusMode = '';
-
-	function setStatusMode(mode) {
-		if (statusMode === mode || !initializing) {
-			return;
-		}
-		if (mode === 'hidden') {
-			statusOverlay.remove();
-			initializing = false;
-			return;
-		}
-		statusOverlay.style.visibility = 'visible';
-		statusProgress.style.display = mode === 'progress' ? 'block' : 'none';
-		statusNotice.style.display = mode === 'notice' ? 'block' : 'none';
-		statusMode = mode;
-	}
-
-	function setStatusNotice(text) {
-		while (statusNotice.lastChild) {
-			statusNotice.removeChild(statusNotice.lastChild);
-		}
-		const lines = text.split('\n');
-		lines.forEach((line) => {
-			statusNotice.appendChild(document.createTextNode(line));
-			statusNotice.appendChild(document.createElement('br'));
-		});
-	}
-
-	function displayFailureNotice(err) {
-		console.error(err);
-		if (err instanceof Error) {
-			setStatusNotice(err.message);
-		} else if (typeof err === 'string') {
-			setStatusNotice(err);
-		} else {
-			setStatusNotice('An unknown error occurred.');
-		}
-		setStatusMode('notice');
-		initializing = false;
-	}
-
-	const missing = Engine.getMissingFeatures({
-		threads: GODOT_THREADS_ENABLED,
-	});
-
-	if (missing.length !== 0) {
-		if (GODOT_CONFIG['serviceWorker'] && GODOT_CONFIG['ensureCrossOriginIsolationHeaders'] && 'serviceWorker' in navigator) {
-			let serviceWorkerRegistrationPromise;
-			try {
-				serviceWorkerRegistrationPromise = navigator.serviceWorker.getRegistration();
-			} catch (err) {
-				serviceWorkerRegistrationPromise = Promise.reject(new Error('Service worker registration failed.'));
-			}
-			// There's a chance that installing the service worker would fix the issue
-			Promise.race([
-				serviceWorkerRegistrationPromise.then((registration) => {
-					if (registration != null) {
-						return Promise.reject(new Error('Service worker already exists.'));
-					}
-					return registration;
-				}).then(() => engine.installServiceWorker()),
-				// For some reason, `getRegistration()` can stall
-				new Promise((resolve) => {
-					setTimeout(() => resolve(), 2000);
-				}),
-			]).then(() => {
-				// Reload if there was no error.
-				window.location.reload();
-			}).catch((err) => {
-				console.error('Error while registering service worker:', err);
-			});
-		} else {
-			// Display the message as usual
-			const missingMsg = 'Error\nThe following features required to run Godot projects on the Web are missing:\n';
-			displayFailureNotice(missingMsg + missing.join('\n'));
-		}
-	} else {
-		setStatusMode('progress');
-		engine.startGame({
-			'onProgress': function (current, total) {
-				if (current > 0 && total > 0) {
-					statusProgress.value = current;
-					statusProgress.max = total;
-				} else {
-					statusProgress.removeAttribute('value');
-					statusProgress.removeAttribute('max');
-				}
-			},
-		}).then(() => {
-			setStatusMode('hidden');
-		}, displayFailureNotice);
-	}
-}());
-		</script>
-	</body>
-</html>
+</head>
+<body>
+<canvas id="canvas" tabindex="0">浏览器暂不支持此试玩画布。</canvas>
+<section id="loading" aria-label="正在载入好好吃饭">
+ <img class="scene" id="scene-a" alt=""><img class="scene" id="scene-b" alt=""><div class="wash"></div>
+ <div class="loader-copy"><img class="brand" src="index.png" alt="好好吃饭图标"><h1>好好吃饭</h1><p id="status" role="status" aria-live="polite">正在准备这一周的生活…</p><progress id="progress" aria-label="游戏资源加载进度"></progress><div id="failure" role="alert"></div></div>
+ <div class="scene-controls"><span id="caption"></span><button id="pause" type="button" aria-pressed="false">暂停轮换</button></div>
+</section>
+<noscript>请启用JavaScript后打开试玩。</noscript>
+<script>
+/* LIFE_SCENES_BEGIN */
+const LIFE_SCENES = [{"id":"student-meal","mobile_focus_x":0.73,"title":"学生 · 午后的一餐","web_file":"life-student-meal.jpg"},{"id":"zhou-songbook","mobile_focus_x":0.74,"title":"周阿姨 · 翻一翻歌谱","web_file":"life-zhou-songbook.jpg"},{"id":"student-campus","mobile_focus_x":0.67,"title":"学生 · 校园路上","web_file":"life-student-campus.jpg"},{"id":"zhou-market","mobile_focus_x":0.68,"title":"周阿姨 · 逛一逛集市","web_file":"life-zhou-market.jpg"},{"id":"student-night","mobile_focus_x":0.74,"title":"学生 · 夜间的书桌","web_file":"life-student-night.jpg"},{"id":"zhou-balcony","mobile_focus_x":0.72,"title":"周阿姨 · 阳台的晨光","web_file":"life-zhou-balcony.jpg"}];
+/* LIFE_SCENES_END */
+const lifeLayers=[document.getElementById('scene-a'),document.getElementById('scene-b')];
+let lifeIndex=0,lifeFront=0,lifePaused=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function placeLifeImage(img,scene){if(!img.naturalWidth)return;const w=innerWidth,h=innerHeight,s=Math.max(w/img.naturalWidth,h/img.naturalHeight),sw=img.naturalWidth*s,sh=img.naturalHeight*s,mobile=h>w*1.18,fx=mobile?scene.mobile_focus_x:.5;Object.assign(img.style,{width:sw+'px',height:sh+'px',left:Math.max(w-sw,Math.min(0,w*.5-sw*fx))+'px',top:Math.max(h-sh,Math.min(0,h*.5-sh*.5))+'px'})}
+function showLifeScene(index){if(!LIFE_SCENES.length)return;lifeIndex=(index+LIFE_SCENES.length)%LIFE_SCENES.length;const scene=LIFE_SCENES[lifeIndex],old=lifeLayers[lifeFront];lifeFront=1-lifeFront;const img=lifeLayers[lifeFront];img.classList.remove('front');img.onload=()=>{placeLifeImage(img,scene);img.classList.add('front');old.classList.remove('front')};img.src=scene.web_file;document.getElementById('caption').textContent=scene.title+' · '+(lifeIndex+1)+' / '+LIFE_SCENES.length}
+function setLifePaused(value){lifePaused=value;const b=document.getElementById('pause');b.textContent=value?'继续轮换':'暂停轮换';b.setAttribute('aria-pressed',String(value))}
+document.getElementById('pause').onclick=()=>setLifePaused(!lifePaused);
+addEventListener('resize',()=>lifeLayers.forEach(img=>{const scene=LIFE_SCENES.find(s=>img.src.endsWith(s.web_file));if(scene)placeLifeImage(img,scene)}));
+setLifePaused(lifePaused);showLifeScene(0);const lifeTimer=setInterval(()=>{if(!lifePaused&&!document.hidden)showLifeScene(lifeIndex+1)},10000);
+</script>
+<script src="index.js"></script>
+<script>
+const GODOT_CONFIG={"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":false,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":96295788,"index.wasm":39514754},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
+const GODOT_THREADS_ENABLED=false;
+const engine=new Engine(GODOT_CONFIG);
+const statusText=document.getElementById('status'),progress=document.getElementById('progress');
+function loadingFailure(error){console.error(error);statusText.textContent='这一周暂时没能载入。';const notice=document.getElementById('failure');notice.style.display='block';notice.textContent='请检查网络连接后重试；已有存档不会因此删除。';const retry=document.createElement('button');retry.textContent='重新载入';retry.onclick=()=>location.reload();notice.appendChild(retry)}
+const missing=Engine.getMissingFeatures({threads:GODOT_THREADS_ENABLED});
+if(missing.length){loadingFailure(new Error('Required browser features unavailable: '+missing.join(', ')))}
+else{engine.startGame({onProgress(current,total){if(current>0&&total>0){progress.max=total;progress.value=current;statusText.textContent='正在载入生活场景与游戏资源… '+Math.floor(current/total*100)+'%'}else{progress.removeAttribute('value');progress.removeAttribute('max');statusText.textContent='正在准备这一周的生活…'}}}).then(()=>{clearInterval(lifeTimer);document.getElementById('loading').remove();document.getElementById('canvas').focus()},loadingFailure)}
+</script>
+</body></html>
 

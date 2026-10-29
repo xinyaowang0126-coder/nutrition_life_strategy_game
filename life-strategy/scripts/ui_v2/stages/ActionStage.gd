@@ -3,6 +3,7 @@ extends Control
 
 signal action_selected(action_id: String)
 signal skip_requested
+signal finale_requested
 signal detail_requested(payload: Dictionary, anchor_rect: Rect2, pinned: bool)
 signal detail_dismissed(item_id: String)
 
@@ -24,6 +25,7 @@ var _options: Dictionary = {}
 var _ready_finished := false
 var _has_setup := false
 var story_note: Label
+var finale_button: Button
 
 
 func setup(items: Array, options: Dictionary = {}) -> void:
@@ -57,6 +59,14 @@ func _ready() -> void:
 	planner.add_child(story_note)
 	planner.move_child(story_note, used_slots.get_index())
 	story_note.hide()
+	finale_button = HouseholdUI.button("演前看看安排", "FinaleButton")
+	finale_button.custom_minimum_size.y = 44
+	finale_button.add_theme_font_size_override("font_size", 20)
+	planner.add_child(finale_button)
+	finale_button.hide()
+	finale_button.pressed.connect(func() -> void:
+		if visible and not is_queued_for_deletion(): finale_requested.emit()
+	)
 	skip_button.pressed.connect(func() -> void: skip_requested.emit())
 	skip_button.tooltip_text = BalanceRules.PERIOD_HINT
 	_ready_finished = true
@@ -95,6 +105,7 @@ func _update_header() -> void:
 	water_count_label.text = "水杯 %d/%d" % [int(_options.get("water_count", 0)), int(_options.get("water_max", 2))]
 	story_note.text = String(_options.get("story_note", ""))
 	story_note.visible = not story_note.text.is_empty()
+	finale_button.visible = bool(_options.get("show_finale", false))
 	var names: Array = _options.get("used_action_names", []) as Array
 	var ids: Array = _options.get("used_action_ids", []) as Array
 	var slot_nodes := used_slots.get_children()

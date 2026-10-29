@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "scenes": [
+    {
+      "id": "student-meal",
+      "character_id": "campus_student",
+      "title": "学生 · 午后的一餐",
+      "image": "res://assets/generated/title_life/student-meal-v1.png",
+      "mobile_focus_x": 0.73,
+      "mobile_focus_y": 0.5,
+      "web_file": "life-student-meal.jpg"
+    },
+    {
+      "id": "zhou-songbook",
+      "character_id": "zhou_huilan_66",
+      "title": "周阿姨 · 翻一翻歌谱",
+      "image": "res://assets/generated/title_life/zhou-songbook-v1.png",
+      "mobile_focus_x": 0.74,
+      "mobile_focus_y": 0.5,
+      "web_file": "life-zhou-songbook.jpg"
+    },
+    {
+      "id": "student-campus",
+      "character_id": "campus_student",
+      "title": "学生 · 校园路上",
+      "image": "res://assets/generated/title_life/student-campus-v1.png",
+      "mobile_focus_x": 0.67,
+      "mobile_focus_y": 0.5,
+      "web_file": "life-student-campus.jpg"
+    },
+    {
+      "id": "zhou-market",
+      "character_id": "zhou_huilan_66",
+      "title": "周阿姨 · 逛一逛集市",
+      "image": "res://assets/generated/title_life/zhou-market-v1.png",
+      "mobile_focus_x": 0.68,
+      "mobile_focus_y": 0.5,
+      "web_file": "life-zhou-market.jpg"
+    },
+    {
+      "id": "student-night",
+      "character_id": "campus_student",
+      "title": "学生 · 夜间的书桌",
+      "image": "res://assets/generated/title_life/student-night-v1.png",
+      "mobile_focus_x": 0.74,
+      "mobile_focus_y": 0.5,
+      "web_file": "life-student-night.jpg"
+    },
+    {
+      "id": "zhou-balcony",
+      "character_id": "zhou_huilan_66",
+      "title": "周阿姨 · 阳台的晨光",
+      "image": "res://assets/generated/title_life/zhou-balcony-v1.png",
+      "mobile_focus_x": 0.72,
+      "mobile_focus_y": 0.5,
+      "web_file": "life-zhou-balcony.jpg"
+    }
+  ]
+}

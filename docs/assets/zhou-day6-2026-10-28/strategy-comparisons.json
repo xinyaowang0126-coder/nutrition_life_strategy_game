@@ -1,0 +1,25 @@
+{
+  "runs": 550,
+  "errors": [],
+  "comparisons": [
+    {
+      "name": "diagnostics.json",
+      "runs": 40,
+      "exact_report_equality": true,
+      "baseline": ".cache/zhou-day5-2026-10-28/diagnostics.json",
+      "current": ".cache/zhou-day6-2026-10-28/diagnostics.json",
+      "baseline_sha256": "852c7b1a33ab688f6b8228feb91cc1d45489ab82e3b1a88968aa7663147070b7",
+      "current_sha256": "852c7b1a33ab688f6b8228feb91cc1d45489ab82e3b1a88968aa7663147070b7"
+    },
+    {
+      "name": "campus-strategies.json",
+      "runs": 510,
+      "exact_report_equality": true,
+      "baseline": ".cache/zhou-day5-2026-10-28/campus-strategies.json",
+      "current": ".cache/zhou-day6-2026-10-28/campus-strategies.json",
+      "baseline_sha256": "e29cb0a31a7bff92c053e660b4bfc0e6ccbeedee33d9aea7884d115e14bf649f",
+      "current_sha256": "e29cb0a31a7bff92c053e660b4bfc0e6ccbeedee33d9aea7884d115e14bf649f"
+    }
+  ],
+  "scope": "Same-seed command simulations preserve existing gameplay reports; not new dialogue traversal or human success/learning evidence."
+}

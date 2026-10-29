@@ -21,6 +21,7 @@ func _run() -> void:
 	await settle()
 	check(root.size == resolution, "Window differs from requested size")
 	await click(game.new_day_popup.continue_button)
+	await finish_household_opening(game)
 	await save("01-home")
 	var before := {"state": game.state.duplicate(true), "ingredients": game.kitchen.ingredients.duplicate(true), "batches": game.kitchen.batches.duplicate(true)}
 	await click(game._active_stage._props["home_kitchen"].get_node("Illustration/Art"))
@@ -108,6 +109,7 @@ func _run() -> void:
 	current_scene = game
 	await settle()
 	await click(game.new_day_popup.continue_button)
+	await finish_household_opening(game)
 	game._choose_meal_source("cafeteria")
 	await settle()
 	check(game.current_source_id == "cafeteria" and not game._background_path_for_phase().contains("/locations/"), "Household locations leaked into campus story")

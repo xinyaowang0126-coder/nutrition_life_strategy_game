@@ -36,6 +36,16 @@ const StoryEducationScript := preload("res://scripts/stories/StoryEducation.gd")
 const StoryDialogScript := preload("res://scripts/stories/StoryDialog.gd")
 const MealFactsScript := preload("res://scripts/stories/HouseholdMealFacts.gd")
 const SharedMealScript := preload("res://scripts/stories/SharedMealPlan.gd")
+const HouseholdLearningScript := preload("res://scripts/stories/HouseholdLearningFlow.gd")
+const HouseholdLearningPresenterScript := preload("res://scripts/stories/HouseholdLearningPresenter.gd")
+const HouseholdMealLearningScript := preload("res://scripts/stories/HouseholdMealLearning.gd")
+const HouseholdStudyPresenterScript := preload("res://scripts/stories/HouseholdStudyPresenter.gd")
+const HouseholdDayFiveScript := preload("res://scripts/stories/HouseholdDayFive.gd")
+const HouseholdDayFivePresenterScript := preload("res://scripts/stories/HouseholdDayFivePresenter.gd")
+const HouseholdPreparationScript := preload("res://scripts/stories/HouseholdPreparation.gd")
+const HouseholdPreparationPresenterScript := preload("res://scripts/stories/HouseholdPreparationPresenter.gd")
+const HouseholdFinaleScript := preload("res://scripts/stories/HouseholdFinale.gd")
+const HouseholdFinalePresenterScript := preload("res://scripts/stories/HouseholdFinalePresenter.gd")
 const SaveCodecScript := preload("res://scripts/stories/GameSaveCodec.gd")
 const SaveStoreScript := preload("res://scripts/stories/GameSaveStore.gd")
 const HOUSEHOLD_SOURCE_SCENE := preload("res://scenes/stories/HouseholdSourceStage.tscn")
@@ -150,6 +160,11 @@ var _workspace: HouseholdWorktop
 var _household_market_context := ""
 var _workspace_restore: Dictionary = {}
 var _lesson_seen: Dictionary = {}
+var household_learning: Dictionary = {}
+var household_lessons: Dictionary = {}
+var household_day_five: Dictionary = {}
+var household_preparation: Dictionary = {}
+var household_finale: Dictionary = {}
 
 var state: Dictionary = {}
 var day := 1
@@ -269,6 +284,11 @@ func start_new_run() -> void:
 	food_preferences = FoodPreferenceServiceScript.load_profile(String(story["preferences"]))
 	performed = false
 	_lesson_seen.clear()
+	household_learning = HouseholdLearningScript.initial_state() if _household() else {}
+	household_lessons = HouseholdMealLearningScript.initial_state() if _household() else {}
+	household_day_five = HouseholdDayFiveScript.initial_state() if _household() else {}
+	household_preparation = HouseholdPreparationScript.initial_state() if _household() else {}
+	household_finale = HouseholdFinaleScript.initial_state() if _household() else {}
 	kitchen.reset()
 	shared_meal.reset()
 	if is_instance_valid(_story_dialog):
@@ -412,7 +432,15 @@ func _show_source_stage() -> void:
 	stage.detail_requested.connect(_show_detail.bind("source"))
 	stage.detail_dismissed.connect(_dismiss_detail)
 	if _household():
-		stage.setup(sources, String(PHASE_NAMES[meal]), disabled_reasons, shared_meal.summary() if shared_meal.plan.get("status") == "planned" else "")
+		var plan_note := shared_meal.summary() if shared_meal.plan.get("status") == "planned" else ""
+		if stage is HouseholdSourceStage:
+			var effort := maxi(0, -int(_effective_meal_source("home_fridge").get("energy", 0)))
+			var preparation_note := HouseholdLearningScript.preparation_notice(kitchen, _story_food_catalog(), day, _story_clock(), effort)
+			var intention := HouseholdPreparationScript.notice(household_preparation, day, meal)
+			if not intention.is_empty(): preparation_note = intention + ("\n" + preparation_note if not preparation_note.is_empty() else "")
+			stage.setup(sources, String(PHASE_NAMES[meal]), disabled_reasons, plan_note, preparation_note)
+		else:
+			stage.setup(sources, String(PHASE_NAMES[meal]), disabled_reasons, plan_note)
 	else:
 		stage.setup(sources, String(PHASE_NAMES[meal]), disabled_reasons)
 
@@ -448,9 +476,17 @@ func _show_meal_stage() -> void:
 		"meal_kind": String(source.get("stage_kind", "")),
 		"batch_notes": _household_batch_notes(),
 		"cost_preview_builder": Callable(self, "preview_meal_cost"),
+		"learning_day": day if _household() else 0,
 	}
 	if stage is HouseholdMealStage:
 		(stage as HouseholdMealStage).kitchen_requested.connect(_show_kitchen)
+		(stage as HouseholdMealStage).study_requested.connect(func(ids: Array) -> void:
+			if stage != _active_stage: return
+			if day == 5: HouseholdDayFivePresenterScript.open_guide(self, ids)
+			elif day == 6: HouseholdPreparationPresenterScript.open_planner(self, ids)
+			elif day == 7: HouseholdFinalePresenterScript.open_plan(self)
+			else: HouseholdStudyPresenterScript.open_selection(self, ids)
+		)
 	stage.food_toggled.connect(_on_food_toggled)
 	stage.confirm_requested.connect(_confirm_food)
 	stage.back_requested.connect(_change_meal_source)
@@ -477,6 +513,9 @@ func _show_action_stage() -> void:
 	stage.skip_requested.connect(_skip_action)
 	stage.detail_requested.connect(_show_detail.bind("action"))
 	stage.detail_dismissed.connect(_dismiss_detail)
+	stage.finale_requested.connect(func() -> void:
+		if stage == _active_stage: HouseholdFinalePresenterScript.open_plan(self)
+	)
 	stage.setup(actions, {
 		"time_label": String(PHASE_NAMES[phase]),
 		"prompt": _phase_prompt(),
@@ -487,6 +526,7 @@ func _show_action_stage() -> void:
 		"used_action_names": used_action_names,
 		"used_action_ids": used_action_ids.filter(func(id: String) -> bool: return int(_story_action(id).get("slots", 1)) > 0),
 		"story_note": _household_action_note() if _household() else "",
+		"show_finale": _household() and day == 7,
 	})
 
 
@@ -976,6 +1016,7 @@ func _advance_from_meal() -> void:
 		"lunch": phase = "lunch_action"
 		_: phase = "dinner_action"
 	_render_phase()
+	HouseholdPreparationPresenterScript.after_meal(self)
 
 
 func _apply_action(action_id: String) -> void:
@@ -994,6 +1035,7 @@ func _apply_action(action_id: String) -> void:
 	if action_id == "call_friend":
 		_show_shared_meal_invitation()
 		return
+	if int(action.get("slots", 1)) > 0: HouseholdFinaleScript.capture(self, action_id)
 	var display_key := "name_%s" % phase
 	var display_name := String(action.get(display_key, action.get("name", action_id)))
 	actions_used_today += int(action.get("slots", 1))
@@ -1048,6 +1090,7 @@ func _skip_action() -> void:
 		return
 	if not _is_action_phase():
 		return
+	HouseholdFinaleScript.capture(self, "skip")
 	_post("%s没有再排事情。" % String(PHASE_NAMES.get(phase, "餐后")), "info")
 	_advance_after_action()
 
@@ -1056,7 +1099,9 @@ func _advance_after_action() -> void:
 	if not _is_action_phase():
 		return
 	var period_delta := BalanceRules.period_delta()
-	today_period_records.append({"phase": phase, "stat_delta": period_delta.duplicate(true)})
+	var period_record := {"phase": phase, "stat_delta": period_delta.duplicate(true)}
+	if _household() and day == 7 and phase == "dinner_action" and not household_finale["outcome"].is_empty(): period_record["finale_context"] = household_finale["outcome"].duplicate(true)
+	today_period_records.append(period_record)
 	_apply_stat_delta(period_delta)
 	_clamp_stats()
 	_update_stability()
@@ -1065,6 +1110,7 @@ func _advance_after_action() -> void:
 		"lunch_action": phase = "dinner_source"
 		_: phase = "sleep"
 	_render_phase()
+	HouseholdFinalePresenterScript.after_action(self)
 
 
 func _can_use_action(action: Dictionary) -> bool:
@@ -1228,6 +1274,10 @@ func _finish_day() -> void:
 		day_record["performed"] = performed
 		day_record["recipe_summary"] = MealFactsScript.summarize(today_meal_records)
 		day_record["shared_meal_history"] = shared_meal.history.filter(func(item: Dictionary) -> bool: return item.get("day") == day).duplicate(true)
+		day_record["household_recap"] = HouseholdLearningScript.day_recap(kitchen, household_learning, day, _story_clock())
+		day_record["learning_observation"] = HouseholdMealLearningScript.day_observation(today_meal_records, day)
+		if day == 5: day_record["day_five_recap"] = HouseholdDayFiveScript.recap(today_meal_records, household_day_five, shared_meal.history)
+		if day in [6, 7]: day_record["preparation_recap"] = HouseholdPreparationScript.recap(household_preparation)
 	run_history.append(day_record)
 	var detail_text := "%s\n\n本局变化\n%s" % [
 		String(nutrition_summary.get("detail_text", "")),
@@ -1256,6 +1306,19 @@ func _finish_day() -> void:
 		"detail_button_open_text": "收起三餐与恢复依据",
 		"button_text": "睡到第 %d 天" % (day + 1),
 	}
+	if _household():
+		summary_payload["record_summary"] = day_record["household_recap"]["text"]
+		summary_payload["detail"]["detail_text"] += "\n\n厨房回顾\n" + String(day_record["household_recap"]["text"])
+		if not day_record["learning_observation"].is_empty():
+			var observation := String(day_record["learning_observation"]["text"]) + "\n" + String(day_record["learning_observation"]["next_step"])
+			summary_payload["record_summary"] = observation + "\n\n" + String(summary_payload["record_summary"])
+			summary_payload["detail"]["detail_text"] += "\n\n这一餐的观察\n" + observation
+		if day == 5:
+			summary_payload["record_summary"] = String(day_record["day_five_recap"]["text"]) + "\n\n" + String(summary_payload["record_summary"])
+			summary_payload["detail"]["detail_text"] += "\n\n今天的做法与同桌\n" + String(day_record["day_five_recap"]["text"])
+		if day in [6, 7]:
+			summary_payload["record_summary"] = String(day_record["preparation_recap"]["text"]) + "\n\n" + String(summary_payload["record_summary"])
+			summary_payload["detail"]["detail_text"] += "\n\n备餐计划与实际取用\n" + String(day_record["preparation_recap"]["text"])
 	if not stability_valid or not next_learning["valid"]:
 		phase = "summary"
 		_render_phase()
@@ -1399,6 +1462,18 @@ func _on_new_day_continue() -> void:
 	_new_day_pending = false
 	_update_toast_visibility()
 	_queue_autosave()
+	if _household() and day == 1 and household_learning.get("opening_stage") in ["pending", "decision", "breakfast"]:
+		new_day_popup.hide_popup(false)
+		HouseholdLearningPresenterScript.resume(self)
+	elif _household() and day == 5:
+		new_day_popup.hide_popup(false)
+		HouseholdDayFivePresenterScript.resume(self)
+	elif _household() and day == 6:
+		new_day_popup.hide_popup(false)
+		HouseholdPreparationPresenterScript.resume(self)
+	elif _household() and day == 7:
+		new_day_popup.hide_popup(false)
+		HouseholdFinalePresenterScript.resume(self)
 	# The popup owns its closing animation; the playable stage is already
 	# rendered underneath so continuing never incurs another scene rebuild.
 
@@ -1419,6 +1494,7 @@ func _show_recovery_detail() -> void:
 func _finish_run(result: String) -> void:
 	ending_id = result
 	phase = "ending"
+	if _household(): household_finale["review"] = HouseholdFinaleScript.review(capture_game_save()["payload"])
 	_render_phase()
 
 
@@ -1445,9 +1521,15 @@ func _show_ending_summary() -> void:
 		"button_text": "再来一周",
 	}
 	if _household():
-		ending_summary["record_summary"] = "已完成社区合唱汇演。" if performed else "本局没有完成参演；排练与演前安排都保留在记录里。"
-		ending_summary["advice"] = "排练 %d/%d｜实际参演：%s｜余额 ¥%d" % [int(state.get("goal_progress", 0)), _goal_target(), "已完成" if performed else "未完成", int(state.get("balance", 0))]
-		ending_summary["detail"]["detail_text"] += "\n\n" + shared_meal.summary() + "\n" + _recipe_history_text()
+		var review: Dictionary = household_finale["review"] if not household_finale["review"].is_empty() else HouseholdFinaleScript.review(capture_game_save()["payload"])
+		ending_summary["ending_image"] = "res://assets/generated/stories/actions/zhou_perform-v1.png" if review["counts"]["performances"] > 0 else String(story["background"])
+		if review["counts"]["performances"] > 0: ending_summary["title"] = "把歌唱完了"
+		elif household_finale["outcome"].get("kind") == "other_choice": ending_summary["title"] = "这一周，按自己的安排"
+		elif performed: ending_summary["title"] = "这一周，按实际记录回看"
+		ending_summary["record_summary"] = review["outcome_text"] + "\n" + review["highlights"][0]["text"]
+		ending_summary["advice"] = "排练 %d/%d｜实际参演：%s｜余额 ¥%d" % [int(state.get("goal_progress", 0)), _goal_target(), "已记录" if review["counts"]["performances"] > 0 else "未记录", int(state.get("balance", 0))]
+		ending_summary["advice"] += "\n" + review["next_step"]
+		ending_summary["detail"]["detail_text"] = "这一周真正留下的事\n" + HouseholdFinaleScript.review_text(review) + "\n\n逐日轨迹\n" + String(ending_summary["detail"]["detail_text"]) + "\n\n" + shared_meal.summary() + "\n" + _recipe_history_text()
 	daily_summary.show_summary(_story_view(ending_summary), _mobile_mode)
 
 
@@ -1558,6 +1640,11 @@ func _build_week_recap() -> Dictionary:
 			String(recovery_view["title"]),
 			String(recovery_view["summary"]),
 		])
+		if record.get("household_recap") is Dictionary:
+			lines.append(String(record["household_recap"].get("text", "")))
+		if record.get("learning_observation") is Dictionary and not record["learning_observation"].is_empty():
+			lines.append(String(record["learning_observation"]["text"]))
+		if record.get("day_five_recap") is Dictionary: lines.append(String(record["day_five_recap"]["text"]))
 	var played_days := recorded_days.size()
 	if book.get("valid", false):
 		for note in MealRecordPresenterScript.view(book, day, true)["notes"]:
@@ -2175,6 +2262,8 @@ func _household_action_note() -> String:
 			return "今晚汇演 · " + reason if not reason.is_empty() else "准备好了 · 选择“去参加汇演”上台。"
 		return "今晚汇演 · 排练达到%d，演前保留%d精力。" % [_goal_target(), minimum]
 	if shared_meal.plan.get("status") == "planned" and phase == "lunch_action": return shared_meal.summary()
+	if day == 5 and phase == "lunch_action" and _household_action_reason(_story_action("call_friend")).is_empty():
+		return "今天午后合练 · 可先问老陈的晚饭安排，约饭不占整段时间。"
 	if day in [3, 5] and phase == "lunch_action":
 		var reason := _action_disabled_reason(_story_action("group_rehearsal"))
 		return "今天午后合练 · " + reason if not reason.is_empty() else "今天午后有集体排练，可以和大家合一遍。"
@@ -2253,7 +2342,7 @@ func _suspend_story_input() -> void:
 	daily_summary.next_button.disabled = true
 
 
-func _present_workspace(page: HouseholdWorktop) -> void:
+func _present_workspace(page: HouseholdWorktop, close_handler: Callable = Callable()) -> void:
 	var owner := get_viewport().gui_get_focus_owner()
 	var stage_focus := _active_stage.get_path_to(owner) if is_instance_valid(_active_stage) and owner != null and _active_stage.is_ancestor_of(owner) else NodePath()
 	_close_workspace(false)
@@ -2270,7 +2359,9 @@ func _present_workspace(page: HouseholdWorktop) -> void:
 	page.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	page.apply_profile(_mobile_mode)
 	page.close_requested.connect(func() -> void:
-		if page == _workspace and page.visible: _close_workspace()
+		if page == _workspace and page.visible:
+			if close_handler.is_valid(): close_handler.call()
+			else: _close_workspace()
 	)
 	_suspend_story_input()
 	_update_background()
@@ -2321,6 +2412,14 @@ func _household_batch_notes() -> Dictionary:
 func _show_education() -> void:
 	var lesson := StoryEducationScript.lesson(day)
 	_lesson_seen[day] = true
+	_queue_autosave()
+	if _household() and day == 5 and HouseholdDayFivePresenterScript.open_guide(self, selected_food_ids): return
+	if _household() and day == 6 and HouseholdPreparationPresenterScript.open_planner(self, selected_food_ids): return
+	if _household() and day == 7 and HouseholdFinalePresenterScript.open_plan(self): return
+	if _household() and day in HouseholdMealLearningScript.DAYS:
+		if HouseholdStudyPresenterScript.open_reference(self): return
+		_show_story_dialog(String(lesson["title"]), String(lesson["body"]) + "\n\n选好食物后，可从菜单的‘看看这一餐’入口练习；做饭时也可对照本次配方。", [{"id": "close", "text": "回到这一餐"}], func(_id: String) -> void: pass)
+		return
 	var exercise := StoryEducationScript.exercise(day)
 	if not exercise.is_empty():
 		var choices: Array = exercise["choices"].duplicate(true)
@@ -2390,6 +2489,14 @@ func _show_cooking_choice(ids: Array[String], storage: String = "eat_now", selec
 		"can_use_later": day < _total_days() or phase != "dinner",
 	}
 	page.setup(ids, _story_food_catalog(), kitchen, _served_portions(), String(PHASE_NAMES[phase]), storage, selected_plan, source_effort)
+	page.configure_learning(day)
+	page.study_requested.connect(func(food_ids: Array, keep: String, recipe: Dictionary) -> void:
+		if page != _workspace or not page.visible or expected != "%d:%s:%s" % [day, phase, current_source_id]: return
+		if day == 5: HouseholdDayFivePresenterScript.open_guide(self, food_ids, keep, recipe)
+		elif day == 6: HouseholdPreparationPresenterScript.open_planner(self, food_ids, keep, recipe)
+		elif day == 7: HouseholdFinalePresenterScript.open_plan(self, food_ids, keep, recipe)
+		else: HouseholdStudyPresenterScript.open_cooking(self, food_ids, keep, recipe)
+	)
 	page.confirm_requested.connect(func(food_ids: Array, keep: String, recipe: Dictionary) -> void:
 		if page != _workspace or not page.visible or expected != "%d:%s:%s" % [day, phase, current_source_id]: return
 		_close_workspace(false)
@@ -2431,12 +2538,16 @@ func confirm_household_food(ids: Array, storage: String = "eat_now", plan: Dicti
 		if not frozen_facts.is_empty():
 			record["recipe_facts"] = frozen_facts
 	var shared_completed := shared_meal.complete(day, record)
+	if day in HouseholdMealLearningScript.DAYS:
+		record["learning_facts"] = HouseholdMealLearningScript.context(day, phase, current_source_id, ids, _story_food_catalog(), "confirmed", record.get("recipe_facts", {}))
+	if day == 5: record["day_five_experience"] = HouseholdDayFiveScript.freeze(record, _story_food_catalog())
 	_apply_meal_record(record)
 	_post("和老陈一起吃了晚饭：%s" % "、".join(record["food_names"]) if shared_completed else "%s：%s" % [PHASE_NAMES[phase], "、".join(record["food_names"])], "meal")
 	selected_food_ids.clear()
 	hand.clear()
 	current_source_id = ""
 	_advance_from_meal()
+	if day == 5: HouseholdDayFivePresenterScript.after_meal(self, record)
 	return true
 
 
@@ -2457,6 +2568,7 @@ func plan_shared_meal(venue: String) -> bool:
 	today_action_records.append({"id": "call_friend", "name": "约老陈一起吃晚饭", "cost": 0, "slots": 0, "stat_delta": {}, "stock_added": {}, "plan": shared_meal.plan.duplicate(true)})
 	_post("晚饭约好了，别忘了准备。", "info")
 	_render_phase()
+	if day == 5: HouseholdDayFivePresenterScript.after_invitation(self)
 	return true
 
 
@@ -2464,10 +2576,20 @@ func _show_shared_meal_invitation() -> void:
 	var expected_day := day
 	var expected_phase := phase
 	var page := WorktopScript.new()
-	_present_workspace(page)
+	var close_handler := Callable()
+	if day == 5:
+		close_handler = func() -> void:
+			if page != _workspace or not page.visible: return
+			household_day_five["invite_declined"] = true
+			_queue_autosave()
+			_close_workspace()
+	_present_workspace(page, close_handler)
 	page.title_label.text = "老陈，晚上一起吃？"
 	page.subtitle_label.text = "先问问他有没有空，再定个地点。"
 	page.close_button.text = "这次先不约"
+	if day == 5:
+		page.close_button.text = "今天先自己安排"
+		page.body.add_child(HouseholdUI.label("周阿姨：‘练完想和老陈吃个小份，先问问有没有空。’", 23))
 	HouseholdUI.note(page.body, "约好还不算完成，实际同桌才写进这一周。")
 	for choice in [{"id": "community", "text": "在家常小馆见", "hint": "各付自己的饭钱，照常搭配自己的餐盘。"}, {"id": "home", "text": "请老陈来家里", "hint": "当餐按两人份备料，只记录自己吃的一份。"}]:
 		var card := PanelContainer.new()
@@ -2515,13 +2637,20 @@ func _show_recipe_records() -> void:
 		card.add_child(stack)
 		stack.add_child(HouseholdUI.label("%s · %s" % [PHASE_NAMES.get(meal.get("phase"), "这一餐"), "、".join(meal.get("food_names", []))], 27, HouseholdUI.INK, true))
 		stack.add_child(HouseholdUI.label(MealFactsScript.describe(meal["recipe_facts"]) if meal.has("recipe_facts") else "这顿饭没有配方调味记录，数值保持未知。", 22, HouseholdUI.MUTED))
+		if meal.has("day_five_experience"):
+			stack.add_child(HouseholdUI.label(String(meal["day_five_experience"]["response"]), 22, HouseholdUI.GREEN))
 	HouseholdUI.section(page.body, "一起吃饭")
 	HouseholdUI.note(page.body, shared_meal.summary())
+	if not household_preparation.get("plans", []).is_empty():
+		HouseholdUI.section(page.body, "备餐计划的后续")
+		HouseholdUI.note(page.body, HouseholdPreparationScript.recap(household_preparation)["text"])
 	if not run_history.is_empty():
 		HouseholdUI.section(page.body, "前几天")
 		for record in run_history:
 			if record.has("recipe_summary"):
 				HouseholdUI.note(page.body, "第%d天\n%s" % [int(record["day"]), String(record["recipe_summary"]["text"])])
+			if record.has("day_five_recap"): HouseholdUI.note(page.body, String(record["day_five_recap"]["text"]))
+			if record.has("preparation_recap"): HouseholdUI.note(page.body, String(record["preparation_recap"]["text"]))
 	HouseholdUI.note(page.body, "配方数值是本关给定规格，未经测定的食材本底保持未知。")
 
 
@@ -2541,6 +2670,7 @@ func restore_game_save(envelope: Dictionary) -> Dictionary:
 		return SaveCodecScript.failure("invalid_archive", "冻结档案无法读取。")
 	_save_generation += 1
 	if is_node_ready():
+		_close_workspace(false)
 		if is_instance_valid(_record_book):
 			_record_book.close_book()
 		_record_input_restore.clear()
@@ -2579,6 +2709,8 @@ func restore_game_save(envelope: Dictionary) -> Dictionary:
 		_render_phase()
 		if _new_day_pending:
 			_show_new_day_popup()
+		elif not HouseholdStudyPresenterScript.resume(self) and not HouseholdDayFivePresenterScript.resume(self) and not HouseholdPreparationPresenterScript.resume(self) and not HouseholdFinalePresenterScript.resume(self):
+			HouseholdLearningPresenterScript.resume(self)
 	return {"ok": true}
 
 

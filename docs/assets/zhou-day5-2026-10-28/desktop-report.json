@@ -1,0 +1,74 @@
+{
+  "cases": [
+    {
+      "case": "home",
+      "phase": "summary",
+      "recap": {
+        "adapted_foods": [
+          "煮软苹果",
+          "时蔬炖豆腐"
+        ],
+        "chose_own_dinner": false,
+        "eaten": 3,
+        "invited": true,
+        "missed": false,
+        "shared": true,
+        "text": "今天选了煮软苹果、时蔬炖豆腐，做法按菜单或配方记录保留。\n晚饭在家和老陈同桌，约定实际完成。",
+        "unrecorded_methods": 0
+      },
+      "social_events": 2
+    },
+    {
+      "case": "community",
+      "phase": "summary",
+      "recap": {
+        "adapted_foods": [],
+        "chose_own_dinner": false,
+        "eaten": 3,
+        "invited": true,
+        "missed": false,
+        "shared": true,
+        "text": "今天照实际选择吃了3餐。\n晚饭在家常小馆和老陈同桌，约定实际完成。",
+        "unrecorded_methods": 0
+      },
+      "social_events": 2
+    },
+    {
+      "case": "own",
+      "phase": "summary",
+      "recap": {
+        "adapted_foods": [
+          "时蔬炖豆腐"
+        ],
+        "chose_own_dinner": true,
+        "eaten": 3,
+        "invited": false,
+        "missed": false,
+        "shared": false,
+        "text": "今天选了时蔬炖豆腐，做法按菜单或配方记录保留。\n今天晚饭自己安排。",
+        "unrecorded_methods": 0
+      },
+      "social_events": 0
+    },
+    {
+      "case": "missed",
+      "phase": "summary",
+      "recap": {
+        "adapted_foods": [
+          "时蔬炖豆腐"
+        ],
+        "chose_own_dinner": false,
+        "eaten": 3,
+        "invited": true,
+        "missed": true,
+        "shared": false,
+        "text": "今天选了时蔬炖豆腐，做法按菜单或配方记录保留。\n晚饭改选家里做饭，没有同桌记录。",
+        "unrecorded_methods": 0
+      },
+      "social_events": 2
+    }
+  ],
+  "errors": [],
+  "scope": "Four actual native day-5 routes from valid prior-day command saves: home/community shared dinner, cancelled invitation/own dinner, changed venue/missed invitation. Intro, recipe guide, actual meals/replies and summary use mouse/key input. Separate restore-only processes verify pending dialogue and draft recovery. Not a seven-day browser run or real phone.",
+  "window": "(1280, 720)"
+}

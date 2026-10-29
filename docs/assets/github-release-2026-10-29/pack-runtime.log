@@ -1,0 +1,3 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+MENU_PACK_RUNTIME={"cases":[{"day":1,"new_and_continue":true,"phase":"breakfast_source","story":"campus_exam"},{"day":1,"new_and_continue":true,"phase":"breakfast_source","story":"choir_week"}],"errors":[],"pack_sha256":"6deb82fe89a3b30d8a49ee925894077cec84cee3ca24a2ba9d2cc28c0c4679f9","scenes":6,"scope":"Matching native Godot 4.7.2 loads final Web PCK directly: six scene textures, both portrait posters, icon alpha, read-only story info, both selected-story starts and memory-backed save/continue. Browser rendering is verified separately; not continuous seven-day acceptance."}

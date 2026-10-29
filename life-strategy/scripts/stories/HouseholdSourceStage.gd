@@ -36,11 +36,14 @@ var footer: HBoxContainer
 var _heading: PanelContainer
 var _hint: Label
 var _plan_note: Label
+var preparation_note: PanelContainer
+var _preparation_text: Label
 var _sources_by_id: Dictionary = {}
 var _props: Dictionary = {}
 var _tweens: Dictionary = {}
 var _meal := "早餐"
 var _plan_summary := ""
+var _preparation_summary := ""
 var _mobile := false
 var _scene_texture: Texture2D
 var _prop_regions: Dictionary = {}
@@ -72,6 +75,14 @@ func _ready() -> void:
 	_plan_note = HouseholdUI.label("有个共餐约定", 21, HouseholdUI.GREEN)
 	_plan_note.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	prompt.add_child(_plan_note)
+	preparation_note = PanelContainer.new()
+	preparation_note.name = "PreparationNote"
+	preparation_note.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	preparation_note.add_theme_stylebox_override("panel", HouseholdUI.paper(HouseholdUI.PAPER, 14, 12))
+	add_child(preparation_note)
+	_preparation_text = HouseholdUI.label("", 23, HouseholdUI.GREEN)
+	preparation_note.add_child(_preparation_text)
+	preparation_note.hide()
 	prop_layer = Control.new()
 	prop_layer.name = "PropLayer"
 	prop_layer.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -112,7 +123,7 @@ func _ready() -> void:
 	_apply_sources()
 
 
-func setup(sources: Array, meal: String, reasons: Dictionary = {}, plan_summary: String = "") -> void:
+func setup(sources: Array, meal: String, reasons: Dictionary = {}, plan_summary: String = "", preparation: String = "") -> void:
 	_sources_by_id.clear()
 	for value in sources:
 		if not value is Dictionary: continue
@@ -125,6 +136,7 @@ func setup(sources: Array, meal: String, reasons: Dictionary = {}, plan_summary:
 		_sources_by_id[id] = source
 	_meal = meal
 	_plan_summary = plan_summary
+	_preparation_summary = preparation
 	if is_node_ready(): _apply_sources()
 	call_deferred("_refresh_map_layout")
 
@@ -191,6 +203,9 @@ func _build_prop(id: String) -> void:
 
 
 func _apply_sources() -> void:
+	_preparation_text.text = _preparation_summary
+	preparation_note.visible = not _preparation_summary.is_empty()
+	_layout_preparation_note()
 	title_label.text = "%s去哪吃？" % _meal
 	_plan_note.visible = not _plan_summary.is_empty()
 	for id: String in HOME_ORDER:
@@ -220,6 +235,8 @@ func apply_entry_profile(mobile: bool) -> void:
 	_heading.offset_bottom = 104 if mobile else 116
 	_hint.text = "轻点选择，可查看详情" if mobile else "悬停看详情"
 	_plan_note.add_theme_font_size_override("font_size", 20 if mobile else 23)
+	_preparation_text.add_theme_font_size_override("font_size", 23 if mobile else 25)
+	_layout_preparation_note()
 	_scene_texture = load(PORTRAIT_SCENE if mobile else WIDE_SCENE) as Texture2D
 	var places := MOBILE_PLACES if mobile else DESKTOP_PLACES
 	for index in range(HOME_ORDER.size()):
@@ -377,8 +394,19 @@ func _prop_texture(id: String) -> Texture2D:
 
 func _refresh_map_layout() -> void:
 	if _scene_texture == null or not is_instance_valid(prop_layer): return
+	_layout_preparation_note()
 	var places := MOBILE_PLACES if _mobile else DESKTOP_PLACES
 	for index in range(HOME_ORDER.size()): _place_on_map(_props[HOME_ORDER[index]], places[index])
+
+
+func _layout_preparation_note() -> void:
+	if _preparation_text == null or size.x <= 1: return
+	var bounds := Rect2(0.39, 0.56, 0.29, 0.25) if _mobile else Rect2(0.43, 0.48, 0.35, 0.14)
+	# Measure wrapping at the final width before the panel consumes the
+	# label's minimum height; a zero-width first layout must not grow it.
+	_preparation_text.size.x = maxf(1, size.x * bounds.size.x - 28)
+	_preparation_text.get_line_count()
+	_rect(preparation_note, bounds)
 
 
 func _place_on_map(control: Control, uv: Rect2) -> void:

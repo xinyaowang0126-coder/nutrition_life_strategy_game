@@ -1,0 +1,592 @@
+Godot: E:\Program\GodotEngine\Godot_v4.7.2-stable_win64_console.exe
+Project: E:\nutrition_life_strategy_game\life-strategy
+Release configuration check passed.
+
+==> Import resources and global script classes
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+ERROR: Safe save failed. This may be a permissions problem, but also may happen because you are running a paranoid antivirus. If this is the case, please switch to Windows Defender or disable the 'safe save' option in editor settings. This makes it work, but increases the risk of file corruption in a crash.
+   at: _close (drivers/windows/file_access_windows.cpp:277)
+[   0% ] first_scan_filesystem | Started 项目初始化 (5 steps)
+[   0% ] first_scan_filesystem | 正在扫描文件结构……
+[  16% ] first_scan_filesystem | 正在加载全局类名……
+[  33% ] first_scan_filesystem | 正在校验 GDExtension……
+[  50% ] first_scan_filesystem | 正在创建自动加载脚本……
+[  66% ] first_scan_filesystem | 正在初始化插件……
+MCP | plugin disabled in headless mode
+[  83% ] first_scan_filesystem | 正在启动文件扫描……
+[ DONE ] first_scan_filesystem
+
+[   0% ] loading_editor_layout | Started 正在加载编辑器 (5 steps)
+[   0% ] loading_editor_layout | 正在加载编辑器布局……
+[  16% ] loading_editor_layout | 正在加载停靠面板……
+[  33% ] loading_editor_layout | 正在重新打开场景……
+[  50% ] loading_editor_layout | 正在加载中央编辑器布局……
+[  66% ] loading_editor_layout | 正在加载插件窗口布局……
+[  83% ] loading_editor_layout | 编辑器布局就绪。
+[ DONE ] loading_editor_layout
+
+
+==> Headless tests
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+[godot_ai game_helper] registered mcp capture (debugger active=false, logger=true)
+WARNING: Loaded resource as image file, this will not work on export: 'res://assets/branding/haohaochifan-512.png'. Instead, import the image file as an Image resource and load it normally as a resource.
+   at: load_from_file (core/io/image.cpp:2780)
+   GDScript backtrace (most recent call first):
+       [0] test_engine_icon_files_are_new_art_with_complete_windows_sizes (res://tests/test_series_menu.gd:219)
+       [1] _run_one_test (res://addons/godot_ai/testing/test_runner.gd:85)
+       [2] _run_suite_tests (res://addons/godot_ai/testing/test_runner.gd:67)
+       [3] run_suites_serviced (res://addons/godot_ai/testing/test_runner.gd:234)
+       [4] run_suites (res://addons/godot_ai/testing/test_runner.gd:147)
+       [5] _run (res://tests/headless_runner.gd:57)
+MCP_TEST_RESULT={"duration_ms":4042,"failed":0,"passed":17,"results":[{"assertion_count":3,"duration_ms":109,"message":"","passed":true,"suite":"series_menu","test":"test_background_rotation_pause_and_disabled_page_have_no_side_effects"},{"assertion_count":5,"duration_ms":685,"message":"","passed":true,"suite":"series_menu","test":"test_cancel_restart_keeps_auto_and_manual_progress"},{"assertion_count":6,"duration_ms":2,"message":"","passed":true,"suite":"series_menu","test":"test_catalog_contains_coherent_portrait_art_for_all_playable_people"},{"assertion_count":4,"duration_ms":384,"message":"","passed":true,"suite":"series_menu","test":"test_character_selection_and_primary_launch_follow_selected_story"},{"assertion_count":5,"duration_ms":283,"message":"","passed":true,"suite":"series_menu","test":"test_empty_manual_slots_are_disabled_and_back_is_available"},{"assertion_count":7,"duration_ms":12,"message":"","passed":true,"suite":"series_menu","test":"test_engine_icon_files_are_new_art_with_complete_windows_sizes"},{"assertion_count":8,"duration_ms":355,"message":"","passed":true,"suite":"series_menu","test":"test_existing_progress_uses_continue_without_resetting_other_story"},{"assertion_count":4,"duration_ms":1,"message":"","passed":true,"suite":"series_menu","test":"test_grouping_supports_more_characters_and_multiple_stories_per_person"},{"assertion_count":3,"duration_ms":279,"message":"","passed":true,"suite":"series_menu","test":"test_invalid_import_does_not_touch_progress_or_request_a_story"},{"assertion_count":5,"duration_ms":281,"message":"","passed":true,"suite":"series_menu","test":"test_latest_title_continue_uses_newest_valid_save"},{"assertion_count":15,"duration_ms":9,"message":"","passed":true,"suite":"series_menu","test":"test_life_playlist_contains_multiple_real_assets_per_person"},{"assertion_count":6,"duration_ms":1,"message":"","passed":true,"suite":"series_menu","test":"test_loading_shell_uses_real_progress_and_no_prominent_switch_buttons"},{"assertion_count":2,"duration_ms":0,"message":"","passed":true,"suite":"series_menu","test":"test_malformed_and_duplicate_catalog_entries_do_not_create_fake_people"},{"assertion_count":3,"duration_ms":257,"message":"","passed":true,"suite":"series_menu","test":"test_no_prominent_title_previous_or_next_controls"},{"assertion_count":3,"duration_ms":671,"message":"","passed":true,"suite":"series_menu","test":"test_person_switching_never_spends_or_writes_progress"},{"assertion_count":9,"duration_ms":446,"message":"","passed":true,"suite":"series_menu","test":"test_three_viewports_keep_primary_button_and_full_art_inside_canvas"},{"assertion_count":6,"duration_ms":265,"message":"","passed":true,"suite":"series_menu","test":"test_title_is_separate_from_character_selection_and_enter_does_not_start"}],"skipped":0,"suite_count":1,"suites_run":["series_menu"],"total":17}
+Headless tests passed: 17/17.
+
+==> Main scene smoke test
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+[godot_ai game_helper] registered mcp capture (debugger active=false, logger=true)
+Main scene smoke test passed.
+
+==> Temporary Web export
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+ERROR: Safe save failed. This may be a permissions problem, but also may happen because you are running a paranoid antivirus. If this is the case, please switch to Windows Defender or disable the 'safe save' option in editor settings. This makes it work, but increases the risk of file corruption in a crash.
+   at: _close (drivers/windows/file_access_windows.cpp:277)
+[   0% ] first_scan_filesystem | Started 项目初始化 (5 steps)
+[   0% ] first_scan_filesystem | 正在扫描文件结构……
+[  16% ] first_scan_filesystem | 正在加载全局类名……
+[  33% ] first_scan_filesystem | 正在校验 GDExtension……
+[  50% ] first_scan_filesystem | 正在创建自动加载脚本……
+[  66% ] first_scan_filesystem | 正在初始化插件……
+MCP | plugin disabled in headless mode
+[  83% ] first_scan_filesystem | 正在启动文件扫描……
+[ DONE ] first_scan_filesystem
+
+MCP | export: stripping autoload/_mcp_game_helper from the exported pack (restored in the editor after export)
+Release guard: stripping editor-only settings from the exported pack
+[   0% ] savepack | Started 打包中 (102 steps)
+[   1% ] savepack | 正在保存文件：res://.godot/exported/133200997/export-d243c278bb449b98b75dbb67ac2f29aa-Boot.scn
+[   1% ] savepack | 正在保存文件：res://scripts/Boot.gdc
+[   1% ] savepack | 正在保存文件：res://.godot/exported/133200997/export-880240fae591cc26332c7a70e4ae8044-MainMenu.scn
+[   2% ] savepack | 正在保存文件：res://scripts/MainMenu.gdc
+[   2% ] savepack | 正在保存文件：res://.godot/exported/133200997/export-26dec28faf683b55e0244589a54d2a61-V2Theme.res
+[   2% ] savepack | 正在保存文件：res://.godot/imported/NotoSansCJKsc-Bold.otf-12b4706e155ce2c3a2adcf96c5a3568e.fontdata
+[   2% ] savepack | 正在保存文件：res://assets/fonts/NotoSansCJKsc-Bold.otf.import
+[   3% ] savepack | 正在保存文件：res://.godot/exported/133200997/export-0cfdeee291834103f98a9b763d1a4b49-GameRootV2.scn
+[   3% ] savepack | 正在保存文件：res://.godot/imported/campus_map.png-ded52334b30a0842997a63521650c482.ctex
+[   3% ] savepack | 正在保存文件：res://assets/generated/ui_v3/backgrounds/campus_map.png.import
+[   4% ] savepack | 正在保存文件：res://scripts/ui_v2/GameRootV2.gdc
+[   4% ] savepack | 正在保存文件：res://.godot/exported/133200997/export-c8f32331cba693cba35997db117b6d78-CharacterHUD.scn
+[   4% ] savepack | 正在保存文件：res://scripts/ui_v2/CharacterHUD.gdc
+[   5% ] savepack | 正在保存文件：res://.godot/imported/student_bust.png-7f24d70847fae342fc2ea66cd1574829.ctex
+[   5% ] savepack | 正在保存文件：res://assets/generated/ui_v2/characters/student_bust.png.import
+[   5% ] savepack | 正在保存文件：res://.godot/imported/study_book.png-e09991201d23ab017a3c4fb5cd847421.ctex
+[   5% ] savepack | 正在保存文件：res://assets/generated/ui_v3/icons/study_book.png.import
+[   6% ] savepack | 正在保存文件：res://scripts/ui_v2/HudStudyProgressStrip.gdc
+[   6% ] savepack | 正在保存文件：res://.godot/exported/133200997/export-0daea31c30b1ed1f84771a8cee33b71d-ToastFeedV2.scn
+[   6% ] savepack | 正在保存文件：res://scripts/ui_v2/ToastFeedV2.gdc
+[   7% ] savepack | 正在保存文件：res://.godot/exported/133200997/export-87df4992bc014a39f3acb0056acdbbdd-StickyNotePopup.scn
+[   7% ] savepack | 正在保存文件：res://scripts/ui_v2/StickyNotePopup.gdc
+[   8% ] savepack | 正在保存文件：res://.godot/exported/133200997/export-15592c74fad53b5835794a3a9ba22919-DailySummaryPopup.scn
+[   8% ] savepack | 正在保存文件：res://scripts/ui_v2/DailySummaryPopup.gdc
+[   8% ] savepack | 正在保存文件：res://.godot/exported/133200997/export-7a4ed29c9ed57db79716d2e64b2e6f05-NewDayPopup.scn
+[   9% ] savepack | 正在保存文件：res://scripts/ui_v2/NewDayPopup.gdc
+[   9% ] savepack | 正在保存文件：res://scripts/ui_v2/WeekRibbon.gdc
+[  10% ] savepack | 正在保存文件：res://assets/branding/haohaochifan.ico
+[  10% ] savepack | 正在保存文件：res://.godot/imported/haohaochifan-144.png-b95d3a3d28e591a826dbbb3099a557b7.ctex
+[  10% ] savepack | 正在保存文件：res://assets/branding/haohaochifan-144.png.import
+[  10% ] savepack | 正在保存文件：res://.godot/imported/haohaochifan-180.png-807bae308c7620ccbf30ddc7f123eac2.ctex
+[  10% ] savepack | 正在保存文件：res://assets/branding/haohaochifan-180.png.import
+[  11% ] savepack | 正在保存文件：res://.godot/imported/haohaochifan-512.png-b61226dbe6e1a456f1d978acade5edcf.ctex
+[  11% ] savepack | 正在保存文件：res://assets/branding/haohaochifan-512.png.import
+[  11% ] savepack | 正在保存文件：res://.godot/imported/CampusHUDSerif-Semibold.ttf-9e0f89cf801864681dab7960e397701e.fontdata
+[  11% ] savepack | 正在保存文件：res://assets/fonts/CampusHUDSerif-Semibold.ttf.import
+[  12% ] savepack | 正在保存文件：res://.godot/exported/133200997/export-6272aa47ad221d94f9bcaf7df4327448-HouseholdBody.res
+[  12% ] savepack | 正在保存文件：res://assets/fonts/HouseholdSans-OFL.txt
+[  12% ] savepack | 正在保存文件：res://.godot/imported/HouseholdSansSC-Medium.ttf-641eaf151ebb64154a013737c5ea3b70.fontdata
+[  12% ] savepack | 正在保存文件：res://assets/fonts/HouseholdSansSC-Medium.ttf.import
+[  13% ] savepack | 正在保存文件：res://assets/fonts/NotoSerifSC-OFL.txt
+[  13% ] savepack | 正在保存文件：res://.godot/imported/allow_imperfection.png-225af4031053a3178f73bc9ed1d1514e.ctex
+[  13% ] savepack | 正在保存文件：res://assets/generated/actions/allow_imperfection.png.import
+[  14% ] savepack | 正在保存文件：res://.godot/imported/convenience_store.png-063c851362f6e7b3c4c8c4f8e69c2b5b.ctex
+[  14% ] savepack | 正在保存文件：res://assets/generated/actions/convenience_store.png.import
+[  14% ] savepack | 正在保存文件：res://.godot/imported/drink_water.png-b1adf1877968baa964af7174437c79c9.ctex
+[  14% ] savepack | 正在保存文件：res://assets/generated/actions/drink_water.png.import
+[  14% ] savepack | 正在保存文件：res://.godot/imported/go_cafeteria.png-d2ec2c647c7e2a20d662ac3770d3c49d.ctex
+[  14% ] savepack | 正在保存文件：res://assets/generated/actions/go_cafeteria.png.import
+[  15% ] savepack | 正在保存文件：res://.godot/imported/nap.png-be7f502130c0d7bbbd5f0af53b3d5513.ctex
+[  15% ] savepack | 正在保存文件：res://assets/generated/actions/nap.png.import
+[  15% ] savepack | 正在保存文件：res://.godot/imported/sleep_early.png-afe2be7ceb23b594bc10ad55ffa6100b.ctex
+[  15% ] savepack | 正在保存文件：res://assets/generated/actions/sleep_early.png.import
+[  16% ] savepack | 正在保存文件：res://.godot/imported/study.png-0b62c1cf3de2acf01e12cef6b0f097f0.ctex
+[  16% ] savepack | 正在保存文件：res://assets/generated/actions/study.png.import
+[  16% ] savepack | 正在保存文件：res://.godot/imported/walk.png-2ea9efad901b399fc7a30adadc885b99.ctex
+[  16% ] savepack | 正在保存文件：res://assets/generated/actions/walk.png.import
+[  16% ] savepack | 正在保存文件：res://.godot/imported/cafeteria_background.png-0d3277a045dc566b8f2617ebac912195.ctex
+[  16% ] savepack | 正在保存文件：res://assets/generated/backgrounds/cafeteria_background.png.import
+[  17% ] savepack | 正在保存文件：res://.godot/imported/convenience_background.png-a85facef887db91c26b5d2cfaecf1bb0.ctex
+[  17% ] savepack | 正在保存文件：res://assets/generated/backgrounds/convenience_background.png.import
+[  17% ] savepack | 正在保存文件：res://.godot/imported/dorm_background.png-6dc862c8c7669edc50261be0c082425c.ctex
+[  17% ] savepack | 正在保存文件：res://assets/generated/backgrounds/dorm_background.png.import
+[  18% ] savepack | 正在保存文件：res://.godot/imported/takeout_background.png-eaca7fa0949d77b8d507419ac55e2c5e.ctex
+[  18% ] savepack | 正在保存文件：res://assets/generated/backgrounds/takeout_background.png.import
+[  18% ] savepack | 正在保存文件：res://.godot/imported/apple.png-9e9cf70a1fe5f97bf46af5d99624a3e1.ctex
+[  18% ] savepack | 正在保存文件：res://assets/generated/cards/apple.png.import
+[  18% ] savepack | 正在保存文件：res://.godot/imported/banana.png-e9822a217bcf9080a00ab825aa345ed4.ctex
+[  18% ] savepack | 正在保存文件：res://assets/generated/cards/banana.png.import
+[  19% ] savepack | 正在保存文件：res://.godot/imported/bubble_tea.png-b1c16cd470d14bd97bebcb5434d383a9.ctex
+[  19% ] savepack | 正在保存文件：res://assets/generated/cards/bubble_tea.png.import
+[  19% ] savepack | 正在保存文件：res://.godot/imported/celery_pork_stir_fry.png-c1fa6b0e021945040ecf172a3541ef12.ctex
+[  19% ] savepack | 正在保存文件：res://assets/generated/cards/celery_pork_stir_fry.png.import
+[  20% ] savepack | 正在保存文件：res://.godot/imported/chicken_vegetable_rice.png-a73994036d0833983c1b004040ed0007.ctex
+[  20% ] savepack | 正在保存文件：res://assets/generated/cards/chicken_vegetable_rice.png.import
+[  20% ] savepack | 正在保存文件：res://.godot/imported/coffee.png-b7221350ad6629d6f7d57becd19b45b8.ctex
+[  20% ] savepack | 正在保存文件：res://assets/generated/cards/coffee.png.import
+[  20% ] savepack | 正在保存文件：res://.godot/imported/egg.png-93a98991fc4d890f1c683655f4082e48.ctex
+[  20% ] savepack | 正在保存文件：res://assets/generated/cards/egg.png.import
+[  21% ] savepack | 正在保存文件：res://.godot/imported/fried_chicken.png-05b0d93a8e2e29b0ee3c481885096720.ctex
+[  21% ] savepack | 正在保存文件：res://assets/generated/cards/fried_chicken.png.import
+[  21% ] savepack | 正在保存文件：res://.godot/imported/greens.png-9394e7484343f7784a08e9c7686ce3d7.ctex
+[  21% ] savepack | 正在保存文件：res://assets/generated/cards/greens.png.import
+[  22% ] savepack | 正在保存文件：res://.godot/imported/instant_noodles.png-c9fb801f4dce18bedeefb1fd2d12f942.ctex
+[  22% ] savepack | 正在保存文件：res://assets/generated/cards/instant_noodles.png.import
+[  22% ] savepack | 正在保存文件：res://.godot/imported/milk.png-381158592ed2d36343199a060dac86a3.ctex
+[  22% ] savepack | 正在保存文件：res://assets/generated/cards/milk.png.import
+[  22% ] savepack | 正在保存文件：res://.godot/imported/mixed_grain_rice.png-1a282eb3c52d4aba3b469df5ba051ce0.ctex
+[  22% ] savepack | 正在保存文件：res://assets/generated/cards/mixed_grain_rice.png.import
+[  23% ] savepack | 正在保存文件：res://.godot/imported/oatmeal.png-96ed57521f327489980f4f2d54d46d5f.ctex
+[  23% ] savepack | 正在保存文件：res://assets/generated/cards/oatmeal.png.import
+[  23% ] savepack | 正在保存文件：res://.godot/imported/plain_yogurt.png-97188583df5c503f7cc739cce9985408.ctex
+[  23% ] savepack | 正在保存文件：res://assets/generated/cards/plain_yogurt.png.import
+[  24% ] savepack | 正在保存文件：res://.godot/imported/rice_plain.png-2b13d19bbaf7c417b3893776c40375ff.ctex
+[  24% ] savepack | 正在保存文件：res://assets/generated/cards/rice_plain.png.import
+[  24% ] savepack | 正在保存文件：res://.godot/imported/salad_bowl.png-f572ee8a1f53263abbad2861474f9985.ctex
+[  24% ] savepack | 正在保存文件：res://assets/generated/cards/salad_bowl.png.import
+[  24% ] savepack | 正在保存文件：res://.godot/imported/sandwich.png-7d28ad49c79c00107f1294e728e148e8.ctex
+[  24% ] savepack | 正在保存文件：res://assets/generated/cards/sandwich.png.import
+[  25% ] savepack | 正在保存文件：res://.godot/imported/steamed_fish.png-9b76081355a8d120bda92e494d605d57.ctex
+[  25% ] savepack | 正在保存文件：res://assets/generated/cards/steamed_fish.png.import
+[  25% ] savepack | 正在保存文件：res://.godot/imported/tofu.png-3541321eb5951e15c787a8d7f5f60301.ctex
+[  25% ] savepack | 正在保存文件：res://assets/generated/cards/tofu.png.import
+[  26% ] savepack | 正在保存文件：res://.godot/imported/tomato.png-b61450836832888748fd9fa19287d29f.ctex
+[  26% ] savepack | 正在保存文件：res://assets/generated/cards/tomato.png.import
+[  26% ] savepack | 正在保存文件：res://.godot/imported/tomato_egg_stir_fry.png-f1bbb12581084a5f2c57193511e2ca65.ctex
+[  26% ] savepack | 正在保存文件：res://assets/generated/cards/tomato_egg_stir_fry.png.import
+[  26% ] savepack | 正在保存文件：res://.godot/imported/unsalted_nuts.png-43f9ee9d065dab38b9be62c6081b0be9.ctex
+[  26% ] savepack | 正在保存文件：res://assets/generated/cards/unsalted_nuts.png.import
+[  27% ] savepack | 正在保存文件：res://.godot/imported/whole_wheat_bread.png-7e0f59e0a343774b7625d77edf037664.ctex
+[  27% ] savepack | 正在保存文件：res://assets/generated/cards/whole_wheat_bread.png.import
+[  27% ] savepack | 正在保存文件：res://.godot/imported/student-v1.png-389f2f026ee825256e334e33ebb7a185.ctex
+[  27% ] savepack | 正在保存文件：res://assets/generated/character_select/student-v1.png.import
+[  27% ] savepack | 正在保存文件：res://.godot/imported/zhou-v1.png-3c6ea8cb9db26920afa4ddd361488396.ctex
+[  27% ] savepack | 正在保存文件：res://assets/generated/character_select/zhou-v1.png.import
+[  28% ] savepack | 正在保存文件：res://.godot/imported/barely_survived.png-82e6421723d2d172f1c4cde7a74cc31c.ctex
+[  28% ] savepack | 正在保存文件：res://assets/generated/endings/barely_survived.png.import
+[  28% ] savepack | 正在保存文件：res://.godot/imported/collapsed.png-b1df3653069eb6ce20cc5a349a12e478.ctex
+[  28% ] savepack | 正在保存文件：res://assets/generated/endings/collapsed.png.import
+[  29% ] savepack | 正在保存文件：res://.godot/imported/stable_endurance.png-6638c9551cd34fe8a94938c816e96145.ctex
+[  29% ] savepack | 正在保存文件：res://assets/generated/endings/stable_endurance.png.import
+[  29% ] savepack | 正在保存文件：res://.godot/imported/choir_stage.png-8da7718fba7eb1c01f6d4c305f971313.ctex
+[  29% ] savepack | 正在保存文件：res://assets/generated/stories/choir_stage.png.import
+[  29% ] savepack | 正在保存文件：res://.godot/imported/zhou_home.png-4603f496d9b0987dc80594310c851a04.ctex
+[  29% ] savepack | 正在保存文件：res://assets/generated/stories/zhou_home.png.import
+[  30% ] savepack | 正在保存文件：res://.godot/imported/zhou_huilan.png-a2542077c2b621b8ff4b88d8dc2e8661.ctex
+[  30% ] savepack | 正在保存文件：res://assets/generated/stories/zhou_huilan.png.import
+[  30% ] savepack | 正在保存文件：res://.godot/imported/zhou_call_friend-v1.png-4e7e4ed88623e7d0a3853bf61a09eaf0.ctex
+[  30% ] savepack | 正在保存文件：res://assets/generated/stories/actions/zhou_call_friend-v1.png.import
+[  31% ] savepack | 正在保存文件：res://.godot/imported/zhou_group_rehearsal-v1.png-69b1404af580b2c8e5a315f24e779dd2.ctex
+[  31% ] savepack | 正在保存文件：res://assets/generated/stories/actions/zhou_group_rehearsal-v1.png.import
+[  31% ] savepack | 正在保存文件：res://.godot/imported/zhou_perform-v1.png-0d2d1f695fb63850f6754d7696a30447.ctex
+[  31% ] savepack | 正在保存文件：res://assets/generated/stories/actions/zhou_perform-v1.png.import
+[  31% ] savepack | 正在保存文件：res://.godot/imported/zhou_rehearse-v1.png-27fc81b0aee5c7c7292501dfe162be64.ctex
+[  31% ] savepack | 正在保存文件：res://assets/generated/stories/actions/zhou_rehearse-v1.png.import
+[  32% ] savepack | 正在保存文件：res://.godot/imported/millet_porridge.png-05e9aa6f9def6b90884d2aa84a9126ee.ctex
+[  32% ] savepack | 正在保存文件：res://assets/generated/stories/foods/millet_porridge.png.import
+[  32% ] savepack | 正在保存文件：res://.godot/imported/soft_apple.png-593a9301ecc80b5523d95421001816bd.ctex
+[  32% ] savepack | 正在保存文件：res://assets/generated/stories/foods/soft_apple.png.import
+[  33% ] savepack | 正在保存文件：res://.godot/imported/soft_tofu_greens.png-747db2d8c730bf9dce0f643784a1a72f.ctex
+[  33% ] savepack | 正在保存文件：res://assets/generated/stories/foods/soft_tofu_greens.png.import
+[  33% ] savepack | 正在保存文件：res://.godot/imported/steamed_egg.png-afd938e34560bfdde7bed558e0bd096a.ctex
+[  33% ] savepack | 正在保存文件：res://assets/generated/stories/foods/steamed_egg.png.import
+[  33% ] savepack | 正在保存文件：res://.godot/imported/convenience_background_day-v1.png-d498959512df02dd632e279a97082508.ctex
+[  33% ] savepack | 正在保存文件：res://assets/generated/stories/home_source/convenience_background_day-v1.png.import
+[  33% ] savepack | 正在保存文件：res://.godot/imported/zhou-home-source-portrait-v1.png-bd98616b4297d623b0eb812ddb1fc5da.ctex
+[  33% ] savepack | 正在保存文件：res://assets/generated/stories/home_source/zhou-home-source-portrait-v1.png.import
+[  33% ] savepack | 正在保存文件：res://.godot/imported/zhou-home-source-wide-v1.png-6d4c400fa18bd61b017d4e87fc8791ff.ctex
+[  33% ] savepack | 正在保存文件：res://assets/generated/stories/home_source/zhou-home-source-wide-v1.png.import
+[  34% ] savepack | 正在保存文件：res://.godot/imported/ingredient_atlas.png-27af8f2b43c9da5fb76f1867a17abc12.ctex
+[  34% ] savepack | 正在保存文件：res://assets/generated/stories/ingredients/ingredient_atlas.png.import
+[  34% ] savepack | 正在保存文件：res://assets/generated/stories/ingredients/ingredient_regions.json
+[  34% ] savepack | 正在保存文件：res://.godot/imported/steamed-bun-v1.png-db8d4b274a7b9a7962bad16f47b1f453.ctex
+[  34% ] savepack | 正在保存文件：res://assets/generated/stories/locations/steamed-bun-v1.png.import
+[  35% ] savepack | 正在保存文件：res://.godot/imported/zhou-breakfast-shop-v1.png-af64d400de1018ec474cdda6abebf041.ctex
+[  35% ] savepack | 正在保存文件：res://assets/generated/stories/locations/zhou-breakfast-shop-v1.png.import
+[  35% ] savepack | 正在保存文件：res://.godot/imported/zhou-fruit-stall-v1.png-3414bef16540193c70e9479a9fe1346f.ctex
+[  35% ] savepack | 正在保存文件：res://assets/generated/stories/locations/zhou-fruit-stall-v1.png.import
+[  36% ] savepack | 正在保存文件：res://.godot/imported/zhou-homestyle-diner-v1.png-f7304182dabc235d20d6e7681f41546b.ctex
+[  36% ] savepack | 正在保存文件：res://assets/generated/stories/locations/zhou-homestyle-diner-v1.png.import
+[  36% ] savepack | 正在保存文件：res://.godot/imported/zhou-kitchen-portrait-v1.png-3681de197de57286ced359929723f3ef.ctex
+[  36% ] savepack | 正在保存文件：res://assets/generated/stories/locations/zhou-kitchen-portrait-v1.png.import
+[  36% ] savepack | 正在保存文件：res://.godot/imported/zhou-kitchen-v1.png-502167db54319bfc1b9760d5974a699f.ctex
+[  36% ] savepack | 正在保存文件：res://assets/generated/stories/locations/zhou-kitchen-v1.png.import
+[  37% ] savepack | 正在保存文件：res://.godot/imported/zhou-market-portrait-v1.png-1f74da83597e64ddef07f12c7445e94e.ctex
+[  37% ] savepack | 正在保存文件：res://assets/generated/stories/locations/zhou-market-portrait-v1.png.import
+[  37% ] savepack | 正在保存文件：res://.godot/imported/zhou-market-wide-v1.png-d2453208a5d84cd097432b7d020aca8f.ctex
+[  37% ] savepack | 正在保存文件：res://assets/generated/stories/locations/zhou-market-wide-v1.png.import
+[  38% ] savepack | 正在保存文件：res://.godot/imported/zhou-open-fridge-v1.png-948e19dd6ccb813e01f0bc17970baae8.ctex
+[  38% ] savepack | 正在保存文件：res://assets/generated/stories/locations/zhou-open-fridge-v1.png.import
+[  38% ] savepack | 正在保存文件：res://.godot/imported/zhou_home_night-v1.png-d1b85d6515b9457177d9650bd2a45a50.ctex
+[  38% ] savepack | 正在保存文件：res://assets/generated/stories/night/zhou_home_night-v1.png.import
+[  38% ] savepack | 正在保存文件：res://.godot/imported/zhou_review_score-v1.png-cd6da753dd5c81e4fdead18cffc6e546.ctex
+[  38% ] savepack | 正在保存文件：res://assets/generated/stories/night/zhou_review_score-v1.png.import
+[  39% ] savepack | 正在保存文件：res://.godot/imported/zhou_scroll_phone-v1.png-caa2a8db7284ae6f2140714e414815fb.ctex
+[  39% ] savepack | 正在保存文件：res://assets/generated/stories/night/zhou_scroll_phone-v1.png.import
+[  39% ] savepack | 正在保存文件：res://.godot/imported/zhou_sleep_early-v1.png-cbe3e263464b0206e428695fecdffec6.ctex
+[  39% ] savepack | 正在保存文件：res://assets/generated/stories/night/zhou_sleep_early-v1.png.import
+[  40% ] savepack | 正在保存文件：res://.godot/imported/breakfast-steamer-v1.png-97c62c8b4af37ca862189428e06d83de.ctex
+[  40% ] savepack | 正在保存文件：res://assets/generated/stories/props/breakfast-steamer-v1.png.import
+[  40% ] savepack | 正在保存文件：res://.godot/imported/cooking-wok-v1.png-6744ad826dbfca799679d51f338060ae.ctex
+[  40% ] savepack | 正在保存文件：res://assets/generated/stories/props/cooking-wok-v1.png.import
+[  40% ] savepack | 正在保存文件：res://.godot/imported/fruit-baskets-v1.png-bdbd8e9db88f700a60fb3da7d9a09fe1.ctex
+[  40% ] savepack | 正在保存文件：res://assets/generated/stories/props/fruit-baskets-v1.png.import
+[  41% ] savepack | 正在保存文件：res://.godot/imported/homestyle-meal-v1.png-e50b3e9f7b457ee386980dff27e127c4.ctex
+[  41% ] savepack | 正在保存文件：res://assets/generated/stories/props/homestyle-meal-v1.png.import
+[  41% ] savepack | 正在保存文件：res://.godot/imported/notebook-pencil-v1.png-fd2698f493082f22e632c143312bc0d6.ctex
+[  41% ] savepack | 正在保存文件：res://assets/generated/stories/props/notebook-pencil-v1.png.import
+[  42% ] savepack | 正在保存文件：res://.godot/imported/outing-tote-v1.png-279219841970741d6332dc1555ffdba9.ctex
+[  42% ] savepack | 正在保存文件：res://assets/generated/stories/props/outing-tote-v1.png.import
+[  42% ] savepack | 正在保存文件：res://.godot/imported/pantry-fridge-v1.png-f77e7fee0e5903681da0850cb9357b79.ctex
+[  42% ] savepack | 正在保存文件：res://assets/generated/stories/props/pantry-fridge-v1.png.import
+[  42% ] savepack | 正在保存文件：res://assets/generated/stories/props/regions.json
+[  43% ] savepack | 正在保存文件：res://.godot/imported/neighborhood-scene-portrait-v2.png-4ac9109d450503c5044f7de27417edc8.ctex
+[  43% ] savepack | 正在保存文件：res://assets/generated/stories/sources/neighborhood-scene-portrait-v2.png.import
+[  43% ] savepack | 正在保存文件：res://.godot/imported/neighborhood-scene-wide-v2.png-8bf11135abcc814c16adbdb3df1f0ab7.ctex
+[  43% ] savepack | 正在保存文件：res://assets/generated/stories/sources/neighborhood-scene-wide-v2.png.import
+[  44% ] savepack | 正在保存文件：res://.godot/imported/student-campus-v1.png-fbfd2582edfef5ce9dee3dc35e553d87.ctex
+[  44% ] savepack | 正在保存文件：res://assets/generated/title_life/student-campus-v1.png.import
+[  44% ] savepack | 正在保存文件：res://.godot/imported/student-meal-v1.png-33c1668c723def0338f5ef58ae5b5e22.ctex
+[  44% ] savepack | 正在保存文件：res://assets/generated/title_life/student-meal-v1.png.import
+[  44% ] savepack | 正在保存文件：res://.godot/imported/student-night-v1.png-47b9b42facb143bf3a615fae54ac3f77.ctex
+[  44% ] savepack | 正在保存文件：res://assets/generated/title_life/student-night-v1.png.import
+[  45% ] savepack | 正在保存文件：res://.godot/imported/zhou-balcony-v1.png-e39b35ab98d45ed1003e1de91b5ad460.ctex
+[  45% ] savepack | 正在保存文件：res://assets/generated/title_life/zhou-balcony-v1.png.import
+[  45% ] savepack | 正在保存文件：res://.godot/imported/zhou-market-v1.png-666431d5bfa02f79f0e941c1d13c0e74.ctex
+[  45% ] savepack | 正在保存文件：res://assets/generated/title_life/zhou-market-v1.png.import
+[  46% ] savepack | 正在保存文件：res://.godot/imported/zhou-songbook-v1.png-f76f9c98f0fddc0cf1a1d0e1469cb670.ctex
+[  46% ] savepack | 正在保存文件：res://assets/generated/title_life/zhou-songbook-v1.png.import
+[  46% ] savepack | 正在保存文件：res://.godot/imported/action_evening_16x9.png-75f48e3455bca7f7e15a6e0bb530adf1.ctex
+[  46% ] savepack | 正在保存文件：res://assets/generated/ui_v2/backgrounds/action_evening_16x9.png.import
+[  46% ] savepack | 正在保存文件：res://.godot/imported/action_evening_9x16.png-a14754348a18086db68572ebc03b7ccc.ctex
+[  46% ] savepack | 正在保存文件：res://assets/generated/ui_v2/backgrounds/action_evening_9x16.png.import
+[  47% ] savepack | 正在保存文件：res://.godot/imported/action_morning_16x9.png-66711273890f737ab9bc81bb75cb613b.ctex
+[  47% ] savepack | 正在保存文件：res://assets/generated/ui_v2/backgrounds/action_morning_16x9.png.import
+[  47% ] savepack | 正在保存文件：res://.godot/imported/action_morning_9x16.png-515011af518ddeb4769a147e2f6e88ec.ctex
+[  47% ] savepack | 正在保存文件：res://assets/generated/ui_v2/backgrounds/action_morning_9x16.png.import
+[  48% ] savepack | 正在保存文件：res://.godot/imported/action_noon_16x9.png-3cf171b0adce8acbf4927bdf58b49f20.ctex
+[  48% ] savepack | 正在保存文件：res://assets/generated/ui_v2/backgrounds/action_noon_16x9.png.import
+[  48% ] savepack | 正在保存文件：res://.godot/imported/action_noon_9x16.png-af5bb8e226aa0ec4427904bff28f508f.ctex
+[  48% ] savepack | 正在保存文件：res://assets/generated/ui_v2/backgrounds/action_noon_9x16.png.import
+[  48% ] savepack | 正在保存文件：res://.godot/imported/night_study_art.png-bc26afc2a8b0d80bf2ea1ae5beca2862.ctex
+[  48% ] savepack | 正在保存文件：res://assets/generated/ui_v2/card_art/sleep/night_study_art.png.import
+[  49% ] savepack | 正在保存文件：res://.godot/imported/scroll_phone_art.png-5a3eb7d0ef77b77dfcd2ffa2440e65f9.ctex
+[  49% ] savepack | 正在保存文件：res://assets/generated/ui_v2/card_art/sleep/scroll_phone_art.png.import
+[  49% ] savepack | 正在保存文件：res://.godot/imported/mock_exam_notice.png-6a6253839307076c23476c4df4412895.ctex
+[  49% ] savepack | 正在保存文件：res://assets/generated/ui_v2/day_popup/events/mock_exam_notice.png.import
+[  50% ] savepack | 正在保存文件：res://.godot/imported/rainy_day.png-5a612fffdf4ed2de5712a25f8b0de32c.ctex
+[  50% ] savepack | 正在保存文件：res://assets/generated/ui_v2/day_popup/events/rainy_day.png.import
+[  50% ] savepack | 正在保存文件：res://.godot/imported/clear_focus.png-a8976ad8ea1504765589dad7d43992d7.ctex
+[  50% ] savepack | 正在保存文件：res://assets/generated/ui_v2/day_popup/states/clear_focus.png.import
+[  50% ] savepack | 正在保存文件：res://.godot/imported/cafeteria_window_alpha.png-a6269cebb6f7d8e3d3b8835677cbb5d6.ctex
+[  50% ] savepack | 正在保存文件：res://assets/generated/ui_v2/props/cafeteria_window_alpha.png.import
+[  51% ] savepack | 正在保存文件：res://.godot/imported/convenience_shelf_alpha.png-89394f50e0c6376c8a0e77c891883d7b.ctex
+[  51% ] savepack | 正在保存文件：res://assets/generated/ui_v2/props/convenience_shelf_alpha.png.import
+[  51% ] savepack | 正在保存文件：res://.godot/imported/dorm_pantry_alpha.png-a799b57fd130057cf8d8ec927e5822a5.ctex
+[  51% ] savepack | 正在保存文件：res://assets/generated/ui_v2/props/dorm_pantry_alpha.png.import
+[  51% ] savepack | 正在保存文件：res://.godot/imported/takeout_phone_alpha.png-c375429621d0467fc5f7f76f5a7f0ed1.ctex
+[  51% ] savepack | 正在保存文件：res://assets/generated/ui_v2/props/takeout_phone_alpha.png.import
+[  52% ] savepack | 正在保存文件：res://.godot/imported/campus_afternoon.png-3c1863b47afff46ecdddd17988de19c4.ctex
+[  52% ] savepack | 正在保存文件：res://assets/generated/ui_v3/backgrounds/campus_afternoon.png.import
+[  52% ] savepack | 正在保存文件：res://.godot/imported/campus_evening.png-1a07c6a10bb236c603dc1332602abbd7.ctex
+[  52% ] savepack | 正在保存文件：res://assets/generated/ui_v3/backgrounds/campus_evening.png.import
+[  53% ] savepack | 正在保存文件：res://.godot/imported/campus_map_portrait.png-32d0169874ef8b764f54006bf24789b4.ctex
+[  53% ] savepack | 正在保存文件：res://assets/generated/ui_v3/backgrounds/campus_map_portrait.png.import
+[  53% ] savepack | 正在保存文件：res://.godot/imported/dorm_morning.png-ad4445b0d15dd91079f487c10ba1d776.ctex
+[  53% ] savepack | 正在保存文件：res://assets/generated/ui_v3/backgrounds/dorm_morning.png.import
+[  53% ] savepack | 正在保存文件：res://.godot/imported/cafeteria_tray.png-b460fe6b78b9b806ff6b6afdffba8f21.ctex
+[  53% ] savepack | 正在保存文件：res://assets/generated/ui_v3/props/cafeteria_tray.png.import
+[  54% ] savepack | 正在保存文件：res://.godot/imported/takeout_phone_compact.png-2f6a8c2da37ba51d273ed24548623d18.ctex
+[  54% ] savepack | 正在保存文件：res://assets/generated/ui_v3/props/takeout_phone_compact.png.import
+[  54% ] savepack | 正在保存文件：res://data/title_life_scenes.json
+[  55% ] savepack | 正在保存文件：res://data/cards/actions.xml
+[  55% ] savepack | 正在保存文件：res://data/cards/foods.xml
+[  55% ] savepack | 正在保存文件：res://data/cards/meal_sources.xml
+[  56% ] savepack | 正在保存文件：res://data/cards/sleep_options.xml
+[  56% ] savepack | 正在保存文件：res://data/characters/default_food_preferences.xml
+[  57% ] savepack | 正在保存文件：res://data/characters/personas.xml
+[  57% ] savepack | 正在保存文件：res://data/characters/zhou_food_preferences.xml
+[  57% ] savepack | 正在保存文件：res://data/health/evidence_registry.xml
+[  58% ] savepack | 正在保存文件：res://data/health/food_health_profiles.xml
+[  58% ] savepack | 正在保存文件：res://data/health/guidance_copy.xml
+[  59% ] savepack | 正在保存文件：res://data/stories/choir_actions.xml
+[  59% ] savepack | 正在保存文件：res://data/stories/choir_foods.xml
+[  59% ] savepack | 正在保存文件：res://data/stories/choir_sources.xml
+[  60% ] savepack | 正在保存文件：res://data/stories/stories.xml
+[  60% ] savepack | 正在保存文件：res://.godot/exported/133200997/export-e37aaf7a74d12f5fd0a9e0632ff85425-CharacterHUDFont.res
+[  61% ] savepack | 正在保存文件：res://.godot/exported/133200997/export-e6a78aeb47e9140e02558f57b8399de8-CompactChoiceCard.scn
+[  61% ] savepack | 正在保存文件：res://.godot/exported/133200997/export-67c60f7a03a0241a7159d0ee1018a875-MealCompositionPanel.scn
+[  61% ] savepack | 正在保存文件：res://.godot/exported/133200997/export-abedbbc24108f82269e4b58ee6b234bd-MealRecordBookPopup.scn
+[  62% ] savepack | 正在保存文件：res://.godot/exported/133200997/export-084a05b4e976de34b4ed8031f7efbf8b-SelectedFoodCard.scn
+[  62% ] savepack | 正在保存文件：res://.godot/exported/133200997/export-4764bc169b0b0270a0a39356d365db66-TakeoutFoodRowCard.scn
+[  63% ] savepack | 正在保存文件：res://.godot/exported/133200997/export-4472ac02367e35d76063bf8fbd4eefdd-ToastItem.scn
+[  63% ] savepack | 正在保存文件：res://.godot/exported/133200997/export-5d58956b97761a1243a82af78d57f658-ActionStage.scn
+[  63% ] savepack | 正在保存文件：res://.godot/exported/133200997/export-e5e0154bb36ddc28820c26e982fc75bf-CafeteriaMealStage.scn
+[  64% ] savepack | 正在保存文件：res://.godot/exported/133200997/export-aec0a1b8cef3aec139f97e9ef3218dc2-ConvenienceMealStage.scn
+[  64% ] savepack | 正在保存文件：res://.godot/exported/133200997/export-4b31e09adcaff65ca1799770633f221b-DormPantryStage.scn
+[  65% ] savepack | 正在保存文件：res://.godot/exported/133200997/export-7aeb58d654cab1bc40fd7af554a3fc5d-MealSourceStage.scn
+[  65% ] savepack | 正在保存文件：res://.godot/exported/133200997/export-5c293fda232c2562d18aaab2d56674de-SleepStage.scn
+[  65% ] savepack | 正在保存文件：res://.godot/exported/133200997/export-f721e681c1d23d1f31f32ab9a196107d-TakeoutMealStage.scn
+[  66% ] savepack | 正在保存文件：res://.godot/exported/133200997/export-55108b17ca708c98a24e799ce5e56376-HouseholdMealStage.scn
+[  66% ] savepack | 正在保存文件：res://.godot/exported/133200997/export-57fae06d3f576d209af88d10cd97dd8b-HouseholdSourceStage.scn
+[  66% ] savepack | 正在保存文件：res://scripts/CardDataStore.gdc
+[  66% ] savepack | 正在保存文件：res://scripts/GameData.gdc
+[  66% ] savepack | 正在保存文件：res://scripts/health/DietPatternEvaluator.gdc
+[  67% ] savepack | 正在保存文件：res://scripts/health/DietPatternLedger.gdc
+[  67% ] savepack | 正在保存文件：res://scripts/health/DietPatternPresenter.gdc
+[  68% ] savepack | 正在保存文件：res://scripts/health/FeasibleSuggestionService.gdc
+[  68% ] savepack | 正在保存文件：res://scripts/health/GuidanceComposer.gdc
+[  68% ] savepack | 正在保存文件：res://scripts/health/HealthDataStore.gdc
+[  69% ] savepack | 正在保存文件：res://scripts/health/HealthDataValidator.gdc
+[  69% ] savepack | 正在保存文件：res://scripts/health/HealthEvidenceRegistry.gdc
+[  70% ] savepack | 正在保存文件：res://scripts/health/HealthGuidanceConfig.gdc
+[  70% ] savepack | 正在保存文件：res://scripts/health/HealthGuidanceFeatureFlags.gdc
+[  70% ] savepack | 正在保存文件：res://scripts/health/HealthGuidancePresenter.gdc
+[  71% ] savepack | 正在保存文件：res://scripts/health/HealthXmlStructure.gdc
+[  71% ] savepack | 正在保存文件：res://scripts/health/MealGuidanceAdapter.gdc
+[  72% ] savepack | 正在保存文件：res://scripts/health/MealGuidanceShadow.gdc
+[  72% ] savepack | 正在保存文件：res://scripts/health/MealHealthArchive.gdc
+[  72% ] savepack | 正在保存文件：res://scripts/health/MealHealthSnapshot.gdc
+[  73% ] savepack | 正在保存文件：res://scripts/health/SuggestionMemory.gdc
+[  73% ] savepack | 正在保存文件：res://scripts/stories/CookingPlanStage.gdc
+[  74% ] savepack | 正在保存文件：res://scripts/stories/GameSaveCodec.gdc
+[  74% ] savepack | 正在保存文件：res://scripts/stories/GameSaveStore.gdc
+[  74% ] savepack | 正在保存文件：res://scripts/stories/HouseholdDayFive.gdc
+[  75% ] savepack | 正在保存文件：res://scripts/stories/HouseholdDayFivePresenter.gdc
+[  75% ] savepack | 正在保存文件：res://scripts/stories/HouseholdFinale.gdc
+[  75% ] savepack | 正在保存文件：res://scripts/stories/HouseholdFinalePresenter.gdc
+[  76% ] savepack | 正在保存文件：res://scripts/stories/HouseholdFoodCard.gdc
+[  76% ] savepack | 正在保存文件：res://scripts/stories/HouseholdLearningFlow.gdc
+[  77% ] savepack | 正在保存文件：res://scripts/stories/HouseholdLearningPresenter.gdc
+[  77% ] savepack | 正在保存文件：res://scripts/stories/HouseholdLocations.gdc
+[  77% ] savepack | 正在保存文件：res://scripts/stories/HouseholdMarketStage.gdc
+[  78% ] savepack | 正在保存文件：res://scripts/stories/HouseholdMealFacts.gdc
+[  78% ] savepack | 正在保存文件：res://scripts/stories/HouseholdMealLearning.gdc
+[  79% ] savepack | 正在保存文件：res://scripts/stories/HouseholdMealStage.gdc
+[  79% ] savepack | 正在保存文件：res://scripts/stories/HouseholdPreparation.gdc
+[  79% ] savepack | 正在保存文件：res://scripts/stories/HouseholdPreparationPresenter.gdc
+[  80% ] savepack | 正在保存文件：res://scripts/stories/HouseholdPropArt.gdc
+[  80% ] savepack | 正在保存文件：res://scripts/stories/HouseholdPropButton.gdc
+[  81% ] savepack | 正在保存文件：res://scripts/stories/HouseholdSourceStage.gdc
+[  81% ] savepack | 正在保存文件：res://scripts/stories/HouseholdStudyPresenter.gdc
+[  81% ] savepack | 正在保存文件：res://scripts/stories/HouseholdUI.gdc
+[  82% ] savepack | 正在保存文件：res://scripts/stories/HouseholdWorktop.gdc
+[  82% ] savepack | 正在保存文件：res://scripts/stories/KitchenStock.gdc
+[  83% ] savepack | 正在保存文件：res://scripts/stories/KitchenStockStage.gdc
+[  83% ] savepack | 正在保存文件：res://scripts/stories/LifeSceneBackdrop.gdc
+[  83% ] savepack | 正在保存文件：res://scripts/stories/LifeSceneCatalog.gdc
+[  84% ] savepack | 正在保存文件：res://scripts/stories/PropTint.gdshader
+[  84% ] savepack | 正在保存文件：res://scripts/stories/SeriesCharacterStrip.gdc
+[  85% ] savepack | 正在保存文件：res://scripts/stories/SeriesMenu.gdc
+[  85% ] savepack | 正在保存文件：res://scripts/stories/SharedMealPlan.gdc
+[  85% ] savepack | 正在保存文件：res://scripts/stories/StoryCatalog.gdc
+[  86% ] savepack | 正在保存文件：res://scripts/stories/StoryDialog.gdc
+[  86% ] savepack | 正在保存文件：res://scripts/stories/StoryEducation.gdc
+[  87% ] savepack | 正在保存文件：res://scripts/stories/StorySession.gdc
+[  87% ] savepack | 正在保存文件：res://scripts/stories/web_save_bridge.js
+[  87% ] savepack | 正在保存文件：res://scripts/systems/DayCarryoverService.gdc
+[  88% ] savepack | 正在保存文件：res://scripts/systems/FoodPreferenceService.gdc
+[  88% ] savepack | 正在保存文件：res://scripts/systems/GameplayBalanceRules.gdc
+[  89% ] savepack | 正在保存文件：res://scripts/systems/GameReserveCalculator.gdc
+[  89% ] savepack | 正在保存文件：res://scripts/systems/MealDeckService.gdc
+[  89% ] savepack | 正在保存文件：res://scripts/systems/MealRecordPresenter.gdc
+[  90% ] savepack | 正在保存文件：res://scripts/systems/MealResolver.gdc
+[  90% ] savepack | 正在保存文件：res://scripts/systems/NutritionLedger.gdc
+[  91% ] savepack | 正在保存文件：res://scripts/systems/RecoveryGameplayService.gdc
+[  91% ] savepack | 正在保存文件：res://scripts/systems/RecoveryPresenter.gdc
+[  91% ] savepack | 正在保存文件：res://scripts/systems/RecoveryRules.gdc
+[  92% ] savepack | 正在保存文件：res://scripts/systems/RecoveryStateMigration.gdc
+[  92% ] savepack | 正在保存文件：res://scripts/systems/RecoveryStateService.gdc
+[  93% ] savepack | 正在保存文件：res://scripts/systems/WeeklyEventService.gdc
+[  93% ] savepack | 正在保存文件：res://scripts/ui_v2/CompactChoiceCard.gdc
+[  93% ] savepack | 正在保存文件：res://scripts/ui_v2/DecisionCostPreview.gdc
+[  94% ] savepack | 正在保存文件：res://scripts/ui_v2/MealCompositionPanel.gdc
+[  94% ] savepack | 正在保存文件：res://scripts/ui_v2/MealRecordBookPopup.gdc
+[  95% ] savepack | 正在保存文件：res://scripts/ui_v2/SelectedFoodCard.gdc
+[  95% ] savepack | 正在保存文件：res://scripts/ui_v2/TakeoutFoodRowCard.gdc
+[  95% ] savepack | 正在保存文件：res://scripts/ui_v2/stages/ActionStage.gdc
+[  96% ] savepack | 正在保存文件：res://scripts/ui_v2/stages/CafeteriaMealStage.gdc
+[  96% ] savepack | 正在保存文件：res://scripts/ui_v2/stages/ConvenienceMealStage.gdc
+[  97% ] savepack | 正在保存文件：res://scripts/ui_v2/stages/DormPantryStage.gdc
+[  97% ] savepack | 正在保存文件：res://scripts/ui_v2/stages/MealSourceStage.gdc
+[  97% ] savepack | 正在保存文件：res://scripts/ui_v2/stages/MealStageBase.gdc
+[  98% ] savepack | 正在保存文件：res://scripts/ui_v2/stages/SleepStage.gdc
+[  98% ] savepack | 正在保存文件：res://scripts/ui_v2/stages/TakeoutMealStage.gdc
+[  98% ] savepack | 正在保存文件：res://scenes/boot/Boot.tscn.remap
+[  98% ] savepack | 正在保存文件：res://scripts/Boot.gd.remap
+[  98% ] savepack | 正在保存文件：res://scenes/main_menu/MainMenu.tscn.remap
+[  98% ] savepack | 正在保存文件：res://scripts/MainMenu.gd.remap
+[  98% ] savepack | 正在保存文件：res://scenes/game_v2/V2Theme.tres.remap
+[  98% ] savepack | 正在保存文件：res://scenes/game_v2/GameRootV2.tscn.remap
+[  98% ] savepack | 正在保存文件：res://scripts/ui_v2/GameRootV2.gd.remap
+[  98% ] savepack | 正在保存文件：res://scenes/game_v2/components/CharacterHUD.tscn.remap
+[  98% ] savepack | 正在保存文件：res://scripts/ui_v2/CharacterHUD.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/ui_v2/HudStudyProgressStrip.gd.remap
+[  98% ] savepack | 正在保存文件：res://scenes/game_v2/components/ToastFeedV2.tscn.remap
+[  98% ] savepack | 正在保存文件：res://scripts/ui_v2/ToastFeedV2.gd.remap
+[  98% ] savepack | 正在保存文件：res://scenes/game_v2/components/StickyNotePopup.tscn.remap
+[  98% ] savepack | 正在保存文件：res://scripts/ui_v2/StickyNotePopup.gd.remap
+[  98% ] savepack | 正在保存文件：res://scenes/game_v2/components/DailySummaryPopup.tscn.remap
+[  98% ] savepack | 正在保存文件：res://scripts/ui_v2/DailySummaryPopup.gd.remap
+[  98% ] savepack | 正在保存文件：res://scenes/game_v2/components/NewDayPopup.tscn.remap
+[  98% ] savepack | 正在保存文件：res://scripts/ui_v2/NewDayPopup.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/ui_v2/WeekRibbon.gd.remap
+[  98% ] savepack | 正在保存文件：res://assets/fonts/HouseholdBody.tres.remap
+[  98% ] savepack | 正在保存文件：res://scenes/game_v2/components/CharacterHUDFont.tres.remap
+[  98% ] savepack | 正在保存文件：res://scenes/game_v2/components/CompactChoiceCard.tscn.remap
+[  98% ] savepack | 正在保存文件：res://scenes/game_v2/components/MealCompositionPanel.tscn.remap
+[  98% ] savepack | 正在保存文件：res://scenes/game_v2/components/MealRecordBookPopup.tscn.remap
+[  98% ] savepack | 正在保存文件：res://scenes/game_v2/components/SelectedFoodCard.tscn.remap
+[  98% ] savepack | 正在保存文件：res://scenes/game_v2/components/TakeoutFoodRowCard.tscn.remap
+[  98% ] savepack | 正在保存文件：res://scenes/game_v2/components/ToastItem.tscn.remap
+[  98% ] savepack | 正在保存文件：res://scenes/game_v2/stages/ActionStage.tscn.remap
+[  98% ] savepack | 正在保存文件：res://scenes/game_v2/stages/CafeteriaMealStage.tscn.remap
+[  98% ] savepack | 正在保存文件：res://scenes/game_v2/stages/ConvenienceMealStage.tscn.remap
+[  98% ] savepack | 正在保存文件：res://scenes/game_v2/stages/DormPantryStage.tscn.remap
+[  98% ] savepack | 正在保存文件：res://scenes/game_v2/stages/MealSourceStage.tscn.remap
+[  98% ] savepack | 正在保存文件：res://scenes/game_v2/stages/SleepStage.tscn.remap
+[  98% ] savepack | 正在保存文件：res://scenes/game_v2/stages/TakeoutMealStage.tscn.remap
+[  98% ] savepack | 正在保存文件：res://scenes/stories/HouseholdMealStage.tscn.remap
+[  98% ] savepack | 正在保存文件：res://scenes/stories/HouseholdSourceStage.tscn.remap
+[  98% ] savepack | 正在保存文件：res://scripts/CardDataStore.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/GameData.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/health/DietPatternEvaluator.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/health/DietPatternLedger.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/health/DietPatternPresenter.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/health/FeasibleSuggestionService.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/health/GuidanceComposer.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/health/HealthDataStore.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/health/HealthDataValidator.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/health/HealthEvidenceRegistry.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/health/HealthGuidanceConfig.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/health/HealthGuidanceFeatureFlags.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/health/HealthGuidancePresenter.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/health/HealthXmlStructure.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/health/MealGuidanceAdapter.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/health/MealGuidanceShadow.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/health/MealHealthArchive.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/health/MealHealthSnapshot.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/health/SuggestionMemory.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/stories/CookingPlanStage.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/stories/GameSaveCodec.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/stories/GameSaveStore.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/stories/HouseholdDayFive.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/stories/HouseholdDayFivePresenter.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/stories/HouseholdFinale.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/stories/HouseholdFinalePresenter.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/stories/HouseholdFoodCard.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/stories/HouseholdLearningFlow.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/stories/HouseholdLearningPresenter.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/stories/HouseholdLocations.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/stories/HouseholdMarketStage.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/stories/HouseholdMealFacts.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/stories/HouseholdMealLearning.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/stories/HouseholdMealStage.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/stories/HouseholdPreparation.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/stories/HouseholdPreparationPresenter.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/stories/HouseholdPropArt.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/stories/HouseholdPropButton.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/stories/HouseholdSourceStage.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/stories/HouseholdStudyPresenter.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/stories/HouseholdUI.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/stories/HouseholdWorktop.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/stories/KitchenStock.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/stories/KitchenStockStage.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/stories/LifeSceneBackdrop.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/stories/LifeSceneCatalog.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/stories/SeriesCharacterStrip.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/stories/SeriesMenu.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/stories/SharedMealPlan.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/stories/StoryCatalog.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/stories/StoryDialog.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/stories/StoryEducation.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/stories/StorySession.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/systems/DayCarryoverService.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/systems/FoodPreferenceService.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/systems/GameplayBalanceRules.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/systems/GameReserveCalculator.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/systems/MealDeckService.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/systems/MealRecordPresenter.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/systems/MealResolver.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/systems/NutritionLedger.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/systems/RecoveryGameplayService.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/systems/RecoveryPresenter.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/systems/RecoveryRules.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/systems/RecoveryStateMigration.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/systems/RecoveryStateService.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/systems/WeeklyEventService.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/ui_v2/CompactChoiceCard.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/ui_v2/DecisionCostPreview.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/ui_v2/MealCompositionPanel.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/ui_v2/MealRecordBookPopup.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/ui_v2/SelectedFoodCard.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/ui_v2/TakeoutFoodRowCard.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/ui_v2/stages/ActionStage.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/ui_v2/stages/CafeteriaMealStage.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/ui_v2/stages/ConvenienceMealStage.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/ui_v2/stages/DormPantryStage.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/ui_v2/stages/MealSourceStage.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/ui_v2/stages/MealStageBase.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/ui_v2/stages/SleepStage.gd.remap
+[  98% ] savepack | 正在保存文件：res://scripts/ui_v2/stages/TakeoutMealStage.gd.remap
+[  98% ] savepack | 正在保存文件：res://.godot/global_script_class_cache.cfg
+[  98% ] savepack | 正在保存文件：res://assets/branding/haohaochifan-512.png
+[  98% ] savepack | 正在保存文件：res://assets/branding/haohaochifan-256.png
+[  98% ] savepack | 正在保存文件：res://.godot/uid_cache.bin
+[  98% ] savepack | 正在保存文件：res://project.binary
+[ DONE ] savepack
+
+
+==> Prepare title loading backgrounds
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+WARNING: Loaded resource as image file, this will not work on export: 'res://assets/generated/title_life/student-meal-v1.png'. Instead, import the image file as an Image resource and load it normally as a resource.
+   at: load_from_file (core/io/image.cpp:2780)
+   GDScript backtrace (most recent call first):
+       [0] _initialize (E:/nutrition_life_strategy_game/tools/prepare_title_web_assets.gd:15)
+WARNING: Loaded resource as image file, this will not work on export: 'res://assets/generated/title_life/zhou-songbook-v1.png'. Instead, import the image file as an Image resource and load it normally as a resource.
+   at: load_from_file (core/io/image.cpp:2780)
+   GDScript backtrace (most recent call first):
+       [0] _initialize (E:/nutrition_life_strategy_game/tools/prepare_title_web_assets.gd:15)
+WARNING: Loaded resource as image file, this will not work on export: 'res://assets/generated/title_life/student-campus-v1.png'. Instead, import the image file as an Image resource and load it normally as a resource.
+   at: load_from_file (core/io/image.cpp:2780)
+   GDScript backtrace (most recent call first):
+       [0] _initialize (E:/nutrition_life_strategy_game/tools/prepare_title_web_assets.gd:15)
+WARNING: Loaded resource as image file, this will not work on export: 'res://assets/generated/title_life/zhou-market-v1.png'. Instead, import the image file as an Image resource and load it normally as a resource.
+   at: load_from_file (core/io/image.cpp:2780)
+   GDScript backtrace (most recent call first):
+       [0] _initialize (E:/nutrition_life_strategy_game/tools/prepare_title_web_assets.gd:15)
+WARNING: Loaded resource as image file, this will not work on export: 'res://assets/generated/title_life/student-night-v1.png'. Instead, import the image file as an Image resource and load it normally as a resource.
+   at: load_from_file (core/io/image.cpp:2780)
+   GDScript backtrace (most recent call first):
+       [0] _initialize (E:/nutrition_life_strategy_game/tools/prepare_title_web_assets.gd:15)
+WARNING: Loaded resource as image file, this will not work on export: 'res://assets/generated/title_life/zhou-balcony-v1.png'. Instead, import the image file as an Image resource and load it normally as a resource.
+   at: load_from_file (core/io/image.cpp:2780)
+   GDScript backtrace (most recent call first):
+       [0] _initialize (E:/nutrition_life_strategy_game/tools/prepare_title_web_assets.gd:15)
+TITLE_WEB_IMAGES=6
+[godot_ai game_helper] registered mcp capture (debugger active=false, logger=true)
+Web PCK audit passed (91.83 MB).
+Verified Web export retained at: E:\nutrition_life_strategy_game\artifacts\menu-redesign-2026-10-28-web
+
+Project verification passed.

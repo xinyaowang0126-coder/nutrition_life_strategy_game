@@ -1,0 +1,72 @@
+{
+  "day": 7,
+  "day_six_recap": {
+    "plans": [
+      {
+        "available_ids": [],
+        "choice": "stock",
+        "meal": "breakfast",
+        "result": {
+          "eligible_ids": [
+            "batch_1",
+            "batch_2"
+          ],
+          "status": "used",
+          "text": "这餐取用了计划范围内的2样熟食，按保存记录彻底再热。",
+          "used_ids": [
+            "batch_1",
+            "batch_2"
+          ]
+        }
+      },
+      {
+        "available_ids": [],
+        "choice": "stock",
+        "meal": "dinner",
+        "result": {}
+      }
+    ],
+    "text": "第6天午餐：这餐取用了计划范围内的2样熟食，按保存记录彻底再热。\n第7天早餐：计划先看留存，还没有实际取用记录。"
+  },
+  "errors": [],
+  "phase": "breakfast_action",
+  "plans": [
+    {
+      "available_ids": [],
+      "choice": "stock",
+      "meal": "breakfast",
+      "result": {
+        "eligible_ids": [
+          "batch_1",
+          "batch_2"
+        ],
+        "status": "used",
+        "text": "这餐取用了计划范围内的2样熟食，按保存记录彻底再热。",
+        "used_ids": [
+          "batch_1",
+          "batch_2"
+        ]
+      }
+    },
+    {
+      "available_ids": [],
+      "choice": "stock",
+      "meal": "dinner",
+      "result": {
+        "eligible_ids": [
+          "batch_3",
+          "batch_4"
+        ],
+        "status": "used",
+        "text": "这餐取用了计划范围内的2样熟食，按保存记录彻底再热。",
+        "used_ids": [
+          "batch_3",
+          "batch_4"
+        ]
+      }
+    }
+  ],
+  "scope": "Matching native Godot 4.7.2 directly loads final Web PCK. Valid command-generated prior days; day-6 planner, raw recipe draft, actual cold preparation/take, same-day response, frozen summary, next-day breakfast and pending response are saved/restored. Declared real-catalog meal hands; not browser/IndexedDB or continuous seven-day UI verification.",
+  "web_pack_sha256": "f4f2b03743cc94a6790c80b94743428e45f46d775f5e617ae96a4c98f51dc538",
+  "source_log": ".cache/zhou-day6-2026-10-28/pack-runtime.log"
+}

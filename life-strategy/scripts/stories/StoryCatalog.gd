@@ -50,6 +50,8 @@ static func _load() -> void:
 		if character.is_empty():
 			continue
 		story["character_name"] = character["name"]
+		story["character_short_name"] = character.get("short_name", character["name"])
+		story["character_selection_art"] = character.get("selection_art", character["portrait"])
 		story["character_version"] = character["version"]
 		story["preferences"] = character["preferences"]
 		story["portrait"] = character["portrait"]

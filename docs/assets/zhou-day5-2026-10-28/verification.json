@@ -1,0 +1,40 @@
+{
+  "date": "2026-10-28",
+  "engine": "Godot 4.7.2 stable",
+  "passed": 581,
+  "total": 581,
+  "failed": 0,
+  "skipped": 0,
+  "suite_count": 48,
+  "duration_ms": 151396,
+  "day_five_tests": [
+    "test_campus_and_restart_are_isolated_from_day_five_progress",
+    "test_cancelled_invitation_is_not_an_invitation_or_a_meal_and_can_change_later",
+    "test_changed_venue_and_skipped_dinner_never_gain_a_shared_meal",
+    "test_community_dinner_pays_own_food_and_does_not_consume_home_ingredients",
+    "test_confirmed_soft_food_gets_a_frozen_personal_response_not_a_health_reward",
+    "test_cooking_guide_preserves_draft_and_does_not_serve_the_preview",
+    "test_day_five_guide_and_reply_layouts_keep_controls_in_portrait_and_desktop",
+    "test_day_five_need_and_own_arrangement_are_choices_without_resources_or_meals",
+    "test_friend_accepts_the_plan_once_before_any_actual_shared_dinner",
+    "test_home_shared_dinner_uses_two_portions_and_only_then_gets_both_speakers",
+    "test_intro_guide_and_response_resume_from_json_without_new_effects",
+    "test_invalid_pending_ack_and_false_companionship_cannot_mutate_the_run",
+    "test_legacy_saves_do_not_replay_or_fabricate_a_conversation",
+    "test_looking_at_sources_does_not_select_food_or_claim_adaptation",
+    "test_new_personal_copy_has_all_bundled_glyphs",
+    "test_prior_day_shared_meal_is_not_rewritten_as_a_day_five_invitation",
+    "test_record_page_can_review_the_frozen_personal_response",
+    "test_regular_food_and_missing_preparation_are_not_reported_as_adapted"
+  ],
+  "main_scene_smoke": "passed",
+  "resource_import": "passed",
+  "web_pack_audit": "passed",
+  "source_log": ".cache/zhou-day5-2026-10-28/verification-export-final.log",
+  "engine_initialization_messages": [
+    "Safe save failed. This may be a permissions problem, but also may happen because you are running a paranoid antivirus. If this is the case, please switch to Windows Defender or disable the 'safe save' option in editor settings. This makes it work, but increases the risk of file corruption in a crash.",
+    "Safe save failed. This may be a permissions problem, but also may happen because you are running a paranoid antivirus. If this is the case, please switch to Windows Defender or disable the 'safe save' option in editor settings. This makes it work, but increases the risk of file corruption in a crash."
+  ],
+  "engine_message_scope": "Windows safe-save message at export initialization; affected file not identified. Final project settings and resource audit passed; final PCK runtime checked separately. No script failures.",
+  "scope": "Local engineering verification; not professional approval or human learning evidence."
+}

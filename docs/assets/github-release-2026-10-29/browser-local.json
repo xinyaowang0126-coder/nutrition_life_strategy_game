@@ -1,0 +1,23 @@
+{
+  "url": "http://127.0.0.1:8769/Play/",
+  "root_redirect": true,
+  "engine_download_progress_visible": true,
+  "title_and_character_selection": true,
+  "campus_new_game": true,
+  "meal": {
+    "foods": [
+      "rice_plain",
+      "egg"
+    ],
+    "before_balance": 150,
+    "after_balance": 146,
+    "phase_after": "breakfast_action"
+  },
+  "reload_continue": {
+    "phase": "breakfast_action",
+    "balance": 146,
+    "energy_display": 57
+  },
+  "console_warning_or_error_entries": 0,
+  "scope": "Actual in-app browser against the exact locally assembled Pages site. New campus game, confirmed rice/egg meal, automatic save, full reload, then continue. Not a claim that the online deployment or complete seven-day flows have passed."
+}

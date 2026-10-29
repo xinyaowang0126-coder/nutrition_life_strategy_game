@@ -13,6 +13,7 @@ func _run() -> void:
 	await settle()
 	game.new_day_popup.continue_button.grab_focus()
 	await key(KEY_ENTER)
+	await finish_household_opening(game)
 	await click(game._active_stage.find_child("home_kitchen", true, false))
 	for id in ["rice_plain", "soft_tofu_greens", "soft_apple"]: await choose_food(game, id)
 	await save("01-selected-recipes")

@@ -1,0 +1,365 @@
+{
+  "date": "2026-10-29",
+  "assets": [
+    {
+      "path": "life-strategy/assets/branding/haohaochifan-master-v3.png",
+      "bytes": 1494503,
+      "sha256": "a0d9944908ab41d5f96806aacaf01dca35dd7ade161c743ef6ef0a34fde7364c",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "semitransparent_pixels": 739964
+    },
+    {
+      "path": "life-strategy/assets/branding/haohaochifan-1024.png",
+      "bytes": 1074301,
+      "sha256": "de3b8ffaccd587df31f041dd8d4c52efe32d81dc0377c78eb402754ca93156c5",
+      "size": [
+        1024,
+        1024
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "semitransparent_pixels": 492196
+    },
+    {
+      "path": "life-strategy/assets/branding/haohaochifan-128.png",
+      "bytes": 25945,
+      "sha256": "a11488ed5ef919c777fc782c38bb518a512d8970bbedaa1c5bd05da829febb2d",
+      "size": [
+        128,
+        128
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "semitransparent_pixels": 7692
+    },
+    {
+      "path": "life-strategy/assets/branding/haohaochifan-144.png",
+      "bytes": 31889,
+      "sha256": "1437a56fc79f4996df8cd17e67a165e758c2d602eddc8b112711f062a4ee876e",
+      "size": [
+        144,
+        144
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "semitransparent_pixels": 9723
+    },
+    {
+      "path": "life-strategy/assets/branding/haohaochifan-16.png",
+      "bytes": 896,
+      "sha256": "564890cadab4b8101b3740f710bebe1f511f76cb93a2de066792ff489b5cf505",
+      "size": [
+        16,
+        16
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "semitransparent_pixels": 135
+    },
+    {
+      "path": "life-strategy/assets/branding/haohaochifan-180.png",
+      "bytes": 46953,
+      "sha256": "5a9a462d416eafd17d1010df78d9537ff51c856dda41b474a9217d4fc1485aaa",
+      "size": [
+        180,
+        180
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "semitransparent_pixels": 15164
+    },
+    {
+      "path": "life-strategy/assets/branding/haohaochifan-256.png",
+      "bytes": 87372,
+      "sha256": "2835e655ffefc36fc3fc95ffa1c026aee503a80267e0407d7ef54f091f500fe2",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "semitransparent_pixels": 30646
+    },
+    {
+      "path": "life-strategy/assets/branding/haohaochifan-32.png",
+      "bytes": 2518,
+      "sha256": "84ec9ebc52469f47796a5dad1f0c1ffdc699bc29f936552755a5597f7afccf51",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "semitransparent_pixels": 502
+    },
+    {
+      "path": "life-strategy/assets/branding/haohaochifan-48.png",
+      "bytes": 4848,
+      "sha256": "3424beafad7577fdfd87ae3dc41ce145a1b469a6584f28689a9766b5cb53e4c9",
+      "size": [
+        48,
+        48
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "semitransparent_pixels": 1102
+    },
+    {
+      "path": "life-strategy/assets/branding/haohaochifan-512.png",
+      "bytes": 302794,
+      "sha256": "57afe704aea557e66324a14b0cf52bc7a3e0753c2998a5a9cb96ac7393d4069f",
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "semitransparent_pixels": 122745
+    },
+    {
+      "path": "life-strategy/assets/branding/haohaochifan-64.png",
+      "bytes": 7816,
+      "sha256": "db955506e3dbdbee2abab522e2b9b5a8140bc5b7010ce44215d652ce26de6b26",
+      "size": [
+        64,
+        64
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "semitransparent_pixels": 1941
+    },
+    {
+      "path": "life-strategy/assets/generated/title_life/student-campus-v1.png",
+      "bytes": 2258195,
+      "sha256": "fb3e9196ec4e29018c6eb2f1e6cc2fea7cdf4b0dd64f8781364e92402190e000",
+      "size": [
+        1672,
+        941
+      ],
+      "mode": "RGB"
+    },
+    {
+      "path": "life-strategy/assets/generated/title_life/student-meal-v1.png",
+      "bytes": 2167565,
+      "sha256": "272092b4d87e9a4380728ba91392f3994f86892326bec8afd62808eadbf8fb31",
+      "size": [
+        1672,
+        940
+      ],
+      "mode": "RGB"
+    },
+    {
+      "path": "life-strategy/assets/generated/title_life/student-night-v1.png",
+      "bytes": 1914758,
+      "sha256": "cae74dfb09eceda70aa9b9fd4041376966d22a33b0f21fb403f03e8f958db80c",
+      "size": [
+        1672,
+        940
+      ],
+      "mode": "RGB"
+    },
+    {
+      "path": "life-strategy/assets/generated/title_life/zhou-balcony-v1.png",
+      "bytes": 2254761,
+      "sha256": "2977bd2e6b611b196943956fcf0daba65428464984e69e283892ada7a53524dc",
+      "size": [
+        1672,
+        941
+      ],
+      "mode": "RGB"
+    },
+    {
+      "path": "life-strategy/assets/generated/title_life/zhou-market-v1.png",
+      "bytes": 2468375,
+      "sha256": "94b60d9c899525a39a358b7d3acdcd788af740b1575aefcfa152a1990c750826",
+      "size": [
+        1672,
+        941
+      ],
+      "mode": "RGB"
+    },
+    {
+      "path": "life-strategy/assets/generated/title_life/zhou-songbook-v1.png",
+      "bytes": 2258769,
+      "sha256": "a148542d124924460e69548400b834cf402eaf712c0d5870b0818a648d1e9bc4",
+      "size": [
+        1672,
+        941
+      ],
+      "mode": "RGB"
+    },
+    {
+      "path": "life-strategy/assets/generated/character_select/student-v1.png",
+      "bytes": 2393451,
+      "sha256": "fe8db40d96a3c355333e10751c41ac6c89abb7d160790e6da9f0458c68690f41",
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGB"
+    },
+    {
+      "path": "life-strategy/assets/generated/character_select/zhou-v1.png",
+      "bytes": 2462975,
+      "sha256": "7e42e2e5be651dcb97a9a5b7721e98ea3e8a5d0ca5d202b8155ca3dae1753f47",
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGB"
+    }
+  ],
+  "windows_ico": {
+    "file": {
+      "path": "life-strategy/assets/branding/haohaochifan.ico",
+      "bytes": 129497,
+      "sha256": "becaa7600e20760ab8b1412caf9f683a03078d9a8c5258c04e426af8cc489649"
+    },
+    "reserved": 0,
+    "type": 1,
+    "count": 6,
+    "images": [
+      {
+        "width": 16,
+        "height": 16,
+        "bits": 32,
+        "png_encoded": true
+      },
+      {
+        "width": 32,
+        "height": 32,
+        "bits": 32,
+        "png_encoded": true
+      },
+      {
+        "width": 48,
+        "height": 48,
+        "bits": 32,
+        "png_encoded": true
+      },
+      {
+        "width": 64,
+        "height": 64,
+        "bits": 32,
+        "png_encoded": true
+      },
+      {
+        "width": 128,
+        "height": 128,
+        "bits": 32,
+        "png_encoded": true
+      },
+      {
+        "width": 256,
+        "height": 256,
+        "bits": 32,
+        "png_encoded": true
+      }
+    ]
+  },
+  "generation": "Built-in image_gen; existing character art used as identity references. Godot tools derive runtime icon sizes and pre-engine JPEGs. PIL is used here only to inspect metadata and alpha."
+}

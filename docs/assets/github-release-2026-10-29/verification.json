@@ -1,0 +1,24 @@
+{
+  "date": "2026-10-29",
+  "passed": 644,
+  "total": 644,
+  "failed": 0,
+  "skipped": 0,
+  "suite_count": 51,
+  "main_scene_smoke": true,
+  "web_pack_audit": true,
+  "files": 15,
+  "pack_bytes": 96295788,
+  "pages_preflight": {
+    "matching_candidate": true,
+    "pages_prepare": true,
+    "fingerprints": true,
+    "missing_background_rejected": true,
+    "unsafe_background_rejected": true
+  },
+  "scope": "Pre-push source tests, real Play promotion, native runtime loading the Play PCK, exact Pages prepare code and asset fingerprint checks. Online deployment status is checked after push.",
+  "diagnostics": {
+    "windows_safe_save_messages": 2,
+    "script_error_messages": 0
+  }
+}

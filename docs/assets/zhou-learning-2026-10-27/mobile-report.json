@@ -1,0 +1,31 @@
+{
+	"errors": [],
+	"routes": [
+		{
+			"balance": 205,
+			"opening_quantity": 1,
+			"phase": "lunch_source",
+			"plate": [
+				"millet_porridge",
+				"egg"
+			],
+			"route": "outside"
+		},
+		{
+			"balance": 210,
+			"meals": 2,
+			"opening_quantity": 0,
+			"phase": "lunch_action",
+			"route": "fresh"
+		},
+		{
+			"balance": 210,
+			"meals": 3,
+			"opening_quantity": 0,
+			"phase": "summary",
+			"route": "batch"
+		}
+	],
+	"scope": "Native mouse/keyboard routes from a new run through the next meal; batch route completes the first day. Restore-only runs in a separate engine process with encoded files. Not browser IndexedDB or a physical phone.",
+	"window": "(390, 640)"
+}

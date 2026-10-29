@@ -20,15 +20,13 @@ func _run() -> void:
 	current_scene = menu
 	await settle()
 	await save("01-menu")
-	var card: Control = menu._grid.get_node("choir_week")
-	var scroll: ScrollContainer = menu._margin.get_child(0)
-	scroll.ensure_control_visible(card)
-	await settle()
-	var choose: Button = card.find_child("ChooseStory", true, false)
-	await click(choose)
+	await click(menu._title_start)
+	await click(menu._strips["zhou_huilan_66"])
+	await click(menu._more_info)
 	check(menu._dialog.visible, "Story card did not open introduction")
 	await save("02-intro")
-	await click(menu._dialog._buttons.get_node("start"))
+	await click(menu._dialog._buttons.get_node("back"))
+	await click(menu._main_start)
 	await settle()
 	var game := current_scene as GameRootV2
 	check(game != null and game.story_id == "choir_week", "Wrong story after selection")
@@ -37,6 +35,7 @@ func _run() -> void:
 		return
 	await save("03-new-day")
 	await click(game.new_day_popup.continue_button)
+	await finish_household_opening(game)
 	await settle()
 	check(not is_instance_valid(game._workspace), "Entering the day must leave the destination scene clear")
 	await source_tool(game, "kitchen")
@@ -90,6 +89,15 @@ func settle() -> void:
 	for i in range(3):
 		await process_frame
 	RenderingServer.force_draw()
+
+
+func finish_household_opening(game: GameRootV2) -> void:
+	# Existing probes explicitly take the non-disposal route before testing
+	# their own feature. The learning probe captures and checks both choices.
+	if game.household_learning.get("opening_stage") == "decision":
+		await click(game._story_dialog._buttons.get_node("back"))
+	if game.household_learning.get("opening_stage") == "breakfast":
+		await click(game._story_dialog._buttons.get_node("close"))
 
 
 func source_tool(game: GameRootV2, id: String) -> void:

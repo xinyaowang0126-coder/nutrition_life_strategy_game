@@ -1,0 +1,121 @@
+{
+  "cases": [
+    {
+      "case": "intro",
+      "day": 6,
+      "phase": "breakfast_source",
+      "plans": []
+    },
+    {
+      "case": "planner",
+      "day": 6,
+      "phase": "breakfast",
+      "plans": [
+        {
+          "available_ids": [],
+          "choice": "stock",
+          "meal": "breakfast",
+          "result": {}
+        }
+      ]
+    },
+    {
+      "case": "response",
+      "day": 6,
+      "phase": "lunch_action",
+      "plans": [
+        {
+          "available_ids": [],
+          "choice": "stock",
+          "meal": "breakfast",
+          "result": {
+            "eligible_ids": [
+              "batch_1",
+              "batch_2"
+            ],
+            "status": "used",
+            "text": "这餐取用了计划范围内的2样熟食，按保存记录彻底再热。",
+            "used_ids": [
+              "batch_1",
+              "batch_2"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "case": "day6-summary",
+      "day": 6,
+      "phase": "summary",
+      "plans": [
+        {
+          "available_ids": [],
+          "choice": "stock",
+          "meal": "breakfast",
+          "result": {
+            "eligible_ids": [
+              "batch_1",
+              "batch_2"
+            ],
+            "status": "used",
+            "text": "这餐取用了计划范围内的2样熟食，按保存记录彻底再热。",
+            "used_ids": [
+              "batch_1",
+              "batch_2"
+            ]
+          }
+        },
+        {
+          "available_ids": [],
+          "choice": "stock",
+          "meal": "dinner",
+          "result": {}
+        }
+      ]
+    },
+    {
+      "case": "day7-response",
+      "day": 7,
+      "phase": "breakfast_action",
+      "plans": [
+        {
+          "available_ids": [],
+          "choice": "stock",
+          "meal": "breakfast",
+          "result": {
+            "eligible_ids": [
+              "batch_1",
+              "batch_2"
+            ],
+            "status": "used",
+            "text": "这餐取用了计划范围内的2样熟食，按保存记录彻底再热。",
+            "used_ids": [
+              "batch_1",
+              "batch_2"
+            ]
+          }
+        },
+        {
+          "available_ids": [],
+          "choice": "stock",
+          "meal": "dinner",
+          "result": {
+            "eligible_ids": [
+              "batch_3",
+              "batch_4"
+            ],
+            "status": "used",
+            "text": "这餐取用了计划范围内的2样熟食，按保存记录彻底再热。",
+            "used_ids": [
+              "batch_3",
+              "batch_4"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "scope": "Actual native mouse/key day-6 routes from valid prior-day command saves: planned cold portion used, changed arrangement, unsafe counter portion not counted. Cold route continues through day-6 summary and day-7 breakfast. Separate restore-only process checks five saved pages. Not a continuous seven-day UI/browser run or a physical phone.",
+  "window": "(1280, 720)"
+}

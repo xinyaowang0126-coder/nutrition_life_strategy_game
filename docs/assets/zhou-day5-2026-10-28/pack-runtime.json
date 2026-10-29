@@ -1,0 +1,21 @@
+{
+  "day": 5,
+  "errors": [],
+  "phase": "summary",
+  "recap": {
+    "adapted_foods": [
+      "煮软苹果",
+      "时蔬炖豆腐"
+    ],
+    "chose_own_dinner": false,
+    "eaten": 3,
+    "invited": true,
+    "missed": false,
+    "shared": true,
+    "text": "今天选了煮软苹果、时蔬炖豆腐，做法按菜单或配方记录保留。\n晚饭在家和老陈同桌，约定实际完成。",
+    "unrecorded_methods": 0
+  },
+  "scope": "Matching native Godot 4.7.2 loads final Web PCK. Valid command-generated prior days, day-5 need, preparation guide and draft save/restore, actual cooking and reheat, invitation, real shared dinner, pending response restores and frozen summary. Declared real-catalog meal hands; not a browser or seven-day UI run.",
+  "web_pack_sha256": "afca82c2562c29087b8c44ce61e713baa2f165b23534cc4d90c31fcd71ba0f0e",
+  "source_log": ".cache/zhou-day5-2026-10-28/pack-runtime.log"
+}

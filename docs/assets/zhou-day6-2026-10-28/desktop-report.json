@@ -1,0 +1,150 @@
+{
+  "cases": [
+    {
+      "case": "used",
+      "day": 7,
+      "day_six_recap": {
+        "plans": [
+          {
+            "available_ids": [],
+            "choice": "stock",
+            "meal": "breakfast",
+            "result": {
+              "eligible_ids": [
+                "batch_1",
+                "batch_2"
+              ],
+              "status": "used",
+              "text": "这餐取用了计划范围内的2样熟食，按保存记录彻底再热。",
+              "used_ids": [
+                "batch_1",
+                "batch_2"
+              ]
+            }
+          },
+          {
+            "available_ids": [],
+            "choice": "stock",
+            "meal": "dinner",
+            "result": {}
+          }
+        ],
+        "text": "第6天午餐：这餐取用了计划范围内的2样熟食，按保存记录彻底再热。\n第7天早餐：计划先看留存，还没有实际取用记录。"
+      },
+      "phase": "breakfast_action",
+      "plans": [
+        {
+          "available_ids": [],
+          "choice": "stock",
+          "meal": "breakfast",
+          "result": {
+            "eligible_ids": [
+              "batch_1",
+              "batch_2"
+            ],
+            "status": "used",
+            "text": "这餐取用了计划范围内的2样熟食，按保存记录彻底再热。",
+            "used_ids": [
+              "batch_1",
+              "batch_2"
+            ]
+          }
+        },
+        {
+          "available_ids": [],
+          "choice": "stock",
+          "meal": "dinner",
+          "result": {
+            "eligible_ids": [
+              "batch_3",
+              "batch_4"
+            ],
+            "status": "used",
+            "text": "这餐取用了计划范围内的2样熟食，按保存记录彻底再热。",
+            "used_ids": [
+              "batch_3",
+              "batch_4"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "case": "changed",
+      "day": 6,
+      "day_six_recap": {
+        "plans": [
+          {
+            "available_ids": [],
+            "choice": "stock",
+            "meal": "breakfast",
+            "result": {
+              "eligible_ids": [
+                "batch_1",
+                "batch_2"
+              ],
+              "status": "changed",
+              "text": "这餐改按眼下的条件安排，没有取用计划范围内的熟食。",
+              "used_ids": []
+            }
+          }
+        ],
+        "text": "第6天午餐：这餐改按眼下的条件安排，没有取用计划范围内的熟食。"
+      },
+      "phase": "summary",
+      "plans": [
+        {
+          "available_ids": [],
+          "choice": "stock",
+          "meal": "breakfast",
+          "result": {
+            "eligible_ids": [
+              "batch_1",
+              "batch_2"
+            ],
+            "status": "changed",
+            "text": "这餐改按眼下的条件安排，没有取用计划范围内的熟食。",
+            "used_ids": []
+          }
+        }
+      ]
+    },
+    {
+      "case": "counter",
+      "day": 6,
+      "day_six_recap": {
+        "plans": [
+          {
+            "available_ids": [],
+            "choice": "stock",
+            "meal": "breakfast",
+            "result": {
+              "eligible_ids": [],
+              "status": "not_prepared",
+              "text": "原先想先用留存，但没有对应的冷藏熟食记录；这餐按实际选择保留。",
+              "used_ids": []
+            }
+          }
+        ],
+        "text": "第6天午餐：原先想先用留存，但没有对应的冷藏熟食记录；这餐按实际选择保留。"
+      },
+      "phase": "summary",
+      "plans": [
+        {
+          "available_ids": [],
+          "choice": "stock",
+          "meal": "breakfast",
+          "result": {
+            "eligible_ids": [],
+            "status": "not_prepared",
+            "text": "原先想先用留存，但没有对应的冷藏熟食记录；这餐按实际选择保留。",
+            "used_ids": []
+          }
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "scope": "Actual native mouse/key day-6 routes from valid prior-day command saves: planned cold portion used, changed arrangement, unsafe counter portion not counted. Cold route continues through day-6 summary and day-7 breakfast. Separate restore-only process checks five saved pages. Not a continuous seven-day UI/browser run or a physical phone.",
+  "window": "(1280, 720)"
+}

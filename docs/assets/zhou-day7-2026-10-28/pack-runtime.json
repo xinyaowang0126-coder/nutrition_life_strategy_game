@@ -1,0 +1,61 @@
+{
+  "errors": [],
+  "outcome": {
+    "energy": 89,
+    "kind": "performed",
+    "progress": 93,
+    "reason": "实际选择参加汇演，完成后记入行动记录。",
+    "slots": 2,
+    "trigger": "perform"
+  },
+  "phase": "ending",
+  "review": {
+    "counts": {
+      "attempted_contexts": 3,
+      "counter_items": 0,
+      "days": 7,
+      "first_after_help": 1,
+      "first_correct": 1,
+      "first_wrong": 1,
+      "meals": 21,
+      "opening_discarded": 1,
+      "performances": 1,
+      "plans": 1,
+      "plans_used": 1,
+      "prepared_items": 4,
+      "rehearsals": 8,
+      "reheated_items": 2,
+      "retries": 2,
+      "shared": 1,
+      "skipped": 0
+    },
+    "highlights": [
+      {
+        "text": "实际记录7天，确认进餐21餐，跳过0餐。组成、份量和全天安排需要分开看。",
+        "title": "这一周的饭"
+      },
+      {
+        "text": "已实际丢弃开局前保存不当的熟食。",
+        "title": "开局那份隔夜菜"
+      },
+      {
+        "text": "3个情境有作答；首次独立正确1、首次独立错误1、帮助后首次1，重试2次。重试不覆盖首次记录，答对不等于已经学会。",
+        "title": "选餐与标签练习"
+      },
+      {
+        "text": "实际记录和老陈同桌1餐，邀约本身不计为已经一起吃。",
+        "title": "同桌的约定"
+      },
+      {
+        "text": "实际另留冷藏4样熟食，取用并再热2样；1个下一餐计划中，1个记录到熟食取用，其余按实际安排保留。",
+        "title": "备餐的后续"
+      }
+    ],
+    "next_step": "下次换一个菜单或标签，再核对实际份量和仍未知的项目。",
+    "outcome_text": "实际参加了社区合唱汇演。",
+    "version": 1
+  },
+  "scope": "Matching native Godot 4.7.2 directly loads final Web PCK. Uses a valid scripted-prior-days save, exercises day-7 preflight, real rest, raw recipe, prior-day cold portion, actual performance, pending reply and frozen ending across JSON restores. Declared catalog cooking hands. Not browser/IndexedDB or continuous seven-day UI verification.",
+  "web_pack_sha256": "53143fac02ab4581a5f8c1e0e4de7c11c2c8fd72bd655f6654dee1bbca81c42d",
+  "source_log": ".cache/zhou-day7-2026-10-28/pack-runtime.log"
+}

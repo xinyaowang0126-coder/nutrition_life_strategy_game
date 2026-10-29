@@ -2,6 +2,7 @@ class_name CookingPlanStage
 extends HouseholdWorktop
 
 signal confirm_requested(ids: Array, storage: String, plan: Dictionary)
+signal study_requested(ids: Array, storage: String, plan: Dictionary)
 const Facts := preload("res://scripts/stories/HouseholdMealFacts.gd")
 const CONDIMENT_UNITS := {"salt_g": ["盐", "克"], "soy_ml": ["酱油", "毫升"], "sugar_g": ["白糖", "克"]}
 var ids: Array[String] = []
@@ -29,6 +30,7 @@ var _recipe_column: VBoxContainer
 var _controls_column: VBoxContainer
 var _source_effort: Dictionary = {}
 var _preview_revision := 0
+var learning_button: Button
 
 
 func setup(food_ids: Array[String], foods: Dictionary, stock: KitchenStock, served: int, meal: String, keep: String = "eat_now", recipe: Dictionary = {}, source_effort: Dictionary = {}) -> void:
@@ -148,6 +150,20 @@ func _add_options(group: String, choices: Array) -> void:
 		row.add_child(button)
 		option_buttons[group + ":" + id] = button
 		button.pressed.connect(func() -> void: choose_option(group, id))
+
+
+func configure_learning(day: int) -> void:
+	if day not in [2, 3, 4, 5, 6, 7]: return
+	if learning_button == null:
+		learning_button = HouseholdUI.button("", "RecipeStudy")
+		learning_button.custom_minimum_size.y = 44
+		learning_button.add_theme_font_size_override("font_size", 21)
+		_controls_column.add_child(learning_button)
+		_controls_column.move_child(learning_button, _details_button.get_index() + 1)
+		learning_button.pressed.connect(func() -> void:
+			if is_visible_in_tree() and not is_queued_for_deletion(): study_requested.emit(ids.duplicate(), storage, plan.duplicate(true))
+		)
+	learning_button.text = {2: "看看这份配方的组成", 3: "用这份调味读标签", 4: "用这份配方看看糖量", 5: "看看做法与用餐安排", 6: "对照库存，安排下一餐", 7: "演前看看今天的安排"}[day]
 
 
 func choose_option(group: String, id: String) -> void:

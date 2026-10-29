@@ -22,7 +22,7 @@ def main():
 
     root = Path(__file__).resolve().parents[1] / "life-strategy"
     chars = set(chr(code) for code in range(32, 127))
-    for folder, extension in [("scripts", "*.gd"), ("data", "*.xml"), ("scenes", "*.tscn")]:
+    for folder, extension in [("scripts", "*.gd"), ("data", "*.xml"), ("data", "*.json"), ("scenes", "*.tscn")]:
         for source in (root / folder).rglob(extension):
             chars.update(source.read_text(encoding="utf-8-sig"))
     chars.update("，。！？：；‘’“”（）【】《》、—…·℃¥×＋−／→≤≥")

@@ -299,11 +299,13 @@ func test_pending_dialog_blocks_cancel_and_focus_skips_disabled_slots() -> void:
 	assert_false(dialog.visible)
 
 
-func test_continuing_first_day_opens_sources_without_a_kitchen_panel() -> void:
+func test_continuing_first_day_presents_safety_choice_without_a_kitchen_panel() -> void:
 	var game := _game()
 	var pantry := game.kitchen.ingredients.duplicate(true)
 	var batches := game.kitchen.batches.duplicate(true)
 	game._on_new_day_continue()
+	assert_true(game._story_dialog.visible)
+	assert_contains(game._story_dialog._title.text, "隔夜菜")
 	assert_true(game._active_stage is HouseholdSourceStage)
 	assert_false(is_instance_valid(game._workspace))
 	assert_eq(game.phase, "breakfast_source")
@@ -317,6 +319,8 @@ func test_continuing_first_day_opens_sources_without_a_kitchen_panel() -> void:
 func test_source_navigation_only_opens_cooking_preview_after_selecting_recipes() -> void:
 	var game := _game()
 	game._on_new_day_continue()
+	game._story_dialog._buttons.get_node("back").pressed.emit()
+	game._story_dialog._buttons.get_node("close").pressed.emit()
 	var state_before := game.state.duplicate(true)
 	var pantry := game.kitchen.ingredients.duplicate(true)
 	(game._active_stage.find_child("home_kitchen", true, false) as Button).pressed.emit()
@@ -386,6 +390,8 @@ func test_home_choices_and_market_hotspots_fit_without_scrolling() -> void:
 func test_source_rules_and_tools_are_available_through_explicit_popups() -> void:
 	var game := _game()
 	game._on_new_day_continue()
+	game._story_dialog._buttons.get_node("back").pressed.emit()
+	game._story_dialog._buttons.get_node("close").pressed.emit()
 	var stage := game._active_stage as HouseholdSourceStage
 	var state_before := game.state.duplicate(true)
 	var text_count := 0

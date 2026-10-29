@@ -1,0 +1,1 @@
+WEB_LOADING_SHELL_TEST={"passed":true,"sceneCount":6,"scope":"DOM/Engine mock verifies rotation, pause, reduced-motion, mobile focus, real byte progress, indeterminate state, ready handoff and failure recovery. Not a browser render."}

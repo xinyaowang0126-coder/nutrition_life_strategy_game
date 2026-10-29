@@ -1,0 +1,6 @@
+{
+	"errors": [],
+	"phase": "breakfast_action",
+	"scope": "Native input with memory backend: auto ack, manual slot, read, menu continue, restart cancel. File persistence is tested separately; not browser acceptance.",
+	"window": "(390, 640)"
+}

@@ -440,6 +440,12 @@ if ($ExportWeb) {
             "--export-release", "Web", $webIndex
         )
         Assert-NoScriptFailures -Label "Temporary Web export" -Output $exportOutputLines
+        $titleAssetOutput = Invoke-GodotStep -Label "Prepare title loading backgrounds" -Arguments @(
+            "--headless", "--path", $projectDir,
+            "--script", (Join-Path $repoRoot "tools\prepare_title_web_assets.gd"),
+            "--", "--output=$exportDirectory"
+        )
+        Assert-NoScriptFailures -Label "Title loading backgrounds" -Output $titleAssetOutput
         Assert-CleanWebPack -PackPath (Join-Path $exportDirectory "index.pck")
         if (-not $ownsExportDirectory) {
             Write-Host "Verified Web export retained at: $exportDirectory"

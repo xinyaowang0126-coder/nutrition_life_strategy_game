@@ -15,6 +15,7 @@ func _run() -> void:
 	current_scene = game
 	await settle()
 	await click(game.new_day_popup.continue_button)
+	await finish_household_opening(game)
 	await source_tool(game, "kitchen")
 	await click(game._workspace.find_child("before_week_greens", true, false))
 	await click(game._workspace.close_button)

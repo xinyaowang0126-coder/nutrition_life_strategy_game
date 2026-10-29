@@ -1,0 +1,51 @@
+{
+  "cases": [
+    {
+      "case": "intro",
+      "outcome": {},
+      "performed": false,
+      "phase": "breakfast_source"
+    },
+    {
+      "case": "action-plan",
+      "outcome": {},
+      "performed": false,
+      "phase": "breakfast_action"
+    },
+    {
+      "case": "cooking-plan",
+      "outcome": {},
+      "performed": false,
+      "phase": "lunch"
+    },
+    {
+      "case": "performed-reply",
+      "outcome": {
+        "energy": 89,
+        "kind": "performed",
+        "progress": 93,
+        "reason": "实际选择参加汇演，完成后记入行动记录。",
+        "slots": 2,
+        "trigger": "perform"
+      },
+      "performed": true,
+      "phase": "sleep"
+    },
+    {
+      "case": "ending",
+      "outcome": {
+        "energy": 89,
+        "kind": "performed",
+        "progress": 93,
+        "reason": "实际选择参加汇演，完成后记入行动记录。",
+        "slots": 2,
+        "trigger": "perform"
+      },
+      "performed": true,
+      "phase": "ending"
+    }
+  ],
+  "errors": [],
+  "scope": "Three native mouse/key day-7 routes from valid command-generated prior days: real performance, insufficient rehearsal, ready but choosing another arrangement. Prior days include scripted disposal, practice, shared meal and cold preparation, not human learning or a continuous seven-day UI run. Five separate-process JSON restores; no browser or physical-phone claim.",
+  "window": "(1280, 720)"
+}

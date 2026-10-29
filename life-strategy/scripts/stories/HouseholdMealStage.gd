@@ -2,6 +2,7 @@ class_name HouseholdMealStage
 extends MealStageBaseV2
 
 signal kitchen_requested
+signal study_requested(ids: Array)
 const SELECTED_CARD_SCENE := preload("res://scenes/game_v2/components/SelectedFoodCard.tscn")
 var paper_panel: PanelContainer
 var food_scroll: ScrollContainer
@@ -13,6 +14,7 @@ var _confirm: Button
 var _footer: HBoxContainer
 var _selected_strip: GridContainer
 var _remove_buttons: Dictionary = {}
+var learning_button: Button
 
 
 func _ready() -> void:
@@ -51,6 +53,14 @@ func _ready() -> void:
 	_selected_strip.add_theme_constant_override("h_separation", 10)
 	_selected_strip.add_theme_constant_override("v_separation", 8)
 	stack.add_child(_selected_strip)
+	learning_button = HouseholdUI.button("看看这一餐", "MealStudy")
+	learning_button.custom_minimum_size.y = 44
+	learning_button.add_theme_font_size_override("font_size", 20)
+	learning_button.hide()
+	learning_button.pressed.connect(func() -> void:
+		if is_visible_in_tree() and not is_queued_for_deletion() and not learning_button.disabled: study_requested.emit(_selected_ids.duplicate())
+	)
+	stack.add_child(learning_button)
 	_receipt = HouseholdUI.label("", 18, HouseholdUI.MUTED)
 	stack.add_child(_receipt)
 	_footer = HBoxContainer.new()
@@ -143,6 +153,10 @@ func _update_scene_summary() -> void:
 			slot.clear_food()
 	_receipt.text = "已选 %d/%d · %s" % [_selected_ids.size(), _max_selected, "使用现有库存" if _payment_mode == "stock" else "本餐 ¥%d" % _selection_total()]
 	_confirm.text = "准备配方" if kind == "cook" else ("再热并开饭" if kind == "fridge" else "确认这一餐")
+	var learning_day := int(_options.get("learning_day", 0))
+	learning_button.visible = learning_day in [2, 3, 4, 5, 6, 7]
+	learning_button.disabled = _selected_ids.is_empty() and learning_day not in [5, 6, 7]
+	learning_button.text = {2: "看看这餐的组成", 3: "看看这餐的调味资料", 4: "看看这餐的糖量资料", 5: "看看今天的做法与约定", 6: "对照库存，安排下一餐", 7: "演前看看今天的安排"}.get(learning_day, "看看这一餐")
 
 
 func _remove_selected_food(id: String, button: Button) -> void:

@@ -113,6 +113,9 @@ func get_summary() -> Dictionary:
 
 
 func _apply_summary() -> void:
+	var ending_layout := String(_summary.get("layout", "")) == "ending"
+	record_kicker.text = "本周小记" if ending_layout else "今日小记"
+	advice_kicker.text = "下次" if ending_layout else "明天"
 	var stats: Dictionary = _summary
 	var nested_stats: Variant = _summary.get("stats", null)
 	if nested_stats is Dictionary:

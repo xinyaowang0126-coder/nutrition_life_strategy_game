@@ -1,0 +1,149 @@
+{
+  "duration_ms": 4042,
+  "failed": 0,
+  "passed": 17,
+  "results": [
+    {
+      "assertion_count": 3,
+      "duration_ms": 109,
+      "message": "",
+      "passed": true,
+      "suite": "series_menu",
+      "test": "test_background_rotation_pause_and_disabled_page_have_no_side_effects"
+    },
+    {
+      "assertion_count": 5,
+      "duration_ms": 685,
+      "message": "",
+      "passed": true,
+      "suite": "series_menu",
+      "test": "test_cancel_restart_keeps_auto_and_manual_progress"
+    },
+    {
+      "assertion_count": 6,
+      "duration_ms": 2,
+      "message": "",
+      "passed": true,
+      "suite": "series_menu",
+      "test": "test_catalog_contains_coherent_portrait_art_for_all_playable_people"
+    },
+    {
+      "assertion_count": 4,
+      "duration_ms": 384,
+      "message": "",
+      "passed": true,
+      "suite": "series_menu",
+      "test": "test_character_selection_and_primary_launch_follow_selected_story"
+    },
+    {
+      "assertion_count": 5,
+      "duration_ms": 283,
+      "message": "",
+      "passed": true,
+      "suite": "series_menu",
+      "test": "test_empty_manual_slots_are_disabled_and_back_is_available"
+    },
+    {
+      "assertion_count": 7,
+      "duration_ms": 12,
+      "message": "",
+      "passed": true,
+      "suite": "series_menu",
+      "test": "test_engine_icon_files_are_new_art_with_complete_windows_sizes"
+    },
+    {
+      "assertion_count": 8,
+      "duration_ms": 355,
+      "message": "",
+      "passed": true,
+      "suite": "series_menu",
+      "test": "test_existing_progress_uses_continue_without_resetting_other_story"
+    },
+    {
+      "assertion_count": 4,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "series_menu",
+      "test": "test_grouping_supports_more_characters_and_multiple_stories_per_person"
+    },
+    {
+      "assertion_count": 3,
+      "duration_ms": 279,
+      "message": "",
+      "passed": true,
+      "suite": "series_menu",
+      "test": "test_invalid_import_does_not_touch_progress_or_request_a_story"
+    },
+    {
+      "assertion_count": 5,
+      "duration_ms": 281,
+      "message": "",
+      "passed": true,
+      "suite": "series_menu",
+      "test": "test_latest_title_continue_uses_newest_valid_save"
+    },
+    {
+      "assertion_count": 15,
+      "duration_ms": 9,
+      "message": "",
+      "passed": true,
+      "suite": "series_menu",
+      "test": "test_life_playlist_contains_multiple_real_assets_per_person"
+    },
+    {
+      "assertion_count": 6,
+      "duration_ms": 1,
+      "message": "",
+      "passed": true,
+      "suite": "series_menu",
+      "test": "test_loading_shell_uses_real_progress_and_no_prominent_switch_buttons"
+    },
+    {
+      "assertion_count": 2,
+      "duration_ms": 0,
+      "message": "",
+      "passed": true,
+      "suite": "series_menu",
+      "test": "test_malformed_and_duplicate_catalog_entries_do_not_create_fake_people"
+    },
+    {
+      "assertion_count": 3,
+      "duration_ms": 257,
+      "message": "",
+      "passed": true,
+      "suite": "series_menu",
+      "test": "test_no_prominent_title_previous_or_next_controls"
+    },
+    {
+      "assertion_count": 3,
+      "duration_ms": 671,
+      "message": "",
+      "passed": true,
+      "suite": "series_menu",
+      "test": "test_person_switching_never_spends_or_writes_progress"
+    },
+    {
+      "assertion_count": 9,
+      "duration_ms": 446,
+      "message": "",
+      "passed": true,
+      "suite": "series_menu",
+      "test": "test_three_viewports_keep_primary_button_and_full_art_inside_canvas"
+    },
+    {
+      "assertion_count": 6,
+      "duration_ms": 265,
+      "message": "",
+      "passed": true,
+      "suite": "series_menu",
+      "test": "test_title_is_separate_from_character_selection_and_enter_does_not_start"
+    }
+  ],
+  "skipped": 0,
+  "suite_count": 1,
+  "suites_run": [
+    "series_menu"
+  ],
+  "total": 17
+}
