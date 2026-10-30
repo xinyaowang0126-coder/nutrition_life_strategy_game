@@ -19,9 +19,8 @@ func _run() -> void:
 				if name == "cooking-plan": check(game._workspace is CookingPlanStage and game._workspace.plan["added_sugar_g"] == 4 and game._workspace.storage == "fridge", "Restart lost raw recipe")
 			elif name == "performed-reply": await acknowledge(game)
 			else:
-				game.daily_summary.content_scroll.ensure_control_visible(game.daily_summary.detail_button)
 				await settle()
-				await click(game.daily_summary.detail_button)
+				await click(game.ending_screen.review_button)
 			check(material_state(game) == before, "Restart/close repeated material effects: " + name)
 			cases.append({"case": name, "phase": game.phase, "performed": game.performed, "outcome": game.household_finale["outcome"]})
 			game.queue_free()
@@ -165,9 +164,8 @@ func route(mode: String) -> void:
 	await save({"performed": "07-ending", "unready": "11-unready-ending", "other_choice": "13-other-choice-ending"}[mode])
 	if mode == "performed":
 		snapshot(game, "ending")
-		game.daily_summary.content_scroll.ensure_control_visible(game.daily_summary.detail_button)
 		await settle()
-		await click(game.daily_summary.detail_button)
+		await click(game.ending_screen.review_button)
 		await save("08-week-facts")
 	cases.append({"case": mode, "phase": game.phase, "outcome": game.household_finale["outcome"], "review": review})
 	game.queue_free()

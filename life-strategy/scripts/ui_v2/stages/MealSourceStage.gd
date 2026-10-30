@@ -28,6 +28,12 @@ var _has_setup := false
 var _prop_tweens: Dictionary = {}
 var _prop_base_positions: Dictionary = {}
 var _mobile_mode := false
+var _action_receipt := ""
+
+
+func set_action_receipt(text: String) -> void:
+	_action_receipt = text
+	if _ready_finished: subtitle_label.text = text if not text.is_empty() else ("轻点选择，可查看详情" if _mobile_mode else "悬停看详情")
 
 
 func setup(sources: Array, meal_label: String = "这一顿", disabled_reasons: Dictionary = {}) -> void:
@@ -112,7 +118,7 @@ func _bind_prop(source_id: String) -> void:
 
 func _apply_sources() -> void:
 	title_label.text = "%s去哪吃？" % _meal_label
-	subtitle_label.text = "轻点选择，可查看详情" if _mobile_mode else "悬停看详情"
+	subtitle_label.text = _action_receipt if not _action_receipt.is_empty() else ("轻点选择，可查看详情" if _mobile_mode else "悬停看详情")
 	for source_id in SOURCE_NODE_NAMES:
 		_apply_source(String(source_id))
 
@@ -170,7 +176,7 @@ func _apply_source(source_id: String) -> void:
 
 func apply_entry_profile(mobile: bool) -> void:
 	_mobile_mode = mobile
-	subtitle_label.text = "轻点选择，可查看详情" if mobile else "悬停看详情"
+	subtitle_label.text = _action_receipt if not _action_receipt.is_empty() else ("轻点选择，可查看详情" if mobile else "悬停看详情")
 	var prop := _prop_for("takeout")
 	if prop == null:
 		return

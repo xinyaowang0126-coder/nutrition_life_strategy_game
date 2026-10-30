@@ -245,6 +245,7 @@ function Assert-CleanWebPack {
         "scenes/game_v2/GameRootV2",
         "scenes/game_v2/components/CompactChoiceCard",
         "scenes/game_v2/components/NewDayPopup",
+        "scenes/game_v2/components/EndingScreen",
         "scenes/game_v2/stages/MealSourceStage",
         "scripts/GameData.gd",
         "scripts/systems/MealResolver",
@@ -255,6 +256,10 @@ function Assert-CleanWebPack {
         "scripts/systems/RecoveryRules",
         "scripts/systems/RecoveryGameplayService",
         "scripts/systems/GameplayBalanceRules",
+        "scripts/systems/EndingFeedbackBuilder",
+        "scripts/systems/ActionFeedbackTrace",
+        "scripts/ui_v2/EndingFeedbackCopy",
+        "scripts/ui_v2/EndingScreen",
         "scripts/health/HealthGuidanceFeatureFlags",
         "scripts/health/HealthDataStore",
         "scripts/health/HealthDataValidator",
@@ -285,6 +290,9 @@ function Assert-CleanWebPack {
         "assets/generated/stories/actions/zhou_group_rehearsal-v1"
         "assets/generated/stories/actions/zhou_perform-v1"
         "assets/generated/stories/actions/zhou_call_friend-v1"
+        "assets/generated/endings/feedback/student_shortfall-v1"
+        "assets/generated/endings/feedback/zhou_unready-v1"
+        "assets/generated/endings/feedback/zhou_other_choice-v1"
         "assets/generated/stories/night/zhou_home_night-v1"
         "assets/generated/stories/locations/zhou-kitchen-v1"
         "assets/generated/stories/locations/zhou-kitchen-portrait-v1"

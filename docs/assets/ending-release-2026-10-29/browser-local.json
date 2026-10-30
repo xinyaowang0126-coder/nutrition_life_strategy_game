@@ -1,0 +1,23 @@
+{
+  "verified_date": "2026-10-30",
+  "url": "http://127.0.0.1:8899/Play/",
+  "root_redirect": true,
+  "engine_download_progress_visible": true,
+  "continued_preflight_day_one": true,
+  "meal": {
+    "foods": [
+      "egg",
+      "rice_plain"
+    ],
+    "before_balance": 150,
+    "after_balance": 146,
+    "phase_after": "breakfast_action"
+  },
+  "reload_continue": {
+    "phase": "breakfast_action",
+    "balance": 146,
+    "energy_display": 57
+  },
+  "console_warning_or_error_entries": 0,
+  "scope": "Actual in-app browser against the exact Pages preparation output. The test save belongs to this local preflight origin. Confirmed breakfast, full reload, and continue; online deployment is verified after push."
+}

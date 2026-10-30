@@ -1,0 +1,15 @@
+{
+  "comparisons": [
+    {
+      "story": "campus",
+      "runs": 510,
+      "equal_except_new_action_evidence": true
+    },
+    {
+      "story": "zhou",
+      "runs": 40,
+      "equal_except_new_action_evidence": true
+    }
+  ],
+  "scope": "Entire existing diagnostic JSON compared; only the new feedback_trace field is excluded."
+}

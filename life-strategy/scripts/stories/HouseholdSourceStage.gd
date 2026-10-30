@@ -43,10 +43,18 @@ var _props: Dictionary = {}
 var _tweens: Dictionary = {}
 var _meal := "早餐"
 var _plan_summary := ""
+var _action_receipt := ""
+
+
 var _preparation_summary := ""
 var _mobile := false
 var _scene_texture: Texture2D
 var _prop_regions: Dictionary = {}
+
+
+func set_action_receipt(text: String) -> void:
+	_action_receipt = text
+	if is_instance_valid(_hint): _hint.text = text if not text.is_empty() else ("轻点选择，可查看详情" if _mobile else "悬停看详情")
 
 
 func _ready() -> void:
@@ -233,7 +241,7 @@ func apply_entry_profile(mobile: bool) -> void:
 	_heading.offset_right = 270 if mobile else 300
 	_heading.offset_top = 8 if mobile else 18
 	_heading.offset_bottom = 104 if mobile else 116
-	_hint.text = "轻点选择，可查看详情" if mobile else "悬停看详情"
+	_hint.text = _action_receipt if not _action_receipt.is_empty() else ("轻点选择，可查看详情" if mobile else "悬停看详情")
 	_plan_note.add_theme_font_size_override("font_size", 20 if mobile else 23)
 	_preparation_text.add_theme_font_size_override("font_size", 23 if mobile else 25)
 	_layout_preparation_note()

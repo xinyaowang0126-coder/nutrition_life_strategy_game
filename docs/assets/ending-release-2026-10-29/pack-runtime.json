@@ -1,0 +1,61 @@
+{
+	"cases": [
+		{
+			"image": "res://assets/generated/endings/stable_endurance.png",
+			"kind": "steady",
+			"moments": 2,
+			"name": "student-steady"
+		},
+		{
+			"image": "res://assets/generated/endings/barely_survived.png",
+			"kind": "goal_gap",
+			"moments": 2,
+			"name": "student-barely"
+		},
+		{
+			"image": "res://assets/generated/endings/barely_survived.png",
+			"kind": "reserve_gap",
+			"moments": 2,
+			"name": "student-barely-reserve"
+		},
+		{
+			"image": "res://assets/generated/endings/feedback/student_shortfall-v1.png",
+			"kind": "study_gap",
+			"moments": 1,
+			"name": "student-shortfall"
+		},
+		{
+			"image": "res://assets/generated/endings/collapsed.png",
+			"kind": "campus_rest",
+			"moments": 1,
+			"name": "student-rest"
+		},
+		{
+			"image": "res://assets/generated/stories/actions/zhou_perform-v1.png",
+			"kind": "performed",
+			"moments": 2,
+			"name": "zhou-performed"
+		},
+		{
+			"image": "res://assets/generated/endings/feedback/zhou_unready-v1.png",
+			"kind": "unready",
+			"moments": 1,
+			"name": "zhou-unready"
+		},
+		{
+			"image": "res://assets/generated/endings/feedback/zhou_other_choice-v1.png",
+			"kind": "other_choice",
+			"moments": 2,
+			"name": "zhou-other-choice"
+		},
+		{
+			"image": "res://assets/generated/stories/zhou_home.png",
+			"kind": "zhou_rest",
+			"moments": 1,
+			"name": "zhou-rest"
+		}
+	],
+	"errors": [],
+	"legacy_save": true,
+	"scope": "Matching Godot 4.7.2 directly loads the final Web PCK. Nine ending variants, actual exported scenes/scripts/art, read-only review and legacy save decoding. Separate from WebGL/browser persistence checks."
+}

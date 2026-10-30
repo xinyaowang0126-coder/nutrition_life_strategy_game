@@ -177,12 +177,24 @@ static func calculate_stability(state: Dictionary, _avg_quality: int, day: int, 
 
 
 static func select_ending(state: Dictionary, _recovery_rules: bool = true) -> String:
-	if int(state["stability"]) <= 15:
-		return "collapsed"
-	if int(state["study_progress"]) < 50:
-		return "study_shortfall"
-	if int(state["study_progress"]) >= 70 and int(state["stability"]) >= 60:
-		return "stable_endurance"
-	if int(state["stability"]) >= 25:
-		return "barely_survived"
-	return "collapsed"
+	return String(ending_result(state)["id"])
+
+
+## Shared classification and explanation; preserve the existing priority order.
+static func ending_result(state: Dictionary) -> Dictionary:
+	var reserve := int(state.get("stability", 0))
+	var progress := int(state.get("study_progress", 0))
+	var id := "collapsed"
+	var reason := "low_reserve"
+	if reserve <= 15:
+		reason = "critical_reserve"
+	elif progress < 50:
+		id = "study_shortfall"
+		reason = "study_gap"
+	elif progress >= 70 and reserve >= 60:
+		id = "stable_endurance"
+		reason = "steady"
+	elif reserve >= 25:
+		id = "barely_survived"
+		reason = "goal_gap" if progress < 70 else "reserve_gap"
+	return {"id": id, "reason": reason, "goal_gap": maxi(0, 70 - progress), "reserve_gap": maxi(0, 60 - reserve)}

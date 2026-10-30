@@ -1,0 +1,93 @@
+{
+  "date": "2026-10-29",
+  "status": "passed",
+  "origin": "http://127.0.0.1:8897/",
+  "viewports": [
+    [
+      1280,
+      720
+    ],
+    [
+      390,
+      640
+    ]
+  ],
+  "cases": [
+    {
+      "name": "student-steady",
+      "desktop": true,
+      "refreshed_continue": true,
+      "review_and_escape": true,
+      "mobile": true
+    },
+    {
+      "name": "student-barely",
+      "desktop": true,
+      "mobile": true,
+      "specific_day": 6
+    },
+    {
+      "name": "student-barely-reserve",
+      "desktop": true,
+      "mobile": true,
+      "actual_cost": -10,
+      "next_try_day": 7
+    },
+    {
+      "name": "student-shortfall",
+      "desktop": true,
+      "mobile": true,
+      "next_try_day": 1
+    },
+    {
+      "name": "student-rest",
+      "desktop": true,
+      "mobile": true,
+      "triggered_from_sleep_card": true,
+      "actual_day": 2,
+      "restart_to_day_one": true,
+      "restart_persisted": true
+    },
+    {
+      "name": "zhou-performed",
+      "desktop": true,
+      "mobile": true,
+      "actual_performance_clicked": true,
+      "reply_closed_before_sleep": true,
+      "refreshed_continue": true
+    },
+    {
+      "name": "zhou-unready",
+      "desktop": true,
+      "mobile": true,
+      "preflight_gap": 70,
+      "early_practice_suggestion": true
+    },
+    {
+      "name": "zhou-other-choice",
+      "desktop": true,
+      "mobile": true,
+      "ready_but_selected_rest": true
+    },
+    {
+      "name": "zhou-rest",
+      "desktop": true,
+      "mobile": true,
+      "actual_day": 2,
+      "restart_to_day_one": true,
+      "closed_tab_reopened": true
+    }
+  ],
+  "legacy_save": {
+    "file": "docs/assets/zhou-day7-2026-10-28/week-ending-demo.json",
+    "desktop": true,
+    "mobile": true,
+    "goal": 93,
+    "reserve": 90,
+    "balance": 138,
+    "actual_shared_meal_and_preparation_shown": true,
+    "meal_book_return_and_escape": true
+  },
+  "current_tab_console": [],
+  "scope": "Actual IAB WebGL UI, real local file chooser/IndexedDB import, nine ending variants at both CSS viewports. Student ending triggered from sleep card; Zhou actual performance, reply and sleep executed. Both stories refreshed/continued and restarted; Zhou restarted state survived closing and reopening the tab. Legacy week save rendered and read-only navigation preserved visible state. Current retained tab console inspected; this is not a human playtest or physical-phone check."
+}

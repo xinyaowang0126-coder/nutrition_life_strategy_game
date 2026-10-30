@@ -5,6 +5,7 @@ const Catalog := preload("res://scripts/stories/StoryCatalog.gd")
 const Data := preload("res://scripts/GameData.gd")
 const Cards := preload("res://scripts/CardDataStore.gd")
 const Balance := preload("res://scripts/systems/GameplayBalanceRules.gd")
+const ActionFeedback := preload("res://scripts/systems/ActionFeedbackTrace.gd")
 const Recovery := preload("res://scripts/systems/RecoveryStateService.gd")
 const Archive := preload("res://scripts/health/MealHealthArchive.gd")
 const Preferences := preload("res://scripts/systems/FoodPreferenceService.gd")
@@ -169,12 +170,16 @@ static func validate(envelope: Variant) -> Dictionary:
 	for row in p["today_action_records"]:
 		if not row is Dictionary or not actions.has(row.get("id")) or not row.get("stat_delta") is Dictionary or not row.get("stock_added") is Dictionary:
 			return failure("invalid_action", "存档的行动记录不完整。")
+	if not action_feedback_valid(p["today_action_records"], p["day"], p["current_learning_state"]):
+		return failure("invalid_action_feedback", "行动前后的记录不一致。原有进度保留。")
 	if p["run_history"].size() != p["day"] - (0 if p["_day_settled"] else 1):
 		return failure("invalid_history", "存档的周记录与日结不一致。")
 	for i in range(p["run_history"].size()):
 		var row: Variant = p["run_history"][i]
 		if not row is Dictionary or row.get("day") != i + 1 or not meal_records_valid(row.get("meals"), foods, sources, i + 1) or not row.get("actions") is Array or not Recovery.validate(row.get("recovery_state"))["valid"]:
 			return failure("invalid_history", "存档的周记录不完整。")
+		if not action_feedback_valid(row["actions"], i + 1, row.get("learning_state", {})):
+			return failure("invalid_action_feedback", "周记录中的行动前后不一致。原有进度保留。")
 	for key in ["pending_recovery_state", "current_recovery_state", "_recovery_display_record"]:
 		if not Recovery.validate(p[key])["valid"]:
 			return failure("invalid_recovery", "存档的恢复记录无效。")
@@ -212,6 +217,15 @@ static func validate(envelope: Variant) -> Dictionary:
 	if not archive.load_data(p.get("health_archive"))["ok"]:
 		return failure("invalid_archive", "存档的冻结资料无效。")
 	return {"ok": true, "save": envelope.duplicate(true)}
+
+
+static func action_feedback_valid(rows: Array, day: int, learning: Variant) -> bool:
+	for index in range(rows.size()):
+		var row: Variant = rows[index]
+		if not row is Dictionary: return false
+		if row.has("feedback_trace"):
+			if not learning is Dictionary or not ActionFeedback.valid(row["feedback_trace"], row, day, index + 1, learning): return false
+	return true
 
 
 static func state_valid(state: Dictionary, story: Dictionary) -> bool:

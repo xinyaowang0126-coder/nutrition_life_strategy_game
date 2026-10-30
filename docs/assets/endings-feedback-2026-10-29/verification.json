@@ -1,0 +1,254 @@
+{
+  "date": "2026-10-29",
+  "engine": "Godot 4.7.2 stable",
+  "full_regression": {
+    "passed": 663,
+    "failed": 0,
+    "skipped": 0,
+    "total": 663,
+    "suite_count": 52,
+    "duration_ms": 185275,
+    "failures": null,
+    "load_errors": null
+  },
+  "ending_suite": {
+    "passed": 19,
+    "failed": 0,
+    "skipped": 0,
+    "total": 19,
+    "suite_count": 1,
+    "duration_ms": 1108,
+    "failures": null,
+    "load_errors": null
+  },
+  "verification_gate_checks": 50,
+  "strategy_comparison": {
+    "comparisons": [
+      {
+        "story": "campus",
+        "runs": 510,
+        "equal_except_new_action_evidence": true
+      },
+      {
+        "story": "zhou",
+        "runs": 40,
+        "equal_except_new_action_evidence": true
+      }
+    ],
+    "scope": "Entire existing diagnostic JSON compared; only the new feedback_trace field is excluded."
+  },
+  "live_routes": {
+    "main_endings": 8,
+    "variants": 9,
+    "errors": [],
+    "all_model_states_equal": true,
+    "scope": "Nine complete live scene routes from day 1: actual new-day/opening dialogs, source/market/menu handlers, card confirmation, action availability, sleep selection, daily summaries and finale replies. Numeric state, hands and ending IDs are not edited. Signals/normal handlers are driven by script, not a human or every-step physical pointer; separate native pointer and browser checks cover interaction."
+  },
+  "native_windows": {
+    "1280x720": {
+      "cases": 9,
+      "errors": []
+    },
+    "390x640": {
+      "cases": 9,
+      "errors": []
+    },
+    "640x960": {
+      "cases": 9,
+      "errors": []
+    },
+    "1920x1080": {
+      "cases": 9,
+      "errors": []
+    }
+  },
+  "separate_process_restores": {
+    "1280x720": {
+      "cases": 9,
+      "errors": []
+    },
+    "390x640": {
+      "cases": 9,
+      "errors": []
+    }
+  },
+  "final_pack": {
+    "cases": [
+      {
+        "image": "res://assets/generated/endings/stable_endurance.png",
+        "kind": "steady",
+        "moments": 2,
+        "name": "student-steady"
+      },
+      {
+        "image": "res://assets/generated/endings/barely_survived.png",
+        "kind": "goal_gap",
+        "moments": 2,
+        "name": "student-barely"
+      },
+      {
+        "image": "res://assets/generated/endings/barely_survived.png",
+        "kind": "reserve_gap",
+        "moments": 2,
+        "name": "student-barely-reserve"
+      },
+      {
+        "image": "res://assets/generated/endings/feedback/student_shortfall-v1.png",
+        "kind": "study_gap",
+        "moments": 1,
+        "name": "student-shortfall"
+      },
+      {
+        "image": "res://assets/generated/endings/collapsed.png",
+        "kind": "campus_rest",
+        "moments": 1,
+        "name": "student-rest"
+      },
+      {
+        "image": "res://assets/generated/stories/actions/zhou_perform-v1.png",
+        "kind": "performed",
+        "moments": 2,
+        "name": "zhou-performed"
+      },
+      {
+        "image": "res://assets/generated/endings/feedback/zhou_unready-v1.png",
+        "kind": "unready",
+        "moments": 1,
+        "name": "zhou-unready"
+      },
+      {
+        "image": "res://assets/generated/endings/feedback/zhou_other_choice-v1.png",
+        "kind": "other_choice",
+        "moments": 2,
+        "name": "zhou-other-choice"
+      },
+      {
+        "image": "res://assets/generated/stories/zhou_home.png",
+        "kind": "zhou_rest",
+        "moments": 1,
+        "name": "zhou-rest"
+      }
+    ],
+    "errors": [],
+    "legacy_save": true,
+    "scope": "Matching Godot 4.7.2 directly loads the final Web PCK. Nine ending variants, actual exported scenes/scripts/art, read-only review and legacy save decoding. Separate from WebGL/browser persistence checks."
+  },
+  "browser": {
+    "date": "2026-10-29",
+    "status": "passed",
+    "origin": "http://127.0.0.1:8897/",
+    "viewports": [
+      [
+        1280,
+        720
+      ],
+      [
+        390,
+        640
+      ]
+    ],
+    "cases": [
+      {
+        "name": "student-steady",
+        "desktop": true,
+        "refreshed_continue": true,
+        "review_and_escape": true,
+        "mobile": true
+      },
+      {
+        "name": "student-barely",
+        "desktop": true,
+        "mobile": true,
+        "specific_day": 6
+      },
+      {
+        "name": "student-barely-reserve",
+        "desktop": true,
+        "mobile": true,
+        "actual_cost": -10,
+        "next_try_day": 7
+      },
+      {
+        "name": "student-shortfall",
+        "desktop": true,
+        "mobile": true,
+        "next_try_day": 1
+      },
+      {
+        "name": "student-rest",
+        "desktop": true,
+        "mobile": true,
+        "triggered_from_sleep_card": true,
+        "actual_day": 2,
+        "restart_to_day_one": true,
+        "restart_persisted": true
+      },
+      {
+        "name": "zhou-performed",
+        "desktop": true,
+        "mobile": true,
+        "actual_performance_clicked": true,
+        "reply_closed_before_sleep": true,
+        "refreshed_continue": true
+      },
+      {
+        "name": "zhou-unready",
+        "desktop": true,
+        "mobile": true,
+        "preflight_gap": 70,
+        "early_practice_suggestion": true
+      },
+      {
+        "name": "zhou-other-choice",
+        "desktop": true,
+        "mobile": true,
+        "ready_but_selected_rest": true
+      },
+      {
+        "name": "zhou-rest",
+        "desktop": true,
+        "mobile": true,
+        "actual_day": 2,
+        "restart_to_day_one": true,
+        "closed_tab_reopened": true
+      }
+    ],
+    "legacy_save": {
+      "file": "docs/assets/zhou-day7-2026-10-28/week-ending-demo.json",
+      "desktop": true,
+      "mobile": true,
+      "goal": 93,
+      "reserve": 90,
+      "balance": 138,
+      "actual_shared_meal_and_preparation_shown": true,
+      "meal_book_return_and_escape": true
+    },
+    "current_tab_console": [],
+    "scope": "Actual IAB WebGL UI, real local file chooser/IndexedDB import, nine ending variants at both CSS viewports. Student ending triggered from sleep card; Zhou actual performance, reply and sleep executed. Both stories refreshed/continued and restarted; Zhou restarted state survived closing and reopening the tab. Legacy week save rendered and read-only navigation preserved visible state. Current retained tab console inspected; this is not a human playtest or physical-phone check."
+  },
+  "pck_bytes": 97346280,
+  "pending": [
+    "Human formative playtesting and feedback strength",
+    "Independent professional/learning validation",
+    "Physical-phone testing"
+  ],
+  "scope": "Engineering and actual browser/native checks are reported separately. Scripted routes, injected native input and screenshots are not evidence of human learning or fun. No deployment or Git push is performed by this change.",
+  "nonreproduced_input_observation": {
+    "window": [
+      1920,
+      1080
+    ],
+    "initial_attempt": "One pointer activation in the last case did not open review; no script error was observed.",
+    "same_code_repeat": "Complete nine-case rerun passed.",
+    "cause": "Focus/layout timing not confirmed; retain original log and watch in human/device checks."
+  },
+  "environment_initialization_messages": [
+    "ERROR: Could not create editor data directory: C:/Users/xywan/AppData/Roaming/Godot",
+    "ERROR: Could not create editor config directory: C:/Users/xywan/AppData/Roaming/Godot",
+    "ERROR: Could not open 'user://' directory: 'user://'.",
+    "ERROR: Safe save failed. This may be a permissions problem, but also may happen because you are running a paranoid antivirus. If this is the case, please switch to Windows Defender or disable the 'safe save' option in editor settings. This makes it work, but increases the risk of file corruption in a crash.",
+    "ERROR: Cannot open directory 'C:/Users/xywan/AppData/Roaming/Godot/feature_profiles'.",
+    "ERROR: Can't save resource to empty path. Provide non-empty path or a Resource with non-empty resource_path.",
+    "ERROR: Error saving editor settings to "
+  ]
+}

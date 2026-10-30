@@ -214,7 +214,7 @@ func test_ready_person_can_choose_rest_and_is_not_reported_as_unprepared() -> vo
 	assert_false(game.performed)
 	_ack(game)
 	game._choose_sleep("sleep_early")
-	assert_eq(game.daily_summary._summary["title"], "这一周，按自己的安排")
+	assert_eq(game.ending_screen.feedback["title"], "这一周，按自己的安排")
 
 
 func test_slot_limit_and_multiple_missing_conditions_are_kept_separate() -> void:
@@ -291,9 +291,12 @@ func test_frozen_week_review_and_counts_restore_without_recalculation_effects() 
 	assert_eq(review["counts"]["days"], 7)
 	assert_eq(review["counts"]["meals"], 21)
 	assert_eq(review["counts"]["performances"], 1)
-	assert_eq(game.daily_summary.ending_image.texture.resource_path, "res://assets/generated/stories/actions/zhou_perform-v1.png")
-	assert_eq(game.daily_summary.record_kicker.text, "本周小记")
-	assert_eq(game.daily_summary.advice_kicker.text, "下次")
+	var ending_texture: Texture2D = game.ending_screen.hero_image.texture
+	assert_true(ending_texture != null)
+	if ending_texture is AtlasTexture: ending_texture = ending_texture.atlas
+	assert_eq(ending_texture.resource_path, "res://assets/generated/stories/actions/zhou_perform-v1.png")
+	assert_eq(game.ending_screen.feedback["kind"], "performed")
+	assert_false(String(game.ending_screen.feedback["next_try"]).is_empty())
 	var encoded := Codec.encode(game.capture_game_save())
 	assert_true(encoded["ok"], str(encoded))
 	var restored := _scene(Codec.decode(encoded["text"])["save"])
@@ -468,6 +471,6 @@ func test_legacy_performed_flag_without_action_record_does_not_invent_success() 
 	game._choose_sleep("sleep_early")
 	assert_eq(game.household_finale["review"]["counts"]["performances"], 0)
 	assert_contains(game.household_finale["review"]["outcome_text"], "原因保持未知")
-	assert_eq(game.daily_summary._summary["title"], "这一周，按实际记录回看")
-	assert_contains(game.daily_summary._summary["advice"], "实际参演：未记录")
+	assert_eq(game.ending_screen.feedback["title"], "这一周，按实际记录回看")
+	assert_contains(game.ending_screen.feedback["summary"], "没有实际参演记录")
 	assert_true(Codec.encode(game.capture_game_save())["ok"])

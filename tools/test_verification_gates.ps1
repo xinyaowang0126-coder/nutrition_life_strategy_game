@@ -79,11 +79,14 @@ $requiredPaths = @(
     "project.binary",
     "scenes/main_menu/MainMenu.tscn", "scenes/game_v2/GameRootV2.tscn",
     "scenes/game_v2/components/CompactChoiceCard.tscn", "scenes/game_v2/components/NewDayPopup.tscn",
+    "scenes/game_v2/components/EndingScreen.tscn",
     "scenes/game_v2/stages/MealSourceStage.tscn", "scripts/GameData.gd",
     "scripts/systems/MealResolver.gd", "scripts/systems/NutritionLedger.gd",
     "scripts/systems/WeeklyEventService.gd", "scripts/systems/DayCarryoverService.gd",
     "scripts/systems/RecoveryStateService.gd", "scripts/systems/RecoveryRules.gd",
     "scripts/systems/RecoveryGameplayService.gd", "scripts/systems/GameplayBalanceRules.gd",
+    "scripts/systems/EndingFeedbackBuilder.gd", "scripts/systems/ActionFeedbackTrace.gd",
+    "scripts/ui_v2/EndingFeedbackCopy.gd", "scripts/ui_v2/EndingScreen.gd",
     "scripts/health/HealthGuidanceFeatureFlags.gd", "scripts/health/HealthDataStore.gd",
     "scripts/health/HealthDataValidator.gd", "scripts/health/HealthEvidenceRegistry.gd",
     "scripts/health/HealthXmlStructure.gd", "scripts/health/MealHealthSnapshot.gd",
@@ -100,6 +103,8 @@ $requiredPaths = @(
     "assets/fonts/HouseholdBody.tres", "assets/fonts/HouseholdSansSC-Medium.ttf", "assets/fonts/HouseholdSans-OFL.txt",
     "assets/generated/stories/actions/zhou_rehearse-v1.png", "assets/generated/stories/actions/zhou_group_rehearsal-v1.png",
     "assets/generated/stories/actions/zhou_perform-v1.png", "assets/generated/stories/actions/zhou_call_friend-v1.png",
+    "assets/generated/endings/feedback/student_shortfall-v1.png",
+    "assets/generated/endings/feedback/zhou_unready-v1.png", "assets/generated/endings/feedback/zhou_other_choice-v1.png",
     "assets/generated/stories/night/zhou_home_night-v1.png",
     "assets/generated/stories/locations/zhou-kitchen-v1.png", "assets/generated/stories/locations/zhou-open-fridge-v1.png",
     "assets/generated/stories/locations/zhou-kitchen-portrait-v1.png",
@@ -144,6 +149,12 @@ try {
     $missingBalance = $requiredPaths | Where-Object { $_ -ne "scripts/systems/GameplayBalanceRules.gd" }
     [IO.File]::WriteAllBytes($packPath, (New-TestPack -Version 4 -Paths $missingBalance))
     Expect-Rejected "Balance runtime must be packaged" { Assert-CleanWebPack -PackPath $packPath } '*missing required production content: scripts/systems/GameplayBalanceRules*'
+    foreach ($endingDependency in @("scenes/game_v2/components/EndingScreen.tscn", "scripts/systems/EndingFeedbackBuilder.gd", "scripts/systems/ActionFeedbackTrace.gd", "scripts/ui_v2/EndingFeedbackCopy.gd", "scripts/ui_v2/EndingScreen.gd", "assets/generated/endings/feedback/student_shortfall-v1.png", "assets/generated/endings/feedback/zhou_unready-v1.png", "assets/generated/endings/feedback/zhou_other_choice-v1.png")) {
+        $missingEnding = $requiredPaths | Where-Object { $_ -ne $endingDependency }
+        [IO.File]::WriteAllBytes($packPath, (New-TestPack -Version 4 -Paths $missingEnding))
+        $endingPrefix = $endingDependency -replace '\.(gd|tscn|png)$', ''
+        Expect-Rejected ("Ending dependency must be packaged: " + $endingDependency) { Assert-CleanWebPack -PackPath $packPath } ("*missing required production content: " + $endingPrefix + "*")
+    }
     $missingProfile = @($requiredPaths | Where-Object { $_ -ne "data/health/food_health_profiles.xml" })
     [IO.File]::WriteAllBytes($packPath, (New-TestPack -Version 4 -Paths $missingProfile -Payload "res://data/health/food_health_profiles.xml"))
     Expect-Rejected "Payload path constant cannot substitute for XML entry" { Assert-CleanWebPack -PackPath $packPath } '*missing required production content: data/health/food_health_profiles.xml*'

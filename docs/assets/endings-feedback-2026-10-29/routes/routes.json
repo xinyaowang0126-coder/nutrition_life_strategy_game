@@ -1,0 +1,5341 @@
+{
+	"cases": [
+		{
+			"checkpoint_valid": true,
+			"day": 7.0,
+			"ending_id": "stable_endurance",
+			"ending_valid": true,
+			"expected_kind": "steady",
+			"intro": "",
+			"kind": "steady",
+			"live_scene": true,
+			"model_state_equal": true,
+			"name": "student-steady",
+			"opening_choice": "",
+			"outcome": {},
+			"state": {
+				"balance": 38,
+				"energy": 90,
+				"mood": 100,
+				"satiety": 62,
+				"stability": 88,
+				"stress": 0,
+				"study_progress": 77,
+				"study_target": 70
+			},
+			"steps": [
+				{
+					"args": [],
+					"command": "new_day_continue",
+					"day": 1,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 1.0,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"oatmeal",
+						"rice_plain"
+					],
+					"command": "meal",
+					"day": 1.0,
+					"phase": "breakfast"
+				},
+				{
+					"args": [
+						"study"
+					],
+					"command": "action",
+					"day": 1.0,
+					"phase": "breakfast_action"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 1.0,
+					"phase": "lunch_source"
+				},
+				{
+					"args": [
+						"oatmeal",
+						"tofu"
+					],
+					"command": "meal",
+					"day": 1.0,
+					"phase": "lunch"
+				},
+				{
+					"args": [
+						"walk"
+					],
+					"command": "action",
+					"day": 1.0,
+					"phase": "lunch_action"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 1.0,
+					"phase": "dinner_source"
+				},
+				{
+					"args": [
+						"rice_plain",
+						"mixed_grain_rice"
+					],
+					"command": "meal",
+					"day": 1.0,
+					"phase": "dinner"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 1.0,
+					"phase": "dinner_action"
+				},
+				{
+					"args": [
+						"sleep_early"
+					],
+					"command": "sleep",
+					"day": 1.0,
+					"phase": "sleep"
+				},
+				{
+					"args": [],
+					"command": "next_day",
+					"day": 1.0,
+					"phase": "summary"
+				},
+				{
+					"args": [],
+					"command": "new_day_continue",
+					"day": 2,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 2.0,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"rice_plain",
+						"oatmeal"
+					],
+					"command": "meal",
+					"day": 2.0,
+					"phase": "breakfast"
+				},
+				{
+					"args": [
+						"study"
+					],
+					"command": "action",
+					"day": 2.0,
+					"phase": "breakfast_action"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 2.0,
+					"phase": "lunch_source"
+				},
+				{
+					"args": [
+						"rice_plain",
+						"oatmeal"
+					],
+					"command": "meal",
+					"day": 2.0,
+					"phase": "lunch"
+				},
+				{
+					"args": [
+						"walk"
+					],
+					"command": "action",
+					"day": 2.0,
+					"phase": "lunch_action"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 2.0,
+					"phase": "dinner_source"
+				},
+				{
+					"args": [
+						"oatmeal",
+						"rice_plain"
+					],
+					"command": "meal",
+					"day": 2.0,
+					"phase": "dinner"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 2.0,
+					"phase": "dinner_action"
+				},
+				{
+					"args": [
+						"sleep_early"
+					],
+					"command": "sleep",
+					"day": 2.0,
+					"phase": "sleep"
+				},
+				{
+					"args": [],
+					"command": "next_day",
+					"day": 2.0,
+					"phase": "summary"
+				},
+				{
+					"args": [],
+					"command": "new_day_continue",
+					"day": 3,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 3.0,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"rice_plain",
+						"oatmeal"
+					],
+					"command": "meal",
+					"day": 3.0,
+					"phase": "breakfast"
+				},
+				{
+					"args": [
+						"study"
+					],
+					"command": "action",
+					"day": 3.0,
+					"phase": "breakfast_action"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 3.0,
+					"phase": "lunch_source"
+				},
+				{
+					"args": [
+						"egg",
+						"oatmeal"
+					],
+					"command": "meal",
+					"day": 3.0,
+					"phase": "lunch"
+				},
+				{
+					"args": [
+						"walk"
+					],
+					"command": "action",
+					"day": 3.0,
+					"phase": "lunch_action"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 3.0,
+					"phase": "dinner_source"
+				},
+				{
+					"args": [
+						"oatmeal",
+						"rice_plain"
+					],
+					"command": "meal",
+					"day": 3.0,
+					"phase": "dinner"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 3.0,
+					"phase": "dinner_action"
+				},
+				{
+					"args": [
+						"sleep_early"
+					],
+					"command": "sleep",
+					"day": 3.0,
+					"phase": "sleep"
+				},
+				{
+					"args": [],
+					"command": "next_day",
+					"day": 3.0,
+					"phase": "summary"
+				},
+				{
+					"args": [],
+					"command": "new_day_continue",
+					"day": 4,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 4.0,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"oatmeal",
+						"rice_plain"
+					],
+					"command": "meal",
+					"day": 4.0,
+					"phase": "breakfast"
+				},
+				{
+					"args": [
+						"study"
+					],
+					"command": "action",
+					"day": 4.0,
+					"phase": "breakfast_action"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 4.0,
+					"phase": "lunch_source"
+				},
+				{
+					"args": [
+						"tofu",
+						"celery_pork_stir_fry"
+					],
+					"command": "meal",
+					"day": 4.0,
+					"phase": "lunch"
+				},
+				{
+					"args": [
+						"walk"
+					],
+					"command": "action",
+					"day": 4.0,
+					"phase": "lunch_action"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 4.0,
+					"phase": "dinner_source"
+				},
+				{
+					"args": [
+						"mixed_grain_rice",
+						"egg"
+					],
+					"command": "meal",
+					"day": 4.0,
+					"phase": "dinner"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 4.0,
+					"phase": "dinner_action"
+				},
+				{
+					"args": [
+						"sleep_early"
+					],
+					"command": "sleep",
+					"day": 4.0,
+					"phase": "sleep"
+				},
+				{
+					"args": [],
+					"command": "next_day",
+					"day": 4.0,
+					"phase": "summary"
+				},
+				{
+					"args": [],
+					"command": "new_day_continue",
+					"day": 5,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 5.0,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"oatmeal",
+						"rice_plain"
+					],
+					"command": "meal",
+					"day": 5.0,
+					"phase": "breakfast"
+				},
+				{
+					"args": [
+						"study"
+					],
+					"command": "action",
+					"day": 5.0,
+					"phase": "breakfast_action"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 5.0,
+					"phase": "lunch_source"
+				},
+				{
+					"args": [
+						"mixed_grain_rice",
+						"rice_plain"
+					],
+					"command": "meal",
+					"day": 5.0,
+					"phase": "lunch"
+				},
+				{
+					"args": [
+						"walk"
+					],
+					"command": "action",
+					"day": 5.0,
+					"phase": "lunch_action"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 5.0,
+					"phase": "dinner_source"
+				},
+				{
+					"args": [
+						"rice_plain",
+						"mixed_grain_rice"
+					],
+					"command": "meal",
+					"day": 5.0,
+					"phase": "dinner"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 5.0,
+					"phase": "dinner_action"
+				},
+				{
+					"args": [
+						"sleep_early"
+					],
+					"command": "sleep",
+					"day": 5.0,
+					"phase": "sleep"
+				},
+				{
+					"args": [],
+					"command": "next_day",
+					"day": 5.0,
+					"phase": "summary"
+				},
+				{
+					"args": [],
+					"command": "new_day_continue",
+					"day": 6,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 6.0,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"oatmeal",
+						"rice_plain"
+					],
+					"command": "meal",
+					"day": 6.0,
+					"phase": "breakfast"
+				},
+				{
+					"args": [
+						"study"
+					],
+					"command": "action",
+					"day": 6.0,
+					"phase": "breakfast_action"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 6.0,
+					"phase": "lunch_source"
+				},
+				{
+					"args": [
+						"oatmeal",
+						"rice_plain"
+					],
+					"command": "meal",
+					"day": 6.0,
+					"phase": "lunch"
+				},
+				{
+					"args": [
+						"walk"
+					],
+					"command": "action",
+					"day": 6.0,
+					"phase": "lunch_action"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 6.0,
+					"phase": "dinner_source"
+				},
+				{
+					"args": [
+						"rice_plain",
+						"mixed_grain_rice"
+					],
+					"command": "meal",
+					"day": 6.0,
+					"phase": "dinner"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 6.0,
+					"phase": "dinner_action"
+				},
+				{
+					"args": [
+						"sleep_early"
+					],
+					"command": "sleep",
+					"day": 6.0,
+					"phase": "sleep"
+				},
+				{
+					"args": [],
+					"command": "next_day",
+					"day": 6.0,
+					"phase": "summary"
+				},
+				{
+					"args": [],
+					"command": "new_day_continue",
+					"day": 7,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 7.0,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"oatmeal",
+						"rice_plain"
+					],
+					"command": "meal",
+					"day": 7.0,
+					"phase": "breakfast"
+				},
+				{
+					"args": [
+						"study"
+					],
+					"command": "action",
+					"day": 7.0,
+					"phase": "breakfast_action"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 7.0,
+					"phase": "lunch_source"
+				},
+				{
+					"args": [
+						"rice_plain",
+						"mixed_grain_rice"
+					],
+					"command": "meal",
+					"day": 7.0,
+					"phase": "lunch"
+				},
+				{
+					"args": [
+						"walk"
+					],
+					"command": "action",
+					"day": 7.0,
+					"phase": "lunch_action"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 7.0,
+					"phase": "dinner_source"
+				},
+				{
+					"args": [
+						"oatmeal",
+						"egg"
+					],
+					"command": "meal",
+					"day": 7.0,
+					"phase": "dinner"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 7.0,
+					"phase": "dinner_action"
+				},
+				{
+					"args": [
+						"sleep_early"
+					],
+					"command": "sleep",
+					"day": 7.0,
+					"phase": "sleep"
+				}
+			],
+			"story": "campus_exam",
+			"title": "稳稳到了周末"
+		},
+		{
+			"checkpoint_valid": true,
+			"day": 7.0,
+			"ending_id": "barely_survived",
+			"ending_valid": true,
+			"expected_kind": "goal_gap",
+			"intro": "",
+			"kind": "goal_gap",
+			"live_scene": true,
+			"model_state_equal": true,
+			"name": "student-barely",
+			"opening_choice": "",
+			"outcome": {},
+			"state": {
+				"balance": 38,
+				"energy": 100,
+				"mood": 100,
+				"satiety": 62,
+				"stability": 88,
+				"stress": 0,
+				"study_progress": 55,
+				"study_target": 70
+			},
+			"steps": [
+				{
+					"args": [],
+					"command": "new_day_continue",
+					"day": 1,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 1.0,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"oatmeal",
+						"rice_plain"
+					],
+					"command": "meal",
+					"day": 1.0,
+					"phase": "breakfast"
+				},
+				{
+					"args": [
+						"study"
+					],
+					"command": "action",
+					"day": 1.0,
+					"phase": "breakfast_action"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 1.0,
+					"phase": "lunch_source"
+				},
+				{
+					"args": [
+						"oatmeal",
+						"tofu"
+					],
+					"command": "meal",
+					"day": 1.0,
+					"phase": "lunch"
+				},
+				{
+					"args": [
+						"walk"
+					],
+					"command": "action",
+					"day": 1.0,
+					"phase": "lunch_action"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 1.0,
+					"phase": "dinner_source"
+				},
+				{
+					"args": [
+						"rice_plain",
+						"mixed_grain_rice"
+					],
+					"command": "meal",
+					"day": 1.0,
+					"phase": "dinner"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 1.0,
+					"phase": "dinner_action"
+				},
+				{
+					"args": [
+						"sleep_early"
+					],
+					"command": "sleep",
+					"day": 1.0,
+					"phase": "sleep"
+				},
+				{
+					"args": [],
+					"command": "next_day",
+					"day": 1.0,
+					"phase": "summary"
+				},
+				{
+					"args": [],
+					"command": "new_day_continue",
+					"day": 2,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 2.0,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"rice_plain",
+						"oatmeal"
+					],
+					"command": "meal",
+					"day": 2.0,
+					"phase": "breakfast"
+				},
+				{
+					"args": [
+						"study"
+					],
+					"command": "action",
+					"day": 2.0,
+					"phase": "breakfast_action"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 2.0,
+					"phase": "lunch_source"
+				},
+				{
+					"args": [
+						"rice_plain",
+						"oatmeal"
+					],
+					"command": "meal",
+					"day": 2.0,
+					"phase": "lunch"
+				},
+				{
+					"args": [
+						"walk"
+					],
+					"command": "action",
+					"day": 2.0,
+					"phase": "lunch_action"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 2.0,
+					"phase": "dinner_source"
+				},
+				{
+					"args": [
+						"oatmeal",
+						"rice_plain"
+					],
+					"command": "meal",
+					"day": 2.0,
+					"phase": "dinner"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 2.0,
+					"phase": "dinner_action"
+				},
+				{
+					"args": [
+						"sleep_early"
+					],
+					"command": "sleep",
+					"day": 2.0,
+					"phase": "sleep"
+				},
+				{
+					"args": [],
+					"command": "next_day",
+					"day": 2.0,
+					"phase": "summary"
+				},
+				{
+					"args": [],
+					"command": "new_day_continue",
+					"day": 3,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 3.0,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"rice_plain",
+						"oatmeal"
+					],
+					"command": "meal",
+					"day": 3.0,
+					"phase": "breakfast"
+				},
+				{
+					"args": [
+						"study"
+					],
+					"command": "action",
+					"day": 3.0,
+					"phase": "breakfast_action"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 3.0,
+					"phase": "lunch_source"
+				},
+				{
+					"args": [
+						"egg",
+						"oatmeal"
+					],
+					"command": "meal",
+					"day": 3.0,
+					"phase": "lunch"
+				},
+				{
+					"args": [
+						"walk"
+					],
+					"command": "action",
+					"day": 3.0,
+					"phase": "lunch_action"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 3.0,
+					"phase": "dinner_source"
+				},
+				{
+					"args": [
+						"oatmeal",
+						"rice_plain"
+					],
+					"command": "meal",
+					"day": 3.0,
+					"phase": "dinner"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 3.0,
+					"phase": "dinner_action"
+				},
+				{
+					"args": [
+						"sleep_early"
+					],
+					"command": "sleep",
+					"day": 3.0,
+					"phase": "sleep"
+				},
+				{
+					"args": [],
+					"command": "next_day",
+					"day": 3.0,
+					"phase": "summary"
+				},
+				{
+					"args": [],
+					"command": "new_day_continue",
+					"day": 4,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 4.0,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"oatmeal",
+						"rice_plain"
+					],
+					"command": "meal",
+					"day": 4.0,
+					"phase": "breakfast"
+				},
+				{
+					"args": [
+						"study"
+					],
+					"command": "action",
+					"day": 4.0,
+					"phase": "breakfast_action"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 4.0,
+					"phase": "lunch_source"
+				},
+				{
+					"args": [
+						"tofu",
+						"celery_pork_stir_fry"
+					],
+					"command": "meal",
+					"day": 4.0,
+					"phase": "lunch"
+				},
+				{
+					"args": [
+						"walk"
+					],
+					"command": "action",
+					"day": 4.0,
+					"phase": "lunch_action"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 4.0,
+					"phase": "dinner_source"
+				},
+				{
+					"args": [
+						"mixed_grain_rice",
+						"egg"
+					],
+					"command": "meal",
+					"day": 4.0,
+					"phase": "dinner"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 4.0,
+					"phase": "dinner_action"
+				},
+				{
+					"args": [
+						"sleep_early"
+					],
+					"command": "sleep",
+					"day": 4.0,
+					"phase": "sleep"
+				},
+				{
+					"args": [],
+					"command": "next_day",
+					"day": 4.0,
+					"phase": "summary"
+				},
+				{
+					"args": [],
+					"command": "new_day_continue",
+					"day": 5,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 5.0,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"oatmeal",
+						"rice_plain"
+					],
+					"command": "meal",
+					"day": 5.0,
+					"phase": "breakfast"
+				},
+				{
+					"args": [
+						"study"
+					],
+					"command": "action",
+					"day": 5.0,
+					"phase": "breakfast_action"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 5.0,
+					"phase": "lunch_source"
+				},
+				{
+					"args": [
+						"mixed_grain_rice",
+						"rice_plain"
+					],
+					"command": "meal",
+					"day": 5.0,
+					"phase": "lunch"
+				},
+				{
+					"args": [
+						"walk"
+					],
+					"command": "action",
+					"day": 5.0,
+					"phase": "lunch_action"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 5.0,
+					"phase": "dinner_source"
+				},
+				{
+					"args": [
+						"rice_plain",
+						"mixed_grain_rice"
+					],
+					"command": "meal",
+					"day": 5.0,
+					"phase": "dinner"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 5.0,
+					"phase": "dinner_action"
+				},
+				{
+					"args": [
+						"sleep_early"
+					],
+					"command": "sleep",
+					"day": 5.0,
+					"phase": "sleep"
+				},
+				{
+					"args": [],
+					"command": "next_day",
+					"day": 5.0,
+					"phase": "summary"
+				},
+				{
+					"args": [],
+					"command": "new_day_continue",
+					"day": 6,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 6.0,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"oatmeal",
+						"rice_plain"
+					],
+					"command": "meal",
+					"day": 6.0,
+					"phase": "breakfast"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 6.0,
+					"phase": "breakfast_action"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 6.0,
+					"phase": "lunch_source"
+				},
+				{
+					"args": [
+						"oatmeal",
+						"rice_plain"
+					],
+					"command": "meal",
+					"day": 6.0,
+					"phase": "lunch"
+				},
+				{
+					"args": [
+						"walk"
+					],
+					"command": "action",
+					"day": 6.0,
+					"phase": "lunch_action"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 6.0,
+					"phase": "dinner_source"
+				},
+				{
+					"args": [
+						"rice_plain",
+						"mixed_grain_rice"
+					],
+					"command": "meal",
+					"day": 6.0,
+					"phase": "dinner"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 6.0,
+					"phase": "dinner_action"
+				},
+				{
+					"args": [
+						"sleep_early"
+					],
+					"command": "sleep",
+					"day": 6.0,
+					"phase": "sleep"
+				},
+				{
+					"args": [],
+					"command": "next_day",
+					"day": 6.0,
+					"phase": "summary"
+				},
+				{
+					"args": [],
+					"command": "new_day_continue",
+					"day": 7,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 7.0,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"oatmeal",
+						"rice_plain"
+					],
+					"command": "meal",
+					"day": 7.0,
+					"phase": "breakfast"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 7.0,
+					"phase": "breakfast_action"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 7.0,
+					"phase": "lunch_source"
+				},
+				{
+					"args": [
+						"rice_plain",
+						"mixed_grain_rice"
+					],
+					"command": "meal",
+					"day": 7.0,
+					"phase": "lunch"
+				},
+				{
+					"args": [
+						"walk"
+					],
+					"command": "action",
+					"day": 7.0,
+					"phase": "lunch_action"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 7.0,
+					"phase": "dinner_source"
+				},
+				{
+					"args": [
+						"oatmeal",
+						"egg"
+					],
+					"command": "meal",
+					"day": 7.0,
+					"phase": "dinner"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 7.0,
+					"phase": "dinner_action"
+				},
+				{
+					"args": [
+						"sleep_early"
+					],
+					"command": "sleep",
+					"day": 7.0,
+					"phase": "sleep"
+				}
+			],
+			"story": "campus_exam",
+			"title": "总算到了周末"
+		},
+		{
+			"checkpoint_valid": true,
+			"day": 7.0,
+			"ending_id": "barely_survived",
+			"ending_valid": true,
+			"expected_kind": "reserve_gap",
+			"intro": "",
+			"kind": "reserve_gap",
+			"live_scene": true,
+			"model_state_equal": true,
+			"name": "student-barely-reserve",
+			"opening_choice": "",
+			"outcome": {},
+			"state": {
+				"balance": 38,
+				"energy": 18,
+				"mood": 95,
+				"satiety": 60,
+				"stability": 58,
+				"stress": 28,
+				"study_progress": 100,
+				"study_target": 70
+			},
+			"steps": [
+				{
+					"args": [],
+					"command": "new_day_continue",
+					"day": 1,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 1.0,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"oatmeal",
+						"rice_plain"
+					],
+					"command": "meal",
+					"day": 1.0,
+					"phase": "breakfast"
+				},
+				{
+					"args": [
+						"study"
+					],
+					"command": "action",
+					"day": 1.0,
+					"phase": "breakfast_action"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 1.0,
+					"phase": "lunch_source"
+				},
+				{
+					"args": [
+						"oatmeal",
+						"tofu"
+					],
+					"command": "meal",
+					"day": 1.0,
+					"phase": "lunch"
+				},
+				{
+					"args": [
+						"walk"
+					],
+					"command": "action",
+					"day": 1.0,
+					"phase": "lunch_action"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 1.0,
+					"phase": "dinner_source"
+				},
+				{
+					"args": [
+						"rice_plain",
+						"mixed_grain_rice"
+					],
+					"command": "meal",
+					"day": 1.0,
+					"phase": "dinner"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 1.0,
+					"phase": "dinner_action"
+				},
+				{
+					"args": [
+						"sleep_early"
+					],
+					"command": "sleep",
+					"day": 1.0,
+					"phase": "sleep"
+				},
+				{
+					"args": [],
+					"command": "next_day",
+					"day": 1.0,
+					"phase": "summary"
+				},
+				{
+					"args": [],
+					"command": "new_day_continue",
+					"day": 2,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 2.0,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"rice_plain",
+						"oatmeal"
+					],
+					"command": "meal",
+					"day": 2.0,
+					"phase": "breakfast"
+				},
+				{
+					"args": [
+						"study"
+					],
+					"command": "action",
+					"day": 2.0,
+					"phase": "breakfast_action"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 2.0,
+					"phase": "lunch_source"
+				},
+				{
+					"args": [
+						"rice_plain",
+						"oatmeal"
+					],
+					"command": "meal",
+					"day": 2.0,
+					"phase": "lunch"
+				},
+				{
+					"args": [
+						"walk"
+					],
+					"command": "action",
+					"day": 2.0,
+					"phase": "lunch_action"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 2.0,
+					"phase": "dinner_source"
+				},
+				{
+					"args": [
+						"oatmeal",
+						"rice_plain"
+					],
+					"command": "meal",
+					"day": 2.0,
+					"phase": "dinner"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 2.0,
+					"phase": "dinner_action"
+				},
+				{
+					"args": [
+						"sleep_early"
+					],
+					"command": "sleep",
+					"day": 2.0,
+					"phase": "sleep"
+				},
+				{
+					"args": [],
+					"command": "next_day",
+					"day": 2.0,
+					"phase": "summary"
+				},
+				{
+					"args": [],
+					"command": "new_day_continue",
+					"day": 3,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 3.0,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"rice_plain",
+						"oatmeal"
+					],
+					"command": "meal",
+					"day": 3.0,
+					"phase": "breakfast"
+				},
+				{
+					"args": [
+						"study"
+					],
+					"command": "action",
+					"day": 3.0,
+					"phase": "breakfast_action"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 3.0,
+					"phase": "lunch_source"
+				},
+				{
+					"args": [
+						"egg",
+						"oatmeal"
+					],
+					"command": "meal",
+					"day": 3.0,
+					"phase": "lunch"
+				},
+				{
+					"args": [
+						"walk"
+					],
+					"command": "action",
+					"day": 3.0,
+					"phase": "lunch_action"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 3.0,
+					"phase": "dinner_source"
+				},
+				{
+					"args": [
+						"oatmeal",
+						"rice_plain"
+					],
+					"command": "meal",
+					"day": 3.0,
+					"phase": "dinner"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 3.0,
+					"phase": "dinner_action"
+				},
+				{
+					"args": [
+						"sleep_early"
+					],
+					"command": "sleep",
+					"day": 3.0,
+					"phase": "sleep"
+				},
+				{
+					"args": [],
+					"command": "next_day",
+					"day": 3.0,
+					"phase": "summary"
+				},
+				{
+					"args": [],
+					"command": "new_day_continue",
+					"day": 4,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 4.0,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"oatmeal",
+						"rice_plain"
+					],
+					"command": "meal",
+					"day": 4.0,
+					"phase": "breakfast"
+				},
+				{
+					"args": [
+						"study"
+					],
+					"command": "action",
+					"day": 4.0,
+					"phase": "breakfast_action"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 4.0,
+					"phase": "lunch_source"
+				},
+				{
+					"args": [
+						"tofu",
+						"celery_pork_stir_fry"
+					],
+					"command": "meal",
+					"day": 4.0,
+					"phase": "lunch"
+				},
+				{
+					"args": [
+						"walk"
+					],
+					"command": "action",
+					"day": 4.0,
+					"phase": "lunch_action"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 4.0,
+					"phase": "dinner_source"
+				},
+				{
+					"args": [
+						"mixed_grain_rice",
+						"egg"
+					],
+					"command": "meal",
+					"day": 4.0,
+					"phase": "dinner"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 4.0,
+					"phase": "dinner_action"
+				},
+				{
+					"args": [
+						"sleep_early"
+					],
+					"command": "sleep",
+					"day": 4.0,
+					"phase": "sleep"
+				},
+				{
+					"args": [],
+					"command": "next_day",
+					"day": 4.0,
+					"phase": "summary"
+				},
+				{
+					"args": [],
+					"command": "new_day_continue",
+					"day": 5,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 5.0,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"oatmeal",
+						"rice_plain"
+					],
+					"command": "meal",
+					"day": 5.0,
+					"phase": "breakfast"
+				},
+				{
+					"args": [
+						"study"
+					],
+					"command": "action",
+					"day": 5.0,
+					"phase": "breakfast_action"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 5.0,
+					"phase": "lunch_source"
+				},
+				{
+					"args": [
+						"mixed_grain_rice",
+						"rice_plain"
+					],
+					"command": "meal",
+					"day": 5.0,
+					"phase": "lunch"
+				},
+				{
+					"args": [
+						"walk"
+					],
+					"command": "action",
+					"day": 5.0,
+					"phase": "lunch_action"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 5.0,
+					"phase": "dinner_source"
+				},
+				{
+					"args": [
+						"rice_plain",
+						"mixed_grain_rice"
+					],
+					"command": "meal",
+					"day": 5.0,
+					"phase": "dinner"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 5.0,
+					"phase": "dinner_action"
+				},
+				{
+					"args": [
+						"sleep_early"
+					],
+					"command": "sleep",
+					"day": 5.0,
+					"phase": "sleep"
+				},
+				{
+					"args": [],
+					"command": "next_day",
+					"day": 5.0,
+					"phase": "summary"
+				},
+				{
+					"args": [],
+					"command": "new_day_continue",
+					"day": 6,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 6.0,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"oatmeal",
+						"rice_plain"
+					],
+					"command": "meal",
+					"day": 6.0,
+					"phase": "breakfast"
+				},
+				{
+					"args": [
+						"study"
+					],
+					"command": "action",
+					"day": 6.0,
+					"phase": "breakfast_action"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 6.0,
+					"phase": "lunch_source"
+				},
+				{
+					"args": [
+						"oatmeal",
+						"rice_plain"
+					],
+					"command": "meal",
+					"day": 6.0,
+					"phase": "lunch"
+				},
+				{
+					"args": [
+						"walk"
+					],
+					"command": "action",
+					"day": 6.0,
+					"phase": "lunch_action"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 6.0,
+					"phase": "dinner_source"
+				},
+				{
+					"args": [
+						"rice_plain",
+						"mixed_grain_rice"
+					],
+					"command": "meal",
+					"day": 6.0,
+					"phase": "dinner"
+				},
+				{
+					"args": [
+						"study"
+					],
+					"command": "action",
+					"day": 6.0,
+					"phase": "dinner_action"
+				},
+				{
+					"args": [
+						"sleep_early"
+					],
+					"command": "sleep",
+					"day": 6.0,
+					"phase": "sleep"
+				},
+				{
+					"args": [],
+					"command": "next_day",
+					"day": 6.0,
+					"phase": "summary"
+				},
+				{
+					"args": [],
+					"command": "new_day_continue",
+					"day": 7,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 7.0,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"oatmeal",
+						"rice_plain"
+					],
+					"command": "meal",
+					"day": 7.0,
+					"phase": "breakfast"
+				},
+				{
+					"args": [
+						"study"
+					],
+					"command": "action",
+					"day": 7.0,
+					"phase": "breakfast_action"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 7.0,
+					"phase": "lunch_source"
+				},
+				{
+					"args": [
+						"rice_plain",
+						"mixed_grain_rice"
+					],
+					"command": "meal",
+					"day": 7.0,
+					"phase": "lunch"
+				},
+				{
+					"args": [
+						"study"
+					],
+					"command": "action",
+					"day": 7.0,
+					"phase": "lunch_action"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 7.0,
+					"phase": "dinner_source"
+				},
+				{
+					"args": [
+						"oatmeal",
+						"egg"
+					],
+					"command": "meal",
+					"day": 7.0,
+					"phase": "dinner"
+				},
+				{
+					"args": [
+						"study"
+					],
+					"command": "action",
+					"day": 7.0,
+					"phase": "dinner_action"
+				},
+				{
+					"args": [
+						"night_study"
+					],
+					"command": "sleep",
+					"day": 7.0,
+					"phase": "sleep"
+				}
+			],
+			"story": "campus_exam",
+			"title": "总算到了周末"
+		},
+		{
+			"checkpoint_valid": true,
+			"day": 7.0,
+			"ending_id": "study_shortfall",
+			"ending_valid": true,
+			"expected_kind": "study_gap",
+			"intro": "",
+			"kind": "study_gap",
+			"live_scene": true,
+			"model_state_equal": true,
+			"name": "student-shortfall",
+			"opening_choice": "",
+			"outcome": {},
+			"state": {
+				"balance": 38,
+				"energy": 100,
+				"mood": 100,
+				"satiety": 62,
+				"stability": 82,
+				"stress": 0,
+				"study_progress": 0,
+				"study_target": 70
+			},
+			"steps": [
+				{
+					"args": [],
+					"command": "new_day_continue",
+					"day": 1,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 1.0,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"oatmeal",
+						"rice_plain"
+					],
+					"command": "meal",
+					"day": 1.0,
+					"phase": "breakfast"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 1.0,
+					"phase": "breakfast_action"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 1.0,
+					"phase": "lunch_source"
+				},
+				{
+					"args": [
+						"oatmeal",
+						"tofu"
+					],
+					"command": "meal",
+					"day": 1.0,
+					"phase": "lunch"
+				},
+				{
+					"args": [
+						"walk"
+					],
+					"command": "action",
+					"day": 1.0,
+					"phase": "lunch_action"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 1.0,
+					"phase": "dinner_source"
+				},
+				{
+					"args": [
+						"rice_plain",
+						"mixed_grain_rice"
+					],
+					"command": "meal",
+					"day": 1.0,
+					"phase": "dinner"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 1.0,
+					"phase": "dinner_action"
+				},
+				{
+					"args": [
+						"sleep_early"
+					],
+					"command": "sleep",
+					"day": 1.0,
+					"phase": "sleep"
+				},
+				{
+					"args": [],
+					"command": "next_day",
+					"day": 1.0,
+					"phase": "summary"
+				},
+				{
+					"args": [],
+					"command": "new_day_continue",
+					"day": 2,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 2.0,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"rice_plain",
+						"oatmeal"
+					],
+					"command": "meal",
+					"day": 2.0,
+					"phase": "breakfast"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 2.0,
+					"phase": "breakfast_action"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 2.0,
+					"phase": "lunch_source"
+				},
+				{
+					"args": [
+						"rice_plain",
+						"oatmeal"
+					],
+					"command": "meal",
+					"day": 2.0,
+					"phase": "lunch"
+				},
+				{
+					"args": [
+						"walk"
+					],
+					"command": "action",
+					"day": 2.0,
+					"phase": "lunch_action"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 2.0,
+					"phase": "dinner_source"
+				},
+				{
+					"args": [
+						"oatmeal",
+						"rice_plain"
+					],
+					"command": "meal",
+					"day": 2.0,
+					"phase": "dinner"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 2.0,
+					"phase": "dinner_action"
+				},
+				{
+					"args": [
+						"sleep_early"
+					],
+					"command": "sleep",
+					"day": 2.0,
+					"phase": "sleep"
+				},
+				{
+					"args": [],
+					"command": "next_day",
+					"day": 2.0,
+					"phase": "summary"
+				},
+				{
+					"args": [],
+					"command": "new_day_continue",
+					"day": 3,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 3.0,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"rice_plain",
+						"oatmeal"
+					],
+					"command": "meal",
+					"day": 3.0,
+					"phase": "breakfast"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 3.0,
+					"phase": "breakfast_action"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 3.0,
+					"phase": "lunch_source"
+				},
+				{
+					"args": [
+						"egg",
+						"oatmeal"
+					],
+					"command": "meal",
+					"day": 3.0,
+					"phase": "lunch"
+				},
+				{
+					"args": [
+						"walk"
+					],
+					"command": "action",
+					"day": 3.0,
+					"phase": "lunch_action"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 3.0,
+					"phase": "dinner_source"
+				},
+				{
+					"args": [
+						"oatmeal",
+						"rice_plain"
+					],
+					"command": "meal",
+					"day": 3.0,
+					"phase": "dinner"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 3.0,
+					"phase": "dinner_action"
+				},
+				{
+					"args": [
+						"sleep_early"
+					],
+					"command": "sleep",
+					"day": 3.0,
+					"phase": "sleep"
+				},
+				{
+					"args": [],
+					"command": "next_day",
+					"day": 3.0,
+					"phase": "summary"
+				},
+				{
+					"args": [],
+					"command": "new_day_continue",
+					"day": 4,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 4.0,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"oatmeal",
+						"rice_plain"
+					],
+					"command": "meal",
+					"day": 4.0,
+					"phase": "breakfast"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 4.0,
+					"phase": "breakfast_action"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 4.0,
+					"phase": "lunch_source"
+				},
+				{
+					"args": [
+						"tofu",
+						"celery_pork_stir_fry"
+					],
+					"command": "meal",
+					"day": 4.0,
+					"phase": "lunch"
+				},
+				{
+					"args": [
+						"walk"
+					],
+					"command": "action",
+					"day": 4.0,
+					"phase": "lunch_action"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 4.0,
+					"phase": "dinner_source"
+				},
+				{
+					"args": [
+						"mixed_grain_rice",
+						"egg"
+					],
+					"command": "meal",
+					"day": 4.0,
+					"phase": "dinner"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 4.0,
+					"phase": "dinner_action"
+				},
+				{
+					"args": [
+						"sleep_early"
+					],
+					"command": "sleep",
+					"day": 4.0,
+					"phase": "sleep"
+				},
+				{
+					"args": [],
+					"command": "next_day",
+					"day": 4.0,
+					"phase": "summary"
+				},
+				{
+					"args": [],
+					"command": "new_day_continue",
+					"day": 5,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 5.0,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"oatmeal",
+						"rice_plain"
+					],
+					"command": "meal",
+					"day": 5.0,
+					"phase": "breakfast"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 5.0,
+					"phase": "breakfast_action"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 5.0,
+					"phase": "lunch_source"
+				},
+				{
+					"args": [
+						"mixed_grain_rice",
+						"rice_plain"
+					],
+					"command": "meal",
+					"day": 5.0,
+					"phase": "lunch"
+				},
+				{
+					"args": [
+						"walk"
+					],
+					"command": "action",
+					"day": 5.0,
+					"phase": "lunch_action"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 5.0,
+					"phase": "dinner_source"
+				},
+				{
+					"args": [
+						"rice_plain",
+						"mixed_grain_rice"
+					],
+					"command": "meal",
+					"day": 5.0,
+					"phase": "dinner"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 5.0,
+					"phase": "dinner_action"
+				},
+				{
+					"args": [
+						"sleep_early"
+					],
+					"command": "sleep",
+					"day": 5.0,
+					"phase": "sleep"
+				},
+				{
+					"args": [],
+					"command": "next_day",
+					"day": 5.0,
+					"phase": "summary"
+				},
+				{
+					"args": [],
+					"command": "new_day_continue",
+					"day": 6,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 6.0,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"oatmeal",
+						"rice_plain"
+					],
+					"command": "meal",
+					"day": 6.0,
+					"phase": "breakfast"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 6.0,
+					"phase": "breakfast_action"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 6.0,
+					"phase": "lunch_source"
+				},
+				{
+					"args": [
+						"oatmeal",
+						"rice_plain"
+					],
+					"command": "meal",
+					"day": 6.0,
+					"phase": "lunch"
+				},
+				{
+					"args": [
+						"walk"
+					],
+					"command": "action",
+					"day": 6.0,
+					"phase": "lunch_action"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 6.0,
+					"phase": "dinner_source"
+				},
+				{
+					"args": [
+						"rice_plain",
+						"mixed_grain_rice"
+					],
+					"command": "meal",
+					"day": 6.0,
+					"phase": "dinner"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 6.0,
+					"phase": "dinner_action"
+				},
+				{
+					"args": [
+						"sleep_early"
+					],
+					"command": "sleep",
+					"day": 6.0,
+					"phase": "sleep"
+				},
+				{
+					"args": [],
+					"command": "next_day",
+					"day": 6.0,
+					"phase": "summary"
+				},
+				{
+					"args": [],
+					"command": "new_day_continue",
+					"day": 7,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 7.0,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"oatmeal",
+						"rice_plain"
+					],
+					"command": "meal",
+					"day": 7.0,
+					"phase": "breakfast"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 7.0,
+					"phase": "breakfast_action"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 7.0,
+					"phase": "lunch_source"
+				},
+				{
+					"args": [
+						"rice_plain",
+						"mixed_grain_rice"
+					],
+					"command": "meal",
+					"day": 7.0,
+					"phase": "lunch"
+				},
+				{
+					"args": [
+						"walk"
+					],
+					"command": "action",
+					"day": 7.0,
+					"phase": "lunch_action"
+				},
+				{
+					"args": [
+						"cafeteria"
+					],
+					"command": "source",
+					"day": 7.0,
+					"phase": "dinner_source"
+				},
+				{
+					"args": [
+						"oatmeal",
+						"egg"
+					],
+					"command": "meal",
+					"day": 7.0,
+					"phase": "dinner"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 7.0,
+					"phase": "dinner_action"
+				},
+				{
+					"args": [
+						"sleep_early"
+					],
+					"command": "sleep",
+					"day": 7.0,
+					"phase": "sleep"
+				}
+			],
+			"story": "campus_exam",
+			"title": "这次没赶上"
+		},
+		{
+			"checkpoint_valid": true,
+			"day": 2.0,
+			"ending_id": "collapsed",
+			"ending_valid": true,
+			"expected_kind": "campus_rest",
+			"intro": "",
+			"kind": "campus_rest",
+			"live_scene": true,
+			"model_state_equal": true,
+			"name": "student-rest",
+			"opening_choice": "",
+			"outcome": {},
+			"state": {
+				"balance": 150,
+				"energy": 0,
+				"mood": 34,
+				"satiety": 0,
+				"stability": 0,
+				"stress": 100,
+				"study_progress": 20,
+				"study_target": 70
+			},
+			"steps": [
+				{
+					"args": [],
+					"command": "new_day_continue",
+					"day": 1,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [],
+					"command": "skip_meal",
+					"day": 1.0,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [],
+					"command": "skip_action",
+					"day": 1.0,
+					"phase": "breakfast_action"
+				},
+				{
+					"args": [],
+					"command": "skip_meal",
+					"day": 1.0,
+					"phase": "lunch_source"
+				},
+				{
+					"args": [],
+					"command": "skip_action",
+					"day": 1.0,
+					"phase": "lunch_action"
+				},
+				{
+					"args": [],
+					"command": "skip_meal",
+					"day": 1.0,
+					"phase": "dinner_source"
+				},
+				{
+					"args": [],
+					"command": "skip_action",
+					"day": 1.0,
+					"phase": "dinner_action"
+				},
+				{
+					"args": [
+						"night_study"
+					],
+					"command": "sleep",
+					"day": 1.0,
+					"phase": "sleep"
+				},
+				{
+					"args": [],
+					"command": "next_day",
+					"day": 1.0,
+					"phase": "summary"
+				},
+				{
+					"args": [],
+					"command": "new_day_continue",
+					"day": 2,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [],
+					"command": "skip_meal",
+					"day": 2.0,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [],
+					"command": "skip_action",
+					"day": 2.0,
+					"phase": "breakfast_action"
+				},
+				{
+					"args": [],
+					"command": "skip_meal",
+					"day": 2.0,
+					"phase": "lunch_source"
+				},
+				{
+					"args": [],
+					"command": "skip_action",
+					"day": 2.0,
+					"phase": "lunch_action"
+				},
+				{
+					"args": [],
+					"command": "skip_meal",
+					"day": 2.0,
+					"phase": "dinner_source"
+				},
+				{
+					"args": [],
+					"command": "skip_action",
+					"day": 2.0,
+					"phase": "dinner_action"
+				},
+				{
+					"args": [
+						"night_study"
+					],
+					"command": "sleep",
+					"day": 2.0,
+					"phase": "sleep"
+				}
+			],
+			"story": "campus_exam",
+			"title": "先歇一会儿"
+		},
+		{
+			"checkpoint_valid": true,
+			"day": 7.0,
+			"ending_id": "stable_endurance",
+			"ending_valid": true,
+			"expected_kind": "performed",
+			"intro": "done",
+			"kind": "performed",
+			"live_scene": true,
+			"model_state_equal": true,
+			"name": "zhou-performed",
+			"opening_choice": "leave",
+			"outcome": {
+				"energy": 89,
+				"kind": "performed",
+				"progress": 100,
+				"reason": "实际选择参加汇演，完成后记入行动记录。",
+				"slots": 2,
+				"trigger": "perform"
+			},
+			"state": {
+				"balance": 107,
+				"energy": 93,
+				"goal_progress": 100,
+				"goal_target": 70,
+				"mood": 100,
+				"satiety": 60,
+				"stability": 90,
+				"stress": 0
+			},
+			"steps": [
+				{
+					"args": [],
+					"command": "new_day_continue",
+					"day": 1,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"back"
+					],
+					"command": "dialog",
+					"day": 1,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"close"
+					],
+					"command": "dialog",
+					"day": 1,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"breakfast_shop"
+					],
+					"command": "source",
+					"day": 1.0,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"steamed_bun",
+						"millet_porridge"
+					],
+					"command": "meal",
+					"day": 1.0,
+					"phase": "breakfast"
+				},
+				{
+					"args": [
+						"rehearse"
+					],
+					"command": "action",
+					"day": 1.0,
+					"phase": "breakfast_action"
+				},
+				{
+					"args": [
+						"community_canteen"
+					],
+					"command": "source",
+					"day": 1.0,
+					"phase": "lunch_source"
+				},
+				{
+					"args": [
+						"millet_porridge",
+						"rice_plain"
+					],
+					"command": "meal",
+					"day": 1.0,
+					"phase": "lunch"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 1.0,
+					"phase": "lunch_action"
+				},
+				{
+					"args": [
+						"community_canteen"
+					],
+					"command": "source",
+					"day": 1.0,
+					"phase": "dinner_source"
+				},
+				{
+					"args": [
+						"millet_porridge",
+						"rice_plain"
+					],
+					"command": "meal",
+					"day": 1.0,
+					"phase": "dinner"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 1.0,
+					"phase": "dinner_action"
+				},
+				{
+					"args": [
+						"sleep_early"
+					],
+					"command": "sleep",
+					"day": 1.0,
+					"phase": "sleep"
+				},
+				{
+					"args": [],
+					"command": "next_day",
+					"day": 1.0,
+					"phase": "summary"
+				},
+				{
+					"args": [],
+					"command": "new_day_continue",
+					"day": 2,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"breakfast_shop"
+					],
+					"command": "source",
+					"day": 2.0,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"steamed_bun",
+						"millet_porridge"
+					],
+					"command": "meal",
+					"day": 2.0,
+					"phase": "breakfast"
+				},
+				{
+					"args": [
+						"rehearse"
+					],
+					"command": "action",
+					"day": 2.0,
+					"phase": "breakfast_action"
+				},
+				{
+					"args": [
+						"community_canteen"
+					],
+					"command": "source",
+					"day": 2.0,
+					"phase": "lunch_source"
+				},
+				{
+					"args": [
+						"millet_porridge",
+						"egg"
+					],
+					"command": "meal",
+					"day": 2.0,
+					"phase": "lunch"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 2.0,
+					"phase": "lunch_action"
+				},
+				{
+					"args": [
+						"community_canteen"
+					],
+					"command": "source",
+					"day": 2.0,
+					"phase": "dinner_source"
+				},
+				{
+					"args": [
+						"millet_porridge",
+						"rice_plain"
+					],
+					"command": "meal",
+					"day": 2.0,
+					"phase": "dinner"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 2.0,
+					"phase": "dinner_action"
+				},
+				{
+					"args": [
+						"sleep_early"
+					],
+					"command": "sleep",
+					"day": 2.0,
+					"phase": "sleep"
+				},
+				{
+					"args": [],
+					"command": "next_day",
+					"day": 2.0,
+					"phase": "summary"
+				},
+				{
+					"args": [],
+					"command": "new_day_continue",
+					"day": 3,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"breakfast_shop"
+					],
+					"command": "source",
+					"day": 3.0,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"steamed_bun",
+						"millet_porridge"
+					],
+					"command": "meal",
+					"day": 3.0,
+					"phase": "breakfast"
+				},
+				{
+					"args": [
+						"rehearse"
+					],
+					"command": "action",
+					"day": 3.0,
+					"phase": "breakfast_action"
+				},
+				{
+					"args": [
+						"community_canteen"
+					],
+					"command": "source",
+					"day": 3.0,
+					"phase": "lunch_source"
+				},
+				{
+					"args": [
+						"millet_porridge",
+						"rice_plain"
+					],
+					"command": "meal",
+					"day": 3.0,
+					"phase": "lunch"
+				},
+				{
+					"args": [
+						"group_rehearsal"
+					],
+					"command": "action",
+					"day": 3.0,
+					"phase": "lunch_action"
+				},
+				{
+					"args": [
+						"community_canteen"
+					],
+					"command": "source",
+					"day": 3.0,
+					"phase": "dinner_source"
+				},
+				{
+					"args": [
+						"rice_plain",
+						"egg"
+					],
+					"command": "meal",
+					"day": 3.0,
+					"phase": "dinner"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 3.0,
+					"phase": "dinner_action"
+				},
+				{
+					"args": [
+						"sleep_early"
+					],
+					"command": "sleep",
+					"day": 3.0,
+					"phase": "sleep"
+				},
+				{
+					"args": [],
+					"command": "next_day",
+					"day": 3.0,
+					"phase": "summary"
+				},
+				{
+					"args": [],
+					"command": "new_day_continue",
+					"day": 4,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"breakfast_shop"
+					],
+					"command": "source",
+					"day": 4.0,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"steamed_bun",
+						"millet_porridge"
+					],
+					"command": "meal",
+					"day": 4.0,
+					"phase": "breakfast"
+				},
+				{
+					"args": [
+						"rehearse"
+					],
+					"command": "action",
+					"day": 4.0,
+					"phase": "breakfast_action"
+				},
+				{
+					"args": [
+						"community_canteen"
+					],
+					"command": "source",
+					"day": 4.0,
+					"phase": "lunch_source"
+				},
+				{
+					"args": [
+						"millet_porridge",
+						"rice_plain"
+					],
+					"command": "meal",
+					"day": 4.0,
+					"phase": "lunch"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 4.0,
+					"phase": "lunch_action"
+				},
+				{
+					"args": [
+						"community_canteen"
+					],
+					"command": "source",
+					"day": 4.0,
+					"phase": "dinner_source"
+				},
+				{
+					"args": [
+						"millet_porridge",
+						"egg"
+					],
+					"command": "meal",
+					"day": 4.0,
+					"phase": "dinner"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 4.0,
+					"phase": "dinner_action"
+				},
+				{
+					"args": [
+						"sleep_early"
+					],
+					"command": "sleep",
+					"day": 4.0,
+					"phase": "sleep"
+				},
+				{
+					"args": [],
+					"command": "next_day",
+					"day": 4.0,
+					"phase": "summary"
+				},
+				{
+					"args": [],
+					"command": "new_day_continue",
+					"day": 5,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"back"
+					],
+					"command": "dialog",
+					"day": 5,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"breakfast_shop"
+					],
+					"command": "source",
+					"day": 5.0,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"steamed_bun",
+						"millet_porridge"
+					],
+					"command": "meal",
+					"day": 5.0,
+					"phase": "breakfast"
+				},
+				{
+					"args": [
+						"close"
+					],
+					"command": "dialog",
+					"day": 5,
+					"phase": "breakfast_action"
+				},
+				{
+					"args": [
+						"rehearse"
+					],
+					"command": "action",
+					"day": 5.0,
+					"phase": "breakfast_action"
+				},
+				{
+					"args": [
+						"community_canteen"
+					],
+					"command": "source",
+					"day": 5.0,
+					"phase": "lunch_source"
+				},
+				{
+					"args": [
+						"egg",
+						"steamed_egg"
+					],
+					"command": "meal",
+					"day": 5.0,
+					"phase": "lunch"
+				},
+				{
+					"args": [
+						"close"
+					],
+					"command": "dialog",
+					"day": 5,
+					"phase": "lunch_action"
+				},
+				{
+					"args": [
+						"group_rehearsal"
+					],
+					"command": "action",
+					"day": 5.0,
+					"phase": "lunch_action"
+				},
+				{
+					"args": [
+						"community_canteen"
+					],
+					"command": "source",
+					"day": 5.0,
+					"phase": "dinner_source"
+				},
+				{
+					"args": [
+						"millet_porridge",
+						"rice_plain"
+					],
+					"command": "meal",
+					"day": 5.0,
+					"phase": "dinner"
+				},
+				{
+					"args": [
+						"close"
+					],
+					"command": "dialog",
+					"day": 5,
+					"phase": "dinner_action"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 5.0,
+					"phase": "dinner_action"
+				},
+				{
+					"args": [
+						"sleep_early"
+					],
+					"command": "sleep",
+					"day": 5.0,
+					"phase": "sleep"
+				},
+				{
+					"args": [],
+					"command": "next_day",
+					"day": 5.0,
+					"phase": "summary"
+				},
+				{
+					"args": [],
+					"command": "new_day_continue",
+					"day": 6,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"back"
+					],
+					"command": "dialog",
+					"day": 6,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"breakfast_shop"
+					],
+					"command": "source",
+					"day": 6.0,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"steamed_bun",
+						"millet_porridge"
+					],
+					"command": "meal",
+					"day": 6.0,
+					"phase": "breakfast"
+				},
+				{
+					"args": [
+						"rehearse"
+					],
+					"command": "action",
+					"day": 6.0,
+					"phase": "breakfast_action"
+				},
+				{
+					"args": [
+						"community_canteen"
+					],
+					"command": "source",
+					"day": 6.0,
+					"phase": "lunch_source"
+				},
+				{
+					"args": [
+						"rice_plain",
+						"egg"
+					],
+					"command": "meal",
+					"day": 6.0,
+					"phase": "lunch"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 6.0,
+					"phase": "lunch_action"
+				},
+				{
+					"args": [
+						"community_canteen"
+					],
+					"command": "source",
+					"day": 6.0,
+					"phase": "dinner_source"
+				},
+				{
+					"args": [
+						"millet_porridge",
+						"rice_plain"
+					],
+					"command": "meal",
+					"day": 6.0,
+					"phase": "dinner"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 6.0,
+					"phase": "dinner_action"
+				},
+				{
+					"args": [
+						"sleep_early"
+					],
+					"command": "sleep",
+					"day": 6.0,
+					"phase": "sleep"
+				},
+				{
+					"args": [],
+					"command": "next_day",
+					"day": 6.0,
+					"phase": "summary"
+				},
+				{
+					"args": [],
+					"command": "new_day_continue",
+					"day": 7,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"back"
+					],
+					"command": "dialog",
+					"day": 7,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"breakfast_shop"
+					],
+					"command": "source",
+					"day": 7.0,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"steamed_bun",
+						"millet_porridge"
+					],
+					"command": "meal",
+					"day": 7.0,
+					"phase": "breakfast"
+				},
+				{
+					"args": [
+						"rehearse"
+					],
+					"command": "action",
+					"day": 7.0,
+					"phase": "breakfast_action"
+				},
+				{
+					"args": [
+						"community_canteen"
+					],
+					"command": "source",
+					"day": 7.0,
+					"phase": "lunch_source"
+				},
+				{
+					"args": [
+						"millet_porridge",
+						"rice_plain"
+					],
+					"command": "meal",
+					"day": 7.0,
+					"phase": "lunch"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 7.0,
+					"phase": "lunch_action"
+				},
+				{
+					"args": [
+						"community_canteen"
+					],
+					"command": "source",
+					"day": 7.0,
+					"phase": "dinner_source"
+				},
+				{
+					"args": [
+						"millet_porridge",
+						"egg"
+					],
+					"command": "meal",
+					"day": 7.0,
+					"phase": "dinner"
+				},
+				{
+					"args": [
+						"perform"
+					],
+					"command": "action",
+					"day": 7.0,
+					"phase": "dinner_action"
+				},
+				{
+					"args": [
+						"close"
+					],
+					"command": "dialog",
+					"day": 7,
+					"phase": "sleep"
+				},
+				{
+					"args": [
+						"sleep_early"
+					],
+					"command": "sleep",
+					"day": 7.0,
+					"phase": "sleep"
+				}
+			],
+			"story": "choir_week",
+			"title": "把歌唱完了"
+		},
+		{
+			"checkpoint_valid": true,
+			"day": 7.0,
+			"ending_id": "study_shortfall",
+			"ending_valid": true,
+			"expected_kind": "unready",
+			"intro": "done",
+			"kind": "unready",
+			"live_scene": true,
+			"model_state_equal": true,
+			"name": "zhou-unready",
+			"opening_choice": "leave",
+			"outcome": {
+				"energy": 92,
+				"kind": "unready",
+				"progress": 0,
+				"reason": "离开晚饭后时段前：排练0/70。",
+				"slots": 2,
+				"trigger": "nap"
+			},
+			"state": {
+				"balance": 107,
+				"energy": 100,
+				"goal_progress": 0,
+				"goal_target": 70,
+				"mood": 100,
+				"satiety": 62,
+				"stability": 82,
+				"stress": 0
+			},
+			"steps": [
+				{
+					"args": [],
+					"command": "new_day_continue",
+					"day": 1,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"back"
+					],
+					"command": "dialog",
+					"day": 1,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"close"
+					],
+					"command": "dialog",
+					"day": 1,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"breakfast_shop"
+					],
+					"command": "source",
+					"day": 1.0,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"steamed_bun",
+						"millet_porridge"
+					],
+					"command": "meal",
+					"day": 1.0,
+					"phase": "breakfast"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 1.0,
+					"phase": "breakfast_action"
+				},
+				{
+					"args": [
+						"community_canteen"
+					],
+					"command": "source",
+					"day": 1.0,
+					"phase": "lunch_source"
+				},
+				{
+					"args": [
+						"millet_porridge",
+						"rice_plain"
+					],
+					"command": "meal",
+					"day": 1.0,
+					"phase": "lunch"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 1.0,
+					"phase": "lunch_action"
+				},
+				{
+					"args": [
+						"community_canteen"
+					],
+					"command": "source",
+					"day": 1.0,
+					"phase": "dinner_source"
+				},
+				{
+					"args": [
+						"millet_porridge",
+						"rice_plain"
+					],
+					"command": "meal",
+					"day": 1.0,
+					"phase": "dinner"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 1.0,
+					"phase": "dinner_action"
+				},
+				{
+					"args": [
+						"sleep_early"
+					],
+					"command": "sleep",
+					"day": 1.0,
+					"phase": "sleep"
+				},
+				{
+					"args": [],
+					"command": "next_day",
+					"day": 1.0,
+					"phase": "summary"
+				},
+				{
+					"args": [],
+					"command": "new_day_continue",
+					"day": 2,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"breakfast_shop"
+					],
+					"command": "source",
+					"day": 2.0,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"steamed_bun",
+						"millet_porridge"
+					],
+					"command": "meal",
+					"day": 2.0,
+					"phase": "breakfast"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 2.0,
+					"phase": "breakfast_action"
+				},
+				{
+					"args": [
+						"community_canteen"
+					],
+					"command": "source",
+					"day": 2.0,
+					"phase": "lunch_source"
+				},
+				{
+					"args": [
+						"millet_porridge",
+						"egg"
+					],
+					"command": "meal",
+					"day": 2.0,
+					"phase": "lunch"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 2.0,
+					"phase": "lunch_action"
+				},
+				{
+					"args": [
+						"community_canteen"
+					],
+					"command": "source",
+					"day": 2.0,
+					"phase": "dinner_source"
+				},
+				{
+					"args": [
+						"millet_porridge",
+						"rice_plain"
+					],
+					"command": "meal",
+					"day": 2.0,
+					"phase": "dinner"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 2.0,
+					"phase": "dinner_action"
+				},
+				{
+					"args": [
+						"sleep_early"
+					],
+					"command": "sleep",
+					"day": 2.0,
+					"phase": "sleep"
+				},
+				{
+					"args": [],
+					"command": "next_day",
+					"day": 2.0,
+					"phase": "summary"
+				},
+				{
+					"args": [],
+					"command": "new_day_continue",
+					"day": 3,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"breakfast_shop"
+					],
+					"command": "source",
+					"day": 3.0,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"steamed_bun",
+						"millet_porridge"
+					],
+					"command": "meal",
+					"day": 3.0,
+					"phase": "breakfast"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 3.0,
+					"phase": "breakfast_action"
+				},
+				{
+					"args": [
+						"community_canteen"
+					],
+					"command": "source",
+					"day": 3.0,
+					"phase": "lunch_source"
+				},
+				{
+					"args": [
+						"millet_porridge",
+						"rice_plain"
+					],
+					"command": "meal",
+					"day": 3.0,
+					"phase": "lunch"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 3.0,
+					"phase": "lunch_action"
+				},
+				{
+					"args": [
+						"community_canteen"
+					],
+					"command": "source",
+					"day": 3.0,
+					"phase": "dinner_source"
+				},
+				{
+					"args": [
+						"rice_plain",
+						"egg"
+					],
+					"command": "meal",
+					"day": 3.0,
+					"phase": "dinner"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 3.0,
+					"phase": "dinner_action"
+				},
+				{
+					"args": [
+						"sleep_early"
+					],
+					"command": "sleep",
+					"day": 3.0,
+					"phase": "sleep"
+				},
+				{
+					"args": [],
+					"command": "next_day",
+					"day": 3.0,
+					"phase": "summary"
+				},
+				{
+					"args": [],
+					"command": "new_day_continue",
+					"day": 4,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"breakfast_shop"
+					],
+					"command": "source",
+					"day": 4.0,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"steamed_bun",
+						"millet_porridge"
+					],
+					"command": "meal",
+					"day": 4.0,
+					"phase": "breakfast"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 4.0,
+					"phase": "breakfast_action"
+				},
+				{
+					"args": [
+						"community_canteen"
+					],
+					"command": "source",
+					"day": 4.0,
+					"phase": "lunch_source"
+				},
+				{
+					"args": [
+						"millet_porridge",
+						"rice_plain"
+					],
+					"command": "meal",
+					"day": 4.0,
+					"phase": "lunch"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 4.0,
+					"phase": "lunch_action"
+				},
+				{
+					"args": [
+						"community_canteen"
+					],
+					"command": "source",
+					"day": 4.0,
+					"phase": "dinner_source"
+				},
+				{
+					"args": [
+						"millet_porridge",
+						"egg"
+					],
+					"command": "meal",
+					"day": 4.0,
+					"phase": "dinner"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 4.0,
+					"phase": "dinner_action"
+				},
+				{
+					"args": [
+						"sleep_early"
+					],
+					"command": "sleep",
+					"day": 4.0,
+					"phase": "sleep"
+				},
+				{
+					"args": [],
+					"command": "next_day",
+					"day": 4.0,
+					"phase": "summary"
+				},
+				{
+					"args": [],
+					"command": "new_day_continue",
+					"day": 5,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"back"
+					],
+					"command": "dialog",
+					"day": 5,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"breakfast_shop"
+					],
+					"command": "source",
+					"day": 5.0,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"steamed_bun",
+						"millet_porridge"
+					],
+					"command": "meal",
+					"day": 5.0,
+					"phase": "breakfast"
+				},
+				{
+					"args": [
+						"close"
+					],
+					"command": "dialog",
+					"day": 5,
+					"phase": "breakfast_action"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 5.0,
+					"phase": "breakfast_action"
+				},
+				{
+					"args": [
+						"community_canteen"
+					],
+					"command": "source",
+					"day": 5.0,
+					"phase": "lunch_source"
+				},
+				{
+					"args": [
+						"egg",
+						"steamed_egg"
+					],
+					"command": "meal",
+					"day": 5.0,
+					"phase": "lunch"
+				},
+				{
+					"args": [
+						"close"
+					],
+					"command": "dialog",
+					"day": 5,
+					"phase": "lunch_action"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 5.0,
+					"phase": "lunch_action"
+				},
+				{
+					"args": [
+						"community_canteen"
+					],
+					"command": "source",
+					"day": 5.0,
+					"phase": "dinner_source"
+				},
+				{
+					"args": [
+						"millet_porridge",
+						"rice_plain"
+					],
+					"command": "meal",
+					"day": 5.0,
+					"phase": "dinner"
+				},
+				{
+					"args": [
+						"close"
+					],
+					"command": "dialog",
+					"day": 5,
+					"phase": "dinner_action"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 5.0,
+					"phase": "dinner_action"
+				},
+				{
+					"args": [
+						"sleep_early"
+					],
+					"command": "sleep",
+					"day": 5.0,
+					"phase": "sleep"
+				},
+				{
+					"args": [],
+					"command": "next_day",
+					"day": 5.0,
+					"phase": "summary"
+				},
+				{
+					"args": [],
+					"command": "new_day_continue",
+					"day": 6,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"back"
+					],
+					"command": "dialog",
+					"day": 6,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"breakfast_shop"
+					],
+					"command": "source",
+					"day": 6.0,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"steamed_bun",
+						"millet_porridge"
+					],
+					"command": "meal",
+					"day": 6.0,
+					"phase": "breakfast"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 6.0,
+					"phase": "breakfast_action"
+				},
+				{
+					"args": [
+						"community_canteen"
+					],
+					"command": "source",
+					"day": 6.0,
+					"phase": "lunch_source"
+				},
+				{
+					"args": [
+						"rice_plain",
+						"egg"
+					],
+					"command": "meal",
+					"day": 6.0,
+					"phase": "lunch"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 6.0,
+					"phase": "lunch_action"
+				},
+				{
+					"args": [
+						"community_canteen"
+					],
+					"command": "source",
+					"day": 6.0,
+					"phase": "dinner_source"
+				},
+				{
+					"args": [
+						"millet_porridge",
+						"rice_plain"
+					],
+					"command": "meal",
+					"day": 6.0,
+					"phase": "dinner"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 6.0,
+					"phase": "dinner_action"
+				},
+				{
+					"args": [
+						"sleep_early"
+					],
+					"command": "sleep",
+					"day": 6.0,
+					"phase": "sleep"
+				},
+				{
+					"args": [],
+					"command": "next_day",
+					"day": 6.0,
+					"phase": "summary"
+				},
+				{
+					"args": [],
+					"command": "new_day_continue",
+					"day": 7,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"back"
+					],
+					"command": "dialog",
+					"day": 7,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"breakfast_shop"
+					],
+					"command": "source",
+					"day": 7.0,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"steamed_bun",
+						"millet_porridge"
+					],
+					"command": "meal",
+					"day": 7.0,
+					"phase": "breakfast"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 7.0,
+					"phase": "breakfast_action"
+				},
+				{
+					"args": [
+						"community_canteen"
+					],
+					"command": "source",
+					"day": 7.0,
+					"phase": "lunch_source"
+				},
+				{
+					"args": [
+						"millet_porridge",
+						"rice_plain"
+					],
+					"command": "meal",
+					"day": 7.0,
+					"phase": "lunch"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 7.0,
+					"phase": "lunch_action"
+				},
+				{
+					"args": [
+						"community_canteen"
+					],
+					"command": "source",
+					"day": 7.0,
+					"phase": "dinner_source"
+				},
+				{
+					"args": [
+						"millet_porridge",
+						"egg"
+					],
+					"command": "meal",
+					"day": 7.0,
+					"phase": "dinner"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 7.0,
+					"phase": "dinner_action"
+				},
+				{
+					"args": [
+						"close"
+					],
+					"command": "dialog",
+					"day": 7,
+					"phase": "sleep"
+				},
+				{
+					"args": [
+						"sleep_early"
+					],
+					"command": "sleep",
+					"day": 7.0,
+					"phase": "sleep"
+				}
+			],
+			"story": "choir_week",
+			"title": "这次没赶上舞台"
+		},
+		{
+			"checkpoint_valid": true,
+			"day": 7.0,
+			"ending_id": "study_shortfall",
+			"ending_valid": true,
+			"expected_kind": "other_choice",
+			"intro": "done",
+			"kind": "other_choice",
+			"live_scene": true,
+			"model_state_equal": true,
+			"name": "zhou-other-choice",
+			"opening_choice": "leave",
+			"outcome": {
+				"energy": 89,
+				"kind": "other_choice",
+				"progress": 100,
+				"reason": "离开晚饭后时段前，参演条件已满足；这次选择了其他安排。",
+				"slots": 2,
+				"trigger": "nap"
+			},
+			"state": {
+				"balance": 107,
+				"energy": 100,
+				"goal_progress": 100,
+				"goal_target": 70,
+				"mood": 100,
+				"satiety": 62,
+				"stability": 92,
+				"stress": 0
+			},
+			"steps": [
+				{
+					"args": [],
+					"command": "new_day_continue",
+					"day": 1,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"back"
+					],
+					"command": "dialog",
+					"day": 1,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"close"
+					],
+					"command": "dialog",
+					"day": 1,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"breakfast_shop"
+					],
+					"command": "source",
+					"day": 1.0,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"steamed_bun",
+						"millet_porridge"
+					],
+					"command": "meal",
+					"day": 1.0,
+					"phase": "breakfast"
+				},
+				{
+					"args": [
+						"rehearse"
+					],
+					"command": "action",
+					"day": 1.0,
+					"phase": "breakfast_action"
+				},
+				{
+					"args": [
+						"community_canteen"
+					],
+					"command": "source",
+					"day": 1.0,
+					"phase": "lunch_source"
+				},
+				{
+					"args": [
+						"millet_porridge",
+						"rice_plain"
+					],
+					"command": "meal",
+					"day": 1.0,
+					"phase": "lunch"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 1.0,
+					"phase": "lunch_action"
+				},
+				{
+					"args": [
+						"community_canteen"
+					],
+					"command": "source",
+					"day": 1.0,
+					"phase": "dinner_source"
+				},
+				{
+					"args": [
+						"millet_porridge",
+						"rice_plain"
+					],
+					"command": "meal",
+					"day": 1.0,
+					"phase": "dinner"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 1.0,
+					"phase": "dinner_action"
+				},
+				{
+					"args": [
+						"sleep_early"
+					],
+					"command": "sleep",
+					"day": 1.0,
+					"phase": "sleep"
+				},
+				{
+					"args": [],
+					"command": "next_day",
+					"day": 1.0,
+					"phase": "summary"
+				},
+				{
+					"args": [],
+					"command": "new_day_continue",
+					"day": 2,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"breakfast_shop"
+					],
+					"command": "source",
+					"day": 2.0,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"steamed_bun",
+						"millet_porridge"
+					],
+					"command": "meal",
+					"day": 2.0,
+					"phase": "breakfast"
+				},
+				{
+					"args": [
+						"rehearse"
+					],
+					"command": "action",
+					"day": 2.0,
+					"phase": "breakfast_action"
+				},
+				{
+					"args": [
+						"community_canteen"
+					],
+					"command": "source",
+					"day": 2.0,
+					"phase": "lunch_source"
+				},
+				{
+					"args": [
+						"millet_porridge",
+						"egg"
+					],
+					"command": "meal",
+					"day": 2.0,
+					"phase": "lunch"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 2.0,
+					"phase": "lunch_action"
+				},
+				{
+					"args": [
+						"community_canteen"
+					],
+					"command": "source",
+					"day": 2.0,
+					"phase": "dinner_source"
+				},
+				{
+					"args": [
+						"millet_porridge",
+						"rice_plain"
+					],
+					"command": "meal",
+					"day": 2.0,
+					"phase": "dinner"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 2.0,
+					"phase": "dinner_action"
+				},
+				{
+					"args": [
+						"sleep_early"
+					],
+					"command": "sleep",
+					"day": 2.0,
+					"phase": "sleep"
+				},
+				{
+					"args": [],
+					"command": "next_day",
+					"day": 2.0,
+					"phase": "summary"
+				},
+				{
+					"args": [],
+					"command": "new_day_continue",
+					"day": 3,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"breakfast_shop"
+					],
+					"command": "source",
+					"day": 3.0,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"steamed_bun",
+						"millet_porridge"
+					],
+					"command": "meal",
+					"day": 3.0,
+					"phase": "breakfast"
+				},
+				{
+					"args": [
+						"rehearse"
+					],
+					"command": "action",
+					"day": 3.0,
+					"phase": "breakfast_action"
+				},
+				{
+					"args": [
+						"community_canteen"
+					],
+					"command": "source",
+					"day": 3.0,
+					"phase": "lunch_source"
+				},
+				{
+					"args": [
+						"millet_porridge",
+						"rice_plain"
+					],
+					"command": "meal",
+					"day": 3.0,
+					"phase": "lunch"
+				},
+				{
+					"args": [
+						"group_rehearsal"
+					],
+					"command": "action",
+					"day": 3.0,
+					"phase": "lunch_action"
+				},
+				{
+					"args": [
+						"community_canteen"
+					],
+					"command": "source",
+					"day": 3.0,
+					"phase": "dinner_source"
+				},
+				{
+					"args": [
+						"rice_plain",
+						"egg"
+					],
+					"command": "meal",
+					"day": 3.0,
+					"phase": "dinner"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 3.0,
+					"phase": "dinner_action"
+				},
+				{
+					"args": [
+						"sleep_early"
+					],
+					"command": "sleep",
+					"day": 3.0,
+					"phase": "sleep"
+				},
+				{
+					"args": [],
+					"command": "next_day",
+					"day": 3.0,
+					"phase": "summary"
+				},
+				{
+					"args": [],
+					"command": "new_day_continue",
+					"day": 4,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"breakfast_shop"
+					],
+					"command": "source",
+					"day": 4.0,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"steamed_bun",
+						"millet_porridge"
+					],
+					"command": "meal",
+					"day": 4.0,
+					"phase": "breakfast"
+				},
+				{
+					"args": [
+						"rehearse"
+					],
+					"command": "action",
+					"day": 4.0,
+					"phase": "breakfast_action"
+				},
+				{
+					"args": [
+						"community_canteen"
+					],
+					"command": "source",
+					"day": 4.0,
+					"phase": "lunch_source"
+				},
+				{
+					"args": [
+						"millet_porridge",
+						"rice_plain"
+					],
+					"command": "meal",
+					"day": 4.0,
+					"phase": "lunch"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 4.0,
+					"phase": "lunch_action"
+				},
+				{
+					"args": [
+						"community_canteen"
+					],
+					"command": "source",
+					"day": 4.0,
+					"phase": "dinner_source"
+				},
+				{
+					"args": [
+						"millet_porridge",
+						"egg"
+					],
+					"command": "meal",
+					"day": 4.0,
+					"phase": "dinner"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 4.0,
+					"phase": "dinner_action"
+				},
+				{
+					"args": [
+						"sleep_early"
+					],
+					"command": "sleep",
+					"day": 4.0,
+					"phase": "sleep"
+				},
+				{
+					"args": [],
+					"command": "next_day",
+					"day": 4.0,
+					"phase": "summary"
+				},
+				{
+					"args": [],
+					"command": "new_day_continue",
+					"day": 5,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"back"
+					],
+					"command": "dialog",
+					"day": 5,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"breakfast_shop"
+					],
+					"command": "source",
+					"day": 5.0,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"steamed_bun",
+						"millet_porridge"
+					],
+					"command": "meal",
+					"day": 5.0,
+					"phase": "breakfast"
+				},
+				{
+					"args": [
+						"close"
+					],
+					"command": "dialog",
+					"day": 5,
+					"phase": "breakfast_action"
+				},
+				{
+					"args": [
+						"rehearse"
+					],
+					"command": "action",
+					"day": 5.0,
+					"phase": "breakfast_action"
+				},
+				{
+					"args": [
+						"community_canteen"
+					],
+					"command": "source",
+					"day": 5.0,
+					"phase": "lunch_source"
+				},
+				{
+					"args": [
+						"egg",
+						"steamed_egg"
+					],
+					"command": "meal",
+					"day": 5.0,
+					"phase": "lunch"
+				},
+				{
+					"args": [
+						"close"
+					],
+					"command": "dialog",
+					"day": 5,
+					"phase": "lunch_action"
+				},
+				{
+					"args": [
+						"group_rehearsal"
+					],
+					"command": "action",
+					"day": 5.0,
+					"phase": "lunch_action"
+				},
+				{
+					"args": [
+						"community_canteen"
+					],
+					"command": "source",
+					"day": 5.0,
+					"phase": "dinner_source"
+				},
+				{
+					"args": [
+						"millet_porridge",
+						"rice_plain"
+					],
+					"command": "meal",
+					"day": 5.0,
+					"phase": "dinner"
+				},
+				{
+					"args": [
+						"close"
+					],
+					"command": "dialog",
+					"day": 5,
+					"phase": "dinner_action"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 5.0,
+					"phase": "dinner_action"
+				},
+				{
+					"args": [
+						"sleep_early"
+					],
+					"command": "sleep",
+					"day": 5.0,
+					"phase": "sleep"
+				},
+				{
+					"args": [],
+					"command": "next_day",
+					"day": 5.0,
+					"phase": "summary"
+				},
+				{
+					"args": [],
+					"command": "new_day_continue",
+					"day": 6,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"back"
+					],
+					"command": "dialog",
+					"day": 6,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"breakfast_shop"
+					],
+					"command": "source",
+					"day": 6.0,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"steamed_bun",
+						"millet_porridge"
+					],
+					"command": "meal",
+					"day": 6.0,
+					"phase": "breakfast"
+				},
+				{
+					"args": [
+						"rehearse"
+					],
+					"command": "action",
+					"day": 6.0,
+					"phase": "breakfast_action"
+				},
+				{
+					"args": [
+						"community_canteen"
+					],
+					"command": "source",
+					"day": 6.0,
+					"phase": "lunch_source"
+				},
+				{
+					"args": [
+						"rice_plain",
+						"egg"
+					],
+					"command": "meal",
+					"day": 6.0,
+					"phase": "lunch"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 6.0,
+					"phase": "lunch_action"
+				},
+				{
+					"args": [
+						"community_canteen"
+					],
+					"command": "source",
+					"day": 6.0,
+					"phase": "dinner_source"
+				},
+				{
+					"args": [
+						"millet_porridge",
+						"rice_plain"
+					],
+					"command": "meal",
+					"day": 6.0,
+					"phase": "dinner"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 6.0,
+					"phase": "dinner_action"
+				},
+				{
+					"args": [
+						"sleep_early"
+					],
+					"command": "sleep",
+					"day": 6.0,
+					"phase": "sleep"
+				},
+				{
+					"args": [],
+					"command": "next_day",
+					"day": 6.0,
+					"phase": "summary"
+				},
+				{
+					"args": [],
+					"command": "new_day_continue",
+					"day": 7,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"back"
+					],
+					"command": "dialog",
+					"day": 7,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"breakfast_shop"
+					],
+					"command": "source",
+					"day": 7.0,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"steamed_bun",
+						"millet_porridge"
+					],
+					"command": "meal",
+					"day": 7.0,
+					"phase": "breakfast"
+				},
+				{
+					"args": [
+						"rehearse"
+					],
+					"command": "action",
+					"day": 7.0,
+					"phase": "breakfast_action"
+				},
+				{
+					"args": [
+						"community_canteen"
+					],
+					"command": "source",
+					"day": 7.0,
+					"phase": "lunch_source"
+				},
+				{
+					"args": [
+						"millet_porridge",
+						"rice_plain"
+					],
+					"command": "meal",
+					"day": 7.0,
+					"phase": "lunch"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 7.0,
+					"phase": "lunch_action"
+				},
+				{
+					"args": [
+						"community_canteen"
+					],
+					"command": "source",
+					"day": 7.0,
+					"phase": "dinner_source"
+				},
+				{
+					"args": [
+						"millet_porridge",
+						"egg"
+					],
+					"command": "meal",
+					"day": 7.0,
+					"phase": "dinner"
+				},
+				{
+					"args": [
+						"nap"
+					],
+					"command": "action",
+					"day": 7.0,
+					"phase": "dinner_action"
+				},
+				{
+					"args": [
+						"close"
+					],
+					"command": "dialog",
+					"day": 7,
+					"phase": "sleep"
+				},
+				{
+					"args": [
+						"sleep_early"
+					],
+					"command": "sleep",
+					"day": 7.0,
+					"phase": "sleep"
+				}
+			],
+			"story": "choir_week",
+			"title": "这一周，按自己的安排"
+		},
+		{
+			"checkpoint_valid": true,
+			"day": 2.0,
+			"ending_id": "collapsed",
+			"ending_valid": true,
+			"expected_kind": "zhou_rest",
+			"intro": "pending",
+			"kind": "zhou_rest",
+			"live_scene": true,
+			"model_state_equal": true,
+			"name": "zhou-rest",
+			"opening_choice": "leave",
+			"outcome": {},
+			"state": {
+				"balance": 210,
+				"energy": 0,
+				"goal_progress": 30,
+				"goal_target": 70,
+				"mood": 33,
+				"satiety": 0,
+				"stability": 0,
+				"stress": 100
+			},
+			"steps": [
+				{
+					"args": [],
+					"command": "new_day_continue",
+					"day": 1,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"back"
+					],
+					"command": "dialog",
+					"day": 1,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"close"
+					],
+					"command": "dialog",
+					"day": 1,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [],
+					"command": "skip_meal",
+					"day": 1.0,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [
+						"rehearse"
+					],
+					"command": "action",
+					"day": 1.0,
+					"phase": "breakfast_action"
+				},
+				{
+					"args": [],
+					"command": "skip_meal",
+					"day": 1.0,
+					"phase": "lunch_source"
+				},
+				{
+					"args": [
+						"rehearse"
+					],
+					"command": "action",
+					"day": 1.0,
+					"phase": "lunch_action"
+				},
+				{
+					"args": [],
+					"command": "skip_meal",
+					"day": 1.0,
+					"phase": "dinner_source"
+				},
+				{
+					"args": [],
+					"command": "skip_action",
+					"day": 1.0,
+					"phase": "dinner_action"
+				},
+				{
+					"args": [
+						"night_study"
+					],
+					"command": "sleep",
+					"day": 1.0,
+					"phase": "sleep"
+				},
+				{
+					"args": [],
+					"command": "next_day",
+					"day": 1.0,
+					"phase": "summary"
+				},
+				{
+					"args": [],
+					"command": "new_day_continue",
+					"day": 2,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [],
+					"command": "skip_meal",
+					"day": 2.0,
+					"phase": "breakfast_source"
+				},
+				{
+					"args": [],
+					"command": "skip_action",
+					"day": 2.0,
+					"phase": "breakfast_action"
+				},
+				{
+					"args": [],
+					"command": "skip_meal",
+					"day": 2.0,
+					"phase": "lunch_source"
+				},
+				{
+					"args": [],
+					"command": "skip_action",
+					"day": 2.0,
+					"phase": "lunch_action"
+				},
+				{
+					"args": [],
+					"command": "skip_meal",
+					"day": 2.0,
+					"phase": "dinner_source"
+				},
+				{
+					"args": [],
+					"command": "skip_action",
+					"day": 2.0,
+					"phase": "dinner_action"
+				},
+				{
+					"args": [
+						"night_study"
+					],
+					"command": "sleep",
+					"day": 2.0,
+					"phase": "sleep"
+				}
+			],
+			"story": "choir_week",
+			"title": "先歇一会儿"
+		}
+	],
+	"errors": [],
+	"scope": "Nine complete live scene routes from day 1: actual new-day/opening dialogs, source/market/menu handlers, card confirmation, action availability, sleep selection, daily summaries and finale replies. Numeric state, hands and ending IDs are not edited. Signals/normal handlers are driven by script, not a human or every-step physical pointer; separate native pointer and browser checks cover interaction.",
+	"seed": 42
+}

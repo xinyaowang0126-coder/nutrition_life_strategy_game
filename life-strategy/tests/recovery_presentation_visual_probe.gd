@@ -159,8 +159,8 @@ func _capture_layout(canvas: Vector2i, enlarged: bool) -> Dictionary:
 	if enlarged:
 		_enlarge_fonts(game)
 		await _settle()
-	_check_modal(game.daily_summary.paper_host, game.daily_summary.next_button, viewport, prefix + " ending")
-	_expect(not game.daily_summary.record_summary_label.text.contains("晚继续复习"), prefix + " ending invented late sleep")
+	_check_modal(game.ending_screen, game.ending_screen.restart_button, viewport, prefix + " ending")
+	_expect(not String(game.ending_screen.feedback["summary"]).contains("晚继续复习"), prefix + " ending invented late sleep")
 	_save(viewport, prefix + "-ending.png")
 	viewport.queue_free()
 	await process_frame

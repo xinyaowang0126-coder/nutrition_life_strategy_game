@@ -1,0 +1,115 @@
+{
+	"cases": [
+		{
+			"input": "native pointer and keyboard events",
+			"kind": "steady",
+			"moments": 2,
+			"name": "student-steady",
+			"restart": "[P: (1274.0, 963.0), S: (604.0, 75.0)]",
+			"title": "[P: (42.0, 83.0), S: (1836.0, 70.0)]",
+			"window": [
+				1280,
+				720
+			]
+		},
+		{
+			"input": "native pointer and keyboard events",
+			"kind": "goal_gap",
+			"moments": 2,
+			"name": "student-barely",
+			"restart": "[P: (1274.0, 963.0), S: (604.0, 75.0)]",
+			"title": "[P: (42.0, 83.0), S: (1836.0, 70.0)]",
+			"window": [
+				1280,
+				720
+			]
+		},
+		{
+			"input": "native pointer and keyboard events",
+			"kind": "reserve_gap",
+			"moments": 2,
+			"name": "student-barely-reserve",
+			"restart": "[P: (1274.0, 963.0), S: (604.0, 75.0)]",
+			"title": "[P: (42.0, 83.0), S: (1836.0, 70.0)]",
+			"window": [
+				1280,
+				720
+			]
+		},
+		{
+			"input": "native pointer and keyboard events",
+			"kind": "study_gap",
+			"moments": 1,
+			"name": "student-shortfall",
+			"restart": "[P: (1274.0, 963.0), S: (604.0, 75.0)]",
+			"title": "[P: (42.0, 83.0), S: (1836.0, 70.0)]",
+			"window": [
+				1280,
+				720
+			]
+		},
+		{
+			"input": "native pointer and keyboard events",
+			"kind": "campus_rest",
+			"moments": 1,
+			"name": "student-rest",
+			"restart": "[P: (1274.0, 963.0), S: (604.0, 75.0)]",
+			"title": "[P: (42.0, 83.0), S: (1836.0, 70.0)]",
+			"window": [
+				1280,
+				720
+			]
+		},
+		{
+			"input": "native pointer and keyboard events",
+			"kind": "performed",
+			"moments": 2,
+			"name": "zhou-performed",
+			"restart": "[P: (1274.0, 963.0), S: (604.0, 75.0)]",
+			"title": "[P: (42.0, 83.0), S: (1836.0, 70.0)]",
+			"window": [
+				1280,
+				720
+			]
+		},
+		{
+			"input": "native pointer and keyboard events",
+			"kind": "unready",
+			"moments": 1,
+			"name": "zhou-unready",
+			"restart": "[P: (1274.0, 963.0), S: (604.0, 75.0)]",
+			"title": "[P: (42.0, 83.0), S: (1836.0, 70.0)]",
+			"window": [
+				1280,
+				720
+			]
+		},
+		{
+			"input": "native pointer and keyboard events",
+			"kind": "other_choice",
+			"moments": 2,
+			"name": "zhou-other-choice",
+			"restart": "[P: (1274.0, 963.0), S: (604.0, 75.0)]",
+			"title": "[P: (42.0, 83.0), S: (1836.0, 70.0)]",
+			"window": [
+				1280,
+				720
+			]
+		},
+		{
+			"input": "native pointer and keyboard events",
+			"kind": "zhou_rest",
+			"moments": 1,
+			"name": "zhou-rest",
+			"restart": "[P: (1274.0, 963.0), S: (604.0, 75.0)]",
+			"title": "[P: (42.0, 83.0), S: (1836.0, 70.0)]",
+			"window": [
+				1280,
+				720
+			]
+		}
+	],
+	"errors": [],
+	"restore_only": false,
+	"scope": "Validated normal-command checkpoints; native pointer chooses the final sleep card and confirms the same outcome/state. Review, meal records, read-only checks and restart use real pointer/key dispatch. Restore-only runs consume endings saved by a separate native process. Not browser, physical-phone or continuous seven-day human play."
+}

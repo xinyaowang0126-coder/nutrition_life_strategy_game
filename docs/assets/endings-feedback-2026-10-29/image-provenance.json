@@ -1,0 +1,36 @@
+{
+  "date": "2026-10-29",
+  "tool": "Built-in ImageGen",
+  "scope": "New ending scene variants using existing character and art references. Inspected generated images; originals retained.",
+  "assets": [
+    {
+      "id": "student_shortfall",
+      "source": "C:/Users/xywan/.codex/generated_images/01a1864b-74f0-7422-a3b4-a3c26c923820/exec-eb07cbcf-0016-427f-bfa9-3694d2313f61.png",
+      "destination": "life-strategy/assets/generated/endings/feedback/student_shortfall-v1.png",
+      "references": [
+        "E:/nutrition_life_strategy_game/life-strategy/assets/generated/endings/barely_survived.png"
+      ],
+      "prompt": "Use case: illustration-story. Create a NEW scene variation of the supplied game illustration for a different ending, preserving the same adult Chinese university student with dark messy hair in a loose bun, navy hoodie, dorm room and warm hand-painted storybook style. This new ending means the seven-day study goal was not reached. Show the student quietly looking over an unfinished open notebook beside the desk lamp at dusk, a few study sheets left unfinished, thoughtful neutral expression, no crying and no exaggerated distress. Distinct from the tired rubbing-eyes pose in the reference. Chest-up / medium view, student on the left-center with recognizable desk and window, full-bleed 3:2 horizontal composition usable in a 4:5 safe central crop. Warm cream, muted ochre, indigo, soft visible brush texture and delicate dark outlines. No external white margin, no frame, no UI, no letters, no text, no numbers, no grades, no red failure symbols. Keep scene everyday and dignified. Opaque background."
+    },
+    {
+      "id": "zhou_unready",
+      "source": "C:/Users/xywan/.codex/generated_images/01a1864b-74f0-7422-a3b4-a3c26c923820/exec-25a72e93-c362-4b7f-91e0-52b85504ef9c.png",
+      "destination": "life-strategy/assets/generated/endings/feedback/zhou_unready-v1.png",
+      "references": [
+        "E:/nutrition_life_strategy_game/life-strategy/assets/generated/stories/zhou_huilan.png",
+        "E:/nutrition_life_strategy_game/life-strategy/assets/generated/stories/zhou_home.png"
+      ],
+      "prompt": "Use case: illustration-story. Make a new illustrated scene variation featuring the EXACT same 66-year-old Chinese woman from image 1, keeping her face, visible age, short gray-brown wavy hair, olive green cardigan over white blouse and dark trousers. Image 2 supplies her actual modest Chinese home with wood table, plants, cream walls and kitchen. Ending: she did not participate in the community choir performance because the game preparation requirements were not met. Show her seated at her home table late in the afternoon, gently holding the closed dark choir folder on her lap, looking towards the nearby window with a calm, thoughtful expression. No performance on stage, no audience, no trophies, no smiling triumph, no tears or shame. Composition full-bleed 3:2 horizontal, subject around center-left in a medium view with home details clearly visible, retain safe central 4:5 crop. Match the references' warm hand-painted storybook / watercolor and fine ink outlines, soft gold daylight, muted sage green and cream. No added writing or readable text, no frame, no white border, no UI. Opaque background."
+    },
+    {
+      "id": "zhou_other_choice",
+      "source": "C:/Users/xywan/.codex/generated_images/01a1864b-74f0-7422-a3b4-a3c26c923820/exec-249216d2-371a-434b-8665-2e1dbda04e2d.png",
+      "destination": "life-strategy/assets/generated/endings/feedback/zhou_other_choice-v1.png",
+      "references": [
+        "E:/nutrition_life_strategy_game/life-strategy/assets/generated/stories/zhou_huilan.png",
+        "E:/nutrition_life_strategy_game/life-strategy/assets/generated/stories/zhou_home.png"
+      ],
+      "prompt": "Use case: illustration-story. Make a new illustrated home ending scene variation preserving the EXACT identity and age of the 66-year-old Chinese woman from image 1: short gray-brown wavy hair, warm lined face, olive cardigan, white blouse, dark trousers. Use the actual same modest home in image 2 as location and style reference. Ending: she had the conditions to join the choir but chose another arrangement. Give this ending the same care and visual beauty as a successful performance ending. Show her standing comfortably beside her wooden home table, setting her closed dark choir folder on the table, softly relaxed expression, warm evening lamplight, houseplants and a recognizable home shelf behind her. Everyday self-directed quiet ending; do not depict unrecorded cooking, eating, other people or hobbies. No stage, no audience, no regret, no tears, no failure symbols. Full-bleed 3:2 horizontal composition, medium framing with main subject center-left and a safe central 4:5 crop. Match warm hand-painted storybook detail and gentle ink outlines in references, cream, ochre, olive and muted amber. No writing, no readable text, no frame, no white border, no UI. Opaque background."
+    }
+  ]
+}

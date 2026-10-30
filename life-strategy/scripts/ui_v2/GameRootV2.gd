@@ -6,6 +6,7 @@ const MealDeckServiceScript := preload("res://scripts/systems/MealDeckService.gd
 const MealResolverScript := preload("res://scripts/systems/MealResolver.gd")
 const DecisionPreviewScript := preload("res://scripts/ui_v2/DecisionCostPreview.gd")
 const BalanceRules := preload("res://scripts/systems/GameplayBalanceRules.gd")
+const ActionFeedback := preload("res://scripts/systems/ActionFeedbackTrace.gd")
 const NutritionLedgerScript := preload("res://scripts/systems/NutritionLedger.gd")
 const WeeklyEventServiceScript := preload("res://scripts/systems/WeeklyEventService.gd")
 const RecoveryStateServiceScript := preload("res://scripts/systems/RecoveryStateService.gd")
@@ -20,6 +21,8 @@ const FoodPreferenceServiceScript := preload("res://scripts/systems/FoodPreferen
 const DEFAULT_HEALTH_HISTORY_PATH := "user://health_guidance/latest_meals.json"
 const MealRecordPresenterScript := preload("res://scripts/systems/MealRecordPresenter.gd")
 const RECORD_BOOK_SCENE := preload("res://scenes/game_v2/components/MealRecordBookPopup.tscn")
+const ENDING_SCENE := preload("res://scenes/game_v2/components/EndingScreen.tscn")
+const EndingFeedback := preload("res://scripts/systems/EndingFeedbackBuilder.gd")
 
 const SOURCE_STAGE_SCENE := preload("res://scenes/game_v2/stages/MealSourceStage.tscn")
 const CAFETERIA_STAGE_SCENE := preload("res://scenes/game_v2/stages/CafeteriaMealStage.tscn")
@@ -189,6 +192,7 @@ var health_profiles_path := HealthDataStoreScript.DEFAULT_PROFILES_PATH
 var health_history_path := DEFAULT_HEALTH_HISTORY_PATH
 var health_history_diagnostics: Array[Dictionary] = []
 var ending_id := ""
+var ending_screen
 var low_stability_days := 0
 var run_history: Array[Dictionary] = []
 var current_event: Dictionary = {}
@@ -243,7 +247,7 @@ func _ready() -> void:
 	character_hud.details_requested.connect(_show_detail.bind("state"))
 	character_hud.detail_dismissed.connect(_dismiss_detail)
 	sticky_note.closed.connect(_restore_detail_input)
-	daily_summary.next_day_requested.connect(_on_summary_advanced)
+	daily_summary.next_day_requested.connect(_on_daily_summary_requested)
 	daily_summary.record_book_requested.connect(_show_meal_record_book)
 	new_day_popup.continue_requested.connect(_on_new_day_continue)
 	new_day_popup.recovery_details_requested.connect(_show_recovery_detail)
@@ -384,13 +388,16 @@ func _render_phase() -> void:
 	character_hud.update_recovery(_recovery_display_record)
 	_queue_autosave()
 	if phase == "summary":
+		if is_instance_valid(ending_screen): ending_screen.hide_screen()
 		_clear_stage()
 		daily_summary.show_summary(_story_view(summary_payload), _mobile_mode)
 		return
 	if phase == "ending":
 		_clear_stage()
+		daily_summary.hide_summary(false)
 		_show_ending_summary()
 		return
+	if is_instance_valid(ending_screen): ending_screen.hide_screen()
 	daily_summary.hide_summary(false)
 	if _is_source_phase():
 		_show_source_stage()
@@ -443,6 +450,10 @@ func _show_source_stage() -> void:
 			stage.setup(sources, String(PHASE_NAMES[meal]), disabled_reasons, plan_note)
 	else:
 		stage.setup(sources, String(PHASE_NAMES[meal]), disabled_reasons)
+	if stage.has_method("set_action_receipt") and not today_action_records.is_empty():
+		var last_action: Dictionary = today_action_records.back()
+		if last_action.has("feedback_trace"):
+			stage.set_action_receipt("刚才：" + ActionFeedback.receipt(last_action, String(story.get("goal_label", "复习"))))
 
 
 func _show_meal_stage() -> void:
@@ -853,12 +864,14 @@ func _show_meal_record_book() -> void:
 	if detail_was_visible:
 		_restore_detail_input()
 	_record_input_restore = {
+		"ending_keys": ending_screen.is_processing_input() if is_instance_valid(ending_screen) else false,
 		"summary_keys": daily_summary.is_processing_unhandled_key_input(),
 		"summary_button": daily_summary.next_button.disabled,
 		"new_day_keys": new_day_popup.is_processing_unhandled_key_input(),
 		"new_day_button": new_day_popup.continue_button.disabled,
 	}
 	daily_summary.set_process_unhandled_key_input(false)
+	if is_instance_valid(ending_screen): ending_screen.set_modal_blocked(true)
 	daily_summary.next_button.disabled = true
 	new_day_popup.set_process_unhandled_key_input(false)
 	new_day_popup.continue_button.disabled = true
@@ -873,11 +886,14 @@ func _on_meal_record_book_closed() -> void:
 	daily_summary.next_button.disabled = _record_input_restore["summary_button"]
 	new_day_popup.set_process_unhandled_key_input(_record_input_restore["new_day_keys"])
 	new_day_popup.continue_button.disabled = _record_input_restore["new_day_button"]
+	if is_instance_valid(ending_screen): ending_screen.set_modal_blocked(not bool(_record_input_restore.get("ending_keys", false)))
 	_record_input_restore.clear()
 	if is_instance_valid(_active_stage) and _active_stage.has_method("set_selection"):
 		_active_stage.call("set_selection", selected_food_ids, false)
 	if daily_summary.visible:
 		daily_summary.next_button.grab_focus()
+	elif is_instance_valid(ending_screen) and ending_screen.visible:
+		ending_screen.restore_focus()
 	elif new_day_popup.visible:
 		new_day_popup.continue_button.grab_focus()
 	else:
@@ -1035,6 +1051,7 @@ func _apply_action(action_id: String) -> void:
 	if action_id == "call_friend":
 		_show_shared_meal_invitation()
 		return
+	var action_before := ActionFeedback.snapshot(state, _goal_key())
 	if int(action.get("slots", 1)) > 0: HouseholdFinaleScript.capture(self, action_id)
 	var display_key := "name_%s" % phase
 	var display_name := String(action.get(display_key, action.get("name", action_id)))
@@ -1074,9 +1091,10 @@ func _apply_action(action_id: String) -> void:
 		"stock_added": stock_added,
 	})
 	_clamp_stats()
+	today_action_records.back()["feedback_trace"] = ActionFeedback.capture(action_before, ActionFeedback.snapshot(state, _goal_key()), today_action_records.back(), day, phase, today_action_records.size(), action.get("_feedback_components", {}))
 	_update_stability()
 	if stock_added.is_empty():
-		_post(display_name, "info")
+		_post(ActionFeedback.receipt(today_action_records.back(), String(story.get("goal_label", "复习"))), "info")
 	else:
 		_post(("小份食材已放好。" if _household() else "%s：燕麦、牛奶和苹果放进柜子了。" % display_name), "good")
 	if int(action.get("slots", 1)) == 0:
@@ -1162,12 +1180,14 @@ func _effective_action(action_id: String) -> Dictionary:
 	if action_id != "study":
 		return action
 	var carryover_modifier := int(_current_recovery_effect["study_modifier"])
+	var event_study := int(action.get("study", 0))
 	var live_penalty := BalanceRules.study_penalty(state)
 	var live_modifier: int = live_penalty["modifier"]
 	var live_reasons: Array[String] = live_penalty["reasons"]
 	var total_modifier := carryover_modifier + live_modifier
 	if total_modifier != 0:
 		action["study"] = maxi(1, int(action.get("study", 0)) + total_modifier)
+	action["_feedback_components"] = {"base": int(base_action.get("study", 0)), "event": event_study - int(base_action.get("study", 0)), "recovery": carryover_modifier, "current": live_modifier, "floor": int(action.get("study", 0)) - event_study - total_modifier}
 	var notes: Array[String] = []
 	var carryover_text := "不变" if carryover_modifier == 0 else _signed_delta(carryover_modifier)
 	notes.append("昨夜恢复：%s（每次复习 %s）" % [
@@ -1319,6 +1339,11 @@ func _finish_day() -> void:
 		if day in [6, 7]:
 			summary_payload["record_summary"] = String(day_record["preparation_recap"]["text"]) + "\n\n" + String(summary_payload["record_summary"])
 			summary_payload["detail"]["detail_text"] += "\n\n备餐计划与实际取用\n" + String(day_record["preparation_recap"]["text"])
+	if int(_day_start_state.get(_goal_key(), 0)) < _goal_target() and int(state.get(_goal_key(), 0)) >= _goal_target():
+		var reached := "今天排练进度达到%d，参演仍要在第7天晚饭后选择。" % _goal_target() if _household() else "今天复习进度达到%d，本周复习目标完成了。" % _goal_target()
+		summary_payload["record_summary"] = reached + "\n" + String(summary_payload["record_summary"])
+	if low_stability_days == 1 and day < _total_days():
+		summary_payload["advice"] = "今天日结余力不高于15；若再有一天这样，本局会提前收束。\n" + String(summary_payload["advice"])
 	if not stability_valid or not next_learning["valid"]:
 		phase = "summary"
 		_render_phase()
@@ -1377,6 +1402,16 @@ func _record_recovery_error(code: String, errors: Array) -> void:
 		if entry.get("day") == day and entry.get("code") == code:
 			return
 	recovery_diagnostics.append({"day": day, "code": code, "errors": errors.duplicate(true)})
+
+
+func _on_daily_summary_requested() -> void:
+	if phase == "summary": _on_summary_advanced()
+
+
+func _on_ending_restart_requested() -> void:
+	if phase != "ending" or _record_book_active(): return
+	if is_instance_valid(ending_screen) and ending_screen.review_open: return
+	start_new_run()
 
 
 func _on_summary_advanced() -> void:
@@ -1499,38 +1534,13 @@ func _finish_run(result: String) -> void:
 
 
 func _show_ending_summary() -> void:
-	var ending := _story_ending(ending_id)
-	var recap := _build_week_recap()
-	var ending_summary := {
-		"day": day,
-		"title": String(ending.get("title", "这一周结束了")),
-		"stats": state.duplicate(true),
-		"record_summary": RecoveryPresenterScript.ending_text(ending_id, run_history),
-		"advice": "目标复习 %d，完成 %d；本周记录了 %d 天，手里还剩 ¥%d。" % [
-			_goal_target(),
-			int(state[_goal_key()]),
-			int(recap.get("played_days", 0)),
-			int(state["balance"]),
-		],
-		"ending_image": String(ending.get("image", "")),
-		"layout": "ending",
-		"record_book_available": true,
-		"detail": recap,
-		"detail_button_text": "查看本周轨迹",
-		"detail_button_open_text": "收起本周轨迹",
-		"button_text": "再来一周",
-	}
-	if _household():
-		var review: Dictionary = household_finale["review"] if not household_finale["review"].is_empty() else HouseholdFinaleScript.review(capture_game_save()["payload"])
-		ending_summary["ending_image"] = "res://assets/generated/stories/actions/zhou_perform-v1.png" if review["counts"]["performances"] > 0 else String(story["background"])
-		if review["counts"]["performances"] > 0: ending_summary["title"] = "把歌唱完了"
-		elif household_finale["outcome"].get("kind") == "other_choice": ending_summary["title"] = "这一周，按自己的安排"
-		elif performed: ending_summary["title"] = "这一周，按实际记录回看"
-		ending_summary["record_summary"] = review["outcome_text"] + "\n" + review["highlights"][0]["text"]
-		ending_summary["advice"] = "排练 %d/%d｜实际参演：%s｜余额 ¥%d" % [int(state.get("goal_progress", 0)), _goal_target(), "已记录" if review["counts"]["performances"] > 0 else "未记录", int(state.get("balance", 0))]
-		ending_summary["advice"] += "\n" + review["next_step"]
-		ending_summary["detail"]["detail_text"] = "这一周真正留下的事\n" + HouseholdFinaleScript.review_text(review) + "\n\n逐日轨迹\n" + String(ending_summary["detail"]["detail_text"]) + "\n\n" + shared_meal.summary() + "\n" + _recipe_history_text()
-	daily_summary.show_summary(_story_view(ending_summary), _mobile_mode)
+	if not is_instance_valid(ending_screen):
+		ending_screen = ENDING_SCENE.instantiate()
+		daily_summary.get_parent().add_child(ending_screen)
+		ending_screen.restart_requested.connect(_on_ending_restart_requested)
+		ending_screen.story_requested.connect(_request_main_menu)
+		ending_screen.record_book_requested.connect(_show_meal_record_book)
+	ending_screen.present(EndingFeedback.build(story, ending_id, capture_game_save()["payload"]))
 
 
 func _build_day_record(nutrition_summary: Dictionary) -> Dictionary:
@@ -2239,7 +2249,10 @@ func _household_action(id: String) -> Dictionary:
 		action["study"] = 4 if used_action_ids.count(id) == 1 else 8
 	if id in ["rehearse", "group_rehearsal"]:
 		var penalty: Dictionary = BalanceRules.study_penalty(state)
+		var base_study := int(action["study"])
+		var recovery_modifier := int(_current_recovery_effect.get("study_modifier", 0))
 		action["study"] = maxi(1, int(action["study"]) + int(_current_recovery_effect.get("study_modifier", 0)) + int(penalty["modifier"]))
+		action["_feedback_components"] = {"base": base_study, "event": 0, "recovery": recovery_modifier, "current": int(penalty["modifier"]), "floor": int(action["study"]) - base_study - recovery_modifier - int(penalty["modifier"])}
 		action["rule_hint"] = String(action.get("rule_hint", "")) + "\n本次排练收益已计入昨夜恢复与当前状态。"
 	if int(action.get("slots", 1)) > 0:
 		action["rule_hint"] = String(action.get("rule_hint", "")) + "\n" + BalanceRules.PERIOD_HINT
@@ -2318,6 +2331,7 @@ func _show_story_dialog(title: String, body: String, choices: Array, handler: Ca
 		)
 	_story_choice_handler = handler
 	_suspend_story_input()
+	_story_dialog.move_to_front()
 	_story_dialog.present(title, body, choices)
 
 
@@ -2328,6 +2342,7 @@ func _restore_story_dialog_input() -> void:
 	daily_summary.next_button.disabled = _story_input_restore["summary_button"]
 	new_day_popup.set_process_unhandled_key_input(_story_input_restore["new_day_keys"])
 	new_day_popup.continue_button.disabled = _story_input_restore["new_day_button"]
+	if is_instance_valid(ending_screen): ending_screen.set_modal_blocked(not bool(_story_input_restore.get("ending_keys", false)))
 	_story_input_restore.clear()
 
 
@@ -2335,7 +2350,8 @@ func _restore_story_dialog_input() -> void:
 
 func _suspend_story_input() -> void:
 	if _story_input_restore.is_empty():
-		_story_input_restore = {"summary_keys": daily_summary.is_processing_unhandled_key_input(), "summary_button": daily_summary.next_button.disabled, "new_day_keys": new_day_popup.is_processing_unhandled_key_input(), "new_day_button": new_day_popup.continue_button.disabled}
+		_story_input_restore = {"summary_keys": daily_summary.is_processing_unhandled_key_input(), "summary_button": daily_summary.next_button.disabled, "new_day_keys": new_day_popup.is_processing_unhandled_key_input(), "new_day_button": new_day_popup.continue_button.disabled, "ending_keys": ending_screen.is_processing_input() if is_instance_valid(ending_screen) else false}
+	if is_instance_valid(ending_screen): ending_screen.set_modal_blocked(true)
 	new_day_popup.set_process_unhandled_key_input(false)
 	new_day_popup.continue_button.disabled = true
 	daily_summary.set_process_unhandled_key_input(false)
