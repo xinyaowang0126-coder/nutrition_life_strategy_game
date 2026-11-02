@@ -262,7 +262,7 @@ func _make_detail_payload() -> Dictionary:
 		"name": "此刻状态",
 		"kind": "状态",
 		"rule_hint": _state_hint(),
-		"desc": "这些数值描述角色当前的游戏状态，不是对玩家真实健康的评价。",
+		"desc": "",
 		"stability": _stat_value("stability"),
 		"energy": _stat_value("energy"),
 		"mood": _stat_value("mood"),
@@ -278,12 +278,12 @@ func _state_hint() -> String:
 	var satiety := _stat_value("satiety")
 	var stress := _stat_value("stress")
 	if satiety <= 25:
-		return "肚子已经在提醒你了，下一餐别再拖。"
+		return "肚子饿了，先吃饭。"
 	if energy <= 25:
-		return "今天的电量不多，留一点给真正要紧的事。"
+		return "精力不多了，可以先休息。"
 	if stress >= 75:
-		return "脑子绷得有点紧，先找机会喘口气。"
-	return "目前还稳得住。"
+		return "压力有点高，去走走或歇会儿。"
+	return "目前状态平稳。"
 
 
 func _stat_value(key: String) -> int:

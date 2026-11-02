@@ -38,11 +38,11 @@ func test_negative_food_reaction_is_separate_and_explicitly_character_taste() ->
 	assert_eq(row.quick_stat.text, "饱腹 +5\n口味 -2")
 	assert_true(note.preference_section.visible)
 	assert_eq((note.preference_section.get_node("Heading") as Label).text, "角色口味（游戏效果）")
-	assert_eq(note.preference_reaction.text, "不太合本局角色的口味 · 心情 -2")
+	assert_eq(note.preference_reaction.text, "不太喜欢 · 心情 -2")
 	assert_false(note.mood_metric.visible, "food mood must leave the generic stat grid")
 	assert_contains(legacy.summary_label.text, "口味 -2")
 	assert_contains(legacy.tooltip_text, "角色口味（游戏效果）")
-	assert_contains(legacy.tooltip_text, "不太合本局角色的口味 · 心情 -2")
+	assert_contains(legacy.tooltip_text, "不太喜欢 · 心情 -2")
 	assert_false(legacy.tooltip_text.contains("999"))
 
 
@@ -75,7 +75,7 @@ func test_known_neutral_taste_is_distinct_from_an_unspecified_preference() -> vo
 	var legacy := _legacy(food)
 	assert_eq(card.secondary_stat.text, "口味 0")
 	assert_contains(row.quick_stat.text, "口味 0")
-	assert_eq(note.preference_reaction.text, "本局角色没有特别偏好 · 心情 0")
+	assert_eq(note.preference_reaction.text, "口味一般 · 心情 0")
 	assert_contains(legacy.summary_label.text, "口味 0")
 	assert_false(note.preference_reaction.text.contains("未设置"))
 
@@ -87,14 +87,14 @@ func test_favorite_copy_comes_only_from_the_supplied_character_preference() -> v
 	food["health_snapshot"] = {"confidence": "high", "health_score": 100}
 	var note := _note(food)
 	var legacy := _legacy(food)
-	assert_eq(note.preference_reaction.text, "合本局角色的口味 · 心情 +3")
+	assert_eq(note.preference_reaction.text, "合口味 · 心情 +3")
 	assert_false(legacy.tooltip_text.contains("偏爱"))
 	food["tags"] = []
 	food["food_preference"]["comfort"] = true
 	note.setup(food, "food")
 	legacy.configure(food, "food", "选这个")
-	assert_eq(note.preference_reaction.text, "本局角色偏爱这一口 · 心情 +3")
-	assert_contains(legacy.tooltip_text, "本局角色偏爱这一口 · 心情 +3")
+	assert_eq(note.preference_reaction.text, "特别喜欢 · 心情 +3")
+	assert_contains(legacy.tooltip_text, "特别喜欢 · 心情 +3")
 	assert_eq(_compact(food).secondary_stat.text, "口味 +3")
 
 

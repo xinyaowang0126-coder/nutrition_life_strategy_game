@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Character preferences use the campus-balance-v2 mood scale. They are
      personal reactions, not claims about a food's health effects. -->
-<food_preferences schema_version="1" id="campus_student" version="2" name="本局角色">
+<food_preferences schema_version="1" id="campus_student" version="2" name="小林">
   <reaction food_id="rice_plain" mood_delta="0" comfort="false" />
   <reaction food_id="oatmeal" mood_delta="0" comfort="false" />
   <reaction food_id="egg" mood_delta="0" comfort="false" />

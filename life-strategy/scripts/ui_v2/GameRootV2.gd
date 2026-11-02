@@ -9,6 +9,10 @@ const BalanceRules := preload("res://scripts/systems/GameplayBalanceRules.gd")
 const ActionFeedback := preload("res://scripts/systems/ActionFeedbackTrace.gd")
 const NutritionLedgerScript := preload("res://scripts/systems/NutritionLedger.gd")
 const WeeklyEventServiceScript := preload("res://scripts/systems/WeeklyEventService.gd")
+const CampusWeekScript := preload("res://scripts/stories/CampusWeek.gd")
+const CampusLearningScript := preload("res://scripts/stories/CampusMealLearning.gd")
+const CampusPresenterScript := preload("res://scripts/stories/CampusPresenter.gd")
+const CampusResourcesScript := preload("res://scripts/stories/CampusResourcePlan.gd")
 const RecoveryStateServiceScript := preload("res://scripts/systems/RecoveryStateService.gd")
 const RecoveryGameplayServiceScript := preload("res://scripts/systems/RecoveryGameplayService.gd")
 const RecoveryPresenterScript := preload("res://scripts/systems/RecoveryPresenter.gd")
@@ -53,6 +57,7 @@ const SaveCodecScript := preload("res://scripts/stories/GameSaveCodec.gd")
 const SaveStoreScript := preload("res://scripts/stories/GameSaveStore.gd")
 const HOUSEHOLD_SOURCE_SCENE := preload("res://scenes/stories/HouseholdSourceStage.tscn")
 const HOUSEHOLD_MEAL_SCENE := preload("res://scenes/stories/HouseholdMealStage.tscn")
+const HOUSEHOLD_FRIDGE_SCENE := preload("res://scenes/stories/HouseholdFridgeStage.tscn")
 const WorktopScript := preload("res://scripts/stories/HouseholdWorktop.gd")
 const CookingPlanScript := preload("res://scripts/stories/CookingPlanStage.gd")
 const KitchenStageScript := preload("res://scripts/stories/KitchenStockStage.gd")
@@ -168,6 +173,7 @@ var household_lessons: Dictionary = {}
 var household_day_five: Dictionary = {}
 var household_preparation: Dictionary = {}
 var household_finale: Dictionary = {}
+var campus_week: Dictionary = {}
 
 var state: Dictionary = {}
 var day := 1
@@ -249,6 +255,7 @@ func _ready() -> void:
 	sticky_note.closed.connect(_restore_detail_input)
 	daily_summary.next_day_requested.connect(_on_daily_summary_requested)
 	daily_summary.record_book_requested.connect(_show_meal_record_book)
+	daily_summary.planning_requested.connect(func() -> void: CampusPresenterScript.open_plan(self))
 	new_day_popup.continue_requested.connect(_on_new_day_continue)
 	new_day_popup.recovery_details_requested.connect(_show_recovery_detail)
 	get_viewport().size_changed.connect(_apply_responsive_profile)
@@ -285,6 +292,7 @@ func start_new_run() -> void:
 		story_id = String(story.get("id", "campus_exam"))
 		return
 	story = requested_story
+	if _deck_service == null: _deck_service = MealDeckServiceScript.new()
 	food_preferences = FoodPreferenceServiceScript.load_profile(String(story["preferences"]))
 	performed = false
 	_lesson_seen.clear()
@@ -293,6 +301,7 @@ func start_new_run() -> void:
 	household_day_five = HouseholdDayFiveScript.initial_state() if _household() else {}
 	household_preparation = HouseholdPreparationScript.initial_state() if _household() else {}
 	household_finale = HouseholdFinaleScript.initial_state() if _household() else {}
+	campus_week = {} if _household() else CampusWeekScript.initial_state(int(_deck_service.capture_state()["seed"]))
 	kitchen.reset()
 	shared_meal.reset()
 	if is_instance_valid(_story_dialog):
@@ -391,6 +400,7 @@ func _render_phase() -> void:
 		if is_instance_valid(ending_screen): ending_screen.hide_screen()
 		_clear_stage()
 		daily_summary.show_summary(_story_view(summary_payload), _mobile_mode)
+		daily_summary.configure_planning(CampusPresenterScript.planning_summary(self) if not _household() and CampusWeekScript.enabled(campus_week) else "")
 		return
 	if phase == "ending":
 		_clear_stage()
@@ -417,6 +427,7 @@ func _show_source_stage() -> void:
 	elif _household():
 		stage = HOUSEHOLD_SOURCE_SCENE.instantiate()
 		stage.notebook_requested.connect(_show_source_notebook)
+		stage.leftovers_requested.connect(func() -> void: HouseholdLearningPresenterScript.open(self))
 		stage.outings_requested.connect(_show_outing_choices)
 	else:
 		stage = SOURCE_STAGE_SCENE.instantiate()
@@ -438,6 +449,7 @@ func _show_source_stage() -> void:
 	if stage.has_signal("skip_requested"): stage.skip_requested.connect(_skip_meal)
 	stage.detail_requested.connect(_show_detail.bind("source"))
 	stage.detail_dismissed.connect(_dismiss_detail)
+	var campus_note := ""
 	if _household():
 		var plan_note := shared_meal.summary() if shared_meal.plan.get("status") == "planned" else ""
 		if stage is HouseholdSourceStage:
@@ -446,14 +458,24 @@ func _show_source_stage() -> void:
 			var intention := HouseholdPreparationScript.notice(household_preparation, day, meal)
 			if not intention.is_empty(): preparation_note = intention + ("\n" + preparation_note if not preparation_note.is_empty() else "")
 			stage.setup(sources, String(PHASE_NAMES[meal]), disabled_reasons, plan_note, preparation_note)
+			stage.set_leftovers_pending(day == 1 and int(HouseholdLearningScript.opening_batch(kitchen).get("quantity", 0)) > 0)
 		else:
 			stage.setup(sources, String(PHASE_NAMES[meal]), disabled_reasons, plan_note)
 	else:
 		stage.setup(sources, String(PHASE_NAMES[meal]), disabled_reasons)
+		if CampusWeekScript.enabled(campus_week):
+			var plan := CampusWeekScript.plan_for(campus_week, day, meal)
+			if not plan.is_empty() and not plan["resolved"]:
+				campus_note = CampusWeekScript.plan_text(plan, CardDataStore.meal_sources)
+			var reserved := CampusResourcesScript.notice(campus_week["resources"], CardDataStore.foods, _campus_resource_payload(), meal)
+			if not reserved.is_empty(): campus_note += ("\n" if not campus_note.is_empty() else "") + reserved
+			if not campus_note.is_empty(): stage.set_action_receipt(campus_note)
 	if stage.has_method("set_action_receipt") and not today_action_records.is_empty():
 		var last_action: Dictionary = today_action_records.back()
 		if last_action.has("feedback_trace"):
-			stage.set_action_receipt("刚才：" + ActionFeedback.receipt(last_action, String(story.get("goal_label", "复习"))))
+			var receipt := "刚才：" + ActionFeedback.receipt(last_action, String(story.get("goal_label", "复习")))
+			if not campus_note.is_empty(): receipt = campus_note + "\n" + receipt
+			stage.set_action_receipt(receipt)
 
 
 func _show_meal_stage() -> void:
@@ -465,7 +487,9 @@ func _show_meal_stage() -> void:
 			scene = CONVENIENCE_STAGE_SCENE
 		"dorm_storage":
 			scene = DORM_STAGE_SCENE
-		"cook", "fridge", "purchase":
+		"fridge":
+			scene = HOUSEHOLD_FRIDGE_SCENE
+		"cook", "purchase":
 			scene = HOUSEHOLD_MEAL_SCENE
 		_:
 			scene = CAFETERIA_STAGE_SCENE
@@ -478,7 +502,7 @@ func _show_meal_stage() -> void:
 	var options := {
 		"max_selected": _source_selection_limit(current_source_id),
 		"source_fee": int(source.get("fee", 0)),
-		"balance": int(state.get("balance", 0)),
+		"balance": _spendable_balance(),
 		"payment_mode": String(source.get("payment_mode", "cash")),
 		"meal_label": String(PHASE_NAMES[phase]),
 		"location_name": String(source.get("name", "食堂窗口")) if _household() else "食堂窗口",
@@ -536,9 +560,10 @@ func _show_action_stage() -> void:
 		"water_max": 2,
 		"used_action_names": used_action_names,
 		"used_action_ids": used_action_ids.filter(func(id: String) -> bool: return int(_story_action(id).get("slots", 1)) > 0),
-		"story_note": _household_action_note() if _household() else "",
+		"story_note": _household_action_note() if _household() else (CampusWeekScript.action_note(day, phase, state, campus_week) if CampusWeekScript.enabled(campus_week) else ""),
 		"show_finale": _household() and day == 7,
 	})
+	_apply_stage_profile(stage)
 
 
 func _show_sleep_stage() -> void:
@@ -560,10 +585,11 @@ func _show_sleep_stage() -> void:
 	stage.detail_dismissed.connect(_dismiss_detail)
 	stage.setup(options_list, {
 		"prompt": ("回到家，今晚怎么收尾？" if performed else "夜深了，今晚怎么歇？") if _household() else "夜深了，几点睡？",
-		"sub_prompt": ("按自己的节奏，安顿好今天。" if day == _total_days() else "把今天放下，给明天留点精神。") if _household() else "闹钟还没响，先把今晚定下来。",
+		"sub_prompt": ("最后一晚，早点休息吧。" if day == _total_days() else "睡前还想做什么？") if _household() else "睡觉、复习，还是刷会儿手机？",
 		"tomorrow_text": tomorrow_text,
 		"hint": ("睡前把今天安顿好，再翻翻这一周的记录。" if day == _total_days() else "点卡片问号，看看今晚不同安排的代价。") if _household() else "点小圆标看清代价，再决定。",
 	})
+	_apply_stage_profile(stage)
 
 
 func _install_stage(stage: Control) -> void:
@@ -635,10 +661,13 @@ func _hand_for_source(source_id: String, meal: String) -> Array[String]:
 		var available := _story_food_ids(source_id, meal)
 		for value in cached:
 			var food_id := String(value)
-			if available.has(food_id) and (String(_effective_meal_source(source_id).get("payment_mode", "cash")) != "stock" or _stock_count(food_id, source_id) > 0):
+			if available.has(food_id) and (String(_effective_meal_source(source_id, meal).get("payment_mode", "cash")) != "stock" or _stock_count(food_id, source_id) > 0):
 				valid_cached.append(food_id)
-		if not valid_cached.is_empty(): return valid_cached
-	var source := _effective_meal_source(source_id)
+		if not valid_cached.is_empty():
+			_ensure_reserved_stock_in_hand(valid_cached, source_id, meal)
+			source_hands[cache_key] = valid_cached.duplicate()
+			return valid_cached
+	var source := _effective_meal_source(source_id, meal)
 	var candidates := _story_food_ids(source_id, meal)
 	var uses_stock := String(source.get("payment_mode", "cash")) == "stock"
 	var built: Array[String] = _deck_service.build_hand(
@@ -649,19 +678,34 @@ func _hand_for_source(source_id: String, meal: String) -> Array[String]:
 	)
 	if not uses_stock:
 		_ensure_affordable_in_source_hand(built, candidates, int(source.get("fee", 0)))
+	_ensure_reserved_stock_in_hand(built, source_id, meal)
+	if not _household() and CampusWeekScript.enabled(campus_week) and day == 3 and meal == CampusWeekScript.limited_meal(campus_week) and source_id == "cafeteria" and candidates.has("rice_plain") and not built.has("rice_plain"):
+		if built.is_empty(): built.append("rice_plain")
+		else: built[built.size() - 1] = "rice_plain"
 	source_hands[cache_key] = built.duplicate()
 	return built
 
 
+func _ensure_reserved_stock_in_hand(built: Array[String], source_id: String, meal: String) -> void:
+	if _household() or source_id != "dorm_storage": return
+	var held := CampusResourcesScript.reserved_here(campus_week.get("resources", {}), day, meal)
+	for id in held:
+		if built.has(id) or int(dorm_inventory.get(id, 0)) <= 0: continue
+		if built.size() < int(_effective_meal_source(source_id, meal).get("hand_size", 4)): built.append(id)
+		else:
+			for index in range(built.size() - 1, -1, -1):
+				if not held.has(built[index]): built[index] = id; break
+
+
 func _ensure_affordable_in_source_hand(built: Array[String], candidates: Array[String], fee: int) -> void:
 	for food_id in built:
-		if int(_story_food(food_id)["cost"]) + fee <= int(state["balance"]):
+		if int(_story_food(food_id)["cost"]) + fee <= _spendable_balance():
 			return
 	var cheapest_id := ""
 	var cheapest_cost := 100000
 	for food_id in candidates:
 		var cost := int(_story_food(food_id)["cost"])
-		if cost < cheapest_cost and cost + fee <= int(state["balance"]):
+		if cost < cheapest_cost and cost + fee <= _spendable_balance():
 			cheapest_cost = cost
 			cheapest_id = food_id
 	if not cheapest_id.is_empty():
@@ -674,17 +718,19 @@ func _ensure_affordable_in_source_hand(built: Array[String], candidates: Array[S
 func _source_disabled_reason(source_id: String, meal: String) -> String:
 	if not _story_source_available(source_id, meal):
 		return "这个时段还没营业。"
-	var source := _effective_meal_source(source_id)
+	var source := _effective_meal_source(source_id, meal)
 	var candidates := _story_food_ids(source_id, meal)
 	if String(source.get("payment_mode", "cash")) == "stock":
 		for food_id in candidates:
 			if _stock_count(food_id, source_id) > 0:
 				return ""
+		if not _household() and not dorm_inventory.is_empty() and dorm_inventory.values().any(func(amount: Variant) -> bool: return int(amount) > 0): return "存粮已留给后面的餐次，可在笔记里解除预留。"
 		return "柜子已经空了。"
 	var fee := int(source.get("fee", 0))
 	for food_id in candidates:
-		if int(_story_food(food_id)["cost"]) + fee <= int(state["balance"]):
+		if int(_story_food(food_id)["cost"]) + fee <= _spendable_balance():
 			return ""
+	if _spendable_balance() < int(state["balance"]): return "除去预留饭钱，这餐可用¥%d；可在笔记里解除预留。" % _spendable_balance()
 	return "余额不够在这里买一份。"
 
 
@@ -712,7 +758,7 @@ func _can_add_food(food_id: String) -> bool:
 		if _household() and current_source_id == "home_kitchen":
 			return kitchen.can_cook(selected_food_ids + [food_id], _story_food_catalog(), _served_portions())
 		return _stock_count(food_id, current_source_id) > 0
-	return _selected_meal_total(food_id) <= int(state["balance"])
+	return _selected_meal_total(food_id) <= _spendable_balance()
 
 
 func _selected_meal_total(extra_food_id: String = "") -> int:
@@ -731,7 +777,9 @@ func _selected_meal_total(extra_food_id: String = "") -> int:
 
 
 func preview_meal_cost(food_ids: Array) -> Dictionary:
-	if current_source_id.is_empty() or not _is_meal_phase() or food_ids.is_empty(): return {}
+	if current_source_id.is_empty() or not _is_meal_phase(): return {}
+	if food_ids.is_empty():
+		return {}
 	var foods: Array[Dictionary] = []
 	var seen := {}
 	for value in food_ids:
@@ -750,7 +798,14 @@ func preview_meal_cost(food_ids: Array) -> Dictionary:
 		for key in needed: inventory[_ingredient_name(String(key))] = int(needed[key]) * _served_portions()
 	elif bool(record["uses_stock"]):
 		for food in foods: inventory[String(food["name"])] = int(inventory.get(String(food["name"]), 0)) + 1
-	return DecisionPreviewScript.meal(record, source, inventory, caption, recipe_next)
+	var preview := DecisionPreviewScript.meal(record, source, inventory, caption, recipe_next)
+	if not _household() and CampusWeekScript.enabled(campus_week):
+		preview["menu_facts"] = CampusLearningScript.facts(food_ids)
+		preview["text"] += "\n" + CampusLearningScript.preview(food_ids)
+		preview["detail"] += "\n" + CampusLearningScript.preview(food_ids) + "。份量、调味用量未标。"
+		var held := int(state["balance"]) - _spendable_balance()
+		if held > 0: preview["text"] = preview["headline"] + "\n已预留¥%d · 现在可用¥%d\n" % [held, _spendable_balance()] + CampusLearningScript.preview(food_ids)
+	return preview
 
 
 func _confirm_food(food_ids: Array) -> void:
@@ -779,13 +834,13 @@ func _confirm_food(food_ids: Array) -> void:
 		foods.append(_story_food(food_id))
 	var source := _effective_meal_source(current_source_id)
 	var record := MealResolverScript.build_record(phase, source, foods, food_preferences)
-	if int(record["total_cost"]) > int(state["balance"]):
+	if int(record["total_cost"]) > _spendable_balance():
 		_post("余额不够，先拿掉一样。", "warning")
 		return
 	if bool(record["uses_stock"]):
 		for food_id in record["food_ids"]:
-			if int(dorm_inventory.get(String(food_id), 0)) <= 0:
-				_post("这份存粮刚好吃完了。", "warning")
+			if _stock_count(String(food_id), current_source_id) <= 0:
+				_post("这份存粮吃完了。", "warning")
 				return
 	_apply_meal_record(record)
 	var names: Array = record["food_names"]
@@ -816,6 +871,10 @@ func _skip_meal() -> void:
 
 
 func _apply_meal_record(record: Dictionary) -> void:
+	if not _household() and CampusWeekScript.enabled(campus_week):
+		if not record.get("skipped", false): record["campus_facts"] = CampusLearningScript.facts(record["food_ids"])
+		CampusWeekScript.resolve_plan(campus_week, day, record)
+		CampusResourcesScript.settle(campus_week["resources"], day, record)
 	state["balance"] = int(state["balance"]) - int(record["total_cost"])
 	_apply_stat_delta(record["stat_delta"])
 	if bool(record["uses_stock"]) and not _household():
@@ -910,7 +969,9 @@ func _restore_detail_input() -> void:
 
 
 func get_food_for_character(food_id: String) -> Dictionary:
-	return FoodPreferenceServiceScript.decorate_food(_story_food(food_id), food_preferences)
+	var food := FoodPreferenceServiceScript.decorate_food(_story_food(food_id), food_preferences)
+	if not _household() and CampusWeekScript.enabled(campus_week): food["desc"] = String(food.get("desc", "")) + "\n" + CampusLearningScript.food_note(food_id)
+	return food
 
 
 func set_food_preferences(profile: Dictionary) -> void:
@@ -1014,7 +1075,7 @@ func _check_meal_combos(record: Dictionary) -> void:
 	if not combos_today.has("comfort_chain") and MealResolverScript.comfort_meal_count(today_meal_records) >= 2:
 		combos_today.append("comfort_chain")
 		state["mood"] = int(state["mood"]) + 2
-		_post("今天已有两餐合口味，心情 +2（游戏）。", "info")
+		_post("今天已有两餐合口味，心情 +2。", "info")
 	if String(record["phase"]) == "dinner" and not combos_today.has("budget_saver"):
 		var all_eaten := today_meal_records.size() >= 3
 		for meal_record in today_meal_records:
@@ -1023,7 +1084,7 @@ func _check_meal_combos(record: Dictionary) -> void:
 		if all_eaten and MealResolverScript.total_spend(today_meal_records) <= 18:
 			combos_today.append("budget_saver")
 			state["stress"] = int(state["stress"]) - 2
-			_post("三餐各补充至少 20 饱腹且合计不超过 ¥18，压力 -2（游戏）。", "good")
+			_post("三餐各补充至少 20 饱腹，共花不超过 ¥18，压力 -2。", "good")
 
 
 func _advance_from_meal() -> void:
@@ -1090,13 +1151,14 @@ func _apply_action(action_id: String) -> void:
 		"stat_delta": delta.duplicate(true),
 		"stock_added": stock_added,
 	})
+	if not _household() and CampusWeekScript.enabled(campus_week) and day == 5 and phase == CampusWeekScript.peer_phase(campus_week) and action_id == "study": today_action_records.back()["campus_event"] = "peer_review"
 	_clamp_stats()
 	today_action_records.back()["feedback_trace"] = ActionFeedback.capture(action_before, ActionFeedback.snapshot(state, _goal_key()), today_action_records.back(), day, phase, today_action_records.size(), action.get("_feedback_components", {}))
 	_update_stability()
 	if stock_added.is_empty():
 		_post(ActionFeedback.receipt(today_action_records.back(), String(story.get("goal_label", "复习"))), "info")
 	else:
-		_post(("小份食材已放好。" if _household() else "%s：燕麦、牛奶和苹果放进柜子了。" % display_name), "good")
+		_post(("食材买回来了。" if _household() else "%s：燕麦、牛奶和苹果放进柜子了。" % display_name), "good")
 	if int(action.get("slots", 1)) == 0:
 		_render_phase()
 	else:
@@ -1138,7 +1200,7 @@ func _can_use_action(action: Dictionary) -> bool:
 		return false
 	if actions_used_today + int(action.get("slots", 1)) > MAX_DAILY_ACTIONS:
 		return false
-	if int(action.get("cost", 0)) > int(state["balance"]):
+	if int(action.get("cost", 0)) > _spendable_balance():
 		return false
 	if int(state.get("energy", 0)) < int(action.get("min_energy", 0)):
 		return false
@@ -1158,8 +1220,8 @@ func _action_disabled_reason(action: Dictionary) -> String:
 		return "今天已经补过一次存粮。"
 	if actions_used_today + int(action.get("slots", 1)) > MAX_DAILY_ACTIONS:
 		return "今天的安排位已经用完。"
-	if int(action.get("cost", 0)) > int(state["balance"]):
-		return "余额不够。"
+	if int(action.get("cost", 0)) > _spendable_balance():
+		return "除去预留饭钱，现在可用¥%d。" % _spendable_balance() if _spendable_balance() < int(state["balance"]) else "余额不够。"
 	var min_energy := int(action.get("min_energy", 0))
 	if int(state.get("energy", 0)) < min_energy:
 		return "至少需要 %d 精力，现在先缓一缓。" % min_energy
@@ -1170,11 +1232,7 @@ func _effective_action(action_id: String) -> Dictionary:
 	if _household():
 		return _household_action(action_id)
 	var base_action := _story_action(action_id)
-	var action := WeeklyEventServiceScript.apply_action(
-		day,
-		action_id,
-		base_action
-	)
+	var action := CampusWeekScript.action(day, phase, action_id, base_action, campus_week)
 	if int(action.get("slots", 1)) > 0:
 		action["rule_hint"] = String(action.get("rule_hint", "")) + "\n" + BalanceRules.PERIOD_HINT
 	if action_id != "study":
@@ -1287,6 +1345,13 @@ func _finish_day() -> void:
 	elif stability_valid:
 		low_stability_days = 0
 	var day_record := _build_day_record(nutrition_summary)
+	if not _household() and CampusWeekScript.enabled(campus_week):
+		day_record["campus_observation"] = CampusLearningScript.observation(day, today_meal_records, run_history)
+		day_record["campus_voice"] = CampusWeekScript.recap(day, today_meal_records, today_action_records, state, campus_week)
+		day_record["campus_plans"] = campus_week["plans"].filter(func(plan: Dictionary) -> bool: return plan["day"] == day).duplicate(true)
+		var resource_payload := _campus_resource_payload()
+		resource_payload["phase"] = "ending" if low_stability_days >= 2 or day >= _total_days() else "summary"
+		day_record["campus_resource_notes"] = CampusResourcesScript.day_notes(campus_week["resources"], CardDataStore.foods, resource_payload)
 	if _household():
 		shared_meal.finish_day(day)
 		day_record["story_context"] = story_identity()
@@ -1322,10 +1387,21 @@ func _finish_day() -> void:
 		"nutrition": nutrition_summary,
 		"recovery": recovery_view,
 		"detail": summary_detail,
-		"detail_button_text": "查看三餐与恢复依据",
-		"detail_button_open_text": "收起三餐与恢复依据",
+		"detail_button_text": "查看三餐与恢复详情",
+		"detail_button_open_text": "收起三餐与恢复详情",
 		"button_text": "睡到第 %d 天" % (day + 1),
 	}
+	if not _household() and CampusWeekScript.enabled(campus_week):
+		var observation: Dictionary = day_record["campus_observation"]
+		if not observation.is_empty():
+			summary_payload["record_summary"] = observation["text"] + "\n" + String(summary_payload["record_summary"])
+			summary_payload["advice"] = observation["next_step"] + "\n" + String(summary_payload["advice"])
+		summary_payload["detail"]["detail_text"] += "\n\n" + day_record["campus_voice"]
+		for plan in day_record["campus_plans"]: summary_payload["detail"]["detail_text"] += "\n" + CampusWeekScript.plan_text(plan, CardDataStore.meal_sources)
+		var resource_notes: Array = day_record["campus_resource_notes"]
+		if not resource_notes.is_empty():
+			summary_payload["record_summary"] = String(resource_notes[0]) + "\n" + String(summary_payload["record_summary"])
+			summary_payload["detail"]["detail_text"] += "\n\n预留与实际使用\n" + "\n".join(resource_notes)
 	if _household():
 		summary_payload["record_summary"] = day_record["household_recap"]["text"]
 		summary_payload["detail"]["detail_text"] += "\n\n厨房回顾\n" + String(day_record["household_recap"]["text"])
@@ -1451,10 +1527,10 @@ func _show_new_day_popup() -> void:
 	new_day_popup.show_day(_story_view({
 		"day": day,
 		"title": "第 %d 天开始" % day,
-		"subtitle": (
-			"用现有预算安排这一周的三餐、复习和休息，先从早餐开始。"
+		"subtitle": CampusWeekScript.opening(day, state, run_history, campus_week) if not _household() and CampusWeekScript.enabled(campus_week) else (
+			"这一周要吃饭、复习，也要休息。先吃早餐。"
 			if day == 1
-			else "昨夜的恢复影响今天的复习节奏；今天的事件也会改变可用策略。"
+			else "先看看昨夜的恢复和今天的事。"
 		),
 		"learning_state": display_learning_state,
 		"recovery": display_learning_state,
@@ -1465,7 +1541,7 @@ func _show_new_day_popup() -> void:
 			LEARNING_STATE_IMAGES["steady"]
 		)) if display_learning_state["available"] else "",
 		"event_image": String(story["background"]) if _household() else String(EVENT_IMAGES.get(event_id, EVENT_IMAGES["quiet_day"])),
-		"event_effect": String(display_event.get("effect_text", "")) if _household() else String(EVENT_EFFECT_TEXT.get(
+		"event_effect": String(display_event.get("effect_text", "")) if _household() or display_event.has("effect_text") else String(EVENT_EFFECT_TEXT.get(
 			event_id,
 			EVENT_EFFECT_TEXT["quiet_day"]
 		)),
@@ -1478,18 +1554,18 @@ func _quiet_day_event() -> Dictionary:
 		return {
 			"id": "quiet_day",
 			"title": "新的一周开始了",
-			"summary": "今天没有额外限制，先按自己的节奏安排三餐与学习。",
+			"summary": "今天没有额外事件，从早餐开始。",
 		}
 	if day >= _total_days():
 		return {
 			"id": "quiet_day",
 			"title": "周末就在眼前",
-			"summary": "今天没有额外变化，把这一周最后的安排稳稳接住。",
+			"summary": "最后一天，看看复习还差多少。",
 		}
 	return {
 		"id": "quiet_day",
 		"title": "照常安排",
-		"summary": "今天没有额外变化，可以按自己的节奏来。",
+		"summary": "今天没有额外事件。",
 	}
 
 
@@ -1616,6 +1692,7 @@ func _next_day_preview_text() -> String:
 	if day >= _total_days():
 		return "本周已经走完，看看七天里哪些选择真正留下了余力。"
 	var preview := _story_preview(day)
+	if not _household() and CampusWeekScript.enabled(campus_week): return "明天：" + String(preview.get("summary", "照常安排。"))
 	return "明天的事件：" + String(preview.get("title", "照常安排"))
 
 
@@ -1665,7 +1742,7 @@ func _build_week_recap() -> Dictionary:
 	])
 	return {
 		"detail_text": "\n".join(lines),
-		"basis": "本周轨迹只整理游戏内选择与次日游戏状态，不构成健康评分或医学判断。",
+		"basis": "各天的三餐、行动和次日恢复见上方。",
 		"played_days": played_days,
 	}
 
@@ -1764,14 +1841,10 @@ func _source_uses_stock() -> bool:
 	return String(_effective_meal_source(current_source_id).get("payment_mode", "cash")) == "stock"
 
 
-func _effective_meal_source(source_id: String) -> Dictionary:
+func _effective_meal_source(source_id: String, meal: String = "") -> Dictionary:
 	if _household():
 		return StoryCatalogScript.content(story, "sources").get(source_id, {})
-	return WeeklyEventServiceScript.apply_meal_source(
-		day,
-		source_id,
-		GameDataScript.get_meal_source(source_id)
-	)
+	return CampusWeekScript.source(day, _current_meal_phase() if meal.is_empty() else meal, source_id, GameDataScript.get_meal_source(source_id), campus_week)
 
 
 func _source_selection_limit(source_id: String) -> int:
@@ -1998,6 +2071,10 @@ func _apply_stage_profile(stage: Control) -> void:
 		var note_path := "Layout/PlannerNote" if stage is ActionStageV2 else "Layout/AlarmNote"
 		_set_rect(stage.get_node(rail_path) as Control, cards.position.x, cards.position.y, cards.end.x, cards.end.y, 0, 0, 0, 0)
 		_set_rect(stage.get_node(note_path) as Control, selection.position.x, selection.position.y, selection.end.x, selection.end.y, 0, 0, 0, 0)
+		if _household():
+			var width := 220.0
+			if stage is SleepStageV2: width = minf(width, maxf(180.0, floorf((stage.size.x * cards.size.x - 44.0) / 3.0)))
+			for card: CompactChoiceCardV2 in stage._cards_by_id.values(): card.apply_card_layout(width)
 		if stage is ActionStageV2:
 			_set_rect(stage.get_node("Layout/SkipButton") as Control, 1, 1, 1, 1, -178 if _mobile_mode else -208, -90 if _mobile_mode else -72, -8 if _mobile_mode else -18, -30 if _mobile_mode else -12)
 			(stage.get_node("Layout/SkipButton") as Button).custom_minimum_size.x = 170 if _mobile_mode else 190
@@ -2115,7 +2192,7 @@ func _story_source_available(id: String, meal: String) -> bool:
 
 func _story_food_ids(source: String, meal: String) -> Array[String]:
 	if not _household():
-		return GameDataScript.get_food_ids_for_context(source, meal)
+		return CampusWeekScript.food_ids(day, meal, source, GameDataScript.get_food_ids_for_context(source, meal), campus_week)
 	var result: Array[String] = []
 	for food in _story_food_catalog().values():
 		if food.get("sources", []).has(source) and food.get("scenes", []).has(meal):
@@ -2151,14 +2228,14 @@ func _story_sleep(id: String) -> Dictionary:
 
 func _story_event(event_day: int) -> Dictionary:
 	if not _household():
-		return WeeklyEventServiceScript.event_for_day(event_day)
+		return CampusWeekScript.event(event_day, campus_week)
 	var lesson := StoryEducationScript.lesson(event_day)
 	return {"id": "choir_day_%d" % event_day, "day": event_day, "title": lesson.get("title", "照常安排"), "summary": lesson.get("line", ""), "preview": lesson.get("line", ""), "effect_text": "周三、周五午后集体排练；周日晚饭后汇演。"}
 
 
 func _story_preview(current_day: int) -> Dictionary:
 	if not _household():
-		return WeeklyEventServiceScript.next_day_preview(current_day, _total_days())
+		return CampusWeekScript.preview(current_day, campus_week)
 	return {} if current_day >= _total_days() else _story_event(current_day + 1)
 
 
@@ -2193,7 +2270,7 @@ func _story_view(value: Variant) -> Variant:
 
 func _stock_count(food_id: String, source_id: String) -> int:
 	if not _household():
-		return int(dorm_inventory.get(food_id, 0))
+		return CampusResourcesScript.quantity(campus_week.get("resources", {}), dorm_inventory, food_id, day, _current_meal_phase())
 	if source_id == "home_kitchen":
 		var required := kitchen.needs([food_id], _story_food_catalog())
 		var count := 999
@@ -2207,11 +2284,21 @@ func _stock_count(food_id: String, source_id: String) -> int:
 
 func _visible_stock(source_id: String = "") -> Dictionary:
 	if not _household():
-		return dorm_inventory.duplicate(true)
+		var available := {}
+		for id in dorm_inventory: available[id] = _stock_count(String(id), source_id)
+		return available
 	var result := {}
 	for food_id in _story_food_catalog():
 		result[food_id] = _stock_count(String(food_id), source_id if not source_id.is_empty() else current_source_id)
 	return result
+
+
+func _spendable_balance() -> int:
+	return int(state.get("balance", 0)) if _household() else CampusResourcesScript.balance(campus_week.get("resources", {}), int(state.get("balance", 0)), day)
+
+
+func _campus_resource_payload() -> Dictionary:
+	return {"day": day, "phase": phase, "state": state, "run_history": run_history, "today_meal_records": today_meal_records, "today_action_records": today_action_records, "dorm_inventory": dorm_inventory}
 
 
 func _household_action_reason(action: Dictionary) -> String:
@@ -2439,9 +2526,9 @@ func _show_education() -> void:
 	var exercise := StoryEducationScript.exercise(day)
 	if not exercise.is_empty():
 		var choices: Array = exercise["choices"].duplicate(true)
-		choices.append({"id": "skip", "text": "直接查看依据"})
-		_show_story_dialog(String(lesson["title"]), "教学情境，标签为给定数据：\n\n" + String(exercise["question"]) + "\n\n查看或作答不会改变预算、精力和目标进度。", choices, func(choice: String) -> void:
-			var feedback := "" if choice == "skip" else ("这次判断正确。\n" if choice == exercise["correct"] else "再看看份量和记录口径。\n")
+		choices.append({"id": "skip", "text": "直接看解释"})
+		_show_story_dialog(String(lesson["title"]), "标签练习：\n\n" + String(exercise["question"]) + "\n\n练习免费，不消耗精力。", choices, func(choice: String) -> void:
+			var feedback := "" if choice == "skip" else ("答对了。\n" if choice == exercise["correct"] else "再看看份量和标签。\n")
 			_show_story_dialog(String(lesson["title"]), feedback + String(exercise["explanation"]) + "\n\n" + String(lesson["body"]), [{"id": "close", "text": "回到这一餐"}], func(_id: String) -> void: pass)
 		)
 		return
@@ -2542,7 +2629,7 @@ func confirm_household_food(ids: Array, storage: String = "eat_now", plan: Dicti
 	elif current_source_id == "home_fridge":
 		transaction = kitchen.consume(ids, day, _story_clock())
 	if not transaction.get("ok", false):
-		_post("食材或合规熟食不够，先换一份。", "warning")
+		_post("食材或可用熟食不够，换一样试试。", "warning")
 		return false
 	record["story_context"] = story_identity()
 	record["kitchen_transaction"] = transaction.get("record", {}).duplicate(true)
@@ -2601,13 +2688,13 @@ func _show_shared_meal_invitation() -> void:
 			_close_workspace()
 	_present_workspace(page, close_handler)
 	page.title_label.text = "老陈，晚上一起吃？"
-	page.subtitle_label.text = "先问问他有没有空，再定个地点。"
+	page.subtitle_label.text = "选个地方吃晚饭。"
 	page.close_button.text = "这次先不约"
 	if day == 5:
 		page.close_button.text = "今天先自己安排"
-		page.body.add_child(HouseholdUI.label("周阿姨：‘练完想和老陈吃个小份，先问问有没有空。’", 23))
-	HouseholdUI.note(page.body, "约好还不算完成，实际同桌才写进这一周。")
-	for choice in [{"id": "community", "text": "在家常小馆见", "hint": "各付自己的饭钱，照常搭配自己的餐盘。"}, {"id": "home", "text": "请老陈来家里", "hint": "当餐按两人份备料，只记录自己吃的一份。"}]:
+		page.body.add_child(HouseholdUI.label("周阿姨：‘老陈，练完一起吃晚饭？’", 23))
+	HouseholdUI.note(page.body, "约好后，晚饭要选同一个地方。")
+	for choice in [{"id": "community", "text": "在家常小馆见", "hint": "各付各的饭钱。"}, {"id": "home", "text": "请老陈来家里", "hint": "需要准备两人份食材。"}]:
 		var card := PanelContainer.new()
 		card.add_theme_stylebox_override("panel", HouseholdUI.paper(HouseholdUI.TILE, 18, 12))
 		page.body.add_child(card)
@@ -2641,9 +2728,9 @@ func _show_recipe_records() -> void:
 	var page := WorktopScript.new()
 	_present_workspace(page)
 	page.title_label.text = "这一周的餐桌"
-	page.subtitle_label.text = "只记录已经确认的饭和实际发生的安排"
+	page.subtitle_label.text = "回看三餐和做饭用料"
 	HouseholdUI.section(page.body, "今天的配方")
-	if today_meal_records.is_empty(): HouseholdUI.note(page.body, "今天还没有确认的餐次。先为自己安排一顿饭。")
+	if today_meal_records.is_empty(): HouseholdUI.note(page.body, "今天还没吃饭。")
 	for meal in today_meal_records:
 		var card := PanelContainer.new()
 		card.add_theme_stylebox_override("panel", HouseholdUI.paper(HouseholdUI.TILE, 14, 12))
@@ -2652,7 +2739,7 @@ func _show_recipe_records() -> void:
 		stack.add_theme_constant_override("separation", 10)
 		card.add_child(stack)
 		stack.add_child(HouseholdUI.label("%s · %s" % [PHASE_NAMES.get(meal.get("phase"), "这一餐"), "、".join(meal.get("food_names", []))], 27, HouseholdUI.INK, true))
-		stack.add_child(HouseholdUI.label(MealFactsScript.describe(meal["recipe_facts"]) if meal.has("recipe_facts") else "这顿饭没有配方调味记录，数值保持未知。", 22, HouseholdUI.MUTED))
+		stack.add_child(HouseholdUI.label(MealFactsScript.describe(meal["recipe_facts"]) if meal.has("recipe_facts") else "调味用量未记录。", 22, HouseholdUI.MUTED))
 		if meal.has("day_five_experience"):
 			stack.add_child(HouseholdUI.label(String(meal["day_five_experience"]["response"]), 22, HouseholdUI.GREEN))
 	HouseholdUI.section(page.body, "一起吃饭")
@@ -2667,7 +2754,7 @@ func _show_recipe_records() -> void:
 				HouseholdUI.note(page.body, "第%d天\n%s" % [int(record["day"]), String(record["recipe_summary"]["text"])])
 			if record.has("day_five_recap"): HouseholdUI.note(page.body, String(record["day_five_recap"]["text"]))
 			if record.has("preparation_recap"): HouseholdUI.note(page.body, String(record["preparation_recap"]["text"]))
-	HouseholdUI.note(page.body, "配方数值是本关给定规格，未经测定的食材本底保持未知。")
+	HouseholdUI.note(page.body, "这里只合计配方中添加的盐、酱油和白糖，食材本身的含量未记录。")
 
 
 func capture_game_save() -> Dictionary:
@@ -2725,7 +2812,7 @@ func restore_game_save(envelope: Dictionary) -> Dictionary:
 		_render_phase()
 		if _new_day_pending:
 			_show_new_day_popup()
-		elif not HouseholdStudyPresenterScript.resume(self) and not HouseholdDayFivePresenterScript.resume(self) and not HouseholdPreparationPresenterScript.resume(self) and not HouseholdFinalePresenterScript.resume(self):
+		elif not CampusPresenterScript.resume(self) and not HouseholdStudyPresenterScript.resume(self) and not HouseholdDayFivePresenterScript.resume(self) and not HouseholdPreparationPresenterScript.resume(self) and not HouseholdFinalePresenterScript.resume(self):
 			HouseholdLearningPresenterScript.resume(self)
 	return {"ok": true}
 
@@ -2772,6 +2859,7 @@ func _show_game_menu() -> void:
 	var progress := _save_status.text if is_instance_valid(_save_status) else ""
 	HouseholdUI.section(page.body, "记录与进度")
 	var choices := [{"id": "records", "text": "餐次记录", "hint": "回看这一周实际吃了什么"}, {"id": "save", "text": "保存当前进度", "hint": progress + " · 可另存三个位置"}, {"id": "load", "text": "读取已有进度", "hint": "从选择的位置继续安排"}, {"id": "export", "text": "导出存档文件", "hint": "下载备份，也可换设备继续"}, {"id": "import", "text": "导入存档文件", "hint": "预览后选择保存位置"}, {"id": "menu", "text": "回到故事选择", "hint": "先保存这一周的自动进度"}]
+	if not _household() and CampusWeekScript.enabled(campus_week): choices.push_front({"id": "campus_notes", "text": "小林的笔记", "hint": "看看这一餐，留个打算，回看实际安排"})
 	for choice in choices:
 		var button := HouseholdUI.button(String(choice["text"]) + "\n" + String(choice["hint"]), String(choice["id"]))
 		button.custom_minimum_size.y = 84
@@ -2780,6 +2868,7 @@ func _show_game_menu() -> void:
 			if page != _workspace or not page.visible: return
 			_close_workspace(false)
 			match String(choice["id"]):
+				"campus_notes": CampusPresenterScript.notebook(self)
 				"records":
 					if _household(): _show_recipe_records()
 					else: _show_meal_record_book()

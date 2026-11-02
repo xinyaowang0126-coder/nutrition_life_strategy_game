@@ -158,7 +158,7 @@ func test_saved_recipe_is_frozen_and_unknown_items_are_not_zero() -> void:
 	assert_eq(summary["known_seasoning_sodium_mg"], 3000.0)
 	assert_eq(summary["known_white_sugar_g"], 16.0)
 	assert_eq(summary["meals_without_recipe_facts"], 1)
-	assert_contains(summary["text"], "这不是全天总摄入")
+	assert_contains(summary["text"], "这里只算配方中添加的调味")
 
 
 func test_recipe_quantity_changes_do_not_claim_health_or_change_goal_resources() -> void:
@@ -231,7 +231,7 @@ func test_missed_invitation_remains_missed_and_restart_clears_plans_and_condimen
 	game.shared_meal.finish_day(4)
 	assert_true(game.shared_meal.plan.is_empty())
 	assert_eq(game.shared_meal.history.back()["kind"], "missed")
-	assert_contains(game.shared_meal.summary(), "还没有共同进餐记录")
+	assert_contains(game.shared_meal.summary(), "还没和老陈一起吃饭")
 	game.kitchen.condiments["soy_ml"] = 0
 	game.start_new_run()
 	assert_true(game.shared_meal.plan.is_empty())

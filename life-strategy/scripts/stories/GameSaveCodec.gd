@@ -15,6 +15,8 @@ const MealLearning := preload("res://scripts/stories/HouseholdMealLearning.gd")
 const DayFive := preload("res://scripts/stories/HouseholdDayFive.gd")
 const Preparation := preload("res://scripts/stories/HouseholdPreparation.gd")
 const Finale := preload("res://scripts/stories/HouseholdFinale.gd")
+const Campus := preload("res://scripts/stories/CampusWeek.gd")
+const CampusLearning := preload("res://scripts/stories/CampusMealLearning.gd")
 const VERSION := 1
 const KIND := "nutrition_life_game_save"
 const MAX_BYTES := 4194304
@@ -41,6 +43,7 @@ const FIELD_TYPES := {
 	"household_day_five": TYPE_DICTIONARY,
 	"household_preparation": TYPE_DICTIONARY,
 	"household_finale": TYPE_DICTIONARY,
+	"campus_week": TYPE_DICTIONARY,
 }
 
 
@@ -122,6 +125,14 @@ static func validate(envelope: Variant) -> Dictionary:
 		envelope = envelope.duplicate(true)
 		p = envelope["payload"]
 		p["household_finale"] = Finale.initial_state(true) if story["mechanics"] == "household" else {}
+	if not p.has("campus_week"):
+		envelope = envelope.duplicate(true)
+		p = envelope["payload"]
+		p["campus_week"] = {} if story["mechanics"] == "household" else Campus.initial_state(0, false)
+	else:
+		envelope = envelope.duplicate(true)
+		p = envelope["payload"]
+		p["campus_week"] = Campus.migrate(p["campus_week"])
 	for key in FIELD_TYPES:
 		if typeof(p.get(key)) != FIELD_TYPES[key]:
 			return failure("invalid_field", "存档字段不完整：" + key)
@@ -205,6 +216,8 @@ static func validate(envelope: Variant) -> Dictionary:
 		return failure("invalid_household_preparation", "备餐计划、取用记录或返回位置不一致。")
 	if not Finale.valid(p["household_finale"], elder, p, foods, actions, int(story["goal_target"])):
 		return failure("invalid_household_finale", "演前安排、实际参演或本周回顾不一致。")
+	if not Campus.valid(p["campus_week"], not elder, p, foods, sources):
+		return failure("invalid_campus_week", "小林的笔记、打算或练习记录不一致。")
 	var finale_open: bool = not p["household_finale"].get("active", {}).is_empty() or p["household_finale"].get("pending", false) or p["household_finale"].get("intro") == "details"
 	if finale_open and (not p["household_lessons"].get("active", {}).is_empty() or not p["household_day_five"].get("active", {}).is_empty() or p["household_day_five"].get("pending", "") != "" or p["household_day_five"].get("intro") == "details" or not p["household_preparation"].get("active", {}).is_empty() or p["household_preparation"].get("pending", "") != "" or p["household_preparation"].get("intro") == "details"):
 		return failure("invalid_household_finale", "同时存在两份未关闭的安排。")
@@ -260,6 +273,7 @@ static func meal_records_valid(rows: Variant, foods: Dictionary, sources: Dictio
 			var c: Variant = row["learning_facts"]
 			if not MealLearning.valid_context(c, foods, sources) or c["scope"] != "confirmed" or c["food_ids"] != row["food_ids"] or c["food_names"] != row["food_names"] or c["meal"] != row["phase"] or c["source"] != row["source_id"] or c["recipe_facts"] != row.get("recipe_facts", {}): return false
 		if row.has("day_five_experience") and not DayFive.valid_experience(row["day_five_experience"], row, day): return false
+		if row.has("campus_facts") and (row["skipped"] or not CampusLearning.valid_facts(row["campus_facts"], row["food_ids"])): return false
 	return true
 
 

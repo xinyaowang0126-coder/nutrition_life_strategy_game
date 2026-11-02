@@ -17,7 +17,7 @@ static func resume(game: Node) -> bool:
 	if game.phase != "breakfast_source" or state["intro"] not in ["pending", "details"]: return false
 	state["intro"] = "details"
 	var generation: int = game._save_generation
-	game._show_story_dialog("今晚，轮到自己的舞台", "周阿姨：‘歌谱带好了。今天照样把饭吃好，晚饭后再决定怎么安排。’\n\n排练%d/%d，眼下精力%d。晚饭后参演需达到排练目标，并在演前保留至少%d游戏精力；早饭后、午饭后仍可按当前条件补练或休息。" % [game.state["goal_progress"], game._goal_target(), game.state["energy"], game._story_action("perform")["min_energy"]], [{"id": "look", "text": "看看今天的安排"}, {"id": "back", "text": "先安排早餐"}], func(choice: String) -> void:
+	game._show_story_dialog("今晚有汇演", "周阿姨：‘歌谱带上了，晚饭后去唱歌。’\n\n排练%d/%d，当前精力%d。演前至少要有%d精力，并留一个安排位。早饭后、午饭后还可以补练或休息。" % [game.state["goal_progress"], game._goal_target(), game.state["energy"], game._story_action("perform")["min_energy"]], [{"id": "look", "text": "看看今天的安排"}, {"id": "back", "text": "先吃早餐"}], func(choice: String) -> void:
 		if generation != game._save_generation or state["intro"] != "details": return
 		state["intro"] = "done"
 		game._queue_autosave()
@@ -49,8 +49,9 @@ static func after_action(game: Node) -> void:
 static func _show_reply(game: Node) -> void:
 	var result: Dictionary = game.household_finale["outcome"]
 	var performed: bool = result["kind"] == "performed"
-	var title := "把歌唱完了" if performed else "今晚，按实际安排收好歌谱"
-	var body: String = "周阿姨：‘最后一句唱完，心里踏实了。这一周没白惦记这首歌。’\n\n已实际完成社区合唱汇演；排练与演出消耗按行动记录保留。" if performed else "周阿姨：‘这回没上台，这一周的饭和练歌也都实实在在过了。收好歌谱，再看看下次怎么排。’\n\n" + result["reason"]
+	var title := "汇演结束了" if performed else "今晚没去汇演"
+	var reply := "周阿姨：‘今晚先忙别的，歌下次再唱。’" if result["kind"] == "other_choice" else "周阿姨：‘今晚没唱成，下回再去。’"
+	var body: String = "周阿姨：‘总算唱完了，回家歇歇。’" if performed else reply + "\n\n" + _outcome_reason(game, result)
 	var generation: int = game._save_generation
 	game._show_story_dialog(title, body, [{"id": "close", "text": "回家歇一歇"}], func(_choice: String) -> void:
 		if generation == game._save_generation and Finale.acknowledge(game.household_finale): game._queue_autosave()
@@ -65,10 +66,10 @@ static func _show_plan(game: Node) -> void:
 	game._present_workspace(page, func() -> void:
 		if _current(game, page, generation): _leave(game)
 	)
-	page.title_label.text = "今晚之前，先看看安排"
-	page.subtitle_label.text = "排练与精力是游戏刻度，参演按实际行动记录"
+	page.title_label.text = "汇演前的安排"
+	page.subtitle_label.text = "晚饭后出发，先看看排练和精力"
 	page.close_button.text = "回到配方" if back["kind"] == "cooking" else "回到当前安排"
-	HouseholdUI.note(page.body, "眼下排练 %d/%d · 精力 %d\n晚饭后参演至少保留%d游戏精力。现在的状态不等于届时一定能上台。" % [game.state["goal_progress"], game._goal_target(), game.state["energy"], game._story_action("perform")["min_energy"]])
+	HouseholdUI.note(page.body, "排练 %d/%d · 精力 %d\n演前至少需要%d精力，晚饭后留一个安排位。" % [game.state["goal_progress"], game._goal_target(), game.state["energy"], game._story_action("perform")["min_energy"]])
 	if game._is_action_phase() and back["kind"] == "stage":
 		HouseholdUI.section(page.body, "眼下可以选择")
 		for id in (["perform"] if game.phase == "dinner_action" else ["rehearse", "nap", "walk"]):
@@ -85,19 +86,29 @@ static func _show_plan(game: Node) -> void:
 				_leave(game, false)
 				game._apply_action(id)
 			)
-		page.body.add_child(HouseholdUI.label("执行会使用这一段餐后安排；实际变化受游戏上下限和原有时段消耗影响。返回页面本身不占安排。", 21, HouseholdUI.MUTED))
+		page.body.add_child(HouseholdUI.label("选一项会占用这段餐后安排。精力还会扣除时段消耗，数值范围为0–100。", 21, HouseholdUI.MUTED))
 	else:
-		page.body.add_child(HouseholdUI.label("先安排眼下这一餐。早饭后、午饭后可按实际条件选择练歌或休息；晚饭后再核对参演条件。", 23))
-	HouseholdUI.section(page.body, "这一周已经留下的事")
+		page.body.add_child(HouseholdUI.label("先吃这顿饭。早饭后、午饭后可以练歌或休息，晚饭后再去汇演。", 23))
+	HouseholdUI.section(page.body, "这周做了什么")
 	var rehearsals := 0
 	for record in game.run_history:
 		for action in record["actions"]:
 			if action["id"] in ["rehearse", "group_rehearsal"]: rehearsals += 1
 	for action in game.today_action_records:
 		if action["id"] in ["rehearse", "group_rehearsal"]: rehearsals += 1
-	HouseholdUI.note(page.body, "已记录排练%d次。\n%s" % [rehearsals, game.shared_meal.summary()])
-	page.body.add_child(HouseholdUI.label("演出完成表示本局目标达成；饮食回顾另看真实餐次、份量和保存记录。", 21, HouseholdUI.MUTED))
+	HouseholdUI.note(page.body, "排练了%d次。\n%s" % [rehearsals, game.shared_meal.summary()])
 	page.close_button.call_deferred("grab_focus")
+
+
+static func _outcome_reason(game: Node, result: Dictionary) -> String:
+	# Keep the frozen v1 outcome untouched; only format the visible explanation.
+	if result["kind"] == "other_choice": return "这次选了其他安排。"
+	var missing: Array[String] = []
+	if result["progress"] < game._goal_target(): missing.append("排练%d/%d" % [result["progress"], game._goal_target()])
+	var minimum: int = game._story_action("perform")["min_energy"]
+	if result["energy"] < minimum: missing.append("演前精力%d，需要%d" % [result["energy"], minimum])
+	if result["slots"] >= game.MAX_DAILY_ACTIONS: missing.append("今天的安排位用完了")
+	return "；".join(missing) + "。"
 
 
 static func _current(game: Node, page: Control, generation: int) -> bool:

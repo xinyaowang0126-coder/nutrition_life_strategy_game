@@ -91,7 +91,7 @@ func test_sodium_question_uses_current_recipe_and_never_calls_it_whole_meal_sodi
 		var q := Study.question(c)
 		assert_contains(q["choices"][1]["text"], str(pair[1]))
 		assert_eq(q["correct"], "measured")
-		assert_contains(q["explanation"], "不是整餐或全天总量")
+		assert_contains(q["explanation"], "食材本身和其他未记录项目中的钠另算")
 	var outside := Study.question(Study.context(3, "lunch", "community_canteen", ["tofu"], game._story_food_catalog()))
 	assert_eq(outside["correct"], "known")
 	assert_contains(outside["explanation"], "保留未知")
@@ -105,7 +105,7 @@ func test_sugar_question_keeps_known_white_sugar_separate_from_unknown_totals() 
 		assert_contains(q["choices"][1]["text"], "白糖%d克" % sugar)
 		assert_contains(q["choices"][1]["text"], "总糖与其他添加糖未知")
 		assert_eq(q["correct"], "known")
-		assert_contains(q["explanation"], "不代表没有总糖")
+		assert_contains(q["explanation"], "总糖还包括食材原有的糖")
 
 
 func test_transfer_labels_have_different_values_and_do_not_become_eaten_food() -> void:
@@ -285,10 +285,10 @@ func test_day_observations_use_confirmed_meals_and_preserve_unknowns() -> void:
 	assert_contains(observation["text"], "未知")
 	var outside := Study.day_observation([{"food_ids": ["tofu"], "skipped": false}], 3)
 	assert_eq(outside["known_sodium_mg"], null)
-	assert_contains(outside["text"], "不能")
+	assert_contains(outside["text"], "未知")
 	var skipped := Study.day_observation([{"food_ids": [], "skipped": true}], 4)
 	assert_eq(skipped["known_white_sugar_g"], null)
-	assert_contains(skipped["text"], "没有已确认")
+	assert_contains(skipped["text"], "还没吃饭")
 
 
 func test_feasible_change_respects_current_cash_inventory_and_recipe_needs() -> void:

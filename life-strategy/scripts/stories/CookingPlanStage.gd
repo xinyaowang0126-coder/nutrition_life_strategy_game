@@ -53,6 +53,7 @@ func setup(food_ids: Array[String], foods: Dictionary, stock: KitchenStock, serv
 	_recipe_column.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_recipe_column.add_theme_constant_override("separation", 6)
 	_content_grid.add_child(_recipe_column)
+	_recipe_column.resized.connect(func() -> void: HouseholdUI.fit_inventory_grid.call_deferred(_ingredients_grid))
 	_controls_column = VBoxContainer.new()
 	_controls_column.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_controls_column.add_theme_constant_override("separation", 6)
@@ -213,6 +214,7 @@ func _update_preview() -> void:
 		var stock := int(_kitchen.ingredients.get(key, 0))
 		stack.add_child(HouseholdUI.label("%s ×%d" % [HouseholdUI.ingredient_name(String(key)), need], 23, HouseholdUI.INK, true))
 		stack.add_child(HouseholdUI.label("库存 %d" % stock, 20, HouseholdUI.GREEN if stock >= need else HouseholdUI.DANGER))
+	HouseholdUI.fit_inventory_grid.call_deferred(_ingredients_grid)
 	for key in option_buttons:
 		var parts: PackedStringArray = String(key).split(":")
 		var selected: bool = (parts[1] == storage if parts[0] == "storage" else (parts[1] == str(plan["added_sugar_g"]) if parts[0] == "sugar" else parts[1] == plan["seasoning"]))
@@ -222,11 +224,11 @@ func _update_preview() -> void:
 	var facts := Facts.freeze(ids, _foods, plan)
 	if _seasoning_label != null:
 		_seasoning_label.text = "每人份：盐%s克 + 酱油%s毫升" % [Facts.number(facts.get("salt_g", 0)), Facts.number(facts.get("soy_ml", 0))]
-	_sodium_note.text = "每人份调味钠 %s毫克 · 另加白糖 %s克\n食材本底钠和总糖未知；这不是整餐或全天总量。" % [Facts.number(facts.get("sodium_from_added_seasonings_mg", 0)), Facts.number(facts.get("white_sugar_added_g", 0))]
-	_sodium_note.tooltip_text = "本关给定酱油标签：每100毫升钠7000毫克。调味平均分配到相应菜肴；数值是教学配方。"
+	_sodium_note.text = "每人份调味钠 %s毫克 · 另加白糖 %s克\n食材本身的钠、总糖未记录。" % [Facts.number(facts.get("sodium_from_added_seasonings_mg", 0)), Facts.number(facts.get("white_sugar_added_g", 0))]
+	_sodium_note.tooltip_text = "本关酱油每100毫升含钠7000毫克。盐和酱油平均分到可调味的菜里。"
 	_portions_label.text = "当餐%d人份%s · 本次共做%d份" % [_served, "，和老陈一起吃" if _served == 2 else "", portions]
 	_update_effort_preview()
-	_storage_note.text = {"eat_now": "只准备这顿饭，不另留熟食。", "fridge": "留存份上桌前分装，1小时内放入4℃冰箱；下次食用前彻底再热。", "counter": "留在灶台到下一餐会经过5小时，保存不当有健康风险，届时应丢弃。"}.get(storage, "")
+	_storage_note.text = {"eat_now": "这顿吃完，不另留。", "fridge": "留存份上桌前分装，1小时内放入4℃冰箱；下次食用前彻底再热。", "counter": "放到下一餐会经过5小时，届时不能吃，只能丢弃。"}.get(storage, "")
 	_storage_note.add_theme_color_override("font_color", HouseholdUI.DANGER if storage == "counter" else HouseholdUI.MUTED)
 	confirm_button.disabled = not _kitchen.can_prepare(ids, _foods, portions, plan)
 	_update_commit_preview(portions)
@@ -289,3 +291,4 @@ func apply_profile(mobile: bool) -> void:
 	super.apply_profile(mobile)
 	if _content_grid != null:
 		_content_grid.columns = 1 if mobile else 2
+		HouseholdUI.fit_inventory_grid.call_deferred(_ingredients_grid)

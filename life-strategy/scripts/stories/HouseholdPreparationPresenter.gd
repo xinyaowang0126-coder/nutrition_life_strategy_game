@@ -17,7 +17,7 @@ static func resume(game: Node) -> bool:
 	if game.day != 6 or game.phase != "breakfast_source" or state["intro"] not in ["pending", "details"]: return false
 	state["intro"] = "details"
 	var generation: int = game._save_generation
-	game._show_story_dialog("给下一餐留个安排", "周阿姨：‘明晚就要登台了。先看看家里有多少，别一做又多了。今天做当餐，还是另留一份？’\n\n按实际人数和库存决定；计划留的份量要在上桌前分出，及时冷藏。也可以每餐重新安排。", [{"id": "look", "text": "看看库存和下一餐"}, {"id": "back", "text": "先安排这顿饭"}], func(choice: String) -> void:
+	game._show_story_dialog("给下一餐留个安排", "周阿姨：‘明晚就要登台了。今天多做一份，明天就省点事。先看看家里够不够。’\n\n多做的那份要在上桌前分出，及时冷藏。想每餐现做也可以。", [{"id": "look", "text": "看看库存和下一餐"}, {"id": "back", "text": "先安排这顿饭"}], func(choice: String) -> void:
 		if generation != game._save_generation or state["intro"] != "details": return
 		state["intro"] = "done"
 		game._queue_autosave()
@@ -54,8 +54,8 @@ static func _show_reply(game: Node) -> void:
 	var row := Prep.entry(game.household_preparation, token)
 	var generation: int = game._save_generation
 	var next := Prep.target(token)
-	var quote := "周阿姨：‘原来留的这一份，这餐用上了。’" if row["result"]["status"] in ["used", "part_used"] else "周阿姨：‘计划可以改，实际怎样安排就怎样记。’"
-	game._show_story_dialog("下一餐，实际怎样安排了", "第%d天%s\n%s\n\n%s" % [next["day"], Prep.NAMES[next["meal"]], row["result"]["text"], quote], [{"id": "close", "text": "继续安排"}], func(_choice: String) -> void:
+	var quote := "周阿姨：‘留的这份正好吃。’" if row["result"]["status"] in ["used", "part_used"] else "周阿姨：‘这顿换点别的吃。’"
+	game._show_story_dialog("这餐吃了什么", "第%d天%s\n%s\n\n%s" % [next["day"], Prep.NAMES[next["meal"]], Prep.result_text(row["result"]), quote], [{"id": "close", "text": "继续安排"}], func(_choice: String) -> void:
 		if generation == game._save_generation and Prep.acknowledge(game.household_preparation, token): game._queue_autosave()
 	)
 
@@ -68,7 +68,7 @@ static func _show_planner(game: Node) -> void:
 	game._present_workspace(page, func() -> void:
 		if _current(game, page, generation): _leave(game)
 	)
-	page.title_label.text = "这一份，打算留给哪餐"
+	page.title_label.text = "下一餐怎么吃"
 	var meal: String = game._current_meal_phase()
 	var next := Prep.target(meal)
 	page.subtitle_label.text = "眼下是%s，下一餐是第%d天%s" % [Prep.NAMES[meal], next["day"], Prep.NAMES[next["meal"]]]
@@ -81,7 +81,7 @@ static func _show_planner(game: Node) -> void:
 	var ready: Array[Dictionary] = HouseholdLearningFlow.ready_batches(game.kitchen, 6, game._story_clock())
 	var names: Array[String] = []
 	for batch in ready: names.append("%s×%d" % [game._story_food_catalog()[batch["food_id"]]["name"], batch["quantity"]])
-	HouseholdUI.note(page.body, "留存熟食：%s\n取用前仍需核对保存记录。" % ("、".join(names) if not names.is_empty() else "当前没有可取用记录"))
+	HouseholdUI.note(page.body, "冷藏熟食：%s\n吃之前要查看保存时间，再彻底再热。" % ("、".join(names) if not names.is_empty() else "暂无"))
 	if back["kind"] == "cooking":
 		HouseholdUI.section(page.body, "对照这份配方")
 		var served: int = game._served_portions()
@@ -90,12 +90,12 @@ static func _show_planner(game: Node) -> void:
 		var needed: Array[String] = []
 		for id in needs: needed.append("%s×%d / 库存%d" % [HouseholdUI.ingredient_name(id), needs[id] * portions, game.kitchen.ingredients.get(id, 0)])
 		page.body.add_child(HouseholdUI.label("当餐%d人份%s，本次共做%d份\n%s" % [served, "＋另留1份" if portions > served else "，不另留", portions, "、".join(needed)], 22))
-		HouseholdUI.note(page.body, "当前配方与调味库存足够。" if game.kitchen.can_prepare(back["ids"], game._story_food_catalog(), portions, back["plan"]) else "当前食材或调味库存不足，回配方调整；计划不会补足库存。")
-		page.body.add_child(HouseholdUI.label({"eat_now": "现在只做当餐，还没有另备冷藏。", "fridge": "确认开饭后才生成另留份：上桌前分装，1小时内放入4℃冰箱；下次取当餐份量彻底再热。", "counter": "当前选了灶台留存；到下一餐经过5小时，保存不当，应丢弃，不能算成可用备餐。"}[back["storage"]], 22, HouseholdUI.DANGER if back["storage"] == "counter" else HouseholdUI.MUTED))
+		HouseholdUI.note(page.body, "食材和调味料够用。" if game.kitchen.can_prepare(back["ids"], game._story_food_catalog(), portions, back["plan"]) else "食材或调味库存不足，回配方减些份数，或先补货。")
+		page.body.add_child(HouseholdUI.label({"eat_now": "现在只做这顿。", "fridge": "另留的一份在上桌前分装，1小时内放入4℃冰箱，下次吃之前彻底再热。", "counter": "选了留在灶台。到下一餐已过5小时，届时只能丢弃。"}[back["storage"]], 22, HouseholdUI.DANGER if back["storage"] == "counter" else HouseholdUI.MUTED))
 	HouseholdUI.section(page.body, "记下下一餐的打算")
-	page.body.add_child(HouseholdUI.label("回看会核对当时可用的留存，以及这餐实际另备的冷藏批次；取用几样就记几样。", 21, HouseholdUI.MUTED))
+	page.body.add_child(HouseholdUI.label("可以用现有的冷藏熟食，也可以把这餐多做的一份留到下餐。", 21, HouseholdUI.MUTED))
 	var planned := Prep.entry(game.household_preparation, meal)
-	for choice in [{"id": "stock", "text": "下一餐先看留存熟食"}, {"id": "later", "text": "下一餐到时另安排"}, {"id": "clear", "text": "先不记计划"}]:
+	for choice in [{"id": "stock", "text": "下一餐吃留存的熟食"}, {"id": "later", "text": "下一餐到时再选"}, {"id": "clear", "text": "暂时不定"}]:
 		var button := HouseholdUI.button(choice["text"], choice["id"])
 		button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		HouseholdUI.style_button(button, false, planned.get("choice", "clear") == choice["id"])
@@ -106,7 +106,7 @@ static func _show_planner(game: Node) -> void:
 			game._queue_autosave()
 			_show_planner(game)
 		)
-	page.body.add_child(HouseholdUI.label("只记打算，不会自动做饭或留份；回到配方确认后才扣材料。届时也可改选，实际取用后再回看。", 21, HouseholdUI.MUTED))
+	page.body.add_child(HouseholdUI.label("这里只定计划。回配方确认才会做饭、扣材料；下餐也可以改选。", 21, HouseholdUI.MUTED))
 	page.close_button.call_deferred("grab_focus")
 
 

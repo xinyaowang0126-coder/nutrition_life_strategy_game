@@ -57,7 +57,7 @@ func test_default_character_preserves_all_23_mood_values_and_explicit_comfort() 
 	var profile: Dictionary = PreferenceScript.default_profile()
 	assert_eq(profile.get("id"), "campus_student")
 	assert_eq(profile.get("version"), 2)
-	assert_eq(profile.get("name"), "本局角色")
+	assert_eq(profile.get("name"), "小林")
 	assert_eq((profile["reactions"] as Dictionary).size(), 23)
 	for food_id in EXPECTED_MOODS:
 		var response: Dictionary = PreferenceScript.reaction(food_id, profile)
@@ -66,7 +66,7 @@ func test_default_character_preserves_all_23_mood_values_and_explicit_comfort() 
 		assert_eq(response["comfort"], COMFORT_FOODS.has(food_id), food_id)
 		assert_eq(response["profile_id"], "campus_student")
 		assert_eq(response["profile_version"], 2)
-		assert_eq(response["character_name"], "本局角色")
+		assert_eq(response["character_name"], "小林")
 
 
 func test_food_catalog_has_no_character_mood_or_preference_tags() -> void:

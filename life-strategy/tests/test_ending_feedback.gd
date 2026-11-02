@@ -93,7 +93,7 @@ func test_actual_performance_and_later_low_reserve_are_both_acknowledged() -> vo
 	assert_eq(view["kind"], "performed")
 	assert_eq(view["title"], "把歌唱完了")
 	assert_contains(view["summary"], "已参加")
-	assert_contains(view["summary"], "提前收束")
+	assert_contains(view["summary"], "提前结束")
 	assert_eq(view["next_try_id"], "rest")
 
 

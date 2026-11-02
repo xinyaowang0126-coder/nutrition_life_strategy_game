@@ -48,8 +48,8 @@ func test_cooking_preview_counts_two_people_plus_saved_portion_without_spending(
 	assert_true(page.option_buttons["seasoning:usual"].button_pressed)
 	assert_false(page.option_buttons["seasoning:light"].button_pressed)
 	assert_contains(page._sodium_note.text, "1500")
-	assert_contains(page._sodium_note.text, "总糖未知")
-	assert_contains(page._sodium_note.text, "不是整餐或全天总量")
+	assert_contains(page._sodium_note.text, "总糖未记录")
+	assert_contains(page._sodium_note.text, "食材本身的钠")
 	assert_eq(game.kitchen.condiments, condiments)
 	page.confirm_button.pressed.emit()
 	assert_eq(game.phase, "dinner_action")
@@ -245,7 +245,8 @@ func test_three_selected_foods_keep_remove_actions_and_footer_in_bounds() -> voi
 		for button: Button in stage._remove_buttons.values():
 			assert_true(paper.encloses(button.get_global_rect()))
 		for tile: SelectedFoodCardV2 in stage._selected_strip.get_children():
-			assert_true(tile.size.y >= 194.0, "the whole selected card is a large removal target")
+			assert_true(tile.size.y >= 150.0 and tile.size.x >= 100.0, "selected cards must remain comfortable removal targets")
+			assert_true(absf(tile.size.x / tile.size.y - 2.0 / 3.0) < 0.03, "selected cards must retain their portrait shape")
 			for control: Control in [tile.remove_button, tile.title_label, tile.preview]:
 				assert_true(tile.get_global_rect().encloses(control.get_global_rect()), "selected food content overlaps its card at %s" % view_size)
 		for card: HouseholdFoodCard in stage._cards_by_id.values():
@@ -299,13 +300,13 @@ func test_pending_dialog_blocks_cancel_and_focus_skips_disabled_slots() -> void:
 	assert_false(dialog.visible)
 
 
-func test_continuing_first_day_presents_safety_choice_without_a_kitchen_panel() -> void:
+func test_continuing_first_day_leaves_the_kitchen_open_with_optional_leftovers() -> void:
 	var game := _game()
 	var pantry := game.kitchen.ingredients.duplicate(true)
 	var batches := game.kitchen.batches.duplicate(true)
 	game._on_new_day_continue()
-	assert_true(game._story_dialog.visible)
-	assert_contains(game._story_dialog._title.text, "隔夜菜")
+	assert_false(is_instance_valid(game._story_dialog) and game._story_dialog.visible)
+	assert_true(game._active_stage.leftovers_button.visible)
 	assert_true(game._active_stage is HouseholdSourceStage)
 	assert_false(is_instance_valid(game._workspace))
 	assert_eq(game.phase, "breakfast_source")
@@ -319,8 +320,6 @@ func test_continuing_first_day_presents_safety_choice_without_a_kitchen_panel() 
 func test_source_navigation_only_opens_cooking_preview_after_selecting_recipes() -> void:
 	var game := _game()
 	game._on_new_day_continue()
-	game._story_dialog._buttons.get_node("back").pressed.emit()
-	game._story_dialog._buttons.get_node("close").pressed.emit()
 	var state_before := game.state.duplicate(true)
 	var pantry := game.kitchen.ingredients.duplicate(true)
 	(game._active_stage.find_child("home_kitchen", true, false) as Button).pressed.emit()
@@ -390,8 +389,6 @@ func test_home_choices_and_market_hotspots_fit_without_scrolling() -> void:
 func test_source_rules_and_tools_are_available_through_explicit_popups() -> void:
 	var game := _game()
 	game._on_new_day_continue()
-	game._story_dialog._buttons.get_node("back").pressed.emit()
-	game._story_dialog._buttons.get_node("close").pressed.emit()
 	var stage := game._active_stage as HouseholdSourceStage
 	var state_before := game.state.duplicate(true)
 	var text_count := 0
@@ -823,6 +820,113 @@ func _cancel_event() -> InputEventAction:
 	event.action = "ui_cancel"
 	event.pressed = true
 	return event
+
+
+func test_fridge_keeps_shelf_left_and_selection_right_until_one_confirmation() -> void:
+	for view_size in [Vector2i(720, 1280), Vector2i(1920, 1080)]:
+		var game := _game(view_size)
+		game._new_day_pending = false
+		game._choose_meal_source("home_fridge")
+		var stage := game._active_stage as HouseholdMealStage
+		_layout(game)
+		stage._fit_card_layout(stage._layout_revision)
+		_layout(game)
+		assert_true(stage.has_method("_open_doors"))
+		assert_true(stage.fridge_panel.get_global_rect().end.x <= stage.tray_panel.get_global_rect().position.x)
+		assert_true(stage.paper_panel.get_global_rect().encloses(stage._footer.get_global_rect()))
+		assert_true(stage.fridge_panel.get_global_rect().encloses(stage.food_scroll.get_global_rect()))
+		assert_true(stage.tray_panel.get_global_rect().encloses(stage.tray_scroll.get_global_rect()))
+		var quantity: int = game.kitchen.ingredients["milk"]
+		var balance: int = game.state["balance"]
+		game._on_food_toggled("milk")
+		_layout(game)
+		assert_eq(game.kitchen.ingredients["milk"], quantity)
+		assert_true(game.today_meal_records.is_empty())
+		game._confirm_food(["milk"])
+		assert_eq(game.kitchen.ingredients["milk"], quantity - 1)
+		assert_eq(game.state["balance"], balance)
+		assert_eq(game.today_meal_records.size(), 1)
+		game._confirm_food(["milk"])
+		assert_eq(game.today_meal_records.size(), 1)
+
+
+func test_food_card_proportions_and_complete_first_row_across_sources() -> void:
+	for view_size in [Vector2i(720, 1280), Vector2i(853, 1280), Vector2i(1920, 1080)]:
+		var game := _game(view_size)
+		game._new_day_pending = false
+		var before := game.state.duplicate(true)
+		for source in ["home_kitchen", "breakfast_shop", "community_canteen", "local_market", "home_fridge"]:
+			game.phase = "lunch_source" if source == "community_canteen" else "breakfast_source"
+			game.current_source_id = ""
+			game.selected_food_ids.clear()
+			game.hand.clear()
+			game._render_phase()
+			game._choose_meal_source(source)
+			assert_true(game._active_stage is HouseholdMealStage, source)
+			var stage := game._active_stage as HouseholdMealStage
+			_layout(game)
+			stage._fit_card_layout(stage._layout_revision)
+			_layout(game)
+			var empty_height := stage._selected_strip.size.y
+			for id in game.hand:
+				if game._can_add_food(id): game._on_food_toggled(id)
+			_layout(game)
+			stage._fit_card_layout(stage._layout_revision)
+			_layout(game)
+			assert_eq(stage._selected_strip.size.y, empty_height, "Selection must not squeeze the hand after the first choice")
+			for card: HouseholdFoodCard in stage._cards_by_id.values():
+				assert_true(absf(card.size.x / card.size.y - 2.0 / 3.0) < 0.03, "%s %s card=%s" % [view_size, source, card.size])
+				assert_true(card.size.y <= stage.food_scroll.size.y + 1, "The hand must show a complete card: %s %s card=%s rail=%s" % [view_size, source, card.size, stage.food_scroll.size])
+				assert_true(card.get_global_rect().encloses(card._status.get_global_rect()), "Unavailable reasons must remain inside the card")
+				assert_true(card._art.size.y >= card.size.y * 0.25, "Food art must not shrink to an icon")
+			for slot: SelectedFoodCardV2 in stage._selected_strip.get_children():
+				assert_true(slot.size.x <= 120, "Selected cards must not stretch across the row")
+		assert_eq(game.state, before)
+
+
+func test_household_action_and_sleep_cards_keep_the_same_portrait_frame() -> void:
+	for view_size in [Vector2i(720, 1280), Vector2i(1920, 1080)]:
+		var game := _game(view_size)
+		for phase_name in ["breakfast_action", "sleep"]:
+			game.phase = phase_name
+			game._render_phase()
+			_layout(game)
+			game._apply_stage_profile(game._active_stage)
+			_layout(game)
+			var rail: ScrollContainer = game._active_stage.action_scroll if phase_name == "breakfast_action" else game._active_stage.sleep_scroll
+			for card: CompactChoiceCardV2 in game._active_stage._cards_by_id.values():
+				assert_true(absf(card.size.x / card.size.y - 2.0 / 3.0) < 0.03, "%s %s %s" % [view_size, phase_name, card.size])
+				assert_true(card.size.y <= rail.size.y + 1, "Story card must fit the visible rail")
+				assert_true(card.get_global_rect().encloses(card.choice_cost_label.get_global_rect()), "Costs must stay on the card")
+
+
+func test_inventory_layout_ignores_a_freed_grid() -> void:
+	var removed_grid: Variant = GridContainer.new()
+	removed_grid.free()
+	HouseholdUI.fit_inventory_grid.call(removed_grid)
+	assert_false(is_instance_valid(removed_grid), "Pending layout must safely ignore a removed grid")
+
+
+func test_ingredient_tiles_stay_near_square_in_recipe_and_stock_pages() -> void:
+	for view_size in [Vector2i(720, 1280), Vector2i(1920, 1080)]:
+		var game := _game(view_size)
+		game._choose_meal_source("home_kitchen")
+		game._confirm_food(["rice_plain", "soft_tofu_greens"])
+		_layout(game)
+		var grid: GridContainer = game._workspace._ingredients_grid
+		HouseholdUI.fit_inventory_grid(grid)
+		_layout(game)
+		for tile: Control in grid.get_children():
+			assert_true(absf(tile.size.x / tile.size.y - 1.0) < 0.15, "Recipe tile %s" % tile.size)
+		game._close_workspace()
+		game._show_kitchen()
+		var stock := game._workspace as KitchenStockStage
+		stock._select_tab("ingredients")
+		_layout(game)
+		HouseholdUI.fit_inventory_grid(stock._ingredients_grid)
+		_layout(game)
+		for tile: Control in stock._ingredients_grid.get_children():
+			assert_true(absf(tile.size.x / tile.size.y - 1.0) < 0.15, "Stock tile %s" % tile.size)
 
 
 func _layout(node: Node) -> void:

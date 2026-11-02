@@ -38,9 +38,9 @@ func test_unreviewed_legacy_tags_do_not_generate_nutrition_claims() -> void:
 
 func test_partial_empty_and_all_skipped_records_are_reported_literally() -> void:
 	var empty: Array[Dictionary] = []
-	assert_contains(Ledger.summarize(empty)["observation"], "还没有确认")
+	assert_contains(Ledger.summarize(empty)["observation"], "今天还没吃饭")
 	var partial: Array[Dictionary] = [_meal([Data.get_food("apple")])]
-	assert_contains(Ledger.summarize(partial)["observation"], "已记下 1 餐")
+	assert_contains(Ledger.summarize(partial)["observation"], "吃了 1 餐")
 	assert_false(Ledger.summarize(partial)["observation"].contains("三餐都"))
 	var skipped: Array[Dictionary] = []
 	for phase in ["breakfast", "lunch", "dinner"]:
@@ -84,11 +84,11 @@ func test_card_details_keep_one_effect_heading_without_repeated_disclaimers() ->
 	(Engine.get_main_loop() as SceneTree).root.add_child(game)
 	for id in ["rice_plain", "coffee", "salad_bowl"]:
 		game._show_detail(Data.get_food(id), Rect2(0, 0, 10, 10), true, "food")
-		assert_eq(game.sticky_note.metric_heading.text, "游戏即时效果")
+		assert_eq(game.sticky_note.metric_heading.text, "本次效果")
 		assert_false(game.sticky_note.description_label.text.contains("不是营养或健康评价"))
 		assert_false(game.sticky_note.recovery_section.visible)
 	assert_false(Presenter.HELP.contains("限幅"))
-	assert_contains(Presenter.HELP, "不用于判断真实健康")
+	assert_contains(Presenter.HELP, "恢复结果会影响第二天")
 
 
 func test_nonconsecutive_preferred_meals_and_final_day_budget_have_factual_copy() -> void:

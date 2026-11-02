@@ -31,6 +31,8 @@ static func acknowledge(state: Dictionary) -> bool:
 
 
 static func review(p: Dictionary) -> Dictionary:
+	# Frozen v1 save content: keep validation stable across copy changes.
+	# EndingFeedbackCopy.household_review formats the player-facing version.
 	var counts := {"days": p["run_history"].size(), "meals": 0, "skipped": 0, "rehearsals": 0, "performances": 0, "shared": 0, "prepared_items": 0, "counter_items": 0, "reheated_items": 0, "first_correct": 0, "first_wrong": 0, "first_after_help": 0, "attempted_contexts": 0, "retries": 0, "plans": p["household_preparation"].get("plans", []).size(), "plans_used": 0, "opening_discarded": 0}
 	for day_record in p["run_history"]:
 		for meal in day_record["meals"]:

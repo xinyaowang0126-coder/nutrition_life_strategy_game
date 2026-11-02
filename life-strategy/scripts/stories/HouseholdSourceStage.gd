@@ -7,6 +7,7 @@ signal detail_requested(payload: Dictionary, anchor: Rect2, pinned: bool)
 signal detail_dismissed(id: String)
 signal notebook_requested
 signal outings_requested
+signal leftovers_requested
 
 const WIDE_SCENE := "res://assets/generated/stories/home_source/zhou-home-source-wide-v1.png"
 const PORTRAIT_SCENE := "res://assets/generated/stories/home_source/zhou-home-source-portrait-v1.png"
@@ -50,6 +51,7 @@ var _preparation_summary := ""
 var _mobile := false
 var _scene_texture: Texture2D
 var _prop_regions: Dictionary = {}
+var leftovers_button: Button
 
 
 func set_action_receipt(text: String) -> void:
@@ -97,6 +99,13 @@ func _ready() -> void:
 	add_child(prop_layer)
 	prop_layer.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	for id: String in HOME_ORDER: _build_prop(id)
+	leftovers_button = HouseholdUI.button("昨晚的菜", "OpeningLeftovers")
+	leftovers_button.tooltip_text = "查看保存记录"
+	leftovers_button.hide()
+	prop_layer.add_child(leftovers_button)
+	leftovers_button.pressed.connect(func() -> void:
+		if _can_interact(): leftovers_requested.emit()
+	)
 	footer = HBoxContainer.new()
 	footer.name = "Footer"
 	footer.add_theme_constant_override("separation", 14)
@@ -210,6 +219,11 @@ func _build_prop(id: String) -> void:
 	prop.add_child(info)
 
 
+func set_leftovers_pending(pending: bool) -> void:
+	leftovers_button.visible = pending
+	_wire_focus()
+
+
 func _apply_sources() -> void:
 	_preparation_text.text = _preparation_summary
 	preparation_note.visible = not _preparation_summary.is_empty()
@@ -246,6 +260,8 @@ func apply_entry_profile(mobile: bool) -> void:
 	_preparation_text.add_theme_font_size_override("font_size", 23 if mobile else 25)
 	_layout_preparation_note()
 	_scene_texture = load(PORTRAIT_SCENE if mobile else WIDE_SCENE) as Texture2D
+	_rect(leftovers_button, Rect2(0.02, 0.15, 0.23, 0.065) if mobile else Rect2(0.025, 0.12, 0.16, 0.065))
+	leftovers_button.add_theme_font_size_override("font_size", 22 if mobile else 24)
 	var places := MOBILE_PLACES if mobile else DESKTOP_PLACES
 	for index in range(HOME_ORDER.size()):
 		var id: String = HOME_ORDER[index]
@@ -304,6 +320,7 @@ func _wire_focus() -> void:
 		var info := prop.get_node_or_null("Info") as Button
 		if info != null: controls.append(info)
 	for button: Button in footer.get_children(): controls.append(button)
+	if leftovers_button.visible: controls.append(leftovers_button)
 	for index in range(controls.size()):
 		controls[index].focus_previous = controls[index].get_path_to(controls[posmod(index - 1, controls.size())])
 		controls[index].focus_next = controls[index].get_path_to(controls[(index + 1) % controls.size()])

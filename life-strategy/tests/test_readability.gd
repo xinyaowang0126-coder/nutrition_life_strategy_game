@@ -45,7 +45,7 @@ func test_sleep_previews_wrap_and_stay_inside_their_note() -> void:
 			assert_true(game.get_viewport().get_visible_rect().encloses(note.get_global_rect()), "event note %s min %s must stay in %s on day %d" % [note.get_global_rect(), note.get_combined_minimum_size(), logical_size, day])
 			assert_true(note.get_global_rect().encloses(stage.tomorrow_label.get_global_rect()))
 			assert_true(note.get_global_rect().encloses(stage.hint_label.get_global_rect()))
-			var preview := Events.next_day_preview(day, Data.TOTAL_DAYS)
+			var preview := game._story_preview(day)
 			if not preview.is_empty():
 				assert_contains(stage.tomorrow_label.text, String(preview["summary"]))
 

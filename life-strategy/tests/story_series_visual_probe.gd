@@ -92,12 +92,9 @@ func settle() -> void:
 
 
 func finish_household_opening(game: GameRootV2) -> void:
-	# Existing probes explicitly take the non-disposal route before testing
-	# their own feature. The learning probe captures and checks both choices.
-	if game.household_learning.get("opening_stage") == "decision":
-		await click(game._story_dialog._buttons.get_node("back"))
-	if game.household_learning.get("opening_stage") == "breakfast":
-		await click(game._story_dialog._buttons.get_node("close"))
+	check(not is_instance_valid(game._workspace), "Household opening forced a panel")
+	check(not is_instance_valid(game._story_dialog) or not game._story_dialog.visible, "Household opening forced a dialog")
+
 
 
 func source_tool(game: GameRootV2, id: String) -> void:

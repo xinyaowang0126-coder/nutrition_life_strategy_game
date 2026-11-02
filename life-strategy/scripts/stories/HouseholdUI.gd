@@ -177,6 +177,24 @@ static func ingredient_texture(id: String) -> Texture2D:
 	return crop
 
 
+static func fit_inventory_grid(grid_value: Variant) -> void:
+	if not is_instance_valid(grid_value): return
+	var grid := grid_value as GridContainer
+	if grid == null or grid.is_queued_for_deletion(): return
+	var parent := grid.get_parent() as Control
+	if parent == null or parent.size.x <= 0: return
+	var gap := grid.get_theme_constant("h_separation")
+	var columns := clampi(floori((parent.size.x + gap) / (160.0 + gap)), 1, 6)
+	var width := minf(180.0, floorf((parent.size.x - gap * (columns - 1)) / columns))
+	grid.columns = columns
+	grid.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+	for tile: Control in grid.get_children():
+		tile.size_flags_horizontal = Control.SIZE_FILL
+		tile.custom_minimum_size = Vector2(width, width)
+		for art: TextureRect in tile.find_children("*", "TextureRect", true, false):
+			art.custom_minimum_size.y = floorf(width * 0.50)
+
+
 static func ingredient_name(id: String) -> String:
 	return String(INGREDIENT_NAMES.get(id, id))
 

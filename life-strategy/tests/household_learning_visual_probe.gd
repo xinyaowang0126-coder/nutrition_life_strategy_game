@@ -28,12 +28,14 @@ func _run() -> void:
 	elif OS.get_cmdline_user_args().has("--restore-only"):
 		for name in ["decision", "breakfast"]:
 			var game := await restored(name)
-			check(game.household_learning["opening_stage"] == name, "Process restart lost " + name)
-			check(game._story_dialog.visible, "Process restart did not restore " + name)
+			check(game.household_learning["opening_stage"] == ("available" if name == "decision" else "done"), "Process restart lost " + name)
+			check((is_instance_valid(game._story_dialog) and game._story_dialog.visible) == false, "Removed breakfast dialog returned after restart")
 			check(game.kitchen.history.size() == (0 if name == "decision" else 1), "Process restart repeated disposal")
 			await save("restart-" + name)
 			game.queue_free()
 			await process_frame
+	elif OS.get_cmdline_user_args().has("--opening-only"):
+		await outside_route()
 	else:
 		await outside_route()
 		await cooking_route(false)
@@ -62,8 +64,10 @@ func fresh(id: String = "choir_week") -> GameRootV2:
 	return game
 
 
-func snapshot(game: GameRootV2, name: String) -> void:
-	var encoded := Codec.encode(game.capture_game_save())
+func snapshot(game: GameRootV2, name: String, legacy_stage: String = "") -> void:
+	var envelope := game.capture_game_save()
+	if not legacy_stage.is_empty(): envelope["payload"]["household_learning"]["opening_stage"] = legacy_stage
+	var encoded := Codec.encode(envelope)
 	check(encoded["ok"], "Save could not encode: " + name)
 	if encoded["ok"]:
 		var file := FileAccess.open(output.path_join(name + ".json"), FileAccess.WRITE)
@@ -85,13 +89,18 @@ func restored(name: String) -> GameRootV2:
 func outside_route() -> void:
 	var game := await fresh()
 	await click(game.new_day_popup.continue_button)
+	check(not is_instance_valid(game._workspace), "Opening forced a panel")
+	await save("00-home-with-leftovers")
+	await click(game._active_stage.leftovers_button)
 	await save("01-opening-safety")
 	snapshot(game, "decision")
 	var baseline := game.state.duplicate(true)
 	await key(KEY_ESCAPE)
 	check(game.household_learning["opening_choice"] == "leave" and game.kitchen.batches[0]["quantity"] == 1, "Escape did not preserve the unhandled portion")
-	await save("02-breakfast-options")
-	await click(game._story_dialog._buttons.get_node("breakfast_shop"))
+	check(game.household_learning["opening_stage"] == "done" and not is_instance_valid(game._workspace), "Opening did not return directly home")
+	await save("02-home-after-opening")
+	await click(game._active_stage.find_child("go_out", true, false))
+	await click(game._active_stage.find_child("breakfast_shop", true, false))
 	check(game.state == baseline and game.today_meal_records.is_empty(), "Navigation spent resources")
 	await save("03-outside-menu")
 	var plate := await pick_plate(game)
@@ -108,11 +117,13 @@ func outside_route() -> void:
 func cooking_route(batch: bool) -> void:
 	var game := await fresh()
 	await click(game.new_day_popup.continue_button)
-	await click(game._story_dialog._buttons.get_node("discard"))
+	await click(game._active_stage.leftovers_button)
+	await click(game._workspace.find_child("DiscardLeftovers", true, false))
+	check(game.household_learning["opening_stage"] == "done" and not is_instance_valid(game._workspace), "Disposal opened another breakfast dialog")
 	if batch:
-		snapshot(game, "breakfast")
-		await save("07-discarded-breakfast-options")
-	await click(game._story_dialog._buttons.get_node("home_kitchen"))
+		snapshot(game, "breakfast", "breakfast")
+		await save("07-home-after-discard")
+	await click(game._active_stage.find_child("home_kitchen", true, false))
 	var plate := await pick_plate(game)
 	await click(game._active_stage._get_confirm_button())
 	var pantry := game.kitchen.ingredients.duplicate(true)

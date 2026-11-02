@@ -83,6 +83,10 @@ $requiredPaths = @(
     "scenes/game_v2/stages/MealSourceStage.tscn", "scripts/GameData.gd",
     "scripts/systems/MealResolver.gd", "scripts/systems/NutritionLedger.gd",
     "scripts/systems/WeeklyEventService.gd", "scripts/systems/DayCarryoverService.gd",
+    "scripts/stories/CampusWeek.gd", "scripts/stories/CampusMealLearning.gd", "scripts/stories/CampusPresenter.gd",
+    "scripts/stories/CampusStudyJournal.gd",
+    "scripts/stories/CampusResourcePlan.gd", "scripts/stories/CampusResourcePresenter.gd",
+    "data/stories/campus_menu_facts.xml",
     "scripts/systems/RecoveryStateService.gd", "scripts/systems/RecoveryRules.gd",
     "scripts/systems/RecoveryGameplayService.gd", "scripts/systems/GameplayBalanceRules.gd",
     "scripts/systems/EndingFeedbackBuilder.gd", "scripts/systems/ActionFeedbackTrace.gd",
@@ -98,6 +102,7 @@ $requiredPaths = @(
     "scripts/stories/CookingPlanStage.gd", "scripts/stories/HouseholdWorktop.gd", "scripts/stories/KitchenStockStage.gd",
     "scripts/stories/HouseholdMarketStage.gd", "scripts/stories/HouseholdLocations.gd",
     "scripts/stories/PropTint.gdshader", "scenes/stories/HouseholdMealStage.tscn",
+    "scripts/stories/HouseholdFridgeStage.gd", "scenes/stories/HouseholdFridgeStage.tscn",
     "assets/generated/stories/props/regions.json",
     "assets/generated/stories/ingredients/ingredient_atlas.png", "assets/generated/stories/ingredients/ingredient_regions.json",
     "assets/fonts/HouseholdBody.tres", "assets/fonts/HouseholdSansSC-Medium.ttf", "assets/fonts/HouseholdSans-OFL.txt",
@@ -149,6 +154,18 @@ try {
     $missingBalance = $requiredPaths | Where-Object { $_ -ne "scripts/systems/GameplayBalanceRules.gd" }
     [IO.File]::WriteAllBytes($packPath, (New-TestPack -Version 4 -Paths $missingBalance))
     Expect-Rejected "Balance runtime must be packaged" { Assert-CleanWebPack -PackPath $packPath } '*missing required production content: scripts/systems/GameplayBalanceRules*'
+    foreach ($campusDependency in @("scripts/stories/CampusWeek.gd", "scripts/stories/CampusMealLearning.gd", "scripts/stories/CampusPresenter.gd", "scripts/stories/CampusStudyJournal.gd", "scripts/stories/CampusResourcePlan.gd", "scripts/stories/CampusResourcePresenter.gd", "data/stories/campus_menu_facts.xml")) {
+        $missingCampus = $requiredPaths | Where-Object { $_ -ne $campusDependency }
+        [IO.File]::WriteAllBytes($packPath, (New-TestPack -Version 4 -Paths $missingCampus))
+        $campusPrefix = $campusDependency -replace '\.gd$', ''
+        Expect-Rejected ("Campus learning runtime must be packaged: " + $campusDependency) { Assert-CleanWebPack -PackPath $packPath } ("*missing required production content: " + $campusPrefix + "*")
+    }
+    foreach ($fridgeDependency in @("scripts/stories/HouseholdFridgeStage.gd", "scenes/stories/HouseholdFridgeStage.tscn")) {
+        $missingFridge = $requiredPaths | Where-Object { $_ -ne $fridgeDependency }
+        [IO.File]::WriteAllBytes($packPath, (New-TestPack -Version 4 -Paths $missingFridge))
+        $fridgePrefix = $fridgeDependency -replace '\.(gd|tscn)$', ''
+        Expect-Rejected ("Fridge dependency must be packaged: " + $fridgeDependency) { Assert-CleanWebPack -PackPath $packPath } ("*missing required production content: " + $fridgePrefix + "*")
+    }
     foreach ($endingDependency in @("scenes/game_v2/components/EndingScreen.tscn", "scripts/systems/EndingFeedbackBuilder.gd", "scripts/systems/ActionFeedbackTrace.gd", "scripts/ui_v2/EndingFeedbackCopy.gd", "scripts/ui_v2/EndingScreen.gd", "assets/generated/endings/feedback/student_shortfall-v1.png", "assets/generated/endings/feedback/zhou_unready-v1.png", "assets/generated/endings/feedback/zhou_other_choice-v1.png")) {
         $missingEnding = $requiredPaths | Where-Object { $_ -ne $endingDependency }
         [IO.File]::WriteAllBytes($packPath, (New-TestPack -Version 4 -Paths $missingEnding))

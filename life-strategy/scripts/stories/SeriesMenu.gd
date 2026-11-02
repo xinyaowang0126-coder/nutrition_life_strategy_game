@@ -164,9 +164,9 @@ func _build_title() -> void:
 	_title_copy.add_child(HouseholdUI.label("营养科普 · 生活策略", 25, HouseholdUI.GREEN))
 	_title = HouseholdUI.label("好好吃饭", 108, HouseholdUI.INK, true)
 	_title_copy.add_child(_title)
-	_tagline = HouseholdUI.label("把自己的饭，也好好安排。", 39, HouseholdUI.ORANGE, true)
+	_tagline = HouseholdUI.label("这一周，吃什么？", 39, HouseholdUI.ORANGE, true)
 	_title_copy.add_child(_tagline)
-	_subtitle = HouseholdUI.label("选一段生活，安排三餐、日常任务和休息。", 29)
+	_subtitle = HouseholdUI.label("选个人物，看看这一周要忙什么。", 29)
 	_title_copy.add_child(_subtitle)
 	_title_start = HouseholdUI.button("开始游戏", "StartGame", true)
 	_title_start.pressed.connect(_show_characters)
@@ -191,7 +191,7 @@ func _build_title() -> void:
 	var scenes := HBoxContainer.new()
 	scenes.add_theme_constant_override("separation", 16)
 	stack.add_child(scenes)
-	_scene_caption = HouseholdUI.label("生活的片刻", 23, HouseholdUI.MUTED)
+	_scene_caption = HouseholdUI.label("人物场景", 23, HouseholdUI.MUTED)
 	scenes.add_child(_scene_caption)
 	var previous := HouseholdUI.button("上一幅", "PreviousScene")
 	previous.custom_minimum_size = Vector2(132, 82)
@@ -252,7 +252,7 @@ func _build_selection() -> void:
 	var mark := HouseholdUI.image(ICON, 58)
 	mark.custom_minimum_size.x = 58
 	header.add_child(mark)
-	header.add_child(HouseholdUI.label("这周，过谁的生活？", 42, HouseholdUI.INK, true))
+	header.add_child(HouseholdUI.label("选择人物", 42, HouseholdUI.INK, true))
 	_roster_hint = HouseholdUI.label("每个人，都有自己的生活安排。", 25, HouseholdUI.MUTED)
 	stack.add_child(_roster_hint)
 	_body_grid = GridContainer.new()
@@ -329,7 +329,7 @@ func _build_selection() -> void:
 	var tools := HBoxContainer.new()
 	tools.add_theme_constant_override("separation", 14)
 	_details_body.add_child(tools)
-	_more_info = HouseholdUI.button("了解这段生活", "StoryInfo")
+	_more_info = HouseholdUI.button("故事介绍", "StoryInfo")
 	_more_info.pressed.connect(func() -> void:
 		var story := _current_story()
 		if not story.is_empty(): _intro(story)
@@ -449,13 +449,13 @@ func _refresh_details() -> void:
 	_goal.text = story["goal"]
 	_conditions.text = "一局7天 · " + story["conditions"]
 	if _mobile: _conditions.text = "一局7天 · 开局预算 ¥%d" % Catalog.initial_stats(story)["balance"]
-	_learning.text = "在这段生活里练习\n" + story["learning"]
+	_learning.text = "饮食话题\n" + story["learning"]
 	_story_picker.clear()
 	for item in group["stories"]: _story_picker.add_item(item["title"])
 	_story_picker.select(group["stories"].find(story))
 	_story_picker.visible = group["stories"].size() > 1
 	var saved: Dictionary = _save_store.read_save(_selected)
-	_saved_detail.text = SaveCodec.summary(saved["save"]) if saved["ok"] else ("这段生活还没有自动进度。" if saved.get("error") in ["empty_slot", "storage_unavailable"] else saved.get("message", "进度暂不可用。"))
+	_saved_detail.text = SaveCodec.summary(saved["save"]) if saved["ok"] else ("还没有存档。" if saved.get("error") in ["empty_slot", "storage_unavailable"] else saved.get("message", "进度暂不可用。"))
 	if _mobile:
 		_saved_detail.visible = saved["ok"]
 		if saved["ok"]: _saved_detail.text = "已有进度 · 第%d天" % saved["save"]["payload"]["day"]
@@ -506,7 +506,7 @@ func _show_characters() -> void:
 	_base_background.color = Color("#efe5d0")
 	_selection_environment.show()
 	_selection_veil.show()
-	_roster_hint.text = "%d位人物 · 每段生活的进度分别保存" % _groups.size()
+	_roster_hint.text = "%d位人物 · 进度分别保存" % _groups.size()
 	_refresh_details()
 	_update_strips()
 	if _strips.has(_selected_character): _strips[_selected_character].call_deferred("grab_focus")
@@ -564,7 +564,7 @@ func _configure_layout(mobile: bool) -> void:
 	art.custom_minimum_size = Vector2.ZERO if _mobile else Vector2(690, 570)
 	_title_stack.alignment = BoxContainer.ALIGNMENT_END if _mobile else BoxContainer.ALIGNMENT_CENTER
 	_title_copy.add_theme_constant_override("separation", 12 if _mobile else 20)
-	_subtitle.text = "安排三餐，也安排自己的一周。" if _mobile else "选一段生活，安排三餐、日常任务和休息。"
+	_subtitle.text = "选个人物开始游戏。" if _mobile else "选个人物，看看这一周要忙什么。"
 	_backdrop.set_mobile(_mobile)
 	var gradient := Gradient.new()
 	gradient.offsets = PackedFloat32Array([0, 0.36, 0.56, 1]) if _mobile else PackedFloat32Array([0, 0.38, 0.61, 1])
@@ -620,7 +620,7 @@ func _load_saved_cards() -> void:
 	if not _latest_save.is_empty():
 		var story := Catalog.get_story(_latest_save["story_id"])
 		_title_continue.text = "继续上次 · %s · 第%d天" % [story.get("character_short_name", story["character_name"]), _latest_save["payload"]["day"]]
-	_title_hint.text = "每段生活的进度分别保存。" if ready else "本次可游玩，建议导出文件保留进度。"
+	_title_hint.text = "两位人物分别存档。" if ready else "本次可游玩，建议导出文件保留进度。"
 	_refresh_details()
 
 
@@ -645,7 +645,7 @@ func _intro(story: Dictionary, can_start: bool = false) -> void:
 	var choices: Array = []
 	if can_start: choices.append({"id": "start", "text": "开始这一周"})
 	choices.append({"id": "back", "text": "返回选人"})
-	_present(String(story["title"]), "本周目标\n" + String(story["goal"]) + "\n\n生活条件\n" + String(story["conditions"]) + "\n\n本篇科普\n" + String(story["learning"]) + "\n\n一局七天；查看和预览不扣钱，确认后才结算。", choices, func(choice: String) -> void:
+	_present(String(story["title"]), "本周目标\n" + String(story["goal"]) + "\n\n生活条件\n" + String(story["conditions"]) + "\n\n本篇科普\n" + String(story["learning"]) + "\n\n一局七天。选好后确认，才会扣钱或扣食材。", choices, func(choice: String) -> void:
 		if choice == "start": _start_week(_selected)
 	)
 

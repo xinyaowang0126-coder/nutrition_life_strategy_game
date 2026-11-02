@@ -16,7 +16,7 @@ func test_new_run_has_no_fictional_prior_sleep_or_recovery_bonus() -> void:
 	var view := Presenter.present(Recovery.new_run())
 	assert_true(view["available"])
 	assert_eq(view["title"], "起步状态")
-	assert_contains(view["summary"], "还没有昨夜")
+	assert_contains(view["summary"], "第一天")
 	assert_false(view["effect_text"].contains("+3"))
 	assert_false(view["detail_text"].contains("精力 0"))
 
@@ -28,8 +28,8 @@ func test_four_conditions_have_factual_reasons_and_frozen_effects() -> void:
 		var view := Presenter.present(record)
 		assert_true(view["available"])
 		assert_eq(view["title"], titles[condition])
-		assert_contains(view["detail_text"], "游戏规则")
-		assert_contains(view["detail_text"], "判断依据")
+		assert_contains(view["detail_text"], "每天结束时结算恢复")
+		assert_contains(view["detail_text"], "原因")
 		assert_contains(view["effect_text"], "今天")
 		for internal_id in record["reason_ids"]:
 			assert_false(view["detail_text"].contains(internal_id))
@@ -37,14 +37,14 @@ func test_four_conditions_have_factual_reasons_and_frozen_effects() -> void:
 
 func test_phone_is_a_fact_without_a_guaranteed_penalty() -> void:
 	var view := Presenter.present(_record("steady"))
-	assert_contains(view["summary"], "恢复仍看实际精力")
+	assert_contains(view["summary"], "恢复按整天的精力")
 	assert_contains(view["effect_text"], "复习收益不变")
 
 
 func test_early_sleep_does_not_override_severe_end_state() -> void:
 	var view := Presenter.present(_settle("sleep_early", {"energy": 0, "stress": 95}))
 	assert_eq(view["title"], "需要缓缓")
-	assert_contains(view["summary"], "虽然早点睡了")
+	assert_contains(view["summary"], "早点睡了")
 
 
 func test_trace_separates_sleep_other_effects_and_clamp() -> void:
@@ -52,7 +52,7 @@ func test_trace_separates_sleep_other_effects_and_clamp() -> void:
 	var view := Presenter.present(record, "settled")
 	assert_contains(view["detail_text"], "精力 95 → 117 → 100")
 	assert_contains(view["detail_text"], "高饱腹日终效果：精力 -3")
-	assert_contains(view["detail_text"], "这次调整：精力 -14")
+	assert_contains(view["detail_text"], "超出部分调整：精力 -14")
 	assert_contains(view["effect_text"], "明天每次复习收益 +3")
 
 
@@ -147,7 +147,7 @@ func test_state_detail_shows_absolute_values_and_card_effects_show_deltas() -> v
 	assert_eq(note.energy_metric.text, "精力 50")
 	note.setup({"name": "行动", "energy": 5}, "action")
 	assert_eq(note.energy_metric.text, "精力 +5")
-	assert_eq(note.metric_heading.text, "游戏即时效果")
+	assert_eq(note.metric_heading.text, "本次效果")
 	assert_false(note.description_label.text.contains("健康评价"))
 
 
@@ -155,7 +155,7 @@ func test_sleep_details_do_not_predict_a_condition_before_settlement() -> void:
 	var game := _game()
 	game._show_detail(Data.get_sleep_option("sleep_early"), Rect2(0, 0, 10, 10), true, "sleep")
 	assert_false(game.sticky_note.recovery_section.visible)
-	assert_contains(game.sticky_note.description_label.text, "收工后")
+	assert_contains(game.sticky_note.description_label.text, "一天结束后")
 	assert_false(game.sticky_note.description_label.text.contains("必定"))
 
 

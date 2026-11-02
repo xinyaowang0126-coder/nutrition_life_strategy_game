@@ -3,12 +3,11 @@ name: Deploy playable Web build
 on:
   push:
     branches: [main]
+    # Deploy when the published site changes; source and tooling may target a newer build.
     paths:
       - 'Play/**'
       - 'index.html'
       - '.nojekyll'
-      - '.github/workflows/pages.yml'
-      - 'tools/verify_project.ps1'
   workflow_dispatch:
 
 permissions:

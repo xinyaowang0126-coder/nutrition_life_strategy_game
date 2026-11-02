@@ -251,6 +251,13 @@ function Assert-CleanWebPack {
         "scripts/systems/MealResolver",
         "scripts/systems/NutritionLedger",
         "scripts/systems/WeeklyEventService",
+        "scripts/stories/CampusWeek",
+        "scripts/stories/CampusMealLearning",
+        "scripts/stories/CampusPresenter",
+        "scripts/stories/CampusStudyJournal",
+        "scripts/stories/CampusResourcePlan",
+        "scripts/stories/CampusResourcePresenter",
+        "data/stories/campus_menu_facts.xml",
         "scripts/systems/DayCarryoverService",
         "scripts/systems/RecoveryStateService",
         "scripts/systems/RecoveryRules",
@@ -283,6 +290,8 @@ function Assert-CleanWebPack {
         "scripts/stories/HouseholdLocations"
         "scripts/stories/PropTint"
         "scenes/stories/HouseholdMealStage"
+        "scenes/stories/HouseholdFridgeStage"
+        "scripts/stories/HouseholdFridgeStage"
         "assets/generated/stories/ingredients/ingredient_atlas"
         "assets/generated/stories/ingredients/ingredient_regions.json"
         "assets/generated/stories/props/regions.json"

@@ -11,10 +11,11 @@ var _title: Label
 var _note: Label
 var _receipt: Label
 var _confirm: Button
-var _footer: HBoxContainer
+var _footer: Container
 var _selected_strip: GridContainer
 var _remove_buttons: Dictionary = {}
 var learning_button: Button
+var _layout_revision := 0
 
 
 func _ready() -> void:
@@ -24,7 +25,7 @@ func _ready() -> void:
 	add_child(paper_panel)
 	paper_panel.add_theme_stylebox_override("panel", HouseholdUI.paper())
 	var stack := VBoxContainer.new()
-	stack.add_theme_constant_override("separation", 14)
+	stack.add_theme_constant_override("separation", 8)
 	paper_panel.add_child(stack)
 	_title = HouseholdUI.label("", 36, HouseholdUI.INK, true)
 	stack.add_child(_title)
@@ -37,19 +38,22 @@ func _ready() -> void:
 	stack.add_child(food_scroll)
 	_grid = GridContainer.new()
 	_grid.columns = 3
-	_grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_grid.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
 	_grid.add_theme_constant_override("h_separation", 12)
 	_grid.add_theme_constant_override("v_separation", 12)
 	food_scroll.add_child(_grid)
+	food_scroll.resized.connect(_queue_card_layout)
 	var selected_title := HBoxContainer.new()
 	stack.add_child(selected_title)
 	selected_title.add_child(HouseholdUI.label("本餐卡牌", 25, HouseholdUI.INK, true))
 	var stock := HouseholdUI.button("冰箱与存粮", "Kitchen")
 	stock.custom_minimum_size.y = 42
 	stock.add_theme_font_size_override("font_size", 19)
+	stock.size_flags_horizontal = Control.SIZE_SHRINK_END
 	stock.pressed.connect(func() -> void: kitchen_requested.emit())
 	selected_title.add_child(stock)
 	_selected_strip = GridContainer.new()
+	_selected_strip.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
 	_selected_strip.add_theme_constant_override("h_separation", 10)
 	_selected_strip.add_theme_constant_override("v_separation", 8)
 	stack.add_child(_selected_strip)
@@ -92,6 +96,7 @@ func _populate_cards() -> void:
 			food["batch_note"] = String((_options.get("batch_notes", {}) as Dictionary).get(food["id"], "未开封／现有存粮"))
 		_foods_by_id[food["id"]] = food
 	super._populate_cards()
+	_queue_card_layout()
 
 
 func _create_card() -> Variant:
@@ -139,9 +144,10 @@ func _update_scene_summary() -> void:
 	for index in range(_max_selected):
 		var slot := SELECTED_CARD_SCENE.instantiate() as SelectedFoodCardV2
 		slot.name = "SelectedSlot%d" % (index + 1)
-		slot.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		slot.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
 		_selected_strip.add_child(slot)
-		slot.set_card_size(Vector2(0, _selection_card_height()), _layout_mobile_mode)
+		slot.set_compact_preview(true)
+		slot.set_card_size(Vector2(112, _selection_card_height()), _layout_mobile_mode)
 		if index < _selected_ids.size():
 			var id := _selected_ids[index]
 			var food: Dictionary = _foods_by_id[id]
@@ -180,7 +186,23 @@ func _focus_after_removal(next_id: String, removed_id: String) -> void:
 
 
 func _selection_card_height() -> float:
-	return 64.0 if _selected_ids.is_empty() else (194.0 if _layout_mobile_mode else 212.0)
+	return 168.0
+
+
+func _queue_card_layout() -> void:
+	_layout_revision += 1
+	_fit_card_layout.call_deferred(_layout_revision)
+
+
+func _fit_card_layout(revision: int) -> void:
+	if revision != _layout_revision or not is_inside_tree() or is_queued_for_deletion(): return
+	var available := food_scroll.size.x - food_scroll.get_v_scroll_bar().get_combined_minimum_size().x
+	if available <= 0: return
+	var preferred := 190.0 if _layout_mobile_mode else 220.0
+	var columns := clampi(floori((available + 12.0) / (preferred + 12.0)), 1, 2 if _layout_mobile_mode else 6)
+	var width := minf(260.0 if _layout_mobile_mode else 220.0, floorf((available - (columns - 1) * 12.0) / columns))
+	_grid.columns = columns
+	for card: HouseholdFoodCard in _cards_by_id.values(): card.apply_card_layout(width)
 
 
 func apply_selection_layout(mobile: bool) -> void:
@@ -196,13 +218,13 @@ func apply_selection_layout(mobile: bool) -> void:
 	paper_panel.offset_bottom = 0
 	paper_panel.add_theme_stylebox_override("panel", HouseholdUI.paper(HouseholdUI.PAPER, 18 if mobile else 26))
 	_title.add_theme_font_size_override("font_size", 31 if mobile else 38)
-	_grid.columns = 2 if mobile else 3
 	_selected_strip.columns = _max_selected
 	for slot: SelectedFoodCardV2 in _selected_strip.get_children():
-		slot.set_card_size(Vector2(0, _selection_card_height()), mobile)
+		slot.set_card_size(Vector2(112, _selection_card_height()), mobile)
 	for button in _footer.get_children():
 		(button as Button).add_theme_font_size_override("font_size", 19 if mobile else 24)
 		(button as Button).custom_minimum_size.y = 62
+	_queue_card_layout()
 
 
 func get_selection_layout_rects() -> Dictionary:

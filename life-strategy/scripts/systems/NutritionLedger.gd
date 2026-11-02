@@ -22,18 +22,18 @@ static func summarize(records: Array[Dictionary]) -> Dictionary:
 		"observation": _observation(day),
 		"action": "",
 		"detail_text": _detail_text(day, view["notes"]),
-		"basis": "这里只记录已确认的选餐。成分与份量尚未核对，暂不作营养评价。",
+		"basis": "配料和份量尚未核对。",
 	}
 
 
 static func _observation(day: Dictionary) -> String:
 	if day["unknown"] > 0 or day["unplaced"] > 0:
-		return "已记下 %d 餐，%d 餐没吃；另有记录未记清。" % [day["eaten"], day["skipped"]]
+		return "吃了 %d 餐，跳过 %d 餐；另有餐次信息不全。" % [day["eaten"], day["skipped"]]
 	if day["skipped"] > 0:
 		return "今天" + String(day["summary"])
 	if day["eaten"] == 0:
-		return "还没有确认的餐次。"
-	return "今天三顿都吃了。" if day["eaten"] == 3 else "已记下 %d 餐。" % day["eaten"]
+		return "今天还没吃饭。"
+	return "今天三顿都吃了。" if day["eaten"] == 3 else "吃了 %d 餐。" % day["eaten"]
 
 
 static func _detail_text(day: Dictionary, notes: Array) -> String:

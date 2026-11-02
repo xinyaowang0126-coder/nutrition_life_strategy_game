@@ -4,7 +4,7 @@
     {
       "id": "student-meal",
       "character_id": "campus_student",
-      "title": "学生 · 午后的一餐",
+      "title": "小林 · 午后的一餐",
       "image": "res://assets/generated/title_life/student-meal-v1.png",
       "mobile_focus_x": 0.73,
       "mobile_focus_y": 0.5,
@@ -22,7 +22,7 @@
     {
       "id": "student-campus",
       "character_id": "campus_student",
-      "title": "学生 · 校园路上",
+      "title": "小林 · 校园路上",
       "image": "res://assets/generated/title_life/student-campus-v1.png",
       "mobile_focus_x": 0.67,
       "mobile_focus_y": 0.5,
@@ -40,7 +40,7 @@
     {
       "id": "student-night",
       "character_id": "campus_student",
-      "title": "学生 · 夜间的书桌",
+      "title": "小林 · 夜间的书桌",
       "image": "res://assets/generated/title_life/student-night-v1.png",
       "mobile_focus_x": 0.74,
       "mobile_focus_y": 0.5,

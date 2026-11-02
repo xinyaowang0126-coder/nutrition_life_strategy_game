@@ -83,7 +83,7 @@ func test_records_without_meal_phases_remain_visible_as_unplaced() -> void:
 	assert_eq(view["metrics"]["eaten_meals"], 1)
 	assert_eq(view["metrics"]["unplaced_records"], 2)
 	assert_contains(view["detail_text"], "2 条旧记录没标餐次")
-	assert_contains(view["observation"], "未记清")
+	assert_contains(view["observation"], "信息不全")
 
 
 func test_details_use_frozen_names_sources_and_cash_or_stock_facts() -> void:

@@ -76,9 +76,9 @@ func _apply_setup() -> void:
 		card.detail_requested.connect(_forward_detail)
 		card.detail_dismissed.connect(_forward_detail_dismissed)
 	prompt_label.text = String(_options.get("prompt", "夜深了，几点睡？"))
-	sub_prompt_label.text = String(_options.get("sub_prompt", "明天的状态，从今晚开始。"))
+	sub_prompt_label.text = String(_options.get("sub_prompt", "选一项睡前安排。"))
 	tomorrow_label.text = String(_options.get("tomorrow_text", "明早还有安排"))
-	hint_label.text = String(_options.get("hint", "点小圆标看清代价，再做决定。"))
+	hint_label.text = String(_options.get("hint", "点问号查看效果。"))
 
 
 func _on_sleep_pressed(sleep_id: String) -> void:

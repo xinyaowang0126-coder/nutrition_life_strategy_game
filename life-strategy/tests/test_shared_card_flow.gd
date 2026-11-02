@@ -112,6 +112,8 @@ func test_both_stories_hide_and_clear_old_toasts_during_summary_and_ending() -> 
 		assert_false(game.toast_anchor.visible)
 		assert_true(game.toast_feed._active.is_empty())
 		game._on_summary_advanced()
+		assert_false(is_instance_valid(game._story_dialog) and game._story_dialog.visible)
+		assert_true(game.campus_week.get("active", {}).is_empty())
 		assert_true(game.new_day_popup.visible)
 		assert_false(game.toast_anchor.visible)
 		game.new_day_popup.continue_button.pressed.emit()

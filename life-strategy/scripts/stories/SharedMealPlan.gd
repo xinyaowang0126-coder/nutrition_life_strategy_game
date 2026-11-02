@@ -44,8 +44,8 @@ func finish_day(day: int) -> void:
 
 func summary() -> String:
 	if plan.get("status") == "planned":
-		return "晚饭约好了：%s和老陈见。接下来准备晚饭。" % ("在家里" if plan["venue"] == "home" else "在家常小馆")
+		return "晚饭约好了，%s和老陈吃。" % ("在家里" if plan["venue"] == "home" else "在家常小馆")
 	for entry in history:
 		if entry.get("kind") == "shared_meal":
 			return "第%d天和老陈一起吃了晚饭。" % int(entry["day"])
-	return "这周还没有共同进餐记录。"
+	return "这周还没和老陈一起吃饭。"

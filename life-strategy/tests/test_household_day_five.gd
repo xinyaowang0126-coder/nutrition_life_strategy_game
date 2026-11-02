@@ -360,7 +360,7 @@ func test_record_page_can_review_the_frozen_personal_response() -> void:
 	game._show_recipe_records()
 	var found := false
 	for label: Label in game._workspace.find_children("*", "Label", true, false):
-		if label.text.contains("我吃着顺口"): found = true
+		if label.text.contains("吃着顺口"): found = true
 	assert_true(found)
 	assert_eq(game.household_day_five["acknowledged"], ["breakfast"])
 

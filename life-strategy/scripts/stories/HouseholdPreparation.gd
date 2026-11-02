@@ -106,6 +106,21 @@ static func notice(state: Dictionary, day: int, meal: String) -> String:
 	return ""
 
 
+static func result_text(result: Dictionary) -> String:
+	# The saved result keeps its v1 text for validation; the UI uses this copy.
+	match result.get("status", ""):
+		"used", "part_used":
+			var text := "这餐取用了留好的%d样熟食，并彻底再热。" % result["used_ids"].size()
+			var left: int = result["eligible_ids"].size() - result["used_ids"].size()
+			if left > 0: text += "还有%d样没用。" % left
+			return text
+		"skipped": return "这餐没吃。"
+		"stock_instead": return "原先打算另外安排，这餐改从冰箱取用。"
+		"arranged": return "这餐另外安排了吃的。"
+		"not_prepared": return "原先想吃留存的熟食，但家里没有备好。"
+	return "这餐没用上原先留的熟食。"
+
+
 static func recap(state: Dictionary) -> Dictionary:
 	var lines: Array[String] = []
 	for meal in MEALS:
@@ -113,8 +128,8 @@ static func recap(state: Dictionary) -> Dictionary:
 		if row.is_empty(): continue
 		var next := target(meal)
 		var label := "第%d天%s" % [next["day"], NAMES[next["meal"]]]
-		lines.append("%s：%s" % [label, row["result"]["text"] if not row["result"].is_empty() else ("计划先看留存，还没有实际取用记录。" if row["choice"] == "stock" else "计划到时另安排，还没有实际进餐记录。")])
-	return {"text": "\n".join(lines) if not lines.is_empty() else "没有记下下一餐计划，备餐与取用仍按实际记录保留。", "plans": state["plans"].duplicate(true)}
+		lines.append("%s：%s" % [label, result_text(row["result"]) if not row["result"].is_empty() else ("打算吃留存的熟食，还没取用。" if row["choice"] == "stock" else "打算到时再选，还没吃这一餐。")])
+	return {"text": "\n".join(lines) if not lines.is_empty() else "还没定下一餐吃什么。", "plans": state["plans"].duplicate(true)}
 
 
 static func records_for(p: Dictionary) -> Array:

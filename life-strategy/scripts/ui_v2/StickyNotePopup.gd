@@ -153,14 +153,14 @@ func _apply_payload() -> void:
 		_set_metric(mood_metric, "心情", "mood")
 	_set_metric(stress_metric, "压力", "stress")
 	_set_metric(study_metric, String(_payload.get("goal_label", "复习")), "study", "study_progress")
-	metric_heading.text = "当前游戏数值" if _mode == "state" else "游戏即时效果"
+	metric_heading.text = "当前数值" if _mode == "state" else "本次效果"
 	metric_heading.visible = satiety_metric.visible or energy_metric.visible or mood_metric.visible or stress_metric.visible or study_metric.visible
 	var recovery: Dictionary = _payload.get("recovery", {})
 	recovery_text.text = String(recovery.get("detail_text", ""))
 	recovery_section.visible = not recovery_text.text.is_empty()
 	recovery_section.scroll_vertical = 0
 	if _mode == "sleep":
-		description_label.text += "\n今晚的恢复，收工后再看精力、压力和今天的安排。"
+		description_label.text += "\n一天结束后结算恢复，结果会在日结中显示。"
 		description_label.visible = true
 	_apply_food_preference()
 
@@ -191,13 +191,13 @@ func _apply_food_preference() -> void:
 		preference_reaction.text = "口味未设置"
 		return
 	var value := int(preference.get("mood_delta", 0))
-	var reaction := "本局角色没有特别偏好"
+	var reaction := "口味一般"
 	if value < 0:
-		reaction = "不太合本局角色的口味"
+		reaction = "不太喜欢"
 	elif bool(preference.get("comfort", false)):
-		reaction = "本局角色偏爱这一口"
+		reaction = "特别喜欢"
 	elif value > 0:
-		reaction = "合本局角色的口味"
+		reaction = "合口味"
 	preference_reaction.text = "%s · 心情 %s" % [reaction, _delta(value)]
 
 

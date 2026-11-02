@@ -6,7 +6,7 @@ const OPENING_BATCH := "before_week_greens"
 
 
 static func initial_state() -> Dictionary:
-	return {"version": 1, "opening_stage": "pending", "opening_choice": ""}
+	return {"version": 1, "opening_stage": "available", "opening_choice": ""}
 
 
 static func legacy_state() -> Dictionary:
@@ -18,7 +18,7 @@ static func valid(value: Variant, household: bool) -> bool:
 	if not household: return value.is_empty()
 	if value.size() != 3 or typeof(value.get("version")) != TYPE_INT or value["version"] != 1: return false
 	var stage: Variant = value.get("opening_stage")
-	if stage not in ["pending", "decision", "breakfast", "done", "legacy"]: return false
+	if stage not in ["available", "pending", "decision", "breakfast", "done", "legacy"]: return false
 	var choice: Variant = value.get("opening_choice")
 	return choice in ["discard", "leave"] if stage in ["breakfast", "done"] else choice == ""
 
@@ -31,7 +31,7 @@ static func opening_batch(stock: KitchenStock) -> Dictionary:
 
 static func opening_body(stock: KitchenStock) -> String:
 	var batch := opening_batch(stock)
-	return "周阿姨：‘这盘菜闻着还行，今天还能吃吗？’\n\n保存记录\n%s\n\n这份菜保存不当，不供食用。闻着正常也不能证明安全，再烧开不能保证消除危害。\n先决定怎么处置，再给自己安排另一顿早餐。" % String(batch.get("note", "这份熟食的保存记录需要核对。"))
+	return "%s\n\n这盘菜保存不当，应丢弃。闻着正常也不能吃，再热也不行。" % String(batch.get("note", "这份熟食的保存时间不清楚。"))
 
 
 static func matches_save(value: Dictionary, stock: Dictionary, day: int, phase: String) -> bool:
@@ -93,7 +93,7 @@ static func day_recap(stock: KitchenStock, learning: Dictionary, day: int, hour:
 	var lines: Array[String] = []
 	if opening_discarded > 0:
 		lines.append("已丢弃开局前保存不当的%d份熟食。" % opening_discarded)
-	elif day == 1 and learning.get("opening_choice") == "leave" and int(opening_batch(stock).get("quantity", 0)) > 0:
+	elif day == 1 and int(opening_batch(stock).get("quantity", 0)) > 0:
 		lines.append("开局那份菜暂未处理，仍不供食用。")
 	if cooked > 0 or reheated > 0:
 		lines.append("今天做饭%d次，其中%d次另备冷藏；再热取用%d餐。" % [cooked, prepared, reheated])

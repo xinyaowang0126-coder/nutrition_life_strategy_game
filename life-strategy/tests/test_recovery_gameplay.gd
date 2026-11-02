@@ -120,7 +120,7 @@ func test_day_opening_applies_recovery_then_event_then_one_clamp() -> void:
 	assert_eq(game.state["mood"], 100)
 	assert_eq(game.current_event["id"], "mock_exam_notice")
 	assert_eq(game.current_learning_state["id"], "clear_focus")
-	assert_eq(game._effective_action("study")["study"], 14, "base8 + recovery3 + event3")
+	assert_eq(game._effective_action("study")["study"], 11, "base8 + recovery3; peer review is only available in the announced later slot")
 
 
 func test_start_day_retry_does_not_reset_actions_or_apply_any_opening_twice() -> void:

@@ -81,7 +81,7 @@ static func _show_guide(game: Node) -> void:
 		if _current(game, page, generation): _leave(game)
 	)
 	page.title_label.text = "今天的做法与约定"
-	page.subtitle_label.text = "先听听想吃什么，再按现有条件选"
+	page.subtitle_label.text = "今天想吃点软的"
 	page.close_button.text = "回到配方" if back["kind"] == "cooking" else "继续自己安排"
 	page.body.add_child(HouseholdUI.label(Day.NEED, 23))
 	if back["kind"] == "source":
@@ -89,7 +89,7 @@ static func _show_guide(game: Node) -> void:
 		for id in ["home_kitchen", "breakfast_shop", "community_canteen", "home_fridge", "local_market"]:
 			if not game._source_disabled_reason(id, game._current_meal_phase()).is_empty(): continue
 			var source: Dictionary = game._effective_meal_source(id)
-			var button := HouseholdUI.button("%s · 查看菜单，确认开饭才结算" % source["name"], id)
+			var button := HouseholdUI.button("%s · 看看菜单" % source["name"], id)
 			button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 			page.body.add_child(button)
 			button.pressed.connect(func() -> void:
@@ -116,12 +116,11 @@ static func _show_guide(game: Node) -> void:
 			row.add_child(art)
 			var status: String = "已经选入" if back["ids"].has(id) else ("可回菜单选择" if game._can_add_food(id) else "需先调整餐盘或材料")
 			row.add_child(HouseholdUI.label("%s · %s\n%s" % [foods[id]["name"], method["method"] if method["basis"] != "unrecorded" else "做法未记录", status], 22))
-		if found == 0: HouseholdUI.note(page.body, "这份菜单暂没有这些做法，可以照现有选择吃，也可以回去换个地方看看。")
+		if found == 0: HouseholdUI.note(page.body, "这里没有这些做法，可以回去换一家。")
 	HouseholdUI.section(page.body, "今晚的约定")
 	HouseholdUI.note(page.body, game.shared_meal.summary())
 	if game.shared_meal.plan.is_empty():
-		page.body.add_child(HouseholdUI.label("午饭后的行动页可先问老陈，再去合练。约饭不占整段安排，实际同桌后才记完成。", 22))
-	page.body.add_child(HouseholdUI.label("这是周阿姨今天的个人困难和喜好；做法顺口，也还要看搭配与份量。", 21, HouseholdUI.MUTED))
+		page.body.add_child(HouseholdUI.label("午饭后可以先约老陈，再去合练。约饭不占安排位。", 22))
 	page.close_button.call_deferred("grab_focus")
 
 

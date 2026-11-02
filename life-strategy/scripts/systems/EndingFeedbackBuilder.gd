@@ -7,6 +7,8 @@ const Trace := preload("res://scripts/systems/ActionFeedbackTrace.gd")
 const Copy := preload("res://scripts/ui_v2/EndingFeedbackCopy.gd")
 const Catalog := preload("res://scripts/stories/StoryCatalog.gd")
 const MealRecords := preload("res://scripts/systems/MealRecordPresenter.gd")
+const Campus := preload("res://scripts/stories/CampusWeek.gd")
+const Cards := preload("res://scripts/CardDataStore.gd")
 const ART := "res://assets/generated/endings/feedback/"
 const PERIOD_NAMES := {"breakfast_action": "早饭后", "lunch_action": "午饭后", "dinner_action": "晚饭后"}
 const MEAL_NAMES := {"breakfast": "早餐", "lunch": "午餐", "dinner": "晚餐"}
@@ -16,6 +18,11 @@ static func build(story: Dictionary, ending_id: String, p: Dictionary) -> Dictio
 	var household: bool = story.get("mechanics") == "household"
 	var result := _household(story, ending_id, p) if household else _student(ending_id, p)
 	var candidates := _moments(story, p, result)
+	if not household and Campus.enabled(p.get("campus_week", {})):
+		for row in p.get("run_history", []):
+			if row.get("event", {}).get("campus_version") != 1: continue
+			if row.get("day") in [3, 5] and not String(row.get("campus_voice", "")).is_empty():
+				candidates.append(_moment("campus_%d" % row["day"], "campus_event", "第%d天，小林的安排" % row["day"], row["campus_voice"], row["day"], 110, String(row["event"].get("summary", "")) + "\n" + row["campus_voice"]))
 	candidates.sort_custom(func(a: Dictionary, b: Dictionary) -> bool:
 		if a["rank"] != b["rank"]: return a["rank"] > b["rank"]
 		if a["day"] != b["day"]: return a["day"] < b["day"]
@@ -55,11 +62,11 @@ static func _student(id: String, p: Dictionary) -> Dictionary:
 		next_id = "meals" if int(state.get("satiety", 100)) < 20 else "rest"
 	elif id == "study_shortfall":
 		kind = "study_gap"
-		summary = "复习%d/70，距离本周目标还差%d。这一周先到这里。" % [progress, maxi(0, 70 - progress)]
+		summary = "复习%d/70，还差%d，没完成本周目标。" % [progress, maxi(0, 70 - progress)]
 		next_id = "study_state" if _action_count(p, ["study"]) >= 7 else "study_time"
 	elif id == "stable_endurance":
 		kind = "steady"
-		summary = "复习%d/70，余力%d。复习目标完成了，也给自己留了些余力。" % [progress, reserve]
+		summary = "复习%d/70，余力%d。本周目标已完成。" % [progress, reserve]
 		next_id = "explore_source"
 	else:
 		kind = "goal_gap" if progress < 70 else "reserve_gap"
@@ -117,18 +124,18 @@ static func _household(story: Dictionary, id: String, p: Dictionary) -> Dictiona
 		if int(outcome["progress"]) < target: missing.append("排练%d/%d，还差%d" % [outcome["progress"], target, target - int(outcome["progress"])])
 		if int(outcome["energy"]) < minimum: missing.append("演前精力%d/%d，还差%d" % [outcome["energy"], minimum, minimum - int(outcome["energy"])])
 		if int(outcome["slots"]) >= 3: missing.append("当天已经没有可用安排位")
-		summary = "演前核对：\n" + "。\n".join(missing) + "。\n这次没有参加汇演。"
+		summary = "演前还差：\n" + "。\n".join(missing) + "。\n这次没有参加汇演。"
 		if missing.size() == 1: next_id = "rehearse" if int(outcome["progress"]) < target else ("energy" if int(outcome["energy"]) < minimum else "slots")
 		if missing.size() == 1 and int(outcome["progress"]) < target / 2: next_id = "rehearsal_time"
 	else:
 		kind = "legacy"
 		title = "这一周，按实际记录回看" if p.get("performed", false) else title
-		summary = "本局没有实际参演记录，演前原因也没有记全。下面只回看已经留下的经历。"
+		summary = "旧存档没有实际参演记录，也没记下演前状态。"
 	if id == "collapsed" and kind in ["performed", "other_choice"]:
 		summary += "\n" + _closing(p)
 		next_id = "rest"
 	return {"kind": kind, "title": title, "voice": Copy.voice(kind), "summary": summary,
-		"rules": "第7天晚饭后可以参演。\n条件：\n排练至少%d，演前精力至少%d。\n还留有一个安排位。\n满足条件仍可以另作安排。\n\n实际执行参演，才算唱完。\n连续两天日结余力不高于15，会提前收束。\n最后一天余力不高于15，也会这样收尾。\n已经参演或另作安排的事实分别保留。" % [target, minimum],
+		"rules": "第7天晚饭后可参加汇演。\n需要排练至少%d、演前精力至少%d，\n并留有一个安排位。\n\n选“去参加汇演”完成演出，也可以改选其他安排。\n连续两天日结余力不高于15，会提前结束。\n最后一天余力不高于15，也需要先休息。\n演出完成后再触发结束，仍算完成了汇演。" % [target, minimum],
 		"image": image, "next_try_id": next_id, "progress": int(state.get("goal_progress", 0)), "target": target, "reserve": int(state.get("stability", 0))}
 
 
@@ -136,9 +143,9 @@ static func _closing(p: Dictionary) -> String:
 	var day := int(p.get("day", 1))
 	var reserve := int(p.get("state", {}).get("stability", 0))
 	if int(p.get("low_stability_days", 0)) >= 2:
-		return "本局停在第%d天。第%d、%d天日结余力连续不高于15，触发了提前收束。" % [day, maxi(1, day - 1), day]
-	if day >= 7: return "本局走到第7天，日结余力%d，触发了低余力收尾。" % reserve
-	return "本局在第%d天收束。回顾保留已经发生的经历。" % day
+		return "停在第%d天。第%d、%d天结束时余力都不高于15，本周提前结束。" % [day, maxi(1, day - 1), day]
+	if day >= 7: return "第7天结束时余力%d，这周需要先休息。" % reserve
+	return "这次玩到第%d天。" % day
 
 
 static func _performed(p: Dictionary) -> bool:
@@ -174,7 +181,7 @@ static func _study_day(p: Dictionary, after_target: bool) -> int:
 static func _chosen_action(p: Dictionary, trigger: String) -> String:
 	if trigger == "skip": return "这段时间没有再排事情。"
 	for action in p.get("today_action_records", []):
-		if action.get("id") == trigger: return "这段时间，你选择了“%s”。" % action.get("name", "另作安排")
+		if action.get("id") == trigger: return "这段时间选了“%s”。" % action.get("name", "另作安排")
 	return "这次选择了其他安排。"
 
 
@@ -226,7 +233,7 @@ static func _moments(story: Dictionary, p: Dictionary, outcome: Dictionary) -> A
 			elif int(parts.get("recovery", 0)) > 0:
 				text += "\n昨夜恢复加成 %s。" % _signed(parts["recovery"])
 			elif int(parts.get("recovery", 0)) < 0:
-				text += "\n昨夜恢复对本次收益的影响为%s。" % _signed(parts["recovery"])
+				text += "\n昨夜恢复使这次收益%s。" % _signed(parts["recovery"])
 			var explanation: Array[String] = ["基础收益%s" % _signed(parts.get("base", 0))]
 			for key in ["event", "recovery", "current", "floor"]:
 				if int(parts.get(key, 0)) != 0: explanation.append(String({"event": "当天事件", "recovery": "昨夜恢复", "current": "当前状态", "floor": "最低收益调整"}[key]) + _signed(parts[key]))
@@ -236,14 +243,14 @@ static func _moments(story: Dictionary, p: Dictionary, outcome: Dictionary) -> A
 		if not found_trace and row.get("start_state", {}).has(goal_key) and row.get("end_state", {}).has(goal_key):
 			var gain := int(row["end_state"][goal_key]) - int(row["start_state"][goal_key])
 			if gain > 0:
-				result.append(_moment("daily_%02d" % day, "progress", "第%d天，进度往前走了一段" % day, "当日%s进度增加%d。" % [goal_label, gain], day, 100, "来自第%d天日结前后的进度差额，是整天合计；没有逐次证据时，不归给其中某一个行动。" % day))
+				result.append(_moment("daily_%02d" % day, "progress", "第%d天的进度" % day, "当日%s进度增加%d。" % [goal_label, gain], day, 100, "第%d天结束时的进度减去当天开场进度，显示整天的总变化。" % day))
 		if row.get("sleep", {}).get("id") == "sleep_early":
 			early_days.append("第%d晚" % day)
 			for next_day in p.get("run_history", []):
 				if next_day.get("day") != day + 1: continue
 				var opening: Variant = next_day.get("learning_state", {})
 				if opening is Dictionary and not String(opening.get("title", "")).is_empty():
-					result.append(_moment("night_%02d" % day, "night", "第%d晚的早点睡" % day, "第%d天以“%s”开场。" % [day + 1, opening["title"]], day, 110, "第%d晚实际选择早点睡。\n第%d天冻结的开场恢复：%s。恢复按当时精力、压力和已执行行动共同判断。" % [day, day + 1, opening["title"]]))
+					result.append(_moment("night_%02d" % day, "night", "第%d晚的早点睡" % day, "第%d天以“%s”开场。" % [day + 1, opening["title"]], day, 110, "第%d晚选了早点睡。\n第%d天的恢复：%s。依据是前一天的精力、压力和安排。" % [day, day + 1, opening["title"]]))
 		for meal in row.get("meals", []):
 			if not meal is Dictionary or meal.get("skipped", false) or meal.get("food_ids", []).is_empty(): continue
 			var names := "、".join(meal.get("food_names", []).slice(0, 2))
@@ -251,14 +258,14 @@ static func _moments(story: Dictionary, p: Dictionary, outcome: Dictionary) -> A
 			var phase := String(meal.get("phase", ""))
 			var meal_name := String(MEAL_NAMES.get(phase, "这一餐"))
 			if meal.get("source_id") == "dorm_storage":
-				result.append(_moment("pantry_%02d_%s" % [day, phase], "pantry", "第%d天，存粮派上用场" % day, "从宿舍存粮取了%s，这餐现金支出¥%d。" % [names, int(meal.get("total_cost", 0))], day, 90, "第%d天%s：%s；食物%s；餐次费用¥%d。只回顾这次取用，不把库存食物视作没有购买成本。" % [day, meal_name, meal.get("source_name", "宿舍存粮"), names, int(meal.get("total_cost", 0))]))
+				result.append(_moment("pantry_%02d_%s" % [day, phase], "pantry", "第%d天，存粮派上用场" % day, "从宿舍存粮取了%s，这餐现金支出¥%d。" % [names, int(meal.get("total_cost", 0))], day, 90, "第%d天%s：%s；食物%s；餐次费用¥%d。这笔费用是当餐支出，存粮之前的购买费用另计。" % [day, meal_name, meal.get("source_name", "宿舍存粮"), names, int(meal.get("total_cost", 0))]))
 			var companions: Variant = meal.get("companions", [])
 			if companions is Array and companions.any(func(person: Variant) -> bool: return person is Dictionary and person.get("id") == "chen_friend"):
-				result.append(_moment("shared_%02d_%s" % [day, phase], "together", "第%d天，和老陈同桌" % day, "这一餐一起吃了%s。" % names, day, 160 + boost, "真实餐次中记录了同桌人老陈。\n第%d天%s，来源：%s，食物：%s。邀约本身不计为共餐。" % [day, meal_name, meal.get("source_name", ""), names]))
+				result.append(_moment("shared_%02d_%s" % [day, phase], "together", "第%d天，和老陈同桌" % day, "这一餐一起吃了%s。" % names, day, 160 + boost, "第%d天%s，和老陈在%s一起吃了%s。" % [day, meal_name, meal.get("source_name", ""), names]))
 	if not early_days.is_empty():
-		result.append(_moment("sleep_early", "night", "%d晚选择了早点睡" % early_days.size(), "这是这一周实际留下的晚间安排。", 1, 80, "、".join(early_days) + "选择早点睡。恢复仍按各晚实际精力、压力和行动判断，不能只由早睡次数推断。"))
+		result.append(_moment("sleep_early", "night", "%d晚选择了早点睡" % early_days.size(), "这几晚睡前没有再复习。", 1, 80, "、".join(early_days) + "选了早点睡。各晚的恢复结果可在日结中查看。"))
 	if not rehearsal_days.is_empty():
-		result.append(_moment("rehearsal", "progress", "这一周的练歌时间", "实际安排了%d次练歌或合练。" % rehearsal_days.size(), 1, 95, "、".join(rehearsal_days) + "有练歌或合练行动。次数不代替实际进度或参演记录。"))
+		result.append(_moment("rehearsal", "progress", "这一周的练歌时间", "练歌或合练共%d次。" % rehearsal_days.size(), 1, 95, "、".join(rehearsal_days) + "练过歌或参加了合练。"))
 	var made := {}
 	for row in p.get("kitchen", {}).get("history", []):
 		if not row is Dictionary: continue
@@ -298,8 +305,13 @@ static func _review(story: Dictionary, p: Dictionary, moments: Array[Dictionary]
 		var names: Array[String] = []
 		for action in row.get("actions", []):
 			if action is Dictionary: names.append(String(action.get("name", action.get("id", "安排"))))
-		if not names.is_empty(): lines.append("实际安排：" + "、".join(names))
+		if not names.is_empty(): lines.append("餐后安排：" + "、".join(names))
 		if row.get("sleep", {}).has("name"): lines.append("夜里：" + String(row["sleep"]["name"]))
+		if not household and row.has("campus_voice"):
+			lines.append(String(row["campus_voice"]))
+			if not row.get("campus_observation", {}).is_empty(): lines.append(String(row["campus_observation"]["text"]))
+			for plan in row.get("campus_plans", []): lines.append(Campus.plan_text(plan, Cards.meal_sources))
+			for note in row.get("campus_resource_notes", []): lines.append(String(note))
 		if row.get("learning_state") is Dictionary and row["learning_state"].has("title"): lines.append("开场恢复：" + String(row["learning_state"]["title"]))
 		for moment in moments:
 			if moment["day"] == day and moment["category"] in ["progress", "together", "kitchen"]:
@@ -307,7 +319,7 @@ static func _review(story: Dictionary, p: Dictionary, moments: Array[Dictionary]
 		sections.append({"id": "day_%d" % day, "title": "第%d天" % day, "text": "\n\n".join(lines)})
 	if household:
 		var stored: Dictionary = p.get("household_finale", {}).get("review", {})
-		for item in stored.get("highlights", []):
+		for item in Copy.household_review(stored):
 			sections.append({"id": "household_%d" % sections.size(), "title": item.get("title", "本周记录"), "text": item.get("text", "")})
 	return sections
 

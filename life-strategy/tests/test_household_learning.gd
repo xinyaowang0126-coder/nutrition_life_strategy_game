@@ -41,80 +41,92 @@ func _scene(size: Vector2i = Vector2i(1920, 1080)) -> GameRootV2:
 
 
 func _opening(game: GameRootV2, discard: bool = false) -> void:
-	game.new_day_popup.continue_button.pressed.emit()
-	assert_eq(game.household_learning["opening_stage"], "decision")
-	game._story_dialog._buttons.get_node("discard" if discard else "back").pressed.emit()
-	assert_eq(game.household_learning["opening_stage"], "breakfast")
+	game.new_day_popup.hide_popup(false)
+	game._on_new_day_continue()
+	assert_true(Presenter.open(game))
+	if discard: game._workspace.find_child("DiscardLeftovers", true, false).pressed.emit()
+	else: game._workspace.close_button.pressed.emit()
+	assert_eq(game.household_learning["opening_stage"], "done")
 
 
-func test_opening_is_a_real_choice_without_spending_or_forcing_disposal() -> void:
+
+func test_opening_is_an_optional_scene_item_and_does_not_block_breakfast() -> void:
 	var game := _scene()
 	var before := game.state.duplicate(true)
 	var ingredients := game.kitchen.ingredients.duplicate(true)
-	game.new_day_popup.continue_button.pressed.emit()
-	assert_true(game._story_dialog.visible)
-	assert_contains(game._story_dialog._body.text, "常温12小时")
-	assert_contains(game._story_dialog._body.text, "闻着正常")
-	game._choose_meal_source("home_kitchen")
-	game._skip_meal()
-	assert_eq(game.phase, "breakfast_source")
-	game._story_dialog._buttons.get_node("back").pressed.emit()
-	assert_eq(game.household_learning["opening_choice"], "leave")
-	assert_eq(game.kitchen.batches[0]["quantity"], 1)
+	game.new_day_popup.hide_popup(false)
+	game._on_new_day_continue()
+	assert_false(is_instance_valid(game._story_dialog) and game._story_dialog.visible)
+	assert_false(is_instance_valid(game._workspace))
+	assert_true(game._active_stage.leftovers_button.visible)
 	assert_eq(game.kitchen.available("greens", 1), 0)
-	assert_true(game.kitchen.history.is_empty())
+	game._active_stage.source_selected.emit("home_kitchen")
+	assert_eq(game.phase, "breakfast")
 	assert_eq(game.state, before)
 	assert_eq(game.kitchen.ingredients, ingredients)
+	assert_true(game.kitchen.history.is_empty())
 	assert_true(game.today_meal_records.is_empty())
+
 
 
 func test_discard_and_stale_confirm_only_record_one_disposal() -> void:
 	var game := _scene()
-	game.new_day_popup.continue_button.pressed.emit()
-	var stale: Button = game._story_dialog._buttons.get_node("discard")
+	game.new_day_popup.hide_popup(false)
+	game._on_new_day_continue()
+	assert_true(Presenter.open(game))
+	var stale: Button = game._workspace.find_child("DiscardLeftovers", true, false)
 	stale.pressed.emit()
 	stale.pressed.emit()
 	assert_eq(game.kitchen.history.size(), 1)
 	assert_eq(game.kitchen.batches[0]["quantity"], 0)
 	assert_eq(game.household_learning["opening_choice"], "discard")
 	assert_eq(game.state["balance"], 210)
+	assert_false(game._active_stage.leftovers_button.visible)
 	assert_false(Presenter.resolve_opening(game, "discard"))
 
 
-func test_breakfast_links_use_the_live_menu_and_do_not_select_or_pay() -> void:
+
+func test_viewing_or_discarding_leftovers_returns_home_without_selecting_or_paying() -> void:
+	for discard in [false, true]:
+		var game := _scene()
+		var before := game.state.duplicate(true)
+		var ingredients := game.kitchen.ingredients.duplicate(true)
+		_opening(game, discard)
+		assert_false(is_instance_valid(game._workspace))
+		assert_true(game._active_stage is HouseholdSourceStage)
+		assert_eq(game.phase, "breakfast_source")
+		assert_eq(game.current_source_id, "")
+		assert_true(game.selected_food_ids.is_empty())
+		assert_true(game.today_meal_records.is_empty())
+		assert_eq(game.state, before)
+		assert_eq(game.kitchen.ingredients, ingredients)
+		assert_eq(game._active_stage.leftovers_button.visible, not discard)
+		game._active_stage.source_selected.emit("home_kitchen")
+		assert_eq(game.phase, "breakfast")
+		assert_eq(game.state, before)
+		game._change_meal_source()
+		Presenter.resume(game)
+		assert_false(is_instance_valid(game._workspace))
+		assert_eq(game.household_learning["opening_stage"], "done")
+
+
+
+func test_manual_breakfast_navigation_still_checks_stock_and_budget() -> void:
 	var game := _scene()
 	_opening(game)
-	var before := game.state.duplicate(true)
-	var ingredients := game.kitchen.ingredients.duplicate(true)
-	var menu: Array = game.source_hands["breakfast:breakfast_shop"].duplicate()
-	var options := Presenter.breakfast_choices(game)
-	assert_eq(options.size(), 3)
-	assert_contains(options[1]["text"], "¥2")
-	game._story_dialog._buttons.get_node("breakfast_shop").pressed.emit()
-	assert_eq(game.phase, "breakfast")
-	assert_eq(game.hand, menu)
-	assert_true(game.selected_food_ids.is_empty())
-	assert_true(game.today_meal_records.is_empty())
-	assert_eq(game.state, before)
-	assert_eq(game.kitchen.ingredients, ingredients)
-	game._change_meal_source()
-	Presenter.resume(game)
-	assert_false(game._story_dialog.visible)
-	assert_eq(game.household_learning["opening_stage"], "done")
-
-
-func test_breakfast_options_are_filtered_by_stock_and_budget() -> void:
-	var game := _game()
 	game.state["balance"] = 0
 	for key in game.kitchen.ingredients: game.kitchen.ingredients[key] = 0
-	assert_true(Presenter.breakfast_choices(game).is_empty())
-	game.kitchen.ingredients["egg"] = 1
-	var options := Presenter.breakfast_choices(game)
-	assert_eq(options.size(), 1)
-	assert_eq(options[0]["id"], "home_kitchen")
-	assert_contains(options[0]["text"], "鸡蛋可做1份")
-	assert_eq(game.kitchen.ingredients["egg"], 1)
+	game._choose_meal_source("home_kitchen")
+	game._choose_meal_source("breakfast_shop")
 	assert_eq(game.phase, "breakfast_source")
+	game.kitchen.ingredients["egg"] = 1
+	game._choose_meal_source("home_kitchen")
+	assert_eq(game.phase, "breakfast")
+	assert_eq(game.current_source_id, "home_kitchen")
+	assert_eq(game.kitchen.ingredients["egg"], 1)
+	assert_eq(game.state["balance"], 0)
+	assert_true(game.selected_food_ids.is_empty())
+	assert_true(game.today_meal_records.is_empty())
 
 
 func test_pending_decision_and_breakfast_resume_from_encoded_saves() -> void:
@@ -122,15 +134,19 @@ func test_pending_decision_and_breakfast_resume_from_encoded_saves() -> void:
 		var previous := _game()
 		previous.household_learning["opening_stage"] = "decision"
 		if stage != "decision": assert_true(Presenter.resolve_opening(previous, "discard"))
-		if stage == "done": previous.household_learning["opening_stage"] = "done"
+		# Simulate a save made by the old breakfast shortcut dialog.
+		if stage == "breakfast": previous.household_learning["opening_stage"] = "breakfast"
 		var encoded := Codec.encode(previous.capture_game_save())
 		assert_true(encoded["ok"], str(encoded))
 		var restored := _scene()
 		assert_true(restored.restore_game_save(Codec.decode(encoded["text"])["save"])["ok"])
-		assert_eq(restored.household_learning["opening_stage"], stage)
+		assert_eq(restored.household_learning["opening_stage"], "available" if stage == "decision" else "done")
 		assert_eq(restored.kitchen.history.size(), 0 if stage == "decision" else 1)
-		assert_eq(is_instance_valid(restored._story_dialog) and restored._story_dialog.visible, stage != "done")
-		if stage == "breakfast": assert_contains(restored._story_dialog._title.text, "早餐")
+		assert_false(is_instance_valid(restored._story_dialog) and restored._story_dialog.visible)
+		assert_eq(restored.phase, "breakfast_source")
+		assert_true(restored.today_meal_records.is_empty())
+		assert_eq(restored.state, previous.state)
+		assert_true(Codec.encode(restored.capture_game_save())["ok"])
 
 
 func test_legacy_saves_stay_valid_without_fabricating_or_replaying_choices() -> void:

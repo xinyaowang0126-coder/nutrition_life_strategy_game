@@ -14,6 +14,9 @@ var _status: Label
 var _art: TextureRect
 var _content_margin: MarginContainer
 var _fitting_height := false
+var _card_width := 210.0
+var _title: Label
+var _detail: Label
 var info_button: Button
 
 
@@ -23,18 +26,18 @@ func configure(payload: Dictionary, _mode: String, chosen: bool, enabled: bool, 
 	_stock = stock
 	_selected = chosen
 	_reason = reason
-	custom_minimum_size = Vector2(0, 304)
-	size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	custom_minimum_size = Vector2(_card_width, _card_width * 1.5)
+	size_flags_horizontal = Control.SIZE_FILL
 	clip_contents = true
 	var margin := MarginContainer.new()
 	_content_margin = margin
 	margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	margin.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	for side in ["margin_left", "margin_right", "margin_top", "margin_bottom"]: margin.add_theme_constant_override(side, 12)
+	for side in ["margin_left", "margin_right", "margin_top", "margin_bottom"]: margin.add_theme_constant_override(side, 10)
 	add_child(margin)
 	var stack := VBoxContainer.new()
 	stack.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	stack.add_theme_constant_override("separation", 6)
+	stack.add_theme_constant_override("separation", 5)
 	margin.add_child(stack)
 	var top := HBoxContainer.new()
 	top.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -51,15 +54,16 @@ func configure(payload: Dictionary, _mode: String, chosen: bool, enabled: bool, 
 		target.focus_exited.connect(_dismiss_preview)
 	top.add_child(info_button)
 	_art = HouseholdUI.image(HouseholdUI.food_texture(payload), 80)
+	_art.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	stack.add_child(_art)
-	var title := HouseholdUI.label(String(payload["name"]), 25, HouseholdUI.INK, true)
-	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	stack.add_child(title)
+	_title = HouseholdUI.label(String(payload["name"]), 22, HouseholdUI.INK, true)
+	_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	stack.add_child(_title)
 	var line := String(payload.get("ingredient_line", payload.get("batch_note", payload.get("kind", ""))))
-	var detail := HouseholdUI.label(line, 18, HouseholdUI.MUTED)
-	detail.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	stack.add_child(detail)
-	_status = HouseholdUI.label("", 19, HouseholdUI.GREEN)
+	_detail = HouseholdUI.label(line, 17, HouseholdUI.MUTED)
+	_detail.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	stack.add_child(_detail)
+	_status = HouseholdUI.label("", 17, HouseholdUI.GREEN)
 	_status.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	stack.add_child(_status)
 	pressed.connect(func() -> void:
@@ -72,12 +76,19 @@ func configure(payload: Dictionary, _mode: String, chosen: bool, enabled: bool, 
 	_fit_content_height()
 
 
+func apply_card_layout(width: float) -> void:
+	_card_width = width
+	_art.custom_minimum_size.y = roundf(width * 0.40)
+	custom_minimum_size = Vector2(width, ceilf(width * 1.5))
+	_fit_content_height()
+
+
 func _fit_content_height() -> void:
 	# Wrapped titles and unavailable reasons must fit at the current card
 	# width. The first layout pass has no content width yet.
 	if _fitting_height or not is_instance_valid(_content_margin) or _content_margin.size.x <= 0: return
 	_fitting_height = true
-	custom_minimum_size.y = maxf(304.0, ceilf(_content_margin.get_combined_minimum_size().y))
+	custom_minimum_size.y = maxf(ceilf(_card_width * 1.5), ceilf(_content_margin.get_combined_minimum_size().y))
 	_fitting_height = false
 
 

@@ -121,6 +121,23 @@ func get_payload() -> Dictionary:
 	return _payload.duplicate(true)
 
 
+func apply_card_layout(width: float) -> void:
+	# Story cards share the food-card frame. A fixed illustration slot keeps
+	# titles aligned when one choice needs another line of cost information.
+	custom_minimum_size = Vector2(width, ceilf(width * 1.5))
+	size_flags_horizontal = Control.SIZE_FILL
+	for side in ["margin_left", "margin_right", "margin_top", "margin_bottom"]:
+		$Margin.add_theme_constant_override(side, 6)
+	art.custom_minimum_size.y = floorf(width * 0.60)
+	art.size_flags_vertical = Control.SIZE_FILL
+	title_label.add_theme_font_size_override("font_size", 22)
+	title_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	for label in [primary_stat, secondary_stat, tertiary_stat]: label.add_theme_font_size_override("font_size", 15)
+	choice_cost_label.add_theme_font_size_override("font_size", 14)
+	choice_cost_label.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	choice_cost_label.vertical_alignment = VERTICAL_ALIGNMENT_TOP
+
+
 func request_detail(pinned: bool = false) -> void:
 	if not _ready_finished or _payload.is_empty():
 		return

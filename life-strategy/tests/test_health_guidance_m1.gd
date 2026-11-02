@@ -62,7 +62,7 @@ func test_retired_health_numeric_widgets_ignore_legacy_values() -> void:
 	var detail := hud._make_detail_payload()
 	for key in ["character_health", "diet_burden", "burden"]:
 		assert_false(detail.has(key))
-	assert_contains(String(detail["desc"]), "不是对玩家真实健康的评价")
+	assert_eq(String(detail["desc"]), "")
 	var note := StickyNoteScene.instantiate() as StickyNotePopupV2
 	track(note)
 	tree.root.add_child(note)
@@ -76,7 +76,7 @@ func test_legacy_scores_no_longer_produce_a_daily_health_tier() -> void:
 	assert_false(view.has("score"))
 	assert_false(view.has("rating"))
 	assert_contains(view["detail_text"], "旧记录食物")
-	assert_contains(view["basis"], "不作营养评价")
+	assert_contains(view["basis"], "尚未核对")
 
 
 func test_carryover_copy_is_explicitly_gameplay_not_medical() -> void:

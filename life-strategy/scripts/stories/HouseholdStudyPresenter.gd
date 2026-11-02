@@ -86,7 +86,7 @@ static func _render(game: Node) -> void:
 		if _current(game, page, generation, id): _leave(game)
 	)
 	page.title_label.text = q["title"]
-	page.subtitle_label.text = "已确认餐次的练习" if row["context"]["scope"] == "confirmed" else "先看看这份预览，确认开饭后才记进餐"
+	page.subtitle_label.text = "用这一餐来练习" if row["context"]["scope"] == "confirmed" else "这是餐盘预览，选好后再开饭"
 	page.close_button.text = "回到配方" if active["return"]["kind"] == "cooking" else "回到这一餐"
 	page.body.add_child(HouseholdUI.label(q["body"], 23))
 	if active["page"] == "question":
@@ -105,12 +105,12 @@ static func _render(game: Node) -> void:
 				_render(game)
 		)
 	else:
-		var feedback := "先看解释，还没有作答。"
-		if not row["attempts"].is_empty(): feedback = "这次判断正确。" if row["attempts"].back()["correct"] else "再看看已知的量和记录范围。"
+		var feedback := "先看看怎么算。"
+		if not row["attempts"].is_empty(): feedback = "答对了。" if row["attempts"].back()["correct"] else "再看看用量和标签。"
 		HouseholdUI.section(page.body, feedback)
 		HouseholdUI.note(page.body, q["explanation"])
 		page.body.add_child(HouseholdUI.label(_history_text(row, q), 21, HouseholdUI.MUTED))
-		var transfer := _button(page.body, "换一道例子" if row["context"]["day"] == 2 else "换个教学标签", "Transfer")
+		var transfer := _button(page.body, "换一道例子" if row["context"]["day"] == 2 else "换张标签", "Transfer")
 		transfer.pressed.connect(func() -> void:
 			if not _current(game, page, generation, id): return
 			var variant := "label_b" if row["variant"] == "label_a" else "label_a"
@@ -126,19 +126,19 @@ static func _render(game: Node) -> void:
 		)
 	var suggestion := feasible_change(game, row["context"])
 	if not suggestion.is_empty(): HouseholdUI.note(page.body, suggestion)
-	var reference := _button(page.body, "查看课程依据", "Reference")
+	var reference := _button(page.body, "查看参考资料", "Reference")
 	var reference_body := HouseholdUI.label(String(Education.lesson(int(row["context"]["day"]))["body"]), 22, HouseholdUI.MUTED)
 	page.body.add_child(reference_body)
 	reference_body.hide()
 	reference.pressed.connect(func() -> void:
 		if _current(game, page, generation, id):
 			reference_body.visible = not reference_body.visible
-			reference.text = "收起课程依据" if reference_body.visible else "查看课程依据"
+			reference.text = "收起参考资料" if reference_body.visible else "查看参考资料"
 			if reference_body.visible:
 				row["reference_seen"] = true
 				game._queue_autosave()
 	)
-	page.body.add_child(HouseholdUI.label("查看、作答和重试不改变预算、精力或餐盘。", 20, HouseholdUI.MUTED))
+	page.body.add_child(HouseholdUI.label("练习免费，不改餐盘，也不消耗精力。", 20, HouseholdUI.MUTED))
 	page.close_button.call_deferred("grab_focus")
 
 
@@ -177,11 +177,11 @@ static func _history_text(row: Dictionary, q: Dictionary) -> String:
 	if not row["attempts"].is_empty():
 		var first: Dictionary = row["attempts"][0]
 		for choice in q["choices"]:
-			if choice["id"] == first["choice"]: lines.append("首次选择：" + String(choice["text"]) + ("（作答前已看解释或依据）" if first["after_help"] else ""))
+			if choice["id"] == first["choice"]: lines.append("第一次选了：" + String(choice["text"]) + ("（先看过提示）" if first["after_help"] else ""))
 	var counts: Array[String] = []
-	for pair in [["attempt_count", "作答"], ["retry_count", "重试"], ["skip_count", "跳过"]]:
+	for pair in [["attempt_count", "答题"], ["retry_count", "重试"], ["skip_count", "跳过"]]:
 		if row[pair[0]] > 0: counts.append("%s%d次" % [pair[1], row[pair[0]]])
-	if not counts.is_empty(): lines.append("、".join(counts) + "。首次选择单独保留。")
+	if not counts.is_empty(): lines.append("、".join(counts) + "。")
 	return "\n".join(lines)
 
 

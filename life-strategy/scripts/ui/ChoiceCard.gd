@@ -172,13 +172,13 @@ func _food_preference_detail(payload: Dictionary) -> String:
 	if not preference is Dictionary or String(preference.get("status", "")) != "known":
 		return "口味未设置"
 	var value := int(preference.get("mood_delta", 0))
-	var reaction := "本局角色没有特别偏好"
+	var reaction := "口味一般"
 	if value < 0:
-		reaction = "不太合本局角色的口味"
+		reaction = "不太喜欢"
 	elif bool(preference.get("comfort", false)):
-		reaction = "本局角色偏爱这一口"
+		reaction = "特别喜欢"
 	elif value > 0:
-		reaction = "合本局角色的口味"
+		reaction = "合口味"
 	return "%s · 心情 %s" % [reaction, _delta(value)]
 
 

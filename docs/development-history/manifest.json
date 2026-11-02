@@ -1,0 +1,738 @@
+{
+  "project": "好好吃饭",
+  "created": "2026-10-30",
+  "stageCount": 15,
+  "imageCount": 54.0,
+  "description": "开发过程展示精选；日期依据截图批次与工程记录，不代表每阶段都发布过。探索稿、撤回方案与发布前本地检查分别标注。原图逐字节归档。",
+  "stages": [
+    {
+      "folder": "01-2026-10-05-campus-prototype",
+      "date": "2026-10-05",
+      "title": "校园篇早期原型",
+      "summary": "单一学生故事已串起选来源、选餐、行动与日结；界面以信息面板和列表为主。",
+      "records": [
+        "docs/process/PROJECT_AUDIT_2026-10-05.md"
+      ],
+      "cover": "01-title.jpg",
+      "images": [
+        {
+          "file": "01-title.jpg",
+          "caption": "早期标题与开局",
+          "source": "docs/assets/project-audit-2026-10-05/01-menu-mobile.jpg",
+          "sourceDisposition": "原路径保留",
+          "bytes": 51791,
+          "width": 600,
+          "height": 956,
+          "sha256": "d654a902be7268a455333b4350ea14d8e27132fbd3482babdd33a6f3d743deb6"
+        },
+        {
+          "file": "02-sources.jpg",
+          "caption": "早期用餐来源",
+          "source": "docs/assets/project-audit-2026-10-05/04-source-mobile.jpg",
+          "sourceDisposition": "原路径保留",
+          "bytes": 92205,
+          "width": 600,
+          "height": 956,
+          "sha256": "6451dd36bfa868e28ccc9828b55cff088503e3886ba938c2af258e2f6923ac3f"
+        },
+        {
+          "file": "03-food-selection.jpg",
+          "caption": "早期选餐界面",
+          "source": "docs/assets/project-audit-2026-10-05/06-meal-mobile.jpg",
+          "sourceDisposition": "原路径保留",
+          "bytes": 87637,
+          "width": 600,
+          "height": 956,
+          "sha256": "1253d01e66274bc41eb403a19413e9b48db63a3b2bc8db1a2704f57f950ee777"
+        }
+      ]
+    },
+    {
+      "folder": "02-2026-10-08-illustrated-campus",
+      "date": "2026-10-08",
+      "title": "从面板到插画场景",
+      "summary": "加入宿舍标题、手绘校园地图和卡牌状态；并列保存改版前界面。日期沿用截图批次，工程说明记录于10月9日。笔记本方案为未采用的探索稿。",
+      "records": [
+        "docs/process/UI_V3_CARD_STYLE_2026-10-09.md",
+        "docs/process/EDU01_UX03_UX04_2026-10-08.md"
+      ],
+      "cover": "06-after-map.png",
+      "images": [
+        {
+          "file": "01-before-title.png",
+          "caption": "改版前标题",
+          "source": "artifacts/ui-v3/before/main-menu.png",
+          "sourceDisposition": "归档后清除临时副本",
+          "bytes": 2867560,
+          "width": 1920,
+          "height": 1080,
+          "sha256": "62852ad167f469b7226e920e26c23752a012554386e2446f855200cdb3987a99"
+        },
+        {
+          "file": "02-before-sources.png",
+          "caption": "改版前来源面板",
+          "source": "artifacts/ui-v3/before/source.png",
+          "sourceDisposition": "归档后清除临时副本",
+          "bytes": 3309672,
+          "width": 1920,
+          "height": 1080,
+          "sha256": "8b19aac3790f7fbd5462a77b5d80649be288bd5e15964e2a1cdb170be1601e18"
+        },
+        {
+          "file": "03-before-food.png",
+          "caption": "改版前选餐",
+          "source": "artifacts/ui-v3/before/cafeteria.png",
+          "sourceDisposition": "归档后清除临时副本",
+          "bytes": 2836309,
+          "width": 1920,
+          "height": 1080,
+          "sha256": "5e59bd93621fd4fd0b339be279479ebfc6a17e383ee28f7ae1f0caf237ee31e9"
+        },
+        {
+          "file": "04-before-action.png",
+          "caption": "改版前行动",
+          "source": "artifacts/ui-v3/before/action.png",
+          "sourceDisposition": "归档后清除临时副本",
+          "bytes": 2821981,
+          "width": 1920,
+          "height": 1080,
+          "sha256": "13c5514b5b5ba40b433e36dacf464baa4b5476bea59297200666cf64c3ac4b76"
+        },
+        {
+          "file": "05-after-title.png",
+          "caption": "插画标题",
+          "source": "docs/assets/ui-v3-2026-10-08/1366x768-menu.png",
+          "sourceDisposition": "原路径保留",
+          "bytes": 1332171,
+          "width": 1366,
+          "height": 768,
+          "sha256": "2cb2f7e94709859249830826f0081cb71bd7f78ec4677968f3286fa98a705f09"
+        },
+        {
+          "file": "06-after-map.png",
+          "caption": "校园地点地图",
+          "source": "docs/assets/ui-v3-2026-10-08/1366x768-map.png",
+          "sourceDisposition": "原路径保留",
+          "bytes": 2302796,
+          "width": 1366,
+          "height": 768,
+          "sha256": "55ec52f526650c14d1b926e6d96707b3bc0fced7ca942b81c51296d24e5df9ab"
+        },
+        {
+          "file": "07-after-selected-mobile.png",
+          "caption": "竖屏卡牌与已选状态",
+          "source": "docs/assets/ui-v3-2026-10-08/390x844-selected.png",
+          "sourceDisposition": "原路径保留",
+          "bytes": 465252,
+          "width": 390,
+          "height": 844,
+          "sha256": "3c685d56067896a28fdce464977853763228c6fda4d723cfd59e13c5e002ab2d"
+        },
+        {
+          "file": "08-rejected-notebook.png",
+          "caption": "未采用的笔记本风格探索稿（不是正式版本）",
+          "source": "artifacts/ui-v3/rejected-notebook/main-menu.png",
+          "sourceDisposition": "归档后清除临时副本",
+          "bytes": 2161006,
+          "width": 1920,
+          "height": 1080,
+          "sha256": "f6209a54fde5207133d96f964ba45ce70a15418154d7cdd45834a4a630ec2a89"
+        },
+        {
+          "file": "09-before-pantry.png",
+          "caption": "可读性调整前库存",
+          "source": "artifacts/ux03-2026-10-08-pantry-baseline.png",
+          "sourceDisposition": "归档后清除临时副本",
+          "bytes": 999945,
+          "width": 720,
+          "height": 1280,
+          "sha256": "978604b7957062940da8bb8e686f803952c69998cfa1e569161349f84f207b34"
+        },
+        {
+          "file": "10-before-sleep.png",
+          "caption": "可读性调整前睡前页",
+          "source": "artifacts/ux03-2026-10-08-sleep-baseline.png",
+          "sourceDisposition": "归档后清除临时副本",
+          "bytes": 1123826,
+          "width": 720,
+          "height": 1280,
+          "sha256": "24b489099740320975f3db104d7003f83a745e1acbbdd174f89808cd3735e894"
+        }
+      ]
+    },
+    {
+      "folder": "03-2026-10-09-character-and-tray",
+      "date": "2026-10-09",
+      "title": "人物状态与餐盘表达",
+      "summary": "人物状态进入HUD，选中食物在餐盘中集中呈现，并同步适配桌面与竖屏。",
+      "records": [
+        "docs/process/CHARACTER_HUD_IMPLEMENTATION_2026-10-09.md",
+        "docs/process/TRAY_REFINEMENT_2026-10-09.md"
+      ],
+      "cover": "01-character-hud.png",
+      "images": [
+        {
+          "file": "01-character-hud.png",
+          "caption": "人物状态HUD",
+          "source": "docs/assets/character-hud-2026-10-09/1366x768/normal.png",
+          "sourceDisposition": "原路径保留",
+          "bytes": 1516097,
+          "width": 1366,
+          "height": 768,
+          "sha256": "f4741c573992da425f17d7bd9da6fd78bd539ee05382df6ab54cf6fb61b0a3f7"
+        },
+        {
+          "file": "02-selected-tray.png",
+          "caption": "桌面已选餐盘",
+          "source": "docs/assets/tray-refinement-2026-10-09/1366x768-cafeteria-selected.png",
+          "sourceDisposition": "原路径保留",
+          "bytes": 1684954,
+          "width": 1366,
+          "height": 768,
+          "sha256": "defd84aab603a18b4d4e9c59c236e5ac653280ca9f76735d604a0bd7c2de2758"
+        },
+        {
+          "file": "03-selected-tray-mobile.png",
+          "caption": "竖屏已选餐盘",
+          "source": "docs/assets/tray-refinement-2026-10-09/390x844-cafeteria-selected.png",
+          "sourceDisposition": "原路径保留",
+          "bytes": 528065,
+          "width": 390,
+          "height": 844,
+          "sha256": "853b9ce199e252c1ec2c4a99b350062cd5a9ebcc88dc5bda832db4e86cb4032b"
+        }
+      ]
+    },
+    {
+      "folder": "04-2026-10-12-meal-records",
+      "date": "2026-10-12",
+      "title": "真实餐次与日周记录",
+      "summary": "用已确认的餐次事实支撑日结与周回顾，移除旧餐次评分的生产输出。",
+      "records": [
+        "docs/process/G4A8_SCORE_RETIREMENT_2026-10-12.md"
+      ],
+      "cover": "01-day-records.png",
+      "images": [
+        {
+          "file": "01-day-records.png",
+          "caption": "日结中的实际餐次",
+          "source": "docs/assets/g4a8-2026-10-12/1920x1080-native-summary-records.png",
+          "sourceDisposition": "原路径保留",
+          "bytes": 1174628,
+          "width": 1920,
+          "height": 1080,
+          "sha256": "c9b5301447439cf9297bc54e043a98af19e5157417ae7e9691bd008857e79034"
+        },
+        {
+          "file": "02-week-review-mobile.png",
+          "caption": "竖屏整周记录",
+          "source": "docs/assets/g4a8-2026-10-12/720x1280-100-week.png",
+          "sourceDisposition": "原路径保留",
+          "bytes": 242029,
+          "width": 720,
+          "height": 1280,
+          "sha256": "67fbd5e7a63cbaa8e8b2a506489d5eda64cbeabc96c1d2a4e4ee4696868db04d"
+        }
+      ]
+    },
+    {
+      "folder": "05-2026-10-13-takeout-entry",
+      "date": "2026-10-13",
+      "title": "外卖入口与小屏打磨",
+      "summary": "用餐入口与学生场景结合，竖屏外卖卡和点击区域经过多轮收拢。对应历史提交4d75437与41c60c0。",
+      "records": [
+        "README.md"
+      ],
+      "cover": "02-after-entry.png",
+      "images": [
+        {
+          "file": "01-before-entry.png",
+          "caption": "入口调整前留档",
+          "source": "artifacts/takeout-redesign-2026-10-13/01-current.png",
+          "sourceDisposition": "归档后清除临时副本",
+          "bytes": 3550373,
+          "width": 1912,
+          "height": 948,
+          "sha256": "3ca73c546b6590e66399d60469caa6ba0f3ab267d828c57b5645af9397067c9c"
+        },
+        {
+          "file": "02-after-entry.png",
+          "caption": "桌面入口调整后",
+          "source": "docs/assets/takeout-entry-2026-10-13/native-final/1366x768-breakfast.png",
+          "sourceDisposition": "原路径保留",
+          "bytes": 2265791,
+          "width": 1366,
+          "height": 768,
+          "sha256": "2239364b2c33945b5cf78aba5c2349ffe3962e69db12f67d5bb6cc528770baff"
+        },
+        {
+          "file": "03-compact-mobile.png",
+          "caption": "紧凑竖屏入口",
+          "source": "docs/assets/takeout-entry-2026-10-13/native-compact/390x640-breakfast.png",
+          "sourceDisposition": "原路径保留",
+          "bytes": 563751,
+          "width": 390,
+          "height": 640,
+          "sha256": "7694af06c99a5991747fb8c0873712bd4d71b441b9a49c7803b149a7a9d51774"
+        },
+        {
+          "file": "04-web-live.jpg",
+          "caption": "10月13日网页试玩留档",
+          "source": "artifacts/github-pages-live-2026-10-13.jpg",
+          "sourceDisposition": "归档后清除临时副本",
+          "bytes": 221643,
+          "width": 1280,
+          "height": 720,
+          "sha256": "557c2a38593c0c65654e0f89947dd19a9ad4ff4201788693b7c3e21ff71b9373"
+        }
+      ]
+    },
+    {
+      "folder": "06-2026-10-14-two-stories",
+      "date": "2026-10-14",
+      "title": "从校园单篇到双人物故事",
+      "summary": "系列更名为《好好吃饭》，加入周阿姨的家庭做饭、库存与熟食管理。",
+      "records": [
+        "docs/process/SERIES_IMPLEMENTATION_2026-10-14.md",
+        "docs/process/CHOIR_CONTENT_2026-10-14.md"
+      ],
+      "cover": "01-story-menu.png",
+      "images": [
+        {
+          "file": "01-story-menu.png",
+          "caption": "双人物故事入口",
+          "source": "docs/assets/series-2026-10-14/desktop-menu.png",
+          "sourceDisposition": "原路径保留",
+          "bytes": 134680,
+          "width": 1280,
+          "height": 720,
+          "sha256": "557301c83474db5cb34a5aff9ffb585347b852d63e020d156da750888cf6de96"
+        },
+        {
+          "file": "02-household-sources-mobile.png",
+          "caption": "周阿姨初版用餐来源",
+          "source": "docs/assets/series-2026-10-14/mobile-sources.png",
+          "sourceDisposition": "原路径保留",
+          "bytes": 360889,
+          "width": 390,
+          "height": 844,
+          "sha256": "0fa5c4310e830bd0b4c242becc94a01159e2d62f71c8e9789a25ae85a0754102"
+        },
+        {
+          "file": "03-household-stock-mobile.png",
+          "caption": "周阿姨初版库存",
+          "source": "docs/assets/series-2026-10-14/mobile-storage.png",
+          "sourceDisposition": "原路径保留",
+          "bytes": 139642,
+          "width": 390,
+          "height": 844,
+          "sha256": "e3ab86f51500188e5873bf35d5b009e5d1fcf3dd5157416ec28ad10be262b9df"
+        }
+      ]
+    },
+    {
+      "folder": "07-2026-10-16-cards-and-preparation",
+      "date": "2026-10-16",
+      "title": "共同卡牌与备餐收益",
+      "summary": "两篇共用可移出的已选卡，家庭篇衔接厨房工作台，说明多做一份的材料与精力收益。",
+      "records": [
+        "docs/process/GLOBAL_UI_CARD_PASS_2026-10-16.md",
+        "docs/process/MEAL_PREP_COSTS_2026-10-16.md"
+      ],
+      "cover": "01-campus-cards.png",
+      "images": [
+        {
+          "file": "01-campus-cards.png",
+          "caption": "学生篇共同卡牌",
+          "source": "docs/assets/global-card-2026-10-15/after/1280x720-campus_exam-04-food-cafeteria.png",
+          "sourceDisposition": "原路径保留",
+          "bytes": 1360368,
+          "width": 1280,
+          "height": 720,
+          "sha256": "1537dc0a48fb297d323fffeb4b1419471d4ac66351f068b792294250a1e54a40"
+        },
+        {
+          "file": "02-household-cards.png",
+          "caption": "周阿姨篇共同卡牌",
+          "source": "docs/assets/global-card-2026-10-15/after/1280x720-choir_week-04-food-home_kitchen.png",
+          "sourceDisposition": "原路径保留",
+          "bytes": 993857,
+          "width": 1280,
+          "height": 720,
+          "sha256": "70449ca095fe1881c6bc1c62f036a71c6042862689a59acceeeb4adad399d7b0"
+        },
+        {
+          "file": "03-preparation-costs.png",
+          "caption": "额外一份的成本与收益",
+          "source": "docs/assets/meal-prep-2026-10-16/native/1280x720-02-extra-portion.png",
+          "sourceDisposition": "原路径保留",
+          "bytes": 1021891,
+          "width": 1280,
+          "height": 720,
+          "sha256": "1695a9b95f820f4db7682091c863919c0cd5e6f45ec5dc04fb389f87e2d117ba"
+        }
+      ]
+    },
+    {
+      "folder": "08-2026-10-20-community-experiment",
+      "date": "2026-10-20",
+      "title": "周阿姨场景探索与调整",
+      "summary": "尝试将来源放入社区地图。该方案在次日根据情境反馈撤回，是开发过程中的探索版。",
+      "records": [
+        "docs/process/HOUSEHOLD_SOURCE_SCENE_2026-10-20.md"
+      ],
+      "cover": "01-community-map.png",
+      "images": [
+        {
+          "file": "01-community-map.png",
+          "caption": "探索版社区来源地图（后续撤回）",
+          "source": "docs/assets/household-source-2026-10-20/1280x720-01-sources.png",
+          "sourceDisposition": "原路径保留",
+          "bytes": 2215425,
+          "width": 1280,
+          "height": 720,
+          "sha256": "116b4d66b939259dd67a864b0c6e8b47ace16668b98b3e3c7e58b18a1c4e5c2c"
+        },
+        {
+          "file": "02-community-map-mobile.png",
+          "caption": "探索版竖屏地图",
+          "source": "docs/assets/household-source-2026-10-20/390x640-01-sources.png",
+          "sourceDisposition": "原路径保留",
+          "bytes": 631780,
+          "width": 390,
+          "height": 640,
+          "sha256": "835f2d9a673580843b0791ff44a816b128f5ce84abaaba06f63e3671cc760eba"
+        }
+      ]
+    },
+    {
+      "folder": "09-2026-10-21-home-and-objects",
+      "date": "2026-10-21",
+      "title": "回到家中，用物件承载操作",
+      "summary": "在家决定这一餐，确认外出后再切换地点；锅、冰箱、购物袋和记事本成为可点入口。",
+      "records": [
+        "docs/process/HOUSEHOLD_HOME_CONTEXT_2026-10-21.md",
+        "docs/process/HOUSEHOLD_GRAPHICAL_ENTRIES_2026-10-21.md",
+        "docs/process/HOUSEHOLD_PANTRY_FLOW_2026-10-21.md"
+      ],
+      "cover": "02-graphical-entries.png",
+      "images": [
+        {
+          "file": "01-home-context.png",
+          "caption": "纠正后的家中情境",
+          "source": "docs/assets/household-home-2026-10-21/1280x720-01-home.png",
+          "sourceDisposition": "原路径保留",
+          "bytes": 1446587,
+          "width": 1280,
+          "height": 720,
+          "sha256": "a1389f2983be6ab655a71b4af9bcae194e7b20c2a64b4d916f4214f94ddb16e6"
+        },
+        {
+          "file": "02-graphical-entries.png",
+          "caption": "图形物件入口",
+          "source": "docs/assets/household-graphics-2026-10-21/1280x720-01-home.png",
+          "sourceDisposition": "原路径保留",
+          "bytes": 1514519,
+          "width": 1280,
+          "height": 720,
+          "sha256": "de040b332c918f85b19f27f1b8f3c07f65cd4540a7b2bc329079441ea0b1fbff"
+        },
+        {
+          "file": "03-cooking-plan.png",
+          "caption": "份数与冷藏配方确认",
+          "source": "docs/assets/household-pantry-2026-10-21/1280x720-03-plan-cold-portion.png",
+          "sourceDisposition": "原路径保留",
+          "bytes": 1039212,
+          "width": 1280,
+          "height": 720,
+          "sha256": "2a343593068bb374f6b6ff46c4a0c4e4e7f8b397d556f7e34d5b0d20f526abfe"
+        }
+      ]
+    },
+    {
+      "folder": "10-2026-10-23-kitchen-fridge-market",
+      "date": "2026-10-23",
+      "title": "厨房、冰箱与集市独立成景",
+      "summary": "进入厨房做饭，打开冰箱看存粮，去集市后选择早餐店、小馆或水果摊。",
+      "records": [
+        "docs/process/HOUSEHOLD_LOCATIONS_2026-10-23.md"
+      ],
+      "cover": "01-kitchen.png",
+      "images": [
+        {
+          "file": "01-kitchen.png",
+          "caption": "厨房近景",
+          "source": "docs/assets/household-locations-2026-10-23/1280x720-02-kitchen.png",
+          "sourceDisposition": "原路径保留",
+          "bytes": 1079859,
+          "width": 1280,
+          "height": 720,
+          "sha256": "aa05453dbe15ef16f41713cd06a68e2fe61d572cba0f97ca9f5bc806583cf42c"
+        },
+        {
+          "file": "02-fridge.png",
+          "caption": "冰箱与熟食",
+          "source": "docs/assets/household-locations-2026-10-23/1280x720-05-fridge-foods.png",
+          "sourceDisposition": "原路径保留",
+          "bytes": 968462,
+          "width": 1280,
+          "height": 720,
+          "sha256": "7469eb314f62d71067217d62f0b05eada472ae34d136244cf595ad054546fe80"
+        },
+        {
+          "file": "03-market.png",
+          "caption": "集市店铺入口",
+          "source": "docs/assets/household-locations-2026-10-23/1280x720-06-market-breakfast.png",
+          "sourceDisposition": "原路径保留",
+          "bytes": 1801443,
+          "width": 1280,
+          "height": 720,
+          "sha256": "1dd89ad5424a47250abbfd03585f8e26662962ee88b75f2c4cf19e18dd6b51e1"
+        }
+      ]
+    },
+    {
+      "folder": "11-2026-10-27-28-learning-loop",
+      "date": "2026-10-27—28",
+      "title": "把科普放进实际选餐",
+      "summary": "首日隔夜菜处置衔接可行早餐，随后使用当前餐次开展组成、钠和糖的标签练习。",
+      "records": [
+        "docs/process/ZHOU_LEARNING_LOOP_2026-10-27.md",
+        "docs/process/ZHOU_DAYS_2_TO_4_2026-10-28.md"
+      ],
+      "cover": "03-sodium-practice.png",
+      "images": [
+        {
+          "file": "01-leftover-opening-mobile.png",
+          "caption": "首日隔夜菜处置",
+          "source": "docs/assets/zhou-learning-2026-10-27/mobile-opening.png",
+          "sourceDisposition": "原路径保留",
+          "bytes": 249418,
+          "width": 390,
+          "height": 640,
+          "sha256": "9e7957ff90433e37f265007948b91476bbee3e24153d2de4e3c3732f4f893657"
+        },
+        {
+          "file": "02-real-breakfast-mobile.png",
+          "caption": "实际可选早餐",
+          "source": "docs/assets/zhou-learning-2026-10-27/mobile-breakfast-options.png",
+          "sourceDisposition": "原路径保留",
+          "bytes": 220768,
+          "width": 390,
+          "height": 640,
+          "sha256": "57b963db82f035680fc49904d136679f291d71c90aae4aa808eebc4039703f50"
+        },
+        {
+          "file": "03-sodium-practice.png",
+          "caption": "依据当前餐次的钠练习",
+          "source": "docs/assets/zhou-study-2026-10-28/desktop-04-current-sodium-question.png",
+          "sourceDisposition": "原路径保留",
+          "bytes": 1054292,
+          "width": 1280,
+          "height": 720,
+          "sha256": "542ffb66c1f409d5f41bdce859b58801ca8bfbb0dc6cfe2345f4306ae160299e"
+        },
+        {
+          "file": "04-sugar-practice.png",
+          "caption": "依据当前餐次的糖练习",
+          "source": "docs/assets/zhou-study-2026-10-28/desktop-07-current-sugar-question.png",
+          "sourceDisposition": "原路径保留",
+          "bytes": 1050097,
+          "width": 1280,
+          "height": 720,
+          "sha256": "4d7aac2411715d831fd571d8bda357c0ecdc7478caf6abca7d500fe999167a3e"
+        }
+      ]
+    },
+    {
+      "folder": "12-2026-10-28-complete-household-week",
+      "date": "2026-10-28",
+      "title": "共餐、备餐到汇演与周回顾",
+      "summary": "第5天回应人物需要和真实共餐，第6天计划并实际取用备餐，第7天回应汇演结果并回顾一周。",
+      "records": [
+        "docs/process/ZHOU_DAY_5_2026-10-28.md",
+        "docs/process/ZHOU_DAY_6_2026-10-28.md",
+        "docs/process/ZHOU_DAY_7_2026-10-28.md"
+      ],
+      "cover": "01-real-shared-dinner.png",
+      "images": [
+        {
+          "file": "01-real-shared-dinner.png",
+          "caption": "第5天真实共餐",
+          "source": "docs/assets/zhou-day5-2026-10-28/desktop-06-real-shared-dinner.png",
+          "sourceDisposition": "原路径保留",
+          "bytes": 774376,
+          "width": 1280,
+          "height": 720,
+          "sha256": "b5b63665b87cfc3cb235a9631f40161a84bc18db61cd928d4a5ea5ba446c5e09"
+        },
+        {
+          "file": "02-preparation-plan.png",
+          "caption": "第6天配方与下一餐计划",
+          "source": "docs/assets/zhou-day6-2026-10-28/desktop-03-recipe-and-plan.png",
+          "sourceDisposition": "原路径保留",
+          "bytes": 1082343,
+          "width": 1280,
+          "height": 720,
+          "sha256": "f12a0e96a5f38e5e4b3c07357a6ba3197310ee63e36a3ae53ce44837294627c5"
+        },
+        {
+          "file": "03-performance-mobile.png",
+          "caption": "第7天实际参演",
+          "source": "docs/assets/zhou-day7-2026-10-28/mobile-06-actually-performed.png",
+          "sourceDisposition": "原路径保留",
+          "bytes": 169279,
+          "width": 390,
+          "height": 640,
+          "sha256": "440da023f42c1183e015c52fed6db84b9a3a5e54ed6c4945d0fb35b2b9908edf"
+        },
+        {
+          "file": "04-week-facts-mobile.png",
+          "caption": "整周实际记录",
+          "source": "docs/assets/zhou-day7-2026-10-28/mobile-08-week-facts.png",
+          "sourceDisposition": "原路径保留",
+          "bytes": 184574,
+          "width": 390,
+          "height": 640,
+          "sha256": "3df9994a947a07937fa0887d135fb549f0217ba18789158c278a205d5c52969d"
+        }
+      ]
+    },
+    {
+      "folder": "13-2026-10-29-title-and-character-entry",
+      "date": "2026-10-29",
+      "title": "生活轮播标题与人物长条入口",
+      "summary": "两位人物各有生活轮播图；完整人物插画承载选择，网页加载展示真实下载进度。",
+      "records": [
+        "docs/process/ENTRY_REDESIGN_2026-10-29.md"
+      ],
+      "cover": "01-title.png",
+      "images": [
+        {
+          "file": "01-title.png",
+          "caption": "生活插画标题页",
+          "source": "docs/assets/menu-redesign-2026-10-28/browser/01-title-desktop.png",
+          "sourceDisposition": "原路径保留",
+          "bytes": 118439,
+          "width": 1280,
+          "height": 720,
+          "sha256": "3a3f3d9443c93b84e4b61a54c663f63a5aa2c624972ad90a696383133ec62b0a"
+        },
+        {
+          "file": "02-character-selection.png",
+          "caption": "桌面人物选择",
+          "source": "docs/assets/menu-redesign-2026-10-28/browser/02-zhou-desktop.png",
+          "sourceDisposition": "原路径保留",
+          "bytes": 123838,
+          "width": 1280,
+          "height": 720,
+          "sha256": "ece054b989b4594f0bf4acb7dbb378b4d7b6c018d1e10ff71b4577a78f917183"
+        },
+        {
+          "file": "03-character-selection-mobile.png",
+          "caption": "竖屏人物选择",
+          "source": "docs/assets/menu-redesign-2026-10-28/browser/03-zhou-mobile.png",
+          "sourceDisposition": "原路径保留",
+          "bytes": 45737,
+          "width": 390,
+          "height": 640,
+          "sha256": "e4bb9328b26052265920f3f7a9365d4eb8e748aee8d0fcc194550169091afc0a"
+        },
+        {
+          "file": "04-web-loading.png",
+          "caption": "真实进度加载页",
+          "source": "docs/assets/menu-redesign-2026-10-28/browser/07-loading-desktop.png",
+          "sourceDisposition": "原路径保留",
+          "bytes": 79123,
+          "width": 1280,
+          "height": 720,
+          "sha256": "d1abe531fe3adc822288cc77ebd854ea02b13509ec34d5da7ada6ff140fe1095"
+        }
+      ]
+    },
+    {
+      "folder": "14-2026-10-29-ending-feedback",
+      "date": "2026-10-29",
+      "title": "结局回应这一局的选择",
+      "summary": "双篇使用独立结局页，回看关键选择、实际效果与下一次尝试。另附本轮改版前的周回顾用于对照。",
+      "records": [
+        "docs/process/ENDING_FEEDBACK_2026-10-29.md"
+      ],
+      "cover": "01-student-ending.png",
+      "images": [
+        {
+          "file": "01-student-ending.png",
+          "caption": "学生篇新版结局",
+          "source": "docs/assets/endings-feedback-2026-10-29/after/1280x720-student-steady-main.png",
+          "sourceDisposition": "原路径保留",
+          "bytes": 590450,
+          "width": 1280,
+          "height": 720,
+          "sha256": "b9712c3d7878e3f8950f87983f85b7bf9886fe853dd77eab5034ecdca2f2257a"
+        },
+        {
+          "file": "02-zhou-ending.png",
+          "caption": "周阿姨新版结局",
+          "source": "docs/assets/endings-feedback-2026-10-29/after/1280x720-zhou-performed-main.png",
+          "sourceDisposition": "原路径保留",
+          "bytes": 579677,
+          "width": 1280,
+          "height": 720,
+          "sha256": "5f40df7312ebaa525314493df31598c0a831c8794d09478edec5daa06808f6f0"
+        },
+        {
+          "file": "03-zhou-ending-mobile.png",
+          "caption": "竖屏新版结局",
+          "source": "docs/assets/endings-feedback-2026-10-29/after/390x640-zhou-performed-main.png",
+          "sourceDisposition": "原路径保留",
+          "bytes": 161903,
+          "width": 390,
+          "height": 640,
+          "sha256": "e3969c5b8d4aea989a0752d558f7d64b584e5d50098044a8020b310bed104095"
+        },
+        {
+          "file": "04-before-week-review.png",
+          "caption": "本轮改版前的整周回顾留档",
+          "source": "docs/assets/endings-feedback-2026-10-29/04-zhou-week-review.png",
+          "sourceDisposition": "原路径保留",
+          "bytes": 899522,
+          "width": 1280,
+          "height": 720,
+          "sha256": "509b87ed75f35a01ed4984628411e91a485ee09c9cc4e1629be66bf8ae80bb02"
+        }
+      ]
+    },
+    {
+      "folder": "15-2026-10-30-web-release-check",
+      "date": "2026-10-30",
+      "title": "发布前网页操作与刷新恢复",
+      "summary": "最新结局版本同步到试玩目录。这里保留发布前本地Pages目录的实际选餐和刷新恢复截图，线上验收另见发布记录。",
+      "records": [
+        "docs/process/ENDING_WEB_RELEASE_2026-10-30.md"
+      ],
+      "cover": "01-web-after-meal.jpg",
+      "images": [
+        {
+          "file": "01-web-after-meal.jpg",
+          "caption": "发布前网页选餐后的状态",
+          "source": "docs/assets/ending-release-2026-10-29/local-campus-after-meal.jpg",
+          "sourceDisposition": "原路径保留",
+          "bytes": 150785,
+          "width": 1280,
+          "height": 720,
+          "sha256": "1d8d8921edb3e6b9f8e6962aa00cf26b9927b3aec4c6d8604c02a6e09e878784"
+        },
+        {
+          "file": "02-web-after-refresh.jpg",
+          "caption": "发布前网页刷新后恢复状态",
+          "source": "docs/assets/ending-release-2026-10-29/local-campus-restored.jpg",
+          "sourceDisposition": "原路径保留",
+          "bytes": 150716,
+          "width": 1280,
+          "height": 720,
+          "sha256": "c8d2823465472af95f3d95df82f1aada0f381f01932af991bdad8d75c160518f"
+        }
+      ]
+    }
+  ]
+}

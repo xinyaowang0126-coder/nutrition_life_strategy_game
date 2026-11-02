@@ -9,6 +9,7 @@ var _active_tab := "cooked"
 var _tab_buttons: Dictionary = {}
 var _tab_pages: Dictionary = {}
 var _expanded_batches: Dictionary = {}
+var _ingredients_grid: GridContainer
 
 
 func setup(stock: KitchenStock, foods: Dictionary, current_day: int) -> void:
@@ -81,17 +82,19 @@ func refresh() -> void:
 	reminder.toggle_mode = true
 	reminder.custom_minimum_size.y = 46
 	cooked.add_child(reminder)
-	var warning := HouseholdUI.note(cooked, "保存不当的隔夜熟食有健康风险。再烧开不能保证消除危害，闻着正常也不证明安全。", true).get_parent() as Control
+	var warning := HouseholdUI.note(cooked, "保存不当的熟食不能吃，再烧开也可能留有耐热毒素。", true).get_parent() as Control
 	warning.hide()
 	reminder.toggled.connect(func(open: bool) -> void: warning.visible = open)
 	var ingredients := _tab_pages["ingredients"] as VBoxContainer
 	HouseholdUI.section(ingredients, "现有原料（游戏份数）")
 	var grid := GridContainer.new()
+	_ingredients_grid = grid
 	grid.columns = 3
 	grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	grid.add_theme_constant_override("h_separation", 10)
 	grid.add_theme_constant_override("v_separation", 10)
 	ingredients.add_child(grid)
+	ingredients.resized.connect(func() -> void: HouseholdUI.fit_inventory_grid.call_deferred(grid))
 	for key in HouseholdUI.INGREDIENT_IDS:
 		var tile := PanelContainer.new()
 		tile.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -102,6 +105,7 @@ func refresh() -> void:
 		stack.add_child(HouseholdUI.image(HouseholdUI.ingredient_texture(String(key)), 90))
 		var quantity := int(_stock.ingredients.get(key, 0))
 		stack.add_child(HouseholdUI.label("%s ×%d" % [HouseholdUI.ingredient_name(String(key)), quantity], 21, HouseholdUI.INK if quantity > 0 else HouseholdUI.DANGER))
+	HouseholdUI.fit_inventory_grid.call_deferred(grid)
 	HouseholdUI.section(ingredients, "调味库存")
 	HouseholdUI.note(ingredients, "盐 %d克  ·  酱油 %d毫升  ·  白糖 %d克" % [_stock.condiments.get("salt_g", 0), _stock.condiments.get("soy_ml", 0), _stock.condiments.get("sugar_g", 0)])
 	_select_tab(_active_tab, false)
@@ -118,6 +122,7 @@ func _select_tab(tab_id: String, reset_scroll: bool = true) -> void:
 		(_tab_buttons[key] as Button).set_pressed_no_signal(selected)
 		(_tab_pages[key] as Control).visible = selected
 	if reset_scroll: scroll.scroll_vertical = 0
+	if tab_id == "ingredients": HouseholdUI.fit_inventory_grid.call_deferred(_ingredients_grid)
 
 
 func _add_batch(parent: Container, batch: Dictionary) -> void:
@@ -163,7 +168,7 @@ func _add_batch(parent: Container, batch: Dictionary) -> void:
 	record.add_child(HouseholdUI.label(String(batch.get("note", "保存情况未记录。")), 21, HouseholdUI.MUTED))
 	var facts: Variant = batch.get("recipe_facts")
 	if facts is Dictionary and HouseholdMealFacts.valid(facts):
-		record.add_child(HouseholdUI.label("原配方：调味钠 %s毫克，另加白糖 %s克／人份。食材本底与总糖未知。" % [HouseholdMealFacts.number(facts["sodium_from_added_seasonings_mg"]), HouseholdMealFacts.number(facts["white_sugar_added_g"])], 20, HouseholdUI.MUTED))
+		record.add_child(HouseholdUI.label("原配方：调味钠 %s毫克，另加白糖 %s克／人份。食材本身的钠、总糖未记录。" % [HouseholdMealFacts.number(facts["sodium_from_added_seasonings_mg"]), HouseholdMealFacts.number(facts["white_sugar_added_g"])], 20, HouseholdUI.MUTED))
 	else:
 		record.add_child(HouseholdUI.label("这份熟食的配方调味量未记录。", 20, HouseholdUI.MUTED))
 	record.visible = bool(_expanded_batches.get(id, false))

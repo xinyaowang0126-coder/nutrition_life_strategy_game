@@ -4,6 +4,7 @@ extends Control
 signal record_book_requested()
 
 signal next_day_requested()
+signal planning_requested()
 
 @onready var dim: ColorRect = $Dim
 @onready var paper_host: Control = $PaperHost
@@ -53,6 +54,7 @@ var _next_locked := false
 var _detail_closed_text := "查看三餐详情"
 var _detail_open_text := "收起三餐详情"
 var record_book_button: Button
+var planning_button: Button
 
 
 func _ready() -> void:
@@ -68,6 +70,16 @@ func _ready() -> void:
 	detail_button.get_parent().add_child(record_book_button)
 	detail_button.get_parent().move_child(record_book_button, detail_button.get_index() + 1)
 	record_book_button.pressed.connect(func() -> void: record_book_requested.emit())
+	planning_button = HouseholdUI.button("", "TomorrowPlan")
+	planning_button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	planning_button.custom_minimum_size.y = 56
+	planning_button.add_theme_font_size_override("font_size", 21)
+	planning_button.hide()
+	content_stack.add_child(planning_button)
+	content_stack.move_child(planning_button, journal_note.get_index())
+	planning_button.pressed.connect(func() -> void:
+		if visible and planning_button.visible and not next_button.disabled: planning_requested.emit()
+	)
 	resized.connect(_on_popup_resized)
 	if not _summary.is_empty():
 		_apply_summary()
@@ -112,8 +124,14 @@ func get_summary() -> Dictionary:
 	return _summary.duplicate(true)
 
 
+func configure_planning(text: String) -> void:
+	planning_button.text = text
+	planning_button.visible = not text.is_empty()
+
+
 func _apply_summary() -> void:
 	var ending_layout := String(_summary.get("layout", "")) == "ending"
+	planning_button.hide()
 	record_kicker.text = "本周小记" if ending_layout else "今日小记"
 	advice_kicker.text = "下次" if ending_layout else "明天"
 	var stats: Dictionary = _summary
@@ -121,7 +139,7 @@ func _apply_summary() -> void:
 	if nested_stats is Dictionary:
 		stats = nested_stats as Dictionary
 	var day := int(_summary.get("day", 1))
-	day_title.text = String(_summary.get("title", "第 %d 天，收工" % day))
+	day_title.text = String(_summary.get("title", "第 %d 天结束" % day))
 	stability_value.text = "余力 %d" % int(stats.get("stability", 0))
 	study_value.text = "%s %d/%d" % [
 		String(stats.get("goal_label", "复习")),
@@ -390,10 +408,10 @@ func _default_advice(stats: Dictionary) -> String:
 	var energy := int(stats.get("energy", 50))
 	var stress := int(stats.get("stress", 50))
 	if energy <= 25:
-		return "电量见底了。今晚别再和自己较劲。"
+		return "精力很低，明天多留点时间休息。"
 	if stress >= 75:
-		return "脑子还没松下来，明天少塞一件事也没关系。"
-	return "今天先放到这里。灯一关，剩下的交给明天。"
+		return "压力较高，明天可以少排一次复习。"
+	return "今天结束了。"
 
 
 func _unhandled_key_input(event: InputEvent) -> void:

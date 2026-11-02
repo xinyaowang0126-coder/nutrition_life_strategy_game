@@ -208,7 +208,7 @@ func _build_main(page: VBoxContainer, window_size: Vector2) -> void:
 	body.add_child(summary_label)
 	if not feedback["moments"].is_empty():
 		var span := "这周" if int(feedback.get("day", 1)) >= 7 else "这几天"
-		body.add_child(_label(span + "留下的" + ("两件事" if feedback["moments"].size() == 2 else "一件事"), 14, true, UI.ORANGE))
+		body.add_child(_label(span + "的" + ("两件事" if feedback["moments"].size() == 2 else "一件事"), 14, true, UI.ORANGE))
 	for moment in feedback["moments"]:
 		var item := _stack(body, 3)
 		var button := _button(String(moment["title"]) + " · 回看", "Moment_" + String(moment["id"]), func() -> void: open_review(String(moment["id"])), false, true)
@@ -216,7 +216,7 @@ func _build_main(page: VBoxContainer, window_size: Vector2) -> void:
 		button.flat = true
 		item.add_child(button)
 		item.add_child(_label(String(moment["text"]), body_pixels))
-	body.add_child(_label("下次试一件事", 14, true, UI.GREEN))
+	body.add_child(_label("下次试试", 14, true, UI.GREEN))
 	body.add_child(_label(String(feedback["next_try"]), body_pixels))
 	var footer := HBoxContainer.new()
 	footer.add_theme_constant_override("separation", roundi(8 * _factor))
@@ -229,7 +229,7 @@ func _build_main(page: VBoxContainer, window_size: Vector2) -> void:
 
 func _build_review(page: VBoxContainer) -> void:
 	var content := _stack(main_scroll, 18)
-	_add_section(content, "rules", "这次结局的依据", String(feedback.get("summary", "")) + "\n\n" + String(feedback.get("rules", "")))
+	_add_section(content, "rules", "结局条件", String(feedback.get("summary", "")) + "\n\n" + String(feedback.get("rules", "")))
 	for moment in feedback.get("moments", []):
 		_add_section(content, String(moment["id"]), String(moment["title"]), String(moment["basis"]))
 	for section in feedback.get("review", []):

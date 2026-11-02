@@ -7,20 +7,20 @@ const Gameplay := preload("res://scripts/systems/RecoveryGameplayService.gd")
 const MealRecords := preload("res://scripts/systems/MealRecordPresenter.gd")
 const SLEEP_NAMES := {"sleep_early": "早点睡", "night_study": "再复习一会儿", "scroll_phone": "刷一会儿手机"}
 const REASONS := {
-	"LOW_ENERGY_SEVERE": "收工时精力很低",
-	"HIGH_STRESS_SEVERE": "收工时压力很高",
+	"LOW_ENERGY_SEVERE": "当天结束时精力很低",
+	"HIGH_STRESS_SEVERE": "当天结束时压力很高",
 	"LATE_STUDY_LOW_ENERGY": "晚间复习后精力偏低",
 	"LATE_STUDY_HIGH_STRESS": "晚间复习后压力偏高",
-	"OVERWORKED_LOW_ENERGY": "三个安排位都用于复习，收工时精力偏低",
-	"HIGH_STRESS_LOW_ENERGY": "收工时压力偏高、精力偏低",
+	"OVERWORKED_LOW_ENERGY": "三个安排位都用于复习，当天结束时精力偏低",
+	"HIGH_STRESS_LOW_ENERGY": "当天结束时压力偏高、精力偏低",
 	"LATE_STUDY": "晚间继续复习",
-	"LOW_ENERGY": "收工时精力偏低",
-	"HIGH_STRESS": "收工时压力偏高",
+	"LOW_ENERGY": "当天结束时精力偏低",
+	"HIGH_STRESS": "当天结束时压力偏高",
 	"OVERWORKED": "三个安排位都用来复习，没留休息时间",
-	"EARLY_SLEEP_READY": "选择早点睡，收工时精力充足、压力较低",
-	"STEADY_FALLBACK": "收工时的精力、压力和安排让复习收益保持照常",
+	"EARLY_SLEEP_READY": "选择早点睡，当天结束时精力充足、压力较低",
+	"STEADY_FALLBACK": "当天结束时的精力、压力和安排让复习收益保持照常",
 }
-const HELP := "昨夜恢复在每天收工后记录一次，白天保持这条记录。判断会一起看精力、压力、当天行动和晚间安排。\n恢复会影响第二天的开场与复习收益。这些是游戏规则，不用于判断真实健康；休息也不会改掉已经记下的饮食选择。"
+const HELP := "每天结束时结算恢复，依据是精力、压力和当天安排。\n恢复结果会影响第二天的精力和复习收益。"
 const EFFECT_NAMES := {
 	"legacy_quality_bonus": "餐食游戏加成", "legacy_quality_strain": "餐食游戏压力变化",
 	"high_quality_bonus": "餐食游戏加成", "low_quality_stress": "餐食游戏压力变化",
@@ -41,7 +41,7 @@ static func present(record: Variant, timing: String = "current") -> Dictionary:
 		return _unavailable(String(record["status"]))
 	var frozen := StateService.normalize(record)
 	if frozen["origin"] == "new_run_default":
-		return {"available": true, "title": "起步状态", "label": "起步状态", "summary": "新的一周开始了，还没有昨夜的恢复记录。", "effect_text": "今天从起步状态开始", "detail_text": "这是这一周的起点。今晚怎么安排，收工后再记。\n\n" + HELP}
+		return {"available": true, "title": "起步状态", "label": "起步状态", "summary": "第一天，从初始状态开始。", "effect_text": "今天从起步状态开始", "detail_text": "今晚结束后，会结算第一次恢复。\n\n" + HELP}
 	var title: String = Gameplay.TITLES[frozen["condition"]]
 	var lead := "今晚恢复" if timing == "settled" else "昨夜恢复"
 	var facts: Array[String] = []
@@ -54,27 +54,27 @@ static func present(record: Variant, timing: String = "current") -> Dictionary:
 		short_reason += "；完整依据见详情"
 	var sleep: Dictionary = frozen["sleep_snapshot"]
 	if sleep["id"] == "scroll_phone":
-		reason += "。这晚刷了手机，恢复仍看实际精力、压力和安排"
-		short_reason += "。这晚刷了手机，恢复仍看实际精力、压力和安排"
+		reason += "。睡前刷了手机，恢复按整天的精力和压力结算"
+		short_reason += "。睡前刷了手机，恢复按整天的精力和压力结算"
 	elif sleep["id"] == "sleep_early" and frozen["condition"] in ["strained", "depleted"]:
-		reason += "。虽然早点睡了，收工时仍有这些情况"
-		short_reason += "。虽然早点睡了，收工时仍有这些情况"
+		reason += "。早点睡了，但当天结束时仍有这些情况"
+		short_reason += "。早点睡了，但当天结束时仍有这些情况"
 	var effect := _effect_text(frozen["next_day_effect"], timing)
-	var details: Array[String] = ["第 %d 天收工后 · %s" % [frozen["evaluated_day"], title], "判断依据：" + reason, "晚间安排：" + String(SLEEP_NAMES[sleep["id"]])]
+	var details: Array[String] = ["第 %d 天收工后 · %s" % [frozen["evaluated_day"], title], "原因：" + reason, "晚间安排：" + String(SLEEP_NAMES[sleep["id"]])]
 	var before: Dictionary = frozen["before_sleep"]
 	var after: Dictionary = frozen["after_sleep"]
 	var finish: Dictionary = frozen["end_of_day"]
-	details.append("精力 %d → %d → %d；压力 %d → %d → %d\n依次为睡前、晚间安排后、收工时。" % [before["energy"], after["energy"], finish["energy"], before["stress"], after["stress"], finish["stress"]])
-	details.append("晚间安排实际效果：" + _delta_text(sleep))
+	details.append("精力 %d → %d → %d；压力 %d → %d → %d\n依次为睡前、晚间安排后、当天结束时。" % [before["energy"], after["energy"], finish["energy"], before["stress"], after["stress"], finish["stress"]])
+	details.append("睡前安排的效果：" + _delta_text(sleep))
 	var others: Array[String] = []
 	for entry in frozen["settlement_effects"]:
 		var delta := _delta_text(entry["requested_delta"])
 		if delta != "无数值变化":
 			others.append("%s：%s" % [EFFECT_NAMES.get(entry["source_id"], "其他日终游戏效果"), delta])
 	if not others.is_empty():
-		details.append("其他日终效果（按执行顺序）：\n" + "\n".join(others))
-	details.append("数值保持在0–100，这次调整：" + _delta_text(frozen["clamp_delta"]))
-	details.append(effect + "。当天事件、精力和压力也会影响实际复习收益；数值到顶或到底时，只记实际变化。")
+		details.append("其他变化：\n" + "\n".join(others))
+	details.append("数值范围0–100，超出部分调整：" + _delta_text(frozen["clamp_delta"]))
+	details.append(effect + "。实际复习收益还受当天事件、精力和压力影响，最高记到100。")
 	if timing == "final":
 		details[-1] = "本周已收尾，这条记录的次日效果没有在本局应用。"
 	details.append(HELP)
@@ -83,14 +83,14 @@ static func present(record: Variant, timing: String = "current") -> Dictionary:
 
 static func _unavailable(status: String) -> Dictionary:
 	var title := "恢复记录暂时不可用"
-	var text := "这条记录读不完整，暂时看不到恢复依据和效果。"
+	var text := "恢复信息不完整，暂时无法显示。"
 	if status == "legacy_unknown":
 		title = "这段历史没有恢复记录"
-		text = "旧记录没有保存恢复依据，这一晚的状态无法确定。"
+		text = "旧存档没有保存这一晚的恢复信息。"
 	elif status == "unsupported_version":
 		title = "恢复记录版本暂不支持"
 		text = "当前版本无法读取这条恢复记录。"
-	return {"available": false, "title": title, "label": title, "summary": text, "effect_text": "恢复效果暂不可用", "detail_text": text + "\n这条记录不参与恢复效果计算。"}
+	return {"available": false, "title": title, "label": title, "summary": text, "effect_text": "恢复效果暂不可用", "detail_text": text + "\n这一晚的恢复效果暂不计入。"}
 
 
 static func _effect_text(effect: Dictionary, timing: String) -> String:

@@ -154,5 +154,5 @@ static func summarize(meals: Array) -> Dictionary:
 		counted += 1
 		sodium += float(facts["sodium_from_added_seasonings_mg"])
 		sugar += float(facts["white_sugar_added_g"])
-	var text := "今天%d餐有配方记录：追加调味钠已知小计约%s毫克，另加白糖已知小计约%s克。" % [counted, number(sodium), number(sugar)] if counted > 0 else "今天没有可汇总的配方调味量。"
-	return {"known_seasoning_sodium_mg": sodium, "known_white_sugar_g": sugar, "recorded_meals": counted, "meals_without_recipe_facts": unknown, "text": text + "\n这不是全天总摄入；食材本底及未记录项目仍未知。"}
+	var text := "今天%d餐的配方合计：调味钠约%s毫克，另加白糖约%s克。" % [counted, number(sodium), number(sugar)] if counted > 0 else "今天没有调味用量记录。"
+	return {"known_seasoning_sodium_mg": sodium, "known_white_sugar_g": sugar, "recorded_meals": counted, "meals_without_recipe_facts": unknown, "text": text + "\n这里只算配方中添加的调味；食材本身和未记录项目的含量未知。"}

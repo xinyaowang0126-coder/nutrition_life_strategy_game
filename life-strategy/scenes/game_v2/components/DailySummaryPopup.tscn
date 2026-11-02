@@ -293,7 +293,7 @@ autowrap_mode = 3
 layout_mode = 2
 theme_override_colors/font_color = Color(0.42, 0.36, 0.29, 1)
 theme_override_font_sizes/font_size = 15
-text = "成分与份量尚未核对，暂不作营养评价。"
+text = "配料和份量尚未核对。"
 autowrap_mode = 3
 
 [node name="Spacer" type="Control" parent="PaperHost/Paper/Margin/VBox" unique_id=1017574170]

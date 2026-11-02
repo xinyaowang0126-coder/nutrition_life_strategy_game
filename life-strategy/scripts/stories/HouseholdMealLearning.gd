@@ -37,73 +37,73 @@ static func key_for(c: Dictionary, variant: String) -> String:
 
 
 static func topic(day: int) -> String:
-	return {2: "看看这餐的组成", 3: "盐勺以外的钠", 4: "糖量怎样记"}.get(day, "这一餐")
+	return {2: "这一餐有什么", 3: "盐勺以外的钠", 4: "糖量怎样记"}.get(day, "这一餐")
 
 
 static func composition(c: Dictionary) -> String:
 	var names: Array[String] = []
 	for group in c["groups"]: names.append(GROUPS[group])
-	return "、".join(names) if not names.is_empty() else "具体组成尚未记录"
+	return "、".join(names) if not names.is_empty() else "配料未记录"
 
 
 static func question(c: Dictionary, variant: String = "actual") -> Dictionary:
 	var day: int = c["day"]
 	var recipe: Dictionary = c["recipe_facts"]
 	var title := topic(day)
-	var body := ("已确认的一餐：" if c["scope"] == "confirmed" else "本次预览：") + "、".join(c["food_names"])
+	var body := ("这一餐：" if c["scope"] == "confirmed" else "餐盘预览：") + "、".join(c["food_names"])
 	var prompt := ""
 	var explanation := ""
 	var choices: Array = []
 	var correct := "known"
 	if day == 2:
-		body += "\n已知组成：" + composition(c) + "。"
-		if variant != "actual": body = "换一道教学例子：面条、豆腐和番茄。\n这是练习菜单，不计入本局进餐。" if variant == "label_a" else "换一道教学例子：米饭、鸡蛋和青菜。\n这是练习菜单，不计入本局进餐。"
-		prompt = "只凭这些食物与配方记录，能确定什么？"
-		choices = [{"id": "known", "text": "能看出组成；是否吃够还要看份量和全天安排"}, {"id": "enough", "text": "出现了几类食物，就能确定全天已经吃够"}, {"id": "nothing", "text": "缺少份量，所以连食物组成也无法判断"}]
-		explanation = "组成是已知事实；份量和全天安排还不清楚，不能据此判断已经吃够。清淡饮食也需要合理搭配，不等于只选一种食物。"
+		body += "\n食物种类：" + composition(c) + "。"
+		if variant != "actual": body = "练习菜单：面条、豆腐和番茄。" if variant == "label_a" else "练习菜单：米饭、鸡蛋和青菜。"
+		prompt = "从这份菜单能看出什么？"
+		choices = [{"id": "known", "text": "有哪些食物很清楚，吃得够不够还要看份量和全天安排"}, {"id": "enough", "text": "食物种类够多，一整天就吃够了"}, {"id": "nothing", "text": "份量不清楚，所以连有哪些食物也不知道"}]
+		explanation = "能看出这一餐有哪些食物。吃得够不够，还要看份量和一整天的安排。清淡的饭菜也要搭配着吃。"
 	elif day == 3:
 		if variant != "actual":
 			var per100 := 7000 if variant == "label_a" else 6000
 			var amount := 10 if variant == "label_a" else 5
 			var sodium := per100 * amount / 100
-			body += "\n\n换一个教学标签：每100毫升钠%d毫克，用了%d毫升。\n此标签不替换本次配方，也不计入进餐。" % [per100, amount]
+			body += "\n\n练习标签：每100毫升含钠%d毫克，用了%d毫升。" % [per100, amount]
 			prompt = "这部分酱油带来多少钠？"
 			correct = "measured"
 			choices = [{"id": "per100", "text": "%d毫克钠" % per100}, {"id": "measured", "text": "%d毫克钠" % sodium}, {"id": "zero", "text": "零毫克钠"}]
-			explanation = "%d × %d ÷ 100 = %d毫克钠。标签要按实际用量换算，不能直接照抄每100毫升的数值。" % [per100, amount, sodium]
+			explanation = "%d × %d ÷ 100 = %d毫克钠。每100毫升的含量，乘上这次用了多少，再除以100。" % [per100, amount, sodium]
 		elif not recipe.is_empty():
-			body += "\n每人份盐%s克、酱油%s毫升。\n本关给定酱油标签：每100毫升钠7000毫克。" % [Facts.number(recipe["salt_g"]), Facts.number(recipe["soy_ml"])]
-			prompt = "这份配方追加的调味带来多少钠？"
+			body += "\n每人份盐%s克、酱油%s毫升。\n本关酱油标签：每100毫升钠7000毫克。" % [Facts.number(recipe["salt_g"]), Facts.number(recipe["soy_ml"])]
+			prompt = "这份配方的盐和酱油，一共带来多少钠？"
 			correct = "measured"
 			var sodium: int = int(recipe["sodium_from_added_seasonings_mg"])
-			choices = [{"id": "per100", "text": "直接记为7000毫克"}, {"id": "measured", "text": "%d毫克，仅为已记录调味的小计" % sodium}, {"id": "whole", "text": "%d毫克，就是整餐全部钠" % sodium}]
-			explanation = "%s × 400 ＋ %s × 7000 ÷ 100 = %d毫克钠。盐和酱油都要计入；食材本底与其他未记录项目仍未知，这不是整餐或全天总量。" % [Facts.number(recipe["salt_g"]), Facts.number(recipe["soy_ml"]), sodium]
+			choices = [{"id": "per100", "text": "直接记为7000毫克"}, {"id": "measured", "text": "%d毫克，来自盐和酱油" % sodium}, {"id": "whole", "text": "%d毫克，包括整餐的全部钠" % sodium}]
+			explanation = "%s × 400 ＋ %s × 7000 ÷ 100 = %d毫克钠。这是盐和酱油中的钠；食材本身和其他未记录项目中的钠另算。" % [Facts.number(recipe["salt_g"]), Facts.number(recipe["soy_ml"]), sodium]
 		else:
 			prompt = "这餐的盐和酱油用量没有记录，调味钠该怎样记？"
 			choices = [{"id": "known", "text": "用量未知，暂时不能计算"}, {"id": "zero", "text": "没有写用量，就记为零"}, {"id": "taste", "text": "只凭菜名或口味估一个准确数值"}]
-			explanation = "未记录用量就保留未知，不能当零。做饭时可对照本次配方；外食的实际调味量没有记录时，也不从菜名或价格反推。"
+			explanation = "用量没记下，调味钠就保留未知。做饭时可以看配方；外食也得知道用量，才能算得准。"
 	else:
 		if variant != "actual":
 			var volume := 250 if variant == "label_a" else 300
 			var per100 := 8 if variant == "label_a" else 6
 			var total := volume * per100 / 100
-			body += "\n\n换一个教学饮料标签：一瓶%d毫升，每100毫升总糖%d克。糖的来源没有写清。\n这瓶饮料不在餐盘里，不计入进餐。" % [volume, per100]
+			body += "\n\n练习标签：一瓶%d毫升，每100毫升总糖%d克，糖的来源没写清。\n这瓶饮料不在餐盘里。" % [volume, per100]
 			prompt = "整瓶应怎样记录？"
 			correct = "total_known"
 			choices = [{"id": "added", "text": "%d克添加糖" % total}, {"id": "total_known", "text": "%d克总糖；添加糖量未知" % total}, {"id": "zero", "text": "没写添加糖，就当作没有糖"}]
-			explanation = "%d × %d ÷ 100 = %d克总糖。总糖不等于添加糖；没有糖来源与配方信息时，添加糖的量仍未知，也不能拿碳水化合物替代。" % [per100, volume, total]
+			explanation = "%d × %d ÷ 100 = %d克总糖。算出来的是总糖。添加糖的来源没写清，含量未知；碳水化合物也要分开看。" % [per100, volume, total]
 		elif not recipe.is_empty():
 			var sugar := Facts.number(recipe["white_sugar_added_g"])
 			body += "\n本次每人份另加白糖%s克。\n食材原有糖及其他添加糖没有记录。" % sugar
 			prompt = "这份配方现在能确定什么？"
-			choices = [{"id": "total", "text": "整餐总糖就是%s克" % sugar}, {"id": "known", "text": "只确认另加白糖%s克；总糖与其他添加糖未知" % sugar}, {"id": "zero", "text": "没写的其他糖都可以记为零"}]
-			explanation = "只确认本次另加的%s克白糖。没有另加白糖也不代表没有总糖；食材原有糖和其他添加糖没有记录时，继续保留未知。" % sugar
+			choices = [{"id": "total", "text": "整餐总糖就是%s克" % sugar}, {"id": "known", "text": "另加白糖%s克；总糖与其他添加糖未知" % sugar}, {"id": "zero", "text": "没写的其他糖都可以记为零"}]
+			explanation = "另加白糖%s克。总糖还包括食材原有的糖和其他添加糖，这部分未记录。" % sugar
 		else:
 			prompt = "这餐没有糖量与配方记录，应该怎样判断？"
 			choices = [{"id": "zero", "text": "糖量记为零"}, {"id": "known", "text": "总糖和添加糖量都保留未知"}, {"id": "name", "text": "只凭食物名字就能算出糖量"}]
-			explanation = "这餐没有糖量记录，不能写成零，也不能只凭食物名称补出准确用量。可以用明确给出的教学标签练习整份换算。"
+			explanation = "这餐的总糖和添加糖量未知。换张有明确数值的标签，再算整份含量。"
 	if variant == "actual" and int(recipe.get("unrecorded_items", 0)) > 0:
-		body += "\n另有%d项食物没有调味记录，以下只看已知部分。" % int(recipe["unrecorded_items"])
+		body += "\n另有%d项食物没有调味记录，下面先算有记录的部分。" % int(recipe["unrecorded_items"])
 	return {"title": title, "body": body, "prompt": prompt, "choices": choices, "correct": correct, "explanation": explanation}
 
 
@@ -253,17 +253,17 @@ static func day_observation(meals: Array, day: int) -> Dictionary:
 			recorded += 1
 			sodium += float(recipe["sodium_from_added_seasonings_mg"])
 			sugar += float(recipe["white_sugar_added_g"])
-	var text := "今天没有已确认的进餐，暂不作组成或调味观察。"
+	var text := "今天还没吃饭。"
 	if eaten > 0:
 		if day == 2:
 			var names: Array[String] = []
 			for group in groups: names.append(GROUPS[group])
-			text = "今天记录的组成有%s。份量还没写清，不能据此判断吃够。" % "、".join(names) if not names.is_empty() else "今天的食物组成未记录，下一餐再核对配料。"
+			text = "今天吃了%s。份量未记录。" % "、".join(names) if not names.is_empty() else "今天的配料信息不全。"
 		elif day == 3:
-			text = "%d餐已记录部分的调味钠小计为%s毫克；食材本底和未记录项目仍未知。" % [recorded, Facts.number(sodium)] if recorded > 0 else "今天的调味用量未记录，不能把调味钠记成零。"
+			text = "%d餐的调味钠小计%s毫克；食材本身和未记录项目中的钠未知。" % [recorded, Facts.number(sodium)] if recorded > 0 else "今天没记调味用量，调味钠未知。"
 		else:
-			text = "%d餐另加白糖的已知小计为%s克；总糖和其他添加糖仍未知。" % [recorded, Facts.number(sugar)] if recorded > 0 else "今天没有糖量与配方记录，总糖和添加糖量仍未知。"
-	var next_step: String = {2: "下一餐先看实际菜单与库存，再决定是否换一种原料。", 3: "下次做饭时，可对照盐和酱油的用量再试一次。", 4: "下次读标签，先分清每100毫升与整份，再看总糖和添加糖。"}[day]
+			text = "%d餐另加白糖共%s克；总糖和其他添加糖未知。" % [recorded, Facts.number(sugar)] if recorded > 0 else "今天没记糖量，总糖和添加糖未知。"
+	var next_step: String = {2: "下一餐看看还有哪些原料可选。", 3: "下次做饭，再算算盐和酱油里的钠。", 4: "下次看标签，先算整份，再分清总糖和添加糖。"}[day]
 	return {"day": day, "text": text, "next_step": next_step, "eaten": eaten, "recorded_recipes": recorded, "known_sodium_mg": sodium if recorded > 0 else null, "known_white_sugar_g": sugar if recorded > 0 else null}
 
 

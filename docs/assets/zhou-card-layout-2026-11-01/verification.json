@@ -1,0 +1,33 @@
+{
+  "tests": {
+    "passed": 698,
+    "failed": 0,
+    "total": 698,
+    "suite_count": 54,
+    "duration_ms": 228892
+  },
+  "gates": 59,
+  "fridge": {
+    "errors": [],
+    "pages": [
+      {
+        "balance": 210,
+        "meals": 1,
+        "size": "(1280, 720)"
+      },
+      {
+        "balance": 210,
+        "meals": 1,
+        "size": "(640, 960)"
+      }
+    ],
+    "scope": "Native pointer input; split fridge, opening animation, selection, stock inspection and one actual meal. In-memory saves."
+  },
+  "selection_resize": {
+    "errors": [],
+    "resized_to": "(390, 844)",
+    "scope": "Declared kitchen hand with eight available recipe foods and three selected items; real native mouse and key input for details and removal, plus live window resizing. No purchase or stock consumption.",
+    "window": "(1280, 720)"
+  },
+  "paired_capture": "Fresh native captures of both stories at portrait and desktop sizes. Declared menu/state/day-completion/ending fixtures, not a complete seven-day playthrough. In-memory saves only."
+}

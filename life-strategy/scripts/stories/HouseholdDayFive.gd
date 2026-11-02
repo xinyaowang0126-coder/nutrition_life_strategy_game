@@ -4,7 +4,7 @@ const Facts := preload("res://scripts/stories/HouseholdMealFacts.gd")
 const SOFT_FOODS := ["soft_apple", "steamed_egg", "soft_tofu_greens", "millet_porridge"]
 const MEALS := ["breakfast", "lunch", "dinner"]
 const TOKENS := ["invitation", "breakfast", "lunch", "dinner"]
-const NEED := "周阿姨：‘硬苹果嚼着费劲，我愿意试试切小或煮软。蒸蛋、炖豆腐也想尝尝，饭还是按自己的口味挑。’"
+const NEED := "周阿姨：‘硬苹果嚼着费劲，今天煮软点吃吧。蒸蛋、炖豆腐也行，别的按自己的口味挑。’"
 
 
 static func initial_state(legacy: bool = false) -> Dictionary:
@@ -46,13 +46,13 @@ static func freeze(meal: Dictionary, foods: Dictionary) -> Dictionary:
 	var adapted: Array[String] = []
 	for row in recorded:
 		if is_adapted(row): adapted.append(row["name"])
-	var line := "周阿姨：‘这顿是%s，就按我自己选的吃。’" % "、".join(meal["food_names"])
+	var line := "周阿姨：‘这顿吃%s。’" % "、".join(meal["food_names"])
 	if not adapted.is_empty():
-		line = "周阿姨：‘今天这份%s，我吃着顺口。’" % "、".join(adapted)
+		line = "周阿姨：‘%s吃着顺口。’" % "、".join(adapted)
 	elif meal["food_ids"].has("apple"):
-		line = "周阿姨：‘苹果我还想试试切小或煮软，下次再选。’"
+		line = "周阿姨：‘下次把苹果切小点，或者煮软。’"
 	elif recorded.any(func(row: Dictionary) -> bool: return row["basis"] == "unrecorded"):
-		line = "周阿姨：‘这顿是%s，我慢慢吃，下次再挑想试的做法。’" % "、".join(meal["food_names"])
+		line = "周阿姨：‘今天吃%s。’" % "、".join(meal["food_names"])
 	var together := shared(meal)
 	var venue := ("home" if meal["source_id"] == "home_kitchen" else "community") if together else ""
 	if together:
@@ -63,7 +63,7 @@ static func freeze(meal: Dictionary, foods: Dictionary) -> Dictionary:
 static func invitation_reply(history: Array) -> String:
 	for row in history:
 		if row.get("kind") == "invitation" and row.get("day") == 5:
-			return "老陈：‘好，%s，晚饭见。’\n\n约定已经记下，真正同桌吃饭后才记为完成。" % ("今晚去你家" if row["plan"]["venue"] == "home" else "今晚在家常小馆见")
+			return "老陈：‘好，%s，晚饭见。’" % ("今晚去你家" if row["plan"]["venue"] == "home" else "今晚在家常小馆见")
 	return ""
 
 
@@ -92,17 +92,17 @@ static func recap(meals: Array, state: Dictionary, history: Array) -> Dictionary
 	var invited := history.any(func(row: Dictionary) -> bool: return row.get("kind") == "invitation" and row.get("day") == 5)
 	var missed := history.any(func(row: Dictionary) -> bool: return row.get("kind") == "missed" and row.get("day") == 5)
 	var lines: Array[String] = []
-	if not adapted.is_empty(): lines.append("今天选了%s，做法按菜单或配方记录保留。" % "、".join(adapted))
-	elif eaten > 0: lines.append("今天照实际选择吃了%d餐。" % eaten)
-	else: lines.append("今天没有已确认的进餐，不生成食后体验。")
+	if not adapted.is_empty(): lines.append("今天吃了%s。" % "、".join(adapted))
+	elif eaten > 0: lines.append("今天吃了%d餐。" % eaten)
+	else: lines.append("今天没吃饭。")
 	if unknown > 0: lines.append("部分做法未记录。")
 	if together:
-		lines.append("晚饭%s和老陈同桌，约定实际完成。" % ("在家" if dinner.get("source_id") == "home_kitchen" else "在家常小馆"))
+		lines.append("晚饭%s和老陈同桌。" % ("在家" if dinner.get("source_id") == "home_kitchen" else "在家常小馆"))
 	elif missed:
-		lines.append("晚饭没吃，今天的约定没有完成。" if dinner.get("skipped", false) else "晚饭改选%s，没有同桌记录。" % dinner.get("source_name", "别处"))
+		lines.append("晚饭没吃，今天的约定没有完成。" if dinner.get("skipped", false) else "晚饭改选%s，没和老陈一起吃。" % dinner.get("source_name", "别处"))
 	elif not dinner.is_empty() and not dinner.get("skipped", false):
 		lines.append("今天晚饭自己安排。")
-	elif invited: lines.append("已经约过晚饭，但还没有实际同桌记录。")
+	elif invited: lines.append("晚饭约好了，还没一起吃。")
 	return {"text": "\n".join(lines), "adapted_foods": adapted, "eaten": eaten, "unrecorded_methods": unknown, "shared": together, "invited": invited, "missed": missed, "chose_own_dinner": bool(state.get("invite_declined", false))}
 
 

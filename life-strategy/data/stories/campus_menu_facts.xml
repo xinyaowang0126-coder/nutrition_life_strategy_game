@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Fixed main ingredients for the fictional campus menu. These are authored
+     menu specifications, not approval of the separate health profiles.
+     Portions, seasoning amounts and nutrient sufficiency remain unspecified. -->
+<campus_menu_facts version="1" basis="fictional_menu">
+  <ingredient id="rice" name="大米" />
+  <ingredient id="oats" name="燕麦" />
+  <ingredient id="egg" name="鸡蛋" />
+  <ingredient id="soy" name="大豆" />
+  <ingredient id="greens" name="青菜" />
+  <ingredient id="tomato" name="番茄" />
+  <ingredient id="apple" name="苹果" />
+  <ingredient id="banana" name="香蕉" />
+  <ingredient id="milk" name="牛乳" />
+  <ingredient id="celery" name="芹菜" />
+  <ingredient id="pork" name="猪肉" />
+  <ingredient id="chicken" name="鸡肉" />
+  <item food_id="rice_plain" ingredients="rice" />
+  <item food_id="oatmeal" ingredients="oats" />
+  <item food_id="egg" ingredients="egg" />
+  <item food_id="tofu" ingredients="soy" />
+  <item food_id="greens" ingredients="greens" />
+  <item food_id="tomato" ingredients="tomato" />
+  <item food_id="apple" ingredients="apple" />
+  <item food_id="banana" ingredients="banana" />
+  <item food_id="milk" ingredients="milk" />
+  <item food_id="tomato_egg_stir_fry" ingredients="tomato,egg" />
+  <item food_id="celery_pork_stir_fry" ingredients="celery,pork" />
+  <item food_id="chicken_vegetable_rice" ingredients="rice,chicken,greens" />
+</campus_menu_facts>

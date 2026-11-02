@@ -22,6 +22,10 @@ var _pointer_start := Vector2.ZERO
 var _pointer_revision := 0
 
 
+func set_compact_preview(compact: bool) -> void:
+	$Face/Stats.visible = not compact
+
+
 func _ready() -> void:
 	resized.connect(_fit_title)
 	title_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART

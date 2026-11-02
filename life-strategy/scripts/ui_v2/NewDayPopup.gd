@@ -94,8 +94,8 @@ func _apply_payload() -> void:
 	day_title.text = String(_payload.get("title", "第 %d 天开始" % day))
 	day_subtitle.text = String(_payload.get(
 		"subtitle",
-		"新的一周从今天开始，先安排好今天的三餐与休息。"
-		if day == 1 else "今天的游戏状态与事件已准备好，可以开始新的安排。"
+		"第一天，先吃早餐。"
+		if day == 1 else "看看今天有什么事。"
 	))
 	day_subtitle.visible = not day_subtitle.text.is_empty()
 
@@ -105,8 +105,8 @@ func _apply_payload() -> void:
 		"summary",
 		learning_state.get(
 			"description",
-			"这是本周的起步状态，今天的安排会影响后续游戏状态。"
-			if day == 1 else "今日状态按游戏规则显示，详细原因以实际记录为准。"
+			"从初始状态开始，先安排早餐。"
+			if day == 1 else "昨夜的恢复结果在这里查看。"
 		)
 	))
 	status_effect.text = String(_payload.get(
@@ -119,7 +119,7 @@ func _apply_payload() -> void:
 	event_title.text = String(event.get("title", event.get("name", "平常的一天")))
 	event_summary.text = String(event.get(
 		"summary",
-		event.get("description", "今天没有额外事件，可以按自己的节奏安排。")
+		event.get("description", "今天没有额外事件。")
 	))
 	event_effect.text = String(_payload.get(
 		"event_effect",
